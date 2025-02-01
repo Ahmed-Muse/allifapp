@@ -6,7 +6,7 @@ import django
 from django.conf import settings#for uploading files
 from django.conf.urls.static import static
 #end of images
-import os
+
 urlpatterns = [
     path('admin/', admin.site.urls),# uncomment after migrations
     #path('website/', include('website.urls')),#this line does all the routing for the views
