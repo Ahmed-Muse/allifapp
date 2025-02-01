@@ -17,6 +17,10 @@
     text-align: center;
     font-size: 1em;
   }
+  .logoutlink{
+    text-align: center;
+    margin: 0.5em;
+  }
 </style>
 </head>
 <body>
@@ -50,27 +54,32 @@
           <label>Address</label> {{form.address}}
           <label>City</label> {{form.city}}
           <label>Country</label> {{form.country}}
-          <label>Branch</label> {{form.branch}}
+          <label>BOX</label> {{form.pobox}}
           
+         
         </div>
             </div><!--end of column 2-->
             <div class="col-md-4"><!--start of column 3-->
             <div class="card shadow text-left p-3 allif-form-card">
            
-              <label>BOX</label> {{form.pobox}}
+              
               <label>Website</label> {{form.website}} 
               <label>Logo</label> {{form.logo}} 
                
                 <br>
                 <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-        
+                <hr>
+                <a class="logoutlink" href="{% url 'allifmaalusersapp:userLogoutPage' %}">Logout</a>
+                <hr>
                 </div>
             </div><!--end of column 1-->
         
         </div><!--end of row div --->
             </form>
             </div>
+            
             </div><!--end of first row body-->
+            
 </div><!--end....table row-->
 
 <!--end of table-->

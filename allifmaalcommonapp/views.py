@@ -1676,7 +1676,7 @@ def commonShowClickedRowUserDetails(request,pk,*allifargs,**allifkwargs):
     
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_edit
-@logged_in_user_is_admin
+
 def commonEditUser(request,allifslug,*allifargs,**allifkwargs):
     try:
         user_var_update=User.objects.filter(customurlslug=allifslug).first()
