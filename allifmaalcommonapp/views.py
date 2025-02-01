@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.contrib.sessions.models import Session
 import sms
 from .sessions import Allifsessions
-#from twilio.rest import Client
+from twilio.rest import Client
 from.forms import *
 from .decorators import allifmaal_admin, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
 import datetime
@@ -458,11 +458,11 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         ################3 this below is for the SMS to notify system owner ###################
                         account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
                         auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        #client = Client(account_sid, auth_token)
-                        #message = client.messages.create(
-                        #to="+252610993964",# number registered with Twilio
-                        #from_="+17753731268",#virtual number from Twilio
-                        #body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
+                        client = Client(account_sid, auth_token)
+                        message = client.messages.create(
+                        to="+252610993964",# number registered with Twilio
+                        from_="+17753731268",#virtual number from Twilio
+                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalsalesapp:salesHome',allifusr=usrslg,allifslug=user_var_comp)
 
                     elif sectorselec.name=="Healthcare":
@@ -486,11 +486,11 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         ################3 this below is for the SMS to notify system owner ###################
                         account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
                         auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        #client = Client(account_sid, auth_token)
-                        #message = client.messages.create(
+                        client = Client(account_sid, auth_token)
+                        message = client.messages.create(
                         to="+252610993964",# number registered with Twilio
                         from_="+17753731268",#virtual number from Twilio
-                        #body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
+                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalshaafiapp:shaafiHome',allifusr=usrslg,allifslug=user_var_comp)
                     elif sectorselec.name=="Hospitality":
                         obj.save()
@@ -513,11 +513,11 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         ################3 this below is for the SMS to notify system owner ###################
                         account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
                         auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        #client = Client(account_sid, auth_token)
-                        #message = client.messages.create(
-                        #to="+252610993964",# number registered with Twilio
-                        #from_="+17753731268",#virtual number from Twilio
-                        #body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
+                        client = Client(account_sid, auth_token)
+                        message = client.messages.create(
+                        to="+252610993964",# number registered with Twilio
+                        from_="+17753731268",#virtual number from Twilio
+                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalhotelsapp:hotelsHome',allifusr=usrslg,allifslug=user_var_comp)
                     elif sectorselec.name=="Education":
                         obj.save()
@@ -540,11 +540,11 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         ################3 this below is for the SMS to notify system owner ###################
                         account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
                         auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        #client = Client(account_sid, auth_token)
-                        #message = client.messages.create(
-                        #to="+252610993964",# number registered with Twilio
-                        #from_="+17753731268",#virtual number from Twilio
-                        #body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
+                        client = Client(account_sid, auth_token)
+                        message = client.messages.create(
+                        to="+252610993964",# number registered with Twilio
+                        from_="+17753731268",#virtual number from Twilio
+                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalilmapp:ilmHome',allifusr=usrslg,allifslug=user_var_comp)
                     
                     elif sectorselec.name=="Logistics":
@@ -568,11 +568,11 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         ################3 this below is for the SMS to notify system owner ###################
                         account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
                         auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        #client = Client(account_sid, auth_token)
-                        #message = client.messages.create(
-                        #to="+252610993964",# number registered with Twilio
-                        #from_="+17753731268",#virtual number from Twilio
-                        #body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
+                        client = Client(account_sid, auth_token)
+                        message = client.messages.create(
+                        to="+252610993964",# number registered with Twilio
+                        from_="+17753731268",#virtual number from Twilio
+                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaallogisticsapp:logisticsHome',allifusr=usrslg,allifslug=user_var_comp)
                     elif sectorselec.name=="Realestate":
                         obj.save()
@@ -595,11 +595,11 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         ################3 this below is for the SMS to notify system owner ###################
                         account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
                         auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        #client = Client(account_sid, auth_token)
-                        #message = client.messages.create(
-                        #to="+252610993964",# number registered with Twilio
-                        #from_="+17753731268",#virtual number from Twilio
-                        #body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
+                        client = Client(account_sid, auth_token)
+                        message = client.messages.create(
+                        to="+252610993964",# number registered with Twilio
+                        from_="+17753731268",#virtual number from Twilio
+                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalrealestateapp:realestateHome',allifusr=usrslg,allifslug=user_var_comp)
                     elif sectorselec.name=="Services":
                         obj.save()
@@ -622,11 +622,11 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         ################3 this below is for the SMS to notify system owner ###################
                         account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
                         auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        #client = Client(account_sid, auth_token)
-                        #message = client.messages.create(
-                        #to="+252610993964",# number registered with Twilio
-                        #from_="+17753731268",#virtual number from Twilio
-                        #body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
+                        client = Client(account_sid, auth_token)
+                        message = client.messages.create(
+                        to="+252610993964",# number registered with Twilio
+                        from_="+17753731268",#virtual number from Twilio
+                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalservicesapp:servicesHome',allifusr=usrslg,allifslug=user_var_comp)
                     
                     else:
@@ -2895,11 +2895,11 @@ def commonEmailsAndSMS(request,*allifargs,**allifkwargs):
         ################3 this below is for the SMS... this worked ###################
         account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
         auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-        #client = Client(account_sid, auth_token)
-        #message = client.messages.create(
-        #to="+252610993964",# number registered with Twilio
-        #from_="+17753731268",#virtual number from Twilio
-        #body="Testing Message Here") # message to be sent.
+        client = Client(account_sid, auth_token)
+        message = client.messages.create(
+        to="+252610993964",# number registered with Twilio
+        from_="+17753731268",#virtual number from Twilio
+        body="Testing Message Here") # message to be sent.
 
     
         context = {

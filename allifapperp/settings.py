@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'import_export',
+    "django.contrib.humanize",
+    'crispy_forms',
     
     "allifmaalusersapp",
     "allifmaalloginapp",
