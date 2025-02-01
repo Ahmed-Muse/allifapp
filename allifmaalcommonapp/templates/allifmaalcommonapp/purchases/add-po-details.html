@@ -1,0 +1,246 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Actions
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+           
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddPODetails' allifquery.id user_var glblslug %}">Edit Item</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddPOItems' allifquery.id user_var glblslug %}">Add Item</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPOMiscCost' allifquery.id user_var glblslug %}">Misc Costs</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCalculatePOMiscCosts' allifquery.id user_var glblslug %}">Calculate PO Misc Costs</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPostPO' allifquery.id user_var glblslug %}">Post PO</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPOToPdf' allifquery.id user_var glblslug %}">PO to pdf</a></li>
+
+          <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeletePO' allifquery.id user_var glblslug %}">Delete Item</a></li>
+    
+       </div>
+      </ul>
+    </div>
+
+    
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+ 
+  <a href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Expenses</a>
+  
+  <a href="{% url 'allifmaalcommonapp:commonAddExpense' user_var glblslug %}">Add New</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+<div class="allifmaincontainer">
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="table-content-description"> {{allifquery}} </div>
+    <div class="allif-details-container">
+      <div class="row"><!--start of row div --->
+      
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="allif-details-card ">
+            <!--start of the table here-->
+          <table class="table allif-details-table table-layout">
+            <tbody>
+              <tr>
+                <td>Company</td>
+                <td>{{allifquery.company}}</td>
+            
+                </tr>
+              <tr>
+                <td>Division</td>
+                <td>{{allifquery.division}}</td>
+            
+                </tr>
+                <tr>
+                  <td>Branch</td>
+                  <td>{{allifquery.branch}}</td>
+              
+                  </tr>
+              <tr>
+                <td>Department</td>
+                <td>{{allifquery.department}}</td>
+            
+                </tr>
+          <tr>
+            <td>Description</td>
+            <td>{{allifquery.description}}</td>
+        
+            </tr>
+           
+            <tr>
+              <td>Terms</td>
+              <td>{{allifquery.payment_terms}}</td>
+              
+            </tr>
+          </tbody>
+          </table>
+        
+          </div>
+              </div>
+      
+           
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+            <tr>
+              <td>PO Amount</td>
+              <td>{{allifquery.amount|intcomma}}</td>
+          
+              </tr>
+            <tr>
+              <td>Misc Costs</td>
+              <td>{{allifquery.misccosts|intcomma}}</td>
+          
+              </tr>
+             
+              <tr>
+                <td>Taxes</td>
+                <td>{{allifquery.taxamount}}</td>
+                
+              </tr>
+              <tr>
+                <td>Grand Total</td>
+                <td>{{allifquery.grandtotal|intcomma}}</td>
+                
+              </tr>
+      
+            <tr>
+              <td>Uplift</td>
+              <td>{{allifquery.uplift|intcomma}}</td>
+          
+              </tr>
+             
+        <tr>
+          <td>Comments</td>
+          <td>{{allifquery.comments}}</td>
+          
+        </tr>
+        
+        
+        </tbody>
+        </table>
+      
+        </div>
+            </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+           
+    <tr>
+    <td>Comments</td>
+    <td>{{allifquery.comments}}</td>
+
+
+    </tr>
+    <tr>
+      <td>Posting Status</td>
+      <td>{{allifquery.posting_po_status}}</td>
+      
+    </tr>
+     
+    <tr>
+      <td>Created By</td>
+      <td>{{allifquery.owner}}</td>
+  
+      
+      </tr> 
+        <tr>
+          <td>Created On</td>
+          <td>{{allifquery.date|date:'d/m/Y'}}</td>
+        </tr>
+      
+        </tbody>
+        </table>
+      
+      </div>
+    </div>
+      
+      </div><!--end of row div --->
+        
+          </div>
+          <hr>
+
+</div><!--end....table row-->
+
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="col-md-12"><!--start of the first row body-->
+        <div class="allif-form-container">
+        <form method='POST' action=''>{% csrf_token %}
+        <div class="row"><!--start of row div --->
+            <div class="col-md-4"><!--start of column 1-->
+                <div class="card shadow text-left p-3 allif-form-card" >
+                  <label>Division Name</label> {{form.division}}
+                  <label>Branch Name</label> {{form.branch}}
+                  <label>Department Name</label> {{form.department}}
+                  <label>Supplier</label> {{form.supplier}} 
+                  <label>P.O. Description</label> {{form.description}} 
+                </div>
+            </div><!--end of column 1-->
+        
+            <div class="col-md-4"><!--start of column 2-->
+            <div class="card shadow text-left p-3 allif-form-card">
+             
+              <label>Items Costs</label> {{form.amount}} 
+              <label>Tax Amount</label> {{form.taxamount}} 
+              <label>Shipping & Other Misc. Costs</label> {{form.misccosts}} 
+              <label>Grand Total</label> {{form.grandtotal}} 
+             
+                 
+
+                </div>
+            </div><!--end of column 2-->
+            <div class="col-md-4"><!--start of column 3-->
+            <div class="card shadow text-left p-3 allif-form-card">
+              <label>Mark Up</label>{{form.uplift}} 
+                  
+              <label>Terms</label> {{form.payment_terms}}
+              <label>Comments</label> {{form.comments}} 
+                 
+              <label>Status</label> {{form.posting_po_status}} 
+                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+        
+                </div>
+            </div><!--end of column 1-->
+        
+        </div><!--end of row div --->
+            </form>
+            </div>
+            </div><!--end of first row body-->
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

@@ -1,0 +1,130 @@
+{% extends 'allifmaaladminapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+
+{%endblock%}
+   
+{% block body %}
+<div class="allifmaincontainer">
+<!--start....main headere-->
+<div class="card-header">
+  <div class="row mt-12" ><!--start....header row-->
+  <div class="col-md-12"><!--start....header column-->
+  <div class="container-fluid amel-content-header">
+
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Modules
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalloginapp:allifmaalChangeYourPassword' %}" >Change Pass</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalloginapp:allifmaalForgotPassword' %}">Forgot Pass</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalloginapp:allifmaaluserLogout' %}">Logout</a></li>
+
+      </div>
+      </ul>
+    </div>
+    
+    <a class="amel-table-list-identifier">SCC:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+    <a href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Password</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddUser' user_var glblslug %}">New Staff</a>
+    <a href="{% url 'allifmaalcommonapp:commonSalaries' user_var glblslug %}">Payroll</a>
+    <a href="{% url 'allifmaalcommonapp:commonStaffProfiles' user_var glblslug %}">Profiles</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}" >New Profile </a>
+
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
+    
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a>
+  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+  </div>
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+<!--start....main headere-->
+<div class="card-header">
+  <div class="row mt-12" ><!--start....header row-->
+  <div class="col-md-12"><!--start....header column-->
+  <div class="container-fluid amel-content-header">
+
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Navigate
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
+      
+      </div>
+      </ul>
+    </div>
+
+   
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+    <a href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Password</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddUser' user_var glblslug %}">New Staff</a>
+    <a href="{% url 'allifmaalcommonapp:commonSalaries' user_var glblslug %}">Payroll</a>
+    <a href="{% url 'allifmaalcommonapp:commonStaffProfiles' user_var glblslug %}">Profiles</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}" >New Profile </a>
+
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
+    
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a>
+  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+  </div>
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+<!--we can insert the other section here-->
+
+  
+<div class="imgcontainer">
+<img src="{% static 'allifmaaladminapp/css/images/allifmaal-icon.png' %}" alt="Allifmaal">
+
+ <!--in the table below ensure it has classes like normal tables-->
+ 
+</div>
+
+</div><!--end of main container of the page-->
+
+   {% endblock %}
+   

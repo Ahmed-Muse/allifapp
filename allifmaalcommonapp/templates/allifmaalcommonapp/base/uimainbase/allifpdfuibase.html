@@ -1,0 +1,119 @@
+{% load static %}
+{% load humanize %}
+<link rel="shortcut icon" href='{% static "allifmaalcommonapp/css/images/allifmaal-icon.png" %}' type="png/ico">
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+{% block title %}
+<!--the title of each page will be displayed here.....-->
+{% endblock %}
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block style %}
+{% endblock %}
+<style>
+*{
+  font-family: system-ui,Helvetica, sans-serif,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+}
+
+.allif-pdf-table-header{
+  background-color: #e6e6e6;
+  }
+
+table td {
+  vertical-align: middle !important;
+  text-align: left;
+  margin-left: 3px;
+  padding-left: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-family:system-ui,Helvetica, sans-serif,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+  font-size: 1em;
+}
+table,th  {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-family:system-ui,Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 1.1em;
+  border:none;
+  text-align: left;
+}
+
+.table-bordered {
+  background-color:#fdfdfd;
+}
+.table-bordered td, .table-bordered th {
+  border: 1px solid #b7e9fc;
+}
+
+.company-details-section{
+  border: 1px solid #fcfbfb;
+  word-spacing: normal;
+  letter-spacing: normal;
+  line-height:0px;
+  font-family: system-ui,Helvetica, sans-serif,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+  font-size: 1.1em;
+  margin-top: 0px;
+  font-weight: normal;
+}
+
+.company-pdf-logo{
+  text-align: center;
+  width: 140px; 
+  max-height: 90px;
+}
+
+</style>
+
+</head>
+<body>
+<table class="company-details-section">
+<thead>
+  <tr>
+  <th>
+    <div>
+    {% if main_sbscrbr_entity.logo %}
+    <div class="company-pdf-logo">
+    
+      <img src="{{main_sbscrbr_entity.logo.path}}">
+    
+    </div>
+    {% else %}
+    {{main_sbscrbr_entity}}
+    
+    {% endif %}
+    </div>
+  </th>
+  <th colspan="2">
+    <li> Address: {{main_sbscrbr_entity.address}}</li>
+    <li>Phone: {{main_sbscrbr_entity.phone1}} </li>
+    <li>E-mail: {{main_sbscrbr_entity.email}}</li>
+    <li>Website: {{main_sbscrbr_entity.website}} </li>
+  </th>
+
+  <th>
+    {% for scope in scopes %}
+  <li>{{scope.name}}</li>
+  {% endfor %}
+  </th>
+    
+  </tr>
+</thead>
+
+</table>
+
+
+{% block body %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+</body>
+</html>
+  
+

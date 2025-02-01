@@ -1,0 +1,206 @@
+{% extends 'allifmaalsalesapp/base/uimainbase/salesbase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+   
+{% block body %}
+
+<!--we can insert the other section here-->
+<div class="allifmaincontainer">
+ <div class="row mt-12"> <!--start....table row-->
+ <div class="col-md-12"> <!--start....table column-->
+ <div class="allif-scroll-table"> 
+   <table class="table ">
+   <form class="form-horizontal" method="POST" action=""> {% csrf_token %}
+     <tr class="allif-table-header-row" >
+       <td>Task</td>
+       <td>Status</td> 
+       <td>Assign</td>
+       <td>Due Date</td>
+       <td>Day</td>
+       <td>Action</td>
+       </tr>
+ 
+       <tbody class="allif-table-body">
+       <tr>
+       <td>{{form.task}}</td>
+       <td>{{form.status}}</td> 
+       <td>{{form.assignedto}}</td>
+       <td> {{form.dueDate}}</td>
+       <td> {{form.taskDay}}</td>
+       <td>
+       <input type="submit" value='Save'class="btn btn-success allifmaal-submit-btn" >
+ 
+       </td>
+     </tr>
+       
+       </tbody>
+       </form>
+     </table>
+     </div>
+   
+   
+   </div></div>
+   
+   <div class="row mt-12"> <!--start....table row-->
+     <div class="col-md-12"> <!--start....table column-->
+     <div class="allif-scroll-table"> 
+       <table class="table table-layout">
+       <thead>
+       <tr class="allif-table-header-row" >
+     <td scope="col">Task</td>
+     <td scope="col">Status</td>
+     
+     <td scope="col">Due</td>
+     <td scope="col">Remaining Time</td>
+     <td scope="col">Assigned</td>
+     <td scope="col" >Action</td>
+     <td scope="col">Action</td>
+     <td >Mon</td> 
+     <td>Tue</td>
+     <td>Wed</td>
+     <td >Thu</td>
+     <td >Fri</td>
+     <td >Sat</td>
+     <td >Sun</td>
+     
+   </tr>
+   </thead>
+   
+   {% for task in tasks %}
+   <tr>
+     
+     <td>{{task.task}}</td>
+     <td>{{task.status}}</td>
+     
+     <td>{{task.dueDate|date:'d/m/Y'}}</td>
+     <td>{{task.dueDate|timeuntil}}</td>
+     <td>{{task.assignedto}}</td>
+               
+     <td> <a href="" data-toggle="tooltip" title="Delete this record">
+       Finish
+       
+     </a></td>
+             
+           
+     <td> <a href="" 
+       data-toggle="tooltip" title="Delete this record" 
+       class="allif-delete-link">
+         X
+       
+     </a></td>
+     
+     {% if task.taskDay == 'Monday' %}
+     <td> 
+       
+     
+     X
+     
+     </td>
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     {% elif task.taskDay == 'Tuesday' %}
+     <td></td>
+     
+     <td>
+       
+   X
+     
+     </td>
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     
+     {% elif task.taskDay == 'Wednesday' %}
+     <td></td>
+     <td></td>
+     <td>
+     X
+   </td>
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     
+     
+     {% elif task.taskDay == 'Thursday' %}
+     <td></td>
+     <td></td>
+     <td></td>
+     
+     <td>
+     X
+     </td>
+     <td></td>
+     <td></td>
+     <td></td>
+     
+     
+     {% elif task.taskDay == 'Friday' %}
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     
+     <td>
+   X
+     </td>
+     <td></td>
+     <td></td>
+     
+     
+     {% elif task.taskDay == 'Saturday' %}
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     <td></td>
+     
+     <td>
+     X
+ </td>
+     <td></td>
+     
+     
+         
+   {% elif task.taskDay == 'Sunday' %}
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   
+   <td>
+   X
+   </td>
+   
+   {% endif %}
+   
+             
+   </tr>
+ 
+   {% endfor %}
+ </table>
+   
+ </div></div></div>
+ 
+
+   
+ 
+ <p>Dear <strong> {{user_var}} </strong> </p>
+ <p>Welcome To The Sales Home </p>
+
+</div><!--end of main container of the page-->
+
+   {% endblock %}
+   

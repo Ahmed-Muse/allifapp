@@ -1,0 +1,101 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<div class="allifmaincontainer">
+  
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+
+    <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+    <a href="{% url 'allifmaalcommonapp:commonSupplierPayments' user_var glblslug %}">Supplier Payments</a>
+
+
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
+     
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="col-md-12"><!--start of the first row body-->
+      <div class="table-details-content-description">Make a payment to {{allifquery}} </div>
+        <div class="allif-form-container">
+        <form method='POST' action=''>{% csrf_token %}
+        <div class="row"><!--start of row div --->
+          <div class="col-md-4"><!--start of column 1-->
+            <div class="card shadow text-left p-3 allif-form-card" >
+            <label>Division Name</label> {{form.division}}
+            <label>Branch Name</label> {{form.branch}}
+            <label>Department Name</label> {{form.department}}
+            <label>Receipt To Acccount</label> {{form.account}}
+            
+            <label>Customer</label> {{form.customer}}
+           
+          
+          </div>
+            </div><!--end of column 1-->
+        
+            <div class="col-md-4"><!--start of column 2-->
+            <div class="card shadow text-left p-3 allif-form-card">
+              <label>Amount</label> {{form.amount}}
+            <label>Description</label> {{form.description}}
+              <label>Mode of Payment</label> {{form.mode}}
+              <label>Comments</label> {{form.comments}}
+
+               
+               
+                </div>
+            </div><!--end of column 2-->
+            <div class="col-md-4"><!--start of column 3-->
+            <div class="card shadow text-left p-3 allif-form-card">
+              <label>Comments </label> {{form.comments}}
+                <label>Posting Status</label> {{form.status}}
+                <br>
+                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+        
+                </div>
+            </div><!--end of column 1-->
+        
+        </div><!--end of row div --->
+            </form>
+            </div>
+            </div><!--end of first row body-->
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

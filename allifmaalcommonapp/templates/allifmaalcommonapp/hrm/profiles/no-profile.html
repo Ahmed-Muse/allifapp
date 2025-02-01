@@ -1,0 +1,62 @@
+<DOCTYPE html>
+    <head> 
+    <title>
+        Error
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    *{
+        font-family: system-ui,Arial, Helvetica, sans-serif;
+    }
+    body {
+    max-width: 100%; 
+    background-color: #F6F7F8;
+    }
+    .error-header{
+    text-align: center;
+    font-size: 2em;
+    color: #fc514b;
+    }
+    .error_container {
+    width: fit-content;
+    height: fit-content;
+    max-width: max-content;
+    max-height: max-content;
+    background: #F6F7F8!important;
+    position: relative;
+    display: block;
+    justify-content: center;
+    box-shadow: 3px 3px 7px 7px rgba(0, 0, 0, 0.2);
+    margin-left: 7em;
+    margin-right: 7em;
+    margin-top: 3em;
+    background-color: #F6F7F8;
+    padding: 2em;
+   
+    }
+    
+    .loginlink{
+    text-align: center;
+    text-decoration: none;
+    }
+    </style>
+    
+    </head>
+    
+    <body>
+        <div class="error_container">
+        <div class="error-header">
+        Profile Error
+        </div>
+        <div class="error-body">
+        <p>The user <strong>{{allifquery}}</strong> has no profile.</p>
+        <p>{{error_message}}</p>
+        <a href="{% url 'allifmaalusersapp:userLogoutPage' %}" class="loginlink">Login Again</a>
+        </div>
+        </div>
+    </body>
+    <html>
+    
+    
+    
+    

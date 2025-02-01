@@ -1,0 +1,107 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifpdfuibase.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<style>
+    #allif-pdf-header{
+    font-size:2em;
+    color: #050eab;
+    float: right;
+    text-align: right;
+    margin: 0.4em;
+  }
+</style>
+
+<div id="allif-pdf-header">Quotation</div>
+  
+<table class="table-bordered">
+    <tr>
+      <th colspan="4">Quote Details</th>
+      <th colspan="4">Supplier Details</th>
+      <th colspan="4">Terms Details</th>
+    </tr>
+
+    <tr> 
+    <th colspan="4">
+    <li>Quote Ref: {{allifquery.number}}</li>
+    <li>Description: {{allifquery.description}}</li> 
+    <li>Date: {{allifquery.date|date:'d/m/Y'}}</li>
+    </th>
+    <th colspan="4">
+    <li>Customer:  {{allifquery.customer}}</li> 
+    <li>Phone: {{allifquery.customer.phone}}</li> 
+    <li>Customer Address: {{allifquery.customer.address}}</li> 
+    </th>
+    <th colspan="4">
+    <li>Comments: {{allifquery.comments}}</li>
+    <li>Terms : {{allifquery.terms}}</li>
+    </th>
+    </tr>
+
+    </table>
+
+<div>
+    <table class="table-bordered">
+    <tr>
+    <thead>
+    <tr class="allif-pdf-table-header">
+    
+    <th colspan="4">Item</th>
+    <th colspan="4">Quantity</th>
+    <th colspan="2">Unit Price</th>
+    <th colspan="2">Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in allifqueryset %}
+    <tr>
+    <td colspan="4">{{item.description}}</td>
+    <td colspan="4">{{item.quantity}}</td>
+    <td colspan="2">{{item.description.unitPrice|floatformat:2|intcomma}}</td>
+    <td colspan="2"> {{item.quote_selling_price|floatformat:2|intcomma}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+    <td colspan="8"></td>
+    <td colspan="2" class="text-right"> <strong> Sub Total</strong> </td>
+    <td colspan="2"> <strong>{{allifquery.total|floatformat:2|intcomma}}</strong> </td>
+    </tr>
+    <tr>
+    <td colspan="8"></td>
+    <td colspan="2" class="text-right"> <strong> Discount </strong> </td>
+    <td colspan="2"> <strong>{{allifquery.discountAmount|floatformat:2|intcomma}}</strong> </td>
+    </tr>
+    <tr>
+    <td colspan="8"></td>
+    <td colspan="2" class="text-right"> <strong> Add Tax </strong> </td>
+    <td colspan="2"> <strong>{{allifquery.taxAmount|floatformat:2|intcomma}}</strong> </td>
+    </tr>
+
+    <tr>
+    <td colspan="8"></td>
+    <td colspan="2" class="text-right"> <strong>Grand Total </strong> </td>
+    <td colspan="2"> <strong>{{allifquery.grandtotal|floatformat:2|intcomma}}</strong> </td>
+    </tr>
+
+    </tbody>
+    </table>
+        
+</div> 
+
+{% block scripts %}
+
+{% endblock %}
+
+{% endblock %}
+
+{% block footer %}
+<h6>Created By: {{usr_var}}</h6>
+<h6>Generated On: {{date_today}}</h6>
+
+{% endblock %}
+   

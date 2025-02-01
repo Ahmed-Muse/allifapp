@@ -1,0 +1,185 @@
+
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<!--start....main headere-->
+<div class="card-header">
+
+<div class="row mt-12" ><!--start....header row-->
+
+<div class="col-md-12"><!--start....header column-->
+
+<div class="container-fluid amel-content-header">
+  
+  <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+  
+<a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+
+<a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
+<a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+</div>
+
+    </div><!--end....header column-->
+  
+  </div><!--end....header row-->
+
+</div><!--end....main headere-->
+
+
+<!--start of main body-->
+<div class="allifmaincontainer">
+
+    <div class="row mt-12"> <!--start....table row-->
+        <div class="allif-details-container">
+          <div class="row"><!--start of row div --->
+          
+            <!--start of column two-->
+            <div class="col-md-4">
+              <div class="allif-details-card ">
+                <!--start of the table here-->
+              <table class="table allif-details-table table-layout">
+                <tbody>
+                  <tr>
+                    <td>Company</td>
+                    <td>{{allifquery.company}}</td>
+                
+                    </tr>
+                  <tr>
+                    <td>Division</td>
+                    <td>{{allifquery.division}}</td>
+                
+                    </tr>
+                    <tr>
+                      <td>Branch</td>
+                      <td>{{allifquery.branch}}</td>
+                  
+                      </tr>
+                 
+              </tbody>
+              </table>
+            
+              </div>
+                  </div>
+          
+               
+           <!--start of column two-->
+           <div class="col-md-4">
+            <div class="allif-details-card ">
+              <!--start of the table here-->
+            <table class="table table-layout allif-details-table">
+              <tbody>
+                <tr>
+                  <td>Department</td>
+                  <td>{{allifquery.department}}</td>
+              
+                  </tr>
+            <tr>
+              <td>Bank Name</td>
+              <td>{{allifquery.name}}</td>
+          
+              </tr>
+          
+           
+            
+            <tr>
+              <td>Company</td>
+              <td>{{allifquery.company}}</td>
+              
+            </tr>
+           
+            
+            </tbody>
+            </table>
+          
+            </div>
+                </div>
+          
+          
+           <!--start of column two-->
+           <div class="col-md-4">
+            <div class="allif-details-card ">
+              <!--start of the table here-->
+            <table class="table table-layout allif-details-table">
+              <tbody>
+                <tr>
+                  <td>Owner</td>
+                  <td>{{allifquery.owner}}</td>
+              
+                  </tr>
+        <tr>
+        <td>Created On</td>
+        <td>{{allifquery.date|date:'d/m/Y'}}</td>
+    
+        </tr>
+                   
+        <tr>
+          <td>Comments</td>
+          <td>{{allifquery.comments}}</td>
+      
+          </tr>
+            </tbody>
+            </table>
+          
+          </div>
+        </div>
+          
+          </div><!--end of row div --->
+            
+              </div>
+    
+    </div><!--end....table row-->
+    
+<div class="row mt-12"> <!--start....table row-->
+   
+    <div class="allif-details-container">
+      <div class="row"><!--start of row div --->
+      
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="delete-options-container">
+            <a href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">No</a>
+          </div>
+              </div>
+      
+           
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="delete-options-container">
+         
+            <a href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Back</a>
+    
+      
+        </div>
+            </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="delete-options-container-delete">
+           <a href="{% url 'allifmaalcommonapp:commonDeleteForm' allifquery.id user_var glblslug %}" class="body-delete-link">Yes</a></li>
+          
+      </div>
+    </div>
+      
+      </div><!--end of row div --->
+        
+          </div>
+
+</div><!--end....table row-->
+
+<!--end of table-->
+<hr>
+
+
+</div>
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+ 

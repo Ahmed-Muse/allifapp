@@ -1,0 +1,110 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<div class="allifmaincontainer">
+  
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
+    <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
+    <a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddStockCat' user_var glblslug %}">New Stock Category</a>
+ 
+ 
+  
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+      
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+    
+
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="table-details-content-description">Add/Edit New Stock Item</div>
+    <div class="col-md-12"><!--start of the first row body-->
+        <div class="allif-form-container">
+        <form method='POST' action=''>{% csrf_token %}
+        <div class="row"><!--start of row div --->
+          <div class="col-md-4"><!--start of column 1-->
+            <div class="card shadow text-left p-3 allif-form-card" >
+              <label>Division Name</label> {{form.division}}
+              <label>Branch Name</label> {{form.branch}}
+              <label>Department Name</label> {{form.department}}
+                <label>Category</label> {{form.category}}
+                <label>Part Number</label> {{form.partNumber}}
+                <label>Description</label> {{form.description}} 
+          </div>
+            </div><!--end of column 1-->
+        
+            <div class="col-md-4"><!--start of column 2-->
+            <div class="card shadow text-left p-3 allif-form-card">
+             
+              <label>Quantity</label>{{form.quantity}}
+                <label>Buying Price</label>{{form.buyingPrice}}
+                
+                <label>Unit Cost</label>{{form.unitcost}} 
+              
+                <label>Standard Cost</label>{{form.standardUnitCost}} 
+                <label>Unit Price</label>{{form.unitPrice}} 
+               
+                
+                </div>
+            </div><!--end of column 2-->
+            <div class="col-md-4"><!--start of column 3-->
+            <div class="card shadow text-left p-3 allif-form-card">
+              
+                <label>Inventory Account</label>{{form.inventory_account}}
+                <label>Income Account</label>{{form.income_account}}
+                <label>Pay From Account</label>{{form.expense_account}}
+                <label>Comments</label>{{form.comments}}
+                <label>Tax Rate</label>{{form.taxrate}}
+                <label>Critial Number</label>{{form.criticalnumber}}
+                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+        
+                </div>
+            </div><!--end of column 1-->
+        
+        </div><!--end of row div --->
+            </form>
+            </div>
+            </div><!--end of first row body-->
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

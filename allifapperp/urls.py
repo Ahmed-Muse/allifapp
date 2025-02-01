@@ -20,17 +20,17 @@ urlpatterns = [
 
  
     path('Allifmaal/Application/For/Users/And/Accounts/Management/', include('allifmaalusersapp.urls')),
-    #path('Allifmaal/Application/Users/Login/App/Managers/', include('allifmaalloginapp.urls')),
-    #path('Allifmaal/User/Interface/App', include('allifmaaluiapp.urls')),
-    #path('Allifmaal/ERP/System/Admin/App/', include('allifmaaladminapp.urls')),
+    path('Allifmaal/Application/Users/Login/App/Managers/', include('allifmaalloginapp.urls')),
+   
+    path('Allifmaal/ERP/System/Admin/App/', include('allifmaaladminapp.urls')),
 
 
-    #path('', include('allifmaalcommonapp.urls')),
-    #path('Allifmaal/ERP/System/Hotels/App/', include('allifmaalhotelsapp.urls')),
+    path('', include('allifmaalcommonapp.urls')),
+    path('Allifmaal/ERP/System/Hotels/App/', include('allifmaalhotelsapp.urls')),
     #path('Allifmaal/ERP/System/Education/App/', include('allifmaalilmapp.urls')),
     #path('Allifmaal/ERP/System/Logistics/App/', include('allifmaallogisticsapp.urls')),
     #path('Allifmaal/ERP/System/Real/Estate/App/', include('allifmaalrealestateapp.urls')),
-    #path('Allifmaal/ERP/System/Distribution/Sales/App/', include('allifmaalsalesapp.urls')),
+    path('Allifmaal/ERP/System/Distribution/Sales/App/', include('allifmaalsalesapp.urls')),
     #path('Allifmaal/ERP/System/Healthcare/App/', include('allifmaalshaafiapp.urls')),
     #path('Allifmaal/ERP/System/Services/App/', include('allifmaalservicesapp.urls')),
 

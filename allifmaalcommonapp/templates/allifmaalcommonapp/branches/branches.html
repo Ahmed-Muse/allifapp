@@ -1,0 +1,258 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Open Filters
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+  
+        <li><a class="dropdown-item">Looking for something?</a></li>
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonBranchSearch' user_var glblslug %}">{% csrf_token %}
+        
+          <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
+          placeholder="Type Here ...">
+        
+          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+          </form>
+         
+      </div>
+      </ul>
+    </div>
+    <a class="amel-table-list-identifier">Companies:</a>
+
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a>
+    
+    <a href="{% url 'allifmaalcommonapp:commonAddBranch' user_var glblslug %}">Add Branch</a>
+    
+    <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors</a>
+  <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+
+  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
+    
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+  
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+        
+<div class="allifmaincontainer">
+  {% if clicked_row_data %}
+  <div class="row mt-12"> <!--start....table row-->
+    
+    <div class="instant-details-container">
+      <div class="row"><!--start of row div --->
+      
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="allif-details-card ">
+            <!--start of the table here-->
+          <table class="table allif-details-table table-layout">
+            <tbody>
+          <tr>
+            <td>Company</td>
+            <td>
+              <a href="{% url 'allifmaalcommonapp:commonCompanyDetails' clicked_row_data.id user_var glblslug %}" class="allif-table-links">
+            {{clicked_row_data.company}}
+            </a>
+          </td>
+        
+            </tr>
+        <tr>
+          <td>Phone</td>
+          <td>{{clicked_row_data.phone1}}</td>
+      
+          </tr>
+          
+          
+          </tbody>
+          </table>
+        
+          </div>
+              </div>
+      
+           
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+       
+        
+        <tr>
+          <td>Country</td>
+          <td>{{clicked_row_data.country}}</td>
+      
+          </tr>
+       
+      <tr>
+          <td>Address</td>
+          <td>{{clicked_row_data.address}}</td>
+      
+          </tr>
+       
+        </tbody>
+        </table>
+      
+        </div>
+            </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+    
+    <tr>
+      <td>Email</td>
+      <td>{{clicked_row_data.email}}</td>
+  
+      </tr>
+      <tr>
+        <td>Sector</td>
+        <td>{{clicked_row_data.sector}}</td>
+    
+  </tr> 
+   
+        </tbody>
+        </table>
+      
+      </div>
+    </div>
+      
+      </div><!--end of row div --->
+        
+          </div>
+
+</div><!--end....table row-->
+{% endif %}
+
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="col-md-12"> <!--start....table column-->
+    <div class="allif-scroll-table"> 
+     
+      <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+          <td>Company</td>
+          <td>Division</td>
+          <td>Branch</td>
+          <td>Owner</td>
+         
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+            
+        {% for item in allifqueryset %}
+        <tr>
+          <td>
+            {{item.company}}
+          </td>
+          <td>
+            {{item.division}}
+          </td>
+          <td>
+            <a href="{% url 'allifmaalcommonapp:commonBranchDetails' item.id user_var glblslug %}" class="allif-table-links">
+           {{item.branch}}
+            </a>
+          </td>
+         
+          <td>{{item.owner}}</td>
+        
+        </tr>
+        {% endfor %}
+        {% if searched_data %}
+        {% for item in searched_data %}
+        <tr>
+          <td>
+            {{item.company}}
+          </td>
+          <td>
+            {{item.division}}
+          </td>
+          <td>
+            <a href="{% url 'allifmaalcommonapp:commonBranchDetails' item.id user_var glblslug %}" class="allif-table-links">
+           {{item.branch}}
+            </a>
+          </td>
+         
+          <td>{{item.owner}}</td>
+        
+        </tr>
+        {% endfor %}
+          {%endif %}
+      </tbody>
+    </table>
+    
+  </div>
+  
+  </div><!--end....table column-->
+
+</div><!--end....table row-->
+
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+  <!--start of the side bar-->
+  <div id="content-hidden-sidenavbar-id" class="content-hidden-sidenavbar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close</a>
+      <div>
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonCompanyAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
+      
+          <div class="mb-3">
+          
+            <input type="text" class="form-control" name="strtdate" placeholder="Starting Date y-m-d">
+          </div>
+          <div class="mb-3">
+            
+            <input type="text" class="form-control" name="enddate" placeholder="Ending Date y-m-d">
+          </div>
+          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+      
+      </form>
+      </div>
+    </div>
+  
+  {% block scripts %}
+ 
+  {% endblock %}
+  
+   {% endblock %}
+   

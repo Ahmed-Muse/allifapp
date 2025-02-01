@@ -1,0 +1,316 @@
+
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--shaafi invoice pdf-->
+    <style>
+        body{
+            background-color: white; 
+            margin: 0;
+            padding: 0;
+        }
+        h3{
+          font-family: 'Times New Roman', Times, serif;
+        }
+       
+        .body-section{
+            padding: 16px;
+            border: 1px solid white;
+            border-radius: 10px 20px;
+        }
+        table{
+            background-color: white;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table td {
+            vertical-align: middle !important;
+            text-align: left;
+            margin-left: 3px;
+            padding-left: 3px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 15px;
+        }
+        table th, table  {
+            padding-top: 02px;
+            padding-bottom: 05px;
+            font-family:Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            font-size: 14px;
+            
+        }
+        .table-bordered{
+            box-shadow: 0px 0px 5px 0.5px green;
+            background-color: white;
+        }
+        .table-bordered td, .table-bordered th {
+            border: 1.5px solid #8dd3ee;
+        }
+        .text-right{
+            text-align: left;
+        }
+        .table-header-row{
+            
+            background-color:#e6e6e6e6;
+        }
+        .float-right{
+            float: right;
+        }
+        .test{
+          border-radius: 2px;
+          border: 2px solid #8dd3ee;
+          width: 5px;
+          height: 20px;
+
+        }
+        .Allifmaal-details{
+          border: 1px;
+          word-spacing: normal;
+          letter-spacing: normal;
+          line-height: 0px;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 14px;
+          margin-top: 0px;
+          font-weight: normal;
+          
+        }
+        th{
+          border:none;
+          text-align: left;
+        
+        }
+        table thead tr{
+          border: none;
+        }
+        .invoice-details{
+          line-height: 0px;
+          margin-left: 3px;
+          padding-left: 3px;
+          margin-top: -5px;
+          
+        }
+        
+
+
+div.invoice-ribbon {
+	text-align:left;
+  -ms-transform: rotate(-10deg);
+
+	padding:3px 0;
+	left:-5px;
+	top:11px;
+	width:120px;
+  transform: rotate(-150deg);
+  transform: translateY(0.125em);
+
+	font-size:25px;
+	color:green;
+  float: left;
+  font-family:'Times New Roman', Times, serif
+}
+.expert{
+  text-align: right;
+ 
+}
+.table-header-row{
+  margin-left: 3px;
+  padding-left: 3px;
+}
+.customer-details{
+  background-color: white;
+  margin-left: 3px;
+  padding-left: 3px;
+ 
+}
+tr.row1{
+  background-color: white;
+  
+}
+.footer{
+  height: 100px; 
+    width:100%;
+    position: absolute;
+    left: 0;
+    bottom: 0; 
+}
+
+    </style>
+
+
+  
+</head>
+<body>
+ 
+  <table class="Allifmaal-details">
+    <thead>
+      <tr>
+        <th>
+          {% for info in companyDetails %}
+          <div style="width: 120px; max-height: 100px;">
+          <img src="{{info.logo.path}}">
+          
+          </div>
+         
+         
+        </th>
+        <th colspan="2">
+         <li> Address: {{info.address}}</li>
+          <li>Phone: {{info.phone1}} </li>
+         <li>E-mail: {{info.email}}</li>
+         <li>Website: {{info.website}} </li>
+        </th>
+        {% endfor%}
+        
+        <div class="expert">
+        <th>
+          {% for scope in scope %}
+         
+          
+          <li>{{scope.name}}</li>
+          
+          {% endfor %}
+          
+         
+        </th>
+        </div>
+      </tr>
+    </thead>
+  </table>
+<br>
+
+
+
+    <table class="table-bordered">
+        <tr style="background-color: #e6e6e6;">
+          <th colspan="5" style="height: 30px; font-size: 120px;margin-left: 2px;padding-left: 2px;padding-top: 6px; padding-bottom: 0px;"> 
+            Invoice
+           </th>
+          <th colspan="5" style="height: 30px; font-size: 120px;margin-left: 2px;padding-left: 2px;padding-top: 6px; padding-bottom: 0px;">
+            Customer
+            </th>
+          
+         
+        </tr>
+        <tr>
+               
+            <th colspan="5" class="customer-details">
+              <li>Invoice Ref: {{invoice_details.invoice_number}}</li>
+                 
+                <li>
+                Due:{{invoice_details.invoice_due_Date}}</li>
+                 
+                <li>
+                  Sales Person : {{system_user}}
+                </li>
+               
+             
+            </th>
+            
+            <th colspan="5"  class="customer-details" style="background-color: white;">
+              <li>Client:  {{invoice_details.customer}} 
+               
+              </li> 
+              <li>Phone: {{invoice_details.customer.phone}}</li> 
+               <li>Address: {{invoice_details.customer.address}}</li>
+              
+             
+                
+            </th>
+             
+            <!-- come back@  uoto here is ok ............. now is ok upto here... just improving it further...ok again trying ot improve.....-->
+           
+          </tr>
+          
+        <tr>
+			      <thead>
+			        <tr>
+			         
+			          <th colspan="4" class="table-header-row">Description</th>
+			          <th colspan="2" class="table-header-row">Quantity</th>
+			          <th colspan="2" class="table-header-row">Unit Price</th>
+			          <th colspan="2" class="table-header-row">Sub-total</th>
+
+			        </tr>
+			      </thead>
+			      <tbody>
+                    {% for item in invoiceItems %}
+                    <tr>
+                        <td colspan="4">{{item.description}}</td>
+                        <td colspan="2">{{item.quantity|intcomma}}</td>
+                        <td colspan="2"> {{item.description.unitPrice|intcomma}}</td>
+                        <td colspan="2">{{item.selling_price|intcomma}}</td>
+  
+                      
+  
+                      </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="8" class="text-right"> Sub Total {{Quote_details.currency}} </td>
+                        <td colspan="2"> 
+                          {{invoice_details.invoice_total|intcomma}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="8" class="text-right">Discount  {{invoice_details.discountValue}}%</td>
+                      <td colspan="2"> 
+                        {{invoice_details.discountAmount|intcomma}}</td>
+                  </tr>
+
+                    
+                    <tr>
+                        <td colspan="8" class="text-right">Add Sales Tax {{invoice_details.tax|intcomma}}%</td>
+                        <td colspan="2">{{invoice_details.taxAmount|intcomma}} </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" class="text-right"><h5>Grand Total {{invoice_details.currency}}</h5></td>
+                        <td colspan="2"> <h4>{{invoice_details.priceLessDiscountWithTax|floatformat:2|intcomma}}</h4></td>
+                    </tr>
+			       </tbody>
+			    </table>
+
+			</div>
+
+		  </div>
+		</div>
+	</div>
+</div>
+</div>
+<br>
+       
+</div>
+<h3>Thank you {{Quote_details.customer}} for giving us the opportunity to serve you.</h3>
+
+<p >Comments: {{Quote_details.comments}}</p>
+
+<br>
+
+<div class="body-section">
+    
+      <a href="https://www.allifmaal.com/" class="float-right">www.allifmaal.com</a>
+    
+
+
+      {% if invoice_details.invoice_status == 'Paid' %}
+                      
+      <h6 class="invoice-ribbon" style="color: black;"><strong>Status: Paid</strong></h6>
+      {% else %}
+      <h6 class="invoice-ribbon" style="color: red;"><strong>Status: Unpaid</strong></h6>
+                        {% endif %}
+  
+                        
+  
+</div>      
+</div> 
+
+</body>
+</html>
+
+
+
+         

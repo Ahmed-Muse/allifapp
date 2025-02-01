@@ -1,0 +1,332 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Open Filters
+      </a>  
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+  
+        <li><a class="dropdown-item">Looking for something?</a></li>
+        <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">Clear Search</a>
+          
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonStockItemSearch' user_var glblslug %}">{% csrf_token %}
+        
+          <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
+          placeholder="Type Here ...">
+        
+          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+          </form>
+          <hr>
+          <li><a class="dropdown-item">Select Ordering Option</a></li>
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
+      
+        <div>
+        <select name="requiredformat" class="form-control">
+          {% for item in datasorts %}
+          <option>{{item.name}}</option>
+            
+           {% endfor %}
+           
+          </select>
+          </div>
+          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+      
+      </form>
+      <hr>
+      <li><a class="dropdown-item">Advanced Searching</a></li>
+      <form method='POST' action="{% url 'allifmaalcommonapp:commonStockItemAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
+        
+        <div>
+          <label>Start Date</label>
+          <input type="date" class="form-control" name="startdate" placeholder="Starting Balance">
+        </div>
+        <div>
+          <label>End Date</label>
+          <input type="date" class="form-control" name="enddate" placeholder="Ending Balance">
+        </div>
+
+        <div>
+          <label>Start Value</label>
+          <input type="text" class="form-control" name="startvalue" placeholder="">
+        </div>
+        <div>
+          <label>End Value</label>
+          <input type="text" class="form-control" name="endvalue" placeholder="">
+        </div>
+        
+        
+        <div>
+          <label >Select Option</label>
+          <select name="requiredformat" class="form-control">
+            {% for item in formats %}
+            <option>{{item.name}}</option>
+            
+         {% endfor %}
+         
+        </select>
+        </div>
+  
+        
+        <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+    
+    </form>
+    <hr>
+      
+      </div>
+      </ul>
+    </div>
+    <a class="amel-table-list-identifier">Inventory:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
+    <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
+    <a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddStockItem' user_var glblslug %}">New Stock Item</a>
+ 
+ 
+  
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+      
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+<div class="allifmaincontainer">
+
+<!--start....main headere-->
+<div class="card-header">
+  <div class="row mt-12" ><!--start....header row-->
+  <div class="col-md-12"><!--start....header column-->
+        
+  <a href="#" class="module-menu-one-open-link module-menu-links">Menu <i class="fa fa-caret-down"></i></a>
+  <a href="{% url 'allifmaalcommonapp:commonAddSupplier' user_var glblslug %}" class="module-menu-links">New Supplier </a>
+   
+ <!-- start of on click dropdown Menu-->
+ <div class="module-dropdown">
+  <!--NOTE.... we can replace the button below with anchor...ie <a href="javascript:void(0);" onclick="openModuleMenuOne()" -->
+  <button onclick="openModuleMenuOne()" class="content-menu-dropdown-btn"> Modules <i class="fa fa-caret-down"></i></button>
+  <!--in the styling of content-dropdown-menu-one, we set display:none so that the content is hidden and is shown using javascript toggle class called module-dropdown-menu-one with the help of content-dropdown-menu-one-id below... the other modules use the same priniciple-->
+  <div id="content-dropdown-menu-one-id" class="content-dropdown-menu">
+    <a href="javascript:void(0);" onclick="openModuleMenuOne()" class="module-menu-close-link"> Close The Menu <i class="fa fa-close"></i></a>
+    <a href="">Employees</a>
+    <a href="#">Retirements</a>
+
+    <button class="module-menu-dropdown-btn" >Contracts <i class="fa fa-caret-down"></i></button>
+    <div class="module-menu-dropdown-container">
+      <a href="">Leaves</a>
+      <a href="#">Sick Leaves</a>
+    </div>
+    <button class="module-menu-dropdown-btn"> Posted Salaries <i class="fa fa-caret-down"></i></button>
+    <div class="module-menu-dropdown-container">
+    <a href="">Receipts</a>
+    <a href="#">Invoices</a>
+    </div>
+    <a href="#">Medicals</a>
+  <!--table here-->
+  </div>
+  </div>
+  <!--end of on click dropdown menu one-->
+
+  <!-- start of on click dropdown Menu-->
+ <div class="module-dropdown">
+  <button onclick="openModuleMenuTwo()" class="content-menu-dropdown-btn">Navigate <i class="fa fa-caret-down"></i> </button>
+  <div id="content-dropdown-menu-two-id" class="content-dropdown-menu">
+  <a href="javascript:void(0);" onclick="openModuleMenuTwo()" class="module-menu-close-link"> Close The Menu <i class="fa fa-close"></i></a>
+    <a href="">Contracts</a>
+    <a href="#">Notifications</a>
+    <button class="module-menu-dropdown-btn" >Appointments <i class="fa fa-caret-down"></i></button>
+    <div class="module-menu-dropdown-container">
+      <a href="">Vacancies</a>
+      <a href="#">Promotions</a>
+    </div>
+    <button class="module-menu-dropdown-btn" >Purchases<i class="fa fa-caret-down"></i></button>
+    <div class="module-menu-dropdown-container">
+      <a href="">Insurances</a>
+      <a href="#">Receipts</a>
+    </div>
+    <a href="#">Letters</a>
+</div>
+</div>
+
+<a href="{% url 'allifmaalcommonapp:commonPostedSupplierPayments' user_var glblslug %}" class="module-menu-links">Posted Payments</a>
+<a href="{% url 'allifmaalcommonapp:commonSupplierPaymentSearch' user_var glblslug %}" class="module-menu-links">Search Payments</a>
+     <!-- start of on click dropdown Menu-->
+ <div class="module-dropdown">
+  <button onclick="openModuleMenuThree()" class="content-menu-dropdown-btn"> Search <i class="fa fa-caret-down"></i></button>
+  <div id="content-dropdown-menu-three-id" class="content-dropdown-menu" >
+<a href="javascript:void(0);" onclick="openModuleMenuThree()" class="module-menu-close-link"> Close The Search Menu <i class="fa fa-close"></i></a>
+
+<table class="table allif-search-table">
+<tr>
+<form method='POST' action=''>{% csrf_token %}
+  <label id="numofitems"> </label>
+  <input type="text" id="allifsearchcommonfield" class="form-control allifsearchcommonfieldclasstwo"
+  placeholder="Search for something" >
+  </form>
+  </tr>
+  <tr>
+  <td> <a href=""> New User </a></td>
+  <td> <a href="">Payments</a> </td>
+  </tr>
+  <tr>
+  <td><a href="">Category</a></td>
+  <td><a href="">Home</a></td>
+</tr>
+  </table>
+  
+<table class="table allif-search-table">
+  <tr>
+  <td scope="col">User</td>
+  <td scope="col">Email</td>
+ </tr>
+<tbody id="display-searched-data-here">
+</tbody>
+</table>
+
+</div>
+</div>
+
+<a href="{% url 'allifmaalcommonapp:commonSupplierStatements' user_var glblslug %}" class="module-menu-links">Supplier Statments </a>
+    
+<!--start....module side nav one menu-->
+ <div class="module-menu-one">
+  <a href="#" class="module-menu-one-open-link module-menu-close-link">Close The Menu <i class="fa fa-close"></i> </a>
+  <a href="">Employees</a>
+
+  <button class="module-menu-dropdown-btn">Postings <i class="fa fa-caret-down"></i></button>
+ <div class="module-menu-dropdown-container">
+   <a href="">Registered Users</a>
+   <a href="#">New User</a>
+ </div>
+
+ <button class="module-menu-dropdown-btn" >Onboardings <i class="fa fa-caret-down"></i></button>
+ <div class="module-menu-dropdown-container">
+   <a href="">Home</a>
+   <a href="#">Absence</a>
+  
+ </div>
+
+  <a href="#" class="">Medicals</a>
+   
+ </div>
+ <!--end....module side nav one menu-->
+
+    </div><!--end....header column-->
+  
+  </div><!--end....header row-->
+
+</div><!--end....main headere-->
+    
+<div class="row mt-12"> <!--start....table row-->
+<div class="col-md-12"> <!--start....table column-->
+  
+<div class="allif-scroll-table"> 
+  <div class="table-content-description">Registerd Suppliers </div>
+<table class="table table-layout">
+<thead>
+  <tr class="allif-table-header-row" >
+  <td>Supplier Name</td>
+  <td>Address</td>
+  <td>Email</td>
+  <td>Company</td>
+  <td>Owner</td>
+  <td>Edit</td>
+  <td>Delete</td>
+  </tr>
+  </thead>
+  <tbody class="allif-table-body">
+   
+  
+  {% for item in allifqueryset %}   
+  <tr>
+   
+  <td>
+  <a href="{% url 'allifmaalcommonapp:commonCustomerStatementDetails' item.id user_var glblslug %}" class="allif-table-links">
+  {{item.name}}
+  </a></td>
+  
+  <td>
+  {{item.address}}
+ </td>
+ <td>
+  {{item.email}}
+ </td>
+
+ <td>
+  {{item.company}}
+ </td>
+ <td>
+  {{item.owner}}
+ </td>
+  
+  
+  <td>
+    <a href="{% url 'allifmaalcommonapp:commonEditSupplierPayment' item.id user_var glblslug %}" class="allif-table-links">Edit</a>
+  </td>
+  
+  <td >
+    <a href="{% url 'allifmaalcommonapp:commonDeleteCustomerStatement' item.id user_var glblslug %}" class="body-delete-link" >Delete</a>
+  
+</td>
+<td >
+    <a href="{% url 'allifmaalcommonapp:commonSupplierStatementpdf' item.id user_var glblslug %}" class="body-delete-link" >pdf</a>
+  
+</td>
+<td >
+    <a href="{% url 'allifmaalcommonapp:commonCustomerStatementpdf' item.id user_var glblslug %}" class="body-delete-link" >pdf</a>
+  
+</td>
+
+  </tr>
+    {% endfor %}
+    
+ 
+  </tbody>
+    </table>
+
+  </div>
+  
+  </div><!--end....table column-->
+  </div>
+
+</div><!--end....table row-->
+
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+ 
+  {% endblock %}
+  
+   {% endblock %}
+   

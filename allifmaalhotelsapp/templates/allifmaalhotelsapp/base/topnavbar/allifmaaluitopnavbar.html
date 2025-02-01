@@ -1,0 +1,88 @@
+
+<div> <!--this div is not necessary but just added so as to have all links under one div...-->
+
+<div class="allifmaaltopnavone" id="allifmaaltopnavoneid">
+  <a href="#" class="opensidemenuonebtn sidenavonemenulinksforminiscreens topnavmobilelinks">Menu 1 <i class="fa fa-caret-down"></i></a>
+ 
+  <button class="topnavonedropdownbtn topnavlargescreenlinks topnavmobilelinks" >Mobile <i class="fa fa-caret-down"></i></button>
+  <div class="topnavone-dropdown-container">
+    <a href="{% url 'allifmaaluiapp:allifmaalUISectionsPage' %}">Sections</a>
+    <a href="#">Suppliers</a>
+    <a href="#">Purchases</a>
+    <a href="#">Suppliers</a>
+    <a href="#">Purchases</a>
+  </div>
+
+  <button class="topnavonedropdownbtn topnavlargescreenlinks topnavmobilelinks" >Mobile <i class="fa fa-caret-down"></i></button>
+  <div class="topnavone-dropdown-container">
+    <a href="">Inventory</a>
+    <a href="#">Suppliers</a>
+    <a href="#">Purchases</a>
+  </div>
+  <a href="" class="topnavtabletlinks">Restaurant</a>
+  <a href="" class="topnavtabletlinks">Halls</a>
+  <a href="" class="topnavtabletlinks">Rooms</a>
+  <a href="" class="topnavtabletlinks">VIP Rooms</a>
+  <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" class="topnavminilaptoplinks topnavlaptoplinks">HRM</a>
+  <a href="{% url 'allifapp:allifappSubsDashboard' glblslug %}" class="topnavtabletlinks">Subs</a>
+  <a href="" class="topnavlaptoplinks">Profiles</a>
+  <a href="{% url 'allifmaaladminapp:adminappHome' %}" class="topnavlaptoplinks">SCC</a>
+  <a href="{% url 'allifmaalapp:allifmaalmaindashboard' %}" class="topnavlaptoplinks">Dashboard</a>
+  <a href="{% url 'allifmaaluiapp:allifmaalUIFormsTable' %}" class="topnavlaptoplinks"></a>
+  
+  <a href="#" class="opentopnavdropdownmenulinkone topnavminilaptoplinks">Sales <i class="fa fa-caret-down"></i></a>
+  <a href="#" class="opentopnavdropdownmenulinktwo topnavminilaptoplinks">Returns <i class="fa fa-caret-down"></i>
+    <a href="#" class="opentopnavdropdownmenulinkthree topnavminilaptoplinks">Minilap <i class="fa fa-caret-down"></i></a>
+  <a href="{% url 'allifmaalapp:allifmaalmaindashboard' %}" class="topnavlaptoplinks"></a>
+
+ 
+  <a href="#about" class="topnavdesktoplinks">Desktop</a>
+  <a href="#about" class="topnavdesktoplinks">Desktop</a>
+  <a href="#about" class="topnavlargescreenlinks">screen</a>
+  <a href="#about" class="topnavlargescreenlinks">Screen</a>
+  <a href="#about" class="topnavlargescreenlinks">screen</a>
+  <a href="#about" class="topnavlargescreenlinks">Screen</a>
+  <a href="#about" class="topnavlargescreenlinks">screen</a>
+  <a href="#about" class="topnavlargescreenlinks">Screen</a>
+  <a href="#about" class="topnavlargescreenlinks">screen</a>
+  <a href="#about" class="topnavlargescreenlinks">Screen</a>
+  <a href="#about" class="topnavlargescreenlinks">screen</a>
+  <a href="#about" class="topnavlargescreenlinks">Screen</a>
+  <a href="#about" class="topnavlargescreenlinks">screen</a>
+  <a href="#about" class="topnavlargescreenlinks">Screen</a>
+  <a href="#about" class="topnavlargescreenlinks">screen</a>
+  <a href="#about" class="topnavlargescreenlinks">Screen</a>
+  <a href="{% url 'allifmaalusersapp:userLogoutPage' %}"  class="topnavlargescreenlinks">Logout</a>
+ 
+   <!--the only work of javascript:void(0) is to makes the cursor pointer like hand...-->
+  <a href="javascript:void(0);" class="allifmaaltopnavoneicon" onclick="opentopnavonehiddenlinks()"><i class="fa fa-bars"></i> </a>
+</div>
+
+<!-- below are the drop down links....3-->
+<!-- links one ....-->
+<div class="topnavmenudropdownmenuonewithclose">
+  <a href="#" class="opentopnavdropdownmenulinkone topnavminilaptoplinks topnav-close-link"> Close <i class="fa fa-close"></i> </a>
+  <a href="{% url 'allifmaaluiapp:allifmaalUIFormAddItem' %}">Add Items</a>
+  <a href="#">Market</a>
+  <a href="#" class="">Sales</a>
+  <a href="#" class="">Sales</a>
+</div>
+
+<!-- links two ....-->
+<div class="topnavmenudropdownmenutwowithclose">
+  <a href="#" class="opentopnavdropdownmenulinktwo topnavminilaptoplinks topnav-close-link"> Close <i class="fa fa-close"></i> </a>
+  <a href="#">Sales</a>
+  <a href="#">Xawa</a>
+  <a href="#" class="">Rents</a>
+  <a href="#" class="">Marketing</a>
+</div>
+
+<!-- links three ....-->
+<div class="topnavmenudropdownmenuthreewithclose">
+  <a href="#" class="opentopnavdropdownmenulinkthree topnavminilaptoplinks topnav-close-link"> Close <i class="fa fa-close"></i> </a>
+  <a href="#">Sales</a>
+  <a href="#">Xawa</a>
+  <a href="#" class="">Rents</a>
+  <a href="#" class="">Marketing</a>
+</div>
+</div>

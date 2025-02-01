@@ -1,0 +1,224 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Open Filters
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+          <li><a class="dropdown-item">Looking for something?</a></li>
+          
+          <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonClearShareholderDepositSearch' user_var glblslug %}">Clear Search</a>
+        
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonDepositSearch' user_var glblslug %}">{% csrf_token %}
+        
+          <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
+          placeholder="Type Here ...">
+        
+          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+          </form>
+          <hr>
+          <li><a class="dropdown-item">Select Ordering Option</a></li>
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
+      
+        <div>
+        <select name="requiredformat" class="form-control">
+          {% for item in datasorts %}
+          <option>{{item.name}}</option>
+            
+           {% endfor %}
+           
+          </select>
+          </div>
+          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+      
+      </form>
+      <hr>
+      <li><a class="dropdown-item">Advanced Searching</a></li>
+      <form method='POST' action="{% url 'allifmaalcommonapp:commonDepositAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
+        
+        <div>
+          <label>Start Date</label>
+          <input type="date" class="form-control" name="startdate" placeholder="Starting Balance">
+        </div>
+        <div>
+          <label>End Date</label>
+          <input type="date" class="form-control" name="enddate" placeholder="Ending Balance">
+        </div>
+
+        <div>
+          <label>Start Value</label>
+          <input type="text" class="form-control" name="startvalue" placeholder="">
+        </div>
+        <div>
+          <label>End Value</label>
+          <input type="text" class="form-control" name="endvalue" placeholder="">
+        </div>
+        
+        
+        <div>
+          <label >Select Option</label>
+          <select name="requiredformat" class="form-control">
+            {% for item in formats %}
+            <option>{{item.name}}</option>
+            
+         {% endfor %}
+         
+        </select>
+        </div>
+  
+        
+        <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+    
+    </form>
+    <hr>
+      
+      </div>
+      </ul>
+    </div>
+    <a class="amel-table-list-identifier">Bank Deposits:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
+    <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddBankShareholderDeposit' user_var glblslug %}">New Deposit</a>
+    <a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a>
+  
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" >Customers</a></li>
+     
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+<div class="allifmaincontainer"> 
+<div class="row mt-12"> <!--start....table row-->
+
+  
+  <div class="col-md-12"> <!--start....table column-->
+  
+    <div class="allif-scroll-table"> 
+      <div class="table-content-description">{{title}}</div>
+    <table class="table table-layout">
+    <thead>
+      <tr class="allif-table-header-row" >
+        <td>Description</td>
+        <td>Amount</td>
+      <td>Bank Name</td>
+      <td>Account</td>
+      
+      <td>Balance</td>
+      <td>BU</td>
+      <td>Date</td>
+    
+    
+      </tr>
+      </thead>
+      <tbody class="allif-table-body">
+       
+           
+      {% for item in allifqueryset %}   
+      <tr>
+      
+      <td>
+      <a href="{% url 'allifmaalcommonapp:commonBankShareholderDepositDetails' item.id user_var glblslug %}" class="allif-table-links">
+      {{item.description}}
+      </a></td>
+      <td>
+        {{item.amount|intcomma}}
+       </td>
+      <td>
+        {{item.bank}}
+       </td>
+      <td>
+        {{item.bank.account}}
+       </td>
+      
+     
+     <td>
+      {{item.bank.balance|intcomma}}
+     </td>
+     <td>
+      {{item.department}}
+     </td>
+     <td>
+      {{item.date|date:'d/m/Y'}}
+     </td>
+     
+      </tr>
+        {% endfor %}
+
+        {% if searched_data %}
+        {% for item in searched_data %}   
+        <tr>
+      
+          <td>
+          <a href="{% url 'allifmaalcommonapp:commonBankShareholderDepositDetails' item.id user_var glblslug %}" class="allif-table-links">
+          {{item.bank}}
+          </a></td>
+          <td>
+            {{item.bank.account}}
+           </td>
+          <td>
+          {{item.amount|intcomma}}
+         </td>
+         
+         <td>
+          {{item.bank.balance|intcomma}}
+         </td>
+         <td>
+          {{item.date|date:'d/m/Y'}}
+         </td>
+         
+          </tr>
+          {% endfor %}
+          {% endif %}
+     
+      </tbody>
+        </table>
+    
+      </div>
+      
+      </div><!--end....table column-->
+  </div>
+
+</div><!--end....table row-->
+
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+  <!--when you put the js code here, it gives a repetitive results....-->
+  {% endblock %}
+  
+   {% endblock %}
+   

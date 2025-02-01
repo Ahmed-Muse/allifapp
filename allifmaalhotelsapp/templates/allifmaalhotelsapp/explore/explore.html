@@ -1,0 +1,396 @@
+{% load static %}
+{% load humanize %}
+<link rel="shortcut icon" href='{% static "allifmaaluiapp/css/images/allifmaal-icon.png" %}' type="png/ico">
+<!DOCTYPE html>
+<html>
+<head> 
+      
+<title>
+
+</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--the lib below is very important for the top nav bar opening and closing icon... so keep it there.-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!--any styles loaded from the static files are to be included here.......-->
+<link href="{% static 'allifmaaluiapp/css/allifmaalmainbootstrap.css' %}" rel="stylesheet">
+
+<style>
+    :root {
+  --main-background-color: #F6F7F8;
+  --main-text-font-size:1em;
+  --main-font-type:system-ui, sans-serif,Helvetica,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+  --main-green-color:#07891c;
+  --main-blue-color:#3d22a7;
+  --main-black-color:#0a0a0a;
+  --main-table-links-color:#04010f;
+  --main-red-color:#bd0303;
+  --links-on-hover-text-color:#3a0bf7;
+  --button-on-hover-color:#eeeeee;
+}
+    body{
+        background-color: var(--main-background-color);
+    }
+
+.topnavtwo{
+    background-color: var(--main-background-color);
+    overflow: auto;
+  
+  margin-left: 0em;
+  box-shadow: 0em 0em 0.5em #858585;
+  position:fixed;
+  right: 0em;
+  left: 0em;
+  top: 0;
+  z-index: 10;
+}
+/*... Start... styling of module dropdowns with closing links... the second option...module-menu-dropdown-container*/
+
+.module-dropdown {
+  position: relative;
+  float: left;/*important*/
+    }
+    
+/*... Hide the drop down content....*/
+.content-dropdown-menu {
+  display: none;
+  background-color: var(--main-background-color);
+}
+
+/*...Show the drop down content on click....*/
+.module-dropdown-menu {
+  display: block;
+  position: fixed;
+  overflow: auto;
+  min-width: max-content;
+ margin-top: 2em;
+ top: auto;
+  border-radius: 0.1em;
+  min-width: 10em;
+  min-height: 10em;
+  background-color:var(--main-background-color);
+  z-index: 10;
+  text-align: center;
+
+  box-shadow: 0em 0em 0.5em #858585;
+  overflow-y:auto;
+  overflow-x: auto;
+  
+  min-height: fit-content;
+  max-height: 70%;/*very important... to show the last link and also for the overflow scrollbar... dont make it more than 70%*/
+  min-width: min-content;
+  max-width: max-content;
+  margin-right: 1em;
+  border-radius: 0.3em;
+  padding: 0.1em 0.2em 0.1em 0.2em;
+  
+  min-width: 100%;
+ 
+  
+}
+
+.content-dropdown-menu a{
+  display:block;
+  text-align: left;
+  position: absolute;
+  font-weight:normal;
+  text-align: left;
+  left: 0.1em;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  color: var(--main-black-color);
+  margin-top: 4em;
+  top: 4em;
+  width: 100%;
+  height: fit-content;
+  line-height: 2em;
+  border: none;
+  background: var(--main-background-color);
+  border-bottom: 1px solid #dfdede;
+  overflow: auto;
+ 
+
+  float: none;
+  display: inline;
+  color: var(--main-black-color);
+  text-align: center;
+  padding: 0.3em 0.3em 0.3em 0.3em;
+  text-decoration: none;
+  font-size: var(--main-text-font-size);
+  border: none;
+  background-color:var(--main-background-color);
+  font-weight:normal;
+
+}
+
+    /*-- end--- of clickable dropdown menu styling one--*/
+
+
+
+/*... End... styling of module dropdowns with closing links... the second option...*/
+a.module-menu-links,button.content-menu-dropdown-btn {
+  color:  var(--main-blue-color);
+  float: left;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  font-weight:normal;
+  font-size: 1em;
+  text-align: left;
+  left: 0.1em;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  border: none;
+ 
+  }
+  a.module-menu-links:hover,button.content-menu-dropdown-btn:hover{
+    color: var(--links-on-hover-text-color);
+  }
+  button.content-menu-dropdown-btn-close {
+    background-color:var(--main-background-color);
+  }
+    /*...............NOTES...............*/
+    /*.
+    1. The module menus can have as many links as you wish...for instance you can add more than 100 links...
+    2. The module drop down menu can also have as many links as you wish...for instance you can add more than 100 links...
+    3. So just add as many links as necessary both in the module side menu and the drop down container......*/
+/*...START.... module menu one styling ...............*/
+  
+.module-menu-one {
+  position: fixed;
+  top: 7em;
+  left: 1em;
+  z-index:10;  
+  box-shadow: 0em 0em 0.5em #858585;
+  overflow-y:auto;
+  overflow-x: auto;
+  width: 0;
+  height: 0;
+  min-height: fit-content;
+  max-height: 70%;/*very important... to show the last link and also for the overflow scrollbar... dont make it more than 70%*/
+  min-width: min-content;
+  max-width: max-content;
+  }
+  
+.module-menu-one a, button.module-menu-dropdown-btn {
+  position: relative;
+  font-weight:normal;
+  text-align: left;
+  left: 0.1em;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  color: var(--main-black-color);
+  display: block;
+  width: 100%;
+  height: fit-content;
+  line-height: 2em;
+  border: none;
+  background: var(--main-background-color);
+  border-bottom: 1px solid #dfdede;
+  overflow: auto;
+ 
+  }
+  
+  
+  /*...END.... module menu one styling ...............*/
+  
+.module-menu-two {
+  position: fixed;
+  top: 7em;
+  left: 1em;
+  z-index:10;  
+  box-shadow: 0em 0em 0.5em #858585;
+  overflow-y:auto;
+  overflow-x: auto;
+  width: 0;
+  height: 0;
+  min-height: fit-content;
+  max-height: 70%;/*very important... to show the last link and also for the overflow scrollbar... dont make it more than 70%*/
+  min-width: min-content;
+  max-width: max-content;
+    }
+  
+.module-menu-two a, button.module-menu-dropdown-btn {
+  position: relative;
+  font-weight:normal;
+  text-align: left;
+  left: 0.1em;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  color: var(--main-black-color);
+  display: block;
+  width: 100%;
+  height: fit-content;
+  line-height: 2em;
+  border: none;
+  background: var(--main-background-color);
+  border-bottom: 1px solid #dfdede;
+  overflow: auto;
+  }
+  
+.module-menu-two a:hover, button.module-menu-dropdown-btn:hover{
+  color: var(--links-on-hover-text-color);
+  }
+  
+
+  /*...START.... module menu three with search input styling ...............*/
+.module-menu-three {
+  position: fixed;
+  top: 7em;
+  left: 1em;
+  z-index:10;  
+  box-shadow: 0em 0em 0.5em #858585;
+  overflow-y:auto;
+  overflow-x: auto;
+  width: 0;
+  height: 0;
+  min-height: fit-content;
+  max-height: 70%;/*very important... to show the last link and also for the overflow scrollbar... dont make it more than 70%*/
+  min-width: min-content;
+  max-width: max-content;
+    }
+  
+.module-menu-three a {
+  position: relative;
+  font-weight:normal;
+  text-align: left;
+  left: 0.1em;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  color: var(--main-black-color);
+  display: block;
+  width: 100%;
+  height: fit-content;
+  line-height: 2em;
+  border: none;
+  background: var(--main-background-color);
+  border-bottom: 1px solid #dfdede;
+  overflow: auto;
+  }
+  
+  
+/* ...this window below is responsible for opening up the various side menus through javascript... */
+.module-menu-window {
+  width:fit-content;
+  height:fit-content;
+  }
+
+/* ...START....module menu drop downs content styling */
+.module-menu-dropdown-container {
+  display: none;
+  position:absolute;
+  left: 0.1em;
+  z-index: 1;/*drop down will not open without this property....*/
+  float: left;
+  text-align: left;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  overflow: auto;
+  min-width: 10em;
+  background-color: var(--main-background-color);
+    }
+  
+.module-menu-dropdown-container a {
+  position: relative;
+  font-weight:normal;
+  font-size: 1em;
+  text-align: left;
+  left: 0.1em;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  color: var(--links-on-hover-text-color);
+  display: block;
+  line-height: 2em;
+  border-bottom: 1px solid #dfdede;
+  width: 100%;
+  }
+    
+.module-menu-dropdown-container a:hover {
+  color: var(--main-blue-color);
+    }
+  
+</style>
+</head>
+<body>
+
+<div class="topnavtwo">
+   
+   <!-- start of on click dropdown Menu-->
+   <div class="module-dropdown">
+   
+    <!--NOTE.... we can replace the button below with anchor...ie <a href="javascript:void(0);" onclick="openModuleMenuOne()" -->
+    <button onclick="openModuleMenuOne()" class="content-menu-dropdown-btn"> Navigate <i class="fa fa-caret-down"></i></button>
+    <!--in the styling of content-dropdown-menu-one, we set display:none so that the content is hidden and is shown using javascript toggle class called module-dropdown-menu-one with the help of content-dropdown-menu-one-id below... the other modules use the same priniciple-->
+    <div id="content-dropdown-menu-one-id" class="content-dropdown-menu">
+      <a href="javascript:void(0);" onclick="openModuleMenuOne()" class="module-menu-close-link"> Close The Menu <i class="fa fa-close"></i></a>
+      
+        <a href="">Module 1</a>
+        <a href="#">Invoices</a>
+    
+        <button class="module-menu-dropdown-btn" >Quotations<i class="fa fa-caret-down"></i></button>
+        <div class="module-menu-dropdown-container">
+          <a href="">Module 1</a>
+          <a href="#">Suppliers</a>
+        </div>
+        <button class="module-menu-dropdown-btn" >Purchases<i class="fa fa-caret-down"></i></button>
+        <div class="module-menu-dropdown-container">
+          <a href="">Logistics</a>
+          <a href="#">Invoices</a>
+          <a href="#">Quotations</a>
+          <a href="#">Invoices</a>
+          <a href="#">Quotations</a>
+        </div>
+        <a href="#">Invoices</a>
+        <a href="#">Invoices</a>
+  
+   
+      <!--table here-->
+    </div>
+    </div>
+    <!--end of on click dropdown menu one-->
+  
+    <!-- start of on click dropdown Menu-->
+   <div class="module-dropdown">
+      <button onclick="openModuleMenuTwo()" class="content-menu-dropdown-btn"> Open Modules <i class="fa fa-caret-down"></i> </button>
+      <div id="content-dropdown-menu-two-id" class="content-dropdown-menu">
+        <a href="javascript:void(0);" onclick="openModuleMenuTwo()" class="module-menu-close-link"> Close The Menu <i class="fa fa-close"></i></a>
+      
+          <a href="">Module 1</a>
+          <a href="#">Invoices</a>
+      
+          <button class="module-menu-dropdown-btn" >Quotations<i class="fa fa-caret-down"></i></button>
+          <div class="module-menu-dropdown-container">
+            <a href="">Module 1</a>
+            <a href="#">Suppliers</a>
+          </div>
+          <button class="module-menu-dropdown-btn" >Purchases<i class="fa fa-caret-down"></i></button>
+          <div class="module-menu-dropdown-container">
+            <a href="">Logistics</a>
+            <a href="#">Invoices</a>
+            <a href="#">Quotations</a>
+            <a href="#">Invoices</a>
+            <a href="#">Quotations</a>
+          </div>
+          <a href="#">Invoices</a>
+          <a href="#">Invoices</a>
+  
+        
+  </div>
+
+   
+  
+  </div><!--end....main headere-->
+      
+  
+  <!--end of table-->
+  
+  </div><!--end of main container of the page-->
+  <script src="{% static 'allifmaaluiapp/js/jquery3.6.0.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script src="{% static 'allifmaaluiapp/js/allifmaaluimainjs.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Actions
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+           
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditCustomerPayment' allifquery.id user_var glblslug %}">Edit Item</a></li>
+         
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPostCustomerPayment' allifquery.id user_var glblslug %}">Post Payment</a></li>
+    
+          <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteCustomerPayment' allifquery.id user_var glblslug %}">Delete Item</a></li>
+          
+
+    
+       </div>
+      </ul>
+    </div>
+
+    
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+ 
+  <a href="{% url 'allifmaalcommonapp:commonSupplierPayments' user_var glblslug %}">Supplier Payments</a>
+  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+<div class="allifmaincontainer">
+  <div class="row mt-12"> <!--start....table row-->
+
+  {% if myallifquery %}
+  <div class="allif-scroll-table">
+    <!--start of the table-->
+
+        <table class="table table-layout">
+        <thead>
+        <tr class="allif-table-header-row">
+        <td>Quote No.</td>
+        <td>Customer</td>
+        <td>Amount</td>
+        
+        <td>No</td>
+        <td>Yes</td>
+        
+        </tr>
+          </thead>
+          <tbody class="allif-table-body">  
+          <tr sid="allif-delete-on-table-row">
+           
+            <td id="allif-delete-on-table-row"> Delete {{myallifquery.number}} ?</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.customer}}</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.total|floatformat:2|intcomma}}</td>
+            <td id="allif-delete-on-table-row">
+              <a href="{% url 'allifmaalcommonapp:commonCustomerPaymentDetails' allifquery.id user_var glblslug %}" class="body-delete-link">
+               Dont Delete
+               </a>
+              </td>
+            <td id="allif-delete-on-table-row">
+            <a href="{% url 'allifmaalcommonapp:commonDeleteCustomerPayment' myallifquery.id user_var glblslug %}" class="body-delete-link">
+             Yes Delete
+             </a>
+            </td>
+           
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+          {% endif %}
+        
+    <div class="table-content-description"> Payment Details for {{allifquery}} </div>
+    <div class="allif-details-container">
+      <div class="row"><!--start of row div --->
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="allif-details-card ">
+            <!--start of the table here-->
+          <table class="table allif-details-table table-layout">
+            <tbody>
+              <tr>
+                <td>Company</td>
+                <td>{{allifquery.company}}</td>
+            
+                </tr>
+              <tr>
+                <td>Division</td>
+                <td>{{allifquery.division}}</td>
+            
+                </tr>
+                <tr>
+                  <td>Branch</td>
+                  <td>{{allifquery.branch}}</td>
+              
+                  </tr>
+              <tr>
+                <td>Department</td>
+                <td>{{allifquery.department}}</td>
+            
+                </tr>
+          
+          </tbody>
+          </table>
+        
+          </div>
+              </div>
+      
+           
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+            <tr>
+                <td>Pay from Account</td>
+                <td>{{allifquery.account}}</td>
+            
+                </tr>
+               
+                <tr>
+                  <td>Supplier</td>
+                  <td>{{allifquery.supplier}}</td>
+                  
+                </tr>
+                <tr>
+                  <td>Description</td>
+                  <td>{{allifquery.description}}</td>
+                  
+                </tr>
+              <tr>
+                <td>Amount</td>
+                <td >{{allifquery.amount|floatformat:2|intcomma}}</td>
+              </tr>
+          
+        </tbody>
+        </table>
+      
+        </div>
+            </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+            <tr>
+              <td>Comments</td>
+              <td>{{allifquery.comments}}</td>
+              
+            </tr>
+           
+        <tr>
+          <td>Mode of payment</td>
+          <td>{{allifquery.mode}}</td>
+      
+    </tr>
+    <tr>
+        <td>Posting Status</td>
+        <td>{{allifquery.status}}</td>
+    
+  </tr>
+    <tr>
+      <td>Created By</td>
+      <td>{{allifquery.owner}}</td>
+  
+      
+      </tr> 
+        <tr>
+          <td>Created On</td>
+          <td>{{allifquery.date|date:'d/m/Y'}}</td>
+        </tr>
+      
+        </tbody>
+        </table>
+      
+      </div>
+    </div>
+      
+      </div><!--end of row div --->
+        
+          </div>
+          <hr>
+
+</div><!--end....table row-->
+
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="col-md-12"><!--start of the first row body-->
+        <div class="allif-form-container">
+        <form method='POST' action=''>{% csrf_token %}
+        <div class="row"><!--start of row div --->
+            <div class="col-md-4"><!--start of column 1-->
+              <div class="card shadow text-left p-3 allif-form-card">
+                <label>Division Name</label> {{form.division}}
+                <label>Branch Name</label> {{form.branch}}
+                <label>Department Name</label> {{form.department}}
+                <label>Pay From Acccount</label> {{form.account}}
+               
+                 
+                </div>
+            </div><!--end of column 1-->
+        
+            <div class="col-md-4"><!--start of column 2-->
+            <div class="card shadow text-left p-3 allif-form-card">
+                <label>Supplier</label> {{form.supplier}}
+                <label>Amount</label> {{form.amount}}
+                <label>Description</label> {{form.description}}
+                <label>Mode of Payment</label> {{form.mode}}
+               
+                 
+                </div>
+            </div><!--end of column 2-->
+            <div class="col-md-4"><!--start of column 3-->
+            <div class="card shadow text-left p-3 allif-form-card">
+                <label>Comments</label> {{form.comments}}
+  
+                
+                <label>Posting Status</label> {{form.status}}
+
+                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+        
+                </div>
+            </div><!--end of column 1-->
+        
+        </div><!--end of row div --->
+            </form>
+            </div>
+            </div><!--end of first row body-->
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

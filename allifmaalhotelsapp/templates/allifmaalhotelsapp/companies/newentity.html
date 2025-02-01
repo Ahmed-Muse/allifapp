@@ -1,0 +1,67 @@
+
+<div class="allifmaincontainer">
+
+  <!--start....main headere-->
+  <div class="card-header">
+
+    <div class="row mt-12" ><!--start....header row-->
+
+    <div class="col-md-12"><!--start....header column-->
+          
+    <a href="" class="module-menu-links">Sales </a>
+    <a href="#" class="module-menu-links">Sales Returns </a>
+    <a href="#" class="module-menu-links"> <span>Customers</span> </a>
+
+    </div><!--end....header column-->
+  
+  </div><!--end....header row-->
+
+</div><!--end....main headere-->
+    
+
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="col-md-12"><!--start of the first row body-->
+        <div class="allif-form-container">
+        <form method='POST' action=''>{% csrf_token %}
+        <div class="row"><!--start of row div --->
+            <div class="col-md-4"><!--start of column 1-->
+                <div class="card shadow text-left p-3 allif-form-card" >
+                <label>Company</label> {{form.company}} 
+                <label>Sector</label>{{form.sector}}
+                <label>Phone 1</label> {{form.phone1}}
+                </div>
+            </div><!--end of column 1-->
+        
+            <div class="col-md-4"><!--start of column 2-->
+            <div class="card shadow text-left p-3 allif-form-card">
+                <label>Email</label> {{form.email}} 
+                <label>Website</label> {{form.website}} 
+                <label>Logo</label> {{form.logo}} 
+                
+                </div>
+            </div><!--end of column 2-->
+            <div class="col-md-4"><!--start of column 3-->
+            <div class="card shadow text-left p-3 allif-form-card">
+                <label>Address</label> {{form.address}} 
+                <label>Phone 2</label> {{form.phone2}} 
+                <label>BOX</label> {{form.pobox}}
+                <label>City</label> {{form.city}}
+                <label>Country</label> {{form.country}}
+        
+               
+                <br>
+                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+        
+                </div>
+            </div><!--end of column 1-->
+        
+        </div><!--end of row div --->
+            </form>
+            </div>
+            </div><!--end of first row body-->
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+</div><!--end of main container of the page....-->

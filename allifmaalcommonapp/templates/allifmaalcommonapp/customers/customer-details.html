@@ -1,0 +1,252 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Actions
+      </a>   
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditCustomer' allifquery.id user_var glblslug %}">Edit Customer</a></li>
+          
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTopUpCustomerAccount' allifquery.id user_var glblslug %}">Pay Customer</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomerLedgerEntries' allifquery.id user_var glblslug %}">Ledger Entries</a></li>
+
+        
+      
+          <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteCustomer' allifquery.id user_var glblslug %}">Delete Customer</a></li>
+      
+       </div>
+      </ul>
+    </div>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+ 
+  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
+  <a href="{% url 'allifmaalcommonapp:commonTopUpCustomerAccount' allifquery.id user_var glblslug %}">Receipt Money</a>
+  
+  <a href="{% url 'allifmaalcommonapp:commonCustomerStatementpdf' allifquery.id user_var glblslug %}">Statement</a>
+  {% if sctr == 'Education' %}
+    <a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" class="module-menu-links">Students</a>
+    
+    {% elif sctr == 'Healthcare' %}
+    <a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" class="module-menu-links">Patients</a>
+   
+    {% else %}
+    <a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" class="module-menu-links">Customers</a>
+    
+    {% endif %}
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+
+
+<div class="allifmaincontainer">
+
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="allif-details-container">
+      <div class="row"><!--start of row div --->
+      
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="allif-details-card ">
+            <!--start of the table here-->
+          <table class="table allif-details-table table-layout">
+            <tbody>
+              <tr>
+                <td>Company</td>
+                <td>{{allifquery.company}}</td>
+            
+                </tr>
+              <tr>
+                <td>Division</td>
+                <td>{{allifquery.division}}</td>
+            
+                </tr>
+                <tr>
+                  <td>Branch</td>
+                  <td>{{allifquery.branch}}</td>
+              
+                  </tr>
+              <tr>
+                <td>Department</td>
+                <td>{{allifquery.department}}</td>
+            
+                </tr>
+                <tr>
+                  <td>Full Name</td>
+                  <td>{{allifquery.fullName}}</td>
+            
+                </tr>
+                <tr>
+                  <td>Sales</td>
+                  <td>{{allifquery.sales}}</td>
+            
+                </tr>
+                <tr>
+                  <td>UID</td>
+                  <td>{{allifquery.uid}}</td>
+            
+                </tr>
+                <tr>
+                  <td>Balance</td>
+                  <td>{{allifquery.balance}}</td>
+            
+                </tr>
+          </tbody>
+          </table>
+        
+          </div>
+              </div>
+      
+           
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+            <tr>
+              <td>First Name</td>
+              <td>{{allifquery.name}}</td>
+           
+              </tr>
+          
+            <tr>
+              <td>Phone</td>
+              <td>{{allifquery.phone}}</td>
+          
+              </tr>
+            <tr>
+              <td>Address</td>
+              <td>{{allifquery.address}}</td>
+          
+              </tr>
+              <tr>
+                  <td>Email</td>
+                  <td>{{allifquery.email}}</td>
+                  
+                </tr>
+        <tr>
+          <td>Balance</td>
+          <td>{{allifquery.balance}}</td>
+          
+        </tr>
+        <tr>
+          <td>Class Name</td>
+          <td>{{allifquery.className}}</td>
+    
+        </tr>
+        <tr>
+          <td>Form</td>
+          <td>{{allifquery.form}}</td>
+    
+        </tr>
+        <tr>
+          <td>Payment Type</td>
+          <td>{{allifquery.paymentType}}</td>
+    
+        </tr>
+        </tbody>
+        </table>
+      
+        </div>
+            </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+            <tr>
+              <td>City</td>
+              <td>{{allifquery.city}}</td>
+          
+              </tr>
+              <tr>
+                <td>Turnover</td>
+                <td>{{allifquery.turnover}}</td>
+          
+                </tr>
+            <tr>
+              <td>Contact</td>
+              <td>{{allifquery.contact}}</td>
+        
+            </tr>
+    <tr>
+    <td>Created On</td>
+    <td>{{allifquery.date|date:'d/m/Y'}}</td>
+
+    </tr>
+    
+   
+    <tr>
+      <td>Next Kin</td>
+      <td>{{allifquery.nextkin}}</td>
+
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td>{{allifquery.age}}</td>
+
+    </tr>
+    <tr>
+      <td>Created By</td>
+      <td>{{allifquery.owner}}</td>
+
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>{{allifquery.gender}}</td>
+
+    </tr>
+    
+
+      
+        </tbody>
+        </table>
+      
+      </div>
+    </div>
+      
+      </div><!--end of row div --->
+        
+          </div>
+<hr>
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+</div><!--end of main container of the page....-->
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   
+
+
+
+
+
+
+

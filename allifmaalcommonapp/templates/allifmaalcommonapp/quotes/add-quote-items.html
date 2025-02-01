@@ -1,0 +1,217 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<!--start....main headere-->
+<div class="card-header">
+  <div class="row mt-12" ><!--start....header row-->
+  <div class="col-md-12"><!--start....header column-->
+  <div class="container-fluid amel-content-header">
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddQuoteItems' allifquery.id user_var glblslug %}">Refresh</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddQuoteDetails' allifquery.id user_var glblslug %}">Quote Details</a>
+
+    
+    <a href="{% url 'allifmaalcommonapp:commonQuotes' user_var glblslug %}">Quotations</a>
+    <a href="{% url 'allifmaalcommonapp:commonInvoices' user_var glblslug %}">Invoices</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+<div class="allifmaincontainer">
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="col-md-12"><!--start of the first row body-->
+      <div class="allif-form-container">
+      
+      <div class="row"><!--start of row div --->
+        
+      <div class="allif-scroll-table">
+      <!--start of the table-->
+
+          <table class="table table-layout">
+          <thead>
+          <tr class="allif-table-header-row">
+          <td>No.</td>
+          <td>Items</td>
+          <td>Quantity</td>
+          <td>Stock</td>
+          <td>Cost</td>
+          <td>Price</td>
+         
+          <td>Amount</td>
+          <td>Discount</td>
+          <td>Total</td>
+          <td>Tax</td>
+          <td>Actions</td>
+          
+          </tr>
+            </thead>
+            <tbody class="allif-table-body">
+              {% if myquery %}
+             
+            <tr>
+              <form method='POST' action=''>{% csrf_token %}
+                <td id="allif-table-inline-form"></td>
+                <td id="allif-table-inline-form">{{form.description}}</td>
+                <td id="allif-table-inline-form">{{form.quantity}}</td>
+                <td id="allif-table-inline-form">{{myquery.description.quantity|floatformat:2|intcomma}}</td>
+                <td id="allif-table-inline-form">{{myquery.description.unitcost|floatformat:2|intcomma}}</td>
+                <td id="allif-table-inline-form">{{myquery.description.unitPrice|floatformat:2|intcomma}}</td>
+                <td id="allif-table-inline-form">{{myquery.quote_selling_price|floatformat:2|intcomma}}</td>
+                <td id="allif-table-inline-form">{{form.discount}}</td>
+                <td id="allif-table-inline-form">{{myquery.quote_selling_price_with_discount|floatformat:2|intcomma}}</td>
+
+                <td id="allif-table-inline-form" colspan="1"> 
+                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+              </td>
+                <td id="allif-table-inline-form" colspan="2"></td>
+              </form>
+            </tr>
+              {% else %}
+          <tr>
+            
+            <form method='POST' action=''>{% csrf_token %}
+              <td id="allif-table-inline-form"></td>
+              <td id="allif-table-inline-form">{{form.description}}</td>
+              <td id="allif-table-inline-form">{{form.quantity}}</td>
+             
+              <td id="allif-table-inline-form" colspan="1"> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+              <td id="allif-table-inline-form" colspan="8"></td>
+            </form>
+            </tr>
+            {% endif %}
+              
+          {% if myallifquery %}
+          <tr sid="allif-delete-on-table-row">
+            <td id="allif-delete-on-table-row">01</td>
+            <td id="allif-delete-on-table-row"> Delete {{myallifquery.description}} ?</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.quantity|floatformat:2|intcomma}}</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.description.quantity|floatformat:2|intcomma}}</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.description.unitcost|floatformat:2|intcomma}}</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.description.unitPrice|floatformat:2|intcomma}}</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.quote_selling_price|floatformat:2|intcomma}}</td>
+
+            <td id="allif-delete-on-table-row">{{myallifquery.discount|floatformat:2|intcomma}}%</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.quote_selling_price_with_discount|floatformat:2|intcomma}}</td>
+
+            
+            <td id="allif-delete-on-table-row">{{myallifquery.description.taxrate.taxrate|floatformat:2|intcomma}}</td>
+            <td>
+              <div class="dropdown allifmaal-content-dropdown">
+                <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                open
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <div class="content-dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddQuoteItems' allifquery.id user_var glblslug %}">No</a></li>
+                  <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDeleteQuoteItem' myallifquery.id user_var glblslug %}">Delete</a></li>
+                </div>
+                </ul>
+              </div>
+            </td>
+            
+           
+          </tr>
+          {% endif %}
+            
+
+          {% for item in allifqueryset %}
+          <tr>
+          <td>{{forloop.counter|intcomma}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.quantity|floatformat:2|intcomma}}</td>
+          <td>{{item.description.quantity|floatformat:2|intcomma}}</td>
+          <td>{{item.description.unitcost|floatformat:2|intcomma}}</td>
+          <td>{{item.description.unitPrice|floatformat:2|intcomma}}</td>
+          
+          <td>{{item.quote_selling_price|floatformat:2|intcomma}}</td>
+          <td>{{item.discount|floatformat:2|intcomma}}%</td>
+          <td>{{item.quote_selling_price_with_discount|floatformat:2|intcomma}}</td>
+         
+          <td>{{item.description.taxrate.taxrate|floatformat:2|intcomma}}%</td>
+          <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              open
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <div class="content-dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditQuoteItem' item.id user_var glblslug %}">Edit</a></li>
+                <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonWantToDeleteQuoteItem' item.id user_var glblslug %}">Delete</a></li>
+              </div>
+              </ul>
+            </div>
+          </td>
+          
+         
+          </tr>
+          {% endfor %}
+
+        <tr>
+          <td id="allif-table-sums-section"></td>
+          <td id="allif-table-sums-section" colspan="5">Sub Total</td>
+          <td id="allif-table-sums-section">{{allifquery.total|floatformat:2|intcomma}}</td>
+          <td id="allif-table-sums-section" colspan="5"></td>
+          
+        </tr>
+
+        <tr>
+          <td id="allif-table-sums-section"></td>
+          <td id="allif-table-sums-section" colspan="6">Discount</td>
+          <td id="allif-table-sums-section">{{allifquery.discountAmount|floatformat:2|intcomma}}</td>
+          <td id="allif-table-sums-section" colspan="4"></td>
+          
+          </tr>
+          <tr>
+            <td id="allif-table-sums-section"></td>
+            <td id="allif-table-sums-section" colspan="7">Discounted Amount</td>
+            <td id="allif-table-sums-section">{{allifquery.totalwithdiscount|floatformat:2|intcomma}}</td>
+            <td id="allif-table-sums-section" colspan="3"></td>
+            
+            </tr>
+
+          
+          <tr>
+            <td id="allif-table-sums-section"></td>
+            <td id="allif-table-sums-section" colspan="8"> Add Tax</td>
+            <td id="allif-table-sums-section">{{allifquery.taxAmount|floatformat:2|intcomma}}</td>
+            <td id="allif-table-sums-section" colspan="2"></td>
+            
+            </tr>
+        
+              <tr>
+                <td id="allif-table-sums-section"></td>
+                <td id="allif-table-sums-section" colspan="7"><strong>Grand Total</strong></td>
+                <td id="allif-table-sums-section"><strong>{{allifquery.grandtotal|floatformat:2|intcomma}}</strong></td>
+                <td id="allif-table-sums-section" colspan="3"></td>
+                
+                </tr>
+        
+          </tbody>
+          </table>
+          </div>
+                   
+      <!--end of table-->
+          
+            </div><!--end of column 1-->
+        
+        </div><!--end of row div --->
+            
+        </div>
+            </div><!--end of first row body....-->
+  
+</div><!--end of main container of the page-->
+
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

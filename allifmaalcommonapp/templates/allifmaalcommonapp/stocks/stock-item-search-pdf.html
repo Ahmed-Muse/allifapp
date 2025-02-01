@@ -1,0 +1,41 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifpdfuibase.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<div>
+    <table class="table-bordered">
+    <tr>
+    <thead>
+    <tr class="allif-pdf-table-header">
+    
+    <th colspan="4">Description</th>
+    <th colspan="4">Bank</th>
+    <th colspan="2">Amount</th>
+    <th colspan="2">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in searched_data %}
+    <tr>
+    <td colspan="4">{{item.description}}</td>
+    <td colspan="4">{{item.bank}}</td>
+    <td colspan="2">{{item.amount|intcomma}}</td>
+    <td colspan="2"> {{item.date}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+        
+</div> 
+
+{% block scripts %}
+
+{% endblock %}
+
+{% endblock %}
+   

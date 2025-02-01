@@ -1,0 +1,616 @@
+{% extends 'allifmaaluiapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+   
+{% block body %}
+ 
+<!--we can insert the other section here...-->
+
+<div class="allifmaincontainer">
+  
+  <!--start....main headere-->
+  <div class="card-header">
+
+    <div class="row mt-12" ><!--start....header row-->
+
+    <div class="col-md-12"><!--start....header column-->
+          
+    <a href="#" class="module-menu-one-open-link module-menu-links">Navigate <i class="fa fa-caret-down"></i></a>
+    <a href="#" class="module-menu-two-open-link module-menu-links">Open <i class="fa fa-caret-down"></i></a>
+    <a href="#" class="module-menu-three-open-link module-menu-links">Search <strong>+</strong> <i class="fa fa-caret-down"></i></a>
+    <a href="" class="module-menu-links">Link </a>
+    <a href="#" class="module-menu-links">Sales Returns </a>
+    <a href="#" class="module-menu-links"> <span>Customers</span> </a>
+
+
+<!--start....module side nav one menu-->
+ <div class="module-menu-one">
+  <a href="#" class="module-menu-one-open-link module-menu-close-link">Close The Menu <i class="fa fa-close"></i> </a>
+
+
+  <button class="module-menu-dropdown-btn" >Quotations<i class="fa fa-caret-down"></i></button>
+ <div class="module-menu-dropdown-container">
+  
+   <a href="#">Suppliers</a>
+ </div>
+
+ <button class="module-menu-dropdown-btn" >Purchases<i class="fa fa-caret-down"></i></button>
+ <div class="module-menu-dropdown-container">
+  
+   <a href="#">Invoices</a>
+   <a href="#">Quotations</a>
+   <a href="#">Invoices</a>
+   <a href="#">Quotations</a>
+   
+ </div>
+
+    <a href="#" class="">Sales</a>
+    <a href="#" class="">Sales</a>
+    <a href="#" class="">Sales</a>
+ </div>
+ <!--end....module side nav one menu-->
+
+ <!--start....module side nav two menu-->
+ <div class="module-menu-two">
+  <a href="#" class="module-menu-two-open-link module-menu-close-link">Close The Menu <i class="fa fa-close"></i> </a>
+  <a href="" >menu 2</a>
+
+  <button class="module-menu-dropdown-btn" >Menu2<i class="fa fa-caret-down"></i></button>
+ <div class="module-menu-dropdown-container">
+   <a href="">Menu 2</a>
+   <a href="#">Suppliers</a>
+ </div>
+
+ <button class="module-menu-dropdown-btn" >Purchases<i class="fa fa-caret-down"></i></button>
+ <div class="module-menu-dropdown-container">
+   <a href="">Logistics</a>
+   <a href="#">Invoices</a>
+  
+ </div>
+
+    <a href="#" class="">Sales</a>
+    <a href="#" class="">Sales</a>
+   
+ </div>
+ <!--end....module side nav two menu-->
+
+ <!--start....module side nav three with search menu-->
+ <div class="module-menu-three">
+    <table class="table allif-search-table">
+      <tr>
+        <a href="#" class="module-menu-three-open-link module-menu-close-link">Close The Menu <i class="fa fa-close"></i> </a>
+      </tr>
+    
+      <tr>
+        <td>
+      <a href=""> New Customer </a>
+        </td>
+
+        <td> 
+          <a href="">Customer Payments</a>
+        </td>
+
+        </tr>
+
+        <tr>
+        <td>
+      <a href=""> Customer Statements </a>
+        </td>
+        <td>     
+          <a href="">Transactions</a>
+        </td>
+
+        </tr>
+        <tr>
+          <td>
+        <a href=""> Customer Statements </a>
+          </td>
+          <td>     
+            <a href="">Customer Transactions</a>
+          </td>
+          </tr>
+        </table>
+ </div>
+ <!--start....module side nav three with search menu-->
+ 
+    </div><!--end....header column-->
+  
+  </div><!--end....header row-->
+
+</div><!--end....main header-->
+
+ <!--start of first row-->
+ <div class="row mt-12" >
+    <div class="col-md-4">
+    <div class="card">
+    <div class="card-header allif-dashboard-card-header">
+        Main Company Assets {{assets_tot_val|floatformat:2|intcomma}}
+    </div>
+
+    <div class="col-md-12">
+    <div class="column allif-dashboard-card-body">
+                    
+    <canvas id="myallifchart" width="400" height="300"></canvas>
+    <script>
+    var ctx33 = document.getElementById('myallifchart').getContext('2d');
+    var myallifchart = new Chart(ctx33, {
+    type: 'doughnut',
+
+    data: {
+    labels: [{% for items in main_assets %} '{{items.description|truncatewords:2}}', {% endfor %}],
+
+    datasets: [{
+
+    label: 'Current Prospects',
+    data: [{% for items in main_assets %} {{items.value}}, {% endfor %}],
+    backgroundColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+        
+    ],
+    borderColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+    ],
+    borderWidth: 1
+    }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+    });
+</script>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+<div class="col-md-4">
+<div class="card">
+<div class="card-header allif-dashboard-card-header">
+Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
+</div>
+
+
+
+<div class="col-md-12">
+    <div class="column allif-dashboard-card-body">
+
+    <canvas id="myChart3" width="400" height="300"></canvas>
+    <script>
+    var ctx3 = document.getElementById('myChart3').getContext('2d');
+    var myChart3 = new Chart(ctx3, {
+    type: 'bar',
+
+    data: {
+    labels: [{% for items in prospects %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
+
+    datasets: [{
+
+    label: 'Current Prospects',
+    data: [{% for items in prospects %} {{items.total}}, {% endfor %}],
+    backgroundColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+        
+    ],
+    borderColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+    ],
+    borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+    yAxes: [{
+        ticks: {
+            beginAtZero: true
+        }
+    }]
+    }
+    }
+    });
+</script>
+</div>
+</div>
+
+
+</div></div>
+
+
+<div class="col-md-4">
+<div class="card">
+<div class="card-header allif-dashboard-card-header">
+Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
+</div>
+
+<div class="col-md-12">
+<div class="column allif-dashboard-card-body">
+
+    <canvas id="myChart3" width="400" height="300"></canvas>
+    <script>
+    var ctx3 = document.getElementById('myChart3').getContext('2d');
+    var myChart3 = new Chart(ctx3, {
+    type: 'bar',
+
+    data: {
+    labels: [{% for items in prospects %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
+
+        datasets: [{
+
+    label: 'Current Prospects',
+    data: [{% for items in prospects %} {{items.total}}, {% endfor %}],
+    backgroundColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+        
+    ],
+    borderColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+    ],
+    borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+    yAxes: [{
+        ticks: {
+            beginAtZero: true
+        }
+    }]
+    }
+    }
+    });
+</script>
+</div>
+</div>
+
+
+</div></div>
+</div>
+
+<!--end of first row-->
+
+<!--start of second row-->
+
+ <!--start of first row-->
+ <div class="row mt-12" >
+    <div class="col-md-4">
+    <div class="card">
+    <div class="card-header allif-dashboard-card-header">
+        Main Company Assets {{assets_tot_val|floatformat:2|intcomma}}
+    </div>
+
+    <div class="col-md-12">
+    <div class="column allif-dashboard-card-body">
+                    
+    <canvas id="myallifchart" width="400" height="300"></canvas>
+    <script>
+    var ctx33 = document.getElementById('myallifchart').getContext('2d');
+    var myallifchart = new Chart(ctx33, {
+    type: 'doughnut',
+
+    data: {
+    labels: [{% for items in main_assets %} '{{items.description|truncatewords:2}}', {% endfor %}],
+
+    datasets: [{
+
+    label: 'Current Prospects',
+    data: [{% for items in main_assets %} {{items.value}}, {% endfor %}],
+    backgroundColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+        
+    ],
+    borderColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+    ],
+    borderWidth: 1
+    }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+    });
+</script>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+<div class="col-md-4">
+<div class="card">
+<div class="card-header allif-dashboard-card-header">
+Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
+</div>
+
+
+
+<div class="col-md-12">
+    <div class="column allif-dashboard-card-body">
+
+    <canvas id="myChart3" width="400" height="300"></canvas>
+    <script>
+    var ctx3 = document.getElementById('myChart3').getContext('2d');
+    var myChart3 = new Chart(ctx3, {
+    type: 'bar',
+
+    data: {
+    labels: [{% for items in prospects %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
+
+    datasets: [{
+
+    label: 'Current Prospects',
+    data: [{% for items in prospects %} {{items.total}}, {% endfor %}],
+    backgroundColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+        
+    ],
+    borderColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+    ],
+    borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+    yAxes: [{
+        ticks: {
+            beginAtZero: true
+        }
+    }]
+    }
+    }
+    });
+</script>
+</div>
+</div>
+
+
+</div></div>
+
+
+<div class="col-md-4">
+<div class="card">
+<div class="card-header allif-dashboard-card-header">
+Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
+</div>
+
+<div class="col-md-12">
+<div class="column allif-dashboard-card-body">
+
+    <canvas id="myChart3" width="400" height="300"></canvas>
+    <script>
+    var ctx3 = document.getElementById('myChart3').getContext('2d');
+    var myChart3 = new Chart(ctx3, {
+    type: 'bar',
+
+    data: {
+    labels: [{% for items in prospects %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
+
+        datasets: [{
+
+    label: 'Current Prospects',
+    data: [{% for items in prospects %} {{items.total}}, {% endfor %}],
+    backgroundColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+        
+    ],
+    borderColor: [
+    'rgb(2, 7, 174)',
+    'rgb(35, 150, 92)',
+    'rgb(2, 7, 0)',
+    'rgba(54, 162, 235, 1)',
+    'rgb(118, 40, 28,1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgb(254, 0, 181,1)',
+    'rgb(121, 214, 1)',
+    'rgb(97, 7, 0)',
+    'rgb(255, 153, 1)',
+    'rgb(2, 98, 115)',
+    'rgb(94, 89, 92)',
+    'rgb(116, 46, 88)',
+    'rgb(73, 42, 141)',
+    ],
+    borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+    yAxes: [{
+        ticks: {
+            beginAtZero: true
+        }
+    }]
+    }
+    }
+    });
+</script>
+</div>
+</div>
+
+
+</div></div>
+</div>
+
+<!--end of first row-->
+
+<!--start of second row-->
+
+</div><!--end of main container of the page-->
+
+
+   {% endblock %}
+   

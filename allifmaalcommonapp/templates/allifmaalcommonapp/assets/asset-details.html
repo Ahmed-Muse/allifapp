@@ -1,0 +1,394 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Actions
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+          
+        <li>
+          <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditAsset' allifquery.id user_var glblslug %}">Edit Asset</a>
+          </li>
+          {% if allifquery.status == 'waiting' %}
+          <li>
+          <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPostAsset' allifquery.id user_var glblslug %}">Post Asset</a>
+          </li>
+          {% else %}
+          <li>
+          <a class="dropdown-item" href="">Asset Posted</a>
+          </li>
+          {% endif %}
+          <li>
+          <a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonDepreciateAsset' allifquery.id user_var glblslug %}">Depreciate</a>
+      </li>
+      <li>
+          <a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteAsset' allifquery.id user_var glblslug %}">Delete Asset</a>
+</li>
+       </div>
+      </ul> 
+    </div>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+ 
+  <a href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}" >Forms</a>
+  
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+
+<div class="allifmaincontainer">
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="allif-details-container">
+      <div class="row"><!--start of row div --->
+      
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="allif-details-card ">
+            <!--start of the table here-->
+          <table class="table allif-details-table table-layout">
+            <tbody>
+          <tr>
+            <td>Category</td>
+            <td>{{allifquery.category}}</td>
+         
+            </tr>
+        
+          <tr>
+            <td>Department</td>
+            <td>{{allifquery.department}}</td>
+        
+            </tr>
+          <tr>
+            <td>Responsible Employee</td>
+            <td>{{allifquery.employee}}</td>
+        
+            </tr>
+            <tr>
+                <td>Asset Account</td>
+                <td>{{allifquery.asset_account}}</td>
+                
+              </tr>
+              <tr>
+                <td>Payment Account</td>
+                <td>{{allifquery.cost_account}}</td>
+                
+              </tr>
+             
+            
+              <tr>
+                <td>Asset Status</td>
+                <td>{{allifquery.asset_status}}</td>
+                
+              </tr>
+          <tr>
+            <td>Supplier</td>
+            <td>{{allifquery.supplier}}</td>
+        
+            </tr>
+            <tr>
+              <td>Description</td>
+              <td>{{allifquery.description}}</td>
+        
+              </tr>
+          </tbody>
+          </table>
+        
+          </div>
+              </div>
+      
+           
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+       
+         
+        <tr>
+          <td>Quantity</td>
+          <td>{{allifquery.quantity|floatformat:2|intcomma}}</td>
+    
+        </tr>
+        <tr>
+          <td>Unit Value</td>
+          <td>{{allifquery.value|floatformat:2|intcomma}}</td>
+       </tr>
+       <tr>
+        <td>Total Value</td>
+        <td>{{allifquery.asset_total_amount|floatformat:2|intcomma}}</td>
+     </tr>
+     <tr>
+      <td>Deposit</td>
+      <td>{{allifquery.deposit|floatformat:2|intcomma}}</td>
+  
+    </tr>
+    <tr>
+      <td>Salvage Value</td>
+      <td>{{allifquery.salvage_value|floatformat:2|intcomma}}</td>
+      
+    </tr>
+    <tr>
+      <td>Created On</td>
+      <td>{{allifquery.date|date:'d/m/Y'}}</td>
+  
+      </tr>
+      <tr>
+        <td>Acquired On</td>
+        <td>{{allifquery.acquired|date:'d/m/Y'}}</td>
+        
+      </tr>
+      <tr>
+        <td>End of Life</td>
+        <td>{{allifquery.expires|date:'d/m/Y'}}</td>
+        
+      </tr>
+        </tbody>
+        </table>
+      
+        </div>
+            </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+     
+      <tr>
+        <td>Asset Age (Years)</td>
+        <td>{{allifquery.asset_age}}</td>
+    
+      </tr> 
+    <tr>
+      <td>Life Span Comments</td>
+      <td>{{allifquery.lifespan}}</td>
+  
+   </tr>     
+   <tr>
+    <td>Asset Life (Years)</td>
+    <td>{{allifquery.asset_life|floatformat:2|intcomma}}</td>
+
+ </tr>     
+   
+   <tr>
+    <td>Comments</td>
+    <td>{{allifquery.comments}}</td>
+
+ </tr>
+ <tr>
+  <td>Created By</td>
+  <td>{{allifquery.owner}}</td>
+  
+</tr>
+<tr>
+  <td>Terms</td>
+  <td>{{allifquery.terms}}</td>
+  
+</tr>
+<tr>
+  <td>Posting Status</td>
+  <td>{{allifquery.status}}</td>
+  
+</tr>
+<tr>
+  <td>Depreciation Method</td>
+  <td>{{allifquery.depreciation}}</td>
+  
+</tr>
+ 
+        </tbody>
+        </table>
+
+      
+      </div>
+    </div>
+      
+      </div><!--end of row div --->
+        
+          </div>
+
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+<div class="row mt-12"> <!--start....table row-->
+
+  <div class="table-content-description" >Depreciation Information</div>
+  </div>
+  
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="allif-details-container">
+      <div class="row"><!--start of row div --->
+      
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="allif-details-card ">
+            <!--start of the table here-->
+          <table class="table table-layout allif-details-table">
+            <tbody>
+          
+        
+          <tr>
+            <td>Annual Depreciation Rate</td>
+            <td>{{allifquery.annual_depreciation_rate}}%</td>
+            
+          </tr>
+          
+         
+          
+          </tbody>
+          </table>
+          <hr>
+          <div class="details-card-header">
+            Asset Depreciation
+          </div>
+        
+          </div>
+          <div class="row mt-12">
+          <div class="col-md-6">
+        <table class="table table-layout">
+          <thead>
+            <tr class="allif-table-header-row" >
+              <td>Year</td>
+              
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+                {% for item in years_depreciated %}  
+              <tr>
+                <td>
+                
+                  {{item|floatformat:2|intcomma}}
+                  </td>
+              
+              </tr>
+                {% endfor %}
+  
+            </tbody>
+              </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row" >
+                  <td>Value Drop</td>
+                  
+                  </tr>
+                  </thead>
+                  <tbody class="allif-table-body">
+                    {% for item in value_drops_list %} 
+                  <tr>
+                    <td>
+                    
+                      {{item|floatformat:2|intcomma}}
+                      </td>
+                  
+                  </tr>
+                    {% endfor %}
+      
+                </tbody>
+                  </table>
+          </div>
+          </div>
+              </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+
+            <tr>
+              <td>Current/Book Value</td>
+              <td>{{allifquery.current_value|floatformat:2|intcomma}}</td>
+              
+            </tr>
+            <tr>
+              <td>Depreciated By</td>
+              <td>{{allifquery.depreciated_by|floatformat:2|intcomma}}</td>
+              
+            </tr>
+            
+          
+        
+        </tbody>
+        </table>
+      
+        </div>
+            </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+           
+            <tr>
+              <td>Sum-of-digit-years</td>
+              <td>{{allifquery.sum_years_digits}}</td>
+            
+            </tr>
+          
+            <tr>
+              <td>Asset Life</td>
+              <td>{{allifquery.life}}</td>
+            
+            </tr>
+      
+        </tbody>
+        </table>
+      
+      </div>
+    </div>
+      
+      </div><!--end of row div --->
+        
+          </div>
+
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+
+</div><!--end of main container of the page....-->
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   
+
+
+
+
+
+
+

@@ -1,0 +1,893 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+   
+    <a class="amel-table-list-identifier">GLA:</a>
+
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddGeneralLedger' user_var glblslug %}">New GL A/C</a>
+    
+    <a href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">GL A/Cs</a>
+  <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+  <a href="{% url 'allifmaalcommonapp:commonChartofAccounts' user_var glblslug %}">Chart of A/Cs</a>
+
+  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
+    
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+ 
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+
+<div class="allifmaincontainer">
+  
+<div class="row mt-12"> <!--start....table row-->
+  
+<div class="col-md-6"> <!--start....table column-->
+  <div class="table-details-content-description"> Standard Account Balance Types</div>
+  
+<div class="allif-scroll-table"> 
+  
+<table class="table table-layout">
+<thead>
+  <tr class="allif-table-header-row" >
+  <td>Account</td>
+  <td>Balance</td>
+  <td>Increase <i class="fa fa-caret-up"></i></td>
+  <td>Decrease <i class="fa fa-caret-down"></i> </td>
+ 
+  </tr>
+  </thead>
+  <tbody class="allif-table-body">
+   
+    <tr>
+        <td>Assets</td>
+        <td>Debit</td>
+        <td>Debit</td>
+        <td>Credit</td>
+    </tr>
+    <tr>
+      <td>Expenses</td>
+      <td>Debit</td>
+      <td>Debit</td>
+      <td>Credit</td>
+  </tr>
+  <tr>
+    <td>Drawings</td>
+    <td>Debit</td>
+    <td>Debit</td>
+    <td>Credit</td>
+</tr>
+<tr>
+  <td>Liabilities</td>
+  <td>Credit</td>
+  <td>Credit</td>
+  <td>Debit</td>
+</tr>
+<tr>
+<td>Equity</td>
+<td>Credit</td>
+  <td>Credit</td>
+  <td>Debit</td>
+</tr>
+<tr>
+<td>Revenue</td>
+<td>Credit</td>
+<td>Credit</td>
+<td>Debit</td>
+</tr>
+    
+ 
+  </tbody>
+    </table>
+
+  </div>
+  <div class="table-details-content-description">Accounting Equation And Balance Sheet</div>
+  
+  <table class="table table-layout">
+    
+      <tbody class="allif-table-body">
+       
+        <tr>
+            <td> Assets  </td>
+            <td>=</td>
+            <td></td>
+            <td>  - Liabilities  </td>
+            <td>+</td>
+            <td>  Equity</td>
+          
+        </tr>
+      
+      </tbody>
+        </table>
+        <table class="table table-layout">
+          <thead>
+            <tr class="allif-table-header-row" >
+            <td>Description</td>
+            <td>2023</td>
+            <td>2024</td>
+            </tr>
+            </thead>
+            <tbody class="allif-table-body">
+            <tr>
+            <td>
+              <div class="allifmaal-special-words">
+            Assets
+            </div>
+            </td>
+            <td></td>
+            <td></td>
+            <tr>
+              <td>Current Assets</td>
+              <td></td>
+              <td></td>
+              <tr>
+            <td>Cash</td>
+            <td>5,000</td>
+            <td>4,000</td>
+            </tr>
+            <tr>
+            <td>
+            A/C Receivables
+            </td>
+            <td>2,000</td>
+            <td>1,000</td>
+            </tr>
+            <tr>
+            <td>
+          Pre-paid Expenses
+          </td>
+          <td>1,000</td>
+          <td>800</td>
+          </tr>
+          <tr>
+            <td>
+          Inventory
+          </td>
+          <td>2,000</td>
+          <td>1,500</td>
+          </tr>
+          <tr>
+            <td colspan="3">
+             
+            <hr>
+            
+            </td>
+           
+          </tr>
+          <tr>
+            <td>
+              <div class="allifmaal-special-words">
+          Total Current Assets
+          </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            10,000
+            </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            7,300
+            </div>
+          </td>
+          </tr>
+
+          <tr>
+            <td>
+          <div class="allifmaal-special-words">
+          Fixed Assets
+          </div>
+          </td>
+          <td></td>
+          <td></td>
+          </tr>
+          <tr>
+            <td>
+          Property & Equipment
+          </td>
+          <td>3,000</td>
+          <td>2,000</td>
+          </tr>
+          <tr>
+            <td>
+          Goodwill
+          </td>
+          <td>1,000</td>
+          <td>1,000</td>
+          </tr>
+          <tr>
+            <td colspan="3">
+             
+            <hr>
+            
+            </td>
+           
+          </tr>
+          <tr>
+            <td>
+              <div class="allifmaal-special-words">
+          Total Assets
+          </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            13,000
+            </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            10,300
+            </div>
+          </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="allifmaal-special-words">
+            Liabilities
+            </div>
+            </td>
+            <td></td>
+            <td></td>
+            <tr>
+              <td>Current Liabilities</td>
+              <td></td>
+              <td></td>
+              <tr>
+            <td>Account Payables</td>
+            <td>1,000</td>
+            <td>500</td>
+            </tr>
+            <tr>
+            <td>
+            Acrued expenses
+            </td>
+            <td>2,000</td>
+            <td>1,500</td>
+            </tr>
+            <tr>
+            <td>
+          Un-earned Revenue
+          </td>
+          <td>2,000</td>
+          <td>1,500</td>
+          </tr>
+         
+          <tr>
+            <td colspan="3">
+             
+            <hr>
+            
+            </td>
+           
+          </tr>
+          <tr>
+            <td>
+              <div class="allifmaal-special-words">
+          Total Current Liabilities
+          </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            5,000
+            </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            3,500
+            </div>
+          </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="allifmaal-special-words">
+          Long Term Liabilities
+          </div>
+          </td>
+          <td></td>
+          <td></td>
+          </tr>
+          <tr>
+            <td>
+          Long term debt
+          </td>
+          <td>1,000</td>
+          <td>1,000</td>
+          </tr>
+          <tr>
+            <td>
+          Other long term Liabilities
+          </td>
+          <td>1,000</td>
+          <td>1,000</td>
+          </tr>
+          <tr>
+            <td colspan="3">
+             
+            <hr>
+            
+            </td>
+           
+          </tr>
+          <tr>
+            <td>
+              <div class="allifmaal-special-words">
+          Total Liabilities
+          </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            7,000
+            </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            5,500
+            </div>
+          </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="allifmaal-special-words">
+            Shareholders Equity
+            </div>
+            </td>
+            <td></td>
+            <td></td>
+            </tr>
+          
+            <tr>
+            <td>Equity Capital</td>
+            <td>5,000</td>
+            <td>4,000</td>
+            </tr>
+            <tr>
+            <td>
+            Retained Earnings
+            </td>
+            <td>1,000</td>
+            <td>800</td>
+            </tr>
+            
+          <tr>
+            <td colspan="3">
+             
+            <hr>
+            
+            </td>
+           
+          </tr>
+          <tr>
+            <td>
+              <div class="allifmaal-special-words">
+          Shareholders Equity
+          </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            6,000
+            </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            4,800
+            </div>
+          </td>
+          </tr>
+
+         
+          <tr>
+            <td colspan="3">
+             
+            <hr>
+            
+            </td>
+           
+          </tr>
+          <tr>
+            <td>
+              <div class="allifmaal-special-words">
+          Total Liabilities & Shareholders Equity
+          </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            13,000
+            </div>
+          </td>
+          <td>
+            <div class="allif-special-number">
+            10,300
+            </div>
+          </td>
+          </tr>
+            </tbody>
+              </table>
+              <br><hr>
+  </div><!--end....table column-->
+
+  <div class="col-md-6"> <!--start....table column-->
+    <div class="table-details-content-description">Registerd General Ledger Accounts</div>
+    
+    <div class="allif-scroll-table"> 
+     
+    <table class="table table-layout">
+    <thead>
+      <tr class="allif-table-header-row" >
+      <td>Account Description</td>
+      <td>Account Balance</td>
+      <td>Synchronization</td>
+     
+      </tr>
+      </thead>
+      <tbody class="allif-table-body">
+       
+      
+      {% for item in allifqueryset %}   
+      <tr>
+       
+      <td>
+      <a href="{% url 'allifmaalcommonapp:commonGeneralLedgerDetails' item.id  user_var glblslug %}" class="allif-table-links">
+      {{item.description}}
+      </a></td>
+      
+      <td>
+      {{item.balance|intcomma}}
+     </td>
+     <td>
+      <a href="{% url 'allifmaalcommonapp:commonSynchGLAccount' item.id user_var glblslug %}" class="allif-table-links">Synchronize</a>
+    </td>
+    
+      </tr>
+        {% endfor %}
+        
+     
+      </tbody>
+        </table>
+
+      </div>
+      <div class="table-details-content-description">Income Statement</div>
+     
+<table class="table table-layout">
+<thead>
+  <tr class="allif-table-header-row" >
+  <td>Description</td>
+  <td>2023</td>
+  <td>2024</td>
+  </tr>
+  </thead>
+  <tbody class="allif-table-body">
+    <tr>
+      <td>
+        <div class="allifmaal-special-words">
+        Revenue
+        </div>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+  <tr>
+  <td>
+  Sales Revenue
+  </td>
+  <td>20,000</td>
+  <td>15,000</td>
+  </tr>
+  <tr>
+  <td>
+  COGS
+  </td>
+  <td>2,000</td>
+  <td>1,500</td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <hr>
+    </td>
+  </tr>
+  <tr>
+  <td>
+    <div class="allifmaal-special-words">
+  Gross Profit
+  </div>
+</td>
+<td>
+  <div class="allif-special-number">
+  18,000
+</div>
+</td>
+<td>
+  <div class="allif-special-number">
+  13,500
+  </div>
+
+</td>
+</tr>
+<tr>
+<td>
+  <div class="allifmaal-special-words">
+  Expenses
+  </div>
+</td>
+<td></td>
+<td></td>
+<tr>
+  <td>Marketing, advertising, promotions</td>
+<td>1,500</td>
+<td>1,200</td>
+</tr>
+<tr>
+  <td>General & Adminstrative</td>
+<td>1,200</td>
+<td>1,100</td>
+</tr>
+<tr>
+  <td>Depreciation & Amortiztion</td>
+<td>1,300</td>
+<td>1,200</td>
+</tr>
+<tr>
+  <td>Interest</td>
+<td>1,500</td>
+<td>1,000</td>
+</tr>
+<tr>
+  <td colspan="3"><hr></td>
+</tr>
+<tr>
+  <td>
+    <div class="allifmaal-special-words">
+    Total Expenses
+    </div>
+  </td>
+  <td>
+    <div class="allif-special-number">
+5,500
+</div>
+  </td>
+  <td>
+    <div class="allif-special-number">
+3,300
+</div>
+  </td>
+</tr>
+<tr>
+  <td colspan="3"><hr></td>
+</tr>
+<tr>
+  <td>
+    <div class="allifmaal-special-words">
+    Earnings Before Tax
+  </div></td>
+  <td>
+    <div class="allif-special-number">
+12,500
+</div>
+  </td>
+  <td>
+    <div class="allif-special-number">
+    10,200
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>Taxes</td>
+  <td>
+1,500
+  </td>
+  <td>
+1,200
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    <hr>
+  </td>
+</tr>
+<tr>
+<td>
+  <div class="allifmaal-special-words">
+  Net Profit/Income/Loss
+  </div>
+</td>
+<td>
+  <div class="allif-special-number">
+  11,000
+  </div>
+</td>
+<td>
+  <div class="allif-special-number">
+  9,000
+</div>
+</td>
+  </tr>
+
+  </tbody>
+    </table>
+   <hr>
+
+   
+      </div><!--end....table column-->
+    
+  </div>
+  <div class="table-details-content-description">Cash Flow Statement from Operating, Investing and Financing Activities</div>
+  
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="col-md-6"> <!--start....table column-->
+      <div class="table-details-content-description">Direct Method</div>
+  
+      
+      <table class="table table-layout">
+        <thead>
+          <tr class="allif-table-header-row" >
+          <td>
+            <div class="allif-bringout">
+            
+            Operating Activities
+          </div>
+          </td>
+          <td>Value</td>
+         
+          </tr>
+          </thead>
+          <tbody class="allif-table-body"  id="allifdata">
+          <tr>
+            <td>Cash from customers</td>
+          <td>800</td>
+          </tr>
+         
+          <tr>
+            <td>Cash paid to suppliers</td>
+          <td>(150)</td>
+          </tr>
+          <tr>
+            <td>Employee Compensation</td>
+          <td>(200)</td>
+          </tr>
+          <tr>
+            <td>Other operating expenses paid</td>
+          <td>(150)</td>
+          </tr>
+          <tr>
+            <td>Net cash from operating activities</td>
+            <td>
+              <div class="allif-special-number">
+              300
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+          <div class="allif-bringout">
+            
+            Investing Activities
+          </div>
+          </td>
+          <td></td>
+          </tr>
+          <tr>
+            <td>Sale of land</td>
+          <td>200</td>
+          </tr>
+          <tr>
+          <td>Purchase of equipment</td>
+          <td>(300)</td>
+          </tr>
+          <tr>
+            <td>Net cash from investing activities</td>
+            <td>
+              <div class="allif-special-number">
+              (100)
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+          <div class="allif-bringout">
+            
+            Financing Activities
+          </div>
+          </td>
+          <td></td>
+          </tr>
+          <tr>
+            <td>Common share dividends payments</td>
+          <td>(200)</td>
+          </tr>
+          <tr>
+            <td>Payment of long term debt</td>
+          <td>(300)</td>
+          </tr>
+          <tr>
+            <td>Net cash from financing activities</td>
+            <td>
+              <div class="allif-special-number">
+              (500)
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Net change in cash</td>
+          <td>(300)</td>
+          </tr>
+          <tr>
+            <td>Beginning cash balance</td>
+          <td>1,000</td>
+          </tr>
+          <tr>
+            <td>Ending cash balance</td>
+          <td>
+            <div class="allif-special-number">
+            700
+            </div>
+          </td>
+          </tr>
+          </tbody>
+            </table>
+            <br>
+      </div><!--end....table column-->
+    
+      <div class="col-md-6"> <!--start....table column-->
+       
+        <div class="table-details-content-description">Indirect Method</div>
+          <table class="table table-layout">
+            <thead>
+              <tr class="allif-table-header-row" >
+              <td>
+                <div class="allif-bringout">
+                
+                Operating Activities
+              </div>
+              </td>
+              <td>Value</td>
+             
+              </tr>
+              </thead>
+              <tbody class="allif-table-body"  id="allifdata">
+              <tr>
+                <td>Net income</td>
+              <td>400</td>
+              </tr>
+             
+              <tr>
+                <td>Depreciation & Amortization</td>
+              <td>150</td>
+              </tr>
+              <tr>
+                <td>(Increase)/Decrease in A/C receivables</td>
+              <td>(200)</td>
+              </tr>
+              <tr>
+                <td>(Increase)/Decrease in Inventory</td>
+              <td>(150)</td>
+              </tr>
+              <tr>
+                <td>Increase/(Decrease) in A/C payables</td>
+                <td>
+                 
+                  100
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>Net cash from operating activities</td>
+                <td>
+                  <div class="allif-special-number">
+                  300
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+              <div class="allif-bringout">
+                
+                Investing Activities
+              </div>
+              </td>
+              <td></td>
+              </tr>
+              <tr>
+                <td>Sale of land</td>
+              <td>200</td>
+              </tr>
+              <tr>
+              <td>Purchase of equipment</td>
+              <td>(300)</td>
+              </tr>
+              <tr>
+                <td>Net cash from investing activities</td>
+                <td>
+                  <div class="allif-special-number">
+                  (100)
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+              <div class="allif-bringout">
+                
+                Financing Activities
+              </div>
+              </td>
+              <td></td>
+              </tr>
+              <tr>
+                <td>Common share dividends payments</td>
+              <td>(200)</td>
+              </tr>
+              <tr>
+                <td>Payment of long term debt</td>
+              <td>(300)</td>
+              </tr>
+              <tr>
+                <td>Net cash from financing activities</td>
+                <td>
+                  <div class="allif-special-number">
+                  (500)
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Net change in cash</td>
+              <td>(300)</td>
+              </tr>
+              <tr>
+                <td>Beginning cash balance</td>
+              <td>1,000</td>
+              </tr>
+              <tr>
+                <td>Ending cash balance</td>
+              <td>
+                <div class="allif-special-number">
+                700
+                </div>
+              </td>
+              </tr>
+              </tbody>
+                </table>
+                <br>
+        
+          
+          </div><!--end....table column-->
+      </div>
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+ 
+  {% endblock %}
+  
+   {% endblock %}
+   

@@ -1,0 +1,342 @@
+
+  /*........................ IMPORTANT NOTES ........................*/
+  /*......................... DATE: 17th MAY 2024 ..................*/
+  /*......................... DEVELOPER: AHMED MUSE DIRIYE QOORYARE..................*/
+   /*.....Kindly read these notes before making any changes to this file.....*/
+   /*this file contains three hidden side nav bars with dropdown links...*/
+   /*we can add as many links as we wish...*/
+   :root {
+    --main-background-color: #F6F7F8;
+    --main-text-font-size:1em;
+    --main-font-type:system-ui, sans-serif,Helvetica,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+    --main-green-color:#07891c;
+    --main-blue-color:#3d22a7;
+    --main-black-color:#0a0a0a;
+    --main-table-links-color:#04010f;
+    --main-red-color:#bd0303;
+    --links-on-hover-text-color:#3a0bf7;
+    --button-on-hover-color:#eeeeee;
+  }
+
+* {
+  
+  font-family: var(--main-font-type);
+}
+/*............start of styling of side nav one bar menu and its content.............................*/
+.sidenavonemenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #f7f7f7;
+  z-index:10;  
+  box-shadow: 0em 0em 0.5em #858585;
+  overflow-y:auto;
+  overflow-x: hidden;
+  width: 0;
+  height: 0;
+  min-height: fit-content;
+  max-height: 100%;/*very important... if you dont put this it will not show the over*/
+  min-width: min-content;
+  max-width: 7em;
+  transition: 0.3s;
+  transition: all 0.3s ease-in;
+  
+ 
+  }
+
+.sidenavonemenu a, .sidenavonemenu button.sidenavonedropdownbtn {
+  position: relative;
+  
+  font-weight:normal;
+  font-size: 1em;
+  text-align: left;
+  left: 0.1em;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  color: #0a0a0a;
+  display: block;
+  width: 100%;
+  height: fit-content;
+  line-height: 2em;
+  border: none;
+  background: #f7f7f7;
+  border-bottom: 1px solid #dfdede;
+  
+  
+}
+
+.sidenavonemenu a:hover,.sidenavonemenu button.sidenavonedropdownbtn:hover{
+  color: #3a0bf7;
+}
+
+/*style the clicked active buttons in the side nav dropdown buttons*/
+.active {
+  background: #f7f7f7;
+  color: #3a0bf7;
+  }
+
+  /*style the side nav one drop down menu and its content*/
+.sidenavone-dropdown-container {
+  display: none;
+  position:absolute;
+  left: 0.1em;
+  z-index: 1;/*drop down will not open without this property.......*/
+  float: left;
+  text-align: left;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  background: #f7f7f7;
+  
+  }
+
+.sidenavone-dropdown-container a{
+  position: relative;
+  
+  font-weight:normal;
+  font-size: 1em;
+  text-align: left;
+  left: 0.1em;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  color: #3a0bf7;
+  display: block;
+  line-height: 2em;
+  background: #f7f7f7;
+  border-bottom: 1px solid #dfdede;
+  width: 100%;
+  }
+  
+  .sidenavone-dropdown-container a:hover{
+    color: #0a0a0a;
+  }
+
+  .opensidenavone {
+  width:fit-content;
+  height:fit-content;
+}
+
+
+  /*............end of styling of side nav one bar menu and its content.............................*/
+
+  /*############################################################################################*/
+  
+/*............start.....styling of second hiden side nav two menu bar and its content..................*/
+.sidenavtwomenu {
+  position: absolute;
+  top: 0em;
+  background: #f7f7f7;
+  overflow-x:hidden;
+  overflow-y:auto;
+  left: 7em;
+  z-index:10;
+  width:0; height:0;/*this ensures that the side two menu is only shown on click... is like hiding the menu*/
+  box-shadow: 0em 0em 0.5em #858585;
+  min-height: fit-content;
+  max-height: 100%;/*very important... if you dont put this it will not show the over*/
+  min-width: min-content;
+  max-width: 7em;
+}
+
+.sidenavtwomenu a, .sidenavtwomenu .sidenavtwomenudropdownbtn{
+  display:block;
+  border: none;
+  text-align:center;
+  color: #0a0a0a;
+  text-decoration:none;  
+  position: relative;
+  line-height: 2em;
+  font-weight:normal;
+  font-size: 1em;
+  text-align:left;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  margin-top: 0em;
+  margin-bottom: 0em;
+ 
+  text-decoration: none;
+  border-bottom: 1px solid #dfdede;
+  background: #f7f7f7;
+  margin-left: 1em;
+  left: 0.1em;
+  height: fit-content;
+  max-height:fit-content;
+ min-width: min-content;
+  width: 100%;
+}
+.sidenavtwomenu a:hover,.sidenavtwomenudropdownbtn:hover{
+  color: #3a0bf7;
+}
+/**styling side nav two drop down container*/
+  
+.sidenavtwo-dropdown-container {
+  display: none;
+  position:absolute;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  z-index: 1;/*drop down will not open without this property....*/
+  float: left;
+  text-align: left;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  background: #f7f7f7;
+ 
+ 
+  }
+
+.sidenavtwo-dropdown-container a{
+  position: relative;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  
+  font-weight:normal;
+  font-size: 1em;
+  text-align: left;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  color: #3a0bf7;
+  display: block;
+  line-height: 2em;
+  background: #f7f7f7;
+  border-bottom: 1px solid #dfdede;
+  width: 100%;
+  
+  }
+  
+  .sidenavtwo-dropdown-container a:hover{
+    color: #474747;
+  }
+
+
+.sidenavtwo-dropdown-container a{
+  color: #3a0bf7;
+  }
+  
+
+/*this opening window is for the second side nav bar*/
+.opensidenavtwo{
+  width:fit-content;
+  height:fit-content;
+  
+ 
+}
+
+
+/*............end.....styling of second hiden side nav two menu bar and its content..................*/
+
+
+/*############################################################################################*/
+  
+/*............start.....styling of third hiden side nav two menu bar and its content..................*/
+.sidenavthreemenu {
+position: absolute;
+top: 0em;
+margin: 0;
+background: #f7f7f7;
+left: 7em;
+width:0; height:0;/*this ensures that the side two menu is only shown on click... is like hiding the menu*/
+overflow-x:hidden;
+overflow-y:auto;
+z-index:10;
+box-shadow: 0em 0em 0.5em #858585;
+min-height: fit-content;
+max-height: 100%;/*very important... if you dont put this it will not show the over*/
+min-width: min-content;
+max-width: 7em;
+
+}
+
+.sidenavthreemenudropdownbtn,.sidenavthreemenu a{
+  display: block;
+  border: none;
+  color: #0a0a0a;
+  text-decoration:none;  
+  position: relative;
+  line-height: 2em;
+  font-weight:normal;
+  font-size: 1em;
+  text-align:left;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  
+  text-decoration: none;
+  border-bottom: 1px solid #dfdede;
+  background: #f7f7f7;
+  margin-left: 1em;
+  max-height:fit-content;
+  left: 0.1em;
+  height: fit-content;
+  min-width: min-content;
+  width: 100%;
+  
+}
+.sidenavthreemenu a:hover,.sidenavthreemenudropdownbtn:hover{
+  color: #3a0bf7;
+}
+/**styling side nav two drop down container*/
+  
+.sidenavthree-dropdown-container {
+  display: none;
+  position:absolute;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  z-index: 1;/*drop down will not open without this property....*/
+  float: left;
+  text-align: left;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  background: #f7f7f7;
+ 
+ 
+  }
+
+.sidenavthree-dropdown-container a{
+  position: relative;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  
+  font-weight:normal;
+  font-size: 1em;
+  text-align: left;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+  text-decoration: none;
+  color: #3a0bf7;
+  display: block;
+  line-height: 2em;
+  background: #f7f7f7;
+  border-bottom: 1px solid #dfdede;
+  width: 100%;
+  
+  }
+  
+  .sidenavthree-dropdown-container a:hover{
+    color: #474747;
+  }
+
+
+.sidenavthree-dropdown-container a{
+  color: #3a0bf7;
+  }
+  
+
+/*this opening window is for the second side nav bar*/
+.opensidenavthree{
+  width:fit-content;
+  height:fit-content;
+  
+}
+a.sidenav-close-link {
+  color: var(--main-red-color);
+}
+  a.sidenav-close-link:hover {
+  color: var(--main-red-color);
+  font-style: italic;
+}
+/*
+just three device sizes...mobiles, tablets and laptops/desktops
+min 0 max 500 - mobile - no side nav dropdown
+min 500 max 1000 - tablets, no side nav
+min 1000 no max - laptops and bigger screens, no side nav...
+*/
+
+/*............end.....styling of second hiden side nav two menu bar and its content..................*/
+
+
+
+

@@ -1,0 +1,168 @@
+/*........................ IMPORTANT NOTES ........................*/
+/*......................... DATE: 17th MAY 2024 ..................*/
+/*......................... DEVELOPER: AHMED MUSE DIRIYE QOORYARE..................*/
+/*.....Kindly read these notes before making any changes to this file.....*/
+/*this file contains three hidden side nav bars with dropdown links...*/
+/*we can add as many links as we wish...*/
+:root {
+    --main-background-color: #F6F7F8;
+    --main-text-font-size:1em;
+    --main-font-type:system-ui,Helvetica, sans-serif,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+    --main-green-color:#07891c;
+    --main-blue-color:#3d22a7;
+    --main-black-color:#0a0a0a;
+    --main-table-links-color:#04010f;
+    --main-red-color:#bd0303;
+    --links-on-hover-text-color:#3a0bf7;
+    --button-on-hover-color:#eeeeee;
+    --box-shadow-specs:0em 0em 0.5em #858585;
+    --bottom-border-line:1px solid #dfdede;
+    --padding-spec:0.3em 0.3em 0.3em 0.3em;
+        }
+        
+    * {
+        font-family: var(--main-font-type);
+    }
+    
+    /*start... styling of top nav bar*/
+    .allifmaal-top-nav-bar{
+        background-color:var(--main-background-color);
+        margin-left: 0em;
+        right: 0em;
+        left: 0em;
+        top: 0em;
+        margin: 0em;
+        padding: 0.1em;
+        box-shadow: var(--box-shadow-specs);
+        position:relative;/*fixed position will cause overlap of dropdown items*/
+        /*overflow: auto;.... do not add this as it will affect the display of drop down displays*/
+        }
+    
+    .allifmaal-top-nav-bar a {
+        color: var(--main-black-color);
+        font-family: var(--main-font-type);
+        float: none;
+        display: inline-block;
+        text-align: left;
+        padding:var(--padding-spec);
+        text-decoration: none;
+        font-size: var(--main-text-font-size);
+        border: none;
+        background-color:var(--main-background-color);
+        font-weight:normal;
+        }
+    
+    .allifmaal-top-nav-bar a:hover {
+        color: var(--links-on-hover-text-color);
+    }
+    
+    .dropdown-menu{
+        background-color: var(--main-background-color);
+        max-width: fit-content;
+        min-width: fit-content;
+        width: 100%;
+        border-bottom: var(--bottom-border-line);
+        }
+    
+    .dropdown-menu a{
+        color: var(--main-black-color);
+        line-height: 2em;
+        border: none;
+        background: var(--main-background-color);
+        border-bottom: var(--bottom-border-line);
+    }
+    
+    /*end... styling of top nav bar*/
+    
+    /*............start of styling of side nav one bar menu and its content.............................*/
+    .allifmaal-side-nav-bar {
+        background:var(--main-background-color);
+        z-index:10;  
+        min-height: fit-content;
+        max-height: 100%;/*very important... if you dont put this it will not show the overlaps*/
+        min-width: fit-content;
+        max-width: fit-content;
+        transition: all 0.3s ease-in;
+        background-color:var(--main-background-color);
+        border-radius: 2px;
+        left: 0;
+        margin-left: 0;/*this is important to make side nav stay on the left when screen is small*/
+        
+        }
+        
+    .allifmaal-side-nav-bar ul a{
+        position: relative;
+        font-weight:normal;
+        font-size: var(--main-text-font-size);
+        text-align: left;
+        left: 0.1em;
+        padding:var(--padding-spec);
+        text-decoration: none;
+        color: var(--main-black-color);
+        display: block;
+        width: 100%;
+        height: fit-content;
+        line-height: 2em;
+        border: none;
+        background: var(--main-background-color);
+        border-bottom: var(--bottom-border-line);
+        
+        }
+    button.side-nav-dropdown-btn{
+        border: none;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        border-bottom: var(--bottom-border-line);
+        position: relative;
+        font-weight:normal;
+        font-size: 1em;
+        text-align: left;
+        left: 0.1em;
+        padding: var(--padding-spec);
+        text-decoration: none;
+        color: var(--main-black-color);
+        display: block;
+        background-color: var(--main-background-color);
+        
+        }
+    
+    button.side-nav-dropdown-btn:hover{
+        color: var(--links-on-hover-text-color);
+        background-color: var(--main-background-color);
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        border-bottom: var(--bottom-border-line);
+        position: relative;
+        font-weight:normal;
+        font-size: 1em;
+        text-align: left;
+        left: 0.1em;
+        padding:var(--padding-spec);
+        text-decoration: none;
+        display: block;
+        }
+        
+    .amrullah-side-navbar{
+        background-color: var(--main-background-color);
+        height: 30em;
+        overflow: auto;
+        max-width: 7em;
+        transition: 0.3s;
+        transition: all 0.3s ease-in;
+        width: fit-content;
+    
+        }
+    .side-navbar-dropdown-menu {
+        border: 0.1em solid var(--main-blue-color);
+        margin: 0.1em;
+        padding: 0.1em;
+        border-radius: 0.2em;
+        box-shadow: var(--box-shadow-specs);
+        height: 10em;
+        overflow: auto;
+        max-height: fit-content;
+        max-width: fit-content;
+        width:fit-content;
+        }

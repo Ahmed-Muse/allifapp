@@ -1,0 +1,91 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+
+    <a class="amel-table-list-identifier">Suppliers:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+    <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
+    
+    <a href="{% url 'allifmaalcommonapp:commonAddSupplier' user_var glblslug %}">New Supplier</a>
+    <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+<div class="allifmaincontainer">
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="table-details-content-description">Add New Supplier</div>
+    <div class="col-md-12"><!--start of the first row body-->
+        <div class="allif-form-container">
+        <form method='POST' action=''>{% csrf_token %}
+        <div class="row"><!--start of row div --->
+          <div class="col-md-4"><!--start of column 1-->
+            <div class="card shadow text-left p-3 allif-form-card" >
+            <label>Division Name</label> {{form.division}}
+            <label>Branch Name</label> {{form.branch}}
+            <label>Department Name</label> {{form.department}}
+            <label>Supplier Name</label> {{form.name}}
+            <label>Phone</label>{{form.phone}}
+           
+          </div>
+            </div><!--end of column 1-->
+        
+            <div class="col-md-4"><!--start of column 2-->
+            <div class="card shadow text-left p-3 allif-form-card">
+              <label>Address</label> {{form.address}}
+              <label>Comments</label>{{form.comments}}
+                <label>Balance</label> {{form.balance}}
+                <label>Email</label>{{form.email}}
+                <label>City</label>{{form.city}}
+               
+                
+                </div>
+            </div><!--end of column 2-->
+            <div class="col-md-4"><!--start of column 3-->
+            <div class="card shadow text-left p-3 allif-form-card">
+              <label>Country</label>{{form.country}}
+              <label>Turnover</label> {{form.turnover}}
+              <label>Contact</label>{{form.contact}}
+             
+             
+            
+                <br>
+                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+        
+                </div>
+            </div><!--end of column 1-->
+        
+        </div><!--end of row div --->
+            </form>
+            </div>
+            </div><!--end of first row body-->
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

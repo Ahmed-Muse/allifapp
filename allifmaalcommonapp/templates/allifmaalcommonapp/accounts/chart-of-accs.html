@@ -1,0 +1,336 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Open Filters
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+  
+        <li><a class="dropdown-item">Looking for something?</a></li>
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonChartofAccountSearch' user_var glblslug %}">{% csrf_token %}
+        
+          <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
+          placeholder="Type Here ...">
+        
+          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+          </form>
+          <hr>
+          <li><a class="dropdown-item">Select Ordering Option</a></li>
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonChartofAccounts' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
+      
+        <div>
+        <select name="requiredformat" class="form-control">
+          {% for item in datasorts %}
+          <option>{{item.name}}</option>
+            
+           {% endfor %}
+           
+          </select>
+          </div>
+          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+      
+      </form>
+      <hr>
+      <li><a class="dropdown-item">Advanced Searching</a></li>
+      <form method='POST' action="{% url 'allifmaalcommonapp:commonChartofAccAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
+        
+        <div>
+          <input type="text" class="form-control" name="startvalue" placeholder="Starting Balance">
+        </div>
+        <div>
+          
+          <input type="text" class="form-control" name="endvalue" placeholder="Ending Balance">
+        </div>
+        
+        <div>
+          <label >Select Option</label>
+          <select name="requiredformat" class="form-control">
+            {% for item in formats %}
+            <option>{{item.name}}</option>
+            
+         {% endfor %}
+         
+        </select>
+        </div>
+  
+        
+        <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+    
+    </form>
+    <hr>
+      </div>
+      </ul>
+    </div>
+    <a class="amel-table-list-identifier">COA:</a>
+
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+   
+  <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+
+  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
+  <a href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">GL A/Cs</a>
+  <a href="{% url 'allifmaalcommonapp:commonAddChartofAccount' user_var glblslug %}">New Chart of A/C</a>
+   
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
+    
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
+ 
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+<div class="allifmaincontainer"> 
+<div class="row mt-12"> <!--start....table row-->
+<div class="col-md-4"> <!--start....table column-->
+<div class="table-details-content-description">Category Selection Search</div>
+<div class="allif-scroll-table"> 
+  
+  
+    <label id="numofitems"> </label>
+ 
+
+  <form method='POST' action=''>{% csrf_token %}
+  {{form.category}}
+  </form>
+
+<table class="table table-layout">
+<thead>
+  <tr class="allif-table-header-row" >
+  <td>Account</td>
+  <td>Balance</td>
+  </tr>
+  </thead>
+  <tbody class="allif-table-body"  id="allifdata">
+  
+  </tbody>
+    </table>
+
+  </div>
+  
+  <table class="table table-layout">
+    <thead>
+      <tr class="allif-table-header-row" >
+      <td>Assets</td>
+      <td>Liabilities</td>
+      <td>Equity</td>
+      </tr>
+      </thead>
+      <tbody class="allif-table-body"  id="allifdata">
+      <tr>
+        <td>{{assets_tot_val|floatformat:2|intcomma}}</td>
+        <td>{{liablts_tot_val|floatformat:2|intcomma}}</td>
+        <td>{{equity_tot_val|floatformat:2|intcomma}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          {{assets_tot_val|floatformat:2|intcomma}}
+        </td>
+        <td>|</td>
+       
+        <td>{{sum_liablts_and_equity|floatformat:2|intcomma}}</td>
+      </tr>
+      </tbody>
+        </table>
+  </div><!--end....table column-->
+
+  <div class="col-md-8"> <!--start....table column-->
+    <div class="table-details-content-description">Chart of Accounts</div>
+    <div class="allif-scroll-table"> 
+      
+    <table class="table table-layout">
+    <thead>
+      <tr class="allif-table-header-row" >
+        <td>Code</td>
+      <td>Description</td>
+      <td>Balance</td>
+      <td>Category</td>
+      <td>Department</td>
+     
+      </tr>
+      </thead>
+      <tbody class="allif-table-body">
+       
+           
+      {% for item in allifqueryset %}   
+      <tr>
+        <td>
+          {{item.code}}
+         </td>
+      <td>
+     
+      {{item.description}}
+      </td>
+      
+      <td>
+        <a href="{% url 'allifmaalcommonapp:commonChartofAccountDetails' item.id user_var glblslug %}" class="allif-table-links">
+      {{item.balance|floatformat:2|intcomma}}
+      </a>
+     </td>
+     <td>
+      {{item.category}}
+     </td>
+     <td>
+      {{item.department}}
+     </td>
+   
+   
+      </tr>
+        {% endfor %}
+    
+    {% if searched_data %}
+
+    {% for item in searched_data %}
+    <tr>
+      <td>
+        {{item.code}}
+       </td>
+    <td>
+   
+    {{item.description}}
+    </td>
+    
+    <td>
+      <a href="{% url 'allifmaalcommonapp:commonChartofAccountDetails' item.id user_var glblslug %}" class="allif-table-links">
+    {{item.balance|floatformat:2|intcomma}}
+    </a>
+   </td>
+   <td>
+    {{item.category}}
+   </td>
+   <td>
+    {{item.department}}
+   </td>
+ 
+    </tr>
+    {% endfor %}
+      {%endif %}
+     
+      </tbody>
+        </table>
+    
+      </div>
+      
+      </div><!--end....table column-->
+  </div>
+
+</div><!--end....table row-->
+
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+  <!--when you put the js code here, it gives a repetitive results....-->
+  {% endblock %}
+  <script>
+    $("#id_category").change(function(e){
+        output=""
+        var allifselecteditemid=$(this).val();
+        let allifmaalcsrf=$("input[name=csrfmiddlewaretoken]").val();
+        //console.log(allifselecteditemid,allifmaalcsrf);
+  
+        //change the data to json so that it can be sent to the backend
+        allifmaaldata={
+        allifidforselecteditem:allifselecteditemid,
+                    //allifcsrfmiddlewaretoken:allifmaalcsrf
+                };
+        
+        $.ajax({
+            url:"{% url 'allifmaalcommonapp:commonSelectedRelatedAccs' %}", //behind the scenes run this url
+            method:"GET",
+            data:allifmaaldata,//this is the collected data sent to the backend
+            dataType:"json",
+        
+        //process the data from the backend...
+        success:function(allifmaalengdata){
+            const datafrombackend=allifmaalengdata
+            const mydata=JSON.stringify(datafrombackend)//converts to json string//work with this data
+            const allifoutputdata=JSON.parse(mydata)
+            console.log(allifoutputdata)
+            no_of_matching_items=0
+            for (i=0; i<allifoutputdata.length; i++){
+                myitemnames=allifoutputdata[i].description//this is working and gives all the item names
+                allifproductid=allifoutputdata[i].id
+
+                /*output+=`<tr><td> <a href='/View-Account-Details/${allifproductid}/'</a>`+
+                 allifoutputdata[i].description +
+                "</td><td>" + allifoutputdata[i].balance
+                ;*/
+              
+                output+=`<tr><td>`+
+                 allifoutputdata[i].description +
+                "</td><td>" + allifoutputdata[i].balance
+                ;
+                no_of_matching_items++;
+  
+                    };  
+  
+                document.getElementById("numofitems").innerHTML = no_of_matching_items+" "+'Accounts';
+                $("#allifdata").html(output);
+                //////////////////////// end of working section.... below one is just for learning and reference
+                
+                //below lines are just for records
+                //document.getElementById("myobjectsdata").innerHTML =allifoutputdata;
+                //document.getElementById("mydictionarydata").innerHTML =mydata;
+                for(let key in allifoutputdata) {
+                    //console.log(key + ":", allifoutputdata[key]);
+                    }
+  
+  
+  
+               //this section is also showing the results required...
+                datafrombackend.map(item=>{
+                    mydatadescription=item.description
+                    const myoption=document.createElement('div')
+                    myoption.textContent=item.description
+                });
+  
+                datafrombackend.forEach(element => {
+                allif=element.description
+                });
+  
+             
+               }
+        });
+      
+    })
+  
+  
+  </script>
+   {% endblock %}
+   

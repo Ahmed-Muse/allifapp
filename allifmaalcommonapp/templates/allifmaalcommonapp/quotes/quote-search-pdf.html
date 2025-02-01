@@ -1,0 +1,54 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifpdfuibase.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<style>
+    #allif-pdf-header{
+    font-size:2em;
+    color: #050eab;
+    float: right;
+    text-align: right;
+    margin: 0.4em;
+  }
+</style>
+
+<div id="allif-pdf-header">Searched Quotations Results</div>
+
+<div>
+    <table class="table-bordered">
+    <tr>
+    <thead>
+    <tr class="allif-pdf-table-header">
+    
+    <th colspan="4">Quote Ref.</th>
+    <th colspan="4">Customer</th>
+    <th colspan="2">Amount</th>
+    <th colspan="2">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in searched_data %}
+    <tr>
+    <td colspan="4">{{item.number}}</td>
+    <td colspan="4">{{item.customer}}</td>
+    <td colspan="2">{{item.total|floatformat:2|intcomma}}</td>
+    <td colspan="2"> {{item.date|date:'d/m/Y'}}</td>
+    </tr>
+    {% endfor %}
+   
+    </tbody>
+    </table>
+        
+</div> 
+
+{% block scripts %}
+
+{% endblock %}
+
+{% endblock %}
+   

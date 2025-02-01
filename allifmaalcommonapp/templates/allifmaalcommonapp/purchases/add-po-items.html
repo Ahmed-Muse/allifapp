@@ -1,0 +1,157 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<!--start....main headere-->
+<div class="card-header">
+  <div class="row mt-12" ><!--start....header row-->
+  <div class="col-md-12"><!--start....header column-->
+  <div class="container-fluid amel-content-header">
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddPODetails' allifquery.id user_var glblslug %}">Back to PO</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddPOItems' allifquery.id user_var glblslug %}">Refresh</a>
+    <a href="{% url 'allifmaalcommonapp:commonPOMiscCost' allifquery.id user_var glblslug %}">Misc Costs</a>
+    <a href="{% url 'allifmaalcommonapp:commonPostPO' allifquery.id user_var glblslug %}">Post PO</a>
+    <a href="{% url 'allifmaalcommonapp:commonPurchaseOrders' user_var glblslug %}">Purchase Orders</a>
+    <a href="{% url 'allifmaalcommonapp:commonCalculatePOMiscCosts' allifquery.id user_var glblslug %}">Synch</a>
+    
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+<div class="allifmaincontainer">
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="col-md-12"><!--start of the first row body-->
+      <div class="allif-form-container">
+      
+      <div class="row"><!--start of row div --->
+      <div class="allif-scroll-table">
+      <!--start of the table-->
+          <table class="table table-layout">
+          <thead>
+          <tr class="allif-table-header-row">
+          <td>No.</td>
+          <td>Description</td>
+          <td>Quantity</td>
+          <td>Unit Cost</td>
+          <td>Amount</td>
+          <td>Edit</td>
+          <td>Delete</td>
+          </tr>
+            </thead>
+            <tbody class="allif-table-body">
+          <tr>
+            <form method='POST' action=''>{% csrf_token %}
+              <td id="allif-table-inline-form"></td>
+              <td id="allif-table-inline-form">{{form.items}}</td>
+              <td id="allif-table-inline-form">{{form.quantity}}</td>
+              <td id="allif-table-inline-form">{{form.unitcost}}</td>
+              <td id="allif-table-inline-form" colspan="1"> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+              <td id="allif-table-inline-form" colspan="2"></td>
+            </form>
+            </tr>
+              
+          {% if myallifquery %}
+          <tr sid="allif-delete-on-table-row">
+            <td id="allif-delete-on-table-row">01</td>
+            <td id="allif-delete-on-table-row"> Delete {{myallifquery.items}} ?</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.quantity}}</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.quantity}}</td>
+            <td id="allif-delete-on-table-row">{{myallifquery.unitcost}}</td>
+            <td id="allif-delete-on-table-row">
+            <a href="{% url 'allifmaalcommonapp:commonAddPOItems' allifquery.id user_var glblslug %}">No</a>
+            </td>
+            <td id="allif-delete-on-table-row">
+              <a href="{% url 'allifmaalcommonapp:commonDeletePOtem' myallifquery.id user_var glblslug %}">Yes</a>
+        
+            </td>
+          </tr>
+          {% endif %}
+            </div>
+
+          {% for item in allifqueryset %}
+          <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{item.items}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.unitcost|intcomma}}</td>
+          <td>{{item.purchase_order_amount|intcomma}}</td>
+          <td>
+            <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditPOItem' item.id user_var glblslug %}">
+              Edit Item
+            </a>
+          </td>
+          <td>
+            <a class="body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeletePOItem' item.id user_var glblslug %}">
+              Delete Item
+            </a>
+         </td>
+          </tr>
+          {% endfor %}
+
+        <tr>
+          <td id="allif-table-sums-section"></td>
+          <td id="allif-table-sums-section" colspan="3">Sub Total</td>
+          <td id="allif-table-sums-section">{{allifquery.amount|intcomma}}</td>
+          <td id="allif-table-sums-section"></td>
+          <td id="allif-table-sums-section"></td>
+        </tr>
+       
+          <tr>
+            <td id="allif-table-sums-section"></td>
+            <td id="allif-table-sums-section" colspan="3">Tax Amount</td>
+            <td id="allif-table-sums-section">{{allifquery.taxamount|floatformat:2|intcomma}}</td>
+            <td id="allif-table-sums-section" colspan="2"></td>
+            
+            </tr>
+        
+          <tr>
+            <td id="allif-table-sums-section"></td>
+            <td id="allif-table-sums-section" colspan="3">Tax Inclusive</td>
+            <td id="allif-table-sums-section">{{allifquery.amounttaxincl|floatformat:2|intcomma}}</td>
+            <td id="allif-table-sums-section"></td>
+            <td id="allif-table-sums-section"></td>
+            </tr>
+            <tr>
+              <td id="allif-table-sums-section"></td>
+              <td id="allif-table-sums-section" colspan="3">Misc. Costs</td>
+              <td id="allif-table-sums-section">{{allifquery.misccosts|floatformat:2|intcomma}}</td>
+              <td id="allif-table-sums-section"></td>
+              <td id="allif-table-sums-section"></td>
+              </tr>
+
+              <tr>
+                <td id="allif-table-sums-section"></td>
+                <td id="allif-table-sums-section" colspan="3">Grand Total</td>
+                <td id="allif-table-sums-section">{{allifquery.grandtotal|floatformat:2|intcomma}}</td>
+                <td id="allif-table-sums-section"></td>
+                <td id="allif-table-sums-section"></td>
+                </tr>
+        
+          </tbody>
+          </table>
+                   
+      <!--end of table-->
+          
+            </div><!--end of column 1-->
+        
+        </div><!--end of row div --->
+            
+        </div>
+            </div><!--end of first row body....-->
+  
+</div><!--end of main container of the page-->
+
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

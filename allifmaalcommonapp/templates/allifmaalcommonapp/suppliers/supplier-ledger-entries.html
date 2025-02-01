@@ -1,0 +1,176 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<!--start....main headere-->
+<div class="card-header">
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    <div class="dropdown allifmaal-content-dropdown">
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Open Filters
+      </a>  
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="content-dropdown-menu">
+  
+        <li><a class="dropdown-item">Looking for something?</a></li>
+        <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSupplierPayments' user_var glblslug %}">Clear Search</a>
+          
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonSupplierPaymentSearch' user_var glblslug %}">{% csrf_token %}
+        
+          <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
+          placeholder="Type Here ...">
+        
+          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+          </form>
+     
+      </div>
+      </ul>
+    </div>
+    <a class="amel-table-list-identifier">Supplier Payments:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonSupplierStatementpdf' allifquery.id user_var glblslug %}">Pdf</a>
+    <a href="{% url 'allifmaalcommonapp:commonPostedSupplierPayments' user_var glblslug %}">Posted Supplier Payments</a>
+    <a href="{% url 'allifmaalcommonapp:commonSupplierStatements' user_var glblslug %}">Supplier Statements</a>
+    <a href="{% url 'allifmaalcommonapp:commonPaySupplierDirect' user_var glblslug %}">New Supplier Payment</a>
+
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+      
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+<div class="allifmaincontainer">
+    
+<div class="row mt-12"> <!--start....table row-->
+<div class="col-md-12"> <!--start....table column-->
+  
+<div class="allif-scroll-table">
+<table class="table table-layout">
+<thead>
+  <tr class="allif-table-header-row" >
+    <td>Posting Date</td>
+    <td>Document Date</td>
+    <td>Document Type</td>
+    
+    <td>Description</td>
+    <td>Supplier</td>
+    <td>Original Amount</td>
+    <td>Amount</td>
+
+    <td>Debit</td>
+    <td>Credit</td>
+    <td>Balance</td>
+    <td>Transaction</td>
+    <td>Date</td>
+  
+  </tr>
+  </thead>
+  <tbody class="allif-table-body">
+   
+  
+  {% for item in allifqueryset %}   
+  <tr>
+    <td>
+      {{item.description}}
+    </td>
+    
+    <td>
+      {{item.credit}}
+    </td>
+    <td>
+      {{item.debit}}
+    </td>
+    <td>
+      {{item.credit}}
+    </td>
+  <td>
+  <a href="{% url 'allifmaalcommonapp:commonSupplierStatementDetails' item.id user_var glblslug %}" class="allif-table-links">
+  {{item.balance|floatformat:2|intcomma}}
+  </a></td>
+  
+    <td>
+    {{item.comments}}
+  </td>
+ 
+ 
+  <td>
+    {{item.date|date:'d/m/Y'}}
+  </td>
+    
+  
+    </tr>
+      {% endfor %}
+      
+      {% if searched_data %}
+      {% for item in searched_data %}   
+      <tr>
+      
+        <td>
+          {{item.description}}
+        </td>
+        <td>
+          {{item.supplier}}
+        </td>
+      <td>
+      <a href="{% url 'allifmaalcommonapp:commonSupplierPaymentDetails' item.id user_var glblslug %}" class="allif-table-links">
+      {{item.amount|floatformat:2|intcomma}}
+      </a></td>
+      
+        <td>
+        {{item.department}}
+      </td>
+     
+      <td>
+        {{item.owner}}
+      </td>
+      <td>
+        {{item.date|date:'d/m/Y'}}
+      </td>
+        
+        </tr>
+        {% endfor %}
+        {% endif %}
+
+  </tbody>
+    </table>
+
+  </div>
+  
+  </div><!--end....table column-->
+  </div>
+
+</div><!--end....table row-->
+
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+ 
+  {% endblock %}
+  
+   {% endblock %}
+   

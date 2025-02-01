@@ -1,0 +1,68 @@
+
+    
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+
+
+<!--start....main headere-->
+<div class="card-header">
+  <div class="row mt-12" ><!--start....header row-->
+  <div class="col-md-12"><!--start....header column-->
+  <div class="container-fluid amel-content-header">
+    <a class="amel-table-list-identifier">Divisions:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddDivision' user_var glblslug %}">Add Divison</a>
+    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+    <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Employees</a></li>
+    </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
+  
+  </div>
+  
+    </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+ 
+<div class="allifmaincontainer">
+    <div class="error_container">
+        <div class="error-header">
+        Error
+            </div>
+        <div class="error-body">
+        <p>Sorry, the form has an error, please correct it and try again.</p>
+        <p>{{error_message}}</p>
+        <a href="{% url 'allifmaalusersapp:userLogoutPage' %}" class="loginlink">Login Again</a>
+        </div>
+        </div>
+
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+  
+  {% block scripts %}
+ 
+  {% endblock %}
+  
+   {% endblock %}
+   
+
