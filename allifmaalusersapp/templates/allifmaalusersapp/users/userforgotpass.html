@@ -1,0 +1,107 @@
+{% extends 'allifmaalusersapp/users/userbase.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+   
+{% block body %}
+<div class="container"><!--start of main container of the page--...#17a2b8;  -->
+	<div class="d-flex justify-content-center h-100">
+	  <div class="user_card">
+		<div class="d-flex justify-content-center">
+		  <h6>Forgot Your Password?</h6>
+         
+		</div>
+        
+	  <div class="d-flex justify-content-center form_container ">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    Please Enter Your Email and Secret Key.
+                </div>
+                
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-key"></i>User Email</span>
+                   
+                </div>
+                <input type="text" required name="email" placeholder="Email Address" class="form-control" >
+              
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-key"></i>Secret Key</span>
+                </div>
+                <input type="password" required name="secretkey" placeholder="Secret Key" class="form-control" >
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    Please Enter Your New Password.
+                </div>
+                
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-key"></i>Password</span>
+                </div>
+                <input type="password" required name="password1" placeholder="New Password" class="form-control" >
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-key"></i>Password</span>
+                </div>
+                <input type="password" required name="password2" placeholder="Confirm Password" class="form-control" >
+            </div>
+
+                <div class="d-flex justify-content-center mt-3 login_container">
+                    <input type="submit" value='Change Password' id="allif-link-buttons" class="btn btn-success mybuttonlinks" >
+                   </div>
+
+
+                   <div class="d-flex justify-content-center">
+                    <a href="{% url 'allifmaalusersapp:userLoginPage' %}" style="text-decoration: none;">
+                        Login Page
+                    </a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                       
+                           Contact Admin for Further Help.
+                        
+                        </div>
+                    <div class="d-flex justify-content-center">
+                    {% for message in messages %}
+                    <p style="color: rgba(204, 89, 0, 0.8);">
+                    {{message}}
+                    </p>
+      
+                    {% endfor %}
+                    
+                  </div>
+        </form>
+       
+        
+       
+	  </div>
+	 
+  </div><!--end of row div --->
+  
+  
+</div>
+  
+</div>
+
+		  
+
+ 
+{% endblock %}
+
