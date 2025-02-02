@@ -33,6 +33,7 @@ from tablib import Dataset
 from .resources import *
 def commonWebsite(request):
     try:
+        
         return render(request,'allifmaalcommonapp/website/website.html')
     except Exception as ex:
         error_context={'error_message': ex,}
