@@ -130,12 +130,48 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
+MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
+MEDIA_URL='/media/'#fetch images/media using this path when viewing through the browser...this folder will be created automatically when we upload the first image
+AUTH_USER_MODEL = 'allifmaalusersapp.User'
+#SENDSMS_BACKEND = 'allifmaalusersapp.mysmsbackend.SmsBackend'
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'Africa/Mogadishu'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_URL = '/static/'
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_LOCATION='static'
+
+#STATIC_URL = '/static/'
+#STATIC_ROOT='static'
+
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static')
+]
+
+
 #PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
 MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
 MEDIA_URL='/media/'#fetch images/media using this path when viewing through the browser...this folder will be created automatically when we upload the first image
