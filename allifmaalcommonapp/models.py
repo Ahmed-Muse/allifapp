@@ -4,6 +4,7 @@ from uuid import uuid4
 #from django.contrib.auth.models import User
 from allifmaalusersapp.models import User
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 #################################################### NOTES ###################################
 # This database should serve the following sectors
@@ -277,7 +278,7 @@ class CommonCompanyScopeModel(models.Model):# this is the company  hospitality l
     def __str__(self):
         return self.name
 class CommonTaxParametersModel(models.Model):
-    taxname = models.CharField(null=True, blank=True, max_length=30,unique=True)
+    taxname = models.CharField(null=True, blank=True, max_length=30,unique=False)
     taxdescription= models.CharField(null=True, blank=True, max_length=20,unique=True)
     taxtype = models.CharField(choices=taxoptions, blank=True, max_length=30)
     taxrate=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
@@ -285,7 +286,11 @@ class CommonTaxParametersModel(models.Model):
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmntaxcmp",on_delete=models.SET_NULL,null=True,blank=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     def __str__(self):
+        return str(self.taxname)
         return self.taxname +"   "+str(self.taxrate)+str('%')
+    def clean(self):
+        if self.taxrate<0:
+            raise ValidationError("Tax Rate cannot be negative")
 # #################3 HRM ################    
 class CommonEmployeesModel(models.Model):
     rights= [

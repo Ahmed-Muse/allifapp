@@ -7,7 +7,7 @@ from allifmaalcommonapp.models import *
 from allifmaalcommonapp.decorators import allifmaal_admin, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
 # Create your views here.
 @login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
-@allifmaal_admin
+#@allifmaal_admin
 def adminappHome(request,*allifargs,**allifkwargs):
     try:
         title="System Control Center"
