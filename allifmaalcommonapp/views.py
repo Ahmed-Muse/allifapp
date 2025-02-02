@@ -2274,7 +2274,7 @@ def commonGeneralLedgers(request,allifusr,allifslug,*allifargs,**allifkwargs):
             logged_user_branch=logged_user_profile.branch
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonGeneralLedgersModel.objects.filter(company=main_sbscrbr_entity)
