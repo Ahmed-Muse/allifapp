@@ -918,6 +918,9 @@ def commonCompanyAdvanceSearch(request,*allifargs,**allifkwargs):
 def commonDivisions(request,*allifargs,**allifkwargs):
     try:
         title="Divisions"
+        num_visits = request.session.get('num_visits', 0)
+        num_visits += 1
+        request.session['num_visits'] = num_visits
         user_var=request.user
         compslg=request.user.usercompany
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
@@ -936,6 +939,7 @@ def commonDivisions(request,*allifargs,**allifkwargs):
             "allifqueryset":allifqueryset,
             "user_var":user_var,
             "main_sbscrbr_entity":main_sbscrbr_entity,
+            "num_visits":num_visits,
         }
         return render(request,'allifmaalcommonapp/divisions/divisions.html',context)
     except Exception as ex:

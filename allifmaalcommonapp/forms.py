@@ -126,7 +126,7 @@ class CommonAddCompanyScopeForm(forms.ModelForm):
 class CommonAddDivisionForm(forms.ModelForm):
     class Meta:
         model =CommonDivisionsModel
-        fields = ['division','legalname','created_date','edit_date','phone','email','address','pobox','city']
+        fields = ['division','legalname','comments','created_date','edit_date','phone','email','address','pobox','city']
         widgets={
             'division':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -135,6 +135,7 @@ class CommonAddDivisionForm(forms.ModelForm):
             'phone':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'email':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'city':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'comments':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
            
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'pobox':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
