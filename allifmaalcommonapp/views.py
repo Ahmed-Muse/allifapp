@@ -33,8 +33,9 @@ from tablib import Dataset
 from .resources import *
 def commonWebsite(request):
     try:
-        
-        return render(request,'allifmaalcommonapp/website/website.html')
+        title="Allifmaal ERP"
+        context={"title":title,}
+        return render(request,'allifmaalcommonapp/website/website.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -913,8 +914,9 @@ def commonCompanyAdvanceSearch(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 ############################### .......Entities and companies details........... #########################3#
-@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
-@logged_in_user_can_view
+#@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+#@login_required(login_url='allifmaalusersapp:userLoginPage')
+#@logged_in_user_can_view
 def commonDivisions(request,*allifargs,**allifkwargs):
     try:
         title="Divisions"
@@ -946,8 +948,8 @@ def commonDivisions(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_add
+#@login_required(login_url='allifmaalusersapp:userLoginPage')
+#@logged_in_user_can_add
 def commonAddDivision(request,*allifargs,**allifkwargs):
     try:
         title="New Division"

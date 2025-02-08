@@ -6,14 +6,23 @@ from django.urls import reverse
 class CommonTaxParametersModelTest(TestCase):
 
     def test_string_representation(self):
-        creator=User.objects.create(username="Ahmed")
+        creator=User.objects.create(username="Ahmed",email='ahmed@allifmaal.com')
         creator.save()
         item =CommonTaxParametersModel(taxname="Galmudugtax",taxdescription="description",owner=creator)
         item.save()
-        record = CommonTaxParametersModel.objects.get(id=1)
+        record = CommonTaxParametersModel.objects.filter(id=1).first()
         self.assertEqual(record.owner.username, "Ahmed")        
         self.assertEqual(str(item), item.taxname,item.taxdescription)
-    
+
+        
+        author = User.objects.get(id=1)
+        field_label = author._meta.get_field('username').verbose_name
+        self.assertEqual(field_label, 'username')
+
+        max_length = author._meta.get_field('username').max_length
+        self.assertEqual(max_length, 255)
+
+       
     def test_quantity(self):
         item =CommonTaxParametersModel(taxname="Puntlandtax",taxdescription="mydescription",taxrate=10.00)
         self.assertEqual(item.taxrate,10.00)

@@ -10,7 +10,29 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+
 from pathlib import Path
+
+
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+FCM_NOTIFICATION_APIKEY = os.getenv("FCM_NOTIFICATION_APIKEY", default="")
+FCM_NOTIFICATION_SENDER_ID = os.getenv("FCM_NOTIFICATION_SENDER_ID", default="")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+
+get_env = os.environ.get
+
+BASE_DIR = Path(__file__).parent.parent.parent 
+
+load_dotenv(BASE_DIR / "../.env") #here you indicate where your .env file is
+
+SECRET_KEY = get_env("DJANGO_SECRET_KEY", "secret")
+
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +42,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c8*_cv^aw$^%(*k5zfx1+(svx3yw!448%^=ci6auje3ucz7gvn'
+#SECRET_KEY = 'django-insecure-c8*_cv^aw$^%(*k5zfx1+(svx3yw!448%^=ci6auje3ucz7gvn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','localhost']
+ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','localhost','http://0.0.0.0:8000/']
 
 
 # Application definition
@@ -40,6 +62,7 @@ INSTALLED_APPS = [
     'import_export',
     "django.contrib.humanize",
     'crispy_forms',
+    "coverage",
     
     "allifmaalusersapp",
     "allifmaalloginapp",
@@ -94,7 +117,50 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.environ.get('DB_NAME'),
+        "USER": os.environ.get('DB_USER'),
+        "PASSWORD": os.environ.get('DB_USER_PASSWORD'),
+        "HOST": os.environ.get('DB_HOST'),
+        "PORT": os.environ.get('DB_PORT'),
+    }
+}
+"""
+""""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'allifmaal_db',
+        'USER': 'root',
+        'PASSWORD': 'amd30974153',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}  
+"""
 
+"""... below worked for me as of 22nd feb 2024
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'MYSQL',
+        'USER': 'root',
+        'PASSWORD': 'hidden',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}  
+
+"""
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ahmedmusadir@gmail.com'
+EMAIL_HOST_PASSWORD = 'cerb vpoc knfd ejgq'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
