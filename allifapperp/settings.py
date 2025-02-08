@@ -18,17 +18,22 @@ from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
-FCM_NOTIFICATION_APIKEY = os.getenv("FCM_NOTIFICATION_APIKEY", default="")
-FCM_NOTIFICATION_SENDER_ID = os.getenv("FCM_NOTIFICATION_SENDER_ID", default="")
+get_env = os.environ.get
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 
-get_env = os.environ.get
+
 
 BASE_DIR = Path(__file__).parent.parent.parent 
 
 load_dotenv(BASE_DIR / "../.env") #here you indicate where your .env file is
 
 SECRET_KEY = get_env("DJANGO_SECRET_KEY", "secret")
+EMAIL_BACKEND=get_env('ALLIF_EMAIL_BACKEND','email-backend')
+EMAIL_HOST=get_env('ALLIF_EMAIL_HOST','email-host')
+EMAIL_PORT=get_env('ALLIF_EMAIL_PORT','email-port')
+EMAIL_USE_TLS=get_env('ALLIF_EMAIL_USE_TLS','email-use-tls')
+EMAIL_HOST_USER=get_env('ALLIF_EMAIL_HOST_USER','email-host-user')
+EMAIL_HOST_PASSWORD=get_env('ALLIF_EMAIL_HOST_PASSWORD','email-host-password')
 
 
 
@@ -155,12 +160,7 @@ DATABASES = {
 }  
 
 """
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ahmedmusadir@gmail.com'
-EMAIL_HOST_PASSWORD = 'cerb vpoc knfd ejgq'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
