@@ -10,30 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import environ
 
 from pathlib import Path
 
 
 from dotenv import load_dotenv
+from dotenv import load_dotenv
+
+import environ
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
+
 
 # Load environment variables from .env file
 load_dotenv()
-get_env = os.environ.get
+allif_get_env_var= os.environ.get
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 
 
+#ALLOWED_HOSTS = os.environ.get("ALLIF_ALLOWED_HOSTS","ALLIF_ALLOWED_HOSTS")
 
 BASE_DIR = Path(__file__).parent.parent.parent 
 
 load_dotenv(BASE_DIR / "../.env") #here you indicate where your .env file is
 
-SECRET_KEY = get_env("DJANGO_SECRET_KEY", "secret")
-EMAIL_BACKEND=get_env('ALLIF_EMAIL_BACKEND','email-backend')
-EMAIL_HOST=get_env('ALLIF_EMAIL_HOST','email-host')
-EMAIL_PORT=get_env('ALLIF_EMAIL_PORT','email-port')
-EMAIL_USE_TLS=get_env('ALLIF_EMAIL_USE_TLS','email-use-tls')
-EMAIL_HOST_USER=get_env('ALLIF_EMAIL_HOST_USER','email-host-user')
-EMAIL_HOST_PASSWORD=get_env('ALLIF_EMAIL_HOST_PASSWORD','email-host-password')
+env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
+load_dotenv(env_path)
+
+#SECRET_KEY = get_env("DJANGO_SECRET_KEY", "secret")
 
 
 
@@ -50,9 +56,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #SECRET_KEY = 'django-insecure-c8*_cv^aw$^%(*k5zfx1+(svx3yw!448%^=ci6auje3ucz7gvn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = os.environ.get('ALLIF_DJANGO_DEBUG', '') != 'False'
+ALLOWED_HOSTS =allif_get_env_var("ALLIF_ALLOWED_HOSTS","ALLIF_ALLOWED_HOSTS")
+ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','127.0.0.1','localhost','http://0.0.0.0:8000/']
+SECRET_KEY =allif_get_env_var("DJANGO_SECRET_KEY")
+EMAIL_BACKEND=allif_get_env_var("ALLIF_EMAIL_BACKEND","email-backend")
+EMAIL_HOST=allif_get_env_var('ALLIF_EMAIL_HOST','email-host')
+EMAIL_PORT=allif_get_env_var('ALLIF_EMAIL_PORT','email-port')
+EMAIL_USE_TLS=allif_get_env_var('ALLIF_EMAIL_USE_TLS','email-use-tls')
+EMAIL_HOST_USER=allif_get_env_var('ALLIF_EMAIL_HOST_USER','email-host-user')
+EMAIL_HOST_PASSWORD=allif_get_env_var('ALLIF_EMAIL_HOST_PASSWORD','email-host-password')
 
-ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','localhost','http://0.0.0.0:8000/']
+
+
 
 
 # Application definition
@@ -67,7 +84,7 @@ INSTALLED_APPS = [
     'import_export',
     "django.contrib.humanize",
     'crispy_forms',
-    "coverage",
+    
     
     "allifmaalusersapp",
     "allifmaalloginapp",

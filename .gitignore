@@ -2,3 +2,4 @@ dockerfile
 docker-compose.yml
 amd.pdf
 .dockerignore
+.env
