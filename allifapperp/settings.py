@@ -10,40 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
-import environ
 
 from pathlib import Path
-
-
 from dotenv import load_dotenv
-from dotenv import load_dotenv
-
-import environ
-# Initialise environment variables
-env = environ.Env()
-environ.Env.read_env()
-
 
 # Load environment variables from .env file
 load_dotenv()
 allif_get_env_var= os.environ.get
-EMAIL_HOST = os.getenv("EMAIL_HOST")
 
+#BASE_DIR = Path(__file__).parent.parent.parent 
 
-#ALLOWED_HOSTS = os.environ.get("ALLIF_ALLOWED_HOSTS","ALLIF_ALLOWED_HOSTS")
-
-BASE_DIR = Path(__file__).parent.parent.parent 
-
-load_dotenv(BASE_DIR / "../.env") #here you indicate where your .env file is
-
-env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
-load_dotenv(env_path)
-
-#SECRET_KEY = get_env("DJANGO_SECRET_KEY", "secret")
-
-
-
-
+#load_dotenv(BASE_DIR / "../.env") #here you indicate where your .env file is
+#env_path = load_dotenv(os.path.join(BASE_DIR, './vvvdd/.env'))
+#load_dotenv(env_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,10 +36,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = os.environ.get('ALLIF_DJANGO_DEBUG', '') != 'False'
-ALLOWED_HOSTS =allif_get_env_var("ALLIF_ALLOWED_HOSTS","ALLIF_ALLOWED_HOSTS")
+DEBUG = os.environ.get('ALLIF_DJANGO_DEBUG', '')
 ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','127.0.0.1','localhost','http://0.0.0.0:8000/']
-SECRET_KEY =allif_get_env_var("DJANGO_SECRET_KEY")
+
+SECRET_KEY =allif_get_env_var("ALLIF_DJANGO_SECRET_KEY")
 EMAIL_BACKEND=allif_get_env_var("ALLIF_EMAIL_BACKEND","email-backend")
 EMAIL_HOST=allif_get_env_var('ALLIF_EMAIL_HOST','email-host')
 EMAIL_PORT=allif_get_env_var('ALLIF_EMAIL_PORT','email-port')
@@ -69,10 +48,18 @@ EMAIL_HOST_USER=allif_get_env_var('ALLIF_EMAIL_HOST_USER','email-host-user')
 EMAIL_HOST_PASSWORD=allif_get_env_var('ALLIF_EMAIL_HOST_PASSWORD','email-host-password')
 
 
-
+############### uncomment below for production ################
+#SECURE_HSTS_SECONDS = 31536000
+#SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#SECURE_SSL_REDIRECT = True# Set this to true in production
+#SESSION_COOKIE_SECURE = True
+#SECURE_HSTS_PRELOAD = True
+#CSRF_COOKIE_SECURE = True
 
 
 # Application definition
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -108,6 +95,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'allifapperp.urls'
+
+# below is for auto logout when there is inactivity... there is two ways to do it as below.
+#AUTO_LOGOUT = {'IDLE_TIME': 60}  # logout after 10 minutes of downtime
+from datetime import timedelta
+AUTO_LOGOUT = {
+    'IDLE_TIME': timedelta(minutes=60),
+    'allifmaalusersapp:userLoginPage': True,
+}
+
+# django_project/settings.py
+LOGIN_REDIRECT_URL="home"
+LOGOUT_REDIRECT_URL="home"
+
 
 TEMPLATES = [
     {
@@ -240,7 +240,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT='static'
+#STATIC_ROOT='static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -251,9 +251,9 @@ STATICFILES_LOCATION='static'
 
 
 
-#STATICFILES_DIRS=[
-    #os.path.join(BASE_DIR,'static')
-#]
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static')
+]
 
 
 #PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
@@ -261,3 +261,9 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
 MEDIA_URL='/media/'#fetch images/media using this path when viewing through the browser...this folder will be created automatically when we upload the first image
 AUTH_USER_MODEL = 'allifmaalusersapp.User'
 #SENDSMS_BACKEND = 'allifmaalusersapp.mysmsbackend.SmsBackend'
+
+
+
+
+################################
+
