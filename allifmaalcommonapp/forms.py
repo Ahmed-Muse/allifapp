@@ -922,5 +922,9 @@ class CommonAddTasksForm(forms.ModelForm): #the forms here is the one imported u
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
         self.fields['assignedto'].queryset = CommonEmployeesModel.objects.filter(company=allifmaalparameter,)
-        
-    
+     
+##########################3 testing links ####################
+class TemplateLinkForm(forms.ModelForm):
+    class Meta:
+        model = TemplateLink
+        fields = ['name', 'url_name', 'url_params']

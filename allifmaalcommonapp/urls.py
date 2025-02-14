@@ -413,6 +413,11 @@ path('UI10/Home/<str:allifusr>/<str:allifslug>/', views.ui10, name="ui10"),
 path('UI11/Home/<str:allifusr>/<str:allifslug>/', views.ui11, name="ui11"),
 
 
+###################3 links test ############3
+path('links/lists', views.link_list, name='link_list'),
+path('add/new/link', views.add_link, name='add_link'),
+
+
 
 
 ]   

@@ -10303,3 +10303,32 @@ def ui11(request,*allifargs,**allifkwargs):
            
         }
     return render(request,'allifmaalcommonapp/ui/ui11.html',context)
+
+
+
+#################### testingl inks
+
+from .models import TemplateLink
+from .forms import TemplateLinkForm
+
+def link_list(request):
+    for item in TemplateLink.objects.all():
+        #item.delete()
+        pass
+    links = TemplateLink.objects.all()
+    return render(request, 'allifmaalcommonapp/links/link_list.html', {'links': links})
+
+def add_link(request):
+    if request.method == 'POST':
+        form = TemplateLinkForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = TemplateLinkForm()
+    return render(request, 'allifmaalcommonapp/links/add_link.html', {'form': form})
+
+@register.filter(name='allif_generate_links')
+def generate_new_link(link):
+    url = reverse(link.url_name, kwargs=link.url_params)
+    return f'<a href="{url}">{link.name}</a>'
+
