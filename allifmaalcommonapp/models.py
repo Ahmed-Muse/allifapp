@@ -1133,4 +1133,11 @@ class CommonJobItemsModel(models.Model):
     
     def __str__(self):
         return str(self.description)
-  
+
+######################## storing links in database ######################
+class TemplateLink(models.Model):
+    name = models.CharField(max_length=200)
+    url_name = models.CharField(max_length=200)
+    url_params = models.JSONField(blank=True, null=True)
+    def __str__(self):
+        return self.name
