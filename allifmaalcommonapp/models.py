@@ -1133,6 +1133,15 @@ class CommonJobItemsModel(models.Model):
     
     def __str__(self):
         return str(self.description)
+    
+class CommonContactsModel(models.Model):
+    name=models.CharField(max_length=60,blank=False,null=True,default="name")
+    subject=models.CharField(max_length=20,blank=False,null=True,default="subject")
+    email=models.CharField(max_length=30,blank=False,null=True,default="email")
+    message=models.CharField(max_length=255,blank=False,null=True,default="message")
+    
+    def __str__(self):
+        return str(self.subject)
 
 ######################## storing links in database ######################
 class TemplateLink(models.Model):

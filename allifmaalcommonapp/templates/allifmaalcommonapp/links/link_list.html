@@ -1,5 +1,5 @@
 
-
+<h4>These are links that can be stored in database so that they can be searched</h4>
 <form method="GET" action=".">
     <input type="text" name="q" placeholder="Search links...">
     <button type="submit">Search</button>
@@ -10,3 +10,5 @@
         <li>{{ link|allif_generate_links|safe }}</li>
     {% endfor %}
 </ul>
+
+<a href="{% url 'allifmaalcommonapp:add_link' %}">Add link</a>

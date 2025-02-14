@@ -10230,6 +10230,31 @@ def commonAvailableStockpdf(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
+###################3 customer contacts messages ###################3
+def commonCustomerContacts(request):
+    try:
+        if request.method=='POST':
+            
+            name=request.POST.get('name')
+            subject=request.POST.get('subject')
+            email=request.POST.get('email')
+            message=request.POST.get('message')
+            custom_info=CommonContactsModel(name=name,subject=subject,email=email,message=message)
+            custom_info.save()
+             
+            return redirect("allifmaalcommonapp:commonWebsite")
+
+        context={}
+        return render(request,"allifmaalcommonapp/website/website.html",context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalusersapp/error/error.html',error_context)
+
+
+
+
+
+
 def ui1(request,*allifargs,**allifkwargs):
     print()
     context = {
@@ -10323,6 +10348,7 @@ def add_link(request):
         form = TemplateLinkForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('allifmaalcommonapp:link_list')
     else:
         form = TemplateLinkForm()
     return render(request, 'allifmaalcommonapp/links/add_link.html', {'form': form})
