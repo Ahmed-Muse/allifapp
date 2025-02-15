@@ -100,3 +100,44 @@ def adminappInvoices(request):
 
     }
     return render(request,"allifmaaladminapp/home.html",context)
+
+@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+def adminCustomerContacts(request,*allifargs,**allifkwargs):
+    try:
+        title="Contacts From Website Form"
+        allifqueryset=CommonContactsModel.objects.all()
+        context={
+            "title":title,
+            "allifqueryset":allifqueryset,
+        }
+        return render(request,"allifmaaladminapp/contacts/contacts.html",context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaaladminapp/error/error.html',error_context)
+
+@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+def adminCustomerContactDetails(request,pk,*allifargs,**allifkwargs):
+    try:
+        title="Website Contact Details"
+        allifquery=CommonContactsModel.objects.filter(id=pk).first()
+        context={
+            "allifquery":allifquery,
+            "title":title,
+        }
+        return render(request,"allifmaaladminapp/contacts/contact-details.html",context)
+       
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+#@allowed_users(allowed_roles=['admin'])  
+@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_can_view 
+def adminDeleteCustomerContact(request,pk,*allifargs,**allifkwargs):
+    try:
+        compslg=request.user.usercompany
+        usrslg=request.user.customurlslug
+        CommonContactsModel.objects.get(id=pk).delete()
+        return redirect('allifmaaladminapp:adminCustomerContacts',allifusr=usrslg,allifslug=compslg)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaaladminapp/error/error.html',error_context)
