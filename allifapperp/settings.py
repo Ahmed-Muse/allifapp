@@ -249,17 +249,15 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_LOCATION='static'
 
-
-
-
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
 
-
-#PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
 MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
+#PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
 MEDIA_URL='/media/'#fetch images/media using this path when viewing through the browser...this folder will be created automatically when we upload the first image
+
+
 AUTH_USER_MODEL = 'allifmaalusersapp.User'
 #SENDSMS_BACKEND = 'allifmaalusersapp.mysmsbackend.SmsBackend'
 
