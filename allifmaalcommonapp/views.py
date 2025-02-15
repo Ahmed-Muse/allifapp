@@ -17,11 +17,11 @@ import json
 from django.contrib.auth.models import Group
 from decimal import Decimal
 from django.contrib.auth.decorators import login_required
-from allifmaalloginapp.models import AllifmaalUsersModel
+
 from django.contrib import messages
 from allifmaalusersapp.forms import CreateNewCustomUserForm
 from django.http.response import HttpResponse, JsonResponse
-from allifmaalloginapp.models import AllifmaalUsersModel
+
 from allifmaalusersapp.forms import UpdateCustomUserForm
 from django.template.loader import get_template
 from django.db.models import Q

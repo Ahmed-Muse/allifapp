@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-from allifmaalloginapp.models import AllifmaalUsersModel
 from allifmaalusersapp.models import User
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required 
@@ -21,11 +20,11 @@ def adminappHome(request,*allifargs,**allifkwargs):
 def adminappUsers(request,*allifargs,**allifkwargs):
     try:
         title="Registered SystemUsers "
-        allifqueryset=AllifmaalUsersModel.objects.all()
+        
         users=User.objects.all()
         context={
             "title":title,
-            "allifqueryset":allifqueryset,
+            
             "users":users,
 
         }

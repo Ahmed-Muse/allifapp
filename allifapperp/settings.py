@@ -74,7 +74,6 @@ INSTALLED_APPS = [
     
     
     "allifmaalusersapp",
-    "allifmaalloginapp",
     
      "allifmaaladminapp",
      "allifmaalcommonapp",

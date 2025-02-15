@@ -20,7 +20,7 @@ urlpatterns = [
 
  
     path('Allifmaal/Application/For/Users/And/Accounts/Management/', include('allifmaalusersapp.urls')),
-    path('Allifmaal/Application/Users/Login/App/Managers/', include('allifmaalloginapp.urls')),
+    
    
     path('Allifmaal/ERP/System/Admin/App/', include('allifmaaladminapp.urls')),
 
