@@ -17,7 +17,7 @@
         
     <ul class="dropdown-menu allifmaal-side-nav-dropdown">
       <div class="amrullah-side-navbar">
-        {% if user_role %}
+        {% if user_is_supper %}
         <li><a class="dropdown-item" href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}">Admin</a></li>
         {% else %}
         <p></p>

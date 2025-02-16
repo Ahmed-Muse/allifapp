@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from allifmaalcommonapp.models import *
 from allifmaalcommonapp.decorators import allifmaal_admin, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
 # Create your views here.
-@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+
 #@allifmaal_admin
 def adminappHome(request,*allifargs,**allifkwargs):
     try:
@@ -16,7 +16,7 @@ def adminappHome(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+
 def adminappUsers(request,*allifargs,**allifkwargs):
     try:
         title="Registered SystemUsers "
@@ -34,7 +34,7 @@ def adminappUsers(request,*allifargs,**allifkwargs):
         return render(request,'allifmaaladminapp/error/error.html',error_context)
 
 
-@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+
 def adminappUserDetails(request,pk,*allifargs,**allifkwargs):
     try:
         title="User Details"
@@ -100,7 +100,7 @@ def adminappInvoices(request):
     }
     return render(request,"allifmaaladminapp/home.html",context)
 
-@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+
 def adminCustomerContacts(request,*allifargs,**allifkwargs):
     try:
         title="Contacts From Website Form"
@@ -114,7 +114,7 @@ def adminCustomerContacts(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+
 def adminCustomerContactDetails(request,pk,*allifargs,**allifkwargs):
     try:
         title="Website Contact Details"

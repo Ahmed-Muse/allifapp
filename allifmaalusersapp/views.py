@@ -52,13 +52,23 @@ def userLoginPage(request):
                 username=request.POST.get('username')
                 password=request.POST.get('password')
                 user=authenticate(request,username=username,password=password)
-                
-                if user is not None:#if there is an authenticated user
-                    login(request, user)
-                    return redirect('allifmaalcommonapp:CommonDecisionPoint')
+                if user.is_superuser:
+                    user_var="allif"
+                    usrslg="allifmaal-2116-e7b104a5d8e7kkjfs-jh6rewr#f-dskj"
+                    if user is not None:#if there is an authenticated user
+                        login(request, user)
+                        return redirect('allifmaaladminapp:adminappHome',allifusr=usrslg,allifslug=user_var)
+                    else:
+                        messages.info(request,'Sorry! your email or password is incorrect!')
+                        form=CustomUserLoginForm()
                 else:
-                    messages.info(request,'Sorry! your email or password is incorrect!')
-                    form=CustomUserLoginForm()
+                    if user is not None:#if there is an authenticated user
+                        login(request, user)
+                        return redirect('allifmaalcommonapp:CommonDecisionPoint')
+                    else:
+                        messages.info(request,'Sorry! your email or password is incorrect!')
+                        form=CustomUserLoginForm()
+                
         context={"form":form,"title":title,}
         return render(request,"allifmaalusersapp/users/user_login.html",context)
     except Exception as ex:

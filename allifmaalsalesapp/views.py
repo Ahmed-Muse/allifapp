@@ -7,18 +7,20 @@ from allifmaalcommonapp.models import CommonTasksModel
 def salesHome(request,*allifargs,**allifkwargs):
     try:
         title="Home"
+        
         user_var=request.user
         form=CommonAddTasksForm(request.POST or None)
         tasks=CommonTasksModel.objects.all()
         user_role=user_var.allifmaal_admin
-        if user_role==True:
+        user_is_supper=request.user.is_superuser
+        if user_is_supper==True:
             
             context={
                 "title":title,
                 "user_var":user_var,
                 "form":form,
                 "tasks":tasks,
-                "user_role":user_role,
+                "user_is_supper":user_is_supper,
             }
             return render(request,"allifmaalsalesapp/home/home.html",context)
         else:
