@@ -1,5 +1,13 @@
 from django.shortcuts import render,redirect
-from .models import CommonCompanyDetailsModel,CommonEmployeesModel,User
+def allifmaal_admin_supperuser(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        usernme=request.user
+        if usernme.is_superuser==True:
+            return allif_param_func(request,*args,**kwargs)
+        else:
+            return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+
 def allifmaal_admin(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
         usernme=request.user
@@ -8,6 +16,7 @@ def allifmaal_admin(allif_param_func):
         else:
             return render(request,'allifmaalcommonapp/permissions/no_permission.html')
     return allif_wrapper_func
+
 
 def logged_in_user_can_add_view_edit_delete(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):

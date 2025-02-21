@@ -8,6 +8,7 @@
 <!--the title of each page will be displayed here.....-->
 {% endblock %}
 </title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--the lib below is very important for the top nav bar opening and closing icon... so keep it there.-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -51,6 +52,8 @@
 <!--Note... when you include a file, it will be available for all the pages in the app unlike the static case...-->
 
 {% include 'allifmaalcommonapp/base/commonjs/common.js' %}
+
+<script src="{% static 'allifapperp/js/common/common.js' %}"></script>
 
 </body>
 </html>

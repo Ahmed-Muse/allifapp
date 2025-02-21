@@ -49,6 +49,8 @@ text-align: center;
   overflow-y: hidden;
   overflow-x: hidden;
   top:0em;
+  margin: 0px;
+ 
   }
 
 .amel-content-header{
@@ -122,7 +124,6 @@ text-align: center;
   margin-right: 0.2em;
   
   }
-
   
 .allifmaal-search-dropdown{
   display: inline;
@@ -289,41 +290,76 @@ background-color: var(--main-background-color);
 /*....End.....style table content describer....*/
 /* ...start....styling the main content tables... */
 .allif-scroll-table {
-  width: auto;
+  display: grid;
+  width: 100%;
   max-width: 100%;
   height: auto;
   max-height: 80vh;
-  
   margin-left: 0px;
   margin-right: 0px;
   overflow: auto;
   overflow-x: auto;
   overflow-y: auto;
-  
   border-left: 0.05em solid #ddddfa;
   border-right: 0.05em solid #ddddfa;
   border-radius: 0.1em;
   background-color: var(--main-background-color);
   margin-bottom: 1em;
   box-shadow: 0em 0em 0.5em #858585;
-  width: 100%;
   
-    }
-   
+}
   /* make the table heads sticky and fixed ...*/
 .allif-scroll-table thead tr {
   position: sticky; /* make the table heads sticky */
   top: 0px; /* table head will be placed from the top of the table and sticks to it */ 
   color: var(--main-black-color); 
   background-color: var(--main-background-color);
+  }
+
+td, th {
+width:auto;
+min-width:auto;
+max-width: 100%;
+word-wrap: break-word; /* Break long words */
+word-break: break-all; /* Break long words */
+text-overflow: ellipsis; /* Show ellipsis for overflow content */
+white-space: nowrap; /* Prevent text from wrapping */
+
+}
+.allif-full-table{
+  height: auto;
+  max-height: 80vh;
+  overflow-y: auto;
   
-    }
-    
+}
+.allif-fix-table-col {
+position:sticky;
+width: auto;
+
+}
+.allif-fix-table-col:first-child {
+left:0;
+width:auto;
+min-width:auto;
+
+
+}
+.allif-fix-table-col:last-child {
+right:0;
+width:auto;
+min-width:auto;
+}
+
+
 .allif-table-header-row {
   box-shadow: 0em 0em 0.5em #858585;
-  border: none;  
+  border: none; 
+  z-index: 10;
+ 
+  
   
   }
+ 
   
 .allif-scroll-table thead tr:hover {
   box-shadow: 0em 0em 0.5em var(--main-green-color);
@@ -339,12 +375,7 @@ background-color: var(--main-background-color);
 border-top: none;
 }
 
-td.allif-scroll-table{
-  background-color: red;
-}
-td.allif-table-body{
-  background-color: red;
-}
+
 
 .allifmaal-full-table{
 background-color: var(--main-background-color);

@@ -52,22 +52,26 @@ def userLoginPage(request):
                 username=request.POST.get('username')
                 password=request.POST.get('password')
                 user=authenticate(request,username=username,password=password)
-                if user.is_superuser:
-                    user_var="allif"
-                    usrslg="allifmaal-2116-e7b104a5d8e7kkjfs-jh6rewr#f-dskj"
-                    if user is not None:#if there is an authenticated user
-                        login(request, user)
-                        return redirect('allifmaaladminapp:adminappHome',allifusr=usrslg,allifslug=user_var)
+                if user !=None:
+                    if user.is_superuser==True:
+                        user_var="username"
+                        usrslg="allifmaal2116e7b104a5d8e7kkjfsjh6rewr#fdskjengltd"
+                        if user is not None:#if there is an authenticated user
+                            login(request, user)
+                            return redirect('allifmaaladminapp:adminappHome',allifusr=usrslg,allifslug=user_var)
+                        else:
+                            messages.info(request,'Sorry! your email or password is incorrect!')
+                            form=CustomUserLoginForm()
                     else:
-                        messages.info(request,'Sorry! your email or password is incorrect!')
-                        form=CustomUserLoginForm()
+                        if user is not None:#if there is an authenticated user
+                            login(request, user)
+                            return redirect('allifmaalcommonapp:CommonDecisionPoint')
+                        else:
+                            messages.info(request,'Sorry! your email or password is incorrect!')
+                            form=CustomUserLoginForm()
                 else:
-                    if user is not None:#if there is an authenticated user
-                        login(request, user)
-                        return redirect('allifmaalcommonapp:CommonDecisionPoint')
-                    else:
-                        messages.info(request,'Sorry! your email or password is incorrect!')
-                        form=CustomUserLoginForm()
+                    messages.info(request,'Sorry! your email or password is incorrect!')
+                    form=CustomUserLoginForm()
                 
         context={"form":form,"title":title,}
         return render(request,"allifmaalusersapp/users/user_login.html",context)

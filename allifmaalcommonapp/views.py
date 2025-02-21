@@ -8,7 +8,7 @@ import sms
 from .sessions import Allifsessions
 from twilio.rest import Client
 from.forms import *
-from .decorators import allifmaal_admin, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
+from .decorators import allifmaal_admin,allifmaal_admin_supperuser, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
 import datetime
 from datetime import datetime, timedelta
 from django.utils import timezone
@@ -917,6 +917,7 @@ def commonCompanyAdvanceSearch(request,*allifargs,**allifkwargs):
 #@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
 #@login_required(login_url='allifmaalusersapp:userLoginPage')
 #@logged_in_user_can_view
+@allifmaal_admin_supperuser
 def commonDivisions(request,*allifargs,**allifkwargs):
     try:
         title="Divisions"
@@ -7277,8 +7278,10 @@ def commonQuoteAdvanceSearch(request,*allifargs,**allifkwargs):
 ########################### END OF QUOTATION ###############
 
 def commonScrollableTable(request,*allifargs,**allifkwargs):
+    allifqueryset=CommonDivisionsModel.objects.all()
    
     context={
+        "allifqueryset":allifqueryset,
       
     }
     return render(request,'allifmaalcommonapp/table.html',context)

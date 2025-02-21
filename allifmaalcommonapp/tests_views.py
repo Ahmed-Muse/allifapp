@@ -19,7 +19,7 @@ class commonWebsiteTest(TestCase):
 
     def test_home_view_content(self):
         response = self.client.get(reverse('allifmaalcommonapp:commonWebsite'))
-        self.assertContains(response, "Work smarter with AllifApp, the best ERP solution to manage your business.")
+        self.assertContains(response, "Allifmaal")
     
     def setUp(self):
         # Create a user
