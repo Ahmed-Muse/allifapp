@@ -15,8 +15,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
-allif_get_env_var= os.environ.get
+#load_dotenv()
+#allif_get_env_var= os.environ.get
 
 #BASE_DIR = Path(__file__).parent.parent.parent 
 
@@ -35,17 +35,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #SECRET_KEY = 'django-insecure-c8*_cv^aw$^%(*k5zfx1+(svx3yw!448%^=ci6auje3ucz7gvn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = os.environ.get('ALLIF_DJANGO_DEBUG', '')
+DEBUG = True
+#DEBUG = os.environ.get('ALLIF_DJANGO_DEBUG', '')
 ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','127.0.0.1','localhost','http://0.0.0.0:8000/']
 
-SECRET_KEY =allif_get_env_var("ALLIF_DJANGO_SECRET_KEY")
-EMAIL_BACKEND=allif_get_env_var("ALLIF_EMAIL_BACKEND","email-backend")
-EMAIL_HOST=allif_get_env_var('ALLIF_EMAIL_HOST','email-host')
-EMAIL_PORT=allif_get_env_var('ALLIF_EMAIL_PORT','email-port')
-EMAIL_USE_TLS=allif_get_env_var('ALLIF_EMAIL_USE_TLS','email-use-tls')
-EMAIL_HOST_USER=allif_get_env_var('ALLIF_EMAIL_HOST_USER','email-host-user')
-EMAIL_HOST_PASSWORD=allif_get_env_var('ALLIF_EMAIL_HOST_PASSWORD','email-host-password')
+SECRET_KEY ='sfsdfsjljgouduoetoej$%5gkkkjhhytfjh$django-insecure-c8*_cv^aw$^%(*k5zfx1+(svx3yw!448%^=ci6auje3ucz7gvn'
+#SECRET_KEY =allif_get_env_var("ALLIF_DJANGO_SECRET_KEY")
+#EMAIL_BACKEND=allif_get_env_var("ALLIF_EMAIL_BACKEND","email-backend")
+#EMAIL_HOST=allif_get_env_var('ALLIF_EMAIL_HOST','email-host')
+#EMAIL_PORT=allif_get_env_var('ALLIF_EMAIL_PORT','email-port')
+#EMAIL_USE_TLS=allif_get_env_var('ALLIF_EMAIL_USE_TLS','email-use-tls')
+#EMAIL_HOST_USER=allif_get_env_var('ALLIF_EMAIL_HOST_USER','email-host-user')
+#EMAIL_HOST_PASSWORD=allif_get_env_var('ALLIF_EMAIL_HOST_PASSWORD','email-host-password')
 
 
 ############### uncomment below for production ################
@@ -58,7 +59,7 @@ EMAIL_HOST_PASSWORD=allif_get_env_var('ALLIF_EMAIL_HOST_PASSWORD','email-host-pa
 
 
 # Application definition
-EMAIL_HOST = os.getenv("EMAIL_HOST")
+#EMAIL_HOST = os.getenv("EMAIL_HOST")
 
 
 INSTALLED_APPS = [
