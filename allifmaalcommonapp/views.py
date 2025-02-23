@@ -649,7 +649,7 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+@login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_view
 def commonCompanyDetailsForClients(request,*allifargs,**allifkwargs):
     try:
