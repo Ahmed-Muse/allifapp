@@ -1,105 +1,188 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
 
-<!--start....main headere-->
-<div class="card-header">
-  <div class="row mt-12" ><!--start....header row-->
-  <div class="col-md-12"><!--start....header column-->
-  <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Divisions:</a>
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddDivision' user_var glblslug %}">Add Divison</a>
-    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
-    <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Employees</a></li>
-    </div>
-    </ul>
-  </div>
-  <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
-  
-  </div>
-  
-    </div><!--end....header column-->
-    
-    </div><!--end....header row-->
-  
-  </div><!--end....main headere-->
- 
-<div class="allifmaincontainer">
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="col-md-12"> <!--start....table column-->
-    <div class="allif-scroll-table table-responsive">
-
-      <table class="table table-layout allifmaal-full-table">
-        <thead>
-          <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Division Name</td>
-          <td>Compnay Sector</td>
-          <td>Company Owner</td>
-          <td>Company Email Address</td>
-          <td>Compnay Sector</td>
-          <td>Company Owner</td>
-          <td>Company Email Address</td>
-          
-          </tr>
-          </thead>
-          <tbody class="allif-table-body">
-              
-          {% for item in allifqueryset %}
-          <tr>
-            <td class="allif-fix-table-col">
-              <a href="{% url 'allifmaalcommonapp:commonDivisionDetails' item.id user_var glblslug %}" class="allif-table-links">
-             {{item.division}}
-              </a>
-            </td>
-           
-            <td>
-              {{item.company.sector}}fsdfsfsdfs kjwlkjekjrewrlewj lkjl
-            </td>
-            <td>{{item.owner}}fjlsdjfljlskfj jsfjdslkfjds lsjkljfklsdjfsk lksjfl</td>
-            
-            <td>{{item.email}}ljkllkfjds jslkfjlkdsjfklsj lsjj</td>
-         
-            <td>
-              {{item.company.sector}}fsdfsfsdfs kjwlkjekjrewrlewj lkjl
-            </td>
-            <td>{{item.owner}}fjlsdjfljlskfj jsfjdslkfjds lsjkljfklsdjfsk lksjfl</td>
-            
-            <td>{{item.email}}ljkllkfjds jslkfjlkdsjfklsj lsjj</td>
-        
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      </div>
-     
-  
-  </div><!--end....table column-->
-
-</div><!--end....table row-->
-
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
-  
-  {% block scripts %}
- 
-  {% endblock %}
-  
-   {% endblock %}
    1. |floatformat:2|intcomma
 2. |date:'d/m/Y'
+
+
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light allifmaal-top-nav-bar">
+  
+  <!--start......side nav bar section....-->
+  <div class="allifmaal-side-nav-bar container-fluid" >
+    
+  <a class="side-nav-dropdown-btn nav-link dropdown-toggle navbar-brand" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+    {% if main_sbscrbr_entity != '' %} {{main_sbscrbr_entity|truncatewords:1}} {% else %} Menu {% endif %}
+  
+  </a>
+      
+  <ul class="dropdown-menu allifmaal-side-nav-dropdown">
+    <div class="amrullah-side-navbar">
+      <li><a class="dropdown-item" href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}">Admin</a></li>
+     
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a></li>
+      
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a></li>
+    
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}" >Scopes</a></li>
+      
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a></li>
+      
+      <li><a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStaffProfiles' user_var glblslug %}">Profiles</a></li>
+      <li><a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Taxes</a></li>
+
+      
+      <li><a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">GL A/Cs</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonChartofAccounts' user_var glblslug %}">Chart of A/Cs</a></li>
+      
+      
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEmailsAndSMS' user_var glblslug %}">Comms</a></li>
+
+     
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a></li>
+     
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Forms</a></li>
+
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonClasses' user_var glblslug %}">Classes</a></li>
+      
+      {% if sctr == 'Education' %}
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" >Students</a></li>
+      
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Lecturers</a></li>
+      {% elif sctr == 'Healthcare' %}
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" >Patients</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Doctors</a></li>
+      {% else %}
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+      
+      {% endif %}
+
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAssetCategories' user_var glblslug %}">Categories</a></li>
+
+
+      
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAssets' user_var glblslug %}">Assets</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Expenses</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStockCats' user_var glblslug %}">Categories</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">Inventory</a></li>
+
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPurchaseOrders' user_var glblslug %}">Procurement</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonQuotes' user_var glblslug %}">Quotes</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonInvoices' user_var glblslug %}">Invoices</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonScrollableTable' user_var glblslug %}">Table</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSupplierPayments' user_var glblslug %}">Supplier Payments</a></li>
+
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonLedgerEntries' user_var glblslug %}">Ledgers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomerPayments' user_var glblslug %}">Customer Payments</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonReceiveCustomerMoney' user_var glblslug %}">Receive Cash</a></li>
+
+      
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSalaries' user_var glblslug %}">Salaries</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonJobs' user_var glblslug %}">Jobs</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a></li>
+
+      
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonProfitAndLoss' user_var glblslug %}">P&L</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonMainReports' user_var glblslug %}">Reports</a></li>
+
+     
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a></li>
+
+      <li><a class="dropdown-item"href="{% url 'allifmaalcommonapp:ui1' user_var glblslug %}">UIs</a></li>
+      <div class="btn-group">
+        <button class="side-nav-dropdown-btn dropdown-toggle " type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+        My Account
+        </button>
+        <ul class="dropdown-menu">
+          <div class="side-navbar-dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Change email</a></li>
+          <li><a href="{% url 'allifmaalusersapp:userLogoutPage' %}"class="dropdown-item">Logout</a></li>
+          
+          
+          </div>
+        </ul>
+      </div>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+  
+  
+      <div class="btn-group">
+        <button class="side-nav-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+          Stocks
+        </button>
+        <ul class="dropdown-menu">
+          <div class="side-navbar-dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">Inventory</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
+         
+          </div>
+        </ul>
+      </div>
+  
+    <li><a class="dropdown-item" href="#">Insurances</a></li>
+    <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">Stock</a></li>
+  
+
+      </div>
+    
+        </ul>
+      </div>
+        <!--end......side nav bar section....-->
+  
+  
+  <!--start of top nav bar section-->
+  <div class="container-fluid">
+    <a class="nav-link" href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <!--button below is very important and shows the hidden links when the screen is small-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
+        </li>
+        <li><a class="nav-link" href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a></li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Navigate
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <div class="side-navbar-dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonQuotes' user_var glblslug %}">Quotations</a></li>
+            <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonInvoices' user_var glblslug %}">Invoices</a></li>
+            <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
+            
+            </div>
+          </ul>
+        </li>
+        <li><a class="nav-link" href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a></li>
+        
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Modules
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAssets' user_var glblslug %}">Assets</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Expenses</a></li>
+        </ul>
+  
+      </li>
+          
+      <li>
+        <a class="nav-link" href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">Stocks</a>
+        <a class="nav-link" href="{% url 'allifmaalcommonapp:commonWebsite' %}">Website</a>
+        
+      </li>
+      
+    </ul>
+      </div>
+    </div>
+  
+  </nav>
+  </div>
