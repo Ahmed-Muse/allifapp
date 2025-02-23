@@ -6,25 +6,25 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-
+<div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
-
   <div class="row mt-12" ><!--start....header row-->
-  
   <div class="col-md-12"><!--start....header column-->
-  
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Companies:</a>
+    <a class="amel-table-list-identifier">Sectors:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddDivision' user_var glblslug %}">Add Divison</a>
+    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+    <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
   
   
-  <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
-  <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
-  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies </a>
-
-<a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
-
+    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+    <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies </a>
+  
+  <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Actions
@@ -38,167 +38,194 @@
       </div>
     </ul>
   </div>
-  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Banks
+    Modules
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
-        </li>
-      <li><a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a></li>
-      </div>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Employees</a></li>
+    </div>
     </ul>
   </div>
-  <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+  <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
+  
   </div>
   
-      </div><!--end....header column-->
+    </div><!--end....header column-->
     
     </div><!--end....header row-->
   
   </div><!--end....main headere-->
-      
+
 
 <div class="allifmaincontainer">
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="table-details-content-description">{{allifquery}} </div>
-    <div class="allif-details-container">
+ 
+
+
+
+
+
+
+
+
+
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+    <div class="table-content-description">{{allifquery.first_name}} Details </div>
+ 
       <div class="row"><!--start of row div --->
-      
-        <!--start of column two-->
-        <div class="col-md-4">
-          <div class="allif-details-card ">
-            <!--start of the table here-->
-          <table class="table allif-details-table table-layout">
-            <tbody>
-          <tr>
-            <td>Sector</td>
-            <td>{{allifquery.name}}</td>
-        
-            </tr>
-        
-          <tr>
-            <td>Notes</td>
-            <td>{{allifquery.notes}}</td>
-        
-            </tr>
-           
-          </tbody>
-          </table>
-        
-          </div>
-              </div>
-      
-           
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card ">
-          <!--start of the table here-->
-        <table class="table table-layout allif-details-table">
-          <tbody>
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="allif-details-card table-responsive">
+      <table class="table table-layout">
+      <tbody>
+      <tr>
+        <td>Company</td>
+        <td>{{allifquery.company}}companylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+    
+        </tr>
+      <tr>
+      <td>Email </td>
+      <td>{{allifquery.email}}email companylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+  
+      </tr>
        
-        
         <tr>
-          <td>Created By</td>
-          <td>{{allifquery.owner}}</td>
+          <td>Phone 1</td>
+          <td>{{allifquery.phone1}}phone1companylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
       
           </tr>
-        
+      <tr>
+        <td>Phone 2</td>
+        <td>{{allifquery.phone2}}phonecompanylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re2</td>
+    
+        </tr>
+    <tr>
+      <td>City</td>
+      <td>{{allifquery.city}}citycompanylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+  
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td>{{allifquery.country}}countrycompanylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+    
+        </tr>
+ 
         </tbody>
         </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+        <tr>
+          <td>Company</td>
+          <td>{{allifquery.company}}companycompanylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+      
+          </tr>
+        <tr>
+        <td>Email</td>
+        <td>{{allifquery.email}}emailcompanylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+    
+        </tr>
+        
+          <tr>
+            <td>Phone 1</td>
+            <td>{{allifquery.phone1}}phone2companylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+        
+            </tr>
+        <tr>
+          <td>Phone 2</td>
+          <td>{{allifquery.phone2}}phonecompanylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+      
+          </tr>
+      <tr>
+        <td>City</td>
+        <td>{{allifquery.city}}citycompanylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+    
+        </tr>
+        <tr>
+          <td>Country</td>
+          <td>{{allifquery.country}}cityt</td>
+      
+          </tr>
+   
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+        <tr>
+          <td>Company</td>
+          <td>{{allifquery.company}}countrycompanylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+      
+          </tr>
+        <tr>
+        <td>Email</td>
+        <td>{{allifquery.email}}compnay</td>
+    
+        </tr>
+        
+          <tr>
+            <td>Phone 1</td>
+            <td>{{allifquery.phone1}}phone1companylkjkljwlejrk wlkejrkljewklr kjlkwejrelkwjrkl lkwejrlkewjklr wjlkwejrlkewjr wlkjklwejr lkewjrlkwjwejrlkewj re</td>
+        
+            </tr>
+        <tr>
+          <td>Phone 2</td>
+          <td>{{allifquery.phone2}}phone2</td>
+      
+          </tr>
+      <tr>
+        <td>City</td>
+        <td>{{allifquery.city}}city</td>
+    
+        </tr>
+        <tr>
+          <td>Country</td>
+          <td>{{allifquery.country}}contry</td>
+      
+          </tr>
+   
+          </tbody>
+          </table>
+  
+    </div><!--end of row div --->
       
         </div>
-            </div>
-      
-      
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card ">
-          <!--start of the table here-->
-        <table class="table table-layout allif-details-table">
-          <tbody>
-    <tr>
-    <td>Created On</td>
-    <td>{{allifquery.date|date:'d/m/Y'}}</td>
-
-    </tr>
-               
-     
-        </tbody>
-        </table>
-      
-      </div>
-    </div>
-      
-      </div><!--end of row div --->
-        
-          </div>
 
 </div><!--end....table row-->
-
-<!--end of table-->
-
-
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="allif-details-container">
-      <div class="row"><!--start of row div --->
-      
-        <!--start of column two-->
-        <div class="col-md-12">
-          <div class="allif-details-card ">
-            <!--start of the table here-->
-            <div class="table-content-description">Companies Belonging to  {{allifquery}} Sector </div>
-          <table class="table table-layout allif-details-table">
-           
-              <thead>
-                <tr class="allif-table-header-row" >
-                <td>Company Description</td>
-                <td>Company Sector</td>
-                <td>Company Contact</td>
-                <td>Company Email</td>
-                </tr>
-                </thead>
-                <tbody class="allif-table-body">
-                  {% for item in allifqueryset %}   
-                  <tr>
-                   
-                    <td>
-                     
-                      {{item.company}}
-                      </td>
-                   <td>
-                    {{item.sector}}
-                   </td>
-                   <td>
-                    {{item.owner}}
-                   </td>
-                   <td>
-                    {{item.email}}
-                   </td>
-                 
-                  </tr>
-                    {% endfor %}
-               
-                </tbody>
-                  </table>
-      
-      </div><!--end of row div --->
-        
-          </div>
-
-</div><!--end....table row-->
-
+</div>
 <!--end of table-->
 
 </div><!--end of main container of the page....-->
+</div>
+</div>
+  
   {% block scripts %}
-
+ 
   {% endblock %}
-   {% endblock %}
-   
+  {% endblock %}
+
+
+
 
 
 

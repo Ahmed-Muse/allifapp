@@ -6,86 +6,69 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-
-
+<div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
-
   <div class="row mt-12" ><!--start....header row-->
-  
   <div class="col-md-12"><!--start....header column-->
-  
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">{{title}}:</a>
+    <a class="amel-table-list-identifier">Sectors:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddDivision' user_var glblslug %}">Add Divison</a>
+    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+    <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
   
   
-  <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
-  <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
-  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies </a>
-
-<a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
-
+    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+    <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies </a>
+  
+  <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Accounts
+    Modules
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">GL Accounts</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonChartofAccounts' user_var glblslug %}">Chart of A/Cs</a></li>
-      
-      </div>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Employees</a></li>
+    </div>
     </ul>
   </div>
-  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Banks
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
-        </li>
-      <li><a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a></li>
-      </div>
-    </ul>
-  </div>
-  <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+  <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
+  
   </div>
   
-      </div><!--end....header column-->
+    </div><!--end....header column-->
     
     </div><!--end....header row-->
   
   </div><!--end....main headere-->
-      
 
 
 <div class="allifmaincontainer">
-
  
   <div class="row mt-12"> <!--start....table row-->
-    
-
-  <div class="col-md-12"> <!--start....table column-->
-    <div class="allif-scroll-table"> 
-      <div class="table-content-description">Registerd Sectors List</div>
+    <div class="col-md-12"> <!--start....table column-->
+    <div class="allif-scroll-table">
+      <div class="table-responsive allif-full-table">
       <table class="table table-layout">
-      <thead>
-        <tr class="allif-table-header-row">
-          <td>Sector Description</td>
-          <td>Created By</td>
-          <td>Sector Comments</td>
-          <td>Added Date</td>
+        <thead>
+          <tr class="allif-table-header-row">
+          <td class="allif-fix-table-col">Division Name</td>
+          <td>Compnay Sector</td>
+          <td>Company Owner</td>
+          <td>Company Email Address</td>
          
-        </tr>
-        </thead>
-        <tbody class="allif-table-body">
-        {% for item in allifqueryset %} 
+         
+          </tr>
+          </thead>
+          <tbody class="allif-table-body">
+          
+            {% for item in allifqueryset %} 
         <tr>
-          <td>
+          <td class="allif-fix-table-col">
             <a href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}" class="allif-table-links">
            {{item.name}}
            </a>
@@ -108,41 +91,49 @@
         </tr>
         {% endfor %}
 
-      </tbody>
-    </table>
-  
-  </div>
-  
-    
-    <div class="allif-form-container">
-      <div class="table-content-description"> Add New Sector </div>
-    <form method='POST' action=''>{% csrf_token %}
-    <div class="row"><!--start of row div --->
-        
-        <div class="card shadow text-left p-3 allif-form-card" >
-        <label>Sector</label> {{form.name}} 
-        <label>Notes</label>{{form.notes}}
-        
-        <br>
-        <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-        
-        </div>
-    
-        </div>
-    </form>
-        
-        </div><!--end of row div --->
 
-  
+
+
+
+
+              
+         
+        </tbody>
+      </table>
+      </div>
+     </div>
+
+
   
   </div><!--end....table column-->
+
 </div><!--end....table row-->
-<br>
-<!--end of table-->
 
-</div><!--end of main container of the page-->
+<div class="allif-form-container">
+  <div class="table-content-description"> Add New Sector </div>
+<form method='POST' action=''>{% csrf_token %}
+<div class="row"><!--start of row div --->
+    
+    <div class="card shadow text-left p-3 allif-form-card" >
+    <label>Sector</label> {{form.name}} 
+    <label>Notes</label>{{form.notes}}
+    
+    <br>
+    <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+    
+    </div>
+
+    </div>
+</form>
+    
+    </div><!--end of row div --->
+
+</div>
+</div>
+  
   {% block scripts %}
-
+ 
   {% endblock %}
-   {% endblock %}
-   
+  {% endblock %}
+
+
