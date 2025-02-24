@@ -297,9 +297,6 @@ background-color: var(--main-background-color);
   max-height: 80vh;
   margin-left: 0px;
   margin-right: 0px;
-  overflow: auto;
-   overflow-x: auto;
-  overflow-y: auto;
   
  
   
@@ -335,8 +332,7 @@ white-space: nowrap; /* Prevent text from wrapping */
   max-height: 80vh;
   
   
-   overflow: auto;
-    overflow-y: auto;
+   
   
 }
 .allif-fix-table-col {
