@@ -297,6 +297,7 @@ background-color: var(--main-background-color);
   max-height: 80vh;
   margin-left: 0px;
   margin-right: 0px;
+ 
   
  
   
@@ -332,6 +333,7 @@ white-space: nowrap; /* Prevent text from wrapping */
   max-height: 80vh;
   
   
+   overflow: auto;
    
   
 }
