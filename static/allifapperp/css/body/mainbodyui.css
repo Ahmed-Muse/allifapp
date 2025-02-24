@@ -294,7 +294,12 @@ background-color: var(--main-background-color);
   max-height: 80vh;
   margin-left: 0px;
   margin-right: 0px;
+  /*overflow: auto;*/
+   /* overflow-x: auto;*/
+    /*overflow-y: auto;*/
+  
  
+  
   border-left: 0.05em solid #ddddfa;
   border-right: 0.05em solid #ddddfa;
   border-radius: 0.1em;
@@ -325,7 +330,10 @@ white-space: nowrap; /* Prevent text from wrapping */
 .allif-full-table{
   height: auto;
   max-height: 80vh;
-
+  
+  
+   /*overflow: auto;*/
+    /*overflow-y: auto;*/
   
 }
 .allif-fix-table-col {
