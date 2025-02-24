@@ -304,12 +304,7 @@ background-color: var(--main-background-color);
   margin-bottom: 1em;
   box-shadow: 0em 0em 0.5em #858585;
 
-  height: auto;
-  max-height: 80vh;
-  overflow: auto;
-  overflow-y: auto;
-  
-  
+ 
 }
   /* make the table heads sticky and fixed ...*/
 .allif-scroll-table thead tr {
@@ -329,7 +324,7 @@ text-overflow: ellipsis; /* Show ellipsis for overflow content */
 white-space: nowrap; /* Prevent text from wrapping */
 
 }
-.allif-full-tablesss{
+.allif-full-table{
   height: auto;
   max-height: 80vh;
   overflow: auto;
