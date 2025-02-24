@@ -85,6 +85,7 @@ text-align: center;
     overflow: auto;
     margin-left: 1px;
     display: inline;
+   
   }
  
   .content-dropdown-menu{
@@ -100,6 +101,7 @@ text-align: center;
     width:fit-content;
     display: inline-block;
     margin-top: 0em;
+   
     
 
   }
@@ -107,6 +109,7 @@ text-align: center;
     color: var(--main-black-color);
     width: 100%;
     border-bottom: var(--bottom-border-line);
+ 
 
   }
 .allifmaincontainer{
