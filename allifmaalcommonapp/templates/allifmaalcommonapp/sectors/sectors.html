@@ -47,7 +47,6 @@
   </div><!--end....main headere-->
 
 <div class="allifmaincontainer">
- 
   <div class="row mt-12"> <!--start....table row-->
     <div class="col-md-12"> <!--start....table column-->
     <div class="allif-scroll-table">
@@ -60,14 +59,6 @@
           <td>Company Owner</td>
           <td>Company Email Address</td>
           <td>Actions</td>
-          
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td> . . . </td>
-         
-         
           </tr>
           </thead>
           <tbody class="allif-table-body">
@@ -81,49 +72,36 @@
           </td>
           
           <td>
-            {{item.owner}}fdfsfdds jwjeljrlewj sjerlkjewlkjre lklwjreljewlkjrlkew lkjwelkrjlkwejr lkjwlkjrelkewjwe
+            {{item.owner}}
             
            </td>
           <td>
           
-           {{item.notes}}fdfsfdds jwjeljrlewj sjerlkjewlkjre lklwjreljewlkjrlkew lkjwelkrjlkwejr lkjwlkjrelkewjwe
+           {{item.notes}}
             
           </td>
 
           <td>
-           {{item.date|date:'d/m/Y'}}fdfsfdds jwjeljrlewj sjerlkjewlkjre lklwjreljewlkjrlkew lkjwelkrjlkwejr lkjwlkjrelkewjwe
+           {{item.date|date:'d/m/Y'}}
           </td>
 
           <td>
             <div class="dropdown allifmaal-content-dropdown">
               <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Open
+            {{open_link}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <div class="content-dropdown-menu">
+                <li><a class="dropdown-item" href="">Edit Item</a></li>
                 <li><a class="dropdown-item" href="">Edit Item</a></li>
                
               </div>
               </ul>
             </div>
           </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td> . . . </td>
-
          
         </tr>
         {% endfor %}
-
-
-
-
-
-
-              
-         
         </tbody>
       </table>
       </div>
@@ -136,177 +114,45 @@
 </div><!--end....table row-->
 
 <div class="allif-form-container">
-  <div class="table-content-description"> Add New Sector </div>
-<form method='POST' action=''>{% csrf_token %}
-<div class="row"><!--start of row div --->
-    
-    <div class="card shadow text-left p-3 allif-form-card" >
-    <label>Sector</label> {{form.name}} 
-    <label>Notes</label>{{form.notes}}
-    
-    <br>
-    <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-    
-    </div>
-
-    </div>
-</form>
-    
-    </div><!--end of row div --->
+<div class="table-content-description"> Add New Sector </div>
 
 
-
-
-
-
-
-
-
-<div class="row mt-12"> <!--start....table row-->
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="table-responsive allif-full-table">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="allif-details-card table-responsive">
-      <table class="table table-layout">
-      <tbody>
-      <tr>
-        <td>Company</td>
-        <td>{{allifquery.company}}company</td>
-    
-        </tr>
-      <tr>
-      <td>Email </td>
-      <td>{{allifquery.email}}email</td>
-  
-      </tr>
+<div class="allif-scroll-table">
+  <div class="table-responsive allif-full-table">
+  <table class="table table-layout">
+   
+      <tbody class="allif-table-body">
       
-        <tr>
-          <td>Phone 1</td>
-          <td>{{allifquery.phone1}}phone1</td>
-      
-          </tr>
-      <tr>
-        <td>Phone 2</td>
-        <td>{{allifquery.phone2}}phone2</td>
-    
-        </tr>
+        
     <tr>
-      <td>City</td>
-      <td>{{allifquery.city}}city</td>
-  
-      </tr>
-      <tr>
-        <td>Country</td>
-        <td>{{allifquery.country}}country</td>
-    
-        </tr>
- 
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-        <tr>
-          <td>Company</td>
-          <td>{{allifquery.company}}company</td>
+      <form method='POST' action=''>{% csrf_token %}
+      <td>
+       
+       {{form.name}}
       
-          </tr>
-        <tr>
-        <td>Email</td>
-        <td>{{allifquery.email}}email</td>
-    
-        </tr>
-        
-          <tr>
-            <td>Phone 1</td>
-            <td>{{allifquery.phone1}}phone2</td>
-        
-            </tr>
-        <tr>
-          <td>Phone 2</td>
-          <td>{{allifquery.phone2}}phone</td>
+      </td>
       
-          </tr>
-      <tr>
-        <td>City</td>
-        <td>{{allifquery.city}}city</td>
-    
-        </tr>
-        <tr>
-          <td>Country</td>
-          <td>{{allifquery.country}}cityt</td>
-      
-          </tr>
-   
-          </tbody>
-          </table>
-          </div>
-          </div>
+      <td>
+       
+        {{form.name}}
+       
+       </td>
+       <td>
+        <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+       </td>
+      </form>
+    </tr>
     
     
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-        <tr>
-          <td>Company</td>
-          <td>{{allifquery.company}}country</td>
-      
-          </tr>
-        <tr>
-        <td>Email</td>
-        <td>{{allifquery.email}}compnay</td>
-    
-        </tr>
-        
-          <tr>
-            <td>Phone 1</td>
-            <td>{{allifquery.phone1}}phone1</td>
-        
-            </tr>
-        <tr>
-          <td>Phone 2</td>
-          <td>{{allifquery.phone2}}phone2</td>
-      
-          </tr>
-      <tr>
-        <td>City</td>
-        <td>{{allifquery.city}}city</td>
-    
-        </tr>
-        <tr>
-          <td>Country</td>
-          <td>{{allifquery.country}}contry</td>
-      
-          </tr>
-   
-          </tbody>
-          </table>
+    </tbody>
+  </table>
   </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
+ </div>
 
-</div><!--end....table row-->
-</div>
-<!--end of table-->
 
-</div><!--end of main container of the page....-->
+    
+  </div><!--end of row div --->
+
 </div>
 </div>
   

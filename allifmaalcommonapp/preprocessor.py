@@ -5,6 +5,7 @@ def allifmaalcommonappglobalVariables(request):
         user_var = 0
         glblslug= "allifmaalfsjdfljengineeringjdjrwosdflimitedjfljj"
         main_sbscrbr_entity="Menu"
+        open_link="Actions"
         if request.user.is_authenticated:
             user_var=request.user.customurlslug
             compslg=request.user.usercompany
@@ -19,12 +20,14 @@ def allifmaalcommonappglobalVariables(request):
                 'glblslug':glblslug,
                 "sctr":sctr,
                 "main_sbscrbr_entity":main_sbscrbr_entity,
+                "open_link":open_link,
                 }
                 
         return {
             'user_var':user_var,
             'glblslug':glblslug,
             "main_sbscrbr_entity":main_sbscrbr_entity,
+            "open_link":open_link,
             }
     
 # create context process so that user sessions can be available on all pages
