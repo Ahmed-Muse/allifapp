@@ -161,11 +161,12 @@ def commonSectorDetails(request,pk,*allifargs,**allifkwargs):
 def commonEditSector(request,pk,*allifargs,**allifkwargs):
     try:
         title="Update Sector Details"
-        update=CommonSectorsModel.objects.get(id=pk)
+        allifqueryset=CommonSectorsModel.objects.all()
+        update_allifquery=CommonSectorsModel.objects.get(id=pk)
         user_var=request.user
-        form =CommonAddSectorForm(instance=update)
+        form =CommonAddSectorForm(instance=update_allifquery)
         if request.method == 'POST':
-            form =CommonAddSectorForm(request.POST, instance=update)
+            form =CommonAddSectorForm(request.POST, instance=update_allifquery)
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.owner =user_var
@@ -175,13 +176,14 @@ def commonEditSector(request,pk,*allifargs,**allifkwargs):
                 return redirect('allifmaalcommonapp:commonSectors',allifusr=usrslg,allifslug=user_var)
                 
             else:
-                form =CommonAddSectorForm(instance=update)
+                form =CommonAddSectorForm(instance=update_allifquery)
         else:
-            form =CommonAddSectorForm(instance=update)
+            form =CommonAddSectorForm(instance=update_allifquery)
         context = {
             'form':form,
-            "update":update,
+            "update_allifquery":update_allifquery,
             "title":title,
+            "allifqueryset":allifqueryset,
         }
         return render(request,'allifmaalcommonapp/sectors/sectors.html',context)
     
