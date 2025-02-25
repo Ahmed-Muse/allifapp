@@ -28,6 +28,7 @@
   --main-spacer-height:2px;
   --main-width:100%;
   --main-border-radius:3px;
+  --main-fixed-col-bg-clr:#f0f0f0;
   
       }
       
@@ -360,7 +361,7 @@ width: auto;
 left:0;
 width:auto;
 min-width:auto;
-background-color: var(--main-background-color);
+background-color: var(--main-fixed-col-bg-clr);
 
 
 }
