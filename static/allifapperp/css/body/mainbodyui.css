@@ -336,19 +336,31 @@ white-space: nowrap; /* Prevent text from wrapping */
   
   
    overflow: auto;
-   overflow-x: hidden;
-    /*overflow-y: auto;*/
+   overflow-x: scroll;
+    overflow-y: auto;
   
+}
+.allif-info-tables{
+  height: auto;
+  max-height: 80vh;
+  
+  
+   overflow: auto;
+   overflow-x: hidden;
+    overflow-y: auto;
+
 }
 .allif-fix-table-col {
 position:sticky;
 width: auto;
 
 }
+
 .allif-fix-table-col:first-child {
 left:0;
 width:auto;
 min-width:auto;
+background-color: var(--main-background-color);
 
 
 }
@@ -381,7 +393,7 @@ min-width:auto;
 td.allif-fix-table-col:hover {
   background-color: #FFF;
   box-shadow: 0em 0em 0.1em var(--main-green-color);
-  border-top: 1.4px  var(--main-green-color) solid;
+  border-top: 1.2px  var(--main-green-color) solid;
   
   }
 
