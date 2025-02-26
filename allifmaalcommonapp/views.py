@@ -195,13 +195,17 @@ def commonEditSector(request,pk,*allifargs,**allifkwargs):
 @allifmaal_admin  
 def commonWantToDeleteSector(request,pk,*allifargs,**allifkwargs):
     try:
-        allifquery=CommonSectorsModel.objects.filter(id=pk).first()
+        allifqueryset=CommonSectorsModel.objects.all()
+        myallifquery=CommonSectorsModel.objects.filter(id=pk).first()
+        form=CommonAddSectorForm()
         title="Are sure to delete?"
         context={
         "title":title,
-        "allifquery":allifquery,
+        "myallifquery":myallifquery,
+        "allifqueryset":allifqueryset,
+        "form":form,
         }
-        return render(request,'allifmaalcommonapp/sectors/sectr-delete-confirm.html',context)
+        return render(request,'allifmaalcommonapp/sectors/sectors.html',context)
 
     except Exception as ex:
         error_context={'error_message': ex,}

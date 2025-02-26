@@ -14,16 +14,8 @@
   <div class="container-fluid amel-content-header">
     <a class="amel-table-list-identifier">Sectors:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddDivision' user_var glblslug %}">Add Divison</a>
-    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
-    <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-  
-  
-    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
     <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
     <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies </a>
-  
   <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,18 +24,15 @@
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <div class="content-dropdown-menu">
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Employees</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
     </div>
     </ul>
   </div>
-  <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
+  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Company</a>
   
   </div>
-  
     </div><!--end....header column-->
-    
     </div><!--end....header row-->
-  
   </div><!--end....main headere-->
 
 <div class="allifmaincontainer">
@@ -64,29 +53,43 @@
           </tr>
           </thead>
           <tbody class="allif-table-body">
-          
-            {% for item in allifqueryset %} 
-        <tr>
-          <td class="allif-fix-table-col">
-            <a href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}" class="allif-table-links">
-           {{item.name}}
-           </a>
-          </td>
-          
-         
-          <td>
-          
-           {{item.notes}}
+              
+            {% if myallifquery %}
+            <tr>
+             
+              <td id="allif-delete-on-table-row"> Delete {{myallifquery.name}} ?</td>
+             
+              <td id="allif-delete-on-table-row">{{myallifquery.notes}}</td>
+              <td id="allif-delete-on-table-row">{{myallifquery.owner}}</td>
+  
+              
+              <td id="allif-delete-on-table-row">{{myallifquery.date|date:'d/m/Y'}}</td>
+              <td>
+                <div class="dropdown allifmaal-content-dropdown">
+                  <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{open_link}}
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <div class="content-dropdown-menu">
+                    <li><a class="dropdown-item" id="allif-table-drop-item-link" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Dont Delete</a></li>
+                    <li><a class="dropdown-item" id="allif-table-drop-item-link-delete" href="{% url 'allifmaalcommonapp:commonSectorDelete' myallifquery.id %}">Delete Item</a></li>
+                  </div>
+                  </ul>
+                </div>
+              </td>
+              <td> . . . </td>
+              <td></td>
+             
+            </tr>
+            {% endif %}
             
-          </td>
-          <td>
-            {{item.owner}}
-            
-           </td>
-          <td>
-           {{item.date|date:'d/m/Y'}}
-          </td>
-
+          
+          {% for item in allifqueryset %} 
+          <tr>
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
+          <td>{{item.notes}}</td>
+          <td>{{item.owner}}</td>
+          <td>{{item.date|date:'d/m/Y'}}</td>
           <td>
             <div class="dropdown allifmaal-content-dropdown">
               <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -94,8 +97,8 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <div class="content-dropdown-menu">
-                <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditSector' item.id user_var glblslug %}">Edit Item</a></li>
-                <li><a class="dropdown-item" href="">Edit Item</a></li>
+                <li><a class="dropdown-item" id="allif-table-drop-item-link" href="{% url 'allifmaalcommonapp:commonEditSector' item.id user_var glblslug %}">Edit Item</a></li>
+                <li><a class="dropdown-item" id="allif-table-drop-item-link-delete" href="{% url 'allifmaalcommonapp:commonWantToDeleteSector' item.id user_var glblslug %}">Delete Item</a></li>
                
               </div>
               </ul>
@@ -111,56 +114,31 @@
       </div>
      </div>
 
-
-  
   </div><!--end....table column-->
 
 </div><!--end....table row-->
 
 <div class="allif-form-container">
 <div class="table-content-description"> Add New Sector </div>
-
-
 <div class="allif-scroll-table">
   <div class="table-responsive allif-full-table">
   <table class="table table-layout">
-   
-      <tbody class="allif-table-body">
-      
-        
+    <tbody class="allif-table-body">
     <tr>
       <form method='POST' action=''>{% csrf_token %}
-      <td>
-       
-       {{form.name}}
-      
-      </td>
-      
-      <td>
-       
-        {{form.notes}}
-       
-       </td>
-       <td>
-        <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-       </td>
+      <td>{{form.name}}</td>
+      <td>{{form.notes}}</td>
+       <td><input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
       </form>
     </tr>
-    
-    
     </tbody>
   </table>
   </div>
  </div>
-
-
-    
   </div><!--end of row div --->
 
 </div>
 </div>
-  
-
   {% block scripts %}
  
   {% endblock %}

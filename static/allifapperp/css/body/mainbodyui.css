@@ -425,7 +425,12 @@ a.allif-table-links:hover {
   color: var(--links-on-hover-text-color);
 }
 
-
+#allif-table-drop-item-link{
+  color: var(--main-blue-color);
+}
+#allif-table-drop-item-link-delete{
+color: var(--main-red-color);
+}
 /*styling for the form page*/
 .allifmaincontainer .allif-form-container {
   background-color:var(--main-background-color);
