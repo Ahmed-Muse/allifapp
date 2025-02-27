@@ -15,11 +15,9 @@
     <a class="amel-table-list-identifier">Sectors:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies </a>
-  <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
-  <a class="myButton" type="button">Load </a>
+    <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
+    <a class="allif-load-content-button" type="button">Load Sectors</a>
 
-  
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Modules
@@ -139,16 +137,16 @@
   </div>
  </div>
   </div><!--end of row div --->
-
-<div class="target"> Load Content</div>
-
+  
+<div class="allif-loading-new-content">
+<div class="allif-load-content-here">Load Sectors</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.myButton');
+        const buttons = document.querySelectorAll('.allif-load-content-button');
 
         buttons.forEach(function(button) {
             button.addEventListener('click', function() {
-                const targetDiv = document.querySelector('.target'); //select the first target div.
+                const targetDiv = document.querySelector('.allif-load-content-here'); //select the first target div.
 
                 if (targetDiv.classList.contains('hidden')) {
                     fetch("{% url 'allifmaalcommonapp:commonLoadContentTest' %}")
@@ -170,9 +168,7 @@
     });
 
 </script>
-    
-
-
+</div>
 
 </div>
 </div>
