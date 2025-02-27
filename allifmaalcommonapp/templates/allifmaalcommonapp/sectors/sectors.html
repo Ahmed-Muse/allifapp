@@ -17,6 +17,9 @@
     <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
     <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies </a>
   <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
+  <a class="myButton" type="button">Load </a>
+
+  
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Modules
@@ -136,6 +139,40 @@
   </div>
  </div>
   </div><!--end of row div --->
+
+<div class="target"> Load Content</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.myButton');
+
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const targetDiv = document.querySelector('.target'); //select the first target div.
+
+                if (targetDiv.classList.contains('hidden')) {
+                    fetch("{% url 'allifmaalcommonapp:commonLoadContentTest' %}")
+                        .then(response => response.text())
+                        .then(html => {
+                            targetDiv.innerHTML = html;
+                            targetDiv.classList.remove('hidden');
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            targetDiv.innerHTML = '<p>Error loading content.</p>';
+                        });
+                } else {
+                    targetDiv.classList.add('hidden');
+                    targetDiv.innerHTML = "";
+                }
+            });
+        });
+    });
+
+</script>
+    
+
+
 
 </div>
 </div>

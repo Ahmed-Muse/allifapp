@@ -226,7 +226,23 @@ def commonSectorDelete(request,pk):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-
+################################### Sectors ############################### 
+@login_required(login_url='allifmaalusersapp:userLoginPage')
+@allifmaal_admin
+@logged_in_user_can_view
+def commonLoadContentTest(request):
+    try:
+        title="Main Sectors"
+        
+        context = {
+            "title":title,
+          
+        }
+        return render(request,'allifmaalcommonapp/sectors/sectors-list.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 ################################### Sectors ############################### 
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @allifmaal_admin

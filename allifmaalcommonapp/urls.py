@@ -15,6 +15,9 @@ path('Want/To/Delete/Sector/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/
 path('Delete/Sector/<str:pk>/Permanently/', views.commonSectorDelete, name="commonSectorDelete"),
 path('Sector/Information/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonSectorDetails, name="commonSectorDetails"),
 
+############ testing only ...used...dont remove....#############3
+path('load/new/content/in/page/', views.commonLoadContentTest, name="commonLoadContentTest"),
+
 ##################################3 DOCUMENTS FORMAT ############################
 path('Allifmaal/ERP/System/Common/Modules/App/Documents/Format/<str:allifusr>/<str:allifslug>/', views.commonDocsFormat, name="commonDocsFormat"),
 path('Allifmaal/ERP/System/Common/Modules/App/Edit/Document/Format/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditDocsFormat, name="commonEditDocsFormat"),
