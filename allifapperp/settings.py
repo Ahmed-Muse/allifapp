@@ -36,6 +36,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# Add a setting for maintenance mode
+
 #if DEBUG:
     #STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 #else:
@@ -97,6 +99,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'allifapperp.urls'

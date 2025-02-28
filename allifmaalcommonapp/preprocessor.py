@@ -6,7 +6,10 @@ def allifmaalcommonappglobalVariables(request):
         glblslug= "allifmaalfsjdfljengineeringjdjrwosdflimitedjfljj"
         main_sbscrbr_entity="Menu"
         open_link="Actions"
-        if request.user.is_authenticated:
+        user = getattr(request, 'user', None)  # Get 'user' if it exists, otherwise None
+        is_authenticated = user is not None and user.is_authenticated
+        
+        if is_authenticated:
             user_var=request.user.customurlslug
             compslg=request.user.usercompany
             main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
