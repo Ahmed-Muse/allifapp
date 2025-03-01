@@ -129,6 +129,8 @@ class CommonSectorsModel(models.Model):# this is the company  hospitality logist
    
     def __str__(self):
         return self.name
+   
+
 class CommonDocsFormatModel(models.Model):# this is the company  hospitality logistics
     name=models.CharField(max_length=10,blank=False,null=False,unique=True,default="pdf")
     notes=models.CharField(max_length=50,blank=True,null=True,default="Write Document Type")

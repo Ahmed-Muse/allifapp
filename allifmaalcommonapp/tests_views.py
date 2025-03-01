@@ -10,6 +10,83 @@ from django.shortcuts import render
 from unittest.mock import patch
 from django.contrib.sessions.middleware import SessionMiddleware
 
+
+
+
+
+from django.test import TestCase, RequestFactory, Client
+from django.urls import reverse
+
+from django.shortcuts import render, redirect
+from unittest.mock import patch
+
+from .models import CommonSectorsModel  # Replace . with your actual import
+from .forms import CommonAddSectorForm  # Replace . with your actual import
+from .views import commonSectors  # Replace . with your actual import
+
+class CommonSectorsViewTest(TestCase):
+
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.client = Client()
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.user.customurlslug = "testslug"
+        self.user.save()
+
+    def test_common_sectors_get(self):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('allifmaalcommonapp:commonSectors', kwargs={'allifusr': 'testslug'}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'allifmaalcommonapp/sectors/sectors.html')
+        self.assertIsInstance(response.context['form'], CommonAddSectorForm)
+        self.assertEqual(response.context['title'], 'Main Sectors')
+
+    def test_common_sectors_post_valid(self):
+        self.client.force_login(self.user)
+        form_data = {'name': 'Logistics', 'notes': 'Test Notes'}
+        response = self.client.post(reverse('allifmaalcommonapp:commonSectors', kwargs={'allifusr': 'testslug'}), data=form_data)
+        self.assertEqual(response.status_code, 302)  # Redirect
+        self.assertEqual(CommonSectorsModel.objects.count(), 1)
+        self.assertEqual(CommonSectorsModel.objects.first().name, 'Logistics')
+
+    def test_common_sectors_post_invalid(self):
+        self.client.force_login(self.user)
+        form_data = {'name': '', 'notes': 'Test Notes'}  # Invalid (blank name)
+        response = self.client.post(reverse('allifmaalcommonapp:commonSectors', kwargs={'allifusr': 'testslug'}), data=form_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'allifmaalcommonapp/sectors/sectors.html')
+        self.assertFalse(response.context['form'].is_valid())
+        self.assertEqual(CommonSectorsModel.objects.count(), 0)
+
+    def test_common_sectors_exception(self):
+        self.client.force_login(self.user)
+        with patch('allifmaalcommonapp.views.render') as mock_render:
+            mock_render.side_effect = Exception('Test Exception')
+            response = self.client.get(reverse('allifmaalcommonapp:commonSectors', kwargs={'allifusr': 'testslug'}))
+            self.assertTemplateUsed(response, 'allifmaalcommonapp/error/error.html')
+
+    def test_common_sectors_queryset(self):
+        self.client.force_login(self.user)
+        CommonSectorsModel.objects.create(name="TestSector", owner=self.user)
+        response = self.client.get(reverse('allifmaalcommonapp:commonSectors', kwargs={'allifusr': 'testslug'}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['allifqueryset'].count(), 1)
+        self.assertEqual(response.context['allifqueryset'].first().name, "TestSector")
+
+    def test_common_sectors_user_context(self):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('allifmaalcommonapp:commonSectors', kwargs={'allifusr': 'testslug'}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['form'].instance.owner, None) #Before post, owner is none.
+        self.assertEqual(response.context['title'], "Main Sectors")
+
+
+
+
+
+
+
+
 class CommonSectorsViewTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()

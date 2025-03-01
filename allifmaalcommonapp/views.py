@@ -111,6 +111,8 @@ def commonHome(request,*allifargs,**allifkwargs):
 def commonSectors(request,allifusr,*allifargs,**allifkwargs):
     try:
         title="Main Sectors"
+        user_var=request.user.usercompany
+        usrslg=request.user.customurlslug
         user_var=request.user
         allifqueryset=CommonSectorsModel.objects.all()
         form=CommonAddSectorForm()
@@ -120,6 +122,7 @@ def commonSectors(request,allifusr,*allifargs,**allifkwargs):
                 obj=form.save(commit=False)
                 obj.owner =user_var
                 obj.save()
+                return redirect('allifmaalcommonapp:commonSectors',allifusr=usrslg,allifslug=user_var)
             else:
                 form=CommonAddSectorForm()
         else:
