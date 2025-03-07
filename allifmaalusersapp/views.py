@@ -11,7 +11,6 @@ def newUserRegistration(request):
         if request.user.is_authenticated:
             return redirect("allifmaalcommonapp:CommonDecisionPoint")
         else:
-
             form=CreateNewCustomUserForm()
             if request.method=='POST':
                 form=CreateNewCustomUserForm(request.POST)
@@ -38,7 +37,7 @@ def newUserRegistration(request):
         context={"title":title,"form":form,}
         return render(request,"allifmaalusersapp/users/user_registeration.html",context)
     except Exception as ex:
-        error_context={'error_message': ex,}
+        error_context={'error_message': ex,"title": title,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 
 def userLoginPage(request):
@@ -53,8 +52,8 @@ def userLoginPage(request):
                 password=request.POST.get('password')
                 user=authenticate(request,username=username,password=password)
                 if user !=None:
-                    if user.is_superuser==True:
-                        user_var="username"
+                    if user.is_superuser==True:# this is very important..only allifmaal team allowed to be superusers
+                        user_var="username"#arbitary parameters values
                         usrslg="allifmaal2116e7b104a5d8e7kkjfsjh6rewr#fdskjengltd"
                         if user is not None:#if there is an authenticated user
                             login(request, user)

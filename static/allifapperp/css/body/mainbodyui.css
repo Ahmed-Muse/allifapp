@@ -639,3 +639,15 @@ a.body-delete-link-confirm{
     color: var(--main-black-color);
     
   }
+
+  .form-header{
+    text-align: center;
+    font-size: 1em;
+  }
+  .logoutlink{
+    text-align: center;
+    margin: 0.5em;
+  }
+  .entity-creation-body{
+    background-color: var(--main-background-color);
+  }
