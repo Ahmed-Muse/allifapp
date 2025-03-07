@@ -1647,7 +1647,6 @@ def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is 
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 @login_required(login_url='allifmaalusersapp:userLoginPage')
-
 def commonUserDetails(request,pk,*allifargs,**allifkwargs):
     try:
         title="User Details"
@@ -1676,6 +1675,39 @@ def commonUserDetails(request,pk,*allifargs,**allifkwargs):
 
         }
         return render(request,'allifmaalcommonapp/hrm/users/user-details.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@login_required(login_url='allifmaalusersapp:userLoginPage')
+def commonLoggedInUserDetails(request,*allifargs,**allifkwargs):
+    try:
+        title="User Details"
+        allifquery=request.user
+       
+        allifqueryset=CommonEmployeesModel.objects.filter(username=allifquery).first()
+        candoall=allifquery.can_do_all
+        canadd=allifquery.can_add
+        canview=allifquery.can_view
+        canedit=allifquery.can_edit
+        candelete=allifquery.can_delete
+        usr_can_access_all=allifquery.can_access_all
+        usr_can_access_related=allifquery.can_access_related
+        
+        context={
+            "allifquery":allifquery,
+            "allifqueryset":allifqueryset,
+            "title":title,
+            "candoall":candoall,
+            "canadd":canadd,
+            "canview":canview,
+            "canedit":canedit,
+            "candelete":candelete,
+            "usr_can_access_all":usr_can_access_all,
+            "usr_can_access_related":usr_can_access_related,
+
+        }
+        return render(request,'allifmaalcommonapp/hrm/users/logged-in-user-details.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)

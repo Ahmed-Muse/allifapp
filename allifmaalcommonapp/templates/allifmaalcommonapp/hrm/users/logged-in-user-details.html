@@ -1,0 +1,462 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+
+<!--start....main headere-->
+<div class="card-header">
+
+  <div class="row mt-12" ><!--start....header row-->
+  
+  <div class="col-md-12"><!--start....header column-->
+  
+  <div class="container-fluid amel-content-header">
+    
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonSalaries' user_var glblslug %}">Payroll </a>
+   
+    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddUser' user_var glblslug %}">New Staff</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}">New Profile</a>
+  
+     
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Actions
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Password</a></li> 
+   
+    </div>
+    </ul>
+  </div>
+ 
+  <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
+  
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Accounts
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">GL Accounts</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonChartofAccounts' user_var glblslug %}">Chart of A/Cs</a></li>
+      
+      </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Banks
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a></li>
+      <li><a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
+        </li>
+      <li><a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a></li>
+      </div>
+    </ul>
+  </div>
+  <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+    
+
+<div class="allifmaincontainer">
+  <div class="row mt-12"> <!--start....table row-->
+    
+  <div class="col-md-12">
+  <div class="table-content-description">{{allifquery.first_name}} Details </div>
+  </div></div>
+
+  <div class="row mt-12"> <!--start....table row-->
+  
+    <div class="allif-details-container">
+      <div class="row"><!--start of row div --->
+      
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="allif-details-card ">
+            <!--start of the table here-->
+          <table class="table allif-details-table table-layout">
+            <tbody>
+          <tr>
+            <td>First Name</td>
+            <td>{{allifquery.first_name}}</td>
+        
+            </tr>
+        
+          <tr>
+            <td>Last Name</td>
+            <td>{{allifquery.last_name}}</td>
+        
+            </tr>
+          <tr>
+            <td>Category</td>
+            <td>{{allifquery.user_category}}</td>
+        
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{allifquery.email}}</td>
+                
+              </tr>
+          </tbody>
+          </table>
+        
+          </div>
+              </div>
+      
+           
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+       
+        <tr>
+          <td>Active</td>
+          <td>{{allifquery.is_active}}</td>
+          
+        </tr>
+        <tr>
+          <td>Authenticated</td>
+          <td>{{allifquery.is_authenticated}}</td>
+      
+          </tr>
+          <tr>
+            <td>Staff</td>
+            <td>{{allifquery.is_staff}}</td>
+      
+            </tr>
+        <tr>
+          <td>Superuser</td>
+          <td>{{allifquery.is_superuser}}</td>
+    
+        </tr>
+        </tbody>
+        </table>
+      
+        </div>
+            </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+    <tr>
+    <td>Last Login</td>
+    <td>{{allifquery.last_login|date:'d/m/Y'}}</td>
+
+    </tr>
+               
+        <tr>
+          <td>Joined On</td>
+          <td>{{allifquery.date_joined|date:'d/m/Y'}}</td>
+        </tr>
+      
+        </tbody>
+        </table>
+      
+      </div>
+    </div>
+      
+      </div><!--end of row div --->
+        
+          </div>
+
+</div><!--end....table row-->
+
+<!--end of table-->
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+    <div class="table-content-description"> {{allifquery.first_name}} Authorized To: </div>
+  <div class="allif-scroll-table">
+    <table class="table table-layout">
+    <thead>
+      <tr class="allif-table-header-row">
+        <td>Do All</td>
+        <td>Add</td>
+        <td>View</td>
+        <td>Edit</td>
+        <td>Delete</td>
+        <td>Access All</td>
+        <td>Access Related</td>
+       
+        </tr>
+    </thead>
+    <tbody class="allif-table-body">
+    
+    <tr>
+    <td>
+      
+      <div class="form-check">
+        
+        {% if candoall == True %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+        {{allifquery.can_do_all}}
+        {% else %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        {{allifquery.can_do_all}}
+        {% endif %}
+        
+      </div>
+     
+    
+    </td>
+    <td>
+      
+      <div class="form-check">
+        
+        {% if canadd == True %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+        {{allifquery.can_add}}
+        {% else %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        {{allifquery.can_add}}
+        {% endif %}
+        
+      </div>
+     
+    </td>
+    <td>
+     
+      <div class="form-check">
+        
+        {% if canview == True %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+        {{allifquery.can_view}}
+        {% else %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        {{allifquery.can_view}}
+        {% endif %}
+        
+      </div>
+      
+    
+    </td>
+    <td>
+      
+      <div class="form-check">
+        
+        {% if canedit == True %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+        {{allifquery.can_edit}}
+        {% else %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        {{allifquery.can_edit}}
+        {% endif %}
+        
+      </div>
+    
+    
+    </td>
+    <td>
+     
+      <div class="form-check">
+        
+        {% if candelete == True %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+        {{allifquery.can_delete}}
+        {% else %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        {{allifquery.can_delete}}
+        {% endif %}
+        
+      </div>
+    
+    
+    </td>
+    <td>
+      
+      <div class="form-check">
+        
+        {% if usr_can_access_all == True %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+        {{allifquery.can_access_all}}
+        {% else %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        {{allifquery.can_access_all}}
+        {% endif %}
+        
+      </div>
+     
+    
+    </td>
+    <td>
+     
+      <div class="form-check">
+        
+        {% if usr_can_access_related == True %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+        {{allifquery.can_access_related}}
+        {% else %}
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        {{allifquery.can_access_related}}
+        {% endif %}
+        
+      </div>
+    
+      
+    </td>
+    </tr>
+     
+    </tbody>
+    </table>
+</div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="table-content-description"> {{allifqueryset.firstName}} Profile Details</div>
+    
+    <div class="allif-details-container">
+      <div class="row"><!--start of row div --->
+      
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="allif-details-card ">
+            <!--start of the table here-->
+          <table class="table table-layout allif-details-table">
+            <tbody>
+          <tr>
+            <td>First Name</td>
+            <td>{{allifqueryset.firstName}}</td>
+            
+          </tr>
+          <tr>
+            <td>Middle Name</td>
+            <td> {{allifqueryset.middleName}}</td>
+        
+            </tr>
+            <tr>
+              <td>Last Name</td>
+              <td> {{allifqueryset.lastName}}</td>
+          
+              </tr>
+              <tr>
+                <td>Gender</td>
+                <td>{{allifqueryset.gender}}</td>
+            
+                </tr>
+          <tr>
+            <td>Title</td>
+            <td>{{allifqueryset.title}}</td>
+            
+          </tr>
+          </tbody>
+          </table>
+        
+          </div>
+              </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+        
+        <tr>
+          <td>Education</td>
+          <td>{{allifqueryset.education}}</td>
+          
+        </tr>
+        <tr>
+          <td>Department</td>
+          <td>{{allifqueryset.department}}</td>
+      
+          </tr>
+          <tr>
+            <td>Username</td>
+            <td>{{allifqueryset.username.email}}</td>
+      
+            </tr>
+        <tr>
+          <td>Rights Category</td>
+          <td>{{allifqueryset.sysperms}}</td>
+    
+        </tr>
+        <tr>
+          <td>Staff No.</td>
+          <td>{{allifqueryset.staffNo}}</td>
+    
+        </tr>
+        </tbody>
+        </table>
+      
+        </div>
+            </div>
+      
+      
+       <!--start of column two-->
+       <div class="col-md-4">
+        <div class="allif-details-card ">
+          <!--start of the table here-->
+        <table class="table table-layout allif-details-table">
+          <tbody>
+            <tr>
+              <td>Comments</td>
+              <td>{{allifqueryset.comment}}</td>
+        
+              </tr>
+              <tr>
+                <td>Salary</td>
+                <td>{{allifqueryset.salary|floatformat:2|intcomma}}</td>
+              </tr>
+              <tr>
+                <td>Total Paid Salary</td>
+                <td>{{allifqueryset.total_salary_paid|floatformat:2|intcomma}}</td>
+              </tr>
+              <tr>
+                <td>Payable Salary</td>
+                <td>{{allifqueryset.salary_payable|floatformat:2|intcomma}}</td>
+              </tr>
+              <tr>
+                <td>Salary Balance</td>
+                <td>{{allifqueryset.salary_balance|floatformat:2|intcomma}}</td>
+              </tr>
+        
+        </tbody>
+        </table>
+      
+      </div>
+    </div>
+      
+      </div><!--end of row div --->
+        
+          </div>
+
+</div><!--end....table row-->
+
+<!--end of table-->
+
+
+</div><!--end of main container of the page....-->
+
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   
+

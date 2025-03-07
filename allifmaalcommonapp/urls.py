@@ -77,6 +77,8 @@ path('Want/To/Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views
 ############################ HRM ##################################3
 path('HRM/<str:allifusr>/<str:allifslug>/', views.commonhrm, name="commonhrm"),
 path('Add/New/Staff/User/<str:allifusr>/<str:allifslug>/', views.commonAddUser, name="commonAddUser"),
+path('Logged/In/User/Details/<str:allifusr>/<str:allifslug>/Show/Info/', views.commonLoggedInUserDetails, name="commonLoggedInUserDetails"),
+
 path('View/User/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserDetails, name="commonUserDetails"),
 path('Viewing/User/Instant/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Row/', views.commonShowClickedRowUserDetails, name="commonShowClickedRowUserDetails"),
 path('Update/User/Details/<str:allifslug>/Edit/', views.commonEditUser, name="commonEditUser"),
