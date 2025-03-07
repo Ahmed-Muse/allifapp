@@ -38,7 +38,7 @@ def commonWebsite(request):
         return render(request,'allifmaalcommonapp/website/website.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+        return render(request,'allifmaalcommonapp/error/web-error.html',error_context)
 
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 def CommonDecisionPoint(request,*allifargs,**allifkwargs):
@@ -159,6 +159,7 @@ def commonSectorDetails(request,pk,*allifargs,**allifkwargs):
     
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 #@allowed_users(allowed_roles=['admin','staff'])
+
 @allifmaal_admin
 @logged_in_user_can_edit
 def commonEditSector(request,pk,*allifargs,**allifkwargs):

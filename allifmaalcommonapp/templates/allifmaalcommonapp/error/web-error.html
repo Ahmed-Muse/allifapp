@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<title>
+Error
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<link href="{% static 'allifapperp/css/body/mainbodyui.css' %}" rel="stylesheet">
+<!--any styles loaded from the static files are to be included here...-->
+
+</head>
+<body class="allifmaal-ui-body">
+  <div class="allifmaincontainer">
+      <div class="error_container">
+          <div class="error-header">
+          Error 
+              </div>
+          <div class="error-body">
+          <p>Sorry, an error occurred, please correct it and try again.</p>
+          <p>{{error_message}}</p>
+          <a href="{% url 'allifmaalcommonapp:commonWebsite' %}" class="loginlink">Load Again</a>
+          </div>
+          </div>
+  </div><!--end of main container of the page....-->
+</body>
+</html>
+  
+
