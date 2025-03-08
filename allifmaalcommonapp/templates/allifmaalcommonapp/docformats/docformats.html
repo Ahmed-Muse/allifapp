@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 {% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
 {% load humanize %}
 {% block title %}
@@ -149,6 +156,123 @@
 </div><!--end....table row-->
 <br>
 <!--end of table-->
+
+
+
+<div>
+  <style>
+    .confirm-delete-dropdown {
+      display: none;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+    }
+
+    .show {
+      display: block;
+    }
+
+    .confirm-delete {
+      background-color: #ffcccc; /* Red background for confirmation */
+    }
+  </style>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in allifqueryset %}
+      <tr data-id="{{ item.id }}">
+        <td>{{item.name}}</td>
+
+        <td>
+          <div class="dropdown">
+            <a href="#" onclick="showDropdown(event, this)">Actions</a>
+            <div class="dropdown-content">
+              <a href="#" onclick="confirmDelete(this)">Delete</a>
+              <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors</a>
+            </div>
+          </div>
+          <div class="dropdown confirm-delete-dropdown">
+            <a href="{% url 'allifmaalcommonapp:commonSectorDelete' item.id %}">Confirm</a>
+          </div>
+        </td>
+        <td>{{ item.notes }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <script>
+    let currentConfirmRow = null;
+
+    function showDropdown(event, element) {
+      event.preventDefault();
+
+      // Close other open dropdowns
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show') && openDropdown !== element.nextElementSibling) {
+          openDropdown.classList.remove('show');
+        }
+      }
+
+      // Toggle the current dropdown
+      element.nextElementSibling.classList.toggle("show");
+    }
+
+    function confirmDelete(element) {
+      const row = element.closest('tr'); // Get the closest <tr> element
+
+      if (currentConfirmRow && currentConfirmRow !== row) {
+        currentConfirmRow.classList.remove("confirm-delete");
+        currentConfirmRow.querySelector(".dropdown").style.display = "inline-block";
+        currentConfirmRow.querySelector(".confirm-delete-dropdown").style.display = "none";
+      }
+
+      row.classList.add("confirm-delete");
+      row.querySelector(".dropdown").style.display = "none";
+      row.querySelector(".confirm-delete-dropdown").style.display = "inline-block";
+
+      currentConfirmRow = row;
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdown-content a') && !event.target.matches('.dropdown a')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+</div>
+<hr>
+
+
+
+
+
+
 
 </div><!--end of main container of the page-->
   {% block scripts %}
