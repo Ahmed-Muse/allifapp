@@ -6,6 +6,36 @@
 {% block style %}
 {%endblock%}
 {% block body %}
+<style>
+  .confirm-delete-dropdown {
+    display: none;
+    
+  }
+#allif-confirm-delete{
+    color: red;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #9a9292;
+    z-index: 1;
+   
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 0.7em;
+   
+    
+    text-decoration: none;
+  }
+
+  .allif-show-content {
+    display: block;
+  }
+
+  
+</style>
 <div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
@@ -48,7 +78,9 @@
           <td>Sector Notes</td>
           <td>Created By</td>
           <td>Date</td>
-          <td>Actions</td>
+          <td>Actions1</td>
+          <td>Actions2</td>
+          <td>Actions3</td>
           <td> . . . </td>
           <td></td>
           </tr>
@@ -85,8 +117,12 @@
             {% endif %}
             
           
+
+
+
+
           {% for item in allifqueryset %} 
-          <tr>
+          <tr data-id="{{item.id}}">
           <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
           <td>{{item.notes}}</td>
           <td>{{item.owner}}</td>
@@ -105,6 +141,28 @@
               </ul>
             </div>
           </td>
+
+
+
+          <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" href="#" onclick="showDropdown(event, this)">Actions</a>
+            
+              <div class="dropdown-content content-dropdown-menu" >
+                
+                <a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors</a>
+                <a class="dropdown-item" href="#" onclick="confirmDelete(this.parentNode.parentNode.parentNode)">Delete Item</a>
+              </div>
+              
+            </div>
+            <div class="dropdown confirm-delete-dropdown">
+              <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">No <span> | </span></a>
+              <a href="{% url 'allifmaalcommonapp:commonSectorDelete' item.id %}" id="allif-confirm-delete">Delete</a>
+            </div>
+          </td>
+
+
+
         
          <td> . . . </td>
          <td></td>
@@ -139,107 +197,6 @@
   </div><!--end of row div --->
 
 
-
-
-<hr>
-<div>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-    .confirm-delete {
-      background-color: #ffcccc; /* Red background for confirmation */
-    }
-   
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-    .show {
-      display: block;
-    }
-  </style>
-  
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in allifqueryset %}
-      <tr data-id="{{ item.id }}">
-        <td>{{ item.name }}</td>
-       
-        <td>
-          <div class="dropdown">
-            <button onclick="showDropdown(this)">Delete</button>
-            <div class="dropdown-content">
-              <a href="#" onclick="confirmDelete(this.parentNode.parentNode.parentNode)">Confirm Delete</a>
-            </div>
-          </div>
-          <div class="dropdown confirm-delete-dropdown" style="display:none;">
-            <a href="{% url 'allifmaalcommonapp:commonSectorDelete' item.id %}">Actually Delete</a>
-            <div class="dropdown-content">
-              <a href="{% url 'allifmaalcommonapp:commonSectorDelete' item.id %}">Actually Delete</a>
-            </div>
-          </div>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  
-  <script>
-  function showDropdown(button) {
-    button.nextElementSibling.classList.toggle("show");
-  }
-  
-  function confirmDelete(row) {
-    row.classList.add("confirm-delete");
-    row.querySelector(".dropdown").style.display = "none";
-    row.querySelector(".confirm-delete-dropdown").style.display = "inline-block";
-  }
-  
-  window.onclick = function(event) {
-    if (!event.target.matches('button')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
-    }
-  }
-  </script>
-  </div>
-  <hr>
- 
 
 
 
@@ -284,6 +241,116 @@
 
 </script>
 </div>
+<hr>
+
+<div>
+  <style>
+    .confirm-delete-dropdown {
+      display: none;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+    }
+
+    .show {
+      display: block;
+    }
+
+    .confirm-delete {
+      background-color: #ffcccc; /* Red background for confirmation */
+    }
+  </style>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in allifqueryset %}
+      <tr data-id="{{ item.id }}">
+        <td>{{ item.name }}</td>
+
+        <td>
+          <div class="dropdown">
+            <a href="#" onclick="showDropdown(event, this)">Actions</a>
+            <div class="dropdown-content">
+              <a href="#" onclick="confirmDelete(this)">Delete</a>
+              <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors</a>
+            </div>
+          </div>
+          <div class="dropdown confirm-delete-dropdown">
+            <a href="{% url 'allifmaalcommonapp:commonSectorDelete' item.id %}">Confirm</a>
+          </div>
+        </td>
+        <td>{{ item.notes }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <script>
+    let currentConfirmRow = null;
+
+    function showDropdown(event, element) {
+      event.preventDefault();
+
+      // Close other open dropdowns
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show') && openDropdown !== element.nextElementSibling) {
+          openDropdown.classList.remove('show');
+        }
+      }
+
+      // Toggle the current dropdown
+      element.nextElementSibling.classList.toggle("show");
+    }
+
+    function confirmDelete(element) {
+      const row = element.closest('tr'); // Get the closest <tr> element
+
+      if (currentConfirmRow && currentConfirmRow !== row) {
+        currentConfirmRow.classList.remove("confirm-delete");
+        currentConfirmRow.querySelector(".dropdown").style.display = "inline-block";
+        currentConfirmRow.querySelector(".confirm-delete-dropdown").style.display = "none";
+      }
+
+      row.classList.add("confirm-delete");
+      row.querySelector(".dropdown").style.display = "none";
+      row.querySelector(".confirm-delete-dropdown").style.display = "inline-block";
+
+      currentConfirmRow = row;
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropdown-content a') && !event.target.matches('.dropdown a')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+</div>
+<hr>
 
 </div>
 </div>
