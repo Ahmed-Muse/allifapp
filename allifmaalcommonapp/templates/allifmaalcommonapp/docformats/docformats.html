@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 {% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
 {% load humanize %}
 {% block title %}
@@ -14,7 +9,35 @@
 {%endblock%}
 {% block body %}
 
+<style>
+  .confirm-delete-dropdown {
+    display: none;
+  }
 
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .confirm-delete {
+    background-color: #ffcccc; /* Red background for confirmation */
+  }
+  #allif-confirm-delete{
+    color: red;
+  }
+</style>
 <!--start....main headere-->
 <div class="card-header">
 
@@ -77,146 +100,91 @@
     
 
   <div class="col-md-12"> <!--start....table column-->
-    <div class="allif-scroll-table"> 
-      <div class="table-content-description">Document Formats</div>
+    <div class="allif-scroll-table">
+      <div class="table-responsive allif-full-table">
       <table class="table table-layout">
-      <thead>
-        <tr class="allif-table-header-row">
-          <td>Document Format</td>
+        <thead>
+          <tr class="allif-table-header-row">
+          <td class="allif-fix-table-col">Sector Name</td>
+          <td>Sector Notes</td>
           <td>Created By</td>
-          <td>Format Comments</td>
-          <td>Added Date</td>
-          <td>Edit Format</td>
-          <td>Delete Format</td>
+          <td>Date</td>
          
-        </tr>
-        </thead>
-        <tbody class="allif-table-body">
-        {% for item in allifqueryset %} 
-        <tr> 
-          <td>
+          <td>Actions</td>
           
-           {{item.name}}
-           
-          </td>
-          <td>
-            {{item.owner}}
-            
-           </td>
-          <td>
+          <td> . . . </td>
+          <td></td>
+          </tr>
+          </thead>
+          <tbody class="allif-table-body">
           
-           {{item.notes}}
-            
-          </td>
+          
+          {% for item in allifqueryset %} 
+          <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
+          <td>{{item.notes}}</td>
+          <td>{{item.owner}}</td>
+          <td>{{item.date|date:'d/m/Y'}}</td>
+         
+          <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
+              <div class="dropdown-content">
+                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete</a>
+                <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Sectors</a>
+              </div>
+            </div>
+            <div class="dropdown confirm-delete-dropdown">
+              <a href="{% url 'allifmaalcommonapp:commonDeleteDocsFormat' item.id %}" id="allif-confirm-delete">Confirm</a>
+            </div>
 
-          <td>
-           {{item.date|date:'d/m/Y'}}
+
+
+
           </td>
-          <td>
-            <a href="{% url 'allifmaalcommonapp:commonEditDocsFormat' item.id user_var glblslug %}">
-          Edit Format
-           </a>
-          </td>
-          <td>
-            <a href="{% url 'allifmaalcommonapp:commonDeleteDocsFormat' item.id %}" class="body-delete-link">
-           Delete Format
-           </a>
-          </td>
+         
+         <td> . . . </td>
+         <td></td>
         </tr>
         {% endfor %}
+        </tbody>
+      </table>
+      </div>
+     </div>
 
-      </tbody>
-    </table>
-  
-  </div>
-  
     
-    <div class="allif-form-container">
-      <div class="table-content-description"> Add New Format </div>
-    <form method='POST' action=''>{% csrf_token %}
-    <div class="row"><!--start of row div --->
-        
-        <div class="card shadow text-left p-3 allif-form-card" >
-        <label>Format Description</label> {{form.name}} 
-        <label>Notes</label>{{form.notes}}
-        
-        <br>
-        <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-        
-        </div>
-    
-        </div>
-    </form>
-        
-        </div><!--end of row div --->
 
   
   
   </div><!--end....table column-->
 </div><!--end....table row-->
+
+<div class="allif-form-container">
+  <div class="table-content-description"> Add New Document Format </div>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <tbody class="allif-table-body">
+      <tr>
+        <form method='POST' action=''>{% csrf_token %}
+        <td>{{form.name}}</td>
+        <td>{{form.notes}}</td>
+         <td><input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+        </form>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+   </div>
+    </div><!--end of row div --->
+
 <br>
 <!--end of table-->
 
 
 
 <div>
-  <style>
-    .confirm-delete-dropdown {
-      display: none;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      z-index: 1;
-    }
-
-    .dropdown-content a {
-      display: block;
-      padding: 12px 16px;
-      text-decoration: none;
-    }
-
-    .show {
-      display: block;
-    }
-
-    .confirm-delete {
-      background-color: #ffcccc; /* Red background for confirmation */
-    }
-  </style>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Actions</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in allifqueryset %}
-      <tr data-id="{{ item.id }}">
-        <td>{{item.name}}</td>
-
-        <td>
-          <div class="dropdown">
-            <a href="#" onclick="showDropdown(event, this)">Actions</a>
-            <div class="dropdown-content">
-              <a href="#" onclick="confirmDelete(this)">Delete</a>
-              <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors</a>
-            </div>
-          </div>
-          <div class="dropdown confirm-delete-dropdown">
-            <a href="{% url 'allifmaalcommonapp:commonSectorDelete' item.id %}">Confirm</a>
-          </div>
-        </td>
-        <td>{{ item.notes }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+ 
 
   <script>
     let currentConfirmRow = null;

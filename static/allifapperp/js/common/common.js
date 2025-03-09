@@ -28,45 +28,4 @@ $(function() {
     
 
     
-    ////start...... this code is for opening the dropdown in the tables for delete inside the table///////
-    let currentConfirmRow = null;
-    function showDropdown(event, element) { // Added event parameter.
-      event.preventDefault(); // Prevent default anchor behavior.
-
-      // Close other open dropdowns
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('allif-show-content') && openDropdown !== element.nextElementSibling) {
-          openDropdown.classList.remove('allif-show-content');
-        }
-      }
-      // Toggle the current dropdown
-      element.nextElementSibling.classList.toggle("allif-show-content");
-    }
-
-    function confirmDelete(row) {
-      if (currentConfirmRow && currentConfirmRow !== row) {
-        currentConfirmRow.classList.remove("confirm-delete");
-        currentConfirmRow.querySelector(".dropdown").style.display = "inline-block";
-        currentConfirmRow.querySelector(".confirm-delete-dropdown").style.display = "none";
-      }
-      row.classList.add("confirm-delete");
-      row.querySelector(".dropdown").style.display = "none";
-      row.querySelector(".confirm-delete-dropdown").style.display = "inline-block";
-      currentConfirmRow = row;
-    }
-
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropdown-content a') && !event.target.matches('.dropdown a')) { // Corrected the selector
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('allif-show-content')) {
-            openDropdown.classList.remove('allif-show-content');
-          }
-        }
-      }
-    }
-////end...... this code is for opening the dropdown in the tables for delete inside the table///////
-
+    
