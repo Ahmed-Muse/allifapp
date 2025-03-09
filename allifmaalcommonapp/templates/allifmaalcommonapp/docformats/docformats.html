@@ -183,62 +183,6 @@
 
 
 
-<div>
- 
-
-  <script>
-    let currentConfirmRow = null;
-
-    function showDropdown(event, element) {
-      event.preventDefault();
-
-      // Close other open dropdowns
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show') && openDropdown !== element.nextElementSibling) {
-          openDropdown.classList.remove('show');
-        }
-      }
-
-      // Toggle the current dropdown
-      element.nextElementSibling.classList.toggle("show");
-    }
-
-    function confirmDelete(element) {
-      const row = element.closest('tr'); // Get the closest <tr> element
-
-      if (currentConfirmRow && currentConfirmRow !== row) {
-        currentConfirmRow.classList.remove("confirm-delete");
-        currentConfirmRow.querySelector(".dropdown").style.display = "inline-block";
-        currentConfirmRow.querySelector(".confirm-delete-dropdown").style.display = "none";
-      }
-
-      row.classList.add("confirm-delete");
-      row.querySelector(".dropdown").style.display = "none";
-      row.querySelector(".confirm-delete-dropdown").style.display = "inline-block";
-
-      currentConfirmRow = row;
-    }
-
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropdown-content a') && !event.target.matches('.dropdown a')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
-    }
-  </script>
-</div>
-<hr>
-
-
-
-
 
 
 
