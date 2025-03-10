@@ -39,38 +39,58 @@ $(function() {
       var dropdowns = document.getElementsByClassName("dropdown-content");
       for (var i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show') && openDropdown !== element.nextElementSibling) {
-          openDropdown.classList.remove('show');
+        if (openDropdown.classList.contains('allif-show') && openDropdown !== element.nextElementSibling) {
+          openDropdown.classList.remove('allif-show');
         }
       }
 
       // Toggle the current dropdown
-      element.nextElementSibling.classList.toggle("show");
+      element.nextElementSibling.classList.toggle("allif-show");
     }
 
     function confirmDelete(element) {
-      const row = element.closest('tr'); // Get the closest <tr> element
-
-      if (currentConfirmRow && currentConfirmRow !== row) {
-        currentConfirmRow.classList.remove("confirm-delete");
-        currentConfirmRow.querySelector(".dropdown").style.display = "inline-block";
-        currentConfirmRow.querySelector(".confirm-delete-dropdown").style.display = "none";
+      const row = element.closest('tr');
+  
+      if (row) { // Check if row is not null
+          if (currentConfirmRow && currentConfirmRow !== row) {
+              if (currentConfirmRow.classList.contains("allif-confirm-delete-action")) {
+                  currentConfirmRow.classList.remove("allif-confirm-delete-action");
+              }
+              const prevDropdown = currentConfirmRow.querySelector(".dropdown");
+              const prevConfirm = currentConfirmRow.querySelector(".allif-confirm-action");
+  
+              if (prevDropdown) {
+                  prevDropdown.style.display = "inline-block";
+              }
+              if (prevConfirm) {
+                  prevConfirm.style.display = "none";
+              }
+          }
+  
+          row.classList.add("allif-confirm-delete-action");
+  
+          const rowDropDown = row.querySelector(".dropdown");
+          const rowConfirm = row.querySelector(".allif-confirm-action");
+          if (rowDropDown) {
+              rowDropDown.style.display = "none";
+          }
+          if (rowConfirm) {
+              rowConfirm.style.display = "inline-block";
+          }
+  
+          currentConfirmRow = row;
+      } else {
+          console.error("Could not find table row for confirmation.");
       }
-
-      row.classList.add("confirm-delete");
-      row.querySelector(".dropdown").style.display = "none";
-      row.querySelector(".confirm-delete-dropdown").style.display = "inline-block";
-
-      currentConfirmRow = row;
-    }
+  }
 
     window.onclick = function(event) {
       if (!event.target.matches('.dropdown-content a') && !event.target.matches('.dropdown a')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         for (var i = 0; i < dropdowns.length; i++) {
           var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
+          if (openDropdown.classList.contains('allif-show')) {
+            openDropdown.classList.remove('allif-show');
           }
         }
       }

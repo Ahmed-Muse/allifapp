@@ -651,3 +651,45 @@ a.body-delete-link-confirm{
   .entity-creation-body{
     background-color: var(--main-background-color);
   }
+
+
+/*start... styling of table inline dropdown with delete*/
+  .allif-confirm-action{
+    display: none;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    z-index: 1;
+    border: 0.1em solid var(--main-blue-color);
+    border-radius: 0.2em;
+    box-shadow: var(--box-shadow-specs);
+    overflow: auto;
+    
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 0.5em 0.5em;
+    text-decoration: none;
+    color: var(--main-black-color);
+    width: 100%;
+    box-shadow: var(--box-shadow-specs);
+    overflow: auto;
+ 
+  }
+
+  .allif-show {
+    display: block;
+  }
+
+  .confirm-delete {
+    background-color: #ffcccc; /* Red background for confirmation */
+  }
+  #allif-confirm-delete{
+    color: var(--main-red-color);
+  }
+
+  /*end... styling of table inline dropdown with delete*/

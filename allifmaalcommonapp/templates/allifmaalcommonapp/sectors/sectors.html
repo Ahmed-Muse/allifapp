@@ -6,36 +6,7 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-<style>
-  .confirm-delete-dropdown {
-    display: none;
-    
-  }
-#allif-confirm-delete{
-    color: red;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #9a9292;
-    z-index: 1;
-   
-  }
 
-  .dropdown-content a {
-    display: block;
-    padding: 0.7em;
-   
-    
-    text-decoration: none;
-  }
-
-  .allif-show-content {
-    display: block;
-  }
-
-  
-</style>
 <div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
@@ -137,23 +108,7 @@
             </div>
           </td>
 
-          <td>
-            <div class="dropdown allifmaal-content-dropdown">
-              <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" href="#" onclick="showDropdown(event, this)">Actions</a>
-            
-              <div class="dropdown-content content-dropdown-menu" >
-                
-                <a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors</a>
-                <a class="dropdown-item" href="#" onclick="confirmDelete(this.parentNode.parentNode.parentNode)">Delete Item</a>
-              </div>
-              
-            </div>
-            <div class="dropdown confirm-delete-dropdown">
-              <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">No <span> | </span></a>
-              <a href="{% url 'allifmaalcommonapp:commonSectorDelete' item.id %}" id="allif-confirm-delete">Delete</a>
-            </div>
-          </td>
-
+        
          <td> . . . </td>
          <td></td>
         </tr>
@@ -166,6 +121,72 @@
   </div><!--end....table column-->
 
 </div><!--end....table row-->
+
+
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Sector Name</td>
+        <td>Sector Notes</td>
+        <td>Created By</td>
+        <td>Date</td>
+        <td>Navigate</td>
+        <td>Actions</td>
+        
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in allifqueryset %} 
+        <tr data-id="{{item.id}}">
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
+        <td>{{item.notes}}</td>
+        <td>{{item.owner}}</td>
+        <td>{{item.date|date:'d/m/Y'}}</td>
+       
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+            <div class="dropdown-content">
+              <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Sectors</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonSectorDelete' item.id %}" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+
+
+
+        </td>
+
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+
+
+
 
 <div class="allif-form-container">
 <div class="table-content-description"> Add New Sector </div>
@@ -218,51 +239,7 @@
 
 </script>
 </div>
-<script>
-  ////start...... this code is for opening the dropdown in the tables for delete inside the table///////
-  let currentConfirmRow = null;
-    function showDropdown(event, element) { // Added event parameter.
-      event.preventDefault(); // Prevent default anchor behavior.
 
-      // Close other open dropdowns
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('allif-show-content') && openDropdown !== element.nextElementSibling) {
-          openDropdown.classList.remove('allif-show-content');
-        }
-      }
-      // Toggle the current dropdown
-      element.nextElementSibling.classList.toggle("allif-show-content");
-    }
-
-    function confirmDelete(row) {
-      if (currentConfirmRow && currentConfirmRow !== row) {
-        currentConfirmRow.classList.remove("confirm-delete");
-        currentConfirmRow.querySelector(".dropdown").style.display = "inline-block";
-        currentConfirmRow.querySelector(".confirm-delete-dropdown").style.display = "none";
-      }
-      row.classList.add("confirm-delete");
-      row.querySelector(".dropdown").style.display = "none";
-      row.querySelector(".confirm-delete-dropdown").style.display = "inline-block";
-      currentConfirmRow = row;
-    }
-
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropdown-content a') && !event.target.matches('.dropdown a')) { // Corrected the selector
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('allif-show-content')) {
-            openDropdown.classList.remove('allif-show-content');
-          }
-        }
-      }
-    }
-////end...... this code is for opening the dropdown in the tables for delete inside the table///////
-
-
-</script>
 
 
 </div>
