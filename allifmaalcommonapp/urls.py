@@ -422,6 +422,8 @@ path('UI11/Home/<str:allifusr>/<str:allifslug>/', views.ui11, name="ui11"),
 path('links/lists', views.link_list, name='link_list'),
 path('add/new/link', views.add_link, name='add_link'),
 
+path('add/dynamic_form_view/', views.dynamic_form_view, name='dynamic_form_view'),
+
 
 
 

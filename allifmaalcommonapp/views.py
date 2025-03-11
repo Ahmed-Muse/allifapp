@@ -10419,3 +10419,36 @@ def generate_new_link(link):
     url = reverse(link.url_name, kwargs=link.url_params)
     return f'<a href="{url}">{link.name}</a>'
 
+
+def dynamic_form_view(request):
+    if request.method == 'POST':
+        names = request.POST.getlist('name[]')
+        notes = request.POST.getlist('notes[]')
+
+        forms = []
+        for i in range(len(names)):
+            data = {
+                'name': names[i],
+                'notes': notes[i],
+            }
+            form = CommonAddSectorForm(data)
+            forms.append(form)
+
+        valid = True
+        for form in forms:
+            if not form.is_valid():
+                valid = False
+                break
+
+        if valid:
+            for form in forms:
+                sector_name = form.cleaned_data['name']
+                sector_notes = form.cleaned_data['notes']
+                # Create and save sector objects
+                sector = CommonSectorsModel(name=sector_name, notes=sector_notes)
+                sector.save()
+            return HttpResponse("Sectors added successfully!")
+        else:
+            return HttpResponse("Form has errors.")
+
+    return render(request, 'allifmaalcommonapp/dynamic_form.html')
