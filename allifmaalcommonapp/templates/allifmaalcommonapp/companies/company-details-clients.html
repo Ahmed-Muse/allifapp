@@ -7,7 +7,7 @@
 {%endblock%}
 {% block body %}
 
-<div class="container-fluid">
+<div class="allifmaal-main-container">
 <div class="allifmaincontainer">
   
 <!--start....main headere-->
@@ -76,255 +76,249 @@
 <!--start of main body-->
 
 
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="table-details-content-description">{{allifquery}} </div>
-    <div class="allif-details-container">
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">{{allifquery}} Details</div>
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
       <div class="row"><!--start of row div --->
-      
-    <!--start of column two-->
-    <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-        <!--start of the table here-->
-      <table class="table allif-details-table table-layout">
-        <tbody>
-        <tr>
-          <td>Company</td>
-          <td>{{allifquery.company}}</td>
-      
-          </tr>
-        <tr>
-        <td>Email</td>
-        <td>{{allifquery.email}}</td>
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+      <tr>
+        <td class="allif-fix-table-col">Company</td>
+        <td>{{allifquery.company}}</td>
     
         </tr>
-        
+        <tr>
+          <td class="allif-fix-table-col">Email</td>
+          <td>{{allifquery.email}}</td>
+      
+          </tr>
           <tr>
-            <td>Phone 1</td>
+            <td class="allif-fix-table-col">Phone 1</td>
             <td>{{allifquery.phone1}}</td>
         
             </tr>
-        <tr>
-          <td>Phone 2</td>
-          <td>{{allifquery.phone2}}</td>
-      
-          </tr>
+            <tr>
+              <td class="allif-fix-table-col">Phone 2</td>
+              <td>{{allifquery.phone2}}</td>
+          
+              </tr>
+              <tr>
+                <td class="allif-fix-table-col">City</td>
+                <td>{{allifquery.city}}</td>
+            
+                </tr>
+                <tr>
+                  <td class="allif-fix-table-col">Country</td>
+                  <td>{{allifquery.country}}</td>
+              
+                  </tr>
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Owner</td>
+            <td>{{allifquery.owner}}</td>
+        
+            </tr>
       <tr>
-        <td>City</td>
-        <td>{{allifquery.city}}</td>
+        <td class="allif-fix-table-col">P.O.BOX</td>
+        <td>{{allifquery.pobox}}</td>
     
         </tr>
         <tr>
-          <td>Country</td>
-          <td>{{allifquery.country}}</td>
-      
-          </tr>
-   
-          </tbody>
-          </table>
-        
-          </div>
-              </div>
-      
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card tablere table-responsive">
-          <!--start of the table here-->
-        <table class="table table-layout allif-details-table">
-          <tbody>
-     
-        <tr>
-          <td>Created By</td>
-          <td>{{allifquery.owner}}</td>
-      
-          </tr>
-       
-      <tr>
-          <td>P.O.Box</td>
-          <td>{{allifquery.pobox}}</td>
-      
-          </tr>
-        <tr>
-          <td>Website</td>
+          <td class="allif-fix-table-col">Website</td>
           <td>{{allifquery.website}}</td>
       
           </tr>
         <tr>
-          <td>Address</td>
+          <td class="allif-fix-table-col">Address</td>
           <td>{{allifquery.address}}</td>
-        
-          </tr>
-    <tr>
-    <td>Sector</td>
-    <td>{{allifquery.sector}}</td>
-
-    </tr>
-    <tr>
-      <td>Date</td>
-      <td>{{allifquery.date|date:'d/m/Y'}}</td>
-  
-      </tr>
-      <tr>
-        <td>Last Update</td>
-        <td>{{allifquery.updatedon|date:'d/m/Y'}}</td>
-    
-        </tr>
       
-
-        </tbody>
-        </table>
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Sector</td>
+            <td>{{allifquery.sector}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Date</td>
+              <td>{{allifquery.date|date:'d/m/Y'}}</td>
+          
+              </tr>
+              <tr>
+                <td class="allif-fix-table-col">Last Update</td>
+                <td>{{allifquery.updatedon|date:'d/m/Y'}}</td>
+            
+                </tr>
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+        <tr>
+          <td class="allif-fix-table-col">UID</td>
+          <td>{{allifquery.companyuid}}</td>
+      
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Slug</td>
+            <td>{{allifquery.companyslug}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Logo</td>
+              <td>
+              {% if allifquery.logo %}
+              <a href="{{ allifquery.logo.url }}" class="btn btn-secondary allifanchorimge" target="_blank" >
+               <img src="{{allifquery.logo.url}}"  width="200" ></a>
+              {% else %}
+              <span class="text-muted">No Logo</span>
+              {% endif %}
+        </td>
+            </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
       
         </div>
-            </div>
-      
-      
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card table-responsive">
-          <!--start of the table here-->
-        <table class="table table-layout ">
-          <tbody>
-    
-    <tr>
-      <td>UID</td>
-      <td>{{allifquery.companyuid}}</td>
-  
-      </tr>
-      <tr>
-        <td>Slug</td>
-        <td>{{allifquery.companyslug}}</td>
-    
-  </tr> 
-    <tr>
-      <td>Logo</td>
-      <td>
-      {% if allifquery.logo %}
-      <a href="{{ allifquery.logo.url }}" class="btn btn-secondary allifanchorimge" target="_blank" >
-       <img src="{{allifquery.logo.url}}"  width="200" ></a>
-      {% else %}
-      <span class="text-muted">No Logo</span>
-      {% endif %}
-</td>
-    </tr>
-
-     
-        </tbody>
-        </table>
-      
-      </div>
-    </div>
-      
-      </div><!--end of row div --->
-        
-          </div>
 
 </div><!--end....table row-->
-
-<!--end of table-->
-
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="allif-details-container">
-      <div class="row"><!--start of row div --->
-      
-        <!--start of column two-->
-        <div class="col-md-12">
-          <div class="allif-details-card table-responsive">
-            <!--start of the table here-->
-            <table class="table table-layout allifmaal-full-table">
-              <thead>
-                <tr class="allif-table-header-row" >
-                  <td>Company Name</td>
-                  <td>Compnay Sector</td>
-                  <td>Company Owner</td>
-                  <td>Company Email Address</td>
-                 
-                </tr>
-                </thead>
-                <tbody class="allif-table-body">
-                  
-              
-                <tr>
-                  <td>
-                   {{allifquery.company}}
-                  
-                  </td>
-                  <td>
-                    {{allifquery.sector}}
-                  </td>
-                  <td>{{allifquery.owner}}</td>
-                  
-                  <td>{{allifquery.email}}</td>
-               
-                  </td>
-              
-                </tr>
-              
-              
-              </tbody>
-            </table>
-      
-      </div><!--end of row div --->
-        
-          </div>
-
-</div><!--end....table row-->
-
+</div>
 <!--end of table-->
 
 </div><!--end of main container of the page....-->
-</div>
+
+
+
+<!--end of table-->
+
+<!--end of table-->
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td>Company</td>
+        <td>Address</td>
+        <td>Phone</td>
+        <td>Email</td>
+       
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+       
+        <tr>
+        <td>{{allifquery.company}}</td>
+        <td>{{allifquery.address}}</td>
+        <td>{{allifquery.phone1}}</td>
+        <td>{{allifquery.email}}</td>
+      </tr>
+      
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+
 
 <div class="row mt-12"> <!--start....table row-->
   <div class="col-md-12"> <!--start....table column-->
     <div class="table-content-description"> <a href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}" class="allif-table-links"> Scopes</a> </div>
-  <div class="allif-scroll-table table-responsive"> 
-   
-    <table class="table table-layout allifmaal-full-table">
-    <thead>
-      <tr class="allif-table-header-row">
-        <td>Company Name</td>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Sector Name</td>
         <td>Scope</td>
         <td>Owner</td>
         <td>Edit Scope</td>
         <td>Delete Scope</td>
-       
-      </tr>
-      </thead>
-      <tbody class="allif-table-body">
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
         
-      {% for item in scopes  %}
-      <tr>
-        <td>
-          
-         {{item.company}}
-        
-        </td>
+        {% for item in scopes %} 
+        <tr data-id="{{item.id}}">
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
+        <td>{{item.notes}}</td>
+        <td>{{item.owner}}</td>
+        <td>{{item.date|date:'d/m/Y'}}</td>
         <td>
           {{item.name}}
         </td>
         <td>{{item.owner}}</td>
         
         <td>
-          <a href="{% url 'allifmaalcommonapp:commonEditCompanyScope' item.id user_var glblslug %}" class="allif-table-links">
-        Edit Scope
-         </a>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+            <div class="dropdown-content">
+              <a href="{% url 'allifmaalcommonapp:commonEditCompanyScope' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Sectors</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonDeleteEntity' item.id %}" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+
+
+
         </td>
-        <td>
-          <a href="{% url 'allifmaalcommonapp:commonWantToDeleteScope' item.id user_var glblslug %}" class="body-delete-link">
-         Delete Scope
-         </a>
-        </td>
-    
+
+      
+       
+       <td> . . . </td>
+       <td></td>
       </tr>
       {% endfor %}
-      
-    </tbody>
-  </table>
-  
-</div>
+      </tbody>
+    </table>
+    </div>
+   </div>
 
 </div><!--end....table column-->
 
 </div><!--end....table row-->
+
+
 
 </div>
 
