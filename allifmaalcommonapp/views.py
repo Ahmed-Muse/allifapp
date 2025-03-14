@@ -1482,9 +1482,9 @@ def commonAddCompanyScope(request,*allifargs,**allifkwargs):
         user_var=request.user
         compslg=user_var.usercompany
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        title="Scope"
+        title="Scopes"
         form=CommonAddCompanyScopeForm()
-        scopes=CommonCompanyScopeModel.objects.filter(company=main_sbscrbr_entity)
+        allifqueryset=CommonCompanyScopeModel.objects.filter(company=main_sbscrbr_entity)
        
         add_item= None
         if request.method == 'POST':
@@ -1498,7 +1498,7 @@ def commonAddCompanyScope(request,*allifargs,**allifkwargs):
     
                 "form":form,
                 "title":title,
-                "scopes":scopes,
+                "allifqueryset":allifqueryset,
               
         }
         return render(request,'allifmaalcommonapp/scopes/scopes.html',context)

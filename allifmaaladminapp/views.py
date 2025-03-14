@@ -21,11 +21,11 @@ def adminappUsers(request,*allifargs,**allifkwargs):
     try:
         title="Registered SystemUsers "
         
-        users=User.objects.all()
+        allifqueryset=User.objects.all()
         context={
             "title":title,
             
-            "users":users,
+            "allifqueryset":allifqueryset,
 
         }
         return render(request,"allifmaaladminapp/users/users.html",context)

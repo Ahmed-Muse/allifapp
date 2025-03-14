@@ -411,6 +411,11 @@ overflow-y: auto;
 
 }
 
+#allif-superuser-row{
+  background-color: #f9922c;
+  
+  
+}
   /* start --- below is for changing the color of the clicked row in the tables 037262......*/
 .table-layout .clickedrow td, .table-layout .clickedrow a {
   background-color:  var(--main-background-color);
@@ -652,7 +657,13 @@ a.body-delete-link-confirm{
     background-color: var(--main-background-color);
   }
 
-
+.allif-admin-img-container{
+  text-align: center;
+}
+.admin-home-image{
+  width: 150px;
+  height: 120px;
+}
 /*start... styling of table inline dropdown with delete*/
   .allif-confirm-action{
     display: none;
@@ -693,3 +704,4 @@ a.body-delete-link-confirm{
   }
 
   /*end... styling of table inline dropdown with delete*/
+  

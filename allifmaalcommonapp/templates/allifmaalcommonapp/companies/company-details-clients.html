@@ -260,11 +260,13 @@
     <table class="table table-layout">
       <thead>
         <tr class="allif-table-header-row">
-        <td class="allif-fix-table-col">Sector Name</td>
-        <td>Scope</td>
-        <td>Owner</td>
-        <td>Edit Scope</td>
-        <td>Delete Scope</td>
+        <td class="allif-fix-table-col">Scope</td>
+        
+        <td>Comments</td>
+        <td>Created By</td>
+      
+        <td>Date</td>
+        <td>Navigate</td>
         <td> . . . </td>
         <td></td>
         </tr>
@@ -275,27 +277,24 @@
         {% for item in scopes %} 
         <tr data-id="{{item.id}}">
         <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
-        <td>{{item.notes}}</td>
+        <td>{{item.comments}}</td>
         <td>{{item.owner}}</td>
         <td>{{item.date|date:'d/m/Y'}}</td>
-        <td>
-          {{item.name}}
-        </td>
-        <td>{{item.owner}}</td>
+       
         
         <td>
           <div class="dropdown allifmaal-content-dropdown">
-            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
             <div class="dropdown-content">
-              <a href="{% url 'allifmaalcommonapp:commonEditCompanyScope' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Sectors</a>
+              <a href="{% url 'allifmaalcommonapp:commonEditCompanyScope' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
               <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete</a>
               
             </div>
           </div>
           <div class="dropdown allif-confirm-action">
             
-            <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalcommonapp:commonDeleteEntity' item.id %}" id="allif-confirm-delete">Confirm</a>
+            <a href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonDeleteCompanyScope' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
           </div>
 
 

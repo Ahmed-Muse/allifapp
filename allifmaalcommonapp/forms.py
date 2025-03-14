@@ -119,9 +119,10 @@ class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
 class CommonAddCompanyScopeForm(forms.ModelForm):
     class Meta:
         model = CommonCompanyScopeModel
-        fields = ['name']
+        fields = ['name','comments']
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
         } 
 class CommonAddDivisionForm(forms.ModelForm):
     class Meta:
