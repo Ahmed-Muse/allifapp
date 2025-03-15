@@ -764,9 +764,11 @@ def commonCompanyDetailsForAllifAdmin(request,pk,*allifargs,**allifkwargs):
     try:
         title="Company Details"
         allifquery=CommonCompanyDetailsModel.objects.filter(id=pk).first()
+       
+        allifqueryset=CommonCompanyScopeModel.objects.filter(company=allifquery)
         context={
             "allifquery":allifquery,
-           
+           "allifqueryset":allifqueryset,
             "title":title,
         }
         return render(request,'allifmaalcommonapp/companies/company-details.html',context)

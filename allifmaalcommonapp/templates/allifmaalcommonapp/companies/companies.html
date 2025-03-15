@@ -7,13 +7,11 @@
 {%endblock%}
 {% block body %}
 
+<div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
-
   <div class="row mt-12" ><!--start....header row-->
-  
   <div class="col-md-12"><!--start....header column-->
-  
   <div class="container-fluid amel-content-header">
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -102,217 +100,159 @@
     </div>
     </ul>
   </div>
-  <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
-  <a href="javascript:void(0)" onclick="openNav()">Open Filter</a>
-  
-  
+ 
+  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+
+
   </div>
-  
-      </div><!--end....header column-->
-    
+    </div><!--end....header column-->
     </div><!--end....header row-->
-  
   </div><!--end....main headere-->
 
-        
 <div class="allifmaincontainer">
   {% if clicked_row_data %}
-  <div class="row mt-12"> <!--start....table row-->
-    
-    <div class="instant-details-container">
-      <div class="row"><!--start of row div --->
-      
-        <!--start of column two-->
-        <div class="col-md-4">
-          <div class="allif-details-card ">
-            <!--start of the table here-->
-          <table class="table allif-details-table table-layout">
-          <tbody>
-          <tr>
-            <td>Company</td>
-            <td>
-              <a href="{% url 'allifmaalcommonapp:commonCompanyDetails' clicked_row_data.id user_var glblslug %}" class="allif-table-links">
-            {{clicked_row_data.company}}
-            </a>
-          </td>
-        
-            </tr>
-        <tr>
-          <td>Phone</td>
-          <td>{{clicked_row_data.phone1}}</td>
-      
-          </tr>
-          
-          
-          </tbody>
-          </table>
-        
-          </div>
-              </div>
-      
-           
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card ">
-          <!--start of the table here-->
-        <table class="table table-layout allif-details-table">
-          <tbody>
-       
-        
-        <tr>
-          <td>Country</td>
-          <td>{{clicked_row_data.country}}</td>
-      
-          </tr>
-       
-      <tr>
-          <td>Address</td>
-          <td>{{clicked_row_data.address}}</td>
-      
-          </tr>
-       
-        </tbody>
-        </table>
-      
-        </div>
-            </div>
-      
-      
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card ">
-          <!--start of the table here-->
-        <table class="table table-layout allif-details-table">
-          <tbody>
-    
-    <tr>
-      <td>Email</td>
-      <td>{{clicked_row_data.email}}</td>
   
-      </tr>
-      <tr>
-        <td>Sector</td>
-        <td>{{clicked_row_data.sector}}</td>
-    
-  </tr> 
-   
-        </tbody>
-        </table>
-      
-      </div>
-    </div>
-      
-      </div><!--end of row div --->
-        
-          </div>
-
-</div><!--end....table row-->
-{% endif %}
-
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="col-md-12"> <!--start....table column-->
-    <div class="allif-scroll-table"> 
-     
-      <table class="table table-layout">
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
       <thead>
         <tr class="allif-table-header-row">
-          <td>Company Name</td>
-          
-          <td>Compnay Sector</td>
-          <td>Company Owner</td>
-          <td>Company Email Address</td>
-         
+        <td>Company</td>
+        <td>Phone</td>
+        <td>Address</td>
         </tr>
         </thead>
         <tbody class="allif-table-body">
-          
-        {% for item in allifqueryset %}
+        
         <tr>
-          <td>
-            <a href="{% url 'allifmaalcommonapp:commonShowClickedRowCompanyDetails' item.id user_var glblslug %}" class="allif-table-links">
-           {{item.company}}
-            </a>
-          </td>
-         
-          <td>
-            {{item.sector}}
-          </td>
-          <td>{{item.owner}}</td>
+        <td>
           
-          <td>{{item.email}}</td>
-       
-          </td>
-      
-        </tr>
-        {% endfor %}
-        {% if searched_data %}
-        {% for item in searched_data %}
-        <tr>
-          <td >
-            <a href="{% url 'allifmaalcommonapp:commonCompanyDetails' item.id user_var glblslug %}" class="allif-table-links">
-           {{item.company}}
-            </a>
-          </td>
-          <td>
-            {{item.sector}}
-          </td>
-          <td>{{item.owner}}</td>
-          
-          <td>{{item.email}}</td>
-       
-          </td>
-      
-        </tr>
-        {% endfor %}
-          {%endif %}
+          <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCompanyDetailsForAllifAdmin' clicked_row_data.id user_var glblslug %}">
+          {{clicked_row_data.company}}
+          </a>
+        </td>
+        <td>{{clicked_row_data.phone1}}</td>
+        <td>{{clicked_row_data.address}}</td>
+      </tr>
+     
       </tbody>
     </table>
-    
-  </div>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+  {% endif %}
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Company Name</td>
+        <td>Compnay Sector</td>
+        <td>Company Owner</td>
+        <td>Company Email Address</td>
+       
+        <td>Navigate</td>
+        
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in allifqueryset %} 
+        <tr data-id="{{item.id}}">
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonShowClickedRowCompanyDetails' item.id user_var glblslug %}">{{item.company}}</a></td>
+       
+        <td>
+          {{item.sector}}
+        </td>
+        <td>{{item.owner}}</td>
+        
+        <td>{{item.email}}</td>
+     
+        </td>
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
+            <div class="dropdown-content">
+              <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForAllifAdmin' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">More Details</a>
+              <a href="" class="dropdown-item" id="allif-table-drop-item-link-delete">Block</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+         
+        </td>
+
+       <td> . . . </td>
+       <td></td>
+      
   
-  </div><!--end....table column-->
+    </tr>
+    {% endfor %}
+    {% if searched_data %}
+    {% for item in searched_data %}
+    <tr>
+      <td >
+        <a href="{% url 'allifmaalcommonapp:commonCompanyDetails' item.id user_var glblslug %}" class="allif-table-links">
+       {{item.company}}
+        </a>
+      </td>
+      <td>
+        {{item.sector}}
+      </td>
+      <td>{{item.owner}}</td>
+      
+      <td>{{item.email}}</td>
+   
+      </td>
+  
+    </tr>
+    {% endfor %}
+      {%endif %}
+
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
 
 </div><!--end....table row-->
 
-<!--end of table-->
 
-</div><!--end of main container of the page....-->
-
-  <!--start of the side bar-->
-  <div id="content-hidden-sidenavbar-id" class="content-hidden-sidenavbar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close</a>
-      <div>
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonCompanyAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-      
-          <div class="mb-3">
-          
-            <input type="text" class="form-control" name="strtdate" placeholder="Starting Date y-m-d">
-          </div>
-          <div class="mb-3">
-            
-            <input type="text" class="form-control" name="enddate" placeholder="Ending Date y-m-d">
-          </div>
-          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-      
-      </form>
-      </div>
-    </div>
-  
-    <script>
-      function openNav() {
-        document.getElementById("content-hidden-sidenavbar-id").style.width = "fit-content";
-        document.getElementById("content-hidden-sidenavbar-id").style.height = "fit-content";
-      }
-      
-      function closeNav() {
-        document.getElementById("content-hidden-sidenavbar-id").style.width = "0";
-        document.getElementById("content-hidden-sidenavbar-id").style.height = "0";
-      }
-      </script>
-      <!--end of the side bar-->
+</div>
+</div>
   {% block scripts %}
  
   {% endblock %}
-  
-   {% endblock %}
-   
+  {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
