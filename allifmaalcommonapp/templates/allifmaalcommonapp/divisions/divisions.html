@@ -72,15 +72,15 @@
           <div class="dropdown allifmaal-content-dropdown">
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
             <div class="dropdown-content">
-              <a href="{% url 'allifmaalcommonapp:commonEditDataSort' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="{% url 'allifmaalcommonapp:commonEditDivision' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
               <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
               
             </div>
           </div>
           <div class="dropdown allif-confirm-action">
             
-            <a href="{% url 'allifmaalcommonapp:commonDataSorts' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalcommonapp:commonDeleteDataSort' item.id %}" id="allif-confirm-delete">Confirm</a>
+            <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonDeleteDivision' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
           </div>
 
          
@@ -98,28 +98,6 @@
 </div><!--end....table column-->
 
 </div><!--end....table row-->
-
-<div class="allif-form-container">
-<div class="table-content-description"> Add New Document Data Filter </div>
-<div class="allif-scroll-table">
-  <div class="table-responsive allif-full-table">
-  <table class="table table-layout">
-    <tbody class="allif-table-body">
-    <tr>
-      <form method='POST' action=''>{% csrf_token %}
-      <td>{{form.name}}</td>
-      <td>{{form.notes}}</td>
-      
-       <td><input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-      </form>
-    </tr>
-    </tbody>
-  </table>
-  </div>
- </div>
-  </div><!--end of row div --->
-
-
 
 </div>
 </div>
