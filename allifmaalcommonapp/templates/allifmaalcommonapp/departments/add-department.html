@@ -7,150 +7,167 @@
 {%endblock%}
 {% block body %}
 
+<div class="allifmaal-main-container">
+<div class="allifmaincontainer">
+  
 <!--start....main headere-->
 <div class="card-header">
 
-  <div class="row mt-12" ><!--start....header row-->
+<div class="row mt-12" ><!--start....header row-->
+
+<div class="col-md-12"><!--start....header column-->
+
+<div class="container-fluid amel-content-header">
+
+<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+<a href="{% url 'allifmaalcommonapp:commonAddBranch' user_var glblslug %}">Add Branch</a>
+
+<a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
+
+<a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a>
+<a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+</div>
+
+    </div><!--end....header column-->
   
-  <div class="col-md-12"><!--start....header column-->
-  
-  <div class="container-fluid amel-content-header">
-    <div class="dropdown allifmaal-content-dropdown">
-      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Open Filters
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <div class="content-dropdown-menu">
-  
-        <li><a class="dropdown-item">Looking for something?</a></li>
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonDepositSearch' user_var glblslug %}">{% csrf_token %}
-        
-          <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
-          placeholder="Type Here ...">
-        
-          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-          </form>
-          <hr>
-          <li><a class="dropdown-item">Select Ordering Option</a></li>
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonChartofAccounts' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-      
-        <div>
-        <select name="requiredformat" class="form-control">
-          {% for item in datasorts %}
-          <option>{{item.name}}</option>
-            
-           {% endfor %}
-           
-          </select>
-          </div>
-          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-      
-      </form>
-      <hr>
-      <li><a class="dropdown-item">Advanced Searching</a></li>
-      <form method='POST' action="{% url 'allifmaalcommonapp:commonChartofAccAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-        
-        <div>
-          <input type="text" class="form-control" name="startvalue" placeholder="Starting Balance">
-        </div>
-        <div>
-          
-          <input type="text" class="form-control" name="endvalue" placeholder="Ending Balance">
-        </div>
-        
-        <div>
-          <label >Select Option</label>
-          <select name="requiredformat" class="form-control">
-            {% for item in formats %}
-            <option>{{item.name}}</option>
-            
-         {% endfor %}
-         
-        </select>
-        </div>
-  
-        
-        <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+  </div><!--end....header row-->
+
+</div><!--end....main headere-->
+
+
+<!--start of main body-->
+
+
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">Add/Edit New Branch</div>
+  <form method='POST' action=''>{% csrf_token %}
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
     
-    </form>
-    <hr>
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+        <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{form.company}}</td>
       
+          </tr>
+      <tr>
+        <td class="allif-fix-table-col">Division Name</td>
+        <td>{{form.division}}</td>
+    
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Branch</td>
+          <td>{{form.branch}}</td>
+      
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Department</td>
+            <td>{{form.department}}</td>
+        
+            </tr>
+        <tr>
+          <td class="allif-fix-table-col">Phone</td>
+          <td>{{form.phone}}</td>
+      
+          </tr>
+            
+        </tbody>
+        </table>
       </div>
-      </ul>
-    </div>
-    <a class="amel-table-list-identifier">Banks:</a>
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddBankShareholderDeposit' user_var glblslug %}">New Deposit</a>
- 
- 
-  
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
-    
-    </div>
-    </ul>
-  </div>
- 
-  </div>
-  
-      </div><!--end....header column-->
-    
-    </div><!--end....header row-->
-  
-  </div><!--end....main headere-->
-
-<div class="allifmaincontainer">
-  <div class="table-details-content-description">Add New Department</div>
-
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="col-md-12"><!--start of the first row body-->
-        <div class="allif-form-container">
-        <form method='POST' action=''>{% csrf_token %}
-        <div class="row"><!--start of row div --->
-          <div class="col-md-4"><!--start of column 1-->
-            <div class="card shadow text-left p-3 allif-form-card" >
-            <label>Division</label> {{form.division}}
-            <label>Branch</label> {{form.branch}}
-            <label>Department Name</label> {{form.description}}
+        </div>
            
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Email</td>
+            <td>{{form.email}}</td>
+        
+            </tr>
+      
+          <tr>
+            <td class="allif-fix-table-col">Address</td>
+            <td>{{form.address}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">City</td>
+              <td>{{form.city}}</td>
+          
+              </tr>
+             
+          </tbody>
+          </table>
           </div>
-            </div><!--end of column 1-->
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">P.O.Box</td>
+            <td>{{form.pobox}}</td>
         
-            <div class="col-md-4"><!--start of column 2-->
-            <div class="card shadow text-left p-3 allif-form-card">
-              <label>Comments</label> {{form.comments}}
-              </div>
-            </div><!--end of column 2-->
-            <div class="col-md-4"><!--start of column 3-->
-            <div class="card shadow text-left p-3 allif-form-card">
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Comments</td>
+              <td>{{form.commentss}}</td>
           
-            <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+              </tr>
+            <tr>
+              <td class="allif-fix-table-col"></td>
+              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
           
-     
-                </div>
-            </div><!--end of column 1-->
-        
-        </div><!--end of row div --->
-            </form>
-            </div>
-            </div><!--end of first row body-->
+              </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
 </div><!--end....table row-->
-
+</div>
+</form>
 <!--end of table-->
-
 
 </div><!--end of main container of the page....-->
 
+
+
+{% if form.errors %}
+        <ul class="errorlist">
+            {% for field in form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error|escape }}</li>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+</div>
+
+</div>
   {% block scripts %}
 
   {% endblock %}

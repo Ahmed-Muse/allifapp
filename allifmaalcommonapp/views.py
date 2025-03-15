@@ -1186,11 +1186,11 @@ def commonEditBranch(request,pk,*allifargs,**allifkwargs):
         usrslg=request.user.customurlslug
         user_var_update=CommonBranchesModel.objects.filter(id=pk).first()
         usernmeslg=User.objects.filter(customurlslug=usrslg).first()
-        form=CommonAddBranchForm(instance=user_var_update)
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
+        form=CommonAddBranchForm(main_sbscrbr_entity,instance=user_var_update)
 
         if request.method=='POST':
-            form=CommonAddBranchForm(request.POST or None,request.FILES, instance=user_var_update)
+            form=CommonAddBranchForm(main_sbscrbr_entity,request.POST or None,request.FILES, instance=user_var_update)
             if form.is_valid():
                 obj = form.save(commit=False)
                 obj.owner=usernmeslg
@@ -1199,9 +1199,9 @@ def commonEditBranch(request,pk,*allifargs,**allifkwargs):
                 return redirect('allifmaalcommonapp:commonBranches',allifusr=usrslg,allifslug=user_var)
                 
             else:
-                form=CommonAddBranchForm(request.POST or None, instance=user_var_update)
+                form=CommonAddBranchForm(main_sbscrbr_entity,request.POST or None, instance=user_var_update)
         else:
-            form=CommonAddBranchForm(request.POST or None, instance=user_var_update)
+            form=CommonAddBranchForm(main_sbscrbr_entity,request.POST or None, instance=user_var_update)
         context={"title":title,"form":form,}
         return render(request,'allifmaalcommonapp/branches/add-branch.html',context)
        
@@ -1367,8 +1367,8 @@ def commonAddDepartment(request,*allifargs,**allifkwargs):
         form=CommonAddDepartmentForm(main_sbscrbr_entity)
         if  main_sbscrbr_entity!=None:
             if request.method=='POST':
-                descrp=request.POST.get('name')
-                account=CommonDepartmentsModel.objects.filter(description=descrp,company=main_sbscrbr_entity).first()
+                descrp=request.POST.get('department')
+                account=CommonDepartmentsModel.objects.filter(department=descrp,company=main_sbscrbr_entity).first()
                 form=CommonAddDepartmentForm(main_sbscrbr_entity,request.POST)
                 if form.is_valid():
                     obj = form.save(commit=False)
@@ -1384,7 +1384,14 @@ def commonAddDepartment(request,*allifargs,**allifkwargs):
                         return render(request,'allifmaalcommonapp/error/error.html',allifcontext)
 
                 else:
+                    context = {
+                        "title": title,
+                        "form": form, # form with errors.
+                    }
+                    return render(request, 'allifmaalcommonapp/departments/add-department.html', context)
+                    
                     form=CommonAddDepartmentForm(main_sbscrbr_entity)
+                    print("invalid form")
             else:
                 form=CommonAddDepartmentForm(main_sbscrbr_entity)
         else:

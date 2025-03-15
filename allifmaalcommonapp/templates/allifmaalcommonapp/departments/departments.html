@@ -7,13 +7,11 @@
 {%endblock%}
 {% block body %}
 
+<div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
-
   <div class="row mt-12" ><!--start....header row-->
-  
   <div class="col-md-12"><!--start....header column-->
-  
   <div class="container-fluid amel-content-header">
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,43 +32,27 @@
       </div>
       </ul>
     </div>
-    <a class="amel-table-list-identifier">{{title}}:</a>
+    <a class="amel-table-list-identifier">Branches:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
     <a href="{% url 'allifmaalcommonapp:commonAddDepartment' user_var glblslug %}">New Department</a>
+    
    
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
-    
-    </div>
-    </ul>
-  </div>
- 
-  </div>
   
-      </div><!--end....header column-->
-    
+  </div>
+    </div><!--end....header column-->
     </div><!--end....header row-->
-  
   </div><!--end....main headere-->
-
 
 <div class="allifmaincontainer">
 <div class="row mt-12"> <!--start....table row-->
   <div class="col-md-12"> <!--start....table column-->
-    <div class="allif-scroll-table table-responsive">
-      <div class="container">
-    <table class="table table-layout allifmaal-full-table">
-    <thead>
-      <tr class="allif-table-header-row" >
-      
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Department</td>
       <td>Company</td>
       <td>Division</td>
       <td>Branch</td>
@@ -78,84 +60,88 @@
       <td>Owner</td>
       <td>Comments</td>
       <td>Date</td>
-    
-      </tr>
-      </thead>
-      <tbody class="allif-table-body">
-       
-           
-      {% for item in allifqueryset %}   
-      <tr>
-        <td>
-          {{item.company}}
-         </td>
-         <td>
-          {{item.division}}
-         </td>
-         <td>
-          {{item.branch}}
-         </td>
-        <td>
-        <a href="{% url 'allifmaalcommonapp:commonDepartmentDetails' item.id user_var glblslug %}" class="allif-table-links">
-        {{item.description}}
-        </a></td>
+        <td>Navigate</td>
         
-         <td>
-          {{item.owner}}
-         </td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in allifqueryset %} 
+        <tr data-id="{{item.id}}">
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonDepartmentDetails' item.id user_var glblslug %}">{{item.department}}</a></td>
+        <td>{{item.address}}</td>
+        <td>{{item.owner}}</td>
+        <td>{{item.date|date:'d/m/Y'}}</td>
+       
         <td>
-        {{item.comments}}
-       </td>
-       <td>
-        {{item.date|date:'d/m/Y'}}
-       </td>
-      
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+            <div class="dropdown-content">
+              <a href="{% url 'allifmaalcommonapp:commonEditBranch' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonDeleteBranch' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+         
+        </td>
+
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      {% if searched_data %}
+        {% for item in searched_data %}
+        <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonDepartmentDetails' item.id user_var glblslug %}">{{item.branch}}</a></td>
+          <td>{{item.address}}</td>
+          <td>{{item.owner}}</td>
+          <td>{{item.date|date:'d/m/Y'}}</td>
+         
+          <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+              <div class="dropdown-content">
+                <a href="{% url 'allifmaalcommonapp:commonEditBranch' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+                
+              </div>
+            </div>
+            <div class="dropdown allif-confirm-action">
+              
+              <a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteBranch' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            </div>
+  
+           
+          </td>
+  
+         <td> . . . </td>
+         <td></td>
         </tr>
         {% endfor %}
-
-        {% if searched_data %}
-        {% for item in searched_data %}   
-        <tr>
-      
-          <td>
-          <a href="{% url 'allifmaalcommonapp:commonDepartmentDetails' item.id user_var glblslug %}" class="allif-table-links">
-          {{item.description}}
-          </a></td>
-          <td>
-            {{item.company}}
-           </td>
-           <td>
-            {{item.owner}}
-           </td>
-          <td>
-          {{item.comments}}
-         </td>
-         <td>
-          {{item.date|date:'d/m/Y'}}
-         </td>
-        
-          </tr>
-          {% endfor %}
-          {% endif %}
-     
+          {%endif %}
       </tbody>
-        </table>
-        </div>
-    
-      </div>
-      
-      </div><!--end....table column-->
-  </div>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
 
 </div><!--end....table row-->
 
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
+</div>
+</div>
   {% block scripts %}
-  <!--when you put the js code here, it gives a repetitive results....-->
+ 
   {% endblock %}
-  
-   {% endblock %}
-   
+  {% endblock %}
+

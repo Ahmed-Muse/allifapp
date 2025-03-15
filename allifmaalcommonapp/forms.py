@@ -354,17 +354,24 @@ class CommonBankWithdrawalsAddForm(forms.ModelForm):
 class CommonAddDepartmentForm(forms.ModelForm):
     class Meta:
         model = CommonDepartmentsModel
-        fields = ['description','comments','branch','division']
+        fields = ['department','comments','company','branch','division','phone','email','address','city','pobox']
         widgets={
-            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'department':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'city':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'phone':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'email':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'pobox':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'company':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super(CommonAddDepartmentForm, self).__init__(*args, **kwargs)
        
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['company'].queryset = CommonCompanyDetailsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
        
 class CommonAddSupplierForm(forms.ModelForm):
