@@ -7,6 +7,9 @@
 {%endblock%}
 {% block body %}
 
+<div class="allifmaal-main-container">
+<div class="allifmaincontainer">
+  
 <!--start....main headere-->
 <div class="card-header">
 
@@ -15,38 +18,38 @@
 <div class="col-md-12"><!--start....header column-->
 
 <div class="container-fluid amel-content-header">
-  
-  <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-  
 <div class="dropdown allifmaal-content-dropdown">
   <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   Actions
   </a>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
-    <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditDivision' allifquery.id user_var glblslug %}">Edit Division</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditDivision' allifquery.id user_var glblslug %}">Edit Division</a></li>
 
-    <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteDivision' allifquery.id user_var glblslug %}">Delete Division</a></li>
-
+      <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteDivision' allifquery.id user_var glblslug %}">Delete Division</a></li>
+  
    </div>
   </ul>
 </div>
-
-<a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
-
+<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+<a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
+<a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
+<a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
+<a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+<a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Staff</a>
 <div class="dropdown allifmaal-content-dropdown">
   <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  Accounts
+  Navigate
   </a>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
-    <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">GL Accounts</a></li>
-    <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonChartofAccounts' user_var glblslug %}">Chart of A/Cs</a></li>
+    <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAssets' user_var glblslug %}">Assets</a></li>
+    <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Expenses</a></li>
     
     </div>
   </ul>
 </div>
-<a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
+<a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
 <div class="dropdown allifmaal-content-dropdown">
   <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   Banks
@@ -60,7 +63,8 @@
     </div>
   </ul>
 </div>
-<a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+<a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a>
+<a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
 </div>
 
     </div><!--end....header column-->
@@ -71,228 +75,235 @@
 
 
 <!--start of main body-->
-<div class="allifmaincontainer">
-
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="table-details-content-description">{{allifquery}} </div>
-    <div class="allif-details-container">
-      <div class="row"><!--start of row div --->
-      
-        <!--start of column two-->
-        <div class="col-md-4">
-          <div class="allif-details-card ">
-            <!--start of the table here-->
-          <table class="table allif-details-table table-layout">
-            <tbody>
-          <tr>
-            <td>Company</td>
-            <td>{{allifquery.company}}</td>
-        
-            </tr>
-           
-             
-        <tr>
-          <td>Email</td>
-          <td>{{allifquery.email}}</td>
-      
-          </tr>
-          
-            <tr>
-              <td>Phone 1</td>
-              <td>{{allifquery.phone}}</td>
-          
-              </tr>
-        
-      <tr>
-        <td>City</td>
-        <td>{{allifquery.city}}</td>
-    
-        </tr>
-       
-         
-          </tbody>
-          </table>
-        
-          </div>
-              </div>
-      
-           
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card ">
-          <!--start of the table here-->
-        <table class="table table-layout allif-details-table">
-          <tbody>
-       
-        
-        <tr>
-          <td>Created By</td>
-          <td>{{allifquery.owner}}</td>
-      
-          </tr>
-       
-      <tr>
-          <td>P.O.Box</td>
-          <td>{{allifquery.pobox}}</td>
-      
-          </tr>
-       
-        <tr>
-          <td>Address</td>
-          <td>{{allifquery.address}}</td>
-        
-          </tr>
-   
-    <tr>
-      <td>Date</td>
-      <td>{{allifquery.date|date:'d/m/Y'}}</td>
-  
-      </tr>
-     
-        </tbody>
-        </table>
-      
-        </div>
-            </div>
-      
-      
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card ">
-          <!--start of the table here-->
-        <table class="table table-layout allif-details-table">
-          <tbody>
-            <tr>
-              <td>Last Update</td>
-              <td>{{allifquery.updatedon|date:'d/m/Y'}}</td>
-          
-              </tr>
-            
-      
-    <tr>
-      <td>UID</td>
-      <td>{{allifquery.divisionuid}}</td>
-  
-      </tr>
-      <tr>
-        <td>Slug</td>
-        <td>{{allifquery.divisionslug}}</td>
-    
-  </tr> 
-   
-        </tbody>
-        </table>
-      
-      </div>
-    </div>
-      
-      </div><!--end of row div --->
-        
-          </div>
-
-</div><!--end....table row-->
-
-<!--end of table-->
-<hr>
-
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="allif-details-container">
-      <div class="row"><!--start of row div --->
-      
-        <!--start of column two-->
-        <div class="col-md-12">
-          <div class="allif-details-card ">
-            <!--start of the table here-->
-            <table class="table table-layout">
-              <thead>
-                <tr class="allif-table-header-row" >
-                  <td>Company Name</td>
-                  <td>Division Name</td>
-                  <td>Created By</td>
-                  <td>Email Address</td>
-                 
-                </tr>
-                </thead>
-                <tbody class="allif-table-body">
-                  
-              
-                <tr>
-                  <td >
-                    <a href="{% url 'allifmaalcommonapp:commonDivisionDetails' allifquery.id user_var glblslug %}" class="allif-table-links">
-                   {{allifquery.company}}
-                    </a>
-                  </td>
-                  <td>
-                    {{allifquery.division}}
-                  </td>
-                  <td>{{allifquery.owner}}</td>
-                  
-                  <td>{{allifquery.email}}</td>
-               
-                  </td>
-              
-                </tr>
-              
-              
-              </tbody>
-            </table>
-      
-      </div><!--end of row div --->
-        
-          </div>
-
-</div><!--end....table row-->
-
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-</div>
 
 
 
 <div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">{{allifquery}} Details</div>
   <div class="col-md-12"> <!--start....table column-->
-    <div class="table-content-description">{{allifquery}} Branches</div>
-  <div class="allif-scroll-table"> 
-   
-    <table class="table table-layout">
-    <thead>
-      <tr class="allif-table-header-row">
-        <td>Company</td>
-        <td>Division</td>
-        <td>Branch</td>
-        <td>Owner</td>
-       
-      </tr>
-      </thead>
-      <tbody class="allif-table-body">
-        
-      {% for item in  relatedqueryset  %}
-      <tr>
-        <td>
-         {{item.company}}
-        </td>
-        <td>
-          {{item.division}}
-        </td>
-        <td>
-          <a href="{% url 'allifmaalcommonapp:commonBranchDetails' item.id user_var glblslug %}" class="allif-table-links">
-          {{item.branch}}
-          </a>
-        </td>
-        <td>{{item.owner}}</td>
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
     
-      </tr>
-      {% endfor %}
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+        <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{allifquery.company}}</td>
+          </tr>
+      <tr>
+        <td class="allif-fix-table-col">Division</td>
+        <td>{{allifquery.division}}</td>
+        </tr>
+      <tr>
+        <td class="allif-fix-table-col">Email</td>
+        <td>{{allifquery.email}}</td>
+        </tr>
+      <tr>
+        <td class="allif-fix-table-col">Phone</td>
+        <td>{{allifquery.phone}}</td>
+        </tr>
       
-    </tbody>
-  </table>
-  
+   
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">City</td>
+            <td>{{allifquery.city}}</td>
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Created By</td>
+            <td>{{allifquery.owner}}</td>
+            </tr>
+         
+        <tr>
+            <td class="allif-fix-table-col">P.O.Box</td>
+            <td>{{allifquery.pobox}}</td>
+            </tr>
+         
+          <tr>
+            <td class="allif-fix-table-col">Address</td>
+            <td>{{allifquery.address}}</td>
+            </tr>
+      
+      
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Date</td>
+            <td>{{allifquery.date|date:'d/m/Y'}}</td>
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Last Update</td>
+              <td>{{allifquery.updatedon|date:'d/m/Y'}}</td>
+          
+              </tr>
+                  
+            
+            <tr>
+            <td class="allif-fix-table-col">UID</td>
+            <td>{{allifquery.divisionuid}}</td>
+          
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Slug</td>
+              <td>{{allifquery.divisionslug}}</td>
+          
+          </tr> 
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
+</div><!--end....table row-->
 </div>
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+
+
+<!--end of table-->
+
+<!--end of table-->
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+          <td>Company Name</td>
+          <td>Division Name</td>
+          <td>Created By</td>
+          <td>Email Address</td>
+         
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+       
+        <tr>
+          <td >
+            <a href="{% url 'allifmaalcommonapp:commonDivisionDetails' allifquery.id user_var glblslug %}" class="allif-table-links">
+           {{allifquery.company}}
+            </a>
+          </td>
+          <td>
+            {{allifquery.division}}
+          </td>
+          <td>{{allifquery.owner}}</td>
+          
+          <td>{{allifquery.email}}</td>
+       
+          </td>
+      </tr>
+      
+      </tbody>
+    </table>
+    </div>
+   </div>
 
 </div><!--end....table column-->
 
 </div><!--end....table row-->
+
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+    <div class="table-content-description"> <a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}" class="allif-table-links"> Branches</a> </div>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Branches</td>
+        <td>Division</td>
+        
+        <td>Owner</td>
+        <td>Date</td>
+       
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in relatedqueryset %} 
+        <tr data-id="{{item.id}}">
+          <td>
+            <a href="{% url 'allifmaalcommonapp:commonBranchDetails' item.id user_var glblslug %}" class="allif-table-links">
+            {{item.branch}}
+            </a>
+          </td>
+        <td>{{item.division}}</td>
+        <td>{{item.owner}}</td>
+        <td>{{item.date|date:'d/m/Y'}}</td>
+
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+              <a href="{% url 'allifmaalcommonapp:commonEditBranch' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="{% url 'allifmaalcommonapp:commonDivisionDetails' allifquery.id user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonDeleteBranch' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+
+        </td>
+
+      
+       
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+
+
+
+</div>
 
 </div>
   {% block scripts %}
@@ -300,10 +311,3 @@
   {% endblock %}
    {% endblock %}
    
-
-
-
-
-
-
-

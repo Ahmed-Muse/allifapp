@@ -205,11 +205,6 @@ class CommonDivisionsModel(models.Model):# this is the company
     class Meta:
         ordering = ['-division','address']
 
-    # Methods
-    def get_absolute_url(self):
-        """Returns the URL to access a particular instance of MyModelName."""
-        return reverse('model-detail-view', args=[str(self.id)])
-
     def __str__(self):
         return str(self.division)
     def save(self, *args, **kwargs):

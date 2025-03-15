@@ -13,15 +13,9 @@
   <div class="row mt-12" ><!--start....header row-->
   <div class="col-md-12"><!--start....header column-->
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Doc Types:</a>
+    <a class="amel-table-list-identifier">Divisions:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
-    
     <a href="{% url 'allifmaalcommonapp:commonAddDivision'  user_var glblslug %}">New Division</a>
-
-    
-    <a class="allif-load-content-button" type="button">Load Sectors</a>
-
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Modules
@@ -33,7 +27,7 @@
     </div>
     </ul>
   </div>
-  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Company</a>
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
   
   </div>
     </div><!--end....header column-->
@@ -49,7 +43,7 @@
       <thead>
         <tr class="allif-table-header-row">
         <td class="allif-fix-table-col">Division</td>
-        <td>Comments</td>
+        <td>Address</td>
         <td>Created By</td>
         <td>Date</td>
         <td>Navigate</td>
@@ -64,7 +58,7 @@
         {% for item in allifqueryset %} 
         <tr data-id="{{item.id}}">
         <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonDivisionDetails' item.id user_var glblslug %}">{{item.division}}</a></td>
-        <td>{{item.notes}}</td>
+        <td>{{item.address}}</td>
         <td>{{item.owner}}</td>
         <td>{{item.date|date:'d/m/Y'}}</td>
        
