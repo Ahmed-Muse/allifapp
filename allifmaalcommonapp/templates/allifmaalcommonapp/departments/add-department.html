@@ -20,9 +20,8 @@
 <div class="container-fluid amel-content-header">
 
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-<a href="{% url 'allifmaalcommonapp:commonAddBranch' user_var glblslug %}">Add Branch</a>
-
-<a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
+<a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+<a href="{% url 'allifmaalcommonapp:commonAddDepartment' user_var glblslug %}">Add Department</a>
 
 <a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a>
 <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
@@ -40,7 +39,7 @@
 
 
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit New Branch</div>
+  <div class="table-details-content-description">Add/Edit New Department</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -53,13 +52,9 @@
       <div class="table-responsive">
       <table class="table table-layout">
       <tbody>
-        <tr>
-          <td class="allif-fix-table-col">Company</td>
-          <td>{{form.company}}</td>
-      
-          </tr>
+       
       <tr>
-        <td class="allif-fix-table-col">Division Name</td>
+        <td class="allif-fix-table-col">Division</td>
         <td>{{form.division}}</td>
     
         </tr>
@@ -127,7 +122,7 @@
             </tr>
             <tr>
               <td class="allif-fix-table-col">Comments</td>
-              <td>{{form.commentss}}</td>
+              <td>{{form.comments}}</td>
           
               </tr>
             <tr>
@@ -135,6 +130,7 @@
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
           
               </tr>
+              
           </tbody>
           </table>
   </div>
@@ -148,21 +144,27 @@
 </form>
 <!--end of table-->
 
+
+<div class="allif-form-errors">
+  
+{% if form.errors %}
+<ul class="errorlist">
+    {% for field in form %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <li>{{ field.label }}: {{ error|escape }}</li>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+</div>
+
+
 </div><!--end of main container of the page....-->
 
 
-
-{% if form.errors %}
-        <ul class="errorlist">
-            {% for field in form %}
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <li>{{ field.label }}: {{ error|escape }}</li>
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% endif %}
 
 
 </div>

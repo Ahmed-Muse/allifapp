@@ -416,6 +416,7 @@ overflow-y: auto;
   
   
 }
+
   /* start --- below is for changing the color of the clicked row in the tables 037262......*/
 .table-layout .clickedrow td, .table-layout .clickedrow a {
   background-color:  var(--main-background-color);

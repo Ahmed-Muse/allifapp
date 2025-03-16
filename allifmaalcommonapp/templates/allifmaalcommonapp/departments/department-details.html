@@ -24,9 +24,9 @@
   </a>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditDepartment' allifquery.id user_var glblslug %}">Edit Department</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditDepartment' allifquery.id user_var glblslug %}">Edit Item</a></li>
         
-        <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteDepartment' allifquery.id user_var glblslug %}">Delete Department</a></li>
+        <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteDepartment' allifquery.id user_var glblslug %}">Delete Item</a></li>
     
    </div>
   </ul>
@@ -136,12 +136,12 @@
             
             <tr>
             <td class="allif-fix-table-col">UID</td>
-            <td>{{allifquery.branchuid}}</td>
+            <td>{{allifquery.departmentuid}}</td>
           
             </tr>
             <tr>
               <td class="allif-fix-table-col">Slug</td>
-              <td>{{allifquery.branchslug}}</td>
+              <td>{{allifquery.departmentslug}}</td>
           
           </tr> 
           </tbody>
@@ -201,75 +201,6 @@
 </div><!--end....table column-->
 
 </div><!--end....table row-->
-
-
-<div class="row mt-12"> <!--start....table row-->
-  <div class="col-md-12"> <!--start....table column-->
-    <div class="table-content-description"> <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}" class="allif-table-links"> Departments</a> </div>
-  <div class="allif-scroll-table">
-    <div class="table-responsive allif-full-table">
-    <table class="table table-layout">
-      <thead>
-        <tr class="allif-table-header-row">
-        <td class="allif-fix-table-col">Branches</td>
-        <td>Division</td>
-        
-        <td>Owner</td>
-        <td>Date</td>
-       
-        <td>Navigate</td>
-        <td> . . . </td>
-        <td></td>
-        </tr>
-        </thead>
-        <tbody class="allif-table-body">
-         
-        
-        {% for item in relatedqueryset %} 
-        <tr data-id="{{item.id}}">
-          <td class="allif-fix-table-col">
-            <a href="{% url 'allifmaalcommonapp:commonDepartmentDetails' item.id user_var glblslug %}" class="allif-table-links">
-            {{item.department}}
-            </a>
-          </td>
-        <td>{{item.division}}</td>
-        <td>{{item.owner}}</td>
-        <td>{{item.date|date:'d/m/Y'}}</td>
-
-        <td>
-          <div class="dropdown allifmaal-content-dropdown">
-            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
-            <div class="dropdown-content">
-              <a href="{% url 'allifmaalcommonapp:commonEditDepartment' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
-              
-            </div>
-          </div>
-          <div class="dropdown allif-confirm-action">
-            
-            <a href="{% url 'allifmaalcommonapp:commonBranchDetails' allifquery.id user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalcommonapp:commonDeleteDepartment' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-          </div>
-
-
-        </td>
-
-      
-       
-       <td> . . . </td>
-       <td></td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    </div>
-   </div>
-
-</div><!--end....table column-->
-
-</div><!--end....table row-->
-
-
 
 </div>
 

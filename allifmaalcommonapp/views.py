@@ -1414,16 +1414,17 @@ def commonEditDepartment(request,pk,*allifargs,**allifkwargs):
         user_var=request.user.usercompany
         usrslg=request.user.customurlslug
         user_var_update=CommonDepartmentsModel.objects.filter(id=pk).first()
-        form=CommonAddDepartmentForm(instance=user_var_update)
+        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
+        form=CommonAddDepartmentForm(main_sbscrbr_entity,instance=user_var_update)
         if request.method=='POST':
-            form=CommonAddDepartmentForm(request.POST or None, instance=user_var_update)
+            form=CommonAddDepartmentForm(main_sbscrbr_entity,request.POST or None, instance=user_var_update)
             if form.is_valid():
                 obj = form.save(commit=False)
                 obj.owner=user_var_update.owner
                 obj.save()
                 return redirect('allifmaalcommonapp:commonDepartments',allifusr=usrslg,allifslug=user_var)
         else:
-            form=CommonAddDepartmentForm(instance=user_var_update)
+            form=CommonAddDepartmentForm(main_sbscrbr_entity,instance=user_var_update)
 
         context={"title":title,"form":form,}
         return render(request,'allifmaalcommonapp/departments/add-department.html',context)

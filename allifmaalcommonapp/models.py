@@ -255,7 +255,7 @@ class CommonDepartmentsModel(models.Model):
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpdprmnt",on_delete=models.SET_NULL,null=True,blank=True)
     division= models.ForeignKey(CommonDivisionsModel,related_name="dpmntdvsn",on_delete=models.SET_NULL,null=True,blank=True)
     branch= models.ForeignKey(CommonBranchesModel,related_name="dpmntbrnch",on_delete=models.SET_NULL,null=True,blank=True)
-    comments= models.CharField(null=True, blank=False, max_length=30)
+    comments= models.CharField(null=True, blank=True, max_length=30)
     pobox=models.CharField(max_length=50,blank=True,null=True)
     email=models.EmailField(max_length=50,blank=True,null=True)
     phone=models.CharField(max_length=50,blank=True,null=True)
@@ -265,6 +265,7 @@ class CommonDepartmentsModel(models.Model):
     address=models.CharField(max_length=50,blank=True,null=True)
     departmentuid =models.CharField(null=True, blank=True, max_length=100,unique=True)
     departmentslug =models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    updatedon= models.DateTimeField(blank=True, null=True)
     
     def __str__(self):
         return str(self.department)

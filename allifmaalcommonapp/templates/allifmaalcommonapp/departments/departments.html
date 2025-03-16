@@ -15,7 +15,7 @@
   <div class="container-fluid amel-content-header">
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Open Filters
+      Filters
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
@@ -32,7 +32,7 @@
       </div>
       </ul>
     </div>
-    <a class="amel-table-list-identifier">Branches:</a>
+    <a class="amel-table-list-identifier">Departments:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
     <a href="{% url 'allifmaalcommonapp:commonAddDepartment' user_var glblslug %}">New Department</a>
@@ -52,13 +52,11 @@
     <table class="table table-layout">
       <thead>
         <tr class="allif-table-header-row">
-        <td class="allif-fix-table-col">Department</td>
-      <td>Company</td>
-      <td>Division</td>
-      <td>Branch</td>
-      <td>Department</td>
-      <td>Owner</td>
-      <td>Comments</td>
+      <td class="allif-fix-table-col">Department</td>
+      <td>Address</td>
+      <td>Email</td>
+      <td>Created By</td>
+     
       <td>Date</td>
         <td>Navigate</td>
         
@@ -73,6 +71,7 @@
         <tr data-id="{{item.id}}">
         <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonDepartmentDetails' item.id user_var glblslug %}">{{item.department}}</a></td>
         <td>{{item.address}}</td>
+        <td>{{item.email}}</td>
         <td>{{item.owner}}</td>
         <td>{{item.date|date:'d/m/Y'}}</td>
        
@@ -80,15 +79,15 @@
           <div class="dropdown allifmaal-content-dropdown">
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
             <div class="dropdown-content">
-              <a href="{% url 'allifmaalcommonapp:commonEditBranch' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="{% url 'allifmaalcommonapp:commonEditDepartment' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
               <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
               
             </div>
           </div>
           <div class="dropdown allif-confirm-action">
             
-            <a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalcommonapp:commonDeleteBranch' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonDeleteDepartment' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
           </div>
 
          
