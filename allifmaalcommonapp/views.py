@@ -1753,9 +1753,9 @@ def commonShowClickedRowUserDetails(request,pk,*allifargs,**allifkwargs):
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_edit
 
-def commonEditUser(request,allifslug,*allifargs,**allifkwargs):
+def commonEditUser(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var_update=User.objects.filter(customurlslug=allifslug).first()
+        user_var_update=User.objects.filter(id=pk).first()
         title="Update User Details"
         form=UpdateCustomUserForm(instance=user_var_update)
         usrcmpny=user_var_update.usercompany
@@ -1805,11 +1805,11 @@ def commonWantToDeleteUser(request,pk,*allifargs,**allifkwargs):
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_delete
 @logged_in_user_is_admin   
-def commonDeleteUser(request,allifslug,*allifargs,**allifkwargs):
+def commonDeleteUser(request,pk,*allifargs,**allifkwargs):
     try:
         user_var=request.user.usercompany
         usrslg=request.user.customurlslug
-        User.objects.filter(customurlslug=allifslug).first().delete()
+        User.objects.filter(id=pk).first().delete()
         return redirect('allifmaalcommonapp:commonhrm',allifusr=usrslg,allifslug=user_var)
     except Exception as ex:
         error_context={'error_message': ex,}

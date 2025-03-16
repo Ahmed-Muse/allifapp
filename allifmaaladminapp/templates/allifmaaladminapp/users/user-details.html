@@ -7,7 +7,7 @@
 {%endblock%}
 {% block body %}
 
-<div class="allifmaal-main-container">
+
 <div class="allifmaincontainer">
   
 <!--start....main headere-->
@@ -24,7 +24,7 @@
   </a>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditUser' allifquery.customurlslug %}">Edit User</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditUser' allifquery.id user_var glblslug %}">Edit User</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalusersapp:changeUserToSupperuserByAdmin' allifquery.customurlslug %}">Supper User: {{allifquery.is_superuser}}</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalusersapp:changeUserPasswordByAdmin' allifquery.customurlslug %}">Change Password By Admin</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Password</a></li> 
@@ -78,7 +78,7 @@
 
 <!--start of main body-->
 
-
+<div class="allif-content-spacer"></div>
 
 <div class="row mt-12"> <!--start....table row-->
   <div class="table-details-content-description">{{allifquery}} Details</div>
@@ -394,7 +394,7 @@
 
 </div>
 
-</div>
+
   {% block scripts %}
 
   {% endblock %}

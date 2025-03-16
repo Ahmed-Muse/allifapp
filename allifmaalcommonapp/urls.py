@@ -81,9 +81,9 @@ path('Logged/In/User/Details/<str:allifusr>/<str:allifslug>/Show/Info/', views.c
 
 path('View/User/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserDetails, name="commonUserDetails"),
 path('Viewing/User/Instant/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Row/', views.commonShowClickedRowUserDetails, name="commonShowClickedRowUserDetails"),
-path('Update/User/Details/<str:allifslug>/Edit/', views.commonEditUser, name="commonEditUser"),
+path('Update/User/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Edit/', views.commonEditUser, name="commonEditUser"),
 path('Want/Tp/Delete/User/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteUser, name="commonWantToDeleteUser"),
-path('Delete/User/<str:allifslug>/Permanently/', views.commonDeleteUser, name="commonDeleteUser"),
+path('Delete/User/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteUser, name="commonDeleteUser"),
 path('Search/For/Employee/HRM/Staff/Details/<str:allifusr>/<str:allifslug>/', views.commonUserSearch, name="commonUserSearch"),
 path('User/Can/Add/Edit/View/Delete/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserCanAddEditViewDelete, name="commonUserCanAddEditViewDelete"),
 path('User/Can/Add/Only/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserCanAdd, name="commonUserCanAdd"),
