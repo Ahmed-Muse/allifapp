@@ -7,76 +7,193 @@
 {%endblock%}
 {% block body %}
 
+<div class="allifmaal-main-container">
 <div class="allifmaincontainer">
+  
+<!--start....main headere-->
+<div class="card-header">
 
-  <!--start....main headere-->
-  <div class="card-header">
+<div class="row mt-12" ><!--start....header row-->
 
-    <div class="row mt-12" ><!--start....header row-->
+<div class="col-md-12"><!--start....header column-->
 
-    <div class="col-md-12"><!--start....header column-->
-      
-        <div class="table-details-content-description">Add New Staff Profile</div>
+<div class="container-fluid amel-content-header">
+
+<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+<a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}">Add Profile</a>
+
+<a href="{% url 'allifmaalcommonapp:commonStaffProfiles' user_var glblslug %}">Profiles</a>
+
+<a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Staff</a>
+
+</div>
+
     </div><!--end....header column-->
   
   </div><!--end....header row-->
 
 </div><!--end....main headere-->
+
+
+<!--start of main body-->
+
+
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">Add/Edit New Profile</div>
+  <form method='POST' action=''>{% csrf_token %}
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
     
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+     
+      <tr>
+        <td class="allif-fix-table-col">Division Name</td>
+        <td>{{form.division}}</td>
+    
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Branch</td>
+          <td>{{form.branch}}</td>
+      
+          </tr>
+        <tr>
+          <td class="allif-fix-table-col">Department</td>
+          <td>{{form.department}}</td>
+      
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Username</td>
+            <td>{{form.username}}</td>
+        
+            </tr>
+      
+          <tr>
+            <td class="allif-fix-table-col">Role</td>
+            <td>{{form.sysperms}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Gender</td>
+              <td>{{form.gender}}</td>
+          
+              </tr>
+              <tr>
+                <td class="allif-fix-table-col">Staff No.</td>
+                <td>{{form.staffNo}}</td>
+            
+                </tr>
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+        
+            <tr>
+              <td class="allif-fix-table-col">First Name</td>
+              <td>{{form.firstName}}</td>
+          
+              </tr>
+              <tr>
+                <td class="allif-fix-table-col">Middle Name</td>
+                <td>{{form.middleName}}</td>
+            
+                </tr>
+                <tr>
+                  <td class="allif-fix-table-col">Last Name</td>
+                  <td>{{form.lastName}}</td>
+              
+                  </tr>
+                  <tr>
+                    <td class="allif-fix-table-col">Title</td>
+                    <td>{{form.title}}</td>
+                
+                    </tr>
+                    <tr>
+                      <td class="allif-fix-table-col">Education</td>
+                      <td>{{form.education}}</td>
+                  
+                      </tr>
+                     
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Comments</td>
+            <td>{{form.comment}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Salary</td>
+              <td>{{form.salary}}</td>
+          
+              </tr>
+              <tr>
+                <td class="allif-fix-table-col">Total Salary Paid</td>
+                <td>{{form.total_salary_paid}}</td>
+            
+                </tr>
+                <tr>
+                  <td class="allif-fix-table-col">Salary Payable</td>
+                  <td>{{form.salary_payable}}</td>
+              
+                  </tr>
+                  <tr>
+                    <td class="allif-fix-table-col">Salary Balance</td>
+                    <td>{{form.salary_balance}}</td>
+                
+                    </tr>
 
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="col-md-12"><!--start of the first row body-->
-        <div class="allif-form-container">
-        <form method='POST' action=''>{% csrf_token %}
-        <div class="row"><!--start of row div --->
-            <div class="col-md-4"><!--start of column 1-->
-                <div class="card shadow text-left p-3 allif-form-card" >
-                <label>Division</label> {{form.division}}
-                <label>Branch</label> {{form.branch}}
-                <label>Department</label> {{form.department}}
-                <label>Username</label> {{form.username}}
-                <label>Level</label>{{form.sysperms}}
-                <label>Gender</label>{{form.gender}}
-                <label>Staff No.</label>{{form.staffNo}}
-  
-                </div>
-            </div><!--end of column 1-->
-        
-            <div class="col-md-4"><!--start of column 2-->
-            <div class="card shadow text-left p-3 allif-form-card">
-              <label>First Name</label> {{form.firstName}}
-              <label>Middle Name</label> {{form.middleName}}
-              <label>Last Name</label>{{form.lastName}}
-              <label>Title</label>{{form.title}}
-              <label>Education</label> {{form.education}}
-              
-              <label>Comments</label>{{form.comment}}
-              
-                </div>
-            </div><!--end of column 2-->
-            <div class="col-md-4"><!--start of column 3-->
-            <div class="card shadow text-left p-3 allif-form-card">
-              <label>Salary</label> {{form.salary}}
-                <label>Total Salary</label>{{form.total_salary_paid}}
-                <label>Salary Payable</label> {{form.salary_payable}}
-                <label>Salary Balance</label>{{form.salary_balance}}
-              
-                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-  
-                </div>
-            </div><!--end of column 1-->
-        
-        </div><!--end of row div --->
-            </form>
-            </div>
-            </div><!--end of first row body-->
+ 
+            <tr>
+              <td class="allif-fix-table-col"></td>
+              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+          
+              </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
 </div><!--end....table row-->
-
+</div>
+</form>
 <!--end of table-->
-
 
 </div><!--end of main container of the page....-->
 
+
+
+
+</div>
+
+</div>
   {% block scripts %}
 
   {% endblock %}

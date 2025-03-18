@@ -56,7 +56,9 @@
       <div class="row"><!--start of row div --->
   <!--start of column two-->
   <div class="col-md-4">
-    
+    {% if allifquerydelete %}
+    <h1>ready to delete</h1>
+    {% endif %}
       <!--start of the table here-->
       <div class="table-responsive">
       <table class="table table-layout">
@@ -247,7 +249,7 @@
           </div>
           <div class="dropdown allif-confirm-action">
             
-            <a href="{% url 'allifmaalcommonapp:commonBranchDetails' allifquery.id user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonBranchDetails' allifquery.id user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
             <a href="{% url 'allifmaalcommonapp:commonDeleteDepartment' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
           </div>
 

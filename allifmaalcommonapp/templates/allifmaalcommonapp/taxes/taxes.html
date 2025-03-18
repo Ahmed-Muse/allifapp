@@ -1,3 +1,4 @@
+
 {% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
 {% load humanize %}
 {% block title %}
@@ -6,6 +7,7 @@
 {% block style %}
 {%endblock%}
 {% block body %}
+
 <div class="allifmaincontainer">
   <!--start....main headere-->
 <div class="card-header">
@@ -16,206 +18,310 @@
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Taxes</a>
   <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
-
+   
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Modules
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
+    </div>
+    </ul>
   </div>
-      </div><!--end....header column-->
-    </div><!--end....header row-->
+  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Company</a>
   
+  </div>
+    </div><!--end....header column-->
+    </div><!--end....header row-->
   </div><!--end....main headere-->
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="col-md-12"><!--start of the first row body-->
-        <div class="allif-form-container">
-        <div class="row"><!--start of row div --->
-            <div class="col-md-3"><!--start of column 1-->
 
+  <div class="allif-content-spacer"></div>
 
-              <div class="card-header">
-                <div class="container-fluid amel-content-header">
-                  <div class="dropdown allifmaal-content-dropdown">
-                    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Open Form
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <div class="content-dropdown-menu">
-                      <form method='POST' action=''>{% csrf_token %}
-                      <li><a class="dropdown-item">Add New Tax Parameter</a></li>
-                      <label>Tax Name</label> {{form.taxname}} 
-                      <label>Tax Description</label> {{form.taxdescription}} 
-                      <label>Tax Rate</label>{{form.taxrate}}
-                      <label>Tax Type </label> {{form.taxtype}}
-                      <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-                    </form>
-                    </div>
-                    </ul>
-                  </div>
-                  <!-- Button trigger modal -->
-                  <a type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Add New Tax </a>
-                </div>
-                </div><!--end....main headere-->
-
-
-
-
-
-              {% if update %}
-              <hr>
-              <form method='POST' action=''>{% csrf_token %}
-                <div class="card shadow text-left p-3 allif-form-card" >
-                <label>Tax Name</label> {{form.taxname}} 
-                <label>Tax Description</label> {{form.taxdescription}} 
-                <label>Tax Rate</label>{{form.taxrate}}
-                <label>Tax Type </label> {{form.taxtype}}
-                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-                
-                </div>
-                <hr>
-            </form>
-            {% else %}
-
-
-
-            <hr>
-            <div class="allif-scroll-table">
-              <!--start of the table-->
-                  
-                  <table class="table table-layout">
-                  <thead>
-                  <tr class="allif-table-header-row">
-                  
-                  <td>Rate %</td>
-                  <td>Type</td>
-                  </tr>
-              </thead>
-              <tbody class="allif-table-body">
+  
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-4"> <!--start....table column-->
+    <div class="allif-scroll-table">
+      <div class="table-responsive allif-full-table">
+      <table class="table table-layout">
+        <thead>
+          <tr class="allif-table-header-row">
+          <td class="allif-fix-table-col">Tax Name</td>
+        
+          <td>Tax Description</td>
+          <td>Rate %</td>
+          <td>Type</td>
           
-          {% for item in latest %}
-              <tr>
-      
-       
-        <td> {{item.taxrate}}</td>
-        <td> {{item.taxtype}}</td>
-        
-              </tr>
-         
-                  {% endfor %}
-      
-              </tbody>
-              </table>
-             
-              <!--end of table-->
-                  </div>
-            {% endif %}
-
-
-
-                
-            </div><!--end of column 1-->
-        
+          <td>Navigate</td>
+          
+          <td> . . . </td>
+          <td></td>
+          </tr>
+          </thead>
+          <tbody class="allif-table-body">
            
-            <div class="col-md-9"><!--start of column 3-->
-                <div class="allif-scroll-table">
-                    <!--start of the table-->
-                        
-                        <table class="table table-layout">
-                        <thead>
-                        <tr class="allif-table-header-row">
-                        <td>Name</td>
-                        <td>Description</td>
-                        <td>Rate %</td>
-                        <td>Type</td>
-                        <td>Edit</td>
-                        <td>Delete</td>
-                    
-                        </tr>
-                    </thead>
-                    <tbody class="allif-table-body">
-                
-                {% for item in allifqueryset %}
-                    <tr>
-                   
-              <td>
-                 {{item.taxname}}
-                 
-              </td>
-              
-              <td> {{item.taxdescription}}</td>
-             
-              <td> {{item.taxrate}}</td>
-              <td> {{item.taxtype}}</td>
-              <td>
-                <a href="{% url 'allifmaalcommonapp:CommonUpdateTaxDetails' item.id user_var glblslug %}">
-                  Edit Item
-                </a>
-            </td>
-             
-              <td>
-                <a class="body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteTaxParameter' item.id user_var glblslug %}">
-                  Delete Item
-                </a>
-            </td>
-              
-              
-                    </tr>
-               
-                        {% endfor %}
-            
-                    </tbody>
-                    </table>
-                   
-                    <!--end of table-->
-                        </div>
-                <hr>
-                <!--end of table-->
-          {% if allifquerydelete %}
           
+          {% for item in allifqueryset %} 
+          <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="">{{item.taxname}}</a></td>
          
-          <div class="row mt-9"> <!--start....table row-->
-            <div class="delete-confirmation-header"> Do you want to delete {{allifquerydelete}}?</div>
-        <div class="allif-details-container">
-          
-          <div class="row"><!--start of row div --->
-            <!--start of column two-->
-            <div class="col-md-4">
-              <div class="delete-options-container">
-                <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">No</a>
-              </div>
-            </div>
-    
-         
-          <!--start of column two-->
-          <div class="col-md-4">
-            <div class="delete-options-container">
-            
-                <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Back</a>
+         <td> {{item.taxdescription}}</td>
         
+         <td> {{item.taxrate}}</td>
+         <td> {{item.taxtype}}</td>
+        
+          <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+              <div class="dropdown-content">
+                <a href="{% url 'allifmaalcommonapp:CommonUpdateTaxDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item </a>
                 
-            </div>
-                </div>
-          
-    
-                <!--start of column two-->
-                <div class="col-md-4">
-                  <div class="delete-options-container-delete">
-                    <a href="{% url 'allifmaalcommonapp:CommonDeleteTaxParameter' allifquerydelete.id user_var glblslug %}">Yes</a></li>
-                    
-                </div>
               </div>
-                
-                </div><!--end of row div --->
-                  
-                    </div>
+            </div>
+            <div class="dropdown allif-confirm-action">
+              
+              <a href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonWantToDeleteTaxParameter' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            </div>
+  
+  
+  
+          </td>
+  
+         <td> . . . </td>
+         <td></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+     </div>
+  
+  </div><!--end....table column-->
 
-            </div><!--end....table row-->
-            {% endif %}
-              
-            </div><!--end of column 1-->
+
+  <div class="col-md-8"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Tax Name</td>
+      
+        <td>Tax Description</td>
+        <td>Rate %</td>
+        <td>Type</td>
         
-        </div><!--end of row div --->
-            </form>
+        <td>Navigate</td>
+        
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in allifqueryset %} 
+        <tr data-id="{{item.id}}">
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="">{{item.taxname}}</a></td>
+       
+       <td> {{item.taxdescription}}</td>
+      
+       <td> {{item.taxrate}}</td>
+       <td> {{item.taxtype}}</td>
+      
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+            <div class="dropdown-content">
+              <a href="{% url 'allifmaalcommonapp:CommonUpdateTaxDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item </a>
+              
             </div>
-            </div><!--end of first row body....-->
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonWantToDeleteTaxParameter' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+
+
+        </td>
+
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
 </div><!--end....table row-->
 
+<div class="allif-form-container">
+<div class="table-content-description"> Add New Tax Rate </div>
+<div class="allif-scroll-table">
+  <div class="table-responsive allif-full-table">
+  <table class="table table-layout">
+    <thead>
+      <tr class="allif-table-header-row">
+      <td>Tax Name</td>
+      <td>Tax Description</td>
+      <td>Tax Rate %</td>
+      <td>Tax Type</td>
+      <td></td>
+      <td></td>
+      </tr>
+      </thead>
+    <tbody class="allif-table-body">
+    <tr>
+      <form method='POST' action=''>{% csrf_token %}
+      <td>{{form.taxname}}</td>
+      <td>{{form.taxdescription}}</td>
+      <td>{{form.taxrate}}</td>
+      <td>{{form.taxtype}}</td>
+      
+       <td><input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+       <td></td>
+      </form>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+ </div>
+  </div><!--end of row div --->
+
+
+
+  <hr>
+  <div class="card-header">
+    <div class="container-fluid amel-content-header">
+      <div class="dropdown allifmaal-content-dropdown">
+        <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Open Form
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <div class="content-dropdown-menu">
+          <form method='POST' action=''>{% csrf_token %}
+          <li><a class="dropdown-item">Add New Tax Parameter</a></li>
+          <label>Tax Name</label> {{form.taxname}} 
+          <label>Tax Description</label> {{form.taxdescription}} 
+          <label>Tax Rate</label>{{form.taxrate}}
+          <label>Tax Type </label> {{form.taxtype}}
+          <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+        </form>
+        </div>
+        </ul>
+      </div>
+      <!-- Button trigger modal -->
+      <a type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Add New Tax </a>
+    </div>
+    </div><!--end....main headere-->
+
+    
+
+
+
+    {% if update %}
+    <hr>
+    <form method='POST' action=''>{% csrf_token %}
+      <div class="card shadow text-left p-3 allif-form-card" >
+      <label>Tax Name</label> {{form.taxname}} 
+      <label>Tax Description</label> {{form.taxdescription}} 
+      <label>Tax Rate</label>{{form.taxrate}}
+      <label>Tax Type </label> {{form.taxtype}}
+      <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+      
+      </div>
+      <hr>
+  </form>
+  {% else %}
+
+
+
+  <hr>
+  <div class="allif-scroll-table">
+    <!--start of the table-->
+        
+        <table class="table table-layout">
+        <thead>
+        <tr class="allif-table-header-row">
+        
+        <td>Rate %</td>
+        <td>Type</td>
+        </tr>
+    </thead>
+    <tbody class="allif-table-body">
+
+{% for item in latest %}
+    <tr>
+
+
+<td> {{item.taxrate}}</td>
+<td> {{item.taxtype}}</td>
+
+    </tr>
+
+        {% endfor %}
+
+    </tbody>
+    </table>
+   
+    <!--end of table-->
+        </div>
+  {% endif %}
+
+  {% if allifquerydelete %}
+          
+         
+  <div class="row mt-9"> <!--start....table row-->
+    <div class="delete-confirmation-header"> Do you want to delete {{allifquerydelete}}?</div>
+<div class="allif-details-container">
+  
+  <div class="row"><!--start of row div --->
+    <!--start of column two-->
+    <div class="col-md-4">
+      <div class="delete-options-container">
+        <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">No</a>
+      </div>
+    </div>
+
+ 
+  <!--start of column two-->
+  <div class="col-md-4">
+    <div class="delete-options-container">
+    
+        <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Back</a>
+
+        
+    </div>
+        </div>
+  
+
+        <!--start of column two-->
+        <div class="col-md-4">
+          <div class="delete-options-container-delete">
+            <a href="{% url 'allifmaalcommonapp:CommonDeleteTaxParameter' allifquerydelete.id user_var glblslug %}">Yes</a></li>
+            
+        </div>
+      </div>
+        
+        </div><!--end of row div --->
+          
+            </div>
+
+    </div><!--end....table row-->
+    {% endif %}
+
+
+    
+  
 <!-- start of modal section-->
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -244,11 +350,14 @@
   </div>
 </div>
  <!--end of modal section-->
+ <hr>
 
-</div><!--end of main container of the page-->
+
+
+</div>
 
   {% block scripts %}
-
+ 
   {% endblock %}
-   {% endblock %}
-   
+  {% endblock %}
+

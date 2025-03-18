@@ -1259,6 +1259,7 @@ def commonWantToDeleteBranch(request,pk,*allifargs,**allifkwargs):
         "allifquery":allifquery,
         "title":title,
         }
+        
         return render(request,'allifmaalcommonapp/branches/delete-branch-confirm.html',context)
 
     except Exception as ex:
@@ -2001,13 +2002,13 @@ def commonStaffProfiles(request,*allifargs,**allifkwargs):
         compslg=user_var.usercompany
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
         if  main_sbscrbr_entity!=None:# if true, it means that company exists and logged user is owner 
-            allifquery=CommonEmployeesModel.objects.filter(company=main_sbscrbr_entity)
+            allifqueryset=CommonEmployeesModel.objects.filter(company=main_sbscrbr_entity)
         else:
             return redirect('allifmaalcommonapp:CommonDecisionPoint')
            
         context={
             "title":title,
-            "allifquery":allifquery,
+            "allifqueryset":allifqueryset,
             "main_sbscrbr_entity":main_sbscrbr_entity,
             } 
         return render(request,'allifmaalcommonapp/hrm/profiles/profiles.html',context)
