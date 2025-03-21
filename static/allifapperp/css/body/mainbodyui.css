@@ -89,6 +89,10 @@ text-align: center;
    
   }
  
+  .allifmaal-main-container {
+    background-color: var(--main-background-color);
+
+  }
   .content-dropdown-menu{
     border: 0.1em solid var(--main-blue-color);
     margin: 0.1em;
