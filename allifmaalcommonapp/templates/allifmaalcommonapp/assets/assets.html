@@ -71,34 +71,37 @@
 
 
   <div class="col-md-12"> <!--start....table column-->
-  
-    <div class="allif-scroll-table"> 
-      <div class="table-content-description">{{title}} Register </div>
-    <table class="table table-layout">
-    <thead>
-      <tr class="allif-table-header-row" >
-        <td>Asset Category</td>
-        <td>Asset Description</td>
-        <td>Quantity</td>
-        <td>Unit Cost</td>
-        <td>Total Cost</td>
-        <td>Posting</td>
-     
-        </tr>
-        </thead>
-        <tbody class="allif-table-body">
+    <div class="allif-scroll-table">
+      <div class="table-responsive allif-full-table">
+      <table class="table table-layout">
+        <thead>
+          <tr class="allif-table-header-row">
+          <td class="allif-fix-table-col">Asset</td>
          
+          <td>Category</td>
+          <td>Quantity</td>
+          <td>Unit Cost</td>
+          <td>Total Cost</td>
+          <td>Posting</td>
+       
         
-        {% for item in allifqueryset %}   
-        <tr>
+          <td>Navigate</td>
+          
+          <td> . . . </td>
+          <td></td>
+          </tr>
+          </thead>
+          <tbody class="allif-table-body">
+           
+          
+          {% for item in allifqueryset %} 
+          <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAssetDetails' item.id user_var glblslug %}">{{item.description}}</a></td>
           <td>
           
             {{item.category}}
             </td>
-        <td>
-        <a href="{% url 'allifmaalcommonapp:commonAssetDetails' item.id user_var glblslug %}" class="allif-table-links">
-        {{item.description}}
-        </a></td>
+       
         <td>
           {{item.quantity|floatformat:2|intcomma}}
          </td>
@@ -120,50 +123,91 @@
           {{item.status}}
         </td>
         {% endif %}
-   
-        </tr>
-          {% endfor %}
-
-        {% if searched_data %}
-        {% for item in searched_data %}   
-        <tr>
-          <td>
           
-            {{item.category}}
-            </td>
-        <td>
-        <a href="{% url 'allifmaalcommonapp:commonAssetDetails' item.id user_var glblslug %}" class="allif-table-links">
-        {{item.description}}
-        </a></td>
-        <td>
-          {{item.quantity|floatformat:2|intcomma}}
-         </td>
-        <td>
-        {{item.value|floatformat:2|intcomma}}
-       </td>
-       <td>
-        {{item.asset_total_amount|floatformat:2|intcomma}}
-       </td>
-       
-        {% if item.status == 'waiting' %}
-        <td class="allif-table-links">
-        <div class="allif-bringout">
-        {{item.status}}
-        </div>
-        </td>
-        {% else %}
-        <td>
-          {{item.status}}
-        </td>
-        {% endif %}
-   
-        </tr>
-          {% endfor %}
-          {% endif %}
-      </tbody>
-        </table>
+           <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+              <div class="dropdown-content">
+                <a href="{% url 'allifmaalcommonapp:commonEditAssetCategory' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+                
+              </div>
+            </div>
+            <div class="dropdown allif-confirm-action">
+              
+              <a href="{% url 'allifmaalcommonapp:commonAssetCategories' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteAssetCategory' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            </div>
+  
+           
+          </td>
+         <td> . . . </td>
+         <td></td>
+        
     
+      </tr>
+      {% endfor %}
+      {% if searched_data %}
+      {% for item in searched_data %}
+      <tr data-id="{{item.id}}">
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAssetDetails' item.id user_var glblslug %}">{{item.description}}</a></td>
+        <td>
+        
+          {{item.category}}
+          </td>
+      
+        {{item.quantity|floatformat:2|intcomma}}
+       </td>
+      <td>
+      {{item.value|floatformat:2|intcomma}}
+     </td>
+     <td>
+      {{item.asset_total_amount|floatformat:2|intcomma}}
+     </td>
+     
+      {% if item.status == 'waiting' %}
+      <td class="allif-table-links">
+      <div class="allif-bringout">
+      {{item.status}}
       </div>
+      </td>
+      {% else %}
+      <td>
+        {{item.status}}
+      </td>
+      {% endif %}
+        
+         <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+            <div class="dropdown-content">
+              <a href="{% url 'allifmaalcommonapp:commonEditAssetCategory' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="{% url 'allifmaalcommonapp:commonAssetCategories' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonDeleteAssetCategory' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+         
+        </td>
+       <td> . . . </td>
+       <td></td>
+      
+  
+    </tr>
+      {% endfor %}
+        {%endif %}
+  
+        </tbody>
+      </table>
+      </div>
+     </div>
+
+  
       
       </div><!--end....table column-->
   </div>

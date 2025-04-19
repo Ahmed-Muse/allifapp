@@ -6,165 +6,281 @@
 {% block style %}
 {%endblock%}
 {% block body %}
+<div class="allifmaal-main-container">
 
 <!--start....main headere-->
 <div class="card-header">
 
-  <div class="row mt-12" ><!--start....header row-->
-  
-  <div class="col-md-12"><!--start....header column-->
-  
-  <div class="container-fluid amel-content-header">
+<div class="row mt-12" ><!--start....header row-->
 
-    <div class="dropdown allifmaal-content-dropdown">
-      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Actions
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <div class="content-dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditClass' allifquery.id user_var glblslug %}">Edit Class</a></li>
+<div class="col-md-12"><!--start....header column-->
+
+<div class="container-fluid amel-content-header">
+<div class="dropdown allifmaal-content-dropdown">
+  <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  Actions
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <div class="content-dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditClass' allifquery.id user_var glblslug %}">Edit Class</a></li>
         <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteClass' allifquery.id user_var glblslug %}">Delete Class</a></li>
        
-      </div>
-      </ul>
-    </div>
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+   </div>
+  </ul>
+</div>
+<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 
-    <a href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Forms</a>
-    <a href="{% url 'allifmaalcommonapp:commonClasses' user_var glblslug %}">Classes</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddClass' user_var glblslug %}">Add New</a>
+<a href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Forms</a>
+<a href="{% url 'allifmaalcommonapp:commonClasses' user_var glblslug %}">Classes</a>
+<a href="{% url 'allifmaalcommonapp:commonAddClass' user_var glblslug %}">Add New</a>
 
 
+</div>
+
+    </div><!--end....header column-->
   
-  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
-  </div>
-  
-      </div><!--end....header column-->
-    
-    </div><!--end....header row-->
-  
-  </div><!--end....main headere-->
+  </div><!--end....header row-->
 
-<div class="allifmaincontainer">
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="allif-details-container">
+</div><!--end....main headere-->
+
+  <div class="allifmaincontainer">
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">{{allifquery}} Details</div>
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
       <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+        <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{allifquery.company}}</td>
+          </tr>
+      <tr>
+        <td class="allif-fix-table-col">Division</td>
+        <td>{{allifquery.division}}</td>
+        </tr>
+      <tr>
+        <td class="allif-fix-table-col">Branch</td>
+        <td>{{allifquery.branch}}</td>
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Department</td>
+          <td>{{allifquery.department}}</td>
+          </tr>
       
-        <!--start of column two-->
-        <div class="col-md-4">
-          <div class="allif-details-card ">
-            <!--start of the table here-->
-          <table class="table allif-details-table table-layout">
-            <tbody>
+   
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+         
+          <tr>
+            <td class="allif-fix-table-col">Name</td>
+            <td>{{allifquery.name}}</td>
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Form</td>
+              <td>{{allifquery.form}}</td>
+              </tr>
               <tr>
-                <td>Company</td>
-                <td>{{allifquery.company}}</td>
-            
-                </tr>
-              <tr>
-                <td>Division</td>
-                <td>{{allifquery.division}}</td>
-            
-                </tr>
-                <tr>
-                  <td>Branch</td>
-                  <td>{{allifquery.branch}}</td>
-              
-                  </tr>
-              <tr>
-                <td>Department</td>
-                <td>{{allifquery.department}}</td>
-            
+                <td class="allif-fix-table-col">Size</td>
+                <td>{{allifquery.size}}</td>
                 </tr>
          
+         
+       
           </tbody>
           </table>
-        
           </div>
-              </div>
-      
-           
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card ">
-          <!--start of the table here-->
-        <table class="table table-layout allif-details-table">
-          <tbody>
-       
-            <tr>
-              <td>Class</td>
-              <td>{{allifquery.name}}</td>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Created By</td>
+            <td>{{allifquery.owner}}</td>
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Date</td>
+            <td>{{allifquery.date|date:'d/m/Y'}}</td>
+            </tr>
           
-              </tr>
-              <tr>
-                <td>Contact</td>
-                <td>{{allifquery.contact}}</td>
-            
-                </tr>
-              
             <tr>
-              <td>Comments</td>
+              <td class="allif-fix-table-col">Comments</td>
               <td>{{allifquery.comments}}</td>
           
-              </tr>
-             
-        </tbody>
-        </table>
+          </tr> 
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
       
         </div>
-            </div>
-      
-      
-       <!--start of column two-->
-       <div class="col-md-4">
-        <div class="allif-details-card ">
-          <!--start of the table here-->
-        <table class="table table-layout allif-details-table">
-          <tbody>
-            <tr>
-              <td>Size</td>
-              <td>{{allifquery.size}}</td>
-          
-              </tr>
-            
-      <tr>
-        <td>Owner</td>
-        <td>{{allifquery.owner}}</td>
-    
-        </tr>
-      
-    <tr>
-    <td>Created On</td>
-    <td>{{allifquery.date|date:'d/m/Y'}}</td>
 
-    </tr>
-               
-     
-        </tbody>
-        </table>
-      
-      </div>
-    </div>
-      
-      </div><!--end of row div --->
-        
-          </div>
-<hr>
 </div><!--end....table row-->
-
-
+</div>
 <!--end of table-->
 
 </div><!--end of main container of the page....-->
+
+<hr>
+<div class="row mt-12"> <!--start....table row-->
+  <div class="row">
+  <div class="col-md-6"> <!--start....table column-->
+    <div class="table-content-description"> <a href="" class="allif-table-links">Schools</a> </div>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Name</td>
+        <td>Description</td>
+        <td>Date</td>
+       
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in deposits %} 
+        <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col">
+            <a href="" class="allif-table-links">
+            {{item.amount|floatformat:2|intcomma}}
+            </a>
+           </td>
+          <td>
+            {{item.description}}
+           </td>
+        
+        
+         <td>
+          {{item.date|date:'d/m/Y'}}
+         </td>
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+              <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+            <a href="" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+
+        </td>
+
+      
+       
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+<div class="col-md-6"> <!--start....table column-->
+  <div class="table-content-description"> <a href="" class="allif-table-links"> {{allifquery}} Faculties </a> </div>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Name</td>
+        <td>Description</td>
+        <td>Date</td>
+       
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+           
+        {% for item in allifqueryset %} 
+        <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col">
+            <a href="" class="allif-table-links">
+            {{item.amount|floatformat:2|intcomma}}
+            </a>
+           </td>
+          <td>
+            {{item.description}}
+           </td>
+        
+        
+         <td>
+          {{item.date|date:'d/m/Y'}}
+         </td>
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+              <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+            <a href="" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+
+        </td>
+
+      
+       
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+</div>
+</div>
+</div>
   {% block scripts %}
 
   {% endblock %}
    {% endblock %}
    
-
-
-
-
-
-
-
