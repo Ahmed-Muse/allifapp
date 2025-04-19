@@ -6,95 +6,153 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-
+<div class="allifmaal-main-container">
+ 
 <!--start....main headere-->
 <div class="card-header">
 
-  <div class="row mt-12" ><!--start....header row-->
-  
-  <div class="col-md-12"><!--start....header column-->
-  
-  <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Banks:</a>
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
+<div class="row mt-12" ><!--start....header row-->
+
+<div class="col-md-12"><!--start....header column-->
+
+<div class="container-fluid amel-content-header">
+
+  <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+  <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
     <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
     <a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a>
     <a href="{% url 'allifmaalcommonapp:commonAddBankShareholderDeposit' user_var glblslug %}">New Deposit</a>
  
- 
+
+</div>
+
+    </div><!--end....header column-->
   
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
-    
-    </div>
-    </ul>
-  </div>
- 
-  </div>
-  
-      </div><!--end....header column-->
-    
-    </div><!--end....header row-->
-  
-  </div><!--end....main headere-->
+  </div><!--end....header row-->
+
+</div><!--end....main headere-->
+
 
 <div class="allifmaincontainer">
-  <div class="table-details-content-description">Add New Withdrawal</div>
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="col-md-12"><!--start of the first row body-->
-        <div class="allif-form-container">
-        <form method='POST' action=''>{% csrf_token %}
-        <div class="row"><!--start of row div --->
-          <div class="col-md-4"><!--start of column 1-->
-            <div class="card shadow text-left p-3 allif-form-card" >
-            <label>Division</label> {{form.division}}
-            <label> Branch</label> {{form.branch}}
-            <label>Department</label> {{form.department}}
-            <label>Bank</label> {{form.bank}}
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">Add/Edit New Deposit</div>
+  <form method='POST' action=''>{% csrf_token %}
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+
+      <tr>
+        <td class="allif-fix-table-col">Division</td>
+        <td>{{form.division}}</td>
+    
+        </tr>
+        
+        <tr>
+          <td class="allif-fix-table-col">Branch</td>
+          <td>{{form.branch}}</td>
+      
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Department</td>
+            <td>{{form.department}}</td>
+        
+            </tr>
            
+            <tr>
+              <td class="allif-fix-table-col">Banks</td>
+              <td>{{form.bank}}</td>
+          
+              </tr>
            
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+        
+              <tr>
+                <td class="allif-fix-table-col">Transfer From</td>
+                <td>{{form.bankcoa}}</td>
+            
+                </tr>
+                <tr>
+                  <td class="allif-fix-table-col">Transfer To</td>
+                  <td>{{form.asset}}</td>
+              
+                  </tr>
+               
+           <tr>
+            <td class="allif-fix-table-col">Description</td>
+            <td>{{form.description}}</td>
+        
+            </tr>
+               
+          </tbody>
+          </table>
           </div>
-            </div><!--end of column 1-->
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Amount</td>
+            <td>{{form.amount}}</td>
         
-            <div class="col-md-4"><!--start of column 2-->
-            <div class="card shadow text-left p-3 allif-form-card">
-              <label>Transfer From</label> {{form.bankcoa}}
-              <label>Transfer To</label> {{form.asset}}
-              <label>Description</label> {{form.description}}
-              <label>Amount</label> {{form.amount}}
-                </div>
-            </div><!--end of column 2-->
-            <div class="col-md-4"><!--start of column 3-->
-            <div class="card shadow text-left p-3 allif-form-card">
-             
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Comments</td>
+            <td>{{form.comments}}</td>
         
-              <label>Comments</label> {{form.comments}}
-              <br>
-              <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-      <br>
-     
-                </div>
-            </div><!--end of column 1-->
-        
-        </div><!--end of row div --->
-            </form>
-            </div>
-            </div><!--end of first row body-->
+            </tr>
+           
+            
+            <tr>
+              <td class="allif-fix-table-col">Action</td>
+              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+          
+              </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
 </div><!--end....table row-->
-
+</div>
+</form>
 <!--end of table-->
-
 
 </div><!--end of main container of the page....-->
 
+
+
+
+</div>
+
+</div>
   {% block scripts %}
 
   {% endblock %}

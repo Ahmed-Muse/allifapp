@@ -40,6 +40,14 @@ def commonWebsite(request):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/web-error.html',error_context)
 
+def commonEngineering(request):
+    try:
+        title="Allifmaal Engineering"
+        context={"title":title,}
+        return render(request,'allifmaalcommonapp/website/engineering.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/web-error.html',error_context)
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 def CommonDecisionPoint(request,*allifargs,**allifkwargs):
     try:

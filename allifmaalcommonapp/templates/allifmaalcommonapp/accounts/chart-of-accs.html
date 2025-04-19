@@ -6,7 +6,7 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-
+<div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
 
@@ -113,137 +113,193 @@
 <div class="row mt-12"> <!--start....table row-->
 <div class="col-md-4"> <!--start....table column-->
 <div class="table-details-content-description">Category Selection Search</div>
-<div class="allif-scroll-table"> 
-  
-  
-    <label id="numofitems"> </label>
- 
 
-  <form method='POST' action=''>{% csrf_token %}
-  {{form.category}}
-  </form>
-
-<table class="table table-layout">
-<thead>
-  <tr class="allif-table-header-row" >
-  <td>Account</td>
-  <td>Balance</td>
-  </tr>
-  </thead>
-  <tbody class="allif-table-body"  id="allifdata">
-  
-  </tbody>
-    </table>
-
-  </div>
+<div class="allif-scroll-table">
+  <div class="table-responsive allif-full-table">
+  <label id="numofitems"> </label>
   
   <table class="table table-layout">
-    <thead>
-      <tr class="allif-table-header-row" >
-      <td>Assets</td>
+      <tbody class="allif-table-body">
+        <form method='POST' action=''>{% csrf_token %}
+          {{form.category}}
+          </form>
+    </tbody>
+  </table>
+  </div>
+ </div>
+
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+      <td>Account</td>
+      
+      <td>Balance</td>
+    
+        </tr>
+        </thead>
+        <tbody class="allif-table-body"  id="allifdata">
+         
+        
+     
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+
+   <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+      <td class="allif-fix-table-col">Assets</td>
+      
       <td>Liabilities</td>
       <td>Equity</td>
-      </tr>
-      </thead>
-      <tbody class="allif-table-body"  id="allifdata">
-      <tr>
-        <td>{{assets_tot_val|floatformat:2|intcomma}}</td>
-        <td>{{liablts_tot_val|floatformat:2|intcomma}}</td>
-        <td>{{equity_tot_val|floatformat:2|intcomma}}</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>
-          {{assets_tot_val|floatformat:2|intcomma}}
-        </td>
-        <td>|</td>
-       
-        <td>{{sum_liablts_and_equity|floatformat:2|intcomma}}</td>
-      </tr>
+     
+        </tr>
+        </thead>
+        <tbody class="allif-table-body"  id="allifdata">
+          <tr>
+            <td>{{assets_tot_val|floatformat:2|intcomma}}</td>
+            <td>{{liablts_tot_val|floatformat:2|intcomma}}</td>
+            <td>{{equity_tot_val|floatformat:2|intcomma}}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              {{assets_tot_val|floatformat:2|intcomma}}
+            </td>
+            <td>|</td>
+           
+            <td>{{sum_liablts_and_equity|floatformat:2|intcomma}}</td>
+          </tr>
+        
+     
       </tbody>
-        </table>
+    </table>
+    </div>
+   </div>
+
   </div><!--end....table column-->
 
   <div class="col-md-8"> <!--start....table column-->
     <div class="table-details-content-description">Chart of Accounts</div>
-    <div class="allif-scroll-table"> 
-      
-    <table class="table table-layout">
-    <thead>
-      <tr class="allif-table-header-row" >
-        <td>Code</td>
-      <td>Description</td>
-      <td>Balance</td>
-      <td>Category</td>
-      <td>Department</td>
-     
-      </tr>
-      </thead>
-      <tbody class="allif-table-body">
-       
-           
-      {% for item in allifqueryset %}   
-      <tr>
-        <td>
-          {{item.code}}
-         </td>
-      <td>
-     
-      {{item.description}}
-      </td>
-      
-      <td>
-        <a href="{% url 'allifmaalcommonapp:commonChartofAccountDetails' item.id user_var glblslug %}" class="allif-table-links">
-      {{item.balance|floatformat:2|intcomma}}
-      </a>
-     </td>
-     <td>
-      {{item.category}}
-     </td>
-     <td>
-      {{item.department}}
-     </td>
-   
-   
-      </tr>
-        {% endfor %}
-    
-    {% if searched_data %}
 
-    {% for item in searched_data %}
-    <tr>
-      <td>
-        {{item.code}}
+    <div class="allif-scroll-table">
+      <div class="table-responsive allif-full-table">
+      <table class="table table-layout">
+        <thead>
+          <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Code</td>
+       
+        <td>Description</td>
+        <td>Balance</td>
+        <td>Category</td>
+        <td>Department</td>
+          <td>Navigate</td>
+          
+          <td> . . . </td>
+          <td></td>
+          </tr>
+          </thead>
+          <tbody class="allif-table-body">
+           
+          
+          {% for item in allifqueryset %} 
+          <tr data-id="{{item.id}}">
+            <td class="allif-fix-table-col">
+              {{item.code}}
+             </td>
+          <td>
+         
+          {{item.description}}
+          </td>
+          
+          <td>
+            <a href="{% url 'allifmaalcommonapp:commonChartofAccountDetails' item.id user_var glblslug %}" class="allif-table-links">
+          {{item.balance|floatformat:2|intcomma}}
+          </a>
+         </td>
+         <td>
+          {{item.category}}
+         </td>
+
+         
+       <td>
+        {{item.department}}
        </td>
-    <td>
-   
-    {{item.description}}
-    </td>
-    
-    <td>
-      <a href="{% url 'allifmaalcommonapp:commonChartofAccountDetails' item.id user_var glblslug %}" class="allif-table-links">
-    {{item.balance|floatformat:2|intcomma}}
-    </a>
-   </td>
-   <td>
-    {{item.category}}
-   </td>
-   <td>
-    {{item.department}}
-   </td>
- 
-    </tr>
-    {% endfor %}
-      {%endif %}
      
-      </tbody>
-        </table>
-    
+       
+          <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+              <div class="dropdown-content">
+                <a href="{% url 'allifmaalcommonapp:commonChartofAccountDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+                
+              </div>
+            </div>
+           
+          </td>
+  
+         <td> . . . </td>
+         <td></td>
+        </tr>
+        {% endfor %}
+        {% if searched_data %}
+          {% for item in searched_data %}
+          <tr data-id="{{item.id}}">
+            <td class="allif-fix-table-col">
+              {{item.code}}
+             </td>
+          <td>
+         
+          {{item.description}}
+          </td>
+          
+          <td>
+            <a href="{% url 'allifmaalcommonapp:commonChartofAccountDetails' item.id user_var glblslug %}" class="allif-table-links">
+          {{item.balance|floatformat:2|intcomma}}
+          </a>
+         </td>
+         <td>
+          {{item.category}}
+         </td>
+
+         
+       <td>
+        {{item.department}}
+       </td>
+     
+       
+          <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+              <div class="dropdown-content">
+                <a href="{% url 'allifmaalcommonapp:commonChartofAccountDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+                
+              </div>
+            </div>
+           
+          </td>
+  
+         <td> . . . </td>
+         <td></td>
+        </tr>
+          {% endfor %}
+            {%endif %}
+        </tbody>
+      </table>
       </div>
+     </div>
+
+
       
       </div><!--end....table column-->
   </div>

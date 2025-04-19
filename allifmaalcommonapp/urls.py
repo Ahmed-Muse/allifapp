@@ -5,6 +5,7 @@ urlpatterns = [
 
 ############################ The decision maker ##################################3
 path('', views.commonWebsite, name="commonWebsite"),
+path('Engineering/', views.commonEngineering, name="commonEngineering"),
 path('Decision/Making/Point/', views.CommonDecisionPoint, name="CommonDecisionPoint"),
 path('Home/<str:allifusr>/<str:allifslug>/', views.commonHome, name="commonHome"),
 
