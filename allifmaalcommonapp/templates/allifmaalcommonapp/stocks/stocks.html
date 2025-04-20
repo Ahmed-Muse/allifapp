@@ -6,7 +6,7 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-
+<div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
 
@@ -93,26 +93,10 @@
     </div>
     <a class="amel-table-list-identifier">Inventory:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a>
+    
     <a href="{% url 'allifmaalcommonapp:commonAddStockItem' user_var glblslug %}">New Stock Item</a>
  
  
-  
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      
-    </div>
-    </ul>
-  </div>
-  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
   </div>
   
       </div><!--end....header column-->
@@ -125,79 +109,121 @@
     
 <div class="row mt-12"> <!--start....table row-->
 <div class="col-md-12"> <!--start....table column-->
-  
-<div class="allif-scroll-table"> 
-  
-<table class="table table-layout">
-<thead>
-  <tr class="allif-table-header-row" >
-  <td>Part No.</td>
-  <td>Description</td>
-  <td>Quantity</td>
-  <td>Unit Cost</td>
-  <td>Unit Price</td>
- 
-  </tr>
-  </thead>
-  <tbody class="allif-table-body">
-   
-  
-  {% for item in allifqueryset %}   
-  <tr>
-   
-  <td>
-  <a href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.id user_var glblslug %}" class="allif-table-links">
-  {{item.partNumber}}
-  </a></td>
-  
-  <td>
-  {{item.description}}
- </td>
- <td>
-  {{item.quantity|intcomma}}
- </td>
 
- <td>
-  {{item.unitcost|intcomma}}
- </td>
- <td>
-  {{item.unitPrice|intcomma}}
- </td>
   
-  </tr>
-    {% endfor %}
-    {% if searched_data %}
-        {% for item in searched_data %}   
-        <tr>
-   
-          <td>
-          <a href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.id user_var glblslug %}" class="allif-table-links">
-          {{item.partNumber}}
-          </a></td>
-          
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Part No.</td>
+     
+        <td>Description</td>
+        <td>Quantity</td>
+        <td>Unit Cost</td>
+        <td>Unit Price</td>
+      
+        <td>Navigate</td>
+        
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in allifqueryset %} 
+        <tr data-id="{{item.id}}">
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.id user_var glblslug %}">{{item.partNumber}}</a></td>
+       
           <td>
           {{item.description}}
          </td>
          <td>
-          {{item.quantity|intcomma}}
+          {{item.quantity|floatformat:2|intcomma}}
          </td>
         
          <td>
-          {{item.unitcost|intcomma}}
+          {{item.unitcost|floatformat:2|intcomma}}
          </td>
          <td>
-          {{item.unitPrice|intcomma}}
+          {{item.unitPrice|floatformat:2|intcomma}}
          </td>
           
-          </tr>
-          {% endfor %}
-          {% endif %}
- 
-  </tbody>
-    </table>
+       
+         <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+            <div class="dropdown-content">
+              <a href="{% url 'allifmaalcommonapp:commonEditStockItem' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonDeleteStockItem' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+          </div>
 
-  </div>
+         
+        </td>
+       <td> . . . </td>
+       <td></td>
+      
   
+    </tr>
+    {% endfor %}
+    {% if searched_data %}
+    {% for item in searched_data %}
+    <tr data-id="{{item.id}}">
+      <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.id user_var glblslug %}">{{item.partNumber}}</a></td>
+     
+        <td>
+        {{item.description}}
+       </td>
+       <td>
+        {{item.quantity|floatformat:2|intcomma}}
+       </td>
+      
+       <td>
+        {{item.unitcost|floatformat:2|intcomma}}
+       </td>
+       <td>
+        {{item.unitPrice|floatformat:2|intcomma}}
+       </td>
+        
+     
+       <td>
+        <div class="dropdown allifmaal-content-dropdown">
+          <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+          <div class="dropdown-content">
+            <a href="{% url 'allifmaalcommonapp:commonEditStockItem' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+            <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+            
+          </div>
+        </div>
+        <div class="dropdown allif-confirm-action">
+          
+          <a href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+          <a href="{% url 'allifmaalcommonapp:commonDeleteStockItem' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+        </div>
+
+       
+      </td>
+     <td> . . . </td>
+     <td></td>
+    
+
+  </tr>
+    {% endfor %}
+      {%endif %}
+
+      </tbody>
+    </table>
+    </div>
+   </div>
+
   </div><!--end....table column-->
   </div>
 

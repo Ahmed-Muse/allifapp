@@ -264,7 +264,7 @@ path('New/Purchase/Order/<str:allifusr>/<str:allifslug>/', views.commonNewPurcha
 path('Delete/Purchase/Order/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeletePO, name="commonDeletePO"),
 path('Add/Purchase/Order/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddPODetails, name="commonAddPODetails"),
 path('Add/PO/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddPOItems, name="commonAddPOItems"),
-path('Delete/Purchase/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeletePOItem, name="commonDeletePOtem"),
+path('Delete/Purchase/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeletePOItem, name="commonDeletePOItem"),
 path('Purchase/Order/Mis/Costs/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPOMiscCost, name="commonPOMiscCost"),
 path('Post/PO/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostPO, name="commonPostPO"),
 path('PO/Misc/Cost/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPOMiscCostDetails, name="commonPOMiscCostDetails"),
