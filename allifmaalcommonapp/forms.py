@@ -870,7 +870,7 @@ class CommonAddJobDetailsForm(forms.ModelForm):
             
             'comments':forms.TextInput(attrs={'class':'form-control'}),
            
-            'customer':forms.Select(attrs={'class':'form-control'}),
+            'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
            
             'status':forms.Select(attrs={'class':'form-control'}),
             

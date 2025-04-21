@@ -8423,7 +8423,7 @@ def commonWantToDeleteSupplierPayment(request,pk,*allifargs,**allifkwargs):
         "allifquery":allifquery,
         "myallifquery":myallifquery,
         }
-        return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payment-details.html',context)
+        return render(request,'allifmaalcommonapp/payments/suppliers/x-supplier-payment-confrm.html',context)
         
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -8475,7 +8475,7 @@ def commonSupplierPaymentDetails(request,pk,*allifargs,**allifkwargs):
                 add_item.company=main_sbscrbr_entity
                 add_item.owner=request.user
                 add_item.save()
-                return redirect('allifmaalapp:AllifSupplierPayments')
+                return redirect('allifmaalcommonapp:commonSupplierPaymentDetails',pk=allifquery.id,allifusr=usrslg,allifslug=compslg)
         context={
             
             "title":title,
@@ -8519,7 +8519,7 @@ def commonEditSupplierPayment(request,pk,*allifargs,**allifkwargs):
                 add_item.company=main_sbscrbr_entity
                 add_item.owner=request.user
                 add_item.save()
-                CommonSupplierPaymentsModel.objects.get(id=pk).delete()
+                #CommonSupplierPaymentsModel.objects.get(id=pk).delete()
                 return redirect('allifmaalcommonapp:commonSupplierPayments',allifusr=usrslg,allifslug=compslg)
               
         context = {
@@ -8801,7 +8801,7 @@ def commonWantToDeleteCustomerPayment(request,pk,*allifargs,**allifkwargs):
         "allifquery":allifquery,
         "myallifquery":myallifquery,
         }
-        return render(request,'allifmaalcommonapp/payments/customers/customer-payment-details.html',context)
+        return render(request,'allifmaalcommonapp/payments/customers/x-cust-payment-confrm.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -9383,7 +9383,7 @@ def commonWantToDeleteSalary(request,pk,*allifargs,**allifkwargs):
         "allifquery":allifquery,
         "myallifquery":myallifquery,
         }
-        return render(request,'allifmaalcommonapp/hrm/salaries/salary-details.html',context)
+        return render(request,'allifmaalcommonapp/hrm/salaries/x-salary-confirm.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -9404,7 +9404,7 @@ def commonDeleteSalary(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonPostSalary(request,pk,*allifargs,**allifkwargs):
     
-    try:
+    #try:
         compslg=request.user.usercompany
         usrslg=request.user.customurlslug
         logged_user=User.objects.filter(customurlslug=usrslg).first()
@@ -9465,10 +9465,10 @@ def commonPostSalary(request,pk,*allifargs,**allifkwargs):
             messgeone=messages.error(request, 'Please note that either Equity or Salaries or both accounts are missing in the chart of accounts.')
             messgetwo=messages.error(request, 'Add Equity and Salaries accounts in the Equity and Expenses categories respectively, if they are not already there, then post again.')
            
-            return render(request,'allifmaalapp/accounts/synch-error.html')
+            return render(request,'allifmaalcommonapp/error/error.html')
             
        
-    except Exception as ex:
+    #except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
@@ -10158,20 +10158,19 @@ def commonEditTask(request,pk,*allifargs,**allifkwargs):
 def commonProfitAndLoss(request,*allifargs,**allifkwargs):
     try:
         title="Profit And Loss"
-        try:
-            latest=CommonInvoicesModel.objects.order_by('-date').filter(posting_inv_status='posted')[:7]
-            totalsales=CommonInvoicesModel.objects.filter(posting_inv_status='posted').order_by('-invoice_total').aggregate(Sum('invoice_total'))['invoice_total__sum']
-            totalrevenue=CommonChartofAccountsModel.objects.filter(code__lt=49999,code__gt=39999).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
-            totalgoodscost=CommonInvoicesModel.objects.filter(posting_inv_status='posted').order_by('-invoice_items_total_cost').aggregate(Sum('invoice_items_total_cost'))['invoice_items_total_cost__sum']
-            grossprofitorloss=totalsales-totalgoodscost
-            #totalexpenses=totalgoodscost=AllifmaalExpensesModel.objects.all().order_by('-amount').aggregate(Sum('amount'))['amount__sum']
-            totexpenses=CommonChartofAccountsModel.objects.filter(code__lt=59999,code__gt=49999).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
-            netprofitorloss=grossprofitorloss-totexpenses
-            totalrevenue=CommonChartofAccountsModel.objects.filter(code__lt=49999,code__gt=39999).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
-            #order_by('-amount').aggregate(Sum('amount'))['amount__sum']
-            exps=CommonChartofAccountsModel.objects.filter(code__lt=59999,code__gt=49999)
-        except:
-            return HttpResponse("No invoices posted yet")
+     
+        latest=CommonInvoicesModel.objects.order_by('-date').filter(posting_inv_status='posted')[:7]
+        totalsales=CommonInvoicesModel.objects.filter(posting_inv_status='posted').order_by('-invoice_total').aggregate(Sum('invoice_total'))['invoice_total__sum']
+        totalrevenue=CommonChartofAccountsModel.objects.filter(code__lt=49999,code__gt=39999).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+        totalgoodscost=CommonInvoicesModel.objects.filter(posting_inv_status='posted').order_by('-invoice_items_total_cost').aggregate(Sum('invoice_items_total_cost'))['invoice_items_total_cost__sum']
+        grossprofitorloss=totalsales-totalgoodscost
+        #totalexpenses=totalgoodscost=AllifmaalExpensesModel.objects.all().order_by('-amount').aggregate(Sum('amount'))['amount__sum']
+        totexpenses=CommonChartofAccountsModel.objects.filter(code__lt=59999,code__gt=49999).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+        netprofitorloss=grossprofitorloss-(totexpenses or 0)
+        totalrevenue=CommonChartofAccountsModel.objects.filter(code__lt=49999,code__gt=39999).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+        #order_by('-amount').aggregate(Sum('amount'))['amount__sum']
+        exps=CommonChartofAccountsModel.objects.filter(code__lt=59999,code__gt=49999)
+    
         context={
             "title":title,
             "totalsales":totalsales,

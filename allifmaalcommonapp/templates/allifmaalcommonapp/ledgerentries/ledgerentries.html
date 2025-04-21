@@ -6,13 +6,14 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-
+<div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
+  
   <div class="row mt-12" ><!--start....header row-->
   
   <div class="col-md-12"><!--start....header column-->
-    
+  
   <div class="container-fluid amel-content-header">
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -90,23 +91,12 @@
       </div>
       </ul>
     </div>
-
-    <a class="amel-table-list-identifier">Supplier Payments:</a>
+    <a class="amel-table-list-identifier">Ledger Entries:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonPostedSupplierPayments' user_var glblslug %}">Posted Supplier Payments</a>
     
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      
-    </div>
-    </ul>
-  </div>
-  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+    <a href="{% url 'allifmaalcommonapp:commonPaySupplierDirect' user_var glblslug %}">New Supplier Payment</a>
+
   </div>
   
       </div><!--end....header column-->
@@ -118,71 +108,37 @@
     
 <div class="row mt-12"> <!--start....table row-->
 <div class="col-md-12"> <!--start....table column-->
+
+     
   
-<div class="allif-scroll-table">
-<table class="table table-layout">
-<thead>
-  <tr class="allif-table-header-row" >
-    <td>Supplier</td>
-    <td>Cusotmer</td>
-    <td>Staff</td>
-    <td>Owner</td>
-    <td>Credit</td>
-    <td>Debit</td>
-  
-    <td>Balance</td>
-    <td>Transaction</td>
-    <td>Date</td>
-  
-  </tr>
-  </thead>
-  <tbody class="allif-table-body">
-   
-  
-  {% for item in allifqueryset %}   
-  <tr>
-    <td>
-      {{item.supplier}}
-    </td>
-    <td>
-      {{item.customer}}
-    </td>
-    <td>
-      {{item.staff}}
-    </td>
-    
-    <td>
-      {{item.ledgowner}}
-    </td>
-   
-    <td>
-      {{item.credit}}
-    </td>
-    <td>
-      {{item.debit}}
-    </td>
-  <td>
-  <a href="{% url 'allifmaalcommonapp:commonLedgerEntryDetails' item.id user_var glblslug %}" class="allif-table-links">
-  {{item.balance|floatformat:2|intcomma}}
-  </a></td>
-  
-    <td>
-    {{item.comments}}
-  </td>
- 
- 
-  <td>
-    {{item.date|date:'d/m/Y'}}
-  </td>
-    
-  
-    </tr>
-      {% endfor %}
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Description</td>
+        <td>Supplier</td>
+        <td>Cusotmer</td>
+        <td>Staff</td>
+        <td>Owner</td>
+        <td>Credit</td>
+        <td>Debit</td>
       
-      {% if searched_data %}
-      {% for item in searched_data %}   
-      <tr>
-      
+        <td>Balance</td>
+        <td>Transaction</td>
+       
+        <td>Navigate</td>
+        
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in allifqueryset %} 
+        <tr data-id="{{item.id}}">
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonLedgerEntryDetails' item.id user_var glblslug %}">{{item.comments}}</a></td>
         <td>
           {{item.supplier}}
         </td>
@@ -198,10 +154,10 @@
         </td>
        
         <td>
-          {{item.credit}}
+          {{item.credit|floatformat:2|intcomma}}
         </td>
         <td>
-          {{item.debit}}
+          {{item.debit|floatformat:2|intcomma}}
         </td>
       <td>
       <a href="{% url 'allifmaalcommonapp:commonLedgerEntryDetails' item.id user_var glblslug %}" class="allif-table-links">
@@ -212,19 +168,94 @@
         {{item.comments}}
       </td>
      
+         <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+            <div class="dropdown-content">
+              <a href="{% url 'allifmaalcommonapp:commonLedgerEntryDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">See Details</a>
+             
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="{% url 'allifmaalcommonapp:commonLedgerEntries' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:commonDeleteLedgerEntry' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+         
+        </td>
+       <td> . . . </td>
+       <td></td>
+      
+  
+    </tr>
+    {% endfor %}
+    {% if searched_data %}
+    {% for item in searched_data %}
+    <tr data-id="{{item.id}}">
+      <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonLedgerEntryDetails' item.id user_var glblslug %}">{{item.comments}}</a></td>
+      <td>
+        {{item.supplier}}
+      </td>
+      <td>
+        {{item.customer}}
+      </td>
+      <td>
+        {{item.staff}}
+      </td>
+      
+      <td>
+        {{item.ledgowner}}
+      </td>
      
       <td>
-        {{item.date|date:'d/m/Y'}}
+        {{item.credit|floatformat:2|intcomma}}
       </td>
-        
-        </tr>
-        {% endfor %}
-        {% endif %}
+      <td>
+        {{item.debit|floatformat:2|intcomma}}
+      </td>
+    <td>
+    <a href="{% url 'allifmaalcommonapp:commonLedgerEntryDetails' item.id user_var glblslug %}" class="allif-table-links">
+    {{item.balance|floatformat:2|intcomma}}
+    </a></td>
+    
+      <td>
+      {{item.comments}}
+    </td>
+   
+       <td>
+        <div class="dropdown allifmaal-content-dropdown">
+          <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+          <div class="dropdown-content">
+            <a href="{% url 'allifmaalcommonapp:commonLedgerEntryDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">See Details</a>
+           
+            <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+            
+          </div>
+        </div>
+        <div class="dropdown allif-confirm-action">
+          
+          <a href="{% url 'allifmaalcommonapp:commonLedgerEntries' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+          <a href="{% url 'allifmaalcommonapp:commonDeleteLedgerEntry' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+        </div>
 
-  </tbody>
+       
+      </td>
+     <td> . . . </td>
+     <td></td>
+    
+
+  </tr>
+    {% endfor %}
+      {%endif %}
+
+      </tbody>
     </table>
+    </div>
+   </div>
 
-  </div>
   
   </div><!--end....table column-->
   </div>

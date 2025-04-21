@@ -655,7 +655,7 @@ class CommonLedgerEntriesModel(models.Model):
     staff= models.ForeignKey(CommonEmployeesModel,related_name="empldgentr",on_delete=models.SET_NULL,blank=True,null=True)
     debit= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
     credit= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    origintalamount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    originalamount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
     newamount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
     balance= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
     date=models.DateField(auto_now=True)

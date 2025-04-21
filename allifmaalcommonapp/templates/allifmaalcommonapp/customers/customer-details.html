@@ -51,7 +51,9 @@
     <a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" class="module-menu-links">Customers</a>
     
     {% endif %}
-  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
+  <a href="{% url 'allifmaalcommonapp:commonCustomerLedgerEntries' allifquery.id user_var glblslug %}">Customer Ledger Entries</a>
+
+  
 </div>
 
     </div><!--end....header column-->
