@@ -70,7 +70,7 @@
               
               {% for item in allifqueryset %} 
               <tr data-id="{{item.id}}">
-              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.id user_var glblslug %}">{{item.items}}</a></td>
+              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.items.id user_var glblslug %}">{{item.items}}</a></td>
              
               <td>{{item.quantity|floatformat:2|intcomma}} </td>
               <td>{{item.unitcost|floatformat:2|intcomma}}</td>

@@ -6993,7 +6993,7 @@ def commonWantToDeleteQuote(request,pk,*allifargs,**allifkwargs):
         "allifquery":allifquery,
         "myallifquery":myallifquery,
         }
-        return render(request,'allifmaalcommonapp/quotes/add-quote-details.html',context)
+        return render(request,'allifmaalcommonapp/quotes/x-qt-confrm.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -7438,7 +7438,7 @@ def commonWantToDeleteInvoice(request,pk,*allifargs,**allifkwargs):
         "allifquery":allifquery,
         "myallifquery":myallifquery,
         }
-        return render(request,'allifmaalcommonapp/invoices/add-invoice-details.html',context)
+        return render(request,'allifmaalcommonapp/invoices/x-inv-confrm.html',context)
       
     except Exception as ex:
         error_context={'error_message': ex,}

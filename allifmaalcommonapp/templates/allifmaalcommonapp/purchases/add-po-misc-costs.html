@@ -6,6 +6,7 @@
 {% block style %}
 {%endblock%}
 {% block body %}
+<div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
   <div class="row mt-12" ><!--start....header row-->
@@ -18,8 +19,7 @@
     <a href="{% url 'allifmaalcommonapp:commonPostPO' allifquery.id user_var glblslug %}">Post PO</a>
     <a href="{% url 'allifmaalcommonapp:commonPurchaseOrders' user_var glblslug %}">Purchase Orders</a>
     <a href="{% url 'allifmaalcommonapp:commonCalculatePOMiscCosts' allifquery.id user_var glblslug %}">Synch</a>
-    <!-- Button trigger modal -->
-  
+    
   </div>
   
       </div><!--end....header column-->
@@ -27,164 +27,118 @@
     </div><!--end....header row-->
   
   </div><!--end....main headere-->
+
 <div class="allifmaincontainer">
   <div class="row mt-12"> <!--start....table row-->
     <div class="col-md-12"><!--start of the first row body-->
-        <div class="allif-form-container">
-        
-        <div class="row"><!--start of row div --->
-            <div class="col-md-3"><!--start of column 1-->
-          {% if queryobj %}
-            
-                <div class="card shadow text-left p-3 allif-form-card" >
+      <div class="allif-form-container">
+      
+      <div class="row"><!--start of row div --->
+        <div class="allif-scroll-table">
+          <div class="table-responsive allif-full-table">
+          <table class="table table-layout">
+            <thead>
+              <tr class="allif-table-header-row">
+                <td>Supplier</td>
+                <td>Description</td>
+                <td>Quantity</td>
+                <td>Unit Cost</td>
+               
+                <td>Total</td>
+              <td>Navigate</td>
+              
+              <td> . . . </td>
+              <td></td>
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+              
+              <tr>
                 <form method='POST' action=''>{% csrf_token %}
-                <label>Supplier</label> {{form.supplier}} 
-                <label>Description</label>{{form.description}}
-                <label>Quantity</label> {{form.quantity}}
-                <label>Unit Cost</label> {{form.unitcost}}
-               
-                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+                 
+                  <td id="allif-table-inline-form">{{form.supplier}}</td>
+                  <td id="allif-table-inline-form">{{form.description}}</td>
+                  <td id="allif-table-inline-form">{{form.quantity}}</td>
+                  <td id="allif-table-inline-form">{{form.unitcost}}</td>
+                  <td id="allif-table-inline-form" colspan="1"> <input type="submit" value='Add Item' class="btn btn-success allifmaal-submit-btn"></td>
+                  <td id="allif-table-inline-form" colspan="2"></td>
+                  <td id="allif-table-inline-form" colspan="3"></td>
                 </form>
-                </div>
-              {% else %}
-
-                <div class="btn-group" style="width: 100%;">
-                  <a style="width: 100%;" class="btn dropdown-toggle" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="true">
-                    Add New Cost
-                  </a>
-                  <div class="btn-group" style="width: 100%;">
-                  <ul class="dropdown-menu"  id="myallifdropdown" aria-labelledby="dropdownMenuClickable" 
-                  style="width: 100%; float: left;">
-                  <div style="width: 100%;">
-                      <form method='POST' action=''>{% csrf_token %}
-                        <li style="width: 100%;"><label style="width: 100%;">Supplier</label></li><li style="width: 100%;"> {{form.supplier}}</li>
-                        <li><label>Description</label></li> <li>{{form.description}}</li>
-                        <li><label>Quantity</label></li><li> {{form.quantity}}</li>
-                        <li><label>Unit Cost</label></li><li> {{form.unitcost}}</li>
-                        
-                       <li><input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></li>
-                        </form>
-                        </div>
-                        
-                        
-                       
-                  </ul>
-              </div>
-             
+                </tr>
                
-</div>
-            {% endif %}
-           
-            </div><!--end of column 1-->
-        
-           
-            <div class="col-md-9"><!--start of column 3-->
-                <div class="allif-scroll-table">
-                    <!--start of the table-->
-                        
-                        <table class="table table-layout">
-                        <thead>
-                        <tr class="allif-table-header-row">
-                        <td>Supplier</td>
-                        <td>Description</td>
-                        <td>Quantity</td>
-                        <td>Unit Cost</td>
-                       
-                        <td>Total</td>
-                     
-                        <td>Edit</td>
-                        <td>Delete</td>
-                        </tr>
-                    </thead>
-                    <tbody class="allif-table-body">
-                      <tr>
-                    
-                        <form method='POST' action=''>{% csrf_token %}
-                             
-                         
-                          <td id="allif-table-inline-form">{{form.supplier}}</td>
-                          <td id="allif-table-inline-form">{{form.description}}</td>
-                          <td id="allif-table-inline-form">{{form.quantity}}</td>
-                          <td id="allif-table-inline-form">{{form.unitcost}}</td>
-                          
-                          <td id="allif-table-inline-form" colspan="3"> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-                         
-                        </form>
-                        </tr>
-                       
+              
+              {% for item in allifqueryset %} 
+              <tr data-id="{{item.id}}">
+             
+              <td>
+                {{item.supplier}}
                 
-                {% for item in allifqueryset %}
-                    <tr>
-                   
-                   
-              <td>
-                 {{item.supplier}}
-                 
-              </td>
-              
-              <td> {{item.description}}</td>
+             </td>
              
-              <td>{{item.quantity|intcomma}}</td>
-              <td>{{item.unitcost|intcomma}}</td>
-              
-              <td>
-                <a href="{% url 'allifmaalcommonapp:commonPOMiscCostDetails' item.id user_var glblslug %}">
-                {{item.purchase_order_misc_cost|intcomma}}
-                </a>
-              </td>
-              
+             <td> {{item.description}}</td>
             
-              <td>
-                <a href="{% url 'allifmaalcommonapp:commonEditPOMiscCostDetails' item.id user_var glblslug %}" class="deletewithX">
-                  Edit
-                </a>
-            </td>
-              <td>
-                  <a href="{% url 'allifmaalcommonapp:commonDeleteMiscCost' item.id user_var glblslug %}" class="body-delete-link">
-                    X
-                  </a>
-              </td>
-              
-                    </tr>
-               
-                        {% endfor %}
+             <td>{{item.quantity|intcomma}}</td>
+             <td>{{item.unitcost|intcomma}}</td>
+             
+             <td>
+               <a href="{% url 'allifmaalcommonapp:commonPOMiscCostDetails' item.id user_var glblslug %}">
+               {{item.purchase_order_misc_cost|intcomma}}
+               </a>
+             </td>
+             
             
-                  <tr>
-                  <td></td>
-            
-                  <td colspan="3">Misc. Costs Total</td>
-                  <td>{{allifquery.misccosts|intcomma}}</td>
-                    <td></td>
-                    <td></td>
+             
+               <td>
+                <div class="dropdown allifmaal-content-dropdown">
+                  <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+                  <div class="dropdown-content">
+                    <a href="{% url 'allifmaalcommonapp:commonEditPOMiscCostDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                    <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+                    
+                  </div>
+                </div>
+                <div class="dropdown allif-confirm-action">
                   
-                  </tr>
-                 
-                    </tbody>
-                    </table>
+                  <a href="" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+                  <a href="{% url 'allifmaalcommonapp:commonDeleteMiscCost' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+                </div>
+      
+               
+              </td>
+             <td> . . . </td>
+             <td></td>
+            
+        
+          </tr>
+          {% endfor %}
+          <tr>
+            
+            <td id="allif-table-sums-section" colspan="4">Sub Total</td>
+            <td id="allif-table-sums-section">{{allifquery.misccosts|floatformat:2|intcomma}}</td>
+            <td id="allif-table-sums-section" colspan="3"></td>
+           
+          </tr>
+         
+          
+            </tbody>
+          </table>
+          </div>
+         </div>
+
+          </tbody>
+          </table>
                    
-                    <!--end of table-->
-                        </div>
+      <!--end of table-->
+          
             </div><!--end of column 1-->
         
         </div><!--end of row div --->
             
-            </div>
+        </div>
             </div><!--end of first row body....-->
-</div><!--end....table row-->
-
-<!--end of table-->
-
-
-
-<hr>
-
-
-
-
-<hr>
-
+  
 </div><!--end of main container of the page-->
-
+</div>
   {% block scripts %}
 
   {% endblock %}
