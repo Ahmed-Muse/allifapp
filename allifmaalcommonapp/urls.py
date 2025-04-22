@@ -409,15 +409,11 @@ path('UI1/Home/<str:allifusr>/<str:allifslug>/', views.ui1, name="ui1"),
 path('UI2/Home/<str:allifusr>/<str:allifslug>/', views.ui2, name="ui2"),
 path('UI3/Home/<str:allifusr>/<str:allifslug>/', views.ui3, name="ui3"),
 path('UI4/Home/<str:allifusr>/<str:allifslug>/', views.ui4, name="ui4"),
-path('UI5/Home/<str:allifusr>/<str:allifslug>/', views.ui5, name="ui5"),
+
 path('UI6/Home/<str:allifusr>/<str:allifslug>/', views.ui6, name="ui6"),
 path('UI7/Home/<str:allifusr>/<str:allifslug>/', views.ui7, name="ui7"),
 
 path('UI8/Home/<str:allifusr>/<str:allifslug>/', views.ui8, name="ui8"),
-path('UI9/Home/<str:allifusr>/<str:allifslug>/', views.ui9, name="ui9"),
-path('UI10/Home/<str:allifusr>/<str:allifslug>/', views.ui10, name="ui10"),
-path('UI11/Home/<str:allifusr>/<str:allifslug>/', views.ui11, name="ui11"),
-
 
 ###################3 links test ############3
 path('links/lists', views.link_list, name='link_list'),

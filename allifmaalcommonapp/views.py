@@ -8692,8 +8692,9 @@ def commonSupplierStatementpdf(request,pk,*allifargs,**allifkwargs):
         
         return response
     ##################################33 our customers ###################################3
-    except:
-        return render(request,'allifmaalapp/error.html')
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
 ######################### customer payments #################3
@@ -10358,12 +10359,7 @@ def ui4(request,*allifargs,**allifkwargs):
            
         }
     return render(request,'allifmaalcommonapp/ui/ui4.html',context)
-def ui5(request,*allifargs,**allifkwargs):
-    print()
-    context = {
-           
-        }
-    return render(request,'allifmaalcommonapp/ui/ui5.html',context)
+
 def ui6(request,*allifargs,**allifkwargs):
     print()
     context ={
@@ -10382,33 +10378,6 @@ def ui8(request,*allifargs,**allifkwargs):
            
         }
     return render(request,'allifmaalcommonapp/ui/ui8.html',context)
-def ui9(request,*allifargs,**allifkwargs):
-    user_var=request.user
-    compslg=user_var.usercompany # this gives the slug of the company that the logged in user belongs to.
-    usrslg=request.user.customurlslug
-    user_var_comp=request.user.usercompany
-    
-    main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-    print()
-    context = {
-        "main_sbscrbr_entity":main_sbscrbr_entity,
-           
-        }
-    return render(request,'allifmaalcommonapp/ui/ui9.html',context)
-def ui10(request,*allifargs,**allifkwargs):
-    print()
-    context = {
-           
-        }
-    return render(request,'allifmaalcommonapp/ui/ui10.html',context)
-def ui11(request,*allifargs,**allifkwargs):
-    print()
-    context = {
-           
-        }
-    return render(request,'allifmaalcommonapp/ui/ui11.html',context)
-
-
 
 #################### testingl inks
 

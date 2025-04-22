@@ -7,7 +7,7 @@
 {%endblock%}
    
 {% block body %}
-
+<div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
 
@@ -18,7 +18,7 @@
   <div class="container-fluid amel-content-header">
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Open Filters
+      Search
       </a>  
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
@@ -57,24 +57,7 @@
     <a class="amel-table-list-identifier">Tasks:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     <a href="{% url 'allifmaalcommonapp:commonCompletedTasks' user_var glblslug %}">Completed Tasks</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddStockItem' user_var glblslug %}">New Stock Item</a>
- 
- 
-  
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      
-    </div>
-    </ul>
-  </div>
+    
   <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
   </div>
   
@@ -88,202 +71,213 @@
        
 <div class="row mt-12"> <!--start....table row-->
 <div class="col-md-12"> <!--start....table column-->
-<div class="allif-scroll-table"> 
-  <table class="table ">
-  <form class="form-horizontal" method="POST" action=""> {% csrf_token %}
-    <tr class="allif-table-header-row" >
-      <td>Task</td>
-      <td>Status</td> 
-      <td>Assign</td>
-      <td>Due Date</td>
-      <td>Day</td>
-      <td>Action</td>
-      </tr>
 
-      <tbody class="allif-table-body">
-      <tr>
-      <td>{{form.task}}</td>
-      <td>{{form.status}}</td> 
-      <td>{{form.assignedto}}</td>
-      <td> {{form.dueDate}}</td>
-      <td> {{form.taskDay}}</td>
-      <td>
-      <input type="submit" value='Save'class="btn btn-success allifmaal-submit-btn" >
-
-      </td>
-    </tr>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td>Task</td>
+        <td>Status</td> 
+        <td>Assign</td>
+        <td>Due Date</td>
+        <td>Day</td>
+        <td>Action</td>
       
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+        
+        <tr>
+          <form method='POST' action=''>{% csrf_token %}
+           
+            <td id="allif-table-inline-form">{{form.task}}</td>
+            <td id="allif-table-inline-form">{{form.status}}</td>
+            <td id="allif-table-inline-form">{{form.assignedto}}</td>
+            <td id="allif-table-inline-form">{{form.dueDate}}</td>
+            <td id="allif-table-inline-form">{{form.taskDay}}</td>
+           
+            <td id="allif-table-inline-form"> <input type="submit" value='Add Item' class="btn btn-success allifmaal-submit-btn"></td>
+            
+          </form>
+          </tr>
+         
       </tbody>
-      </form>
     </table>
     </div>
-  
-  
-  </div></div>
-  
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="col-md-12"> <!--start....table column-->
-    <div class="allif-scroll-table"> 
-      <table class="table table-layout">
-      <thead>
-    <tr class="allif-table-header-row" >
-    <td>Task</td>
+   </div>
+
+<hr>
+
+<div class="allif-scroll-table">
+  <div class="table-responsive allif-full-table">
+  <table class="table table-layout">
+    <thead>
+      <tr class="allif-table-header-row">
+      <td class="allif-fix-table-col">Task</td>
+     
     
-    <td>Due</td>
-    <td>Remaining Time</td>
-    <td>Assigned</td>
-    <td>Finish</td>
-    
-    <td>Mon</td> 
-    <td>Tue</td>
-    <td>Wed</td>
-    <td>Thu</td>
-    <td>Fri</td>
-    <td>Sat</td>
-    <td>Sun</td>
-    
-  </tr>
-  </thead>
-  
-  {% for task in allifqueryset %}
-  <tr>
-    
-    <td>
-      <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddSeeTaskDetails' task.id user_var glblslug %}" data-toggle="tooltip" title="See More Details">
-      {{task.task}}
-      </a>
-    </td>
-    
-    <td>{{task.dueDate|date:'d/m/Y'}}</td>
-    <td>{{task.dueDate|timeuntil}}</td>
-    <td>{{task.assignedto}}</td>
-              
-    <td> <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonMarkTaskComplete' task.id user_var glblslug %}" data-toggle="tooltip" title="Finish Task">
-      Finish
+      <td>Due</td>
+      <td>Remaining Time</td>
+      <td>Assigned</td>
+     
+      <td>Mon</td> 
+      <td>Tue</td>
+      <td>Wed</td>
+      <td>Thu</td>
+      <td>Fri</td>
+      <td>Sat</td>
+      <td>Sun</td>
+   
+      <td>Navigate</td>
       
-    </a></td>
-    
-    
-    {% if task.taskDay == 'Monday' %}
-    <td> 
+      <td> . . . </td>
+      <td></td>
+      </tr>
+      </thead>
+      <tbody class="allif-table-body">
+       
       
-    
-    X
-    
-    </td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    {% elif task.taskDay == 'Tuesday' %}
-    <td></td>
-    
-    <td>
+      {% for item in allifqueryset %} 
+      <tr data-id="{{item.id}}">
+      <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddSeeTaskDetails' item.id user_var glblslug %}">{{item.task}}</a></td>
+     
       
-  X
-    
-    </td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    
-    {% elif task.taskDay == 'Wednesday' %}
-    <td></td>
-    <td></td>
-    
-    <td>
-    X
-  </td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    
-    
-    {% elif task.taskDay == 'Thursday' %}
-    <td></td>
-    <td></td>
-    <td></td>
-    
-    <td>
-    X
-    </td>
-    <td></td>
-    <td></td>
-    <td></td>
-    
-    
-    {% elif task.taskDay == 'Friday' %}
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    
-    <td>
-  X
-    </td>
-    <td></td>
-    <td></td>
-    
-    
-    {% elif task.taskDay == 'Saturday' %}
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    
-    <td>
-    X
-</td>
-    <td></td>
-    
-    
+      <td>{{item.dueDate|date:'d/m/Y'}}</td>
+      <td>{{item.dueDate|timeuntil}}</td>
+      <td>{{item.assignedto}}</td>
+         
+      {% if item.taskDay == 'Monday' %}
+      <td> 
         
-  {% elif task.taskDay == 'Sunday' %}
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  
-  <td>
-  X
+      
+      X
+      
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      {% elif item.taskDay == 'Tuesday' %}
+      <td></td>
+      
+      <td>
+        
+    X
+      
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      
+      {% elif item.taskDay == 'Wednesday' %}
+      <td></td>
+      <td></td>
+      
+      <td>
+      X
+    </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      
+      
+      {% elif item.taskDay == 'Thursday' %}
+      <td></td>
+      <td></td>
+      <td></td>
+      
+      <td>
+      X
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      
+      
+      {% elif item.taskDay == 'Friday' %}
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      
+      <td>
+    X
+      </td>
+      <td></td>
+      <td></td>
+      
+      
+      {% elif item.taskDay == 'Saturday' %}
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      
+      <td>
+      X
   </td>
-  
-  {% endif %}
-  
+      <td></td>
+      
+      
+          
+    {% elif item.taskDay == 'Sunday' %}
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    
+    <td>
+    X
+    </td>
+    
+    {% endif %}
+    
+    
+       <td>
+        <div class="dropdown allifmaal-content-dropdown">
+          <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+          <div class="dropdown-content">
+            <a href="{% url 'allifmaalcommonapp:commonEditTask' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+            <a href="{% url 'allifmaalcommonapp:commonMarkTaskComplete' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Complete</a>
+            <a href="{% url 'allifmaalcommonapp:commonCompletedTasks' user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Completed</a>
+            <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
             
+          </div>
+        </div>
+        <div class="dropdown allif-confirm-action">
+          
+          <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+          <a href="{% url 'allifmaalcommonapp:commonDeleteTask' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+        </div>
+
+       
+      </td>
+     <td> . . . </td>
+     <td></td>
+    
+
   </tr>
-
-
   {% endfor %}
   {% if searched_data %}
-  {% for task in searched_data %}
-  <tr>
+  {% for item in searched_data %}
+  <tr data-id="{{item.id}}">
+    <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddSeeTaskDetails' item.id user_var glblslug %}">{{item.task}}</a></td>
+   
     
-    <td>
-      <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddSeeTaskDetails' task.id user_var glblslug %}" data-toggle="tooltip" title="See More Details">
-      {{task.task}}
-      </a>
-    </td>
-    
-    <td>{{task.dueDate|date:'d/m/Y'}}</td>
-    <td>{{task.dueDate|timeuntil}}</td>
-    <td>{{task.assignedto}}</td>
-              
-    <td> <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonMarkTaskComplete' task.id user_var glblslug %}" data-toggle="tooltip" title="Finish Task">
-      Finish
-      
-    </a></td>
-    
-    
-    {% if task.taskDay == 'Monday' %}
+    <td>{{item.dueDate|date:'d/m/Y'}}</td>
+    <td>{{item.dueDate|timeuntil}}</td>
+    <td>{{item.assignedto}}</td>
+   
+    {% if item.taskDay == 'Monday' %}
     <td> 
       
     
@@ -296,7 +290,7 @@
     <td></td>
     <td></td>
     <td></td>
-    {% elif task.taskDay == 'Tuesday' %}
+    {% elif item.taskDay == 'Tuesday' %}
     <td></td>
     
     <td>
@@ -310,7 +304,7 @@
     <td></td>
     <td></td>
     
-    {% elif task.taskDay == 'Wednesday' %}
+    {% elif item.taskDay == 'Wednesday' %}
     <td></td>
     <td></td>
     
@@ -323,7 +317,7 @@
     <td></td>
     
     
-    {% elif task.taskDay == 'Thursday' %}
+    {% elif item.taskDay == 'Thursday' %}
     <td></td>
     <td></td>
     <td></td>
@@ -336,7 +330,7 @@
     <td></td>
     
     
-    {% elif task.taskDay == 'Friday' %}
+    {% elif item.taskDay == 'Friday' %}
     <td></td>
     <td></td>
     <td></td>
@@ -349,7 +343,7 @@
     <td></td>
     
     
-    {% elif task.taskDay == 'Saturday' %}
+    {% elif item.taskDay == 'Saturday' %}
     <td></td>
     <td></td>
     <td></td>
@@ -363,7 +357,7 @@
     
     
         
-  {% elif task.taskDay == 'Sunday' %}
+  {% elif item.taskDay == 'Sunday' %}
   <td></td>
   <td></td>
   <td></td>
@@ -377,15 +371,49 @@
   
   {% endif %}
   
-            
-  </tr>
-  {% endfor %}
-  {% endif %}
-</table>
   
-</div></div></div>
+     <td>
+      <div class="dropdown allifmaal-content-dropdown">
+        <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+        <div class="dropdown-content">
+          <a href="{% url 'allifmaalcommonapp:commonEditTask' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+          <a href="{% url 'allifmaalcommonapp:commonMarkTaskComplete' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Complete</a>
+          <a href="{% url 'allifmaalcommonapp:commonCompletedTasks' user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Completed</a>
+          <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+          
+        </div>
+      </div>
+      <div class="dropdown allif-confirm-action">
+        
+        <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+        <a href="{% url 'allifmaalcommonapp:commonDeleteTask' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+      </div>
+
+     
+    </td>
+   <td> . . . </td>
+   <td></td>
+  
+
+</tr>
+  {% endfor %}
+    {%endif %}
+
+    </tbody>
+  </table>
+  </div>
+ </div>
+
+<hr>
+
+  </div></div>
+ 
 
 </div><!--end of main container of the page-->
+</div>
 
-   {% endblock %}
-   
+{% block scripts %}
+<!--when you put the js code here, it gives a repetitive results....-->
+{% endblock %}
+
+ {% endblock %}

@@ -913,7 +913,7 @@ class CommonAddTasksForm(forms.ModelForm): #the forms here is the one imported u
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             
             'dueDate':DatePickerInput(attrs={'class':'form-control','placeholder':'Task due date'}),
-            'taskDay':forms.Select(attrs={'class':'form-control'}),
+            'taskDay':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'status':forms.Select(attrs={'class':'form-control'}),
             
             'assignedto':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
