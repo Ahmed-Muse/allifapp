@@ -22,8 +22,8 @@
 		 
 		  <p>{{form.first_name}}</p>
 		  <p>{{form.last_name}}</p>
-		  <p>{{form.user_category}}</p>
 		  <p>{{form.email}}</p>
+		  <p>{{form.user_category}}</p>
 		  <p>{{form.password1}}</p>
 		  <p>{{form.password2}}</p>
 		  
@@ -58,10 +58,10 @@ var form_fields = document.getElementsByTagName('input')
 //form_fields[1].placeholder='User Name';
 form_fields[1].placeholder='First Name';
 form_fields[2].placeholder='Last Name';
-form_fields[3].placeholder='User Category';
-form_fields[4].placeholder='Email Address';
-form_fields[5].placeholder='Enter password';
-form_fields[6].placeholder='Confirm Password';
+form_fields[3].placeholder='Email Address';
+
+form_fields[4].placeholder='password';
+form_fields[5].placeholder='Confirm Password';
 
 
 for (var field in form_fields){	

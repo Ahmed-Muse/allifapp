@@ -185,15 +185,15 @@
             <div class="dropdown allifmaal-content-dropdown">
               <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
               <div class="dropdown-content">
-                <a href="{% url 'allifmaalcommonapp:commonEditSupplier' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="{% url 'allifmaalcommonapp:commonEditCustomer' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
                 <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
                 
               </div>
             </div>
             <div class="dropdown allif-confirm-action">
               
-              <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-              <a href="{% url 'allifmaalcommonapp:commonDeleteSupplier' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+              <a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteCustomer' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
             </div>
   
            

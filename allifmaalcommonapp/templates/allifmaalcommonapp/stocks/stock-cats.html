@@ -39,25 +39,9 @@
     </div>
     <a class="amel-table-list-identifier">Stock Categories:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a>
+   
     <a href="{% url 'allifmaalcommonapp:commonAddStockCat' user_var glblslug %}">New Stock Category</a>
  
- 
-  
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      
-    </div>
-    </ul>
-  </div>
   <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
   </div>
   
@@ -145,8 +129,6 @@
          <td>
             {{item.department}}
            </td>
-          
-         
          
          <td>
           {{item.date|date:'d/m/Y'}}

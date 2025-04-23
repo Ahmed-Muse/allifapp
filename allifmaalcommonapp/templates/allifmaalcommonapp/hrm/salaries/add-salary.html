@@ -32,7 +32,7 @@
   <div class="allifmaincontainer">
 
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit New Expense</div>
+  <div class="table-details-content-description">Add/Edit New Staff Salary</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -91,17 +91,6 @@
         <tbody>
         
         
-          <tr>
-            <td class="allif-fix-table-col">Mode</td>
-            <td>{{form.mode}}</td>
-        
-            </tr>
-            <tr>
-              <td class="allif-fix-table-col">Amount</td>
-              <td>{{form.amount}}</td>
-          
-              </tr>
-         
                   <tr>
                     <td class="allif-fix-table-col">Description</td>
                     <td>{{form.description}}</td>
@@ -109,10 +98,20 @@
                     </tr>
                 
                       <tr>
-                        <td class="allif-fix-table-col">Amount</td>
+                        <td class="allif-fix-table-col">Amount To Pay</td>
                         <td>{{form.amount}}</td>
                     
-                        </tr>   
+                        </tr>
+                        <tr>
+                          <td class="allif-fix-table-col">Salary Payable</td>
+                          <td>{{form.salary_payable}}</td>
+                      
+                          </tr>
+                          <tr>
+                            <td class="allif-fix-table-col">Comments</td>
+                            <td>{{form.comments}}</td>
+                        
+                            </tr>
           </tbody>
           </table>
           </div>
@@ -126,28 +125,21 @@
        <table class="table table-layout">
         <tbody>
         
-            <tr>
-              <td class="allif-fix-table-col">Terms</td>
-              <td>{{form.mode}}</td>
-          
-              </tr>
+          <tr>
+            <td class="allif-fix-table-col">Mode</td>
+            <td>{{form.mode}}</td>
+        
+            </tr>
+           
+           
               <tr>
                 <td class="allif-fix-table-col">Status</td>
                 <td>{{form.status}}</td>
             
                 </tr>
-                <tr>
-                  <td class="allif-fix-table-col">Salary Payable</td>
-                  <td>{{form.salary_payable}}</td>
-              
-                  </tr>
                 
           
-              <tr>
-                <td class="allif-fix-table-col">Comments</td>
-                <td>{{form.comments}}</td>
             
-                </tr>
             <tr>
               <td class="allif-fix-table-col">Action</td>
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>

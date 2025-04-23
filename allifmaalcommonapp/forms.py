@@ -536,7 +536,7 @@ class CommonAssetsAddForm(forms.ModelForm):
             'salvage_value':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'depreciation':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'depreciation':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }
     def __init__(self,allifmaalparameter, *args, **kwargs):
         super(CommonAssetsAddForm, self).__init__(*args, **kwargs)
@@ -891,12 +891,12 @@ class CommonAddJobDetailsForm(forms.ModelForm):
 class CommonAddJobItemsForm(forms.ModelForm):
     class Meta:
         model =CommonJobItemsModel
-        fields = ['description', 'quantity','comments','item']
+        fields = ['quantity','item']
 
         widgets={
             'quantity':forms.TextInput(attrs={'class':'form-control'}),
-            'comments':forms.TextInput(attrs={'class':'form-control'}),
-            'description':forms.TextInput(attrs={'class':'form-control'}),
+           
+           
             'item':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):

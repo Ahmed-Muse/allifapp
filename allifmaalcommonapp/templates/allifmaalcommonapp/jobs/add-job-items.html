@@ -15,8 +15,7 @@
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     
     
-    <a href="{% url 'allifmaalcommonapp:commonQuotes' user_var glblslug %}">Quotations</a>
-    <a href="{% url 'allifmaalcommonapp:commonInvoices' user_var glblslug %}">Invoices</a>
+    <a href="{% url 'allifmaalcommonapp:commonJobs' user_var glblslug %}">Jobs</a>
     
   </div>
   
@@ -41,13 +40,7 @@
                 <td>Items</td>
                 <td>Quantity</td>
                 <td>Stock</td>
-                <td>Cost</td>
-                <td>Price</td>
-               
-                <td>Amount</td>
-                <td>Discount</td>
-                <td>Total</td>
-                <td>Tax</td>
+             
               <td>Navigate</td>
               
               <td> . . . </td>
@@ -58,8 +51,8 @@
               
               <tr>
                 <form method='POST' action=''>{% csrf_token %}
-                 
-                  <td id="allif-table-inline-form">{{form.description}}</td>
+                  <td id="allif-table-inline-form">{{form.item}}</td>
+                  
                   <td id="allif-table-inline-form">{{form.quantity}}</td>
                   
                   <td id="allif-table-inline-form"> <input type="submit" value='Add Item' class="btn btn-success allifmaal-submit-btn"></td>
@@ -71,32 +64,25 @@
               
               {% for item in allifqueryset %} 
               <tr data-id="{{item.id}}">
-              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.description.id user_var glblslug %}">{{item.description}}</a></td>
+              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.item.id user_var glblslug %}">{{item.item.description}}</a></td>
             
-          <td>{{item.quantity|floatformat:2|intcomma}}</td>
-          <td>{{item.description.quantity|floatformat:2|intcomma}}</td>
-          <td>{{item.description.unitcost|floatformat:2|intcomma}}</td>
-          <td>{{item.description.unitPrice|floatformat:2|intcomma}}</td>
-          
-          <td>{{item.quote_selling_price|floatformat:2|intcomma}}</td>
-          <td>{{item.discount|floatformat:2|intcomma}}%</td>
-          <td>{{item.quote_selling_price_with_discount|floatformat:2|intcomma}}</td>
-         
-          <td>{{item.description.taxrate.taxrate|floatformat:2|intcomma}}%</td>
+              <td>{{item.quantity|floatformat:2|intcomma}}</td>
+              <td>{{item.item.quantity|floatformat:2|intcomma}}</td>
+              
              
                <td>
                 <div class="dropdown allifmaal-content-dropdown">
                   <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
                   <div class="dropdown-content">
-                    <a href="{% url 'allifmaalcommonapp:commonEditInvoiceItem' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                    
                     <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
                     
                   </div>
                 </div>
                 <div class="dropdown allif-confirm-action">
                   
-                  <a href="{% url 'allifmaalcommonapp:commonAddInvoiceItems' item.allifinvitemconnector.id user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-                  <a href="{% url 'allifmaalcommonapp:commonDeleteInvoiceItem' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+                  <a href="{% url 'allifmaalcommonapp:commonAddJobItems' item.jobitemconnector.id user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+                  <a href="{% url 'allifmaalcommonapp:commonDeleteJobItem' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
                 </div>
                  
                
@@ -107,45 +93,7 @@
         
           </tr>
           {% endfor %}
-          <tr>
-           
-            <td id="allif-table-sums-section" colspan="5">Sub Total</td>
-            <td id="allif-table-sums-section">{{allifquery.total|floatformat:2|intcomma}}</td>
-            <td id="allif-table-sums-section" colspan="6"></td>
-            
-          </tr>
-  
-          <tr>
-            
-            <td id="allif-table-sums-section" colspan="6">Discount</td>
-            <td id="allif-table-sums-section">{{allifquery.discountAmount|floatformat:2|intcomma}}</td>
-            <td id="allif-table-sums-section" colspan="5"></td>
-            
-            </tr>
-            <tr>
-              
-              <td id="allif-table-sums-section" colspan="7">Discounted Amount</td>
-              <td id="allif-table-sums-section">{{allifquery.totalwithdiscount|floatformat:2|intcomma}}</td>
-              <td id="allif-table-sums-section" colspan="4"></td>
-              
-              </tr>
-  
-            
-            <tr>
-             
-              <td id="allif-table-sums-section" colspan="8"> Add Tax</td>
-              <td id="allif-table-sums-section">{{allifquery.taxAmount|floatformat:2|intcomma}}</td>
-              <td id="allif-table-sums-section" colspan="3"></td>
-              
-              </tr>
-          
-                <tr>
-                 
-                  <td id="allif-table-sums-section" colspan="7"><strong>Grand Total</strong></td>
-                  <td id="allif-table-sums-section"><strong>{{allifquery.grandtotal|floatformat:2|intcomma}}</strong></td>
-                  <td id="allif-table-sums-section" colspan="4"></td>
-                  
-                  </tr>
+         
             </tbody>
           </table>
           </div>

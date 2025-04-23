@@ -8,732 +8,334 @@
    
 {% block body %}
 
-
-<!--we can insert the other section here-->
-<div class="allifmaincontainer">
-   <!--start of first row-->
-   <div class="row mt-12" >
-      <div class="col-md-4">
-      <div class="card">
-      <div class="card-header allif-dashboard-card-header">
-          Main Company Assets {{assets_tot_val|floatformat:2|intcomma}}
-      </div>
-  
-      <div class="col-md-12">
-      <div class="column allif-dashboard-card-body">
-      <canvas id="myallifchart" width="400" height="300"></canvas>
-<script>
-var ctx33 = document.getElementById('myallifchart').getContext('2d');
-var myallifchart = new Chart(ctx33, {
-    type: 'doughnut',
-    data: {
-        labels: [{% for items in main_assets %} '{{ items.description|truncatewords:2 }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
-        datasets: [{
-            label: 'Current Prospects',
-            data: [{% for items in main_assets %} {{ items.value }}{% if not forloop.last %}, {% endif %}{% endfor %}],
-            backgroundColor: [
-                'rgb(2, 7, 174)',
-                'rgb(35, 150, 92)',
-                'rgb(2, 7, 0)',
-                'rgba(54, 162, 235, 1)',
-                'rgb(118, 40, 28,1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgb(254, 0, 181,1)',
-                'rgb(121, 214, 1)',
-                'rgb(97, 7, 0)',
-                'rgb(255, 153, 1)',
-                'rgb(2, 98, 115)',
-                'rgb(94, 89, 92)',
-                'rgb(116, 46, 88)',
-                'rgb(73, 42, 141)'
-            ],
-            borderColor: [
-                'rgb(2, 7, 174)',
-                'rgb(35, 150, 92)',
-                'rgb(2, 7, 0)',
-                'rgba(54, 162, 235, 1)',
-                'rgb(118, 40, 28,1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgb(254, 0, 181,1)',
-                'rgb(121, 214, 1)',
-                'rgb(97, 7, 0)',
-                'rgb(255, 153, 1)',
-                'rgb(2, 98, 115)',
-                'rgb(94, 89, 92)',
-                'rgb(116, 46, 88)',
-                'rgb(73, 42, 141)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        // No scales for doughnut chart
-    }
-});
+<div class="allifmaal-main-container">
+    <!--we can insert the other section here-->
+     
+      <!--start....main headere-->
+      <div class="card-header">
+        <div class="row mt-12" ><!--start....header row-->
+        <div class="col-md-12"><!--start....header column-->
+        <div class="container-fluid amel-content-header">
+        
+            <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+            <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
+            <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
+            <a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
+            <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+        </div>
+          </div><!--end....header column-->
+          </div><!--end....header row-->
+        </div><!--end....main headere-->
+        
+    <div class="allifmaincontainer">
+       <!--start of first row-->
+       <div class="row mt-12" >
+          <div class="col-md-4">
+          <div class="card">
+          <div class="card-header allif-dashboard-card-header">
+            Top 10 Categories. <span>Total: <strong>{{catcount}}</strong></span>
+          </div>
       
-  </script>
-  </div>
-  </div>
-  
-  
-  </div>
-  </div>
-  
-  
-  <div class="col-md-4">
-  <div class="card">
-  <div class="card-header allif-dashboard-card-header">
-  Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
-  </div>
-  
-  
-  
-  <div class="col-md-12">
-      <div class="column allif-dashboard-card-body">
-  
-      <canvas id="myChart3" width="400" height="300"></canvas>
-      <script>
-      var ctx3 = document.getElementById('myChart3').getContext('2d');
-      var myChart3 = new Chart(ctx3, {
-      type: 'bar',
-  
-      data: {
-      labels: [{% for items in prospects %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
-  
-      datasets: [{
-  
-      label: 'Current Prospects',
-      data: [{% for items in prospects %} {{items.total}}, {% endfor %}],
-      backgroundColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
+          <div class="col-md-12">
+          <div class="column allif-dashboard-card-body">
           
-      ],
-      borderColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
-      ],
-      borderWidth: 1
-      }]
-      },
-      options: {
-      scales: {
-      yAxes: [{
-          ticks: {
-              beginAtZero: true
-          }
-      }]
-      }
-      }
-      });
-  </script>
-  </div>
-  </div>
-  
-  
-  </div></div>
-  
-  
-  <div class="col-md-4">
-  <div class="card">
-  <div class="card-header allif-dashboard-card-header">
-  Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
-  </div>
-  
-  <div class="col-md-12">
-  <div class="column allif-dashboard-card-body">
-  
-      <canvas id="myChart3" width="400" height="300"></canvas>
-      <script>
-      var ctx3 = document.getElementById('myChart3').getContext('2d');
-      var myChart3 = new Chart(ctx3, {
-      type: 'bar',
-  
-      data: {
-      labels: [{% for items in prospects %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
-  
-          datasets: [{
-  
-      label: 'Current Prospects',
-      data: [{% for items in prospects %} {{items.total}}, {% endfor %}],
-      backgroundColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
+    
+        <div class="allif-scroll-table">
+          <div class="table-responsive allif-full-table">
+          <table class="table table-layout">
+            <thead>
+              <tr class="allif-table-header-row">
+              <td>Categories</td>
+              <td>Votes</td>
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+              {% for item in categories %} 
+              <tr data-id="{{item.id}}">
+              <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td>
+                {{item.votes|floatformat:2|intcomma}}
+              </td>
+             
+        
+          </tr>
+          {% endfor %}
           
-      ],
-      borderColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
-      ],
-      borderWidth: 1
-      }]
-      },
-      options: {
-      scales: {
-      yAxes: [{
-          ticks: {
-              beginAtZero: true
-          }
-      }]
-      }
-      }
-      });
-  </script>
-  </div>
-  </div>
-  
-  
-  </div></div>
-  </div>
-  
-  <!--end of first row-->
-  
-  <!--start of second row-->
-  
-   <!--start of first row-->
-   <div class="row mt-12" >
-      <div class="col-md-4">
-      <div class="card">
-      <div class="card-header allif-dashboard-card-header">
-          Main Company Assets {{assets_tot_val|floatformat:2|intcomma}}
+            </tbody>
+          </table>
+          </div>
+         </div>
+      
+    
       </div>
-  
-      <div class="col-md-12">
-      <div class="column allif-dashboard-card-body">
-                      
-      <canvas id="myallifchart" width="400" height="300"></canvas>
-      <script>
-      var ctx33 = document.getElementById('myallifchart').getContext('2d');
-      var myallifchart = new Chart(ctx33, {
-      type: 'doughnut',
-  
-      data: {
-      labels: [{% for items in main_assets %} '{{items.description|truncatewords:2}}', {% endfor %}],
-  
-      datasets: [{
-  
-      label: 'Current Prospects',
-      data: [{% for items in main_assets %} {{items.value}}, {% endfor %}],
-      backgroundColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
-          
-      ],
-      borderColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
-      ],
-      borderWidth: 1
-      }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-          }
-      }
-      });
-  </script>
-  </div>
-  </div>
-  
-  
-  </div>
-  </div>
-  
-  
-  <div class="col-md-4">
-  <div class="card">
-  <div class="card-header allif-dashboard-card-header">
-  Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
-  </div>
-  
-  
-  
-  <div class="col-md-12">
-      <div class="column allif-dashboard-card-body">
-  
-      <canvas id="myChart3" width="400" height="300"></canvas>
-      <script>
-      var ctx3 = document.getElementById('myChart3').getContext('2d');
-      var myChart3 = new Chart(ctx3, {
-      type: 'bar',
-  
-      data: {
-      labels: [{% for items in prospects %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
-  
-      datasets: [{
-  
-      label: 'Current Prospects',
-      data: [{% for items in prospects %} {{items.total}}, {% endfor %}],
-      backgroundColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
-          
-      ],
-      borderColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
-      ],
-      borderWidth: 1
-      }]
-      },
-      options: {
-      scales: {
-      yAxes: [{
-          ticks: {
-              beginAtZero: true
-          }
-      }]
-      }
-      }
-      });
-  </script>
-  </div>
-  </div>
-  
-  
-  </div></div>
-  
-  
-  <div class="col-md-4">
-  <div class="card">
-  <div class="card-header allif-dashboard-card-header">
-  Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
-  </div>
-  
-  <div class="col-md-12">
-  <div class="column allif-dashboard-card-body">
-  
-      <canvas id="myChart3" width="400" height="300"></canvas>
-      <script>
-      var ctx3 = document.getElementById('myChart3').getContext('2d');
-      var myChart3 = new Chart(ctx3, {
-      type: 'bar',
-  
-      data: {
-      labels: [{% for items in prospects %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
-  
-          datasets: [{
-  
-      label: 'Current Prospects',
-      data: [{% for items in prospects %} {{items.total}}, {% endfor %}],
-      backgroundColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
-          
-      ],
-      borderColor: [
-      'rgb(2, 7, 174)',
-      'rgb(35, 150, 92)',
-      'rgb(2, 7, 0)',
-      'rgba(54, 162, 235, 1)',
-      'rgb(118, 40, 28,1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgb(254, 0, 181,1)',
-      'rgb(121, 214, 1)',
-      'rgb(97, 7, 0)',
-      'rgb(255, 153, 1)',
-      'rgb(2, 98, 115)',
-      'rgb(94, 89, 92)',
-      'rgb(116, 46, 88)',
-      'rgb(73, 42, 141)',
-      ],
-      borderWidth: 1
-      }]
-      },
-      options: {
-      scales: {
-      yAxes: [{
-          ticks: {
-              beginAtZero: true
-          }
-      }]
-      }
-      }
-      });
-  </script>
-  </div>
-  </div>
-  
-  
-  </div></div>
-  </div>
-  
-  <!--end of first row-->
-  
-  <!--start of second row-->
-  
- 
-
-  
-
-
- <div class="row mt-12"> <!--start....table row-->
- <div class="col-md-12"> <!--start....table column-->
- <div class="allif-scroll-table"> 
-   <table class="table ">
-   <form class="form-horizontal" method="POST" action=""> {% csrf_token %}
-     <tr class="allif-table-header-row" >
-       <td>Task</td>
-       <td>Status</td> 
-       <td>Assign</td>
-       <td>Due Date</td>
-       <td>Day</td>
-       <td>Action</td>
-       </tr>
- 
-       <tbody class="allif-table-body">
-       <tr>
-       <td>{{form.task}}</td>
-       <td>{{form.status}}</td> 
-       <td>{{form.assignedto}}</td>
-       <td> {{form.dueDate}}</td>
-       <td> {{form.taskDay}}</td>
-       <td>
-       <input type="submit" value='Save'class="btn btn-success allifmaal-submit-btn" >
- 
-       </td>
-     </tr>
-       
-       </tbody>
-       </form>
-     </table>
-     </div>
-   
-   
-   </div></div>
-   
-   <div class="row mt-12"> <!--start....table row-->
-     <div class="col-md-12"> <!--start....table column-->
-     <div class="allif-scroll-table"> 
-       <table class="table table-layout">
-       <thead>
-       <tr class="allif-table-header-row" >
-     <td scope="col">Task</td>
-     <td scope="col">Status</td>
-     
-     <td scope="col">Due</td>
-     <td scope="col">Remaining Time</td>
-     <td scope="col">Assigned</td>
-     <td scope="col" >Action</td>
-     <td scope="col">Action</td>
-     <td >Mon</td> 
-     <td>Tue</td>
-     <td>Wed</td>
-     <td >Thu</td>
-     <td >Fri</td>
-     <td >Sat</td>
-     <td >Sun</td>
-     
-   </tr>
-   </thead>
-   
-   {% for task in tasks %}
-   <tr>
-     
-     <td>{{task.task}}</td>
-     <td>{{task.status}}</td>
-     
-     <td>{{task.dueDate|date:'d/m/Y'}}</td>
-     <td>{{task.dueDate|timeuntil}}</td>
-     <td>{{task.assignedto}}</td>
-               
-     <td> <a href="" data-toggle="tooltip" title="Delete this record">
-       Finish
-       
-     </a></td>
+      </div>
+      
+      
+      </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card">
+        <div class="card-header allif-dashboard-card-header">
+          Top 10 Companies. <span>Total: <strong>{{compcount}}</strong></span>
+        </div>
+    
+        <div class="col-md-12">
+        <div class="column allif-dashboard-card-body">
+        
+    
+      <div class="allif-scroll-table">
+        <div class="table-responsive allif-full-table">
+        <table class="table table-layout">
+          <thead>
+            <tr class="allif-table-header-row">
+            <td>Companies</td>
+            <td>Votes</td>
+            </tr>
+            </thead>
+            <tbody class="allif-table-body">
              
+            
+            {% for item in companies %} 
+            <tr data-id="{{item.id}}">
+            <td><a class="allif-table-links" href="">{{item.name}}</a></td>
            
-     <td> <a href="" 
-       data-toggle="tooltip" title="Delete this record" 
-       class="allif-delete-link">
-         X
-       
-     </a></td>
-     
-     {% if task.taskDay == 'Monday' %}
-     <td> 
-       
-     
-     X
-     
-     </td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     {% elif task.taskDay == 'Tuesday' %}
-     <td></td>
-     
-     <td>
-       
-   X
-     
-     </td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     
-     {% elif task.taskDay == 'Wednesday' %}
-     <td></td>
-     <td></td>
-     <td>
-     X
-   </td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     
-     
-     {% elif task.taskDay == 'Thursday' %}
-     <td></td>
-     <td></td>
-     <td></td>
-     
-     <td>
-     X
-     </td>
-     <td></td>
-     <td></td>
-     <td></td>
-     
-     
-     {% elif task.taskDay == 'Friday' %}
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     
-     <td>
-   X
-     </td>
-     <td></td>
-     <td></td>
-     
-     
-     {% elif task.taskDay == 'Saturday' %}
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     
-     <td>
-     X
- </td>
-     <td></td>
-     
-     
-         
-   {% elif task.taskDay == 'Sunday' %}
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-   
-   <td>
-   X
-   </td>
-   
-   {% endif %}
-   
+            <td>
+              {{item.votes|floatformat:2|intcomma}}
+            </td>
+        </tr>
+        {% endfor %}
+        
+          </tbody>
+        </table>
+        </div>
+       </div>
+    
+    
+    </div>
+    </div>
+    
+    
+    </div>
+    </div>
+    
+      
+    <div class="col-md-4">
+        <div class="card">
+        <div class="card-header allif-dashboard-card-header">
+          Top 10 Voters. <span>Total: <strong>{{voterscount}}</strong></span>
+        </div>
+    
+        <div class="col-md-12">
+        <div class="column allif-dashboard-card-body">
+        
+    
+      <div class="allif-scroll-table">
+        <div class="table-responsive allif-full-table">
+        <table class="table table-layout">
+          <thead>
+            <tr class="allif-table-header-row">
+            <td>Name</td>
+           
+            <td>Votes</td>
+        
+            </tr>
+            </thead>
+            <tbody class="allif-table-body">
              
-   </tr>
- 
-   {% endfor %}
- </table>
-   
- </div></div></div>
- 
-
-   
- 
- <p>Dear <strong> {{user_var}} </strong> </p>
- <p>Welcome To The Sales Home </p>
-
- That sounds like an exciting project! Here are some key elements you might want to include on the landing page when a customer logs in to your ERP system:
-
-Welcome Message:
-
-A personalized greeting to make users feel valued.
-Example: "Welcome back, [Customer Name]!"
-Dashboard Overview:
-
-A summary of key metrics and data relevant to the user.
-Example: Sales figures, inventory levels, recent transactions.
-Navigation Menu:
-
-Easy access to different modules of the ERP system.
-Example: Dashboard, Sales, Inventory, Accounting, Reports, Settings.
-Notifications and Alerts:
-
-Important updates or alerts that require the user's attention.
-Example: "You have 3 new orders to process."
-Quick Actions:
-
-Shortcuts to frequently used features.
-Example: "Create New Invoice," "Add New Product."
-User Profile and Settings:
-
-Access to user profile and account settings.
-Example: "Edit Profile," "Subscription Details."
-Support and Help:
-
-Links to support resources or contact information for customer service.
-Example: "Help Center," "Contact Support."
-Subscription Information:
-
-Details about the user's subscription plan and renewal dates.
-Example: "Your subscription is active until [Date]."
-Recent Activity:
-
-A log of recent actions taken by the user or their team.
-Example: "You recently updated the inventory for Product X."
-Announcements and Updates:
-
-Information about new features or updates to the ERP system.
-Example: "Check out our new reporting module!"
-Would you like more detailed examples or help with designing any specific section?
-
-</div><!--end of main container of the page-->
-
-
- 
-<!--we can insert the other section here...-->
-
-
-   
-
+            
+            {% for item in allifqueryset %} 
+            <tr data-id="{{item.id}}">
+            <td><a class="allif-table-links" href="">{{item.first_name}}</a></td>
+           
+            <td>
+              {{item.castedvotes|floatformat:2|intcomma}}
+            </td>
+        </tr>
+        {% endfor %}
+        
+          </tbody>
+        </table>
+        </div>
+       </div>
+    
+    
+    </div>
+    </div>
+    
+    
+    </div>
+    </div>
+    
+      </div>
+      
+      <!--end of first row-->
+      
+      <!--start of second row-->
+      
+       <!--start of first row-->
+       <div class="row mt-12" >
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Top 10 Golden Sponsors. <span>Total: <strong>{{sponsorscount}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Sponsors</td>
+               
+                <td>Amounts</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in sponsors %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+               
+               
+            <td>
+              {{item.amount|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+      
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Top 10 Highest Expenses. <span>Total: <strong>{{expensescount}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Description</td>
+               
+                <td>Amount</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in expenses %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.description}}</a></td>
+                  
+            <td>
+              {{item.amount|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              10 Latest Votes. <span>Total: <strong>{{votescount}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Voter</td>
+               
+                <td>Date</td>
+             
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in votes %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.voter}}</a></td>
+               
+                <td>
+                    {{item.date|date:'d/m/Y'}}
+                  </td>
+              
+               
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+      </div>
+      
+      <!--end of first row-->
+      
+      <!--start of second row-->
+      
+     
+    
+    </div><!--end of main container of the page-->
+    
+    
+     
+    <!--we can insert the other section here...-->
+    
+    </div>
+       
+    
    {% endblock %}
    

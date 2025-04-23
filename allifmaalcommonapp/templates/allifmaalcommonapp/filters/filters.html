@@ -14,28 +14,9 @@
   <div class="row mt-12" ><!--start....header row-->
   <div class="col-md-12"><!--start....header column-->
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Doc Types:</a>
+    <a class="amel-table-list-identifier">Filter Types:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
-    <a href="{% url 'allifmaalcommonapp:dynamic_form_view' %}">Dynamic form</a>
-
-    
-    <a class="allif-load-content-button" type="button">Load Sectors</a>
-
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
-    </div>
-    </ul>
-  </div>
-  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Company</a>
-  
+   
   </div>
     </div><!--end....header column-->
     </div><!--end....header row-->
@@ -49,7 +30,7 @@
     <table class="table table-layout">
       <thead>
         <tr class="allif-table-header-row">
-        <td class="allif-fix-table-col">Scope</td>
+        <td class="allif-fix-table-col">Filter Type</td>
         <td>Comments</td>
         <td>Created By</td>
         <td>Date</td>
@@ -64,7 +45,7 @@
         
         {% for item in allifqueryset %} 
         <tr data-id="{{item.id}}">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
+        <td class="allif-fix-table-col">{{item.name}}</td>
         <td>{{item.notes}}</td>
         <td>{{item.owner}}</td>
         <td>{{item.date|date:'d/m/Y'}}</td>

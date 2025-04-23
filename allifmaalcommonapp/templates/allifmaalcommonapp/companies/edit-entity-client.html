@@ -11,86 +11,166 @@
 <!--start....main headere-->
 <div class="card-header">
 
-  <div class="row mt-12" ><!--start....header row-->
+<div class="row mt-12" ><!--start....header row-->
+
+<div class="col-md-12"><!--start....header column-->
+
+<div class="container-fluid amel-content-header">
+  <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
   
-  <div class="col-md-12"><!--start....header column-->
-  
-  <div class="container-fluid amel-content-header">
-    
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
-   
     <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
-    <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies </a>
- 
-  <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors </a>
-  
-  <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
-  
-  
-  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a>
   
   <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
-  </div>
+ 
+</div>
+
+    </div><!--end....header column-->
   
-      </div><!--end....header column-->
+  </div><!--end....header row-->
+
+</div><!--end....main headere-->
+
+
+  <div class="allifmaincontainer">
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">Add/Edit New Expense</div>
+  <form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
     
-    </div><!--end....header row-->
-  
-  </div><!--end....main headere-->
-  
-    <div class="allifmaincontainer">
-
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="col-md-12"><!--start of the first row body-->
-        <div class="allif-form-container">
-        <form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
-        <div class="row"><!--start of row div --->
-          <div class="col-md-4"><!--start of column 1-->
-            <div class="card shadow text-left p-3 allif-form-card" >
-              <label>Company Name</label> {{form.company}}
-            
-              <label>Sector</label>{{form.sector}}
-              <label>Phone 1</label> {{form.phone1}}
-              <label>Phone 2</label> {{form.phone2}}
-              <label>Branch</label> {{form.branch}}
-          </div>
-            </div><!--end of column 1-->
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+     
+        <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{form.company}}</td>
+      
+          </tr>
         
-            <div class="col-md-4"><!--start of column 2-->
-            <div class="card shadow text-left p-3 allif-form-card">
-              <label>Email</label> {{form.email}} 
-              <label>Address</label> {{form.address}}
-              <label>City</label> {{form.city}}
-              <label>Country</label> {{form.country}}
+      <tr>
+        <td class="allif-fix-table-col">Sector</td>
+        <td>{{form.sector}}</td>
+    
+        </tr>
+        
+       
+          <tr>
+            <td class="allif-fix-table-col">Phone 1</td>
+            <td>{{form.phone1}}</td>
+        
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Phone 2</td>
+            <td>{{form.phone2}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Email</td>
+              <td>{{form.email}}</td>
+          
+              </tr>
+             
+          
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Branch</td>
+            <td>{{form.branch}}</td>
+        
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Address</td>
+            <td>{{form.address}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">City</td>
+              <td>{{form.city}}</td>
+          
+              </tr>
+         
+                  <tr>
+                    <td class="allif-fix-table-col">Country</td>
+                    <td>{{form.country}}</td>
                 
-                </div>
-            </div><!--end of column 2-->
-            <div class="col-md-4"><!--start of column 3-->
-            <div class="card shadow text-left p-3 allif-form-card">
+                    </tr>
               
-              <label>BOX</label> {{form.pobox}}
-              <label>Website</label> {{form.website}} 
-              <label>Logo</label> {{form.logo}} 
-              <label>Deletable</label> {{form.can_delete}} 
-               
-              
-                <br>
-                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+                      <tr>
+                        <td class="allif-fix-table-col">P.O.Box</td>
+                        <td>{{form.pobox}}</td>
+                    
+                        </tr>   
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
         
-                </div>
-            </div><!--end of column 1-->
-        
-        </div><!--end of row div --->
-            </form>
-            </div>
-            </div><!--end of first row body-->
-</div><!--end....table row-->
+            <tr>
+              <td class="allif-fix-table-col">Website</td>
+              <td>{{form.website}}</td>
+          
+              </tr>
+              <tr>
+                <td class="allif-fix-table-col">Logo</td>
+                <td>{{form.logo}}</td>
+            
+                </tr>
+          
+              <tr>
+                <td class="allif-fix-table-col">Can Delete</td>
+                <td>{{form.can_delete}}</td>
+            
+                </tr>
+            <tr>
+              <td class="allif-fix-table-col">Action</td>
+              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+          
+              </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
 
+</div><!--end....table row-->
+</div>
+</form>
 <!--end of table-->
 
-
 </div><!--end of main container of the page....-->
+
+
+
+
+</div>
+
 </div>
   {% block scripts %}
 

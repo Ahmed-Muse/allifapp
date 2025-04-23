@@ -33,7 +33,7 @@
     </div>
     </ul>
   </div>
-  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Company</a>
+  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a>
   
   </div>
     </div><!--end....header column-->
@@ -41,92 +41,7 @@
   </div><!--end....main headere-->
   <div class="allifmaincontainer">
   <div class="allif-content-spacer"></div>
-  <div class="row mt-12"> <!--start....table row-->
-    <div class="col-md-12"> <!--start....table column-->
-    <div class="allif-scroll-table">
-      <div class="table-responsive allif-full-table">
-      <table class="table table-layout">
-        <thead>
-          <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Sector Name</td>
-          <td>Sector Notes</td>
-          <td>Created By</td>
-          <td>Date</td>
-          
-          <td>Actions</td>
-          
-          <td> . . . </td>
-          <td></td>
-          </tr>
-          </thead>
-          <tbody class="allif-table-body">
-              
-            {% if myallifquery %}
-            <tr>
-             
-              <td id="allif-delete-on-table-row"> Delete {{myallifquery.name}} ?</td>
-             
-              <td id="allif-delete-on-table-row">{{myallifquery.notes}}</td>
-              <td id="allif-delete-on-table-row">{{myallifquery.owner}}</td>
   
-              
-              <td id="allif-delete-on-table-row">{{myallifquery.date|date:'d/m/Y'}}</td>
-              <td>
-                <div class="dropdown allifmaal-content-dropdown">
-                  <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{open_link}}
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <div class="content-dropdown-menu">
-                    <li><a class="dropdown-item" id="allif-table-drop-item-link" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Dont Delete</a></li>
-                    <li><a class="dropdown-item" id="allif-table-drop-item-link-delete" href="{% url 'allifmaalcommonapp:commonSectorDelete' myallifquery.id %}">Delete Item</a></li>
-                  </div>
-                  </ul>
-                </div>
-              </td>
-              <td> . . . </td>
-              <td></td>
-             
-            </tr>
-            {% endif %}
-          
-          {% for item in allifqueryset %} 
-          <tr data-id="{{item.id}}">
-          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSectorDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
-          <td>{{item.notes}}</td>
-          <td>{{item.owner}}</td>
-          <td>{{item.date|date:'d/m/Y'}}</td>
-          <td>
-            <div class="dropdown allifmaal-content-dropdown">
-              <a class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            {{open_link}}
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <div class="content-dropdown-menu">
-                <li><a class="dropdown-item" id="allif-table-drop-item-link" href="{% url 'allifmaalcommonapp:commonEditSector' item.id user_var glblslug %}">Edit Item</a></li>
-                <li><a class="dropdown-item" id="allif-table-drop-item-link-delete" href="{% url 'allifmaalcommonapp:commonWantToDeleteSector' item.id user_var glblslug %}">Delete Item</a></li>
-               
-              </div>
-              </ul>
-            </div>
-          </td>
-
-        
-         <td> . . . </td>
-         <td></td>
-        </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-      </div>
-     </div>
-
-  </div><!--end....table column-->
-
-</div><!--end....table row-->
-
-
-
 <div class="row mt-12"> <!--start....table row-->
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">

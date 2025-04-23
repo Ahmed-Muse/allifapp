@@ -111,7 +111,6 @@ path('Delete/Tax/Parameter/<str:pk>/<str:allifusr>/<str:allifslug>/', views.Comm
 path('Want/To/Delete/This/Tax/Parameter/Now/Prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteTaxParameter, name="commonWantToDeleteTaxParameter"),
 
 
-
 ##################################### General Ledger accounts ################
 path('General/Ledgers/Accounts/<str:allifusr>/<str:allifslug>/', views.commonGeneralLedgers, name="commonGeneralLedgers"),
 path('Add/General/Ledger/Account/<str:allifusr>/<str:allifslug>/', views.commonAddGeneralLedger, name="commonAddGeneralLedger"),

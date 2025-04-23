@@ -174,22 +174,39 @@
     {% endfor %}
     {% if searched_data %}
     {% for item in searched_data %}
-    <tr>
-      <td >
-        <a href="{% url 'allifmaalcommonapp:commonCompanyDetails' item.id user_var glblslug %}" class="allif-table-links">
-       {{item.company}}
-        </a>
-      </td>
+    <tr data-id="{{item.id}}">
+      <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonShowClickedRowUserDetails' item.id user_var glblslug %}">{{item.first_name}}</a></td>
+     
       <td>
-        {{item.sector}}
+        {{item.last_name}}
       </td>
-      <td>{{item.owner}}</td>
-      
       <td>{{item.email}}</td>
+      
+      <td>{{item.user_category}}</td>
    
       </td>
-  
-    </tr>
+      <td>
+        <div class="dropdown allifmaal-content-dropdown">
+          <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+          <div class="dropdown-content">
+            <a href="{% url 'allifmaalcommonapp:commonEditUser' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+            <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+            
+          </div>
+        </div>
+        <div class="dropdown allif-confirm-action">
+          
+          <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+          <a href="{% url 'allifmaalcommonapp:commonDeleteUser' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+        </div>
+
+       
+      </td>
+     <td> . . . </td>
+     <td></td>
+    
+
+  </tr>
     {% endfor %}
       {%endif %}
 

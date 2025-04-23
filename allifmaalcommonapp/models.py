@@ -140,7 +140,7 @@ class CommonDocsFormatModel(models.Model):# this is the company  hospitality log
     def __str__(self):
         return self.name
 class CommonDataSortsModel(models.Model):# this is the company  hospitality logistics
-    name=models.CharField(max_length=10,blank=False,null=False,unique=True,default="asc")
+    name=models.CharField(max_length=20,blank=False,null=False,unique=True,default="asc")
     notes=models.CharField(max_length=50,blank=True,null=True,default="Write Document Type")
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="datsortusr")
     date=models.DateField(blank=True,null=True,auto_now_add=True)
@@ -1128,13 +1128,13 @@ class CommonJobsModel(models.Model):
 
 class CommonJobItemsModel(models.Model):
     item= models.ForeignKey(CommonStocksModel, blank=True, null=True, on_delete=models.CASCADE,related_name='itemjobcon')
-    description=models.CharField(max_length=20,blank=True,null=True,default="Description")
+    
     quantity=models.FloatField(max_length=20,blank=True,null=True,default=0)
-    comments=models.CharField(max_length=20,blank=True,null=True,default="Comments")
+    
     jobitemconnector= models.ForeignKey(CommonJobsModel, blank=True, null=True, on_delete=models.CASCADE,related_name='itemjobconrelnme')
     
     def __str__(self):
-        return str(self.description)
+        return str(self.item)
     
 class CommonContactsModel(models.Model):
     name=models.CharField(max_length=60,blank=False,null=True,default="name")

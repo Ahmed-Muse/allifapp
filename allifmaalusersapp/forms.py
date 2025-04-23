@@ -7,7 +7,7 @@ class CreateNewCustomUserForm(UserCreationForm):#this is used for new user creat
         model=User
         fields=['username','fullNames','phone','first_name','last_name','email','password1','password2','user_category']#all these fields are from django
         widgets={
-            'user_category':forms.Select(attrs={'class':'form-control'}), 
+            'user_category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}), 
         }
 class CustomUserLoginForm(forms.ModelForm): #this is used for user login
     class Meta:

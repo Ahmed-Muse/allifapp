@@ -13,22 +13,9 @@
   <div class="row mt-12" ><!--start....header row-->
   <div class="col-md-12"><!--start....header column-->
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Sectors:</a>
+    <a class="amel-table-list-identifier">Scopes:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}"> Admin Home</a>
    
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
-    </div>
-    </ul>
-  </div>
-  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Company</a>
   
   </div>
     </div><!--end....header column-->

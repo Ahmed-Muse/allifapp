@@ -883,6 +883,7 @@ def commonCompanyAdvanceSearch(request,*allifargs,**allifkwargs):
             if start_date!="" and end_date!="":
                 searched_data=CommonCompanyDetailsModel.objects.filter(Q(created_date__gte=start_date)& Q(created_date__lte=end_date))
                 # if pdf is selected
+                print(searched_data)
                 if selected_option=="pdf":
                     template_path = 'allifmaalcommonapp/companies/search-pdf.html'
                     allifcontext = {
@@ -1349,7 +1350,7 @@ def commonDepartmentSearch(request,*allifargs,**allifkwargs):
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonDepartmentsModel.objects.filter((Q(description__icontains=allifsearch)|Q(comments__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
+            searched_data=CommonDepartmentsModel.objects.filter((Q(department__icontains=allifsearch)|Q(comments__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
            
             context={
            
@@ -2079,7 +2080,10 @@ def commonAddStaffProfile(request,allifusr,allifslug,*allifargs,**allifkwargs): 
                     return redirect('allifmaalcommonapp:commonStaffProfiles',allifusr=usrslg,allifslug=user_var)
                    
                 else:
-                    form=CommonAddStaffProfileForm(instance=main_sbscrbr_entity)
+                    error_message=form.errors
+                    allifcontext={"error_message":error_message,"title":title,}
+                    return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+                    
             else:
                 form=CommonAddStaffProfileForm(instance=main_sbscrbr_entity)
         else:
@@ -4587,7 +4591,9 @@ def commonAddCustomer(request,*allifargs,**allifkwargs):
                     return redirect('allifmaalcommonapp:commonCustomers',allifusr=usrslg,allifslug=user_var)
 
                 else:
-                    form=CommonCustomerAddForm(main_sbscrbr_entity)
+                    error_message=form.errors
+                    allifcontext={"error_message":error_message,"title":title,}
+                    return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
             else:
                     form=CommonCustomerAddForm(main_sbscrbr_entity)
         else:
@@ -5830,7 +5836,7 @@ def commonStockCategorySearch(request,*allifargs,**allifkwargs):
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonExpensesModel.objects.filter((Q(description__icontains=allifsearch)|Q(amount__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
+            searched_data=CommonStockCategoriesModel.objects.filter((Q(description__icontains=allifsearch)|Q(comments__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
            
             context={
            
@@ -5840,9 +5846,8 @@ def commonStockCategorySearch(request,*allifargs,**allifkwargs):
             "main_sbscrbr_entity":main_sbscrbr_entity,
            
         }
-        return render(request,'allifmaalcommonapp/expenses/expenses.html',context)
-        
-     
+        return render(request,'allifmaalcommonapp/stocks/stock-cats.html',context)
+       
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
