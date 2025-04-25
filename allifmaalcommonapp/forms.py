@@ -1,8 +1,6 @@
 from django import forms
 from .models import *
 
-
-
 ############################# start of datepicker customization ##############################
 class DatePickerInput(forms.DateInput):#use this class whereever you have a date and it will give you the calender
     input_type = 'date'#
@@ -211,16 +209,19 @@ class CommonAddTaxParameterForm(forms.ModelForm):
     class Meta:
         #mydefault=TaxParametersModel.objects.all().first().taxname
         model = CommonTaxParametersModel
-        fields = ['taxname','taxtype','taxrate', 'taxdescription']
+        fields = ['taxname','taxtype','taxrate', 'taxdescription','division','branch','department']
         widgets={
             'taxname':forms.TextInput(attrs={'class':'form-control'}),
              #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
             'taxrate':forms.TextInput(attrs={'class':'form-control'}),
              'taxtype':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
              'taxdescription':forms.TextInput(attrs={'class':'form-control'}),
-             
-            
         }
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super(CommonAddTaxParameterForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
 ######################################### chart of accounts ########################
 class CommonAddBankForm(forms.ModelForm):
     class Meta:
@@ -711,7 +712,7 @@ class CommonAddQuoteDetailsForm(forms.ModelForm):
             'prospect':forms.Select(attrs={'class':'form-control'}),
             'currency':forms.Select(attrs={'class':'form-control'}),
             'discount':forms.Select(attrs={'class':'form-control'}),
-            'salestax':forms.Select(attrs={'class':'form-control'}),
+            'salestax':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -723,7 +724,7 @@ class CommonAddQuoteDetailsForm(forms.ModelForm):
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-
+        self.fields['salestax'].queryset = CommonTaxParametersModel.objects.filter(company=allifmaalparameter)
 class CommonAddQuoteItemsForm(forms.ModelForm):
     class Meta:
         model = CommonQuoteItemsModel
@@ -930,9 +931,4 @@ class CommonAddTasksForm(forms.ModelForm): #the forms here is the one imported u
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
         self.fields['assignedto'].queryset = CommonEmployeesModel.objects.filter(company=allifmaalparameter,)
-     
-##########################3 testing links ####################
-class TemplateLinkForm(forms.ModelForm):
-    class Meta:
-        model = TemplateLink
-        fields = ['name', 'url_name', 'url_params']
+ 

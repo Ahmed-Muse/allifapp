@@ -27,12 +27,12 @@ urlpatterns = [
 
     path('', include('allifmaalcommonapp.urls')),
     path('Allifmaal/ERP/System/Hotels/App/', include('allifmaalhotelsapp.urls')),
-    #path('Allifmaal/ERP/System/Education/App/', include('allifmaalilmapp.urls')),
-    #path('Allifmaal/ERP/System/Logistics/App/', include('allifmaallogisticsapp.urls')),
-    #path('Allifmaal/ERP/System/Real/Estate/App/', include('allifmaalrealestateapp.urls')),
+    path('Allifmaal/ERP/System/Education/App/', include('allifmaalilmapp.urls')),
+    path('Allifmaal/ERP/System/Logistics/App/', include('allifmaallogisticsapp.urls')),
+    path('Allifmaal/ERP/System/Real/Estate/App/', include('allifmaalrealestateapp.urls')),
     path('Allifmaal/ERP/System/Distribution/Sales/App/', include('allifmaalsalesapp.urls')),
-    #path('Allifmaal/ERP/System/Healthcare/App/', include('allifmaalshaafiapp.urls')),
-    #path('Allifmaal/ERP/System/Services/App/', include('allifmaalservicesapp.urls')),
+    path('Allifmaal/ERP/System/Healthcare/App/', include('allifmaalshaafiapp.urls')),
+    path('Allifmaal/ERP/System/Services/App/', include('allifmaalservicesapp.urls')),
 
 ]
 

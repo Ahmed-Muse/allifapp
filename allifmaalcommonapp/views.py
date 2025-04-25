@@ -112,6 +112,36 @@ def commonHome(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
+@login_required(login_url='allifmaalusersapp:userLoginPage')
+def commonSpecificDashboard(request,*allifargs,**allifkwargs):
+    try:
+        usrslg=request.user.customurlslug
+        user_var_comp=request.user.usercompany
+        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var_comp).first()
+        if main_sbscrbr_entity!=None:
+            sctr=str(main_sbscrbr_entity.sector)# this is very important...
+            if sctr=="Sales":
+                return redirect('allifmaalsalesapp:salesDashboard',allifusr=usrslg,allifslug=user_var_comp)
+            elif sctr=="Healthcare":
+                return redirect('allifmaalshaafiapp:shaafiDashboard',allifusr=usrslg,allifslug=user_var_comp)
+            elif sctr=="Hospitality":
+                return redirect('allifmaalhotelsapp:hospitalityDashboard',allifusr=usrslg,allifslug=user_var_comp)
+            elif sctr=="Education":
+                return redirect('allifmaalilmapp:ilmDashboard',allifusr=usrslg,allifslug=user_var_comp)
+            elif sctr=="Services":
+                return redirect('allifmaalservicesapp:servicesDashboard',allifusr=usrslg,allifslug=user_var_comp)
+            elif sctr=="Realestate":
+                return redirect('allifmaalrealestateapp:realestateDashboard',allifusr=usrslg,allifslug=user_var_comp)
+            elif sctr=="Logistics":
+                return redirect('allifmaallogisticsapp:logisticsDashboard',allifusr=usrslg,allifslug=user_var_comp)
+            else:
+                return redirect('allifmaalcommonapp:CommonDecisionPoint')
+        else:
+            return redirect('allifmaalcommonapp:CommonDecisionPoint')
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
 ################################### Sectors ############################### 
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @allifmaal_admin
@@ -835,12 +865,12 @@ def commonDeleteEntity(request,allifslug,*allifargs,**allifkwargs):
         user_var=request.user.usercompany
         usrslg=request.user.customurlslug
         allifquery=CommonCompanyDetailsModel.objects.filter(companyslug=allifslug).first()
-        if allifquery.can_delete=="undeletable":
-            context={"allifquery":allifquery,"title":title,}
-            return render(request,'allifmaalcommonapp/error/cant_delete.html',context)
-        else:
-            allifquery.delete()
-            return redirect('allifmaalcommonapp:commonTasks',allifusr=usrslg,allifslug=user_var)
+        #if allifquery.can_delete=="undeletable":
+            #context={"allifquery":allifquery,"title":title,}
+            #return render(request,'allifmaalcommonapp/error/cant_delete.html',context)
+        #else:
+        allifquery.delete()
+        return redirect('allifmaalcommonapp:commonTasks',allifusr=usrslg,allifslug=user_var)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -2245,9 +2275,9 @@ def commonTaxParameters(request,*allifargs,**allifkwargs):
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
         allifqueryset=CommonTaxParametersModel.objects.filter(company=main_sbscrbr_entity)
         latest=CommonTaxParametersModel.objects.filter(company=main_sbscrbr_entity).order_by('-date')[:3]
-        form=CommonAddTaxParameterForm(request.POST)
+        form=CommonAddTaxParameterForm(main_sbscrbr_entity,request.POST)
         if request.method == 'POST':
-            form=CommonAddTaxParameterForm(request.POST)
+            form=CommonAddTaxParameterForm(main_sbscrbr_entity,request.POST)
             if form.is_valid():
                 obj = form.save(commit=False)
                 obj.company=main_sbscrbr_entity
@@ -2259,7 +2289,7 @@ def commonTaxParameters(request,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonAddTaxParameterForm()
+            form=CommonAddTaxParameterForm(main_sbscrbr_entity)
         context={
             "title":title,
             "form":form,
@@ -2282,9 +2312,9 @@ def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
         allifqueryset=CommonTaxParametersModel.objects.filter(company=main_sbscrbr_entity)
         update=CommonTaxParametersModel.objects.get(id=pk)
-        form =CommonAddTaxParameterForm(instance=update)
+        form =CommonAddTaxParameterForm(main_sbscrbr_entity,instance=update)
         if request.method == 'POST':
-            form = CommonAddTaxParameterForm(request.POST,instance=update)
+            form = CommonAddTaxParameterForm(main_sbscrbr_entity,request.POST,instance=update)
             if form.is_valid():
                 obj = form.save(commit=False)
                 obj.company =main_sbscrbr_entity
@@ -2296,7 +2326,7 @@ def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form =CommonAddTaxParameterForm(instance=update)
+            form =CommonAddTaxParameterForm(main_sbscrbr_entity,instance=update)
         context = {
             'form':form,
             "update":update,
@@ -9764,6 +9794,7 @@ def commonAddJobItems(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
+
 @login_required(login_url='allifmaalusersapp:userLoginPage') 
 @logged_in_user_can_view 
 @logged_in_user_can_delete
@@ -10335,11 +10366,6 @@ def commonCustomerContacts(request):
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 
-
-
-
-
-
 def ui1(request,*allifargs,**allifkwargs):
     print()
     context = {
@@ -10348,7 +10374,7 @@ def ui1(request,*allifargs,**allifkwargs):
     return render(request,'allifmaalcommonapp/ui/ui1.html',context)
 def ui2(request,*allifargs,**allifkwargs):
     print()
-    context = {
+    context ={
            
         }
     return render(request,'allifmaalcommonapp/ui/ui2.html',context)
@@ -10386,31 +10412,10 @@ def ui8(request,*allifargs,**allifkwargs):
 
 #################### testingl inks
 
-from .models import TemplateLink
-from .forms import TemplateLinkForm
-
-def link_list(request):
-    for item in TemplateLink.objects.all():
-        #item.delete()
-        pass
-    links = TemplateLink.objects.all()
-    return render(request, 'allifmaalcommonapp/links/link_list.html', {'links': links})
-
-def add_link(request):
-    if request.method == 'POST':
-        form = TemplateLinkForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('allifmaalcommonapp:link_list')
-    else:
-        form = TemplateLinkForm()
-    return render(request, 'allifmaalcommonapp/links/add_link.html', {'form': form})
-
 @register.filter(name='allif_generate_links')
 def generate_new_link(link):
     url = reverse(link.url_name, kwargs=link.url_params)
     return f'<a href="{url}">{link.name}</a>'
-
 
 def dynamic_form_view(request):
     if request.method == 'POST':

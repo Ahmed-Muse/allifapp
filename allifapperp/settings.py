@@ -85,8 +85,12 @@ INSTALLED_APPS = [
      "allifmaaladminapp",
      "allifmaalcommonapp",
      "allifmaalhotelsapp",
-     
+     "allifmaalilmapp",
+     "allifmaalrealestateapp",
      "allifmaalsalesapp",
+     "allifmaalservicesapp",
+     "allifmaalshaafiapp",
+     "allifmaallogisticsapp",
      
      
 ]

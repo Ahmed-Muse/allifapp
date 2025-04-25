@@ -54,11 +54,16 @@ def adminappUserDetails(request,pk,*allifargs,**allifkwargs):
             canviewprofile=""
             caneditprofile=""
             candeleteprofile=""
+        #else:
+            #context={
+                #"allifquery":allifquery,
+            #}
+            #return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
         else:
             context={
                 "allifquery":allifquery,
             }
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaaladminapp/users/user-details.html',context)
            
         context={
             "allifquery":allifquery,

@@ -8,6 +8,7 @@ path('', views.commonWebsite, name="commonWebsite"),
 path('Engineering/', views.commonEngineering, name="commonEngineering"),
 path('Decision/Making/Point/', views.CommonDecisionPoint, name="CommonDecisionPoint"),
 path('Home/<str:allifusr>/<str:allifslug>/', views.commonHome, name="commonHome"),
+path('Dashboard/<str:allifusr>/<str:allifslug>/', views.commonSpecificDashboard, name="commonSpecificDashboard"),
 
 ############################ Sectors ##################################3
 path('Sectors/<str:allifusr>/<str:allifslug>/', views.commonSectors, name="commonSectors"),
@@ -396,9 +397,6 @@ path('Available/Stock/Report/<str:allifusr>/<str:allifslug>/', views.commonAvail
 
 path('Contact/Information/Saving/', views.commonCustomerContacts, name="commonCustomerContacts"),
 
-
-
-
 ############################3
 path('Table/scroll/Horizontal<str:allifusr>/<str:allifslug>/', views.commonScrollableTable, name="commonScrollableTable"),
 
@@ -414,13 +412,6 @@ path('UI7/Home/<str:allifusr>/<str:allifslug>/', views.ui7, name="ui7"),
 
 path('UI8/Home/<str:allifusr>/<str:allifslug>/', views.ui8, name="ui8"),
 
-###################3 links test ############3
-path('links/lists', views.link_list, name='link_list'),
-path('add/new/link', views.add_link, name='add_link'),
-
 path('add/dynamic_form_view/', views.dynamic_form_view, name='dynamic_form_view'),
-
-
-
 
 ]   

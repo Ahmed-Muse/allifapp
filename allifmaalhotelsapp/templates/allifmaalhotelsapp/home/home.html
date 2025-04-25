@@ -1,4 +1,4 @@
-{% extends 'allifmaalhotelsapp/base/uimainbase/hotelsbase.html'%}
+{% extends 'allifmaalhotelsapp/base/uimainbase/hospitalitybase.html'%}
 {% load humanize %}
 {% block title %}
 {{title}}
@@ -8,127 +8,334 @@
    
 {% block body %}
 
-<!--we can insert the other section here-->
-<div class="allifmaincontainer">
-      
-  <!--start....main headere-->
-  <div class="card-header">
-
-    <div class="row mt-12" ><!--start.......header row-->
-
-    <div class="col-md-12"><!--start....header column-->
-          
-    <a href="#" class="module-menu-one-open-link module-menu-links">Navigate <i class="fa fa-caret-down"></i></a>
-    <a href="#" class="module-menu-two-open-link module-menu-links">Open <i class="fa fa-caret-down"></i></a>
-    <a href="#" class="module-menu-three-open-link module-menu-links">Modules <i class="fa fa-caret-down"></i></a>
-    <a href="" class="module-menu-links">Sales </a>
-    <a href="#" class="module-menu-links">Sales Returns </a>
-    <a href="#" class="module-menu-links"> <span>Customers</span> </a>
-
-
-<!--start....module side nav one menu-->
- <div class="module-menu-one">
-  <a href="#" class="module-menu-one-open-link module-menu-close-link">Close The Menu <i class="fa fa-close"></i> </a>
- 
-
-  <button class="module-menu-dropdown-btn" >Quotations<i class="fa fa-caret-down"></i></button>
- <div class="module-menu-dropdown-container">
-  
-   <a href="#">Suppliers</a>
- </div>
-
- <button class="module-menu-dropdown-btn" >Purchases<i class="fa fa-caret-down"></i></button>
- <div class="module-menu-dropdown-container">
-   
-   <a href="#">Invoices</a>
-   <a href="#">Quotations</a>
-   <a href="#">Invoices</a>
-   <a href="#">Quotations</a>
-   
- </div>
-
-    <a href="#" class="">Sales</a>
-    <a href="#" class="">Sales</a>
-    <a href="#" class="">Sales</a>
- </div>
- <!--end....module side nav one menu-->
-
- <!--start....module side nav two menu-->
- <div class="module-menu-two">
-  <a href="#" class="module-menu-two-open-link module-menu-close-link">Close The Menu <i class="fa fa-close"></i> </a>
-  <a href="" >menu 2</a>
-
-  <button class="module-menu-dropdown-btn" >Menu2<i class="fa fa-caret-down"></i></button>
- <div class="module-menu-dropdown-container">
-   <a href="">Menu 2</a>
-   <a href="#">Suppliers</a>
- </div>
-
- <button class="module-menu-dropdown-btn" >Purchases<i class="fa fa-caret-down"></i></button>
- <div class="module-menu-dropdown-container">
-   <a href="">Logistics</a>
-   <a href="#">Invoices</a>
-  
- </div>
-
-    <a href="#" class="">Sales</a>
-    <a href="#" class="">Sales</a>
-   
- </div>
- <!--end....module side nav two menu-->
-
- <!--start....module side nav three with search menu-->
- <div class="module-menu-three">
-    <table class="table allif-search-table">
-      <tr>
-        <a href="#" class="module-menu-three-open-link module-menu-close-link">Close The Menu <i class="fa fa-close"></i> </a>
-      </tr>
+<div class="allifmaal-main-container">
+    <!--we can insert the other section here-->
      
-      <tr>
-        <td>
-      <a href=""> New Customer </a>
-        </td>
-
-        <td> 
-          <a href="">Customer Payments</a>
-        </td>
-
-        </tr>
-
-        <tr>
-        <td>
-      <a href=""> Customer Statements </a>
-        </td>
-        <td>     
-          <a href="">Transactions</a>
-        </td>
-
-        </tr>
-        <tr>
-          <td>
-        <a href=""> Customer Statements </a>
-          </td>
-          <td>     
-            <a href="">Customer Transactions</a>
-          </td>
+      <!--start....main headere-->
+      <div class="card-header">
+        <div class="row mt-12" ><!--start....header row-->
+        <div class="col-md-12"><!--start....header column-->
+        <div class="container-fluid amel-content-header">
+        
+            <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+            <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
+            <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
+            <a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
+            <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+        </div>
+          </div><!--end....header column-->
+          </div><!--end....header row-->
+        </div><!--end....main headere-->
+        
+    <div class="allifmaincontainer">
+       <!--start of first row-->
+       <div class="row mt-12" >
+          <div class="col-md-4">
+          <div class="card">
+          <div class="card-header allif-dashboard-card-header">
+            Top 10 Categories. <span>Total: <strong>{{catcount}}</strong></span>
+          </div>
+      
+          <div class="col-md-12">
+          <div class="column allif-dashboard-card-body">
+          
+    
+        <div class="allif-scroll-table">
+          <div class="table-responsive allif-full-table">
+          <table class="table table-layout">
+            <thead>
+              <tr class="allif-table-header-row">
+              <td>Categories</td>
+              <td>Votes</td>
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+              {% for item in categories %} 
+              <tr data-id="{{item.id}}">
+              <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td>
+                {{item.votes|floatformat:2|intcomma}}
+              </td>
+             
+        
           </tr>
+          {% endfor %}
+          
+            </tbody>
+          </table>
+          </div>
+         </div>
+      
+    
+      </div>
+      </div>
+      
+      
+      </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card">
+        <div class="card-header allif-dashboard-card-header">
+          Top 10 Companies. <span>Total: <strong>{{compcount}}</strong></span>
+        </div>
+    
+        <div class="col-md-12">
+        <div class="column allif-dashboard-card-body">
+        
+    
+      <div class="allif-scroll-table">
+        <div class="table-responsive allif-full-table">
+        <table class="table table-layout">
+          <thead>
+            <tr class="allif-table-header-row">
+            <td>Companies</td>
+            <td>Votes</td>
+            </tr>
+            </thead>
+            <tbody class="allif-table-body">
+             
+            
+            {% for item in companies %} 
+            <tr data-id="{{item.id}}">
+            <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+           
+            <td>
+              {{item.votes|floatformat:2|intcomma}}
+            </td>
+        </tr>
+        {% endfor %}
+        
+          </tbody>
         </table>
- </div>
- <!--start....module side nav three with search menu-->
- 
-    </div><!--end....header column-->
-  
-  </div><!--end....header row-->
-
-</div><!--end....main headere-->
-
-
-<h2>Dear <strong> {{user_var}} </strong> </h2>
-<h4>Welcome To The Hotels App Home </h4>
+        </div>
+       </div>
+    
+    
+    </div>
+    </div>
+    
+    
+    </div>
+    </div>
+    
+      
+    <div class="col-md-4">
+        <div class="card">
+        <div class="card-header allif-dashboard-card-header">
+          Top 10 Voters. <span>Total: <strong>{{voterscount}}</strong></span>
+        </div>
+    
+        <div class="col-md-12">
+        <div class="column allif-dashboard-card-body">
+        
+    
+      <div class="allif-scroll-table">
+        <div class="table-responsive allif-full-table">
+        <table class="table table-layout">
+          <thead>
+            <tr class="allif-table-header-row">
+            <td>Name</td>
+           
+            <td>Votes</td>
+        
+            </tr>
+            </thead>
+            <tbody class="allif-table-body">
+             
+            
+            {% for item in allifqueryset %} 
+            <tr data-id="{{item.id}}">
+            <td><a class="allif-table-links" href="">{{item.first_name}}</a></td>
+           
+            <td>
+              {{item.castedvotes|floatformat:2|intcomma}}
+            </td>
+        </tr>
+        {% endfor %}
+        
+          </tbody>
+        </table>
+        </div>
+       </div>
+    
+    
+    </div>
+    </div>
+    
+    
+    </div>
+    </div>
+    
+      </div>
+      
+      <!--end of first row-->
+      
+      <!--start of second row-->
+      
+       <!--start of first row-->
+       <div class="row mt-12" >
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Top 10 Golden Sponsors. <span>Total: <strong>{{sponsorscount}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Sponsors</td>
+               
+                <td>Amounts</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in sponsors %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+               
+               
+            <td>
+              {{item.amount|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+      
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Top 10 Highest Expenses. <span>Total: <strong>{{expensescount}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Description</td>
+               
+                <td>Amount</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in expenses %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.description}}</a></td>
+                  
+            <td>
+              {{item.amount|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              10 Latest Votes. <span>Total: <strong>{{votescount}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Voter</td>
+               
+                <td>Date</td>
+             
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in votes %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.voter}}</a></td>
+               
+                <td>
+                    {{item.date|date:'d/m/Y'}}
+                  </td>
+              
+               
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+      </div>
+      
+      <!--end of first row-->
+      
+      <!--start of second row-->
+      
+     
+    
+    </div><!--end of main container of the page-->
+    
+    
+     
+    <!--we can insert the other section here...-->
+    
+    </div>
        
-
-
-</div><!--end of main container of the page-->
-
+    
    {% endblock %}
    

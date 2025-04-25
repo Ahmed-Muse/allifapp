@@ -15,7 +15,7 @@
   <div class="row mt-12" ><!--start....header row-->
   <div class="col-md-12"><!--start....header column-->
   <div class="container-fluid amel-content-header">
-
+    <a class="amel-table-list-identifier">Control Center:</a>
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
       Modules
@@ -30,30 +30,27 @@
       </ul>
     </div>
     
-    <a class="amel-table-list-identifier">SCC:</a>
+    
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
-    <a href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Password</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddUser' user_var glblslug %}">New Staff</a>
-    <a href="{% url 'allifmaalcommonapp:commonSalaries' user_var glblslug %}">Payroll</a>
-    <a href="{% url 'allifmaalcommonapp:commonStaffProfiles' user_var glblslug %}">Profiles</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}" >New Profile </a>
-
+    <a href="{% url 'allifmaaladminapp:adminappUsers' user_var glblslug %}">Subscribers</a>
+    
+    
+    <a href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Your Password</a>
+    
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
+    Sales
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <div class="content-dropdown-menu">
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
     
     </div>
     </ul>
   </div>
   <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a>
-  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+  
   </div>
       </div><!--end....header column-->
     
@@ -74,20 +71,10 @@
         <div class="content-dropdown-menu">
         <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
         <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
       
       </div>
       </ul>
     </div>
-
-   
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
-    <a href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Password</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddUser' user_var glblslug %}">New Staff</a>
-    <a href="{% url 'allifmaalcommonapp:commonSalaries' user_var glblslug %}">Payroll</a>
-    <a href="{% url 'allifmaalcommonapp:commonStaffProfiles' user_var glblslug %}">Profiles</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}" >New Profile </a>
 
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -95,15 +82,14 @@
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
-    
+     
     </div>
     </ul>
   </div>
   <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a>
-  <a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
+ 
   </div>
       </div><!--end....header column-->
     

@@ -6,7 +6,7 @@ from allifmaalcommonapp.models import CommonTasksModel
 # Create your views here.
 def salesHome(request,*allifargs,**allifkwargs):
     try:
-        title="Home"
+        title="Home : Distribution"
         
         user_var=request.user
         form=CommonAddTasksForm(request.POST or None)
@@ -33,6 +33,29 @@ def salesHome(request,*allifargs,**allifkwargs):
                 "tasks":tasks,
             }
             return render(request,"allifmaalsalesapp/home/home.html",context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+def salesDashboard(request,*allifargs,**allifkwargs):
+    try:
+        title="Dashboard : Distribution"
+        
+        user_var=request.user
+        form=CommonAddTasksForm(request.POST or None)
+        tasks=CommonTasksModel.objects.all()
+        user_role=user_var.allifmaal_admin
+        user_is_supper=request.user.is_superuser
+        
+        context={
+            "title":title,
+            "user_var":user_var,
+            "form":form,
+            "tasks":tasks,
+            "user_is_supper":user_is_supper,
+        }
+        return render(request,"allifmaalsalesapp/dashboard/dashboard.html",context)
+        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)

@@ -99,8 +99,10 @@ taxoptions = [
 
 
 payment_method=[
-        ("Cash","Cash"),
-        ("Credit","Credit"),
+    ("Cash","Cash"),
+    ("Bank Transfer","Bank Transfer"),
+    ("Cheque","Cheque"),
+    ("Credit Card","Credit Card"),
     ]
 posting_status = [
     ('waiting','waiting'),
@@ -121,6 +123,64 @@ ledgerentryowner= [
    
     ]
 
+paymentTerms = [
+    ('Cash', 'Cash'),
+    ('Deposit', 'Deposit'),
+    ('15 days', '15 days'),
+    ('30 days', '30 days'),
+    ('Other', 'Other'),
+   
+    ]
+Currency = [
+    ('KES','KES'),
+    ('$', 'USD'),
+    ('£', 'EURO'),
+    ]
+prospects = [
+    ('Default', 'Default'),
+    ('Likely', 'Likely'),
+    ('Confirmed', 'Confirmed'),
+    ('Closed', 'Closed'),
+    ('Lost', 'Lost'),
+   
+    ]
+givediscount = [
+    ('Yes','Yes'),
+    ('No', 'No'),
+   
+    ]
+invoiceStatus = [
+    ('Paid', 'Paid'),
+    ('Current', 'Current'),
+    ('Overdue', 'Overdue'),
+   
+    ]
+  
+givediscount = [
+    ('Yes','Yes'),
+    ('No', 'No'),
+   
+    ]
+task_status = [
+    ('complete', 'complete'),
+    ('incomplete', 'incomplete'),
+    
+    ]
+day = [
+    ('Monday', 'Monday'),
+    ('Tuesday', 'Tuesday'),
+    ('Wednesday', 'Wednesday'),
+    ('Thursday', 'Thursday'),
+    ('Friday', 'Friday'),
+    ('Saturday', 'Saturday'),
+    ('Sunday', 'Sunday'),
+    
+    ]
+      
+job_status=[
+        ("open","open"),
+        ("completed","completed"),
+    ]
 class CommonSectorsModel(models.Model):# this is the company  hospitality logistics
     name=models.CharField(max_length=20,blank=False,null=False,unique=True,default="Sector Name")
     notes=models.CharField(max_length=50,blank=True,null=True,default="Sector Comments")
@@ -132,7 +192,7 @@ class CommonSectorsModel(models.Model):# this is the company  hospitality logist
    
 
 class CommonDocsFormatModel(models.Model):# this is the company  hospitality logistics
-    name=models.CharField(max_length=10,blank=False,null=False,unique=True,default="pdf")
+    name=models.CharField(max_length=20,blank=False,null=False,unique=True,default="pdf")
     notes=models.CharField(max_length=50,blank=True,null=True,default="Write Document Type")
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="docformusr")
     date=models.DateField(blank=True,null=True,auto_now_add=True)
@@ -154,7 +214,7 @@ class CommonCompanyDetailsModel(models.Model):# this is the company
     legalName=models.CharField(max_length=50,blank=True,null=True,default="CompanyLegalName")
     address=models.CharField(max_length=50,blank=True,null=True)
     companyuid = models.CharField(null=True, blank=True, max_length=100,unique=True)
-    companyslug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    companyslug = models.SlugField(max_length=150, unique=True, blank=True, null=True)
     pobox=models.CharField(max_length=50,blank=True,null=True)
     email=models.EmailField(max_length=50,blank=True,null=True)
     website=models.CharField(max_length=50,blank=True,null=True)
@@ -190,7 +250,7 @@ class CommonDivisionsModel(models.Model):# this is the company
     legalname=models.CharField(max_length=50,blank=True,null=True,default="CompanyDvsnLegalName")
     address=models.CharField(max_length=50,blank=True,null=True)
     divisionuid = models.CharField(null=True, blank=True, max_length=100,unique=True)
-    divisionslug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    divisionslug = models.SlugField(max_length=150, unique=True, blank=True, null=True)
     pobox=models.CharField(max_length=50,blank=True,null=True)
     email=models.EmailField(max_length=50,blank=True,null=True)
     phone=models.CharField(max_length=50,blank=True,null=True)
@@ -223,7 +283,7 @@ class CommonBranchesModel(models.Model):# this is the company
     legalname=models.CharField(max_length=50,blank=True,null=True,default="CompanyBranchLegalName")
     address=models.CharField(max_length=50,blank=True,null=True)
     branchuid =models.CharField(null=True, blank=True, max_length=100,unique=True)
-    branchslug =models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    branchslug =models.SlugField(max_length=150, unique=True, blank=True, null=True)
     pobox=models.CharField(max_length=50,blank=True,null=True)
     email=models.EmailField(max_length=50,blank=True,null=True)
     phone=models.CharField(max_length=50,blank=True,null=True)
@@ -250,11 +310,11 @@ class CommonBranchesModel(models.Model):# this is the company
 
 ########################## Common departments ##########################3
 class CommonDepartmentsModel(models.Model):
-    department=models.CharField(max_length=30,blank=False,null=True,unique=False)
+    department=models.CharField(max_length=50,blank=False,null=True,unique=False)
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="usrdprmnt",null=True)
-    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpdprmnt",on_delete=models.SET_NULL,null=True,blank=True)
-    division= models.ForeignKey(CommonDivisionsModel,related_name="dpmntdvsn",on_delete=models.SET_NULL,null=True,blank=True)
-    branch= models.ForeignKey(CommonBranchesModel,related_name="dpmntbrnch",on_delete=models.SET_NULL,null=True,blank=True)
+    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpdprmnt",on_delete=models.PROTECT,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dpmntdvsn",on_delete=models.PROTECT,null=True,blank=True)
+    branch= models.ForeignKey(CommonBranchesModel,related_name="dpmntbrnch",on_delete=models.PROTECT,null=True,blank=True)
     comments= models.CharField(null=True, blank=True, max_length=30)
     pobox=models.CharField(max_length=50,blank=True,null=True)
     email=models.EmailField(max_length=50,blank=True,null=True)
@@ -264,7 +324,7 @@ class CommonDepartmentsModel(models.Model):
     legalname=models.CharField(max_length=50,blank=True,null=True,default="CompanyDepartmentLegalName")
     address=models.CharField(max_length=50,blank=True,null=True)
     departmentuid =models.CharField(null=True, blank=True, max_length=100,unique=True)
-    departmentslug =models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    departmentslug =models.SlugField(max_length=150, unique=True, blank=True, null=True)
     updatedon= models.DateTimeField(blank=True, null=True)
     
     def __str__(self):
@@ -290,12 +350,17 @@ class CommonCompanyScopeModel(models.Model):# this is the company  hospitality l
         return self.name
 class CommonTaxParametersModel(models.Model):
     taxname = models.CharField(null=True, blank=True, max_length=30,unique=False)
-    taxdescription= models.CharField(null=True, blank=True, max_length=20,unique=True)
+    taxdescription= models.CharField(null=True, blank=True, max_length=30)
     taxtype = models.CharField(choices=taxoptions, blank=True, max_length=30)
     taxrate=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
     owner= models.ForeignKey(User, related_name="cmnowntax",on_delete=models.SET_NULL,null=True,blank=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmntaxcmp",on_delete=models.SET_NULL,null=True,blank=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
+    division= models.ForeignKey(CommonDivisionsModel,related_name="dvstxprm",on_delete=models.PROTECT,null=True,blank=True)
+    
+    branch= models.ForeignKey(CommonBranchesModel,related_name="txpbrcnh",on_delete=models.PROTECT,null=True,blank=True)
+    department= models.ForeignKey(CommonDepartmentsModel,related_name="txprdptm",on_delete=models.PROTECT,null=True,blank=True)
+    
     def __str__(self):
         return str(self.taxname)
         return self.taxname +"   "+str(self.taxrate)+str('%')
@@ -312,7 +377,7 @@ class CommonEmployeesModel(models.Model):
     ('manager', 'manager'),
     ('director', 'director'),
 	]
-    staffNo = models.IntegerField(default='0',blank=False,null=False,unique=True)
+    staffNo = models.IntegerField(default='0',blank=False,null=False)
     firstName = models.CharField(max_length=50,blank=False,null=True)
     lastName = models.CharField(max_length=50,blank=False,null=True)
     middleName = models.CharField(max_length=50,blank=True,null=True)
@@ -328,16 +393,16 @@ class CommonEmployeesModel(models.Model):
     salary_payable=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     salary_balance=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     username= models.OneToOneField(User, on_delete=models.PROTECT,related_name="secrlmmemply",null=True)
-    uniqueId = models.CharField(null=True, blank=True, max_length=100)
+    uniqueId = models.CharField(null=True, blank=True, max_length=150)
     sysperms= models.CharField(choices=rights, blank=True, null=True,max_length=30,default="staff")
-    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="emplcomprlnmefsammnapp",on_delete=models.SET_NULL,null=True,blank=True)
+    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="emplcomprlnmefsammnapp",on_delete=models.PROTECT,null=True,blank=True)
     
     division= models.ForeignKey(CommonDivisionsModel,related_name="emplydvs",on_delete=models.PROTECT,null=True,blank=True)
     
     branch= models.ForeignKey(CommonBranchesModel,related_name="emplybrnch",on_delete=models.PROTECT,null=True,blank=True)
     department= models.ForeignKey(CommonDepartmentsModel,related_name="emplydpt",on_delete=models.PROTECT,null=True,blank=True)
     
-    stffslug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
+    stffslug = models.SlugField(max_length=150, unique=True, blank=True, null=True)
 
     def __str__(self):
         return str(self.firstName)
@@ -392,10 +457,7 @@ class CommonBanksModel(models.Model):
     division= models.ForeignKey(CommonDivisionsModel,related_name="dvsbnk",on_delete=models.SET_NULL,null=True,blank=True)
     branch= models.ForeignKey(CommonBranchesModel,related_name="brnchbnk",on_delete=models.SET_NULL,null=True,blank=True)
     department= models.ForeignKey(CommonDepartmentsModel,related_name="bnkdptmn",on_delete=models.SET_NULL,null=True,blank=True)
-    
     date=models.DateField(blank=True,null=True,auto_now_add=True)
-    
-    
     def __str__(self):
         return '{}'.format(self.name)
 
@@ -462,7 +524,7 @@ class CommonEmailsModel(models.Model):
 
 #################3 suppliers ################
 class CommonSuppliersModel(models.Model):
-    name = models.CharField(null=True, blank=False, max_length=20)
+    name = models.CharField(null=True, blank=False, max_length=30)
     phone = models.CharField(null=True, blank=True, max_length=30)
     email= models.CharField(null=True, blank=True, max_length=100)
     city= models.CharField(null=True, blank=True, max_length=30)
@@ -471,7 +533,7 @@ class CommonSuppliersModel(models.Model):
     turnover=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     contact = models.CharField(null=True, blank=True, max_length=30)
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="spplusowncrln",null=True)
-    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="suppusrlnm",on_delete=models.PROTECT,null=True,blank=True)
+    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="suppusrlnm",on_delete=models.SET_NULL,null=True,blank=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     comments= models.CharField(null=True, blank=True, max_length=50)
     country= models.CharField(null=True, blank=True, max_length=50)
@@ -482,18 +544,7 @@ class CommonSuppliersModel(models.Model):
     def __str__(self):
         return '{}'.format(self.name)
 class CommonSupplierPaymentsModel(models.Model):
-    payment_method=[
-        ("Cash","Cash"),
-        ("Bank Transfer","Bank Transfer"),
-        ("Cheque","Cheque"),
-        ("Credit Card","Credit Card"),
-        
-    ]
-    posting_status = [
-    ('waiting','waiting'),
-    ('posted', 'posted'),
     
-    ]
     supplier= models.ForeignKey(CommonSuppliersModel,related_name="allifsuprln",on_delete=models.SET_NULL,blank=True,null=True)
     amount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
     date=models.DateField(auto_now=True)
@@ -607,17 +658,6 @@ class CommonCustomersModel(models.Model):
         super(CommonCustomersModel, self).save(*args, **kwargs)
    
 class CommonCustomerPaymentsModel(models.Model):
-    payment_method=[
-        ("Cash","Cash"),
-        ("Cheque","Cheque"),
-        ("Credit Card","Credit Card"),
-    ]
-    
-    posting_status = [
-    ('waiting','waiting'),
-    ('posted', 'posted'),
-    
-    ]
     customer= models.ForeignKey(CommonCustomersModel,related_name="allifcustpaymentreltedname",on_delete=models.SET_NULL,blank=True,null=True)
     amount= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     date=models.DateField(auto_now=True)
@@ -666,8 +706,9 @@ class CommonLedgerEntriesModel(models.Model):
    
     def __str__(self):
         return '{}'.format(self.comments)
+    
 ################################3assets######################################################
-########################## Common departments ##########################3
+
 class CommonAssetCategoriesModel(models.Model):
     description=models.CharField(max_length=30,blank=False,null=True,unique=False)
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="asstcatusr",null=True)
@@ -734,9 +775,9 @@ class CommonExpensesModel(models.Model):
     supplier=models.ForeignKey(CommonSuppliersModel, blank=False, null=True, on_delete=models.SET_NULL,related_name='expsupprelanmeconcmm')
     mode=models.CharField(choices=payment_method,max_length=20,blank=False,null=True,default="Cash")
     date=models.DateField(blank=True,null=True,auto_now_add=True)
-    description=models.CharField(max_length=25,blank=False,null=True)
+    description=models.CharField(max_length=30,blank=False,null=True)
     amount=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    comments=models.CharField(max_length=20,blank=True,null=True)
+    comments=models.CharField(max_length=30,blank=True,null=True)
     status=models.CharField(choices=posting_status, default='waiting', max_length=20,blank=True,null=True)
     quantity=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     equity_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True, on_delete=models.SET_NULL,related_name='coexprln')
@@ -756,7 +797,7 @@ class CommonExpensesModel(models.Model):
 
 #########################################3 STOCK ##############################################
 class CommonStockCategoriesModel(models.Model):
-    description = models.CharField(max_length=15, blank=False, null=True,unique=True)
+    description = models.CharField(max_length=30, blank=False, null=True)
     owner= models.ForeignKey(User, related_name="cmnurstkcat",on_delete=models.SET_NULL,null=True,blank=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmnstcatrln",on_delete=models.SET_NULL,null=True,blank=True)
     division= models.ForeignKey(CommonDivisionsModel,related_name="dvsstockcats",on_delete=models.SET_NULL,null=True,blank=True)
@@ -769,8 +810,8 @@ class CommonStockCategoriesModel(models.Model):
 
 class CommonStocksModel(models.Model):
     category=models.ForeignKey(CommonStockCategoriesModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='catinvtconrlnm')
-    partNumber = models.CharField(max_length=20, blank=False, null=False,unique=True)# unique prevents data duplication
-    description = models.CharField(max_length=30, blank=False, null=False,unique=True)
+    partNumber = models.CharField(max_length=20, blank=False, null=False)# unique prevents data duplication
+    description = models.CharField(max_length=30, blank=False, null=False)
     quantity=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     buyingPrice=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     unitcost=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
@@ -849,39 +890,9 @@ class CommonPurchaseOrderMiscCostsModel(models.Model):
         po_misc_cost=self.quantity * self.unitcost
         return po_misc_cost
 
-
-
-
-
-
 ################################3 QUOTES ###########################3
 class CommonQuotesModel(models.Model):
-    paymentTerms = [
-    ('Cash', 'Cash'),
-    ('Deposit', 'Deposit'),
-    ('15 days', '15 days'),
-    ('30 days', '30 days'),
-    ('Other', 'Other'),
-   
-    ]
-    Currency = [
-    ('KES','KES'),
-    ('$', 'USD'),
-    ('£', 'EURO'),
-    ]
-    prospects = [
-    ('Default', 'Default'),
-    ('Likely', 'Likely'),
-    ('Confirmed', 'Confirmed'),
-    ('Closed', 'Closed'),
-    ('Lost', 'Lost'),
-   
-    ]
-    givediscount = [
-    ('Yes','Yes'),
-    ('No', 'No'),
-   
-    ]
+    
     number = models.CharField(null=True, blank=True, max_length=20)
     description=models.CharField(blank=True,null=True,default='Quotation',max_length=100)
     customer= models.ForeignKey(CommonCustomersModel,related_name="allifrelatcustquote",on_delete=models.SET_NULL,blank=True,null=True)
@@ -934,43 +945,8 @@ class CommonQuoteItemsModel(models.Model):
         qtetaxamount=self.quantity* self.description.unitPrice*(1-(self.discount/100))*(self.description.taxrate.taxrate/100)
         return qtetaxamount
 
-
-
 ########################### INVOICES ################################
 class CommonInvoicesModel(models.Model):
-    paymentTerms = [
-    ('Cash', 'Cash'),
-    ('Deposit', 'Deposit'),
-    ('15 days', '15 days'),
-    ('30 days', '30 days'),
-   
-    ]
-    invoiceStatus = [
-    ('Paid', 'Paid'),
-    ('Current', 'Current'),
-    ('Overdue', 'Overdue'),
-   
-    ]
-    Currency = [
-    ('KES','KES'),
-    ('$', 'USD'),
-    ('£', 'EURO'),
-    ]
-    posting_status = [
-    ('waiting','waiting'),
-    ('posted', 'posted'),
-    
-    ]
-    givediscount = [
-    ('Yes','Yes'),
-    ('No', 'No'),
-   
-    ]
-    searchstatus = [
-    ('Normal','Normal'),
-    ('pdf', 'pdf'),
-   
-    ]
     number = models.CharField(null=True, blank=True, max_length=20)
     description=models.CharField(blank=True,null=True,default='Quotation',max_length=100)
     customer= models.ForeignKey(CommonCustomersModel,related_name="allifrelatcustinvce",on_delete=models.SET_NULL,blank=True,null=True)
@@ -1037,23 +1013,6 @@ class CommonInvoiceItemsModel(models.Model):
    
 
 class CommonTasksModel(models.Model):
-   
-    task_status = [
-    ('complete', 'complete'),
-    ('incomplete', 'incomplete'),
-    
-    ]
-    day = [
-    ('Monday', 'Monday'),
-    ('Tuesday', 'Tuesday'),
-    ('Wednesday', 'Wednesday'),
-    ('Thursday', 'Thursday'),
-    ('Friday', 'Friday'),
-    ('Saturday', 'Saturday'),
-    ('Sunday', 'Sunday'),
-    
-    ]
-    
     task = models.CharField(max_length=20,blank=False)
     status = models.CharField(max_length=10,choices=task_status,default='incomplete')
     date= models.DateTimeField(auto_now_add=True,blank=True,null=True)
@@ -1072,15 +1031,6 @@ class CommonTasksModel(models.Model):
     		return self.task
 
 class CommonSalariesModel(models.Model):
-    payment_method=[
-        ("Cash","Cash"),
-        ("Cheque","Cheque"),
-        ("Credit Card","Credit Card"),
-    ]
-    posting_status = [
-    ('waiting','waiting'),
-    ('posted', 'posted'),
-    ]
    
     staff= models.ForeignKey(CommonEmployeesModel,related_name="stafsalrnm",on_delete=models.SET_NULL,null=True,blank=False)
     description= models.CharField(max_length=30,blank=False,null=True)
@@ -1103,10 +1053,7 @@ class CommonSalariesModel(models.Model):
     	return str(self.staff)
 
 class CommonJobsModel(models.Model):
-    job_status=[
-        ("open","open"),
-        ("completed","completed"),
-    ]
+    
     #first_cust=CommonCustomersModel.objects.filter()[0]
   
     job_number=models.CharField(max_length=20,blank=True,null=True)
@@ -1128,11 +1075,8 @@ class CommonJobsModel(models.Model):
 
 class CommonJobItemsModel(models.Model):
     item= models.ForeignKey(CommonStocksModel, blank=True, null=True, on_delete=models.CASCADE,related_name='itemjobcon')
-    
     quantity=models.FloatField(max_length=20,blank=True,null=True,default=0)
-    
     jobitemconnector= models.ForeignKey(CommonJobsModel, blank=True, null=True, on_delete=models.CASCADE,related_name='itemjobconrelnme')
-    
     def __str__(self):
         return str(self.item)
     
@@ -1146,10 +1090,3 @@ class CommonContactsModel(models.Model):
     def __str__(self):
         return str(self.subject)
 
-######################## storing links in database ######################
-class TemplateLink(models.Model):
-    name = models.CharField(max_length=200)
-    url_name = models.CharField(max_length=200)
-    url_params = models.JSONField(blank=True, null=True)
-    def __str__(self):
-        return self.name

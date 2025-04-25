@@ -80,6 +80,18 @@
         <td>{{form.taxtype}}</td>
         </tr>
         <tr>
+          <td>Division</td>
+        <td>{{form.division}}</td>
+        </tr>
+        <tr>
+          <td>Branch</td>
+        <td>{{form.branch}}</td>
+        </tr>
+        <tr>
+          <td>Department</td>
+        <td>{{form.department}}</td>
+        </tr>
+        <tr>
           <td>Action</td>
         
          <td><input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
@@ -164,8 +176,8 @@
           </div>
           <div class="dropdown allif-confirm-action">
             
-            <a href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalcommonapp:commonWantToDeleteTaxParameter' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:CommonDeleteTaxParameter' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
           </div>
 
 

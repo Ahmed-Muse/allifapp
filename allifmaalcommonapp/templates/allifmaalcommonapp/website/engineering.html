@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Engineering</title>
+    <title>Alifmaal ERP</title>
     <!-- Favicons back-to-top -->
     <link rel="shortcut icon" href='{% static "allifapperp/css/images/allifmaal-icon.png" %}' type="png/ico">
     <link href="{% static 'allifapperp/css/common/bootstrap.min.css' %}" rel="stylesheet">
@@ -30,10 +30,14 @@
         <nav id="navbar" class="navbar">
           <ul>
             <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+
             <li><a class="nav-link scrollto" href="#about">About</a></li>
             <li><a class="nav-link scrollto" href="#modules">Modules</a></li>
             <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
             <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'allifmaalcommonapp:commonEngineering' %}">Engineering</a></li>
+
+            
             <li><a class="getstarted scrollto" href="{% url 'allifmaalusersapp:userLoginPage' %}">Login</a></li>
 
           </ul>
@@ -48,10 +52,10 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1">
-            <h1>Engineering <span class="allifmaal-erp-styling">Department</span>,
+            <h1>Achieve your business goals with AI driven <span class="allifmaal-erp-styling">Allifmaal ERP</span>,
              
-                the core of the organization.</h1>
-            <h6>Your Engineering Partner.</h6>
+                the smarter way to manage your organization seamlessly.</h1>
+            <h6>Digitize your deal, discover your dreams.</h6>
             <div class="d-flex justify-content-center justify-content-lg-start">
               <a href="#about" class="btn-get-started scrollto">About Allifmaal ERP</a>
              
@@ -92,8 +96,7 @@
               <p>
                 Allifmaal ERP is meticulously developed by a team of experienced developers. Our developers bring years of expertise in software engineering, business processes, and industry best practices to create a robust and reliable ERP solution tailored to meet the diverse needs of modern businesses world.
               </p>
-             
-              <a href="#" class="btn-learn-more">Learn More</a>
+            
               <div>
                 <img src="{% static 'allifapperp/css/images/alliferp.webp' %}" class="img-fluid animated" alt="Allifmaal">
               </div>
@@ -139,9 +142,7 @@
                 <li><i class="ri-check-double-line"></i><strong>Service</strong>- Consulting, Legal, Accounting, ICT.</li>
                 
               </ul>
-              
-              <a href="#" class="btn-learn-more">Learn More</a>
-              
+           
             </div>
             
           </div>
@@ -200,7 +201,7 @@
                     <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>5</span>Improved Data Security<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                     <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                       <p>
-                        With robust security measures, Allifmaal ERP system protects sensitive data from unauthorized access. Centralized data storage also reduces the risk of data breaches and ensures compliance with industry regulations.
+                        Role based access control (RBAC) coupled with robust security measures, Allifmaal ERP system protects sensitive data from unauthorized access. Centralized data storage also reduces the risk of data breaches and ensures compliance with industry regulations.
                       </p>
                     </div>
                   </li>
@@ -272,31 +273,6 @@
         
       </section><!-- End Why Us Section -->
   
-      <!-- ======= Skills Section ======= -->
-      <section id="skills" class="skills">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="row">
-            <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
-              <img src="{% static 'allifapperp/css/images/skills.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-              <h5>Allifmaal - A Suite of Business Management Applications</h5>
-              <p class="fst-italic">
-                Allifmaal is a suite of integrated applications that are designed to work seamlessly together to streamline your business operations.
-              </p>
-  
-              <div class="skills-content">
-  
-               
-              </div>
-  
-            </div>
-          </div>
-  
-        </div>
-      </section><!-- End Skills Section -->
-  
       <!-- ======= Services Section ======= -->
       <section id="modules" class="services section-bg">
         <div class="container" data-aos="fade-up">
@@ -322,7 +298,7 @@
                 <div class="icon"><i class="bx bx-layer"></i></div>
                 <h4><a href="">HRM</a></h4>
                 <p>The Human Resource Management module is used to manage staff related activities like employees registrations, staff payments and benefits, salaries,
-                  employee statements, employee account activities and much more.</p>
+                  employee statements, employee account activities and many other tasks.</p>
               </div>
             </div>
   
@@ -330,7 +306,7 @@
               <div class="icon-box">
                 <div class="icon"><i class="bx bx-layer"></i></div>
                 <h4><a href="">FRM</a></h4>
-                <p>The Financial Resources Management module is used to manage finance related activities like accounts, payments, debts, credits, financial statments and much more.</p>
+                <p>The Financial Resources Management module is used to manage finance related activities like accounts, payments, debts, credits, financial statments and other account operations.</p>
               </div>
             </div>
   
@@ -393,7 +369,7 @@
   
           <div class="section-title">
             <h2>Pricing</h2>
-            <p>Get a competitive quotation from our dedicated team</p>
+            <p>Get a competitive quotation from our dedicated team.</p>
           </div>
   
           <div class="row">
@@ -401,7 +377,7 @@
             <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
               <div class="box">
                 <h3>Startup Plan</h3>
-                <h4><sup>$</sup>10<span>per month/user</span></h4>
+                <h4><sup>$</sup>20<span>per month/user</span></h4>
                 <div class="billed-annually">(Billed Annually)</div>
                 
                 <h5>Some of its features</h5>
@@ -411,22 +387,22 @@
                   <li><i class="bx bx-check"></i> Available in web-based</li>
                   
                 </ul>
-                <a href="#" class="buy-btn">Get in touch</a>
+               
               </div>
             </div>
   
             <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
               <div class="box featured">
                 <h3>Business Plan</h3>
-                <h4><sup>$</sup>20<span>per month/user</span></h4>
-                <h5>Some of its features</h5>
+                <h4><sup>$</sup>30<span>per month/user</span></h4>
+                <div class="billed-annually">(Billed Annually)</div>
                 <ul>
                   <li><i class="bx bx-check"></i>Everything in Startup Plan</li>
                   <li><i class="bx bx-check"></i> Full training to users</li>
                   <li><i class="bx bx-check"></i> Main Modules accessable</li>
                   
                 </ul>
-                <a href="#" class="buy-btn">Get in touch</a>
+                
               </div>
             </div>
   
@@ -434,7 +410,7 @@
               <div class="box">
                 <h3>Gold Plan</h3>
                 <h4><sup>$</sup>50<span>per month/user</span></h4>
-                <h5>Some of its features</h5>
+                <div class="billed-annually">(Billed Annually)</div>
                 <ul>
                   <li><i class="bx bx-check"></i>Everything in Business Plan</li>
                   <li><i class="bx bx-check"></i> All Modules Accessable</li>
@@ -448,7 +424,7 @@
                  
                   
                 </ul>
-                <a href="#" class="buy-btn">Get in touch</a>
+                
               </div>
             </div>
   
@@ -462,8 +438,8 @@
         <div class="container" data-aos="fade-up">
   
           <div class="section-title">
-            <h2>Contact</h2>
-            <p>Feel free to contact us for support and information.</p>
+            <h2>Contact Us</h2>
+            <p>Feel free to contact us for support and for more information.</p>
           </div>
   
           <div class="row">

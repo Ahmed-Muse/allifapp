@@ -70,6 +70,14 @@
         <td>Email</td>
         <td>Superuser</td>
         <td>Role</td>
+        <td>Add</td>
+        <td>View</td>
+        <td>Edit</td>
+        <td>Delete</td>
+        <td>All</td>
+
+        <td>Related</td>
+
        
         <td>Navigate</td>
         
@@ -94,7 +102,13 @@
         </td>
         {% endif %}
         <td>{{item.user_category}}</td>
-       
+        <td>{{item.can_add}}</td>
+        <td>{{item.can_view}}</td>
+        <td>{{item.can_edit}}</td>
+        <td>{{item.can_delete}}</td>
+        <td>{{item.can_access_all}}</td>
+        <td>{{item.can_access_related}}</td>
+        
         <td>
           <div class="dropdown allifmaal-content-dropdown">
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
