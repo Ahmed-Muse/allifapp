@@ -30,81 +30,11 @@
   <div class="col-md-4"> <!--start....table column-->
         <div class="card-header">
           <div class="container-fluid amel-content-header">
-            <div class="dropdown allifmaal-content-dropdown">
-              <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Open Form
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <div class="content-dropdown-menu">
-                <form method='POST' action=''>{% csrf_token %}
-                <li><a class="dropdown-item">Add New Tax Parameter</a></li>
-                <label>Tax Name</label> {{form.taxname}} 
-                <label>Tax Description</label> {{form.taxdescription}} 
-                <label>Tax Rate</label>{{form.taxrate}}
-                <label>Tax Type </label> {{form.taxtype}}
-                <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
-              </form>
-              </div>
-              </ul>
-            </div>
+            <a class="amel-table-list-identifier">Latest Tax Additions:</a>
           </div>
           </div><!--end....main headere-->
 
-          {% if update %}
-  
-  
-<div class="allif-form-container">
-  <div class="table-content-description"> Add New Tax Rate </div>
-  <div class="allif-scroll-table">
-    <div class="table-responsive allif-full-table">
-    <table class="table table-layout">
-     
-      <tbody class="allif-table-body">
-        <form method='POST' action=''>{% csrf_token %}
-      <tr>
-        
-        <td>Tax Name</td>
-        <td>{{form.taxname}}</td>
-        </tr>
-        <tr>
-          <td>Description</td>
-       
-        <td>{{form.taxdescription}}</td>
-        </tr>
-        <tr>
-          <td>Rate</td>
-        <td>{{form.taxrate}}</td>
-        </tr>
-        <tr>
-          <td>Type</td>
-        <td>{{form.taxtype}}</td>
-        </tr>
-        <tr>
-          <td>Division</td>
-        <td>{{form.division}}</td>
-        </tr>
-        <tr>
-          <td>Branch</td>
-        <td>{{form.branch}}</td>
-        </tr>
-        <tr>
-          <td>Department</td>
-        <td>{{form.department}}</td>
-        </tr>
-        <tr>
-          <td>Action</td>
-        
-         <td><input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-         
-        
-      </tr>
-      </form>
-      </tbody>
-    </table>
-    </div>
-   </div>
-    </div><!--end of row div --->
-    {% else %}
+    
     <div class="allif-content-spacer"></div>
     <div class="allif-scroll-table">
       <div class="table-responsive allif-full-table">
@@ -130,7 +60,6 @@
       </div>
      </div>
 
-    {% endif %}
     
   </div><!--end....table column-->
 
@@ -206,6 +135,7 @@
   <table class="table table-layout">
     <thead>
       <tr class="allif-table-header-row">
+     
       <td>Tax Name</td>
       <td>Tax Description</td>
       <td>Tax Rate %</td>
@@ -217,6 +147,7 @@
     <tbody class="allif-table-body">
     <tr>
       <form method='POST' action=''>{% csrf_token %}
+       
       <td>{{form.taxname}}</td>
       <td>{{form.taxdescription}}</td>
       <td>{{form.taxrate}}</td>

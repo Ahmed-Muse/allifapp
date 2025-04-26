@@ -26,7 +26,7 @@
 <body class="allifmaal-ui-body">
 <!--below includes the side and top nav bars and their styles...-->
 
-{% include 'allifmaalcommonapp/base/sidetopnavbars/sidetopnavbars.html' %}
+{% include 'allifmaalshaafiapp/base/sidetopnavbar/shaafispecsidetopnavbar.html' %}
 
 <!--if there is no internet, the app will use the lib in the specified path in the static folder... otherwise it will use the cdn-->
 <!--this libs important for the opening of side menus-->
@@ -50,7 +50,7 @@
 {% endblock %}
 <!--Note... when you include a file, it will be available for all the pages in the app unlike the static case...-->
 
-{% include 'allifmaalshaafiapp/base/commonjs/commonjs.js' %}
+{% include 'allifmaalsalesapp/base/commonjs/commonjs.js' %}
 
 </body>
 </html>

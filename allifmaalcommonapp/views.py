@@ -161,6 +161,7 @@ def commonSectors(request,allifusr,*allifargs,**allifkwargs):
                 obj.owner =user_var
                 obj.save()
                 return redirect('allifmaalcommonapp:commonSectors',allifusr=usrslg,allifslug=user_var)
+            
             else:
                 form=CommonAddSectorForm()
         else:
@@ -982,9 +983,9 @@ def commonCompanyAdvanceSearch(request,*allifargs,**allifkwargs):
     
 ############################### .......Entities and companies details........... #########################3#
 #@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
-#@login_required(login_url='allifmaalusersapp:userLoginPage')
-#@logged_in_user_can_view
-@allifmaal_admin_supperuser
+@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_can_view
+#@allifmaal_admin_supperuser
 def commonDivisions(request,*allifargs,**allifkwargs):
     try:
         title="Divisions"
@@ -1345,8 +1346,10 @@ def commonDepartments(request,*allifargs,**allifkwargs):
         compslg=request.user.usercompany
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
         allifqueryset=CommonDepartmentsModel.objects.all()
+        
         allifquery=CommonEmployeesModel.objects.filter(username=user_var,company=main_sbscrbr_entity).first()
         if user_var.can_access_all==True:
+            
             if allifquery!=None:
                 emplye_division=allifquery.division
                 allifqueryset=CommonDepartmentsModel.objects.filter(company=main_sbscrbr_entity)
@@ -1422,16 +1425,12 @@ def commonAddDepartment(request,*allifargs,**allifkwargs):
                         error_message="Sorry, a similar department description exists!!!"
                         allifcontext={"error_message":error_message,}
                         return render(request,'allifmaalcommonapp/error/error.html',allifcontext)
-
                 else:
-                    context = {
-                        "title": title,
-                        "form": form, # form with errors.
-                    }
-                    return render(request, 'allifmaalcommonapp/departments/add-department.html', context)
-                    
-                    form=CommonAddDepartmentForm(main_sbscrbr_entity)
-                    print("invalid form")
+                    error_message=form.errors
+                    allifcontext={"error_message":error_message,"title":title,}
+                    return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+
+                
             else:
                 form=CommonAddDepartmentForm(main_sbscrbr_entity)
         else:
@@ -2628,7 +2627,7 @@ def commonChartofAccounts(request,*allifargs,**allifkwargs):
             logged_user_branch=logged_user_profile.branch
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonChartofAccountsModel.objects.filter(company=main_sbscrbr_entity).order_by("code")
@@ -3062,7 +3061,8 @@ def commonBanks(request,*allifargs,**allifkwargs):
             logged_user_branch=logged_user_profile.branch
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonBanksModel.objects.filter(company=main_sbscrbr_entity)
@@ -3268,7 +3268,8 @@ def commonBankShareholderDeposits(request,*allifargs,**allifkwargs):
             logged_user_branch=logged_user_profile.branch
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity)
@@ -3310,7 +3311,7 @@ def commonAddBankShareholderDeposit(request,*allifargs,**allifkwargs):
             logged_user_branch=logged_user_profile.branch
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
         form=CommonBankDepositAddForm(main_sbscrbr_entity)
         if  main_sbscrbr_entity!=None:
             if request.method=='POST':
@@ -3917,7 +3918,7 @@ def commonSuppliers(request,*allifargs,**allifkwargs):
             logged_user_branch=logged_user_profile.branch
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonSuppliersModel.objects.filter(company=main_sbscrbr_entity)
@@ -4203,7 +4204,7 @@ def commonForms(request,*allifargs,**allifkwargs):
         if logged_user_profile!=None:
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonFormsModel.objects.filter(company=main_sbscrbr_entity)
@@ -4377,7 +4378,7 @@ def commonClasses(request,*allifargs,**allifkwargs):
         if logged_user_profile!=None:
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonClassesModel.objects.filter(company=main_sbscrbr_entity)
@@ -4556,7 +4557,7 @@ def commonCustomers(request,*allifargs,**allifkwargs):
         if logged_user_profile!=None:
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonCustomersModel.objects.filter(company=main_sbscrbr_entity)
@@ -5776,7 +5777,7 @@ def commonStockCats(request,*allifargs,**allifkwargs):
         if logged_user_profile!=None:
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonStockCategoriesModel.objects.filter(company=main_sbscrbr_entity)
@@ -5948,7 +5949,7 @@ def commonStocks(request,*allifargs,**allifkwargs):
         if logged_user_profile!=None:
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonStocksModel.objects.filter(company=main_sbscrbr_entity)
@@ -6237,7 +6238,7 @@ def commonPurchaseOrders(request,*allifargs,**allifkwargs):
         if logged_user_profile!=None:
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
             
         if logged_user_can_access_all==True:
             allifqueryset=CommonPurchaseOrdersModel.objects.filter(company=main_sbscrbr_entity)
@@ -6691,7 +6692,7 @@ def commonPostPO(request,pk,*allifargs,**allifkwargs):
         usrslg=request.user.customurlslug
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
         allifquery=CommonPurchaseOrdersModel.objects.filter(id=pk).first()
-        po_amount=allifquery.amount
+        po_amount=allifquery.amount or 1
         po_amount_taxinclusve=allifquery.amounttaxincl
         applied_uplift=allifquery.uplift
         po_misccosts=allifquery.misccosts
@@ -8570,7 +8571,7 @@ def commonEditSupplierPayment(request,pk,*allifargs,**allifkwargs):
 @login_required(login_url='allifmaalusersapp:userLoginPage') 
 @logged_in_user_can_view 
 def commonPostSupplierPayment(request,pk,*allifargs,**allifkwargs):#global
-    try:
+    #try:
         compslg=request.user.usercompany
         usrslg=request.user.customurlslug
         main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
@@ -8578,7 +8579,7 @@ def commonPostSupplierPayment(request,pk,*allifargs,**allifkwargs):#global
         allifsup=allifquery.supplier.id
         amount=allifquery.amount#this gives the amount of salary given to the staff
         pay_from_acc_id=allifquery.account.id
-        mysupp=CommonSuppliersModel.objects.filter(id=pk).first()
+        mysupp=CommonSuppliersModel.objects.filter(id=allifsup).first()
         init_balance=mysupp.balance
         mysupp.balance=init_balance + amount
         mysupp.save()
@@ -8603,7 +8604,7 @@ def commonPostSupplierPayment(request,pk,*allifargs,**allifkwargs):#global
         allifquery.save()
         return redirect('allifmaalcommonapp:commonSupplierPayments',allifusr=usrslg,allifslug=compslg)
     
-    except Exception as ex:
+    #except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
@@ -9440,7 +9441,7 @@ def commonDeleteSalary(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonPostSalary(request,pk,*allifargs,**allifkwargs):
     
-    #try:
+    try:
         compslg=request.user.usercompany
         usrslg=request.user.customurlslug
         logged_user=User.objects.filter(customurlslug=usrslg).first()
@@ -9498,13 +9499,14 @@ def commonPostSalary(request,pk,*allifargs,**allifkwargs):
             return redirect('allifmaalcommonapp:commonSalaries',allifusr=usrslg,allifslug=compslg)
     
         else:
+
             messgeone=messages.error(request, 'Please note that either Equity or Salaries or both accounts are missing in the chart of accounts.')
             messgetwo=messages.error(request, 'Add Equity and Salaries accounts in the Equity and Expenses categories respectively, if they are not already there, then post again.')
            
             return render(request,'allifmaalcommonapp/error/error.html')
             
        
-    #except Exception as ex:
+    except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
@@ -9553,38 +9555,42 @@ import datetime
 @login_required(login_url='allifmaalusersapp:userLoginPage') 
 @logged_in_user_can_view 
 def commonNewJobs(request,*allifargs,**allifkwargs):
-    compslg=request.user.usercompany
-    usrslg=request.user.customurlslug
-    logged_user=User.objects.filter(customurlslug=usrslg).first()
-    main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-    logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-    logged_user_can_access_all=logged_user.can_access_all
-    
-    if logged_user_profile!=None:
-        logged_user_division=logged_user_profile.division
-        logged_user_branch=logged_user_profile.branch
-        logged_user_department=logged_user_profile.department
-    else:
-        context={
-            "logged_user":logged_user
-        }
-        return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
-    
-    current_datetime = datetime.datetime.now()
-    job_year=current_datetime.year
-    last_job= CommonJobsModel.objects.filter(company=main_sbscrbr_entity).order_by('id').last()
-    last_obj=CommonJobsModel.objects.filter(company=main_sbscrbr_entity).last()
-    if last_obj:
-        last_obj_id=last_obj.id
-        last_obj_incremented=last_obj_id+1
-        jobNo= 'Job/'+str(uuid4()).split('-')[1]+'/'+str(last_obj_incremented)+'/'+str(job_year)
-    else:
-       jobNo= 'First/Job/'+str(uuid4()).split('-')[1]
-    newJobRef=CommonJobsModel.objects.create(job_number=jobNo,description="Job Description",company=main_sbscrbr_entity,owner=logged_user,
-                division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
-    newJobRef.save()
-    return redirect('allifmaalcommonapp:commonJobs',allifusr=usrslg,allifslug=compslg)
-    
+    try:
+        compslg=request.user.usercompany
+        usrslg=request.user.customurlslug
+        logged_user=User.objects.filter(customurlslug=usrslg).first()
+        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
+        logged_user_can_access_all=logged_user.can_access_all
+        
+        if logged_user_profile!=None:
+            logged_user_division=logged_user_profile.division
+            logged_user_branch=logged_user_profile.branch
+            logged_user_department=logged_user_profile.department
+        else:
+            context={
+                "logged_user":logged_user
+            }
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+        
+        current_datetime = datetime.datetime.now()
+        job_year=current_datetime.year
+        last_job= CommonJobsModel.objects.filter(company=main_sbscrbr_entity).order_by('id').last()
+        last_obj=CommonJobsModel.objects.filter(company=main_sbscrbr_entity).last()
+        if last_obj:
+            last_obj_id=last_obj.id
+            last_obj_incremented=last_obj_id+1
+            jobNo= 'Job/'+str(uuid4()).split('-')[1]+'/'+str(last_obj_incremented)+'/'+str(job_year)
+        else:
+            jobNo= 'First/Job/'+str(uuid4()).split('-')[1]
+        newJobRef=CommonJobsModel.objects.create(job_number=jobNo,description="Job Description",company=main_sbscrbr_entity,owner=logged_user or None,
+                    division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
+        newJobRef.save()
+        return redirect('allifmaalcommonapp:commonJobs',allifusr=usrslg,allifslug=compslg)
+        
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_view
@@ -9924,6 +9930,7 @@ def commonJobTransactionReportpdf(request,pk,*allifargs,**allifkwargs):
         my_job_id=CommonJobsModel.objects.get(id=pk)
         job_Items =CommonJobItemsModel.objects.filter(jobitemconnector=my_job_id)
         myuplift=0
+        """
         template_path = 'allifmaalcommonapp/jobs/job-trans-report-pdf.html'
     
         context={
@@ -9953,7 +9960,8 @@ def commonJobTransactionReportpdf(request,pk,*allifargs,**allifkwargs):
         if pisa_status.err:
             return HttpResponse('We had some errors <pre>' + html + '</pre>')
         
-      
+      """
+        return render(request,'allifmaalcommonapp/jobs/jobs.html')
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -9979,7 +9987,7 @@ def commonTasks(request,*allifargs,**allifkwargs):
             logged_user_branch=logged_user_profile.branch
             logged_user_department=logged_user_profile.department
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
         
         form =CommonAddTasksForm(main_sbscrbr_entity,request.POST or None)
         allifqueryset=CommonTasksModel.objects.order_by('dueDate').filter(status="incomplete",company=main_sbscrbr_entity)
@@ -9997,6 +10005,7 @@ def commonTasks(request,*allifargs,**allifkwargs):
                 allifqueryset=CommonTasksModel.objects.order_by('dueDate').filter(status="incomplete",company=main_sbscrbr_entity)
                 
             else:
+                
                 allifqueryset=CommonTasksModel.objects.filter(status="incomplete",company=main_sbscrbr_entity)
             
         else:
@@ -10123,8 +10132,12 @@ def commonMarkTaskComplete(request,pk,*allifargs,**allifkwargs):
 def commonCompletedTasks(request,*allifargs,**allifkwargs):
     try:
         title="Completed Tasks"
+        compslg=request.user.usercompany
+        usrslg=request.user.customurlslug
+        logged_user=User.objects.filter(customurlslug=usrslg).first()
+        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
         tasks=CommonTasksModel.objects.filter(status="incomplete")
-        allifqueryset=CommonTasksModel.objects.filter(status="complete")
+        allifqueryset=CommonTasksModel.objects.filter(company=main_sbscrbr_entity,status="complete")
         context = {
             "tasks":tasks,
             "title":title,

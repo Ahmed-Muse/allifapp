@@ -216,6 +216,10 @@ class CommonAddTaxParameterForm(forms.ModelForm):
             'taxrate':forms.TextInput(attrs={'class':'form-control'}),
              'taxtype':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
              'taxdescription':forms.TextInput(attrs={'class':'form-control'}),
+              'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super(CommonAddTaxParameterForm, self).__init__(*args, **kwargs)

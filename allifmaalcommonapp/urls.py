@@ -49,6 +49,7 @@ path('Edit/Company/Scope/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', view
 path('Delete/Company/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCompanyScope, name="commonDeleteCompanyScope"),
 path('Want/To/Delete/This/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteScope, name="commonWantToDeleteScope"),
 
+
 #########################33 branches ########################
 path('Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonDivisions, name="commonDivisions"),
 path('Add/New/Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonAddDivision, name="commonAddDivision"),
