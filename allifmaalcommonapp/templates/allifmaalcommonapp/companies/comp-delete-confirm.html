@@ -19,10 +19,6 @@
 
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 
-<a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
-
-<a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a>
-<a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
 </div>
 
     </div><!--end....header column-->
@@ -135,7 +131,7 @@
     <tr>
         <td>
         <div class="delete-options-container">
-          <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Back</a>
+          <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Back</a>
         </div>
         </td>
       </tr>
@@ -155,7 +151,7 @@
           <tr>
             <td>
             <div class="delete-options-container">
-              <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">No</a>
+              <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">No</a>
             </div>
             </td>
           </tr>

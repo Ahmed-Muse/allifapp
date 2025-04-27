@@ -34,7 +34,7 @@ from .resources import *
 def commonWebsite(request):
     try:
         title="Allifmaal ERP"
-        context={"title":title,}
+        context={"title":title}
         return render(request,'allifmaalcommonapp/website/website.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -48,6 +48,7 @@ def commonEngineering(request):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/web-error.html',error_context)
+    
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 def CommonDecisionPoint(request,*allifargs,**allifkwargs):
     try:
@@ -145,7 +146,6 @@ def commonSpecificDashboard(request,*allifargs,**allifkwargs):
 ################################### Sectors ############################### 
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @allifmaal_admin
-@logged_in_user_can_view
 def commonSectors(request,allifusr,*allifargs,**allifkwargs):
     try:
         title="Main Sectors"
@@ -161,9 +161,10 @@ def commonSectors(request,allifusr,*allifargs,**allifkwargs):
                 obj.owner =user_var
                 obj.save()
                 return redirect('allifmaalcommonapp:commonSectors',allifusr=usrslg,allifslug=user_var)
-            
             else:
-                form=CommonAddSectorForm()
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             form=CommonAddSectorForm()
         context = {
@@ -174,12 +175,11 @@ def commonSectors(request,allifusr,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/sectors/sectors.html',context)
     
     except Exception as ex:
-        error_context={'error_message': ex,}
+        error_context={'error_message': ex,"title":title,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @allifmaal_admin
-@logged_in_user_can_view
 def commonSectorDetails(request,pk,*allifargs,**allifkwargs):
     try:
         title="Sector Details"
@@ -193,14 +193,11 @@ def commonSectorDetails(request,pk,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/sectors/sector-details.html',context)
     
     except Exception as ex:
-        error_context={'error_message': ex,}
+        error_context={'error_message': ex,"title":title,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 @login_required(login_url='allifmaalusersapp:userLoginPage')
-#@allowed_users(allowed_roles=['admin','staff'])
-
 @allifmaal_admin
-@logged_in_user_can_edit
 def commonEditSector(request,pk,*allifargs,**allifkwargs):
     try:
         title="Update Sector Details"
@@ -220,6 +217,10 @@ def commonEditSector(request,pk,*allifargs,**allifkwargs):
                 
             else:
                 form =CommonAddSectorForm(instance=update_allifquery)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,"form":form,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+                
         else:
             form =CommonAddSectorForm(instance=update_allifquery)
         context = {
@@ -231,11 +232,12 @@ def commonEditSector(request,pk,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/sectors/sectors.html',context)
     
     except Exception as ex:
-        error_context={'error_message': ex,}
+        error_context={'error_message': ex,"title":title,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 @login_required(login_url='allifmaalusersapp:userLoginPage')
-@allifmaal_admin  
+@allifmaal_admin
+@logged_in_user_can_delete
 def commonWantToDeleteSector(request,pk,*allifargs,**allifkwargs):
     try:
         allifqueryset=CommonSectorsModel.objects.all()
@@ -251,7 +253,7 @@ def commonWantToDeleteSector(request,pk,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/sectors/sectors.html',context)
 
     except Exception as ex:
-        error_context={'error_message': ex,}
+        error_context={'error_message': ex,"title":title,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)   
      
 @login_required(login_url='allifmaalusersapp:userLoginPage')
@@ -264,7 +266,6 @@ def commonSectorDelete(request,pk):
         user_var=request.user.usercompany
         usrslg=request.user.customurlslug
         return redirect('allifmaalcommonapp:commonSectors',allifusr=usrslg,allifslug=user_var)
-        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -272,19 +273,15 @@ def commonSectorDelete(request,pk):
 ################################### Sectors ############################### 
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @allifmaal_admin
-@logged_in_user_can_view
 def commonLoadContentTest(request):
     try:
         title="Main Sectors"
-        
         context = {
             "title":title,
-          
         }
         return render(request,'allifmaalcommonapp/sectors/sectors-list.html',context)
-    
     except Exception as ex:
-        error_context={'error_message': ex,}
+        error_context={'error_message': ex,"title":title,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 ################################### Sectors ############################### 
 @login_required(login_url='allifmaalusersapp:userLoginPage')
@@ -303,9 +300,10 @@ def commonDocsFormat(request,*allifargs,**allifkwargs):
                 obj.owner =user_var
                 obj.save()
             else:
-                form=CommonAddDocFormatForm()
-        else:
-            form=CommonAddDocFormatForm()
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+           
         context = {
             "title":title,
             "form":form,
@@ -337,7 +335,9 @@ def commonEditDocsFormat(request,pk,*allifargs,**allifkwargs):
                 return redirect('allifmaalcommonapp:commonDocsFormat',allifusr=usrslg,allifslug=user_var)
                 
             else:
-                form =CommonAddSectorForm(instance=update)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             form =CommonAddSectorForm(instance=update)
         context = {
@@ -384,7 +384,9 @@ def commonDataSorts(request,*allifargs,**allifkwargs):
                 obj.owner =user_var
                 obj.save()
             else:
-                form=CommonAddDataSortsForm()
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             form=CommonAddDataSortsForm()
         context = {
@@ -418,7 +420,9 @@ def commonEditDataSort(request,pk,*allifargs,**allifkwargs):
                 return redirect('allifmaalcommonapp:commonDataSorts',allifusr=usrslg,allifslug=user_compny)
                 
             else:
-                form =CommonAddDataSortsForm(instance=update)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             form =CommonAddDataSortsForm(instance=update)
         context = {
@@ -448,11 +452,9 @@ def commonDeleteDataSort(request,pk):
 ############################### .......Entities and companies details........... #########################3#
 @login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
 @allifmaal_admin
-@logged_in_user_can_view
 def commonCompanies(request,*allifargs,**allifkwargs):
     try:
         title="Registered Companies"
-        user_var=request.user
         allifqueryset=CommonCompanyDetailsModel.objects.all()
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
@@ -461,14 +463,14 @@ def commonCompanies(request,*allifargs,**allifkwargs):
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
             if selected_option=="ascending":
-                allifqueryset=CommonCompanyDetailsModel.objects.all().order_by("-company")
+                allifqueryset=CommonCompanyDetailsModel.objects.all().order_by("company")
             else:
-                allifqueryset=CommonCompanyDetailsModel.objects.all()
-        
+                allifqueryset=CommonCompanyDetailsModel.objects.all().order_by("-company")
+        else:
+            allifqueryset=CommonCompanyDetailsModel.objects.all()
         context={
             "title":title,
             "allifqueryset":allifqueryset,
-            "user_var":user_var,
             "main_sbscrbr_entity":main_sbscrbr_entity,
             "formats":formats,
             "datasorts":datasorts,
@@ -510,26 +512,6 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         allifusr=User.objects.filter(email=user_var.email).first()
                         allifusr.usercompany=str(newcompny.companyslug)
                         allifusr.save()
-
-                        ################## Sending an Email to notify system owner #######################
-                        ahmed='info@allifmaal.com'
-                        muse='allifmaalengineering@gmail.com'
-                        subject = title
-                        message = f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System'
-                        email_sender=usernmeslg.email #'ahmedmusadir@gmail.com'
-                        recipient_list = [ahmed,muse]
-                        send_mail(subject, message, email_sender, recipient_list)# uncomment to send emails.
-                        email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender)
-                        email.save()
-
-                        ################3 this below is for the SMS to notify system owner ###################
-                        account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
-                        auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        client = Client(account_sid, auth_token)
-                        message = client.messages.create(
-                        to="+252610993964",# number registered with Twilio
-                        from_="+17753731268",#virtual number from Twilio
-                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalsalesapp:salesHome',allifusr=usrslg,allifslug=user_var_comp)
 
                     elif sectorselec.name=="Healthcare":
@@ -539,25 +521,6 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         allifusr=User.objects.filter(email=user_var.email).first()
                         allifusr.usercompany=str(newcompny.companyslug)
                         allifusr.save()
-                        ################## Sending an Email to notify system owner #######################
-                        ahmed='info@allifmaal.com'
-                        muse='allifmaalengineering@gmail.com'
-                        subject = title
-                        message = f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System'
-                        email_sender=usernmeslg.email #'ahmedmusadir@gmail.com'
-                        recipient_list = [ahmed,muse]
-                        send_mail(subject, message, email_sender, recipient_list)# uncomment to send emails.
-                        email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender)
-                        email.save()
-
-                        ################3 this below is for the SMS to notify system owner ###################
-                        account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
-                        auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        client = Client(account_sid, auth_token)
-                        message = client.messages.create(
-                        to="+252610993964",# number registered with Twilio
-                        from_="+17753731268",#virtual number from Twilio
-                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalshaafiapp:shaafiHome',allifusr=usrslg,allifslug=user_var_comp)
                     elif sectorselec.name=="Hospitality":
                         obj.save()
@@ -566,25 +529,6 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         allifusr=User.objects.filter(email=user_var.email).first()
                         allifusr.usercompany=str(newcompny.companyslug)
                         allifusr.save()
-                        ################## Sending an Email to notify system owner #######################
-                        ahmed='info@allifmaal.com'
-                        muse='allifmaalengineering@gmail.com'
-                        subject = title
-                        message = f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System'
-                        email_sender=usernmeslg.email #'ahmedmusadir@gmail.com'
-                        recipient_list = [ahmed,muse]
-                        send_mail(subject, message, email_sender, recipient_list)# uncomment to send emails.
-                        email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender)
-                        email.save()
-
-                        ################3 this below is for the SMS to notify system owner ###################
-                        account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
-                        auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        client = Client(account_sid, auth_token)
-                        message = client.messages.create(
-                        to="+252610993964",# number registered with Twilio
-                        from_="+17753731268",#virtual number from Twilio
-                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalhotelsapp:hotelsHome',allifusr=usrslg,allifslug=user_var_comp)
                     elif sectorselec.name=="Education":
                         obj.save()
@@ -593,25 +537,6 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         allifusr=User.objects.filter(email=user_var.email).first()
                         allifusr.usercompany=str(newcompny.companyslug)
                         allifusr.save()
-                        ################## Sending an Email to notify system owner #######################
-                        ahmed='info@allifmaal.com'
-                        muse='allifmaalengineering@gmail.com'
-                        subject = title
-                        message = f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System'
-                        email_sender=usernmeslg.email #'ahmedmusadir@gmail.com'
-                        recipient_list = [ahmed,muse]
-                        send_mail(subject, message, email_sender, recipient_list)# uncomment to send emails.
-                        email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender)
-                        email.save()
-
-                        ################3 this below is for the SMS to notify system owner ###################
-                        account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
-                        auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        client = Client(account_sid, auth_token)
-                        message = client.messages.create(
-                        to="+252610993964",# number registered with Twilio
-                        from_="+17753731268",#virtual number from Twilio
-                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalilmapp:ilmHome',allifusr=usrslg,allifslug=user_var_comp)
                     
                     elif sectorselec.name=="Logistics":
@@ -621,25 +546,6 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         allifusr=User.objects.filter(email=user_var.email).first()
                         allifusr.usercompany=str(newcompny.companyslug)
                         allifusr.save()
-                        ################## Sending an Email to notify system owner #######################
-                        ahmed='info@allifmaal.com'
-                        muse='allifmaalengineering@gmail.com'
-                        subject = title
-                        message = f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System'
-                        email_sender=usernmeslg.email #'ahmedmusadir@gmail.com'
-                        recipient_list = [ahmed,muse]
-                        send_mail(subject, message, email_sender, recipient_list)# uncomment to send emails.
-                        email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender)
-                        email.save()
-
-                        ################3 this below is for the SMS to notify system owner ###################
-                        account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
-                        auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        client = Client(account_sid, auth_token)
-                        message = client.messages.create(
-                        to="+252610993964",# number registered with Twilio
-                        from_="+17753731268",#virtual number from Twilio
-                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaallogisticsapp:logisticsHome',allifusr=usrslg,allifslug=user_var_comp)
                     elif sectorselec.name=="Realestate":
                         obj.save()
@@ -648,25 +554,6 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         allifusr=User.objects.filter(email=user_var.email).first()
                         allifusr.usercompany=str(newcompny.companyslug)
                         allifusr.save()
-                        ################## Sending an Email to notify system owner #######################
-                        ahmed='info@allifmaal.com'
-                        muse='allifmaalengineering@gmail.com'
-                        subject = title
-                        message = f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System'
-                        email_sender=usernmeslg.email #'ahmedmusadir@gmail.com'
-                        recipient_list = [ahmed,muse]
-                        send_mail(subject, message, email_sender, recipient_list)# uncomment to send emails.
-                        email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender)
-                        email.save()
-
-                        ################3 this below is for the SMS to notify system owner ###################
-                        account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
-                        auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        client = Client(account_sid, auth_token)
-                        message = client.messages.create(
-                        to="+252610993964",# number registered with Twilio
-                        from_="+17753731268",#virtual number from Twilio
-                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalrealestateapp:realestateHome',allifusr=usrslg,allifslug=user_var_comp)
                     elif sectorselec.name=="Services":
                         obj.save()
@@ -675,25 +562,6 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         allifusr=User.objects.filter(email=user_var.email).first()
                         allifusr.usercompany=str(newcompny.companyslug)
                         allifusr.save()
-                        ################## Sending an Email to notify system owner #######################
-                        ahmed='info@allifmaal.com'
-                        muse='allifmaalengineering@gmail.com'
-                        subject = title
-                        message = f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System'
-                        email_sender=usernmeslg.email #'ahmedmusadir@gmail.com'
-                        recipient_list = [ahmed,muse]
-                        send_mail(subject, message, email_sender, recipient_list)# uncomment to send emails.
-                        email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender)
-                        email.save()
-
-                        ################3 this below is for the SMS to notify system owner ###################
-                        account_sid = "ACb19b2a5701ec5f53c38e113ae9595917" # Twilio account
-                        auth_token  = "143c2731b15d0a8a9a918db838ac048a"  # Twilio Token
-                        client = Client(account_sid, auth_token)
-                        message = client.messages.create(
-                        to="+252610993964",# number registered with Twilio
-                        from_="+17753731268",#virtual number from Twilio
-                        body=f'Kindly note that Name: {usernmeslg}, Email: {email}, Phone: {phone}, has created an entity in the AllifApp System') # message to be sent.
                         return redirect('allifmaalservicesapp:servicesHome',allifusr=usrslg,allifslug=user_var_comp)
                     
                     else:
@@ -703,6 +571,9 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                     form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
             else:
                 form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
 
@@ -736,7 +607,7 @@ def commonCompanyDetailsForClients(request,*allifargs,**allifkwargs):
     
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @allifmaal_admin 
-@logged_in_user_can_view
+@logged_in_user_can_edit
 def commonEditEntityByAllifAdmin(request,allifpk,*allifargs,**allifkwargs):
     try:
         title="Update Entity Details"
@@ -754,6 +625,9 @@ def commonEditEntityByAllifAdmin(request,allifpk,*allifargs,**allifkwargs):
                 
             else:
                 form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None, instance=user_var_update)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None, instance=user_var_update)
         context={"title":title,"form":form,}
@@ -789,6 +663,9 @@ def commonEditEntityByClients(request,allifpk,*allifargs,**allifkwargs):
                 
             else:
                 form=CommonAddByClientCompanyDetailsForm(request.POST or None, instance=user_var_update)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             form=CommonAddByClientCompanyDetailsForm(request.POST or None, instance=user_var_update)
         context={"title":title,"form":form,}
@@ -797,13 +674,14 @@ def commonEditEntityByClients(request,allifpk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
+    
 @login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view 
+@logged_in_user_can_view
+@allifmaal_admin
 def commonCompanyDetailsForAllifAdmin(request,pk,*allifargs,**allifkwargs):
     try:
         title="Company Details"
         allifquery=CommonCompanyDetailsModel.objects.filter(id=pk).first()
-       
         allifqueryset=CommonCompanyScopeModel.objects.filter(company=allifquery)
         context={
             "allifquery":allifquery,
@@ -834,8 +712,6 @@ def commonShowClickedRowCompanyDetails(request,pk,*allifargs,**allifkwargs):
             "title":title,
         }
         return render(request,'allifmaalcommonapp/companies/companies.html',context)
-       
-    
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -851,7 +727,6 @@ def commonWantToDeleteCompany(request,pk,*allifargs,**allifkwargs):
         "allifquery":allifquery,
         "title":title,
         }
-        
         return render(request,'allifmaalcommonapp/companies/comp-delete-confirm.html',context)
 
     except Exception as ex:
@@ -863,28 +738,30 @@ def commonWantToDeleteCompany(request,pk,*allifargs,**allifkwargs):
 def commonDeleteEntity(request,allifslug,*allifargs,**allifkwargs):
     try:
         title="Are you sure to delete?"
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         allifquery=CommonCompanyDetailsModel.objects.filter(companyslug=allifslug).first()
-        #if allifquery.can_delete=="undeletable":
-            #context={"allifquery":allifquery,"title":title,}
-            #return render(request,'allifmaalcommonapp/error/cant_delete.html',context)
-        #else:
-        allifquery.delete()
-        return redirect('allifmaalcommonapp:commonTasks',allifusr=usrslg,allifslug=user_var)
+        if allifquery.can_delete=="undeletable":
+            context={"allifquery":allifquery,"title":title,}
+            return render(request,'allifmaalcommonapp/error/cant_delete.html',context)
+        else:
+            allifquery.delete()
+            return redirect('allifmaalcommonapp:CommonDecisionPoint')
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_view
+@allifmaal_admin
 def commonCompanySearch(request,*allifargs,**allifkwargs):
     try:
         title="Search"
+        searched_data=[]
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
             searched_data=CommonCompanyDetailsModel.objects.filter(Q(company__contains=allifsearch) | Q(address__contains=allifsearch))
-            context={
+        else:
+            searched_data=CommonCompanyDetailsModel.objects.all()
+        context={
             "title":title,
             "allifsearch":allifsearch,
             "searched_data":searched_data,
@@ -894,98 +771,67 @@ def commonCompanySearch(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
+    
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_view
 @allifmaal_admin
-def commonCompanyAdvanceSearch(request,*allifargs,**allifkwargs):
+def commonCompanyAdvanceSearch(request, *allifargs, **allifkwargs):
     try:
-        title="Advanced Search"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        formats=CommonDocsFormatModel.objects.all()
-        allifqueryset=CommonCompanyDetailsModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=main_sbscrbr_entity)
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('strtdate')
-            end_date=request.POST.get('enddate')
-            if start_date!="" and end_date!="":
-                searched_data=CommonCompanyDetailsModel.objects.filter(Q(created_date__gte=start_date)& Q(created_date__lte=end_date))
-                # if pdf is selected
-                print(searched_data)
-                if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/companies/search-pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":main_sbscrbr_entity,
-                    "scopes":scopes
-                    }
-                    response = HttpResponse(content_type='application/doc')
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                # if excel is selected
-                elif selected_option=="excel":
-                    compnyresource= commonCompanyResource()
-                    dataset =compnyresource.export(searched_data)
-                    response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
-                    response['Content-Disposition'] = 'attachment; filename="zamzam-stock.xls"'
-                    return response
-                # if word is selected
-                elif selected_option=="word":
-                    pass
+        title = "Advanced Search"
+        user_var = request.user
+        compslg = user_var.usercompany
+        main_sbscrbr_entity = CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        formats = CommonDocsFormatModel.objects.all()
+        scopes = CommonCompanyScopeModel.objects.filter(company=main_sbscrbr_entity).order_by('date')[:4]
+        context = {
+            "formats": formats,
+            "title": title,
+            "main_sbscrbr_entity": main_sbscrbr_entity,
+            "scopes": scopes,
+        }
 
-                # if something else is selected or none is selected
-                else:
-                    context = {
-                    "searched_data":searched_data,
-                    "formats":formats,
-                    "title":title,
-                     "scopes":scopes
-                    }
-                    return render(request,'allifmaalcommonapp/companies/companies.html',context)
+        if request.method == 'POST':
+            selected_option = request.POST.get('requiredformat')
+            start_date = request.POST.get('strtdate')
+            end_date = request.POST.get('enddate')
+            searched_data = CommonCompanyDetailsModel.objects.all()  # Default to all if no date range
 
+            if start_date and end_date:
+                searched_data = CommonCompanyDetailsModel.objects.filter(Q(date__gte=start_date) & Q(date__lte=end_date))
+                context["searched_data"] = searched_data
             else:
-                allifqueryset=CommonCompanyDetailsModel.objects.all()
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
-            }
-            return render(request,'allifmaalcommonapp/companies/companies.html',context)
-        
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
-            }
-            return render(request,'allifmaalcommonapp/companies/companies.html',context)
-      
+                context["allifqueryset"] = searched_data  # Use a consistent key
+           
+            if selected_option == "pdf":
+                template_path = 'allifmaalcommonapp/companies/search-pdf.html'
+                template = get_template(template_path)
+                html = template.render(context)
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                pisa_status = pisa.CreatePDF(html, dest=response)
+                if pisa_status.err:
+                    return HttpResponse('We had some errors <pre>' + html + '</pre>')
+                return response
+          
+            else:
+                context={
+                    "searched_data":searched_data,
+                }
+                return render(request, 'allifmaalcommonapp/companies/companies.html', context)
+
+        else:  # request.method == 'GET'
+            context["allifqueryset"] = CommonCompanyDetailsModel.objects.all()
+            return render(request, 'allifmaalcommonapp/companies/companies.html', context)
+
     except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
+        error_context = {'error_message': ex}
+        return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+
 ############################### .......Entities and companies details........... #########################3#
-#@login_required(login_url='allifmaalloginapp:allifmaalUserLogin')
+
+
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_view
-#@allifmaal_admin_supperuser
 def commonDivisions(request,*allifargs,**allifkwargs):
     try:
         title="Divisions"
@@ -7390,14 +7236,6 @@ def commonQuoteAdvanceSearch(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 ########################### END OF QUOTATION ###############
 
-def commonScrollableTable(request,*allifargs,**allifkwargs):
-    allifqueryset=CommonDivisionsModel.objects.all()
-   
-    context={
-        "allifqueryset":allifqueryset,
-      
-    }
-    return render(request,'allifmaalcommonapp/table.html',context)
 
 ##########################3 INVOICES #######################333
 @login_required(login_url='allifmaalusersapp:userLoginPage')
@@ -10461,4 +10299,4 @@ def dynamic_form_view(request):
         else:
             return HttpResponse("Form has errors.")
 
-    return render(request, 'allifmaalcommonapp/dynamic_form.html')
+    return render(request, 'allifmaalcommonapp/explore/dynamic_form.html')

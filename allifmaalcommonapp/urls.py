@@ -30,6 +30,7 @@ path('Data/Sorts/<str:allifusr>/<str:allifslug>/', views.commonDataSorts, name="
 path('Edit/Data/Filter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditDataSort, name="commonEditDataSort"),
 path('Delete/Data/Filter/<str:pk>/Permanently/', views.commonDeleteDataSort, name="commonDeleteDataSort"),
 
+
 ############################ Entities ##################################3
 path('Companies/<str:allifusr>/<str:allifslug>/', views.commonCompanies, name="commonCompanies"),
 path('Company/Settings/Details/For/Subscribers/<str:allifusr>/<str:allifslug>/', views.commonCompanyDetailsForClients, name="commonCompanyDetailsForClients"),
@@ -50,7 +51,16 @@ path('Delete/Company/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.comm
 path('Want/To/Delete/This/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteScope, name="commonWantToDeleteScope"),
 
 
-#########################33 branches ########################
+
+
+
+
+
+
+
+
+
+#########################33 divisions ########################
 path('Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonDivisions, name="commonDivisions"),
 path('Add/New/Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonAddDivision, name="commonAddDivision"),
 
@@ -398,21 +408,14 @@ path('Available/Stock/Report/<str:allifusr>/<str:allifslug>/', views.commonAvail
 
 path('Contact/Information/Saving/', views.commonCustomerContacts, name="commonCustomerContacts"),
 
-############################3
-path('Table/scroll/Horizontal<str:allifusr>/<str:allifslug>/', views.commonScrollableTable, name="commonScrollableTable"),
-
-
+############################3 BELOW ARE FOR TESTING PURPOSES ###############################3
 path('UI1/Home/<str:allifusr>/<str:allifslug>/', views.ui1, name="ui1"),
-
 path('UI2/Home/<str:allifusr>/<str:allifslug>/', views.ui2, name="ui2"),
 path('UI3/Home/<str:allifusr>/<str:allifslug>/', views.ui3, name="ui3"),
 path('UI4/Home/<str:allifusr>/<str:allifslug>/', views.ui4, name="ui4"),
-
 path('UI6/Home/<str:allifusr>/<str:allifslug>/', views.ui6, name="ui6"),
 path('UI7/Home/<str:allifusr>/<str:allifslug>/', views.ui7, name="ui7"),
-
 path('UI8/Home/<str:allifusr>/<str:allifslug>/', views.ui8, name="ui8"),
-
 path('add/dynamic_form_view/', views.dynamic_form_view, name='dynamic_form_view'),
 
 ]   

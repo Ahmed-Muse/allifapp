@@ -22,19 +22,6 @@
     
     <a class="allif-load-content-button" type="button">Load Sectors</a>
 
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
-    </div>
-    </ul>
-  </div>
-  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a>
-  
   </div>
     </div><!--end....header column-->
     </div><!--end....header row-->
@@ -104,8 +91,6 @@
 </div><!--end....table row-->
 
 
-
-
 <div class="allif-form-container">
 <div class="table-content-description"> Add New Sector </div>
 <div class="allif-scroll-table">
@@ -114,7 +99,7 @@
     <tbody class="allif-table-body">
     <tr>
       <form method='POST' action=''>{% csrf_token %}
-      <td>{{form.name}}</td>
+        <td>{{form.name}}</td>
       <td>{{form.notes}}</td>
        <td><input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
       </form>
@@ -124,7 +109,6 @@
   </div>
  </div>
   </div><!--end of row div --->
-
 
 <div class="allif-loading-new-content">
 <div class="allif-load-content-here">Load Sectors</div>

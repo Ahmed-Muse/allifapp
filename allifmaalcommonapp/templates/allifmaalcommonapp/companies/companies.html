@@ -15,12 +15,14 @@
   <div class="container-fluid amel-content-header">
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Open Filters
+      Search Filters
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
   
         <li><a class="dropdown-item">Looking for something?</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Clear Search</a></li>
+       
         <form method='POST' action="{% url 'allifmaalcommonapp:commonCompanySearch' user_var glblslug %}">{% csrf_token %}
         
           <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
