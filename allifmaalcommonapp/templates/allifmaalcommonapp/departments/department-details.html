@@ -30,9 +30,7 @@
   </ul>
 </div>
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-<a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
-<a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
-<a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
+
 <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
 
 </div>
@@ -65,6 +63,15 @@
         <td class="allif-fix-table-col">Division</td>
         <td>{{allifquery.division}}</td>
         </tr>
+
+        <tr>
+          <td class="allif-fix-table-col">Branch</td>
+          <td>{{allifquery.branch}}</td>
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Departmetn</td>
+            <td>{{allifquery.department}}</td>
+            </tr>
       <tr>
         <td class="allif-fix-table-col">Email</td>
         <td>{{allifquery.email}}</td>

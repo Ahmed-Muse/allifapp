@@ -9,8 +9,12 @@ from allifmaalcommonapp.decorators import allifmaal_admin, unauthenticated_user,
 #@allifmaal_admin
 def adminappHome(request,*allifargs,**allifkwargs):
     try:
+        num_visits = request.session.get('num_visits', 0)
+        num_visits += 1
+        request.session['num_visits'] = num_visits
         title="System Control Center"
-        context={"title":title,}
+        context={"title":title,
+                 "num_visits":num_visits,}
         return render(request,"allifmaaladminapp/home/home.html",context)
     except Exception as ex:
         error_context={'error_message': ex,}

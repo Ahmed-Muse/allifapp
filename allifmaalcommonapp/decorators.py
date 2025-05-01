@@ -1,4 +1,6 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
+from .allifutils import common_shared_data
+from django.contrib.auth.decorators import login_required
 def allifmaal_admin_supperuser(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
         usernme=request.user
@@ -31,15 +33,14 @@ def logged_in_user_can_add_view_edit_delete(allif_param_func):
 def logged_in_user_can_add(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
         usernme=request.user
-        usr_can_view=usernme.can_add
-        if usr_can_view==True:
+        usr_can_add=usernme.can_add
+        if usr_can_add==True:
             return allif_param_func(request,*args,**kwargs)
         else:
             return render(request,'allifmaalcommonapp/permissions/no_permission.html')
     return allif_wrapper_func
 
 def logged_in_user_can_view(allif_param_func):
-    
     def allif_wrapper_func(request,*args,**kwargs):
         usernme=request.user
         usr_can_view=usernme.can_view
@@ -54,8 +55,8 @@ def logged_in_user_can_view(allif_param_func):
 def logged_in_user_can_edit(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
         usernme=request.user
-        usr_can_view=usernme.can_edit
-        if usr_can_view==True:
+        usr_can_edit=usernme.can_edit
+        if usr_can_edit==True:
             return allif_param_func(request,*args,**kwargs)
         else:
             return render(request,'allifmaalcommonapp/permissions/no_permission.html')
@@ -64,8 +65,8 @@ def logged_in_user_can_edit(allif_param_func):
 def logged_in_user_can_delete(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
         usernme=request.user
-        usr_can_view=usernme.can_delete
-        if usr_can_view==True:
+        usr_can_delete=usernme.can_delete
+        if usr_can_delete==True:
             return allif_param_func(request,*args,**kwargs)
         else:
             return render(request,'allifmaalcommonapp/permissions/no_permission.html')
@@ -110,6 +111,98 @@ def logged_in_user_is_general_manager(allif_param_func):
             return allif_param_func(request,*args,**kwargs)
         else:
             return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+
+
+################### ACCESS LEVELS ########
+def logged_in_user_has_universal_delete(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        usernme=request.user
+        usr_has_univeral_delete=usernme.universal_delete
+        if usr_has_univeral_delete==True:
+            return allif_param_func(request,*args,**kwargs)
+        else:
+            return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+def logged_in_user_has_divisional_delete(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        usernme=request.user
+        usr_has_divisional_delete=usernme.divisional_delete
+        if usr_has_divisional_delete==True:
+            return allif_param_func(request,*args,**kwargs)
+        else:
+            return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+def logged_in_user_has_branches_delete(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        usernme=request.user
+        usr_has_branches_delete=usernme.branches_delete
+        if usr_has_branches_delete==True:
+            return allif_param_func(request,*args,**kwargs)
+        else:
+            return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+def logged_in_user_has_departmental_delete(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        usernme=request.user
+        usr_has_departmental_delete=usernme.departmental_delete
+        if usr_has_departmental_delete==True:
+            return allif_param_func(request,*args,**kwargs)
+        else:
+            return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+
+############# ACESS LEVELS ##################3
+def logged_in_user_has_universal_access(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        usernme=request.user
+        usr_has_universal_access=usernme.universal_access
+        if usr_has_universal_access==True:
+            return allif_param_func(request,*args,**kwargs)
+        else:
+            return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+
+def logged_in_user_has_divisional_access(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        usernme=request.user
+        usr_has_divisional_access=usernme.divisional_access
+        if usr_has_divisional_access==True:
+            return allif_param_func(request,*args,**kwargs)
+        else:
+            return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+def logged_in_user_has_branches_access(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        usernme=request.user
+        usr_has_branches_access=usernme.branches_access
+        if usr_has_branches_access==True:
+            return allif_param_func(request,*args,**kwargs)
+        else:
+            return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+def logged_in_user_has_departmental_access(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        usernme=request.user
+        usr_has_departmental_access=usernme.departmental_access
+        if usr_has_departmental_access==True:
+            return allif_param_func(request,*args,**kwargs)
+        else:
+            return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+    return allif_wrapper_func
+
+
+def logged_in_user_must_have_profile(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        allif_data=common_shared_data(request)
+        context={"allifquery":request.user,}
+        if request.user.is_authenticated:
+            if allif_data.get("logged_in_user_profile"):
+                return allif_param_func(request,*args,**kwargs)
+            else:
+                return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+        else:
+            return redirect('allifmaalusersapp:userLoginPage')
     return allif_wrapper_func
 
 #########################################################################################3
@@ -162,4 +255,4 @@ def unrestrictedCRUD(allowed_roles=[]):
         return allif_wrapper_func
     return user_delete_permissions
 
-                  
+       

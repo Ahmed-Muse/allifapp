@@ -6,7 +6,6 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-
 <div class="allifmaal-main-container">
  
 <!--start....main headere-->
@@ -18,7 +17,7 @@
 
 <div class="container-fluid amel-content-header">
   <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-<a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+<a href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Forms</a>
 </div>
 
     </div><!--end....header column-->
@@ -28,6 +27,7 @@
 </div><!--end....main headere-->
 
   <div class="allifmaincontainer">
+
 <div class="row mt-12"> <!--start....table row-->
   <div class="delete-confirmation-header">Do you want to delete {{allifquery}}?</div>
   <div class="col-md-12"> <!--start....table column-->
@@ -42,15 +42,11 @@
       <table class="table table-layout">
       <tbody>
       <tr>
-        <td class="allif-fix-table-col">Company</td>
-        <td>{{allifquery.company}}</td>
+        <td class="allif-fix-table-col">Name</td>
+        <td>{{allifquery.name}}</td>
     
         </tr>
-        <tr>
-          <td class="allif-fix-table-col">Email</td>
-          <td>{{allifquery.email}}</td>
-      
-          </tr>
+       
         
         </tbody>
         </table>
@@ -65,15 +61,11 @@
        <table class="table table-layout">
         <tbody>
           <tr>
-            <td class="allif-fix-table-col">Phone</td>
-            <td>{{allifquery.phone}}</td>
+            <td class="allif-fix-table-col">Notes</td>
+            <td>{{allifquery.notes}}</td>
         
             </tr>
-            <tr>
-              <td class="allif-fix-table-col">City</td>
-              <td>{{allifquery.city}}</td>
           
-              </tr>
         
           </tbody>
           </table>
@@ -88,17 +80,11 @@
        <table class="table table-layout">
         <tbody>
           <tr>
-            <td class="allif-fix-table-col">Address</td>
-            <td>{{allifquery.address}}</td>
+            <td class="allif-fix-table-col">Date</td>
+            <td>{{allifquery.date}}</td>
         
             </tr>
-            
-      <tr>
-        <td class="allif-fix-table-col">Owner</td>
-        <td>{{allifquery.owner}}</td>
-    
-        </tr>
-  
+          
           </tbody>
           </table>
   </div>
@@ -129,7 +115,7 @@
     <tr>
         <td>
         <div class="delete-options-container">
-          <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Back</a>
+          <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Back</a>
         </div>
         </td>
       </tr>
@@ -149,7 +135,7 @@
           <tr>
             <td>
             <div class="delete-options-container">
-              <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">No</a>
+              <a href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">No</a>
             </div>
             </td>
           </tr>
@@ -170,7 +156,7 @@
           <tr>
             <td>
             <div class="delete-options-container">
-              <a href="{% url 'allifmaalcommonapp:commonDeleteDepartment' allifquery.id user_var glblslug %}" class="body-delete-link">Yes</a></li>
+              <a href="{% url 'allifmaalcommonapp:commonSectorDelete' allifquery.id %}" class="body-delete-link">Yes</a></li>
             </div>
             </td>
           </tr>

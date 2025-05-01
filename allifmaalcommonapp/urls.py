@@ -10,12 +10,15 @@ path('Decision/Making/Point/', views.CommonDecisionPoint, name="CommonDecisionPo
 path('Home/<str:allifusr>/<str:allifslug>/', views.commonHome, name="commonHome"),
 path('Dashboard/<str:allifusr>/<str:allifslug>/', views.commonSpecificDashboard, name="commonSpecificDashboard"),
 
+
 ############################ Sectors ##################################3
 path('Sectors/<str:allifusr>/<str:allifslug>/', views.commonSectors, name="commonSectors"),
 path('Edit/Sector/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditSector, name="commonEditSector"),
 path('Want/To/Delete/Sector/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteSector, name="commonWantToDeleteSector"),
 path('Delete/Sector/<str:pk>/Permanently/', views.commonSectorDelete, name="commonSectorDelete"),
 path('Sector/Information/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonSectorDetails, name="commonSectorDetails"),
+
+
 
 ############ testing only ...used...dont remove....#############3
 path('load/new/content/in/page/', views.commonLoadContentTest, name="commonLoadContentTest"),
@@ -50,20 +53,9 @@ path('Edit/Company/Scope/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', view
 path('Delete/Company/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCompanyScope, name="commonDeleteCompanyScope"),
 path('Want/To/Delete/This/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteScope, name="commonWantToDeleteScope"),
 
-
-
-
-
-
-
-
-
-
-
 #########################33 divisions ########################
 path('Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonDivisions, name="commonDivisions"),
 path('Add/New/Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonAddDivision, name="commonAddDivision"),
-
 path('Edit/Division/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditDivision, name="commonEditDivision"),
 path('Division/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDivisionDetails, name="commonDivisionDetails"),
 path('Want/To/Delete/Division/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDivision, name="commonWantToDeleteDivision"),
@@ -87,6 +79,14 @@ path('Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonD
 path('Search/Departments/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepartmentSearch, name="commonDepartmentSearch"),
 path('Want/To/Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDepartment, name="commonWantToDeleteDepartment"),
 
+
+
+
+
+
+
+
+
 ############################ HRM ##################################3
 path('HRM/<str:allifusr>/<str:allifslug>/', views.commonhrm, name="commonhrm"),
 path('Add/New/Staff/User/<str:allifusr>/<str:allifslug>/', views.commonAddUser, name="commonAddUser"),
@@ -105,6 +105,18 @@ path('User/Can/Edit/Only/<str:pk>/<str:allifusr>/<str:allifslug>/', views.common
 path('User/Can/Delete/Only/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserCanDelete, name="commonUserCanDelete"),
 path('User/Can/Access/All/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserCanAccessAll, name="commonUserCanAccessAll"),
 path('User/Can/Access/Only/Related/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserCanAccessRelated, name="commonUserCanAccessRelated"),
+
+path('User/Can/Access/Has/Universal/view/Authority<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasUniversalDelete, name="commonUserHasUniversalDelete"),
+path('User/Can/Access/Has/Divisional/level/Access/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasDivisionalDelete, name="commonUserHasDivisionalDelete"),
+path('User/Has/Branches/Level/Delete/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasBranchesDelete, name="commonUserHasBranchesDelete"),
+path('User/Has/Departmental/Delete/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasDepartmentalDelete, name="commonUserHasDepartmentalDelete"),
+path('User/Granted/Universal/Company/Level/Access/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasUniversalAccess, name="commonUserHasUniversalAccess"),
+path('User/Granted/All/Divisions/al/Levels/Access/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasDivisionalAccess, name="commonUserHasDivisionalAccess"),
+path('User/Granted/All/Branches/Level/Access/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasBranchesAccess, name="commonUserHasBranchesAccess"),
+path('User/Granted/Departmental/Access/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasDepartmentalAccess, name="commonUserHasDepartmentalAccess"),
+
+       
+
 path('User/Is/Allifmaal/Admin/<str:pk>/', views.commonUserAllifaamlAdmin, name="commonUserAllifaamlAdmin"),
 
 ############################ staff profiles ##################################3

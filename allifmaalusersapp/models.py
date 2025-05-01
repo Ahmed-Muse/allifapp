@@ -36,6 +36,16 @@ class User(AbstractUser):# this is for creating new user... the fields are below
     can_view=models.BooleanField('Can view',default=False)
     can_delete=models.BooleanField('Can delete',default=False)
     
+    universal_delete=models.BooleanField('Can delete anything in the company',default=False)
+    divisional_delete=models.BooleanField('Can delete anything in their division',default=False)
+    branches_delete=models.BooleanField('Can delete anything in the branch',default=False)
+    departmental_delete=models.BooleanField('Can delete anything in the department',default=False)
+
+    universal_access=models.BooleanField('Can access anything in the company',default=False)
+    divisional_access=models.BooleanField('Can access anything in their division',default=False)
+    branches_access=models.BooleanField('Can access anything in the branch',default=False)
+    departmental_access=models.BooleanField('Can access anything in the department',default=False)
+    
     can_access_all=models.BooleanField('Can access all',default=False)
     can_access_related=models.BooleanField('Can access only related',default=False)
     allifmaal_admin=models.BooleanField('Can access all',default=False)

@@ -7,23 +7,15 @@
 {%endblock%}
 {% block body %}
 <div class="allifmaal-main-container">
- 
 <!--start....main headere-->
 <div class="card-header">
-
 <div class="row mt-12" ><!--start....header row-->
-
 <div class="col-md-12"><!--start....header column-->
-
 <div class="container-fluid amel-content-header">
-
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 <a href="{% url 'allifmaalcommonapp:commonAddDivision' user_var glblslug %}">Add Divison</a>
-
 <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
 
-<a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a>
-<a href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a>
 </div>
 
     </div><!--end....header column-->
@@ -79,6 +71,24 @@
        <table class="table table-layout">
         <tbody>
           <tr>
+            <td class="allif-fix-table-col">Comments</td>
+            <td>{{form.comments}}</td>
+        
+            </tr>
+          
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
             <td class="allif-fix-table-col">Address</td>
             <td>{{form.address}}</td>
         
@@ -94,25 +104,8 @@
             
                 </tr>
                 
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Comments</td>
-            <td>{{form.comments}}</td>
-        
-            </tr>
             <tr>
-              <td class="allif-fix-table-col"></td>
+              <td class="allif-fix-table-col">Action</td>
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
           
               </tr>

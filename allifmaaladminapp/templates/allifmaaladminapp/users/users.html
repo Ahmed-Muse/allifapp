@@ -68,6 +68,7 @@
         <td class="allif-fix-table-col">Name</td>
         
         <td>Email</td>
+        <td>AllifAdmin</td>
         <td>Superuser</td>
         <td>Role</td>
         <td>Add</td>
@@ -92,6 +93,7 @@
         <tr data-id="{{item.id}}">
         <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaaladminapp:adminappUserDetails' item.id user_var glblslug %}">{{item.first_name}}</a></td>
         <td>{{item.email}}</td>
+        <td>{{item.allifmaal_admin}}</td>
         {% if item.is_superuser %}
         <td id="allif-superuser-row">
           {{item.is_superuser}}
@@ -108,6 +110,7 @@
         <td>{{item.can_delete}}</td>
         <td>{{item.can_access_all}}</td>
         <td>{{item.can_access_related}}</td>
+        
         
         <td>
           <div class="dropdown allifmaal-content-dropdown">

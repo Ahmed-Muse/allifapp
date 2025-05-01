@@ -16,10 +16,11 @@
   <div class="container-fluid amel-content-header">
     <a class="amel-table-list-identifier">Divisions:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
     <a href="{% url 'allifmaalcommonapp:commonAddDivision'  user_var glblslug %}">New Division</a>
+    <a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
+    <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
 
-  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
-  
   </div>
     </div><!--end....header column-->
     </div><!--end....header row-->

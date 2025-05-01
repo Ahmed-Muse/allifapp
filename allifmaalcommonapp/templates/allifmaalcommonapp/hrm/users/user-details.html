@@ -60,7 +60,21 @@
       <div class="table-responsive">
       <table class="table table-layout">
       <tbody>
-       
+        <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{allifquery.usercompany}}</td>
+      
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Branch</td>
+            <td>{{allifquery.userbranch}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Department</td>
+              <td>{{allifquery.userdepartment}}</td>
+          
+              </tr>
       <tr>
         <td class="allif-fix-table-col">First Name</td>
         <td>{{allifquery.first_name}}</td>
@@ -143,7 +157,21 @@
       <div class="table-responsive">
       <table class="table table-layout">
       <tbody>
-       
+        <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{allifqueryset.company}}</td>
+      
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Branch</td>
+            <td>{{allifqueryset.branch}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Department</td>
+              <td>{{allifqueryset.department}}</td>
+          
+              </tr>
       <tr>
         <td class="allif-fix-table-col">First Name</td>
         <td>{{allifqueryset.firstName}}</td>
@@ -293,7 +321,6 @@
 
 </div><!--end....table row-->
 
-
 <div class="row mt-12"> <!--start....table row-->
   <div class="table-content-description"> {{allifquery.first_name}} Authorized To: </div>
   <div class="col-md-12"> <!--start....table column-->
@@ -429,6 +456,201 @@
         </a>
         
       </td>
+      </tr>
+     
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-content-description"> {{allifquery.first_name}} Authorized Delete Levels: </div>
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        
+        <td>Universal Delete</td>
+        <td>Divisional Delete</td>
+        <td>Branches Delete</td>
+        <td>Departmental Delete</td>
+       
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+        
+       
+    <tr data-id="{{item.id}}">
+      <td>
+        <a href="{% url 'allifmaalcommonapp:commonUserHasUniversalDelete' allifquery.id user_var glblslug %}">
+        <div class="form-check">
+          
+          {% if universal_delete == True %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+          {{allifquery.universal_delete}}
+          {% else %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          {{allifquery.universal_delete}}
+          {% endif %}
+          
+        </div>
+        </a>
+      
+      </td>
+      <td>
+        <a href="{% url 'allifmaalcommonapp:commonUserHasDivisionalDelete' allifquery.id user_var glblslug %}">
+        <div class="form-check">
+          
+          {% if divisional_delete == True %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+          {{allifquery.divisional_delete}}
+          {% else %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          {{allifquery.divisional_delete}}
+          {% endif %}
+          
+        </div>
+        </a>
+      
+      </td>
+      <td>
+        <a href="{% url 'allifmaalcommonapp:commonUserHasBranchesDelete' allifquery.id user_var glblslug %}">
+        <div class="form-check">
+          
+          {% if branches_delete == True %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+          {{allifquery.branches_delete}}
+          {% else %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          {{allifquery.branches_delete}}
+          {% endif %}
+          
+        </div>
+        </a>
+      
+      </td>
+      <td>
+        <a href="{% url 'allifmaalcommonapp:commonUserHasDepartmentalDelete' allifquery.id user_var glblslug %}">
+        <div class="form-check">
+          
+          {% if departmental_delete == True %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+          {{allifquery.departmental_delete}}
+          {% else %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          {{allifquery.departmental_delete}}
+          {% endif %}
+          
+        </div>
+        </a>
+      
+      </td>
+      
+      
+      </tr>
+     
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-content-description"> {{allifquery.first_name}} Authorized Access Levels: </div>
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        
+        <td>Universal Access</td>
+        <td>Divisional Access</td>
+        <td>Branches Access</td>
+        <td>Departmental Access</td>
+       
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+        
+             
+    <tr data-id="{{item.id}}">
+      <td>
+        <a href="{% url 'allifmaalcommonapp:commonUserHasUniversalAccess' allifquery.id user_var glblslug %}">
+        <div class="form-check">
+          
+          {% if universal_access == True %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+          {{allifquery.universal_access}}
+          {% else %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          {{allifquery.universal_access}}
+          {% endif %}
+          
+        </div>
+        </a>
+      
+      </td>
+      <td>
+        <a href="{% url 'allifmaalcommonapp:commonUserHasDivisionalAccess' allifquery.id user_var glblslug %}">
+        <div class="form-check">
+          
+          {% if divisional_access == True %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+          {{allifquery.divisional_access}}
+          {% else %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          {{allifquery.divisional_access}}
+          {% endif %}
+          
+        </div>
+        </a>
+      
+      </td>
+      <td>
+        <a href="{% url 'allifmaalcommonapp:commonUserHasBranchesAccess' allifquery.id user_var glblslug %}">
+        <div class="form-check">
+          
+          {% if branches_access == True %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+          {{allifquery.branches_access}}
+          {% else %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          {{allifquery.branches_access}}
+          {% endif %}
+          
+        </div>
+        </a>
+      
+      </td>
+      <td>
+        <a href="{% url 'allifmaalcommonapp:commonUserHasDepartmentalAccess' allifquery.id user_var glblslug %}">
+        <div class="form-check">
+          
+          {% if departmental_access == True %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+          {{allifquery.departmental_access}}
+          {% else %}
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          {{allifquery.departmental_access}}
+          {% endif %}
+          
+        </div>
+        </a>
+      
+      </td>
+      
+      
       </tr>
      
       </tbody>

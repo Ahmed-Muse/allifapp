@@ -246,7 +246,7 @@ class CommonCompanyDetailsModel(models.Model):# this is the company
 
 #######33 Branches --- this is needed if a company has more than one branch ################
 class CommonDivisionsModel(models.Model):# this is the company
-    division=models.CharField(max_length=50,blank=True,null=True,help_text="Enter division name")
+    division=models.CharField(max_length=50,blank=True,null=True)
     legalname=models.CharField(max_length=50,blank=True,null=True,default="CompanyDvsnLegalName")
     address=models.CharField(max_length=50,blank=True,null=True)
     divisionuid = models.CharField(null=True, blank=True, max_length=100,unique=True)
@@ -262,8 +262,10 @@ class CommonDivisionsModel(models.Model):# this is the company
     created_date = models.DateField(null=True, blank=True)
     edit_date = models.DateField(null=True, blank=True)
     comments= models.TextField(max_length=100, help_text="Enter a brief description of the division",blank=True,null=True)
-    class Meta:
-        ordering = ['-division','address']
+    #delete= models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="owdelte")
+    #owner= models.ForeignKey(User, on_delete=models.PROTECT,blank=True,null=True,related_name="owncmpndvsn")
+    #class Meta:
+        #ordering = ['-division','address']
 
     def __str__(self):
         return str(self.division)
