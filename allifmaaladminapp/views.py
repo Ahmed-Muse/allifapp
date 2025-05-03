@@ -149,3 +149,25 @@ def adminDeleteCustomerContact(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
+    
+
+@login_required(login_url='allifmaalusersapp:userLoginPage')
+def adminBlockUnblockEntity(request,pk,*allifargs,**allifkwargs):
+    try:
+        allifquery=CommonCompanyDetailsModel.objects.filter(id=pk).first()
+        user_var=request.user.usercompany
+        usrslg=request.user.customurlslug
+        if allifquery.status=="Blocked":
+                allifquery.status="Unblocked"
+        else:
+            allifquery.status="Blocked"
+            
+        allifquery.save()
+      
+       
+        return redirect('allifmaalcommonapp:commonCompanies',allifusr=usrslg,allifslug=user_var)
+       
+       
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)

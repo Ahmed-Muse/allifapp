@@ -138,6 +138,7 @@
         <td>Compnay Sector</td>
         <td>Company Owner</td>
         <td>Company Email Address</td>
+        <td>Status</td>
        
         <td>Navigate</td>
         
@@ -158,6 +159,7 @@
         <td>{{item.owner}}</td>
         
         <td>{{item.email}}</td>
+        <td>{{item.status}}</td>
      
         </td>
         <td>
@@ -165,8 +167,13 @@
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
             <div class="dropdown-content">
               <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForAllifAdmin' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">More Details</a>
-              <a href="" class="dropdown-item" id="allif-table-drop-item-link-delete">Block</a>
-              
+              <a href="{% url 'allifmaaladminapp:adminBlockUnblockEntity' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link-delete">
+                {% if item.status == 'Blocked' %}
+                Unblock
+                {% else %}
+                Block
+                {% endif %}
+              </a>
             </div>
           </div>
           <div class="dropdown allif-confirm-action">

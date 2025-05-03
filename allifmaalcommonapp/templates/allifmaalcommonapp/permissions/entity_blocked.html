@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<title>
+Error
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<link href="{% static 'allifapperp/css/body/mainbodyui.css' %}" rel="stylesheet">
+<!--any styles loaded from the static files are to be included here...-->
+
+    <title>Action Required: Complete Your Subscription Payment</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="{% static 'allifapperp/css/body/mainbodyui.css' %}" rel="stylesheet">
+    <style>
+        .unpaid-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; /* Ensure it takes up a good portion of the screen */
+            background-color: #f8f9fa; /* Light background */
+        }
+
+        .unpaid-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .unpaid-header {
+            color: #dc3545; /* Red color to indicate an issue */
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .unpaid-body p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .important-note {
+            color: #007bff; /* Blue for emphasis */
+            font-weight: bold;
+        }
+
+        .payment-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #28a745; /* Green for positive action */
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .payment-button:hover {
+            background-color: #218838;
+        }
+
+        .support-link {
+            display: block;
+            margin-top: 20px;
+            color: #6c757d;
+            text-decoration: none;
+        }
+
+        .support-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+
+</head>
+<body class="allifmaal-ui-body">
+  <div class="allifmaincontainer">
+      <div class="error_container">
+          <div class="error-header">
+            Account Activation Pending
+              </div>
+          <div class="error-body">
+          <p>You need to pay for this ERP by subscribing before you can use it.</p>
+          <div>
+            <p>Thank you for subscribing to our ERP system! Your account has been created, but to gain full access and start leveraging its powerful features, we require confirmation of your payment.</p>
+        
+            {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                </div>
+            {% endif %}
+
+            <p class="important-note">Your access will be automatically activated once your payment is successfully processed.</p>
+
+            <p>To complete your subscription and unlock your access, please proceed with the payment through the following options:</p>
+
+            <ul>
+                <li><strong>Bank Transfer:</strong> [Your Bank Name], Account Number: [Your Account Number], Branch Code: [Your Branch Code]. Please include your company name or subscription ID in the payment reference.</li>
+                <li><strong>Paypal:</strong> [Your Bank Name], Account Number: [Your Account Number], Branch Code: [Your Branch Code]. Please include your company name or subscription ID in the payment reference.</li>
+                <li><strong>EVC:</strong> [Your Bank Name], Account Number: [Your Account Number], Branch Code: [Your Branch Code]. Please include your company name or subscription ID in the payment reference.</li>
+                <li><strong>Mobile Money (e.g., MPESA, Zaad):</strong> Paybill Number: [Your Paybill Number], Account/Reference: [Your Company Name or Subscription ID].</li>
+                <li><strong>Master/Visa Card:</strong> [Your Bank Name], Account Number: [Your Account Number], Branch Code: [Your Branch Code]. Please include your company name or subscription ID in the payment reference.</li>    
+            </ul>
+
+            <p>Once you have made the payment, it may take [Number] business hours for our team to verify and activate your account. If you have already made the payment, please allow this processing time.</p>
+            <a href="" class="payment-button">Pricing Options</a>
+            <a href="" class="payment-button">Proceed to Payment</a>
+
+            <p class="mt-3">If you have any questions or require assistance with the payment process, please don't hesitate to contact our support team:</p>
+            <a href="mailto:[Your Support Email Address]" class="support-link">Email Support</a>
+            <a href="tel:[Your Support Phone Number]" class="support-link">Phone Support</a>
+          </div>
+          <p>{{error_message}}</p>
+          <a href="{% url 'allifmaalcommonapp:commonWebsite' %}" class="loginlink">Load Again</a>
+          </div>
+
+         
+
+          </div>
+
+
+          
+  </div><!--end of main container of the page....-->
+
+</body>
+</html>
+  

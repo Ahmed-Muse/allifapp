@@ -57,6 +57,7 @@ def userLoginPage(request):
                         usrslg="allifmaal2116e7b104a5d8e7kkjfsjh6rewr#fdskjengltd"
                         if user is not None:#if there is an authenticated user
                             login(request, user)
+                            return redirect('allifmaalcommonapp:CommonDecisionPoint')
                             return redirect('allifmaaladminapp:adminappHome',allifusr=usrslg,allifslug=user_var)
                         else:
                             messages.info(request,'Sorry! your email or password is incorrect!')

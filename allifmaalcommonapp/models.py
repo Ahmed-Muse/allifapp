@@ -49,6 +49,11 @@ gender = (
     ('Organization', 'Organization'),
 	)
 
+entity_status=(
+    ('Blocked', 'Entity Blocked'),
+    ('Unblocked', 'Entity Unblocked'),
+   
+	)
 payment_method=[
 ("Cash","Cash"),
 ("Deposit","Deposit"),
@@ -223,14 +228,16 @@ class CommonCompanyDetailsModel(models.Model):# this is the company
     country=models.CharField(max_length=50,blank=True,null=True)
     phone2=models.CharField(max_length=50,blank=True,null=True)
     logo=models.FileField(upload_to='myfiles/',null=True, blank=True)
-    owner= models.OneToOneField(User, on_delete=models.PROTECT,blank=True,null=True,related_name="secrlmown")
-    sector= models.ForeignKey(CommonSectorsModel,related_name="secrlmcompcmmnapp",on_delete=models.PROTECT,null=True,blank=False)
-    branch=models.CharField(max_length=50,blank=True,null=True)
+    owner= models.OneToOneField(User, on_delete=models.CASCADE,blank=True,null=True,related_name="secrlmown")
+    sector= models.ForeignKey(CommonSectorsModel,related_name="secrlmcompcmmnapp",on_delete=models.CASCADE,null=True,blank=False)
+    #branch=models.CharField(max_length=50,blank=True,null=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     updatedon= models.DateTimeField(blank=True, null=True)
     created_date = models.DateField(null=True, blank=True)
     edit_date = models.DateField(null=True, blank=True)
     can_delete= models.CharField(choices=delete_status, blank=True, null=True,max_length=30,default="undeletable")
+
+    status= models.CharField(choices=entity_status, blank=True, null=True,max_length=30,default="Blocked")
 
     def __str__(self):
         return str(self.company)
@@ -255,8 +262,8 @@ class CommonDivisionsModel(models.Model):# this is the company
     email=models.EmailField(max_length=50,blank=True,null=True)
     phone=models.CharField(max_length=50,blank=True,null=True)
     city=models.CharField(max_length=50,blank=True,null=True)
-    owner= models.ForeignKey(User, on_delete=models.PROTECT,blank=True,null=True,related_name="owncmpndvsn")
-    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="dvsncmpny",on_delete=models.PROTECT,null=True,blank=False)
+    owner= models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True,related_name="owncmpndvsn")
+    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="dvsncmpny",on_delete=models.CASCADE,null=True,blank=False)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     updatedon= models.DateTimeField(blank=True, null=True)
     created_date = models.DateField(null=True, blank=True)
@@ -290,9 +297,9 @@ class CommonBranchesModel(models.Model):# this is the company
     email=models.EmailField(max_length=50,blank=True,null=True)
     phone=models.CharField(max_length=50,blank=True,null=True)
     city=models.CharField(max_length=50,blank=True,null=True)
-    owner=models.ForeignKey(User, on_delete=models.PROTECT,blank=True,null=True,related_name="owncmpnbrnch")
-    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="brnchcmpny",on_delete=models.PROTECT,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvnscmpny",on_delete=models.PROTECT,null=True,blank=True)
+    owner=models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True,related_name="owncmpnbrnch")
+    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="brnchcmpny",on_delete=models.CASCADE,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvnscmpny",on_delete=models.CASCADE,null=True,blank=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     updatedon= models.DateTimeField(blank=True, null=True)
     created_date =models.DateField(null=True, blank=True)
@@ -314,9 +321,9 @@ class CommonBranchesModel(models.Model):# this is the company
 class CommonDepartmentsModel(models.Model):
     department=models.CharField(max_length=50,blank=False,null=True,unique=False)
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="usrdprmnt",null=True)
-    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpdprmnt",on_delete=models.PROTECT,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dpmntdvsn",on_delete=models.PROTECT,null=True,blank=True)
-    branch= models.ForeignKey(CommonBranchesModel,related_name="dpmntbrnch",on_delete=models.PROTECT,null=True,blank=True)
+    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpdprmnt",on_delete=models.CASCADE,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dpmntdvsn",on_delete=models.CASCADE,null=True,blank=True)
+    branch= models.ForeignKey(CommonBranchesModel,related_name="dpmntbrnch",on_delete=models.CASCADE,null=True,blank=True)
     comments= models.CharField(null=True, blank=True, max_length=30)
     pobox=models.CharField(max_length=50,blank=True,null=True)
     email=models.EmailField(max_length=50,blank=True,null=True)
@@ -358,10 +365,10 @@ class CommonTaxParametersModel(models.Model):
     owner= models.ForeignKey(User, related_name="cmnowntax",on_delete=models.SET_NULL,null=True,blank=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmntaxcmp",on_delete=models.SET_NULL,null=True,blank=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
-    division= models.ForeignKey(CommonDivisionsModel,related_name="dvstxprm",on_delete=models.PROTECT,null=True,blank=True)
+    division= models.ForeignKey(CommonDivisionsModel,related_name="dvstxprm",on_delete=models.CASCADE,null=True,blank=True)
     
-    branch= models.ForeignKey(CommonBranchesModel,related_name="txpbrcnh",on_delete=models.PROTECT,null=True,blank=True)
-    department= models.ForeignKey(CommonDepartmentsModel,related_name="txprdptm",on_delete=models.PROTECT,null=True,blank=True)
+    branch= models.ForeignKey(CommonBranchesModel,related_name="txpbrcnh",on_delete=models.CASCADE,null=True,blank=True)
+    department= models.ForeignKey(CommonDepartmentsModel,related_name="txprdptm",on_delete=models.CASCADE,null=True,blank=True)
     
     def __str__(self):
         return str(self.taxname)
@@ -394,15 +401,15 @@ class CommonEmployeesModel(models.Model):
     total_salary_paid=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
     salary_payable=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     salary_balance=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    username= models.OneToOneField(User, on_delete=models.PROTECT,related_name="secrlmmemply",null=True)
+    username= models.OneToOneField(User, on_delete=models.CASCADE,related_name="secrlmmemply",null=True)
     uniqueId = models.CharField(null=True, blank=True, max_length=150)
     sysperms= models.CharField(choices=rights, blank=True, null=True,max_length=30,default="staff")
-    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="emplcomprlnmefsammnapp",on_delete=models.PROTECT,null=True,blank=True)
+    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="emplcomprlnmefsammnapp",on_delete=models.CASCADE,null=True,blank=True)
     
-    division= models.ForeignKey(CommonDivisionsModel,related_name="emplydvs",on_delete=models.PROTECT,null=True,blank=True)
+    division= models.ForeignKey(CommonDivisionsModel,related_name="emplydvs",on_delete=models.CASCADE,null=True,blank=True)
     
-    branch= models.ForeignKey(CommonBranchesModel,related_name="emplybrnch",on_delete=models.PROTECT,null=True,blank=True)
-    department= models.ForeignKey(CommonDepartmentsModel,related_name="emplydpt",on_delete=models.PROTECT,null=True,blank=True)
+    branch= models.ForeignKey(CommonBranchesModel,related_name="emplybrnch",on_delete=models.CASCADE,null=True,blank=True)
+    department= models.ForeignKey(CommonDepartmentsModel,related_name="emplydpt",on_delete=models.CASCADE,null=True,blank=True)
     
     stffslug = models.SlugField(max_length=150, unique=True, blank=True, null=True)
 
@@ -1092,3 +1099,18 @@ class CommonContactsModel(models.Model):
     def __str__(self):
         return str(self.subject)
 
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    quantity = models.IntegerField()
+    unit_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def total_cost(self):
+        return self.quantity * self.unit_cost
+
+    def total_price(self):
+        return self.quantity * self.unit_price
+
+    def __str__(self):
+        return self.name

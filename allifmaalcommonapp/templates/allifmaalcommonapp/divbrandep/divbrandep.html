@@ -1,0 +1,15 @@
+<h5>This is for demonstration of saving two different forms in the same page, in the same database at the same time.</h5> 
+<form class="form-horizontal" method="POST" action="">
+{% csrf_token %}
+              
+<div class="form-field">
+{{form1}}
+</div>
+
+<div class="form-field">
+{{form2}}
+</div>                        
+<button id="form-button" class="btn btn-success btn-block" 
+type="submit">Add</button>
+    </form>
+                 

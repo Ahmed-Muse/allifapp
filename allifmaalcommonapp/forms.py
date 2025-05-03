@@ -91,7 +91,7 @@ class CommonEditCompanyDetailsFormByAllifAdmin(forms.ModelForm):
 class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
     class Meta:
         model = CommonCompanyDetailsModel
-        fields = ['company','branch','can_delete','legalName','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
+        fields = ['company','can_delete','legalName','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
         widgets={
             'company':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'legalName':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -105,7 +105,7 @@ class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
             'sector':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'can_delete':forms.Select(attrs={'class':'form-control','placeholder':''}),
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'branch':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
             'pobox':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'phone2':forms.TextInput(attrs={'class':'form-control'}),
             'website':forms.TextInput(attrs={'class':'form-control'}),
@@ -193,9 +193,9 @@ class CommonAddStaffProfileForm(forms.ModelForm):
             'total_salary_paid':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'salary_payable':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'salary_balance':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'gender':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'gender':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'username':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'sysperms':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'sysperms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -203,6 +203,12 @@ class CommonAddStaffProfileForm(forms.ModelForm):
 
             
         }
+    def __init__(self,allifmaalparameter,*args,**kwargs):
+        super (CommonAddStaffProfileForm,self).__init__(*args,**kwargs) # populates the post
+        self.fields['username'].queryset =User.objects.filter(usercompany=allifmaalparameter.companyslug)
+        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
 
 #################### taxes #####################3
 class CommonAddTaxParameterForm(forms.ModelForm):

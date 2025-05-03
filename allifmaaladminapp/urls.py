@@ -10,7 +10,7 @@ path('User/Details/Admin/App/<str:pk>/<str:allifusr>/<str:allifslug>/', views.ad
 path('Customer/Contacts/Forms/Data/<str:allifusr>/<str:allifslug>/', views.adminCustomerContacts, name="adminCustomerContacts"),
 path('Customer/Contact/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.adminCustomerContactDetails, name="adminCustomerContactDetails"),
 path('Delete/Customer/Contact/Information/<str:pk>/<str:allifusr>/<str:allifslug>/', views.adminDeleteCustomerContact, name="adminDeleteCustomerContact"),
-
+path('Block/Unblock/Company/Entity/<str:pk>/<str:allifusr>/<str:allifslug>/', views.adminBlockUnblockEntity, name="adminBlockUnblockEntity"),
 
 
 

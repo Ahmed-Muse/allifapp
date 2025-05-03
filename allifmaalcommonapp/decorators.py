@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect,HttpResponse
 from .allifutils import common_shared_data
 from django.contrib.auth.decorators import login_required
+from .models import CommonCompanyDetailsModel
+from allifmaalusersapp.models import User
 def allifmaal_admin_supperuser(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
         usernme=request.user
@@ -201,6 +203,23 @@ def logged_in_user_must_have_profile(allif_param_func):
                 return allif_param_func(request,*args,**kwargs)
             else:
                 return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+        else:
+            return redirect('allifmaalusersapp:userLoginPage')
+    return allif_wrapper_func
+
+def subscriber_company_status(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        allif_data=common_shared_data(request)
+        context={"allifquery":request.user,}
+        compslg=request.user.usercompany
+        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        print(main_sbscrbr_entity.status,'from decoratorsssssssssss')
+        subs_status=main_sbscrbr_entity.status
+        if request.user.is_authenticated:
+            if subs_status=="Unblocked":
+                return allif_param_func(request,*args,**kwargs)
+            else:
+                return render(request,'allifmaalcommonapp/permissions/entity_blocked.html',context)
         else:
             return redirect('allifmaalusersapp:userLoginPage')
     return allif_wrapper_func

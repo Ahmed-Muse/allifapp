@@ -53,6 +53,7 @@ path('Edit/Company/Scope/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', view
 path('Delete/Company/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCompanyScope, name="commonDeleteCompanyScope"),
 path('Want/To/Delete/This/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteScope, name="commonWantToDeleteScope"),
 
+
 #########################33 divisions ########################
 path('Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonDivisions, name="commonDivisions"),
 path('Add/New/Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonAddDivision, name="commonAddDivision"),
@@ -429,5 +430,7 @@ path('UI6/Home/<str:allifusr>/<str:allifslug>/', views.ui6, name="ui6"),
 path('UI7/Home/<str:allifusr>/<str:allifslug>/', views.ui7, name="ui7"),
 path('UI8/Home/<str:allifusr>/<str:allifslug>/', views.ui8, name="ui8"),
 path('add/dynamic_form_view/', views.dynamic_form_view, name='dynamic_form_view'),
+
+path('products/', views.product_list, name='product_list'),
 
 ]   
