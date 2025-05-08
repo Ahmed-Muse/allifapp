@@ -3,11 +3,11 @@ from django.contrib import messages
 from .forms import CreateNewCustomUserForm,CustomUserLoginForm,UpdateCustomUserForm
 from django.contrib.auth import authenticate, login, logout#for login and logout- and authentication
 from allifmaalusersapp.models import User
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def newUserRegistration(request):
+    title="New User Registeration"
     try:
-        title="New User Registeration"
         if request.user.is_authenticated:
             return redirect("allifmaalcommonapp:CommonDecisionPoint")
         else:
@@ -21,19 +21,12 @@ def newUserRegistration(request):
                     obj = form.save(commit=False)
                     obj.fullNames=str(f'{fname}+{lname}')#important...used to generate user slug
                     obj.save()
-                    newUser=User.objects.filter(email=obj).first()
-                    if newUser!=None:
-                        secret_key=newUser.customurlslug
-                        context={"title":title,"form":form,"secret_key":secret_key,}
-                        return render(request,"allifmaalusersapp/users/userkey.html",context)
-                    
-                    else:
-                        messages.info(request,f'User does not exist')
-                        return redirect('allifmaalusersapp:newUserRegistration')
+                    return redirect('allifmaalusersapp:userLoginPage')
                 else:
-                    messages.info(request,f'Sorry {email} is likely taken, or passwords not match')
-               
-
+                    error_message=form.errors
+                    allifcontext={"error_message":error_message,"title":title,}
+                    return render(request,'allifmaalusersapp/error/error.html',allifcontext)
+                   
         context={"title":title,"form":form,}
         return render(request,"allifmaalusersapp/users/user_registeration.html",context)
     except Exception as ex:
@@ -41,8 +34,8 @@ def newUserRegistration(request):
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 
 def userLoginPage(request):
+    title="User Login Page"
     try:
-        title="User Login Page"
         if request.user.is_authenticated:
             return redirect("allifmaalcommonapp:CommonDecisionPoint")
         else:
@@ -51,24 +44,9 @@ def userLoginPage(request):
                 username=request.POST.get('username')
                 password=request.POST.get('password')
                 user=authenticate(request,username=username,password=password)
-                if user !=None:
-                    if user.is_superuser==True:# this is very important..only allifmaal team allowed to be superusers
-                        user_var="username"#arbitary parameters values
-                        usrslg="allifmaal2116e7b104a5d8e7kkjfsjh6rewr#fdskjengltd"
-                        if user is not None:#if there is an authenticated user
-                            login(request, user)
-                            return redirect('allifmaalcommonapp:CommonDecisionPoint')
-                            return redirect('allifmaaladminapp:adminappHome',allifusr=usrslg,allifslug=user_var)
-                        else:
-                            messages.info(request,'Sorry! your email or password is incorrect!')
-                            form=CustomUserLoginForm()
-                    else:
-                        if user is not None:#if there is an authenticated user
-                            login(request, user)
-                            return redirect('allifmaalcommonapp:CommonDecisionPoint')
-                        else:
-                            messages.info(request,'Sorry! your email or password is incorrect!')
-                            form=CustomUserLoginForm()
+                if user!=None:
+                    login(request, user)
+                    return redirect('allifmaalcommonapp:CommonDecisionPoint')
                 else:
                     messages.info(request,'Sorry! your email or password is incorrect!')
                     form=CustomUserLoginForm()
@@ -91,7 +69,7 @@ def userLogoutPage(request):
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 
-
+@login_required(login_url='allifmaalusersapp:userLoginPage') 
 def editUserDetailsByAdmin(request,allifslug):
     try:
         if request.user.is_authenticated:
@@ -111,7 +89,8 @@ def editUserDetailsByAdmin(request,allifslug):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
-   
+
+@login_required(login_url='allifmaalusersapp:userLoginPage') 
 def changeYourUserPassword(request):
     try:
         title="Change Your User Password"
@@ -138,6 +117,7 @@ def changeYourUserPassword(request):
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 
+@login_required(login_url='allifmaalusersapp:userLoginPage') 
 def changeUserPasswordByAdmin(request,allifslug):
     try:
         user=User.objects.filter(customurlslug=allifslug).first()
@@ -163,6 +143,7 @@ def changeUserPasswordByAdmin(request,allifslug):
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 
+@login_required(login_url='allifmaalusersapp:userLoginPage') 
 def changeUserToSupperuserByAdmin(request,allifslug):
     try:
         if request.user.is_authenticated:
@@ -184,6 +165,7 @@ def changeUserToSupperuserByAdmin(request,allifslug):
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 #customurlslug customuserslug
+@login_required(login_url='allifmaalusersapp:userLoginPage') 
 def DeleteUserByAdmin(request,allifslug):
     try:
         if request.user.is_authenticated:

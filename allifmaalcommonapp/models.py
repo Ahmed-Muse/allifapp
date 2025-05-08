@@ -228,7 +228,7 @@ class CommonCompanyDetailsModel(models.Model):# this is the company
     country=models.CharField(max_length=50,blank=True,null=True)
     phone2=models.CharField(max_length=50,blank=True,null=True)
     logo=models.FileField(upload_to='myfiles/',null=True, blank=True)
-    owner= models.OneToOneField(User, on_delete=models.CASCADE,blank=True,null=True,related_name="secrlmown")
+    owner=models.OneToOneField(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="secrlmown")
     sector= models.ForeignKey(CommonSectorsModel,related_name="secrlmcompcmmnapp",on_delete=models.CASCADE,null=True,blank=False)
     #branch=models.CharField(max_length=50,blank=True,null=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)

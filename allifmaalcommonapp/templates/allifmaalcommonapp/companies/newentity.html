@@ -19,7 +19,7 @@
 
   <div class="form-header">
     <h5>
-    Please Register Your Entity Here.
+    Dear <strong>{{user_var}}</strong>, Please Register Your Entity/Company Here.
 </h5>
   </div>
 
@@ -32,7 +32,7 @@
       <div class="row"><!--start of row div --->
         <div class="col-md-4"><!--start of column 1-->
           <div class="card shadow text-left p-3 allif-form-card" >
-          <label>Sector</label>{{form.sector}}
+          <label>Select Your Company's Sector</label>{{form.sector}}
           <label>Company Name</label> {{form.company}}
           <label>Phone 1</label> {{form.phone1}}
           <label>Phone 2</label> {{form.phone2}}
@@ -67,6 +67,16 @@
         
         </div><!--end of row div --->
             </form>
+
+            <div class="d-flex justify-content-center">
+              {% for message in messages %}
+              <p>
+              {{message}}
+              </p>
+
+              {% endfor %}
+              
+            </div>
             </div>
             
             </div><!--end of first row body-->

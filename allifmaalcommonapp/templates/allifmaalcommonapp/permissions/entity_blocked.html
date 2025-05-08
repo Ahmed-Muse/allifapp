@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>
-Error
+Account Activation Pending
 </title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,9 +90,9 @@ Error
             Account Activation Pending
               </div>
           <div class="error-body">
-          <p>You need to pay for this ERP by subscribing before you can use it.</p>
-          <div>
             <p>Thank you for subscribing to our ERP system! Your account has been created, but to gain full access and start leveraging its powerful features, we require confirmation of your payment.</p>
+          <div>
+           
         
             {% if error_message %}
                 <div class="alert alert-danger" role="alert">
@@ -105,20 +105,17 @@ Error
             <p>To complete your subscription and unlock your access, please proceed with the payment through the following options:</p>
 
             <ul>
-                <li><strong>Bank Transfer:</strong> [Your Bank Name], Account Number: [Your Account Number], Branch Code: [Your Branch Code]. Please include your company name or subscription ID in the payment reference.</li>
-                <li><strong>Paypal:</strong> [Your Bank Name], Account Number: [Your Account Number], Branch Code: [Your Branch Code]. Please include your company name or subscription ID in the payment reference.</li>
-                <li><strong>EVC:</strong> [Your Bank Name], Account Number: [Your Account Number], Branch Code: [Your Branch Code]. Please include your company name or subscription ID in the payment reference.</li>
-                <li><strong>Mobile Money (e.g., MPESA, Zaad):</strong> Paybill Number: [Your Paybill Number], Account/Reference: [Your Company Name or Subscription ID].</li>
-                <li><strong>Master/Visa Card:</strong> [Your Bank Name], Account Number: [Your Account Number], Branch Code: [Your Branch Code]. Please include your company name or subscription ID in the payment reference.</li>    
+                <li><strong>Bank Transfer:</strong>Absa Bank, Account Number: 2038573074.</li>
+                
+                <li><strong>Mobile Money:</strong>  MPESA (+254723973992), EVC (+252610993964), E-DAHAB (+252621993964) </li>
+                
             </ul>
 
-            <p>Once you have made the payment, it may take [Number] business hours for our team to verify and activate your account. If you have already made the payment, please allow this processing time.</p>
-            <a href="" class="payment-button">Pricing Options</a>
-            <a href="" class="payment-button">Proceed to Payment</a>
-
+            <p>Once you have made the payment, it may take 2 business days or less for our team to verify and activate your account. If you have already made the payment, please allow this processing time.</p>
+           
             <p class="mt-3">If you have any questions or require assistance with the payment process, please don't hesitate to contact our support team:</p>
-            <a href="mailto:[Your Support Email Address]" class="support-link">Email Support</a>
-            <a href="tel:[Your Support Phone Number]" class="support-link">Phone Support</a>
+            <a href="mailto:allifmaalengineering@gmail.com" class="support-link">allifmaalengineering@gmail.com</a>
+            <a href="tel:+254723973992" class="support-link">+254723973992 (WhatsApp) </a>
           </div>
           <p>{{error_message}}</p>
           <a href="{% url 'allifmaalcommonapp:commonWebsite' %}" class="loginlink">Load Again</a>
@@ -131,6 +128,7 @@ Error
 
           
   </div><!--end of main container of the page....-->
+  <br>
 
 </body>
 </html>

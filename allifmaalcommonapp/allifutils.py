@@ -16,6 +16,7 @@ def common_shared_data(request):
     main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
     logged_in_user_profile=CommonEmployeesModel.objects.filter(username=logged_in_user,company=main_sbscrbr_entity).first()
     logged_user_division=None
+    
     logged_user_branch=None
     logged_user_department=None
     logged_user_profile_staffslg=None
@@ -24,7 +25,6 @@ def common_shared_data(request):
         logged_user_branch=logged_in_user_profile.branch
         logged_user_department=logged_in_user_profile.department
         logged_user_profile_staffslg=logged_in_user_profile.stffslug
-        
     else:
         pass
       
@@ -38,13 +38,12 @@ def common_shared_data(request):
     logged_in_user_has_branches_delete=request.user.branches_delete
     logged_in_user_has_departmental_delete=request.user.departmental_delete
     
-       
-    
     return {
         "usrslg":usrslg,
         "main_sbscrbr_entity":main_sbscrbr_entity,
         "usernmeslg":usernmeslg,
         "compslg":compslg,
+       
         "logged_in_user_profile":logged_in_user_profile,
         "logged_in_user":logged_in_user,
         "logged_in_user_profile":logged_in_user_profile,

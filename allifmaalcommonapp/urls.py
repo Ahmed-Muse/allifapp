@@ -18,8 +18,6 @@ path('Want/To/Delete/Sector/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/
 path('Delete/Sector/<str:pk>/Permanently/', views.commonSectorDelete, name="commonSectorDelete"),
 path('Sector/Information/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonSectorDetails, name="commonSectorDetails"),
 
-
-
 ############ testing only ...used...dont remove....#############3
 path('load/new/content/in/page/', views.commonLoadContentTest, name="commonLoadContentTest"),
 
@@ -33,11 +31,10 @@ path('Data/Sorts/<str:allifusr>/<str:allifslug>/', views.commonDataSorts, name="
 path('Edit/Data/Filter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditDataSort, name="commonEditDataSort"),
 path('Delete/Data/Filter/<str:pk>/Permanently/', views.commonDeleteDataSort, name="commonDeleteDataSort"),
 
-
 ############################ Entities ##################################3
 path('Companies/<str:allifusr>/<str:allifslug>/', views.commonCompanies, name="commonCompanies"),
 path('Company/Settings/Details/For/Subscribers/<str:allifusr>/<str:allifslug>/', views.commonCompanyDetailsForClients, name="commonCompanyDetailsForClients"),
-path('Add/New/Entity/<str:allifusr>/', views.commonAddnewEntity, name="commonAddnewEntity"),
+path('Add/New/Entity/<str:allifusr>/Allifmaal/ERP/System/', views.commonAddnewEntity, name="commonAddnewEntity"),
 path('Edit/Entity/Details/By/Allifmaal/Admin/<slug:allifpk>/<str:allifusr>/<str:allifslug>/', views.commonEditEntityByAllifAdmin, name="commonEditEntityByAllifAdmin"),
 path('Edit/Entity/Details/By/Owners/<slug:allifpk>/<str:allifusr>/<str:allifslug>/Clients/Subscribers/', views.commonEditEntityByClients, name="commonEditEntityByClients"),
 path('Company/Details/For/Allifmaal/Admin/<str:pk>/<str:allifusr>/<str:allifslug>/Only/', views.commonCompanyDetailsForAllifAdmin, name="commonCompanyDetailsForAllifAdmin"),
@@ -52,6 +49,17 @@ path('Company/Scopes/<str:allifusr>/<str:allifslug>/', views.commonAddCompanySco
 path('Edit/Company/Scope/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCompanyScope, name="commonEditCompanyScope"),
 path('Delete/Company/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCompanyScope, name="commonDeleteCompanyScope"),
 path('Want/To/Delete/This/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteScope, name="commonWantToDeleteScope"),
+
+
+
+
+
+
+
+
+
+
+
 
 
 #########################33 divisions ########################
@@ -79,12 +87,6 @@ path('View/Department/<str:allifslug>/<str:allifusr>/<str:allifrandom>/Details/'
 path('Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteDepartment, name="commonDeleteDepartment"),
 path('Search/Departments/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepartmentSearch, name="commonDepartmentSearch"),
 path('Want/To/Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDepartment, name="commonWantToDeleteDepartment"),
-
-
-
-
-
-
 
 
 

@@ -209,19 +209,25 @@ def logged_in_user_must_have_profile(allif_param_func):
 
 def subscriber_company_status(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
-        allif_data=common_shared_data(request)
-        context={"allifquery":request.user,}
-        compslg=request.user.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        print(main_sbscrbr_entity.status,'from decoratorsssssssssss')
-        subs_status=main_sbscrbr_entity.status
-        if request.user.is_authenticated:
-            if subs_status=="Unblocked":
-                return allif_param_func(request,*args,**kwargs)
+        try:
+            allif_data=common_shared_data(request)
+            context={"allifquery":request.user,}
+            compslg=request.user.usercompany
+            main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+            if main_sbscrbr_entity is None:
+                return redirect('allifmaalusersapp:userLogoutPage')
             else:
-                return render(request,'allifmaalcommonapp/permissions/entity_blocked.html',context)
-        else:
-            return redirect('allifmaalusersapp:userLoginPage')
+                subs_status=main_sbscrbr_entity.status
+                if request.user.is_authenticated:
+                    if subs_status=="Unblocked":
+                        return allif_param_func(request,*args,**kwargs)
+                    else:
+                        return render(request,'allifmaalcommonapp/permissions/entity_blocked.html',context)
+                else:
+                    return redirect('allifmaalusersapp:userLoginPage')
+        except Exception as ex:
+            error_context={'error_message': ex,}
+            return render(request,'allifmaalcommonapp/error/error.html',error_context)
     return allif_wrapper_func
 
 #########################################################################################3

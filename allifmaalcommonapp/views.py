@@ -5,9 +5,8 @@ from django.core.mail import send_mail
 from .allifutils import common_shared_data
 #from sms import send_sms
 from django.contrib.sessions.models import Session
-import sms
+
 from django.views.decorators.csrf import csrf_exempt
-from .sessions import Allifsessions
 from twilio.rest import Client
 from.forms import *
 from .decorators import subscriber_company_status, logged_in_user_must_have_profile,logged_in_user_has_universal_delete,logged_in_user_has_divisional_delete,logged_in_user_has_branches_delete,logged_in_user_has_departmental_delete,logged_in_user_has_universal_access,logged_in_user_has_divisional_access,logged_in_user_has_branches_access,logged_in_user_has_departmental_access,allifmaal_admin,allifmaal_admin_supperuser, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
@@ -16,10 +15,8 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from django.core.serializers import serialize
 import json
-from django.contrib.auth.models import Group
 from decimal import Decimal
 from django.contrib.auth.decorators import login_required
-
 from django.contrib import messages
 from allifmaalusersapp.forms import CreateNewCustomUserForm
 from django.http.response import HttpResponse, JsonResponse
@@ -53,70 +50,56 @@ def commonEngineering(request):
     
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 def CommonDecisionPoint(request,*allifargs,**allifkwargs):
-    #try:
-        request.user
+    try:
         allif_data=common_shared_data(request)
-        #if allif_data.get("logged_in_user_profile")==None:
-            #return HttpResponse("no profile")
-        #else:
-            #pass
-        print(request.user.usercompany,'aaaaaaaaa')
-        print(allif_data.get("logged_in_user").usercompany,'bbbbbbbb')
-        print(allif_data.get("compslg"),'cccccccc')
-        
-        
-        if allif_data.get("compslg") is None:#means that the logged user did not create a company and does not belong to any company
-            #return HttpResponse("n")
+        if allif_data.get("main_sbscrbr_entity") is None or '' or allif_data.get("compslg") is None or '':#means that the logged user did not create a company and does not belong to any company
             return redirect('allifmaalcommonapp:commonAddnewEntity',allifusr=allif_data.get("logged_in_user"))
-        
-        elif allif_data.get("compslg")!=None:
-            company=CommonCompanyDetailsModel.objects.filter(companyslug=allif_data.get("compslg")).first()
-            print(company,'dddddddddd')
-            sctr=str(company.sector)# this is very important...
-            if sctr=="Sales":
+        elif allif_data.get("compslg") and str(allif_data.get("main_sbscrbr_entity"))!=None:
+            if str(allif_data.get("main_sbscrbr_entity").sector)=="Sales":
                 return redirect('allifmaalsalesapp:salesHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Healthcare":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Healthcare":
                 return redirect('allifmaalshaafiapp:shaafiHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Hospitality":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Hospitality":
                 return redirect('allifmaalhotelsapp:hotelsHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Education":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Education":
                 return redirect('allifmaalilmapp:ilmHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Services":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Services":
                 return redirect('allifmaalservicesapp:servicesHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Realestate":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Realestate":
                 return redirect('allifmaalrealestateapp:realestateHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Logistics":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Logistics":
                 return redirect('allifmaallogisticsapp:logisticsHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                return HttpResponse("Sorry, Your company must belong to a sector")
         else:
             return render(request,'allifmaalcommonapp/error/error.html')
-    #except Exception as ex:
-       # error_context={'error_message': ex,}
-        #return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-#@logged_in_user_must_have_profile
+@logged_in_user_must_have_profile
+@subscriber_company_status
 def commonHome(request,*allifargs,**allifkwargs):
     try:
         if request.user.email.endswith("info@allifmaal.com"):#just for remembering purposes
             pass
         allif_data=common_shared_data(request)
         if allif_data.get("main_sbscrbr_entity")!=None:
-            sctr=str(allif_data.get("main_sbscrbr_entity").sector)# this is very important...
-            if sctr=="Sales":
+            if str(allif_data.get("main_sbscrbr_entity").sector)=="Salest":
                 return redirect('allifmaalsalesapp:salesHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Healthcare":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Healthcare":
                 return redirect('allifmaalshaafiapp:shaafiHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Hospitality":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Hospitality":
                 return redirect('allifmaalhotelsapp:hotelsHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Education":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Education":
                 return redirect('allifmaalilmapp:ilmHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Services":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Services":
                 return redirect('allifmaalservicesapp:servicesHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Realestate":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Realestate":
                 return redirect('allifmaalrealestateapp:realestateHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Logistics":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Logistics":
                 return redirect('allifmaallogisticsapp:logisticsHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
-
                 return redirect('allifmaalcommonapp:CommonDecisionPoint')
         else:
             return redirect('allifmaalcommonapp:CommonDecisionPoint')
@@ -125,24 +108,24 @@ def commonHome(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 @logged_in_user_must_have_profile
+@subscriber_company_status
 def commonSpecificDashboard(request,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
         if allif_data.get("main_sbscrbr_entity")!=None:
-            sctr=str(allif_data.get("main_sbscrbr_entity").sector)# this is very important...
-            if sctr=="Sales":
+            if str(allif_data.get("main_sbscrbr_entity").sector)=="Sales":
                 return redirect('allifmaalsalesapp:salesDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Healthcare":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Healthcare":
                 return redirect('allifmaalshaafiapp:shaafiDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Hospitality":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Hospitality":
                 return redirect('allifmaalhotelsapp:hospitalityDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Education":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Education":
                 return redirect('allifmaalilmapp:ilmDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Services":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Services":
                 return redirect('allifmaalservicesapp:servicesDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Realestate":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Realestate":
                 return redirect('allifmaalrealestateapp:realestateDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif sctr=="Logistics":
+            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Logistics":
                 return redirect('allifmaallogisticsapp:logisticsDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 return redirect('allifmaalcommonapp:CommonDecisionPoint')
@@ -153,7 +136,6 @@ def commonSpecificDashboard(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 ################################### Sectors ############################### 
-
 
 @logged_in_user_must_have_profile
 @allifmaal_admin
@@ -221,13 +203,11 @@ def commonEditSector(request,pk,*allifargs,**allifkwargs):
                 obj.owner=allif_data.get("logged_in_user")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonSectors',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
             else:
                 form =CommonAddSectorForm(instance=update_allifquery)
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,"form":form,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-                
         else:
             form =CommonAddSectorForm(instance=update_allifquery)
         context = {
@@ -254,7 +234,6 @@ def commonWantToDeleteSector(request,pk,*allifargs,**allifkwargs):
         "allifquery":allifquery,
         }
         return render(request,'allifmaalcommonapp/sectors/x-sector-confirm.html',context)
-
     except Exception as ex:
         error_context={'error_message': ex,"title":title,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)   
@@ -379,7 +358,6 @@ def commonDataSorts(request,*allifargs,**allifkwargs):
                 obj.owner =allif_data.get("logged_in_user")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonDataSorts',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
@@ -442,8 +420,8 @@ def commonDeleteDataSort(request,pk):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 ############################### .......Entities and companies details........... #########################3#
-#@logged_in_user_must_have_profile
-#@allifmaal_admin
+@logged_in_user_must_have_profile
+@allifmaal_admin
 def commonCompanies(request,*allifargs,**allifkwargs):
     title="Registered Companies"
     try:
@@ -469,129 +447,93 @@ def commonCompanies(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-
+# dont add pre-conditions here like the requirement for the profiles
+@login_required(login_url='allifmaalusersapp:userLoginPage') 
 def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
     title="Entity Registration"
     try:
-        allif_data=common_shared_data(request)
         usrslg=request.user.customurlslug
+        usernmeslg=User.objects.filter(customurlslug=usrslg).first()
         user_var_comp=request.user.usercompany
-        user_var=request.user
-        user_var_customrulslg=request.user.customurlslug
-        usernmeslg=User.objects.filter(customurlslug=user_var_customrulslg).first()
-        phone=usernmeslg.phone
-        email=usernmeslg.email
+        # create divisions, branches and department when the company is created to have profile for the new user....
+        main_division="Main Division"
         main_division="Main Division"
         main_branch="Main Branch"
         main_department="Main Department"
+        allif_data=common_shared_data(request)
         form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
-        if request.method == 'POST':
+        if request.method=='POST':
             form=CommonAddCompanyDetailsForm(request.POST,request.FILES)
-            #CommonDivisionsModel(division=division).save()
-               # CommonBranchesModel(branch=branch).save()
-                #CommonDepartmentsModel(department=department).save()
-
             if form.is_valid():
                 sector=int(request.POST.get('sector'))
                 name=request.POST.get('company')
                 address=request.POST.get('address')
-                if name and sector!="":
-                    sectorselec=CommonSectorsModel.objects.filter(id=sector).first()
-                    obj = form.save(commit=False)
-                    obj.owner =usernmeslg
-                    obj.legalName=str(f'{name}+{address}')#important...used to generate company slug
+                if CommonCompanyDetailsModel.objects.filter(company=name).exists():
+                    messages.info(request,'Sorry! A company with similar name exists. Please Choose another name.')
+                    return redirect('allifmaalcommonapp:commonAddnewEntity',allifusr=allif_data.get("logged_in_user"))
+                else:
+                    if name and sector!="":
+                        sectorselec=CommonSectorsModel.objects.filter(id=sector).first()
+                        obj=form.save(commit=False)
+                        obj.owner=usernmeslg
+                         # if the legal name changes, the slug will change and the company will lose all data related to it.
+                        obj.legalName=str(f'{name}+{address}')#important...used to generate company slug...dont change the legal name of the company
+                        obj.save()
+                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
+                        #set the user division, branch and department
+                        usernmeslg.usercompany=str(newcompny.companyslug)
+                        main_div=str(main_division+"-"+str(newcompny))
+                        main_bran=str(main_branch+"-"+str(newcompny))
+                        main_dept=str(main_department+"-"+str(newcompny))
+        
+                        usernmeslg.userdivision=str(main_div)
+                        usernmeslg.userbranch=str(main_bran)
+                        usernmeslg.userdepartment=str(main_dept)
 
-                    if sectorselec.name=="Sales":
-                        obj.save()
-                        #the code below is for connecting the usercompany field of the User model with
-                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
-                        allifusr=User.objects.filter(email=user_var.email).first()
-                        allifusr.usercompany=str(newcompny.companyslug)
-                        allifusr.userdivision=str(main_division)
-                        allifusr.userbranch=str(main_branch)
-                        allifusr.userdepartment=str(main_department)
-                        allifusr.can_do_all=True
-                        allifusr.can_add=True
-                        allifusr.can_edit=True
-                        allifusr.can_view=True
-                        allifusr.can_delete=True
-                        allifusr.universal_delete=True
-                        allifusr.divisional_delete=True
-                        allifusr.branches_delete=True
-                        allifusr.departmental_delete=True
-                        allifusr.universal_access=True
-                        allifusr.divisional_access=True
-                        allifusr.branches_access=True
-                        allifusr.departmental_access=True
-                        allifusr.can_access_all=True
-                        allifusr.can_access_related=True
-                        allifusr.user_category="admin"
-                        allifusr.save()
-                        new_division=CommonDivisionsModel(division=main_division,company=newcompny).save()
-                        new_branch=CommonBranchesModel(branch=main_branch,division=new_division,company=newcompny).save()
-                        new_department=CommonDepartmentsModel(department=main_department,division=new_division,branch=new_branch,company=newcompny).save()
+                            # since we need to create user profile next, create default division, branch and department
+                        new_division=CommonDivisionsModel(division=main_div,company=newcompny).save()
+                        new_branch=CommonBranchesModel(branch=main_bran,division=new_division,company=newcompny).save()
+                        new_department=CommonDepartmentsModel(department=main_dept,division=new_division,branch=new_branch,company=newcompny).save()
 
-                        #allif_data=common_shared_data(request)
-                        #allif_data.get("logged_in_user")
-                        #return redirect('allifmaalcommonapp:commonSectors',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-                        return redirect('allifmaalsalesapp:salesHome',allifusr=usrslg,allifslug=user_var_comp)
-
-                    elif sectorselec.name=="Healthcare":
-                        obj.save()
-                        #the code below is for connecting the usercompany field of the User model with
-                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
-                        allifusr=User.objects.filter(email=user_var.email).first()
-                        allifusr.usercompany=str(newcompny.companyslug)
-                        allifusr.save()
-                        return redirect('allifmaalshaafiapp:shaafiHome',allifusr=usrslg,allifslug=user_var_comp)
-                    elif sectorselec.name=="Hospitality":
-                        obj.save()
-                        #the code below is for connecting the usercompany field of the User model with
-                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
-                        allifusr=User.objects.filter(email=user_var.email).first()
-                        allifusr.usercompany=str(newcompny.companyslug)
-                        allifusr.save()
-                        return redirect('allifmaalhotelsapp:hotelsHome',allifusr=usrslg,allifslug=user_var_comp)
-                    elif sectorselec.name=="Education":
-                        obj.save()
-                        #the code below is for connecting the usercompany field of the User model with
-                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
-                        allifusr=User.objects.filter(email=user_var.email).first()
-                        allifusr.usercompany=str(newcompny.companyslug)
-                        allifusr.save()
-                        return redirect('allifmaalilmapp:ilmHome',allifusr=usrslg,allifslug=user_var_comp)
-                    
-                    elif sectorselec.name=="Logistics":
-                        obj.save()
-                        #the code below is for connecting the usercompany field of the User model with
-                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
-                        allifusr=User.objects.filter(email=user_var.email).first()
-                        allifusr.usercompany=str(newcompny.companyslug)
-                        allifusr.save()
-                        return redirect('allifmaallogisticsapp:logisticsHome',allifusr=usrslg,allifslug=user_var_comp)
-                    elif sectorselec.name=="Realestate":
-                        obj.save()
-                        #the code below is for connecting the usercompany field of the User model with
-                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
-                        allifusr=User.objects.filter(email=user_var.email).first()
-                        allifusr.usercompany=str(newcompny.companyslug)
-                        allifusr.save()
-                        return redirect('allifmaalrealestateapp:realestateHome',allifusr=usrslg,allifslug=user_var_comp)
-                    elif sectorselec.name=="Services":
-                        obj.save()
-                        #the code below is for connecting the usercompany field of the User model with
-                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
-                        allifusr=User.objects.filter(email=user_var.email).first()
-                        allifusr.usercompany=str(newcompny.companyslug)
-                        allifusr.save()
-                        return redirect('allifmaalservicesapp:servicesHome',allifusr=usrslg,allifslug=user_var_comp)
-                    
+                        # give the user all the permissions since they are the owner of this enttity
+                        usernmeslg.can_do_all=True
+                        usernmeslg.can_add=True
+                        usernmeslg.can_edit=True
+                        usernmeslg.can_view=True
+                        usernmeslg.can_delete=True
+                        usernmeslg.universal_delete=True
+                        usernmeslg.divisional_delete=True
+                        usernmeslg.branches_delete=True
+                        usernmeslg.departmental_delete=True
+                        usernmeslg.universal_access=True
+                        usernmeslg.divisional_access=True
+                        usernmeslg.branches_access=True
+                        usernmeslg.departmental_access=True
+                        usernmeslg.can_access_all=True
+                        usernmeslg.can_access_related=True
+                        usernmeslg.user_category="admin"
+                        usernmeslg.save()
+                        if sectorselec is not None:
+                            if sectorselec.name=="Sales":
+                                return redirect('allifmaalsalesapp:salesHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Healthcare":
+                                return redirect('allifmaalshaafiapp:shaafiHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Hospitality":
+                                return redirect('allifmaalhotelsapp:hotelsHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Education":
+                                return redirect('allifmaalilmapp:ilmHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Logistics":
+                                return redirect('allifmaallogisticsapp:logisticsHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Realestate":
+                                return redirect('allifmaalrealestateapp:realestateHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Services":
+                                return redirect('allifmaalservicesapp:servicesHome',allifusr=usrslg,allifslug=user_var_comp)
+                            else:
+                                form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+                        else:
+                            form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
                     else:
                         form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
-        
-                else:
-                    form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
             else:
                 form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
                 error_message=form.errors
@@ -601,15 +543,15 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
             form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
 
         context={"form":form,
-                 "title":title,}
+                 "title":title,"user_var":usernmeslg,}
         return render(request,'allifmaalcommonapp/companies/newentity.html',context)
-    
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@logged_in_user_can_view
+@subscriber_company_status
 def commonCompanyDetailsForClients(request,*allifargs,**allifkwargs):
     title="Company Details and Settings"
     try:
@@ -656,9 +598,9 @@ def commonEditEntityByAllifAdmin(request,allifpk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
     
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_edit
-#@logged_in_user_is_admin
+@logged_in_user_must_have_profile
+@logged_in_user_can_edit
+@logged_in_user_is_admin
 def commonEditEntityByClients(request,allifpk,*allifargs,**allifkwargs):
     title="Update Entity Details"
     try:
@@ -668,12 +610,8 @@ def commonEditEntityByClients(request,allifpk,*allifargs,**allifkwargs):
         if request.method=='POST':
             form=CommonAddByClientCompanyDetailsForm(request.POST or None,request.FILES, instance=user_var_update)
             if form.is_valid():
-                obj = form.save(commit=False)
+                obj=form.save(commit=False)
                 obj.owner=allif_data.get("logged_in_user")
-                obj.userbranch=user_var_update.branch
-                upduser=User.objects.filter(first_name=allif_data.get("logged_in_user")).first()
-                upduser.userbranch=user_var_update.branch
-                upduser.save()
                 obj.save()
                 return redirect('allifmaalcommonapp:commonCompanyDetailsForClients',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
@@ -731,9 +669,9 @@ def commonShowClickedRowCompanyDetails(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_delete
-#@logged_in_user_is_admin 
+@logged_in_user_must_have_profile
+@logged_in_user_can_delete
+@logged_in_user_is_admin 
 def commonWantToDeleteCompany(request,pk,*allifargs,**allifkwargs):
     title="Are you sure to delete?"
     try:
@@ -747,9 +685,9 @@ def commonWantToDeleteCompany(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)   
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_delete
-#@logged_in_user_is_admin
+@logged_in_user_must_have_profile
+@logged_in_user_can_delete
+@logged_in_user_is_admin
 def commonDeleteEntity(request,allifslug,*allifargs,**allifkwargs):
     title="Are you sure to delete?"
     try:
@@ -795,7 +733,7 @@ def commonCompanyAdvanceSearch(request,*allifargs, **allifkwargs):
     try:
         allif_data=common_shared_data(request)
         main_sbscrbr_entity = CommonCompanyDetailsModel.objects.filter(companyslug=allif_data.get("compslg")).first()
-        scopes = CommonCompanyScopeModel.objects.filter(company=main_sbscrbr_entity).order_by('date')[:4]
+        scopes=CommonCompanyScopeModel.objects.filter(company=main_sbscrbr_entity).order_by('date')[:4]
         context = {
             "title": title,
             "main_sbscrbr_entity": main_sbscrbr_entity,
@@ -816,7 +754,8 @@ def commonCompanyAdvanceSearch(request,*allifargs, **allifkwargs):
                 template = get_template(template_path)
                 html = template.render(context)
                 response = HttpResponse(content_type='application/pdf')
-                response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                response = HttpResponse(content_type='application/doc')
+                response['Content-Disposition'] = f'filename="Searched_Results.pdf"'
                 pisa_status = pisa.CreatePDF(html, dest=response)
                 if pisa_status.err:
                     return HttpResponse('We had some errors <pre>' + html + '</pre>')
@@ -835,7 +774,93 @@ def commonCompanyAdvanceSearch(request,*allifargs, **allifkwargs):
         error_context = {'error_message': ex}
         return render(request, 'allifmaalcommonapp/error/error.html', error_context)
 
-############################### .......Entities and companies details........... #########################3#
+##########################3 company scope ######################################
+
+@logged_in_user_must_have_profile
+@logged_in_user_can_add 
+@subscriber_company_status
+def commonAddCompanyScope(request,*allifargs,**allifkwargs):
+    title="Scopes"
+    try:
+        allif_data=common_shared_data(request)
+        form=CommonAddCompanyScopeForm()
+        allifqueryset=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        if request.method == 'POST':
+            form=CommonAddCompanyScopeForm(request.POST)
+            if form.is_valid():
+                add_item= form.save(commit=False)
+                add_item.company=allif_data.get("main_sbscrbr_entity")
+                add_item.owner=allif_data.get("logged_in_user")
+                add_item.save()
+                return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        else:
+            form=CommonAddCompanyScopeForm()
+        context={
+                "form":form,
+                "title":title,
+                "allifqueryset":allifqueryset,
+        }
+        return render(request,'allifmaalcommonapp/scopes/scopes.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalusersapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@logged_in_user_can_edit 
+@subscriber_company_status
+def commonEditCompanyScope(request,pk,*allifargs,**allifkwargs):
+    title="Update Scope"
+    try:
+        allif_data=common_shared_data(request)
+        user_var_update=CommonCompanyScopeModel.objects.filter(pk=pk).first()
+        form=CommonAddCompanyScopeForm(instance=user_var_update)
+        if request.method=='POST':
+            form=CommonAddCompanyScopeForm(request.POST or None,request.FILES, instance=user_var_update)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.save()
+                return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                form=CommonAddCompanyScopeForm(request.POST or None, instance=user_var_update)
+        else:
+            form=CommonAddCompanyScopeForm(request.POST or None, instance=user_var_update)
+        context={"title":title,"form":form,}
+        return render(request,'allifmaalcommonapp/scopes/scopes.html',context)
+       
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalusersapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@logged_in_user_can_delete
+@subscriber_company_status
+def commonDeleteCompanyScope(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        CommonCompanyScopeModel.objects.filter(pk=pk).first().delete()
+        return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile 
+@logged_in_user_is_admin
+@logged_in_user_can_delete
+@subscriber_company_status
+def commonWantToDeleteScope(request,pk,*allifargs,**allifkwargs):
+    try:
+        allifquery=CommonCompanyScopeModel.objects.filter(id=pk).first()
+        title="Are you sure to delete?"
+        context={
+        "allifquery":allifquery,
+        "title":title,
+        }
+        return render(request,'allifmaalcommonapp/scopes/delete-confirm.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
+       
+
 
 #@logged_in_user_must_have_profile
 #@logged_in_user_can_view
@@ -1310,90 +1335,8 @@ def commonDeleteDepartment(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-##########################3 company scope ######################################
-
-@logged_in_user_must_have_profile
-@logged_in_user_can_add 
-def commonAddCompanyScope(request,*allifargs,**allifkwargs):
-    title="Scopes"
-    try:
-        allif_data=common_shared_data(request)
-        form=CommonAddCompanyScopeForm()
-        allifqueryset=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        if request.method == 'POST':
-            form=CommonAddCompanyScopeForm(request.POST)
-            if form.is_valid():
-                add_item= form.save(commit=False)
-                add_item.company=allif_data.get("main_sbscrbr_entity")
-                add_item.owner=allif_data.get("logged_in_user")
-                add_item.save()
-                return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-        else:
-            form=CommonAddCompanyScopeForm()
-        context={
-                "form":form,
-                "title":title,
-                "allifqueryset":allifqueryset,
-        }
-        return render(request,'allifmaalcommonapp/scopes/scopes.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@logged_in_user_can_edit 
-def commonEditCompanyScope(request,pk,*allifargs,**allifkwargs):
-    title="Update Scope"
-    try:
-        allif_data=common_shared_data(request)
-        user_var_update=CommonCompanyScopeModel.objects.filter(pk=pk).first()
-        form=CommonAddCompanyScopeForm(instance=user_var_update)
-        if request.method=='POST':
-            form=CommonAddCompanyScopeForm(request.POST or None,request.FILES, instance=user_var_update)
-            if form.is_valid():
-                obj = form.save(commit=False)
-                obj.save()
-                return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                form=CommonAddCompanyScopeForm(request.POST or None, instance=user_var_update)
-        else:
-            form=CommonAddCompanyScopeForm(request.POST or None, instance=user_var_update)
-        context={"title":title,"form":form,}
-        return render(request,'allifmaalcommonapp/scopes/scopes.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@logged_in_user_can_delete
-def commonDeleteCompanyScope(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonCompanyScopeModel.objects.filter(pk=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile 
-@logged_in_user_is_admin
-@logged_in_user_can_delete
-def commonWantToDeleteScope(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=CommonCompanyScopeModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalcommonapp/scopes/delete-confirm.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-       
 #################################...HRM....... System users ..........#####################################
-@logged_in_user_must_have_profile
+#@logged_in_user_must_have_profile
 @subscriber_company_status
 def commonhrm(request,*allifargs,**allifkwargs):
     title="Human Resources Management"
@@ -1501,22 +1444,16 @@ def commonEditUser(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
         if request.method=='POST':
             form=UpdateCustomUserForm(request.POST or None, instance=user_var_update)
-            email=request.POST.get('email')
             if form.is_valid():
                 obj = form.save(commit=False)
                 """this is very important line... dont change unless you know what you are doing...."""
                 obj.usercompany=str(allif_data.get("compslg"))
                 obj.save()
-                newUser=User.objects.filter(email=email).first()
-                if newUser!=None:
-                    secret_key=newUser.customurlslug
-                    context={"title":title,"form":form,"secret_key":secret_key,}
-                    return render(request,"allifmaalcommonapp/hrm/users/userkey.html",context)
-                else:
-                    messages.info(request,f'User does not exist')
-                    return redirect('allifmaalusersapp:newUserRegistration')
+                return redirect("allifmaalcommonapp:CommonDecisionPoint")
             else:
-                messages.info(request,f'Sorry {email} is likely taken, or passwords not match')
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             form=UpdateCustomUserForm(instance=user_var_update)
 
@@ -1526,7 +1463,7 @@ def commonEditUser(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+#login_required(login_url='allifmaalusersapp:userLoginPage')
 def commonUserDetails(request,pk,*allifargs,**allifkwargs):
     try:
 
@@ -6937,6 +6874,7 @@ def commonPOAdvanceSearch(request,*allifargs,**allifkwargs):
 ######################### QUOTATION #########################
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_view
+@subscriber_company_status
 def commonQuotes(request,*allifargs,**allifkwargs):
     try:
         title="Quotations"
@@ -7373,6 +7311,7 @@ def commonQuoteAdvanceSearch(request,*allifargs,**allifkwargs):
 ##########################3 INVOICES #######################333
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 @logged_in_user_can_view
+@subscriber_company_status
 def commonInvoices(request,*allifargs,**allifkwargs):
     try:
         title="Invoices"
