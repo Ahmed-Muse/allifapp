@@ -32,22 +32,8 @@
         
           <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
           </form>
-          <hr>
-          <li><a class="dropdown-item">Select Ordering Option</a></li>
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-      
-        <div>
-        <select name="requiredformat" class="form-control">
-          {% for item in datasorts %}
-          <option>{{item.name}}</option>
-            
-           {% endfor %}
-           
-          </select>
-          </div>
-          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-      
-      </form>
+        
+         
       <hr>
       <li><a class="dropdown-item">Advanced Searching</a></li>
       <form method='POST' action="{% url 'allifmaalcommonapp:commonDepositAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}

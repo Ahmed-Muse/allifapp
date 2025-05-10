@@ -36,9 +36,9 @@
 
 
   <div class="allifmaincontainer">
-
+{% if allifquery_update %}
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit New Banks</div>
+  <div class="table-details-content-description">Edit New Bank</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -145,7 +145,97 @@
 <!--end of table-->
 
 </div><!--end of main container of the page....-->
+{% else %}
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">Add New Bank</div>
+  <form method='POST' action=''>{% csrf_token %}
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+      <tr>
+        <td class="allif-fix-table-col">Name</td>
+        <td>{{form.name}}</td>
+    
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Account</td>
+          <td>{{form.account}}</td>
+      
+          </tr>
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+        
+        <tr>
+          <td class="allif-fix-table-col">Deposit</td>
+          <td>{{form.deposit}}</td>
+      
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Balance</td>
+            <td>{{form.balance}}</td>
+        
+            </tr>
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+         
+            <tr>
+              <td class="allif-fix-table-col">Withdrawal</td>
+              <td>{{form.withdrawal}}</td>
+          
+              </tr>
+              <tr>
+                <td class="allif-fix-table-col">Comments</td>
+                <td>{{form.comments}}</td>
+            
+                </tr>
+            <tr>
+              <td class="allif-fix-table-col">Action</td>
+              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+          
+              </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
 
+</div><!--end....table row-->
+</div>
+</form>
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+{% endif %}
 
 
 

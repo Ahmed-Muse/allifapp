@@ -698,7 +698,7 @@ class CommonCustomerStatementsModel(models.Model):
     def __str__(self):
         return '{}'.format(self.customer)
 
-class CommonLedgerEntriesModel(models.Model):
+class CommonLedgerEntriesModel(models.Model): # this is the journal entries...
     supplier= models.ForeignKey(CommonSuppliersModel,related_name="sppldgentr",on_delete=models.SET_NULL,blank=True,null=True)
     customer= models.ForeignKey(CommonCustomersModel,related_name="cstmldgentr",on_delete=models.SET_NULL,blank=True,null=True)
     staff= models.ForeignKey(CommonEmployeesModel,related_name="empldgentr",on_delete=models.SET_NULL,blank=True,null=True)

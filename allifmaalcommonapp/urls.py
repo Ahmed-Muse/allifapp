@@ -10,7 +10,6 @@ path('Decision/Making/Point/', views.CommonDecisionPoint, name="CommonDecisionPo
 path('Home/<str:allifusr>/<str:allifslug>/', views.commonHome, name="commonHome"),
 path('Dashboard/<str:allifusr>/<str:allifslug>/', views.commonSpecificDashboard, name="commonSpecificDashboard"),
 
-
 ############################ Sectors ##################################3
 path('Sectors/<str:allifusr>/<str:allifslug>/', views.commonSectors, name="commonSectors"),
 path('Edit/Sector/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditSector, name="commonEditSector"),
@@ -50,18 +49,6 @@ path('Edit/Company/Scope/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', view
 path('Delete/Company/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCompanyScope, name="commonDeleteCompanyScope"),
 path('Want/To/Delete/This/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteScope, name="commonWantToDeleteScope"),
 
-
-
-
-
-
-
-
-
-
-
-
-
 #########################33 divisions ########################
 path('Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonDivisions, name="commonDivisions"),
 path('Add/New/Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonAddDivision, name="commonAddDivision"),
@@ -87,8 +74,6 @@ path('View/Department/<str:allifslug>/<str:allifusr>/<str:allifrandom>/Details/'
 path('Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteDepartment, name="commonDeleteDepartment"),
 path('Search/Departments/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepartmentSearch, name="commonDepartmentSearch"),
 path('Want/To/Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDepartment, name="commonWantToDeleteDepartment"),
-
-
 
 ############################ HRM ##################################3
 path('HRM/<str:allifusr>/<str:allifslug>/', views.commonhrm, name="commonhrm"),
@@ -117,9 +102,8 @@ path('User/Granted/Universal/Company/Level/Access/Authority/<str:pk>/<str:allifu
 path('User/Granted/All/Divisions/al/Levels/Access/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasDivisionalAccess, name="commonUserHasDivisionalAccess"),
 path('User/Granted/All/Branches/Level/Access/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasBranchesAccess, name="commonUserHasBranchesAccess"),
 path('User/Granted/Departmental/Access/Authority/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserHasDepartmentalAccess, name="commonUserHasDepartmentalAccess"),
-
-       
-
+  
+############################ this converts to Allifmaal adminstrator... ##################
 path('User/Is/Allifmaal/Admin/<str:pk>/', views.commonUserAllifaamlAdmin, name="commonUserAllifaamlAdmin"),
 
 ############################ staff profiles ##################################3
@@ -135,8 +119,6 @@ path('Search/For/Employee/Profile/Details/HRM/Staff/Details/<str:allifusr>/<str:
 path('Tax/Parameters/<str:allifusr>/<str:allifslug>/', views.commonTaxParameters, name="commonTaxParameters"),
 path('Update/Tax/Parameter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonUpdateTaxDetails, name="CommonUpdateTaxDetails"),
 path('Delete/Tax/Parameter/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonDeleteTaxParameter, name="CommonDeleteTaxParameter"),
-path('Want/To/Delete/This/Tax/Parameter/Now/Prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteTaxParameter, name="commonWantToDeleteTaxParameter"),
-
 
 ##################################### General Ledger accounts ################
 path('General/Ledgers/Accounts/<str:allifusr>/<str:allifslug>/', views.commonGeneralLedgers, name="commonGeneralLedgers"),
@@ -180,7 +162,7 @@ path('Bank/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.comm
 path('Delete/Bank/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteBankShareholderDeposit, name="commonDeleteBankShareholderDeposit"),
 path('Search/Bank/Deposit/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepositSearch, name="commonDepositSearch"),
 path('Want/To/Delete/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDeposit, name="commonWantToDeleteDeposit"),
-path('Search/Results/Deposits/<str:allifusr>/<str:allifslug>/', views.commonDepositAdvanceSearch, name="commonDepositAdvanceSearch"),
+path('Search/Results/Deposits/<str:allifusr>/<str:allifslug>/Advaned/Search/', views.commonDepositAdvanceSearch, name="commonDepositAdvanceSearch"),
 path('Clear/Shareholder/Search/Results/Deposits/<str:allifusr>/<str:allifslug>/', views.commonClearShareholderDepositSearch, name="commonClearShareholderDepositSearch"),
 
 ####################################3 withdrawals ###########################3
@@ -193,6 +175,14 @@ path('Search/Bank/Withdrawals/<str:allifusr>/<str:allifslug>/Shareholders/', vie
 path('Want/To/Delete/Withdrawal/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteWithdrawal, name="commonWantToDeleteWithdrawal"),
 path('Search/Results/Withdrawals/<str:allifusr>/<str:allifslug>/', views.commonWithdrawalAdvanceSearch, name="commonWithdrawalAdvanceSearch"),
 path('Clear/Shareholder/Search/Results/Withdrawls/<str:allifusr>/<str:allifslug>/', views.commonClearShareholderWithdrwlSearch, name="commonClearShareholderWithdrwlSearch"),
+
+
+
+
+
+
+
+
 
 ############################ suppliers sections ##################################3
 path('Suppliers/<str:allifusr>/<str:allifslug>/List/', views.commonSuppliers, name="commonSuppliers"),

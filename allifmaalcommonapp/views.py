@@ -862,8 +862,9 @@ def commonWantToDeleteScope(request,pk,*allifargs,**allifkwargs):
        
 
 
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@logged_in_user_can_view
+@subscriber_company_status
 def commonDivisions(request,*allifargs,**allifkwargs):
     title="Divisions"
     try:
@@ -874,9 +875,6 @@ def commonDivisions(request,*allifargs,**allifkwargs):
             allifqueryset=CommonDivisionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
         else:
             allifqueryset=[]
-
-        allifqueryset=CommonDivisionsModel.objects.all()
-            
         context={
             "title":title,
             "allifqueryset":allifqueryset,
@@ -887,8 +885,9 @@ def commonDivisions(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_add
+@logged_in_user_must_have_profile
+@logged_in_user_can_add
+@subscriber_company_status
 def commonAddDivision(request,*allifargs,**allifkwargs):
     title="New Division"
     try:
@@ -900,7 +899,7 @@ def commonAddDivision(request,*allifargs,**allifkwargs):
                 division=request.POST.get('division')
                 address=request.POST.get('address')
                 if division!="":
-                    obj = form.save(commit=False)
+                    obj=form.save(commit=False)
                     obj.owner=allif_data.get("logged_in_user")
                     obj.company=allif_data.get("main_sbscrbr_entity")
                     obj.legalname=str(f'{division}+{address}')#important...used to generate company slug
@@ -925,6 +924,7 @@ def commonAddDivision(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @logged_in_user_can_edit
 @logged_in_user_is_admin
+@subscriber_company_status
 def commonEditDivision(request,pk,*allifargs,**allifkwargs):
     title="Update Division Details"
     try:
@@ -935,16 +935,12 @@ def commonEditDivision(request,pk,*allifargs,**allifkwargs):
             form=CommonAddDivisionForm(request.POST or None,request.FILES, instance=allifquery_update)
             if form.is_valid():
                 obj=form.save(commit=False)
-                #obj.owner=allifquery_update.owner
-                #obj.company=allif_data.get("main_sbscrbr_entity")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonDivisions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-                
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-              
         else:
             form=CommonAddDivisionForm(request.POST or None, instance=allifquery_update)
         context={"title":title,"form":form,}
@@ -955,8 +951,9 @@ def commonEditDivision(request,pk,*allifargs,**allifkwargs):
         return render(request,'allifmaalusersapp/error/error.html',error_context)
     
 
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@logged_in_user_can_view
+@subscriber_company_status
 def commonDivisionDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
@@ -975,7 +972,8 @@ def commonDivisionDetails(request,pk,*allifargs,**allifkwargs):
 
 @logged_in_user_must_have_profile
 @logged_in_user_is_admin
-@logged_in_user_can_delete  
+@logged_in_user_can_delete
+@subscriber_company_status
 def commonWantToDeleteDivision(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonDivisionsModel.objects.filter(id=pk).first()
@@ -990,10 +988,11 @@ def commonWantToDeleteDivision(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)   
     
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_delete
-#@logged_in_user_is_admin
-#@logged_in_user_has_universal_delete
+@logged_in_user_must_have_profile
+@logged_in_user_can_delete
+@logged_in_user_is_admin
+@logged_in_user_has_universal_delete
+@subscriber_company_status
 def commonDeleteDivision(request,pk,*allifargs,**allifkwargs):
     try:
         CommonDivisionsModel.objects.filter(id=pk).first().delete()
@@ -1006,8 +1005,9 @@ def commonDeleteDivision(request,pk,*allifargs,**allifkwargs):
 
 
 ############################### .......Entities and companies details........... #########################3#
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@logged_in_user_can_view
+@subscriber_company_status
 def commonBranches(request,*allifargs,**allifkwargs):
     title="Branches"
     try:
@@ -1021,7 +1021,7 @@ def commonBranches(request,*allifargs,**allifkwargs):
 
         else:
             allifqueryset=[]
-        allifqueryset=CommonBranchesModel.objects.all()
+        
         context={
             "title":title,
             "allifqueryset":allifqueryset,
@@ -1032,8 +1032,9 @@ def commonBranches(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_add
+@logged_in_user_must_have_profile
+@logged_in_user_can_add
+@subscriber_company_status
 def commonAddBranch(request,*allifargs,**allifkwargs):
     title="New Branch"
     try:
@@ -1068,7 +1069,8 @@ def commonAddBranch(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 @logged_in_user_must_have_profile
-@logged_in_user_can_edit 
+@logged_in_user_can_edit
+@subscriber_company_status 
 def commonEditBranch(request,pk,*allifargs,**allifkwargs):
     title="Update Branch Details"
     try:
@@ -1079,6 +1081,7 @@ def commonEditBranch(request,pk,*allifargs,**allifkwargs):
             form=CommonAddBranchForm(allif_data.get("main_sbscrbr_entity"),request.POST or None,request.FILES, instance=user_var_update)
             if form.is_valid():
                 obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonBranches',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
@@ -1120,6 +1123,7 @@ def commonBranchDetails(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_is_admin
 @logged_in_user_can_delete
 @logged_in_user_has_branches_delete
+@subscriber_company_status
 def commonWantToDeleteBranch(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonBranchesModel.objects.filter(id=pk).first()
@@ -1133,9 +1137,10 @@ def commonWantToDeleteBranch(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)   
 
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_delete
-#@logged_in_user_is_admin
+@logged_in_user_must_have_profile
+@logged_in_user_can_delete
+@logged_in_user_is_admin
+@subscriber_company_status
 def commonDeleteBranch(request,pk,*allifargs,**allifkwargs):
     try:
         CommonBranchesModel.objects.filter(pk=pk).first().delete()
@@ -1147,6 +1152,7 @@ def commonDeleteBranch(request,pk,*allifargs,**allifkwargs):
     
 @logged_in_user_must_have_profile
 @logged_in_user_can_view
+@subscriber_company_status
 def commonBranchSearch(request,*allifargs,**allifkwargs):
     title="Search"
     try:  
@@ -1173,8 +1179,9 @@ def commonBranchSearch(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
  ################################### below are departments #######################
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@logged_in_user_can_view
+@subscriber_company_status
 def commonDepartments(request,*allifargs,**allifkwargs):
     title="Departments"
     try:
@@ -1189,8 +1196,7 @@ def commonDepartments(request,*allifargs,**allifkwargs):
             allifqueryset=CommonDepartmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
             allifqueryset=[]
-        allifqueryset=CommonDepartmentsModel.objects.all()
-           
+       
         context = {
             "title":title,
             "allifqueryset":allifqueryset,
@@ -1232,8 +1238,9 @@ def commonDepartmentSearch(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_add
+@logged_in_user_must_have_profile
+@logged_in_user_can_add
+@subscriber_company_status
 def commonAddDepartment(request,*allifargs,**allifkwargs):
     title="Add New Department"
     try:
@@ -1272,6 +1279,7 @@ def commonAddDepartment(request,*allifargs,**allifkwargs):
 
 @logged_in_user_must_have_profile
 @logged_in_user_can_edit 
+@subscriber_company_status
 def commonEditDepartment(request,pk,*allifargs,**allifkwargs):
     title="Update Department Details"
     try:
@@ -1282,6 +1290,7 @@ def commonEditDepartment(request,pk,*allifargs,**allifkwargs):
             form=CommonAddDepartmentForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=user_var_update)
             if form.is_valid():
                 obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonDepartments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
         else:
@@ -1296,6 +1305,7 @@ def commonEditDepartment(request,pk,*allifargs,**allifkwargs):
     
 @logged_in_user_must_have_profile
 @logged_in_user_can_view 
+@subscriber_company_status
 def commonDepartmentDetails(request,allifslug,*allifargs,**allifkwargs):
     try:
         title="Department Details"
@@ -1310,6 +1320,8 @@ def commonDepartmentDetails(request,allifslug,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 @logged_in_user_must_have_profile 
 @logged_in_user_is_admin
+@subscriber_company_status
+@logged_in_user_has_departmental_delete
 def commonWantToDeleteDepartment(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonDepartmentsModel.objects.filter(id=pk).first()
@@ -1323,9 +1335,11 @@ def commonWantToDeleteDepartment(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)   
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_delete  
-#@logged_in_user_is_admin
+@logged_in_user_must_have_profile
+@logged_in_user_can_delete  
+@logged_in_user_is_admin
+@subscriber_company_status
+@logged_in_user_has_departmental_delete
 def commonDeleteDepartment(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
@@ -1336,7 +1350,7 @@ def commonDeleteDepartment(request,pk,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 #################################...HRM....... System users ..........#####################################
-#@logged_in_user_must_have_profile
+@logged_in_user_must_have_profile
 @subscriber_company_status
 def commonhrm(request,*allifargs,**allifkwargs):
     title="Human Resources Management"
@@ -1350,22 +1364,22 @@ def commonhrm(request,*allifargs,**allifkwargs):
                 if allif_data.get("logged_in_user_has_universal_access")==True:
                     allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg")).order_by('-first_name')
                 elif allif_data.get("logged_in_user_has_divisional_access")==True:
-                    allifqueryset==User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division")).order_by('-first_name')
+                    allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division")).order_by('-first_name')
                 elif allif_data.get("logged_in_user_has_branches_access")==True:
-                    allifqueryset==User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch")).order_by('-first_name')
+                    allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch")).order_by('-first_name')
                 elif allif_data.get("logged_in_user_has_departmental_access")==True:
-                    allifqueryset==User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch"),userdepartment=allif_data.get("logged_user_department")).order_by('-first_name')
+                    allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch"),userdepartment=allif_data.get("logged_user_department")).order_by('-first_name')
                 else:
                     allifqueryset=[]
             else:
                 if allif_data.get("logged_in_user_has_universal_access")==True:
                     allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"))
                 elif allif_data.get("logged_in_user_has_divisional_access")==True:
-                    allifqueryset==User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=str(allif_data.get("logged_user_division")))
+                    allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=str(allif_data.get("logged_user_division")))
                 elif allif_data.get("logged_in_user_has_branches_access")==True:
-                    allifqueryset==User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch"))
+                    allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch"))
                 elif allif_data.get("logged_in_user_has_departmental_access")==True:
-                    allifqueryset==User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch"),userdepartment=allif_data.get("logged_user_department"))
+                    allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch"),userdepartment=allif_data.get("logged_user_department"))
                 else:
                     allifqueryset=[]
         else:
@@ -1380,7 +1394,7 @@ def commonhrm(request,*allifargs,**allifkwargs):
                 allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch"),userdepartment=allif_data.get("logged_user_department"))
             else:
                 allifqueryset=[]
-        #allifqueryset=User.objects.all()
+        
         context={
             "title":title,
              "allifqueryset":allifqueryset,
@@ -1391,9 +1405,10 @@ def commonhrm(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_add
-#@logged_in_user_is_admin
+@logged_in_user_must_have_profile
+@logged_in_user_can_add
+@logged_in_user_is_admin
+@subscriber_company_status
 def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is where a new user is added by the subscriber admin.
     title="New Staff User Registeration"
     try:
@@ -1415,19 +1430,14 @@ def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is 
                 obj.userdepartment=allif_data.get("usernmeslg").userdepartment
                 obj.fullNames=str(f'{fname}+{lname}')#important...used to generate user slug
                 obj.save()
-                newUser=User.objects.filter(email=email).first()
-                if newUser!=None:
-                    secret_key=newUser.customurlslug
-                    context={"title":title,"form":form,"secret_key":secret_key,}
-                    return render(request,"allifmaalcommonapp/hrm/users/userkey.html",context)
-                else:
-                    messages.info(request,f'User does not exist')
-                    return redirect('allifmaalusersapp:newUserRegistration')
+                return redirect('allifmaalcommonapp:commonhrm',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 messages.info(request,f'Sorry {email} is likely taken, or passwords not match')
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=CreateNewCustomUserForm()
 
         context={"title":title,"form":form,}
         return render(request,"allifmaalcommonapp/hrm/users/adduser.html",context)
@@ -1435,13 +1445,18 @@ def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is 
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@logged_in_user_can_edit
+@logged_in_user_is_admin
+@subscriber_company_status
 def commonEditUser(request,pk,*allifargs,**allifkwargs):
     title="Update User Details"
     try:
         user_var_update=User.objects.filter(id=pk).first()
         form=UpdateCustomUserForm(instance=user_var_update)
         allif_data=common_shared_data(request)
+        
         if request.method=='POST':
             form=UpdateCustomUserForm(request.POST or None, instance=user_var_update)
             if form.is_valid():
@@ -1449,7 +1464,7 @@ def commonEditUser(request,pk,*allifargs,**allifkwargs):
                 """this is very important line... dont change unless you know what you are doing...."""
                 obj.usercompany=str(allif_data.get("compslg"))
                 obj.save()
-                return redirect("allifmaalcommonapp:CommonDecisionPoint")
+                return redirect('allifmaalcommonapp:commonhrm',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
@@ -1462,38 +1477,14 @@ def commonEditUser(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
-#login_required(login_url='allifmaalusersapp:userLoginPage')
+   
+@logged_in_user_must_have_profile
+@logged_in_user_is_admin
+@subscriber_company_status
 def commonUserDetails(request,pk,*allifargs,**allifkwargs):
+    title="User Details"
     try:
-
-        logged_in_user=request.user
-        usrslg=request.user.customurlslug
-        compslg=request.user.usercompany
-        usernmeslg=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        logged_in_user_profile=CommonEmployeesModel.objects.filter(username=logged_in_user,company=main_sbscrbr_entity).first()
-
-
-        allif_data=common_shared_data(request)
-        print(allif_data.get("usernmeslg").userdivision)
-        print("________________________________________________")
-
-        print(logged_in_user,"logged user...request.user")
-        print(usrslg,'user slug...usrslg...request.user.customurlslug')
-        print(compslg,'request.user.usercompany')
-        print(usernmeslg,'usernmeslg...')
-        print(main_sbscrbr_entity,'main_sbscrbr_entity')
-        print(logged_in_user_profile,'logged user profile')
-
-
-        
-
-
-        title="User Details"
         allifquery=User.objects.filter(id=pk).first()
-        print(allifquery.usercompany,allifquery.userdivision)
-       
         allifqueryset=CommonEmployeesModel.objects.filter(username=allifquery).first()
         candoall=allifquery.can_do_all
         canadd=allifquery.can_add
@@ -1542,13 +1533,13 @@ def commonUserDetails(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
 def commonLoggedInUserDetails(request,*allifargs,**allifkwargs):
+    title="User Details"
     try:
-        title="User Details"
         allifquery=request.user
-       
         allifqueryset=CommonEmployeesModel.objects.filter(username=allifquery).first()
         candoall=allifquery.can_do_all
         canadd=allifquery.can_add
@@ -1575,21 +1566,27 @@ def commonLoggedInUserDetails(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 def commonShowClickedRowUserDetails(request,pk,*allifargs,**allifkwargs):
+    title="User Details"
     try:
-        title="User Details"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        if  main_sbscrbr_entity!=None:# if true, it means that company exists and logged user is owner 
-            allifqueryset=User.objects.filter(usercompany=main_sbscrbr_entity.companyslug)
-        else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint')
-        
+        clicked_row_data=User.objects.filter(id=pk).first()
+        allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
-        clicked_row_data=User.objects.filter(id=pk).first()
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=User.objects.filter(usercompany=allif_data.get("main_sbscrbr_entity"))
+            allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg"),userdivision=allif_data.get("logged_user_division"),userbranch=allif_data.get("logged_user_branch"),userdepartment=allif_data.get("logged_user_department"))
+        else:
+            allifqueryset=[]
         context={
             "clicked_row_data":clicked_row_data,
             "allifqueryset":allifqueryset,
@@ -1598,14 +1595,14 @@ def commonShowClickedRowUserDetails(request,pk,*allifargs,**allifkwargs):
             "title":title,
         }
         return render(request,'allifmaalcommonapp/hrm/staff/staff.html',context)
-       
-    
+   
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_delete 
 @logged_in_user_is_admin 
 def commonWantToDeleteUser(request,pk,*allifargs,**allifkwargs):
@@ -1621,37 +1618,34 @@ def commonWantToDeleteUser(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)    
-#@login_required(login_url='allifmaalusersapp:userLoginPage')
-#@logged_in_user_can_delete
-#@logged_in_user_is_admin   
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_delete 
+@logged_in_user_is_admin 
+@logged_in_user_has_universal_delete
 def commonDeleteUser(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        allif_data=common_shared_data(request)
         User.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonhrm',allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonhrm',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
 def commonUserSearch(request,*allifargs,**allifkwargs):
+    title="Search"
     try:
-        title="Search"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        allif_data=common_shared_data(request)
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=User.objects.filter((Q(first_name__icontains=allifsearch)|Q(last_name__icontains=allifsearch)) & Q(usercompany=compslg))
-           
+            searched_data=User.objects.filter((Q(first_name__icontains=allifsearch)|Q(last_name__icontains=allifsearch)) & Q(usercompany=allif_data.get("compslg")))
             context={
-           
             "title":title,
             "allifsearch":allifsearch,
             "searched_data":searched_data,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
-           
         }
         return render(request,'allifmaalcommonapp/hrm/staff/staff.html',context)
             
@@ -1660,12 +1654,13 @@ def commonUserSearch(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserCanAddEditViewDelete(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        allif_data=common_shared_data(request)
         if allifquery.can_do_all==True:
             allifquery.can_do_all=False
             allifquery.can_add=False
@@ -1679,259 +1674,294 @@ def commonUserCanAddEditViewDelete(request,pk,*allifargs,**allifkwargs):
             allifquery.can_edit=True
             allifquery.can_delete=True
         allifquery.save()
-       
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
-       
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+    
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
 def commonUserCanAdd(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         if allifquery.can_add==True:
             allifquery.can_add=False
         else:
             allifquery.can_add=True
         allifquery.can_do_all=False
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+       
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserCanView(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         if allifquery.can_view==True:
             allifquery.can_view=False
         else:
             allifquery.can_view=True
         allifquery.can_do_all=False
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserCanEdit(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         if allifquery.can_edit==True:
             allifquery.can_edit=False
         else:
             allifquery.can_edit=True
         allifquery.can_do_all=False
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
-   
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserCanDelete(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         if allifquery.can_delete==True:
             allifquery.can_delete=False
         else:
             allifquery.can_delete=True
         allifquery.can_do_all=False 
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 #####################3  access control for entities and sub entities
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserCanAccessAll(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         if allifquery.can_access_all==True:
             allifquery.can_access_all=False
         else:
             allifquery.can_access_all=True
         allifquery.save()
         
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserCanAccessRelated(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         if allifquery.can_access_related==True:
             allifquery.can_access_related=False
         else:
             allifquery.can_access_related=True
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserHasUniversalDelete(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         if allifquery.universal_delete==True:
             allifquery.universal_delete=False
         else:
             allifquery.universal_delete=True
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserHasDivisionalDelete(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         if allifquery.divisional_delete==True:
             allifquery.divisional_delete=False
         else:
             allifquery.divisional_delete=True
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+      
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserHasBranchesDelete(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        
         if allifquery.branches_delete==True:
             allifquery.branches_delete=False
         else:
             allifquery.branches_delete=True
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserHasDepartmentalDelete(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+       
         if allifquery.departmental_delete==True:
             allifquery.departmental_delete=False
         else:
             allifquery.departmental_delete=True
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+      
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserHasUniversalAccess(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        
         if allifquery.universal_access==True:
             allifquery.universal_access=False
         else:
             allifquery.universal_access=True
         allifquery.can_do_all=False
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+       
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserHasDivisionalAccess(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+       
         if allifquery.divisional_access==True:
             allifquery.divisional_access=False
         else:
             allifquery.divisional_access=True
         allifquery.can_do_all=False
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+       
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserHasBranchesAccess(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+       
         if allifquery.branches_access==True:
             allifquery.branches_access=False
         else:
             allifquery.branches_access=True
         allifquery.can_do_all=False
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin 
 def commonUserHasDepartmentalAccess(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        
         if allifquery.departmental_access==True:
             allifquery.departmental_access=False
         else:
             allifquery.departmental_access=True
         allifquery.can_do_all=False
         allifquery.save()
-        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@allifmaal_admin
+@logged_in_user_has_universal_access
 def commonUserAllifaamlAdmin(request,pk):
     try:
+        allif_data=common_shared_data(request)
         allifquery=User.objects.filter(id=pk).first()
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         user=request.user.is_superuser
-        
         if user==True:
             if allifquery.allifmaal_admin==True:
                 allifquery.allifmaal_admin=False
             else:
                 allifquery.allifmaal_admin=True
             allifquery.save()
-            return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
+            return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            
         else:
             return render(request,'allifmaalcommonapp/error/error.html',error_context)
     except Exception as ex:
@@ -1940,23 +1970,26 @@ def commonUserAllifaamlAdmin(request,pk):
 
 
 ###################### staff profiles #####################################
-#@login_required(login_url='allifmaalusersapp:userLoginPage')
-#@logged_in_user_can_view   
+
+@logged_in_user_must_have_profile
 def commonStaffProfiles(request,*allifargs,**allifkwargs):
+    title="Staff Profiles"
     try:
-        title="Staff Profiles"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        if  main_sbscrbr_entity!=None:# if true, it means that company exists and logged user is owner 
-            allifqueryset=CommonEmployeesModel.objects.filter(company=main_sbscrbr_entity)
+        allif_data=common_shared_data(request)
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=CommonEmployeesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=CommonEmployeesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=CommonEmployeesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=CommonEmployeesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint')
+            allifqueryset=[]
            
         context={
             "title":title,
             "allifqueryset":allifqueryset,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
             } 
         return render(request,'allifmaalcommonapp/hrm/profiles/profiles.html',context)
                     
@@ -1965,18 +1998,12 @@ def commonStaffProfiles(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
+@login_required(login_url='allifmaalusersapp:userLoginPage')
 def commonAddStaffProfile(request,allifusr,allifslug,*allifargs,**allifkwargs): # when someone logs in, they are directed to this page to create company details.
-    #try:
-        
-        title="Create Staff Profile"
-        user_var=request.user.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
-        usrslg=request.user.customurlslug
-        compslg=request.user.usercompany
-        
-        print(compslg)
-        print(main_sbscrbr_entity.id)
-        form=CommonAddStaffProfileForm(main_sbscrbr_entity)
+    title="Create Staff Profile"
+    try:
+        allif_data=common_shared_data(request)
+        form=CommonAddStaffProfileForm(allif_data.get("main_sbscrbr_entity"))
         """
         if  main_sbscrbr_entity!=None:
             class CommonAddStaffProfileForm(forms.ModelForm):
@@ -2015,94 +2042,19 @@ def commonAddStaffProfile(request,allifusr,allifslug,*allifargs,**allifkwargs): 
             form=CommonAddStaffProfileForm(main_sbscrbr_entity)
             """
         if request.method=='POST':
-            form=CommonAddStaffProfileForm(main_sbscrbr_entity,request.POST)
+            form=CommonAddStaffProfileForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
                 obj = form.save(commit=False)
-                obj.company=main_sbscrbr_entity
+                obj.company=allif_data.get("main_sbscrbr_entity")
                 obj.save()
-                user_var=request.user.usercompany
-                usrslg=request.user.customurlslug
-                return redirect('allifmaalcommonapp:commonStaffProfiles',allifusr=usrslg,allifslug=user_var)
-                
+                return redirect('allifmaalcommonapp:commonStaffProfiles',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-                
         else:
-            form=CommonAddStaffProfileForm(main_sbscrbr_entity)
-        #else:
-            #return redirect('allifmaalcommonapp:CommonDecisionPoint')
-            
-           
-        context={
-            "title":title,
-            "form":form,
-            }
-        return render(request,'allifmaalcommonapp/hrm/profiles/add-staff-profile.html',context)
-    #except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_edit
-def commonEditStaffProfile(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Update Staff Profile Details"
-        user_var=request.user.usercompany
-        updateItem= CommonEmployeesModel.objects.filter(id=pk).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
-        #form =CommonAddStaffProfileForm(instance=updateItem)#insert the content of the table stored in the selected id in the update form
-        #we could have used the add customer form but the validation will refuse us to update since fields may exist
-    
-        if  main_sbscrbr_entity!=None:
-            class CommonAddStaffProfileForm(forms.ModelForm):
-                class Meta:
-                    model = CommonEmployeesModel
-                    fields = ['staffNo','firstName','division','branch','lastName','middleName','gender','department','title','education',
-                                'comment','salary','total_salary_paid','salary_payable','salary_balance','username','sysperms','company']
-                    widgets={
-                    'staffNo':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'firstName':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'lastName':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'middleName':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    
-                    'title':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'education':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'comment':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'salary':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'total_salary_paid':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'salary_payable':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'salary_balance':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-                    'gender':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-                    'username':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-                    'sysperms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-                    'company':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-                    'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-                    'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-                    'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-                    }
-                    
-                def __init__(self,*args,**kwargs):
-                    super (CommonAddStaffProfileForm,self).__init__(*args,**kwargs) # populates the post
-                    self.fields['username'].queryset =User.objects.filter(usercompany=main_sbscrbr_entity.companyslug)
-            form=CommonAddStaffProfileForm(instance=updateItem)
-            
-            if request.method=='POST':
-                form=CommonAddStaffProfileForm(request.POST,instance=updateItem)
-                if form.is_valid():
-                    obj = form.save(commit=False)
-                    obj.company =main_sbscrbr_entity
-                    obj.save()
-                    user_var=request.user.usercompany
-                    usrslg=request.user.customurlslug
-                    return redirect('allifmaalcommonapp:commonStaffProfiles',allifusr=usrslg,allifslug=user_var)
-                    
-                else:
-                    form=CommonAddStaffProfileForm(instance=main_sbscrbr_entity)
-        else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint')
-           
+            form=CommonAddStaffProfileForm(allif_data.get("main_sbscrbr_entity"))
         context={
             "title":title,
             "form":form,
@@ -2112,8 +2064,43 @@ def commonEditStaffProfile(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_has_universal_delete
+@logged_in_user_can_edit
+def commonEditStaffProfile(request,pk,*allifargs,**allifkwargs):
+    title="Update Staff Profile Details"
+    try:
+        allif_data=common_shared_data(request)
+        updateItem= CommonEmployeesModel.objects.filter(id=pk).first()
+        form=CommonAddStaffProfileForm(allif_data.get("main_sbscrbr_entity"),instance=updateItem)
+        if request.method=='POST':
+            form=CommonAddStaffProfileForm(allif_data.get("main_sbscrbr_entity"),request.POST,instance=updateItem)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.save()
+                return redirect('allifmaalcommonapp:commonStaffProfiles',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+               
+        else:
+            form=CommonAddStaffProfileForm(allif_data.get("main_sbscrbr_entity"),instance=updateItem)
+       
+        context={
+            "title":title,
+            "form":form,
+            }
+        return render(request,'allifmaalcommonapp/hrm/profiles/add-staff-profile.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 def commonStaffProfileDetails(request,allifslug,*allifargs,**allifkwargs):
     try:
         title="Staff Profile Details"
@@ -2128,7 +2115,10 @@ def commonStaffProfileDetails(request,allifslug,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')  
+
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 def commonWantToDeleteProfile(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonEmployeesModel.objects.filter(id=pk).first()
@@ -2142,69 +2132,77 @@ def commonWantToDeleteProfile(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
 @logged_in_user_can_delete  
 def commonDeleteProfile(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        allif_data=common_shared_data(request)
         CommonEmployeesModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonStaffProfiles',allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonStaffProfiles',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
 def commonProfileSearch(request,*allifargs,**allifkwargs):
+    title="Search"
     try:
-        title="Search"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-       
+        allif_data=common_shared_data(request)
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonEmployeesModel.objects.filter((Q(firstName__icontains=allifsearch)|Q(lastName__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
-            print(searched_data)
-            context={
-           
-            "title":title,
-            "allifsearch":allifsearch,
-            "searched_data":searched_data,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
-           
-        }
+            if allif_data.get("logged_in_user_has_universal_access")==True:
+                searched_data=CommonEmployeesModel.objects.filter((Q(firstName__icontains=allifsearch)|Q(lastName__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+            elif allif_data.get("logged_in_user_has_divisional_access")==True:
+                searched_data=CommonEmployeesModel.objects.filter((Q(firstName__icontains=allifsearch)|Q(lastName__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")))
+            elif allif_data.get("logged_in_user_has_branches_access")==True:
+                searched_data=CommonEmployeesModel.objects.filter((Q(firstName__icontains=allifsearch)|Q(lastName__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")))
+            elif allif_data.get("logged_in_user_has_departmental_access")==True:
+                searched_data=CommonEmployeesModel.objects.filter((Q(firstName__icontains=allifsearch)|Q(lastName__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")))
+            else:
+                searched_data=[]
+        else:
+            searched_data=CommonEmployeesModel.objects.filter((Q(firstName__icontains=allifsearch)|Q(lastName__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")))
+        context={
+        "title":title,
+        "allifsearch":allifsearch,
+        "searched_data":searched_data,}
         return render(request,'allifmaalcommonapp/hrm/profiles/profiles.html',context)
-            
+  
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 ###################333 tax parameters settings ###############
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_add
 def commonTaxParameters(request,*allifargs,**allifkwargs):
+    title="Applicable Tax Details"
     try:
-        title="Applicable Tax Details"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        allifqueryset=CommonTaxParametersModel.objects.filter(company=main_sbscrbr_entity)
-        latest=CommonTaxParametersModel.objects.filter(company=main_sbscrbr_entity).order_by('-date')[:3]
-        form=CommonAddTaxParameterForm(main_sbscrbr_entity,request.POST)
+        allif_data=common_shared_data(request)
+        allifqueryset=CommonTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        latest=CommonTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:3]
+        form=CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST)
         if request.method == 'POST':
-            form=CommonAddTaxParameterForm(main_sbscrbr_entity,request.POST)
+            form=CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
-                obj = form.save(commit=False)
-                obj.company=main_sbscrbr_entity
-                obj.owner=user_var
+                obj=form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=user_var,allifslug=compslg)
+                return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonAddTaxParameterForm(main_sbscrbr_entity)
+            form=CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"))
         context={
             "title":title,
             "form":form,
@@ -2216,32 +2214,31 @@ def commonTaxParameters(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_add
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_edit
 def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
+    title="Update Tax Details"
     try:
-        title="Update Tax Details"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        allifqueryset=CommonTaxParametersModel.objects.filter(company=main_sbscrbr_entity)
+        allif_data=common_shared_data(request)
+        allifqueryset=CommonTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         update=CommonTaxParametersModel.objects.get(id=pk)
-        form =CommonAddTaxParameterForm(main_sbscrbr_entity,instance=update)
+        form =CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),instance=update)
         if request.method == 'POST':
-            form = CommonAddTaxParameterForm(main_sbscrbr_entity,request.POST,instance=update)
+            form = CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST,instance=update)
             if form.is_valid():
-                obj = form.save(commit=False)
-                obj.company =main_sbscrbr_entity
-                obj.owner=user_var
+                obj=form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=user_var,allifslug=compslg)
+                return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form =CommonAddTaxParameterForm(main_sbscrbr_entity,instance=update)
+            form =CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),instance=update)
         context = {
             'form':form,
             "update":update,
@@ -2254,121 +2251,81 @@ def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
-@logged_in_user_can_delete 
-def commonWantToDeleteTaxParameter(request,pk,*allifargs,**allifkwargs):
-    try:
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        allifqueryset=CommonTaxParametersModel.objects.filter(company=main_sbscrbr_entity)
-        form=CommonAddTaxParameterForm(request.POST)
-       
-        allifquerydelete=CommonTaxParametersModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquerydelete":allifquerydelete,
-        "title":title,
-        "allifqueryset":allifqueryset,
-        "form":form,
-        }
-        return render(request,'allifmaalcommonapp/taxes/taxes.html',context)
-        return render(request,'allifmaalcommonapp/hrm/profiles/profile-delete-confirm.html',context)
-
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_delete
 def CommonDeleteTaxParameter(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user
-        compslg=user_var.usercompany
+        allif_data=common_shared_data(request)
         CommonTaxParametersModel.objects.get(id=pk).delete()
-        return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=user_var,allifslug=compslg)
+        return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+
 ################################# ACCOUNTS  #############################
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 @logged_in_user_is_admin
 def commonGeneralLedgers(request,allifusr,allifslug,*allifargs,**allifkwargs):
+    title="General Ledger Accounts"
     try:
-        title="General Ledger Accounts"
-        #mysession=Session.objects.get(pk='mxrrjr4vniy08mhpnesjjo5y79kds5ts')
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-        logged_user_can_access_all=logged_user.can_access_all
-        if logged_user_profile!=None:
-            logged_user_division=logged_user_profile.division
-            logged_user_branch=logged_user_profile.branch
-            logged_user_department=logged_user_profile.department
+        allif_data=common_shared_data(request)
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=CommonGeneralLedgersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=CommonGeneralLedgersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=CommonGeneralLedgersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=CommonGeneralLedgersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
-            
-        if logged_user_can_access_all==True:
-            allifqueryset=CommonGeneralLedgersModel.objects.filter(company=main_sbscrbr_entity)
-      
-        else:# if true, it means that company exists and logged user is owner 
-            allifqueryset=CommonGeneralLedgersModel.objects.filter(company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
-       
-        context = {
-            "title":title,
-            "allifqueryset":allifqueryset,
-        }
+            allifqueryset=[]
+        context={"title":title,"allifqueryset":allifqueryset,}
         return render(request,'allifmaalcommonapp/accounts/genledgers.html',context)
     
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_add
 @logged_in_user_is_admin
 def commonAddGeneralLedger(request,allifusr,allifslug,*allifargs,**allifkwargs):
+    title="New General Ledger Account"
     try:
-        title="New General Ledger Account"
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-        
-        form=CommonAddGeneralLedgerForm(main_sbscrbr_entity)
-        if  main_sbscrbr_entity!=None:
-            if request.method=='POST':
-                descrp=request.POST.get('description')
-                deprtmnt=request.POST.get('department')
-                #account=CommonGeneralLedgersModel.objects.filter(description=descrp,company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department).first()
-                CommonDepartmentsModel.objects.filter(id=deprtmnt,company=main_sbscrbr_entity).first()
-                account=CommonGeneralLedgersModel.objects.filter(description=descrp,department=deprtmnt,company=main_sbscrbr_entity).first()
-                
-                form=CommonAddGeneralLedgerForm(main_sbscrbr_entity,request.POST)
-                if form.is_valid():
-                    obj = form.save(commit=False)
-                    obj.company=main_sbscrbr_entity
-                    obj.owner=logged_user
-                    if account is None:
-                        obj.save()
-                        return redirect('allifmaalcommonapp:commonGeneralLedgers',allifusr=usrslg,allifslug=user_cmpny_slug)
-                    else:
-                        error_message="Sorry, a similar account description exists!!!"
-                        allifcontext={"error_message":error_message,
-                                    "form":form,
-                                    "title":title,}
-                        return render(request,'allifmaalcommonapp/accounts/add-gl.html',allifcontext)
-                        
+        allif_data=common_shared_data(request)
+        form=CommonAddGeneralLedgerForm(allif_data.get("main_sbscrbr_entity"))
+        if request.method=='POST':
+            descrp=request.POST.get('description')
+            deprtmnt=request.POST.get('department')
+            CommonDepartmentsModel.objects.filter(id=deprtmnt,company=allif_data.get("main_sbscrbr_entity")).first()
+            account=CommonGeneralLedgersModel.objects.filter(description=descrp,department=allif_data.get("logged_user_department"),company=allif_data.get("main_sbscrbr_entity")).first()
+            form=CommonAddGeneralLedgerForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                if account is None:
+                    obj.save()
+                    return redirect('allifmaalcommonapp:commonGeneralLedgers',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
                 else:
-                    form=CommonAddGeneralLedgerForm(main_sbscrbr_entity)
+                    error_message="Sorry, a similar account description exists!!!"
+                    allifcontext={"error_message":error_message,"form":form,"title":title,}
+                    return render(request,'allifmaalcommonapp/accounts/add-gl.html',allifcontext) 
             else:
-                form=CommonAddGeneralLedgerForm(main_sbscrbr_entity)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint') 
+            form=CommonAddGeneralLedgerForm(allif_data.get("main_sbscrbr_entity"))
         context = {
             "title":title,
             "form":form,
@@ -2379,58 +2336,45 @@ def commonAddGeneralLedger(request,allifusr,allifslug,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_edit
 @logged_in_user_is_admin
 def commonEditGeneralLedger(request,allifusr,pk,*allifargs,**allifkwargs):
+    title="Update General Ledger Account Details"
     try:
-        title="Update General Ledger Account Details"
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-       
-        user_var_update=CommonGeneralLedgersModel.objects.filter(id=pk).first()
-        form=CommonAddGeneralLedgerForm(main_sbscrbr_entity,instance=user_var_update)
+        allif_data=common_shared_data(request)
+        allifquery_update=CommonGeneralLedgersModel.objects.filter(id=pk).first()
+        form=CommonAddGeneralLedgerForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         if request.method=='POST':
-            descrp=request.POST.get('description')
-            deprtmnt=request.POST.get('department')
-            #account=CommonGeneralLedgersModel.objects.filter(description=descrp,company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department).first()
-            CommonDepartmentsModel.objects.filter(id=deprtmnt,company=main_sbscrbr_entity).first()
-            account=CommonGeneralLedgersModel.objects.filter(description=descrp,department=deprtmnt,company=main_sbscrbr_entity).first()
-                
-            form=CommonAddGeneralLedgerForm(main_sbscrbr_entity,request.POST or None, instance=user_var_update)
+            form=CommonAddGeneralLedgerForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
             if form.is_valid():
-                obj = form.save(commit=False)
-                obj.owner=user_var_update.owner
-                if account is None:
-                    obj.save()
-                    return redirect('allifmaalcommonapp:commonGeneralLedgers',allifusr=usrslg,allifslug=usrslg)
-                else:
-                    error_message="Sorry, a similar account description exists!!!"
-                    allifcontext={"error_message":error_message,
-                        "form":form,
-                        "title":title,}
-                    return render(request,'allifmaalcommonapp/accounts/add-gl.html',allifcontext)
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalcommonapp:commonGeneralLedgers',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonAddGeneralLedgerForm(main_sbscrbr_entity,instance=user_var_update)
-
-        context={"title":title,"form":form,}
+            form=CommonAddGeneralLedgerForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
         return render(request,'allifmaalcommonapp/accounts/add-gl.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view 
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
 def commonGeneralLedgerDetails(request,allifslug,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         title="Account Details"
-        user_cmpny_slug=request.user.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
         allifquery=CommonGeneralLedgersModel.objects.filter(pk=allifslug).first()
-        allifqueryset=CommonChartofAccountsModel.objects.filter(category=allifquery,company=main_sbscrbr_entity)
+        allifqueryset=CommonChartofAccountsModel.objects.filter(category=allifquery,company=allif_data.get("main_sbscrbr_entity"))
         context={
             "allifquery":allifquery,
             "title":title,
@@ -2441,9 +2385,12 @@ def commonGeneralLedgerDetails(request,allifslug,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view 
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
+@logged_in_user_has_departmental_delete
+@logged_in_user_can_delete
 def commonWantToDeleteGenLedger(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonGeneralLedgersModel.objects.filter(id=pk).first()
@@ -2457,54 +2404,52 @@ def commonWantToDeleteGenLedger(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)    
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_delete 
-@logged_in_user_is_admin 
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+@logged_in_user_has_universal_delete
+@logged_in_user_can_delete
 def commonDeleteGeneralLedger(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        allif_data=common_shared_data(request)
         CommonGeneralLedgersModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonGeneralLedgers',allifusr=usrslg,allifslug=user_var)
-        
+        return redirect('allifmaalcommonapp:commonGeneralLedgers',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
+@logged_in_user_has_departmental_access
 def commonSynchGLAccount(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
-        if  main_sbscrbr_entity!=None:
-            allifquery=CommonGeneralLedgersModel.objects.filter(id=pk,company=main_sbscrbr_entity).first()
-            related_coa_accs=CommonChartofAccountsModel.objects.filter(category=allifquery,company=main_sbscrbr_entity)
-            acc_balance=0
-            for items in related_coa_accs:
-                acc_balance+=items.balance
-            acc_total=acc_balance
-            allifquery.balance=acc_total
-            allifquery.save()
-            return redirect('allifmaalcommonapp:commonGeneralLedgers',allifusr=usrslg,allifslug=user_var)
-           
-        else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint') 
-        
+        allif_data=common_shared_data(request)
+        allifquery=CommonGeneralLedgersModel.objects.filter(id=pk,company=allif_data.get("main_sbscrbr_entity")).first()
+        related_coa_accs=CommonChartofAccountsModel.objects.filter(category=allifquery,company=allif_data.get("main_sbscrbr_entity"))
+        acc_balance=0
+        for items in related_coa_accs:
+            acc_balance+=items.balance
+        acc_total=acc_balance
+        allifquery.balance=acc_total
+        allifquery.save()
+        return redirect('allifmaalcommonapp:commonGeneralLedgers',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
+
 ####################### chart of accounts ########################
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
-@logged_in_user_can_view
 def commonChartofAccounts(request,*allifargs,**allifkwargs):
+    title="Chart of Accounts"
     try:
+        allif_data=common_shared_data(request)
         
-        title="Chart of Accounts"
         prospects=CommonQuotesModel.objects.filter(prospect="Likely").order_by('-total','-date')[:15]
         posted_invoices=CommonInvoicesModel.objects.filter(posting_inv_status="posted").order_by('-invoice_total','-date')[:7]
         no_of_prospects=CommonQuotesModel.objects.filter(prospect="Likely").count()
@@ -2520,44 +2465,52 @@ def commonChartofAccounts(request,*allifargs,**allifkwargs):
         main_assets=CommonAssetsModel.objects.filter(value__gt=0).order_by('-value')[:10]
         
         gold_customers_turnover=CommonCustomersModel.objects.all().aggregate(Sum('turnover'))['turnover__sum']
-        
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
+      
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
-        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-        logged_user_can_access_all=logged_user.can_access_all
-        form=CommonFilterCOAForm(main_sbscrbr_entity)
-        allifqueryset=CommonChartofAccountsModel.objects.filter(company=main_sbscrbr_entity).order_by("code")
-
-        assets_tot_val=CommonChartofAccountsModel.objects.filter(code__lte=19999 or 0,company=main_sbscrbr_entity).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
-        liablts_tot_val=CommonChartofAccountsModel.objects.filter(code__gt=19999 or 0,code__lte=29999 or 0,company=main_sbscrbr_entity).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
-        creditors_total_balance=CommonSuppliersModel.objects.filter(balance__gt=2,company=main_sbscrbr_entity).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
-        equity_tot_val=CommonChartofAccountsModel.objects.filter(code__gt=29999 or 0,code__lte=39999 or 0,company=main_sbscrbr_entity).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+        form=CommonFilterCOAForm(allif_data.get("main_sbscrbr_entity"))
+        allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by("code")
+        assets_tot_val=CommonChartofAccountsModel.objects.filter(code__lte=19999 or 0,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+        liablts_tot_val=CommonChartofAccountsModel.objects.filter(code__gt=19999 or 0,code__lte=29999 or 0,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+        creditors_total_balance=CommonSuppliersModel.objects.filter(balance__gt=2,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+        equity_tot_val=CommonChartofAccountsModel.objects.filter(code__gt=29999 or 0,code__lte=39999 or 0,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
         sum_liablts_and_equity=Decimal(liablts_tot_val or 0)+Decimal(equity_tot_val or 0)+Decimal(creditors_total_balance or 0)
 
-        if logged_user_profile!=None:
-            logged_user_division=logged_user_profile.division
-            logged_user_branch=logged_user_profile.branch
-            logged_user_department=logged_user_profile.department
-        else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
-            
-        if logged_user_can_access_all==True:
-            allifqueryset=CommonChartofAccountsModel.objects.filter(company=main_sbscrbr_entity).order_by("code")
-      
-        else:# if true, it means that company exists and logged user is owner 
-            allifqueryset=CommonChartofAccountsModel.objects.filter(company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
-       
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
             if selected_option=="ascending":
-                allifqueryset=CommonChartofAccountsModel.objects.filter(company=main_sbscrbr_entity).order_by('-balance')
+                if allif_data.get("logged_in_user_has_universal_access")==True:
+                    allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-balance')
+                elif allif_data.get("logged_in_user_has_divisional_access")==True:
+                    allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('-balance')
+                elif allif_data.get("logged_in_user_has_branches_access")==True:
+                    allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('-balance')
+                elif allif_data.get("logged_in_user_has_departmental_access")==True:
+                    allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('-balance')
+                else:
+                    allifqueryset=[]
             else:
-                allifqueryset=CommonChartofAccountsModel.objects.filter(company=main_sbscrbr_entity)
-        
+                if allif_data.get("logged_in_user_has_universal_access")==True:
+                    allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by("code")
+                elif allif_data.get("logged_in_user_has_divisional_access")==True:
+                    allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by("code")
+                elif allif_data.get("logged_in_user_has_branches_access")==True:
+                    allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by("code")
+                elif allif_data.get("logged_in_user_has_departmental_access")==True:
+                    allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by("code")
+                else:
+                    allifqueryset=[]
+        else:
+            if allif_data.get("logged_in_user_has_universal_access")==True:
+                allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by("code")
+            elif allif_data.get("logged_in_user_has_divisional_access")==True:
+                allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by("code")
+            elif allif_data.get("logged_in_user_has_branches_access")==True:
+                allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by("code")
+            elif allif_data.get("logged_in_user_has_departmental_access")==True:
+                allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by("code")
+            else:
+                allifqueryset=[]
         
         context = {
             "title":title,
@@ -2575,46 +2528,42 @@ def commonChartofAccounts(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
 @logged_in_user_can_add
 def commonAddChartofAccount(request,*allifargs,**allifkwargs):
+    title="Add New Account"
     try:
-        title="Add New Account"
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-        form=CommonAddChartofAccountForm(main_sbscrbr_entity)
-        if  main_sbscrbr_entity!=None:
-            if request.method=='POST':
-                code=request.POST.get('code')
-                descrp=request.POST.get('description')
-                deprtmnt=request.POST.get('department')
-                account=CommonChartofAccountsModel.objects.filter(code=code,description=descrp,company=main_sbscrbr_entity,department=deprtmnt).first()
-                form=CommonAddChartofAccountForm(main_sbscrbr_entity, request.POST)
-                if form.is_valid():
-                    obj = form.save(commit=False)
-                    obj.company =main_sbscrbr_entity
-                    obj.owner =logged_user
-                    if account is None:
-                        obj.save()
-                        return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=usrslg,allifslug=user_cmpny_slug)
-                    else:
-                        error_message="Sorry, a similar account description exists!!!"
-                        allifcontext={"error_message":error_message,
-                                    "form":form,
-                                    "title":title,}
-                        return render(request,'allifmaalcommonapp/accounts/add-coa.html',allifcontext)
-                
-                        
-                       
+        allif_data=common_shared_data(request)
+        form=CommonAddChartofAccountForm(allif_data.get("main_sbscrbr_entity"))
+        if request.method=='POST':
+            code=request.POST.get('code')
+            descrp=request.POST.get('description')
+            deprtmnt=request.POST.get('department')
+            account=CommonChartofAccountsModel.objects.filter(code=code,description=descrp,company=allif_data.get("main_sbscrbr_entity"),department=deprtmnt).first()
+            form=CommonAddChartofAccountForm(allif_data.get("main_sbscrbr_entity"), request.POST)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                if account is None:
+                    obj.save()
+                    return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
                 else:
-                    form=CommonAddChartofAccountForm(main_sbscrbr_entity, request.POST)
+                    error_message="Sorry, a similar account description exists!!!"
+                    allifcontext={"error_message":error_message,"form":form,"title":title,}
+                    return render(request,'allifmaalcommonapp/accounts/add-coa.html',allifcontext)
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint')
+            form=CommonAddChartofAccountForm(allif_data.get("main_sbscrbr_entity"), request.POST)
         context = {
             "title":title,
             "form":form,
@@ -2624,97 +2573,76 @@ def commonAddChartofAccount(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
+@logged_in_user_can_add
 def commonChartofAccountSearch(request,*allifargs,**allifkwargs):
     try:
         title="Search Results"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        searched_data=[]
+        allif_data=common_shared_data(request)
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonChartofAccountsModel.objects.filter((Q(description__icontains=allifsearch)|Q(code__icontains=allifsearch)|Q(category__description__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
-           
-            context={
-           
-            "title":title,
-            "allifsearch":allifsearch,
-            "searched_data":searched_data,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
-           
+            if allif_data.get("logged_in_user_has_universal_access")==True:
+                searched_data=CommonChartofAccountsModel.objects.filter((Q(description__icontains=allifsearch)|Q(code__icontains=allifsearch)|Q(category__description__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity"))).order_by("code")
+            elif allif_data.get("logged_in_user_has_divisional_access")==True:
+                searched_data=CommonChartofAccountsModel.objects.filter((Q(description__icontains=allifsearch)|Q(code__icontains=allifsearch)|Q(category__description__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")) & Q(division=allif_data.get("logged_user_division"))).order_by("code")
+            elif allif_data.get("logged_in_user_has_branches_access")==True:
+                searched_data=CommonChartofAccountsModel.objects.filter((Q(description__icontains=allifsearch)|Q(code__icontains=allifsearch)|Q(category__description__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")) & Q(division=allif_data.get("logged_user_division")) & Q(branch=allif_data.get("logged_user_branch"))).order_by("code")
+            elif allif_data.get("logged_in_user_has_departmental_access")==True:
+                searched_data=CommonChartofAccountsModel.objects.filter((Q(description__icontains=allifsearch)|Q(code__icontains=allifsearch)|Q(category__description__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")) & Q(division=allif_data.get("logged_user_division")) & Q(department=allif_data.get("logged_user_department")) & Q(branch=allif_data.get("logged_user_branch"))).order_by("code")
+               
+            else:
+                searched_data=[]
+        else:
+            searched_data=[]
+        context={
+        "title":title,
+        "allifsearch":allifsearch,
+        "searched_data":searched_data,
         }
         return render(request,'allifmaalcommonapp/accounts/chart-of-accs.html',context)
             
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
-@logged_in_user_can_edit 
+@logged_in_user_can_edit
 def commonEditChartofAccount(request,pk,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         title="Update Account Details"
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-       
-        user_var_update=CommonChartofAccountsModel.objects.filter(id=pk).first()
-        
-        querydept=user_var_update.department
-        
-        form=CommonAddChartofAccountForm(main_sbscrbr_entity,instance=user_var_update)
+        allifquery_update=CommonChartofAccountsModel.objects.filter(id=pk).first()
+        form=CommonAddChartofAccountForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         if request.method=='POST':
-            descrp=request.POST.get('description')
-            code=request.POST.get('code')
-            deprtmnt=request.POST.get('department')
-            account=CommonChartofAccountsModel.objects.filter(code=code,description=descrp,department=deprtmnt,company=main_sbscrbr_entity).first()
-            dept=CommonDepartmentsModel.objects.filter(id=deprtmnt).first()
-            
-            form=CommonAddChartofAccountForm(main_sbscrbr_entity,request.POST or None, instance=user_var_update)
+            form=CommonAddChartofAccountForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
             if form.is_valid():
-                obj = form.save(commit=False)
-                obj.owner=user_var_update.owner
-                if account is None:
-                   
-                    obj.save()
-                    return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=usrslg,allifslug=usrslg)
-                    
-                else:
-                    if deprtmnt==querydept.id:
-                       
-                        error_message="Sorry, a similar account description exists!!!"
-                        allifcontext={"error_message":error_message,
-                            "form":form,
-                            "title":title,}
-                        return render(request,'allifmaalcommonapp/accounts/add-coa.html',allifcontext)
-                    else:
-                        if int(deprtmnt)==int(querydept.id):
-                            obj.save()
-                            return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=usrslg,allifslug=usrslg)
-                        else:
-                            print(f"not equal {deprtmnt} {querydept.id}")
-                            error_message="Sorry, a similar account description exists!!!"
-                            allifcontext={"error_message":error_message,
-                                "form":form,
-                                "title":title,}
-                            return render(request,'allifmaalcommonapp/accounts/add-coa.html',allifcontext)
-                
-           
-                
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
-                form=CommonAddChartofAccountForm(main_sbscrbr_entity,instance=user_var_update)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonAddChartofAccountForm(main_sbscrbr_entity,instance=user_var_update)
+            form=CommonAddChartofAccountForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         
-        context={"title":title,"form":form,}
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
         return render(request,'allifmaalcommonapp/accounts/add-coa.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
 @logged_in_user_can_view
 def commonChartofAccountDetails(request,allifslug,*allifargs,**allifkwargs):
@@ -2723,16 +2651,18 @@ def commonChartofAccountDetails(request,allifslug,*allifargs,**allifkwargs):
         allifquery=CommonChartofAccountsModel.objects.filter(pk=allifslug).first()
         context={
             "allifquery":allifquery,
-            "title":title,
-        }
+            "title":title,}
         return render(request,'allifmaalcommonapp/accounts/coa-details.html',context)
     
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
-@logged_in_user_can_delete  
+@logged_in_user_can_delete
+@logged_in_user_has_departmental_delete
 def commonWantToDeleteCoA(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonChartofAccountsModel.objects.filter(id=pk).first()
@@ -2746,96 +2676,85 @@ def commonWantToDeleteCoA(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_is_admin
-@logged_in_user_can_delete  
+@logged_in_user_can_delete
+@logged_in_user_has_departmental_delete
 def commonDeleteChartofAccount(request,pk,*allifargs,**allifkwargs):
     try:
-        usrslg=request.user.customurlslug
-        user_var=request.user.usercompany
+        allif_data=common_shared_data(request)
         CommonChartofAccountsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=usrslg,allifslug=user_var)
-        
+        return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
 def commonSelectedRelatedAccs(request,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
-        if  main_sbscrbr_entity!=None:
-            if request.method=="GET":
-                selectedoption=request.GET.get('allifidforselecteditem')
-                selectedcategoryid=CommonGeneralLedgersModel.objects.filter(pk=selectedoption,company=main_sbscrbr_entity).first()
-                catid=selectedcategoryid.id
-                #catdescrip=selectedcategoryid.description
-                allifquery=CommonChartofAccountsModel.objects.filter(category=catid,company=main_sbscrbr_entity)#this is a queryset that will be sent to the backend.
-                allifqueryrelatedlist=list(CommonChartofAccountsModel.objects.filter(category=catid,company=main_sbscrbr_entity))#this is a list
-                serialized_data = serialize("json", allifqueryrelatedlist)
-                myjsondata= json.loads(serialized_data)
-                allifqueryset=list(CommonChartofAccountsModel.objects.filter(category=catid,company=main_sbscrbr_entity).values("category","description","id","code","balance"))
-                allifrelatedserlized= json.loads(serialize('json', allifquery))#this is a list
-                mystringjsondata=json.dumps(allifrelatedserlized)#this is string
-                return JsonResponse(allifqueryset,safe=False)
-            else:
-                pass
+        allif_data=common_shared_data(request)
+        if request.method=="GET":
+            selectedoption=request.GET.get('allifidforselecteditem')
+            selectedcategoryid=CommonGeneralLedgersModel.objects.filter(pk=selectedoption,company=allif_data.get("main_sbscrbr_entity")).first()
+            catid=selectedcategoryid.id
+            allifquery=CommonChartofAccountsModel.objects.filter(category=catid,company=allif_data.get("main_sbscrbr_entity"))#this is a queryset that will be sent to the backend.
+            allifqueryrelatedlist=list(CommonChartofAccountsModel.objects.filter(category=catid,company=allif_data.get("main_sbscrbr_entity")))#this is a list
+            serialized_data = serialize("json", allifqueryrelatedlist)
+            myjsondata= json.loads(serialized_data)
+            allifqueryset=list(CommonChartofAccountsModel.objects.filter(category=catid,company=allif_data.get("main_sbscrbr_entity")).values("category","description","id","code","balance"))
+            allifrelatedserlized= json.loads(serialize('json', allifquery))#this is a list
+            mystringjsondata=json.dumps(allifrelatedserlized)#this is string
+            return JsonResponse(allifqueryset,safe=False)
         else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint')
+            allifqueryset=[]
+     
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
 def commonClearAcc(request,pk,*allifargs,**allifkwargs):
     try:
-        usrslg=request.user.customurlslug
-        user_var=request.user.usercompany
+        allif_data=common_shared_data(request)
         acc=CommonChartofAccountsModel.objects.filter(id=pk).first()
         acc.balance=0
         acc.save()
-        return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=usrslg,allifslug=user_var)
-        
+        return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
 def commonChartofAccAdvanceSearch(request,*allifargs,**allifkwargs):
+    title="Advanced Search"
     try:
-        title="Advanced Search"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
-        allifqueryset=CommonCompanyDetailsModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=main_sbscrbr_entity)
-        allifqueryset=CommonChartofAccountsModel.objects.filter(company=main_sbscrbr_entity).order_by("code")
-        
+        allifqueryset=[]
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('name')[:4]
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
             start_value=request.POST.get('startvalue')
             end_value=request.POST.get('endvalue')
             if start_value!="" and end_value!="":
-                searched_data=CommonChartofAccountsModel.objects.filter(Q(balance__gte=start_value)& Q(balance__lte=end_value)& Q(company=main_sbscrbr_entity))
+                searched_data=CommonChartofAccountsModel.objects.filter(Q(balance__gte=start_value)& Q(balance__lte=end_value)& Q(company=allif_data.get("main_sbscrbr_entity"))).order_by('code')
                 # if pdf is selected
                 if selected_option=="pdf":
                     template_path = 'allifmaalcommonapp/accounts/coa-search-pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":main_sbscrbr_entity,
-                    "scopes":scopes
-                    }
+                    allifcontext={"searched_data":searched_data,"title":title,"main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),"scopes":scopes}
+                  
                     response = HttpResponse(content_type='application/doc')
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = f'filename="Searched_Results.pdf"'
                     template = get_template(template_path)
-                    html = template.render(allifcontext)
+                    html=template.render(allifcontext)
                     try:
                         pisa_status=pisa.CreatePDF(html, dest=response)
                     except Exception as ex:
@@ -2845,43 +2764,16 @@ def commonChartofAccAdvanceSearch(request,*allifargs,**allifkwargs):
                     if pisa_status.err:
                         return HttpResponse('We had some errors <pre>' + html + '</pre>')
                     return response
-                # if excel is selected
-                elif selected_option=="excel":
-                    compnyresource= commonCompanyResource()
-                    dataset =compnyresource.export(searched_data)
-                    response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
-                    response['Content-Disposition'] = 'attachment; filename="zamzam-stock.xls"'
-                    return response
-                # if word is selected
-                elif selected_option=="word":
-                    pass
-
-                # if something else is selected or none is selected
                 else:
-                    context = {
-                    "searched_data":searched_data,
-                    "formats":formats,
-                    "title":title,
-                     "scopes":scopes
-                    }
-                    return render(request,'allifmaalcommonapp/accounts/chart-of-accs.html',context)
-                    
+                    allifqueryset=CommonChartofAccountsModel.objects.filter(Q(balance__gte=start_value)& Q(balance__lte=end_value)& Q(company=allif_data.get("main_sbscrbr_entity"))).order_by('code')
+                    context={"allifqueryset":allifqueryset,"formats":formats,"title":title,}
+                    return render(request,'allifmaalcommonapp/accounts/chart-of-accs.html',context)  
             else:
-                allifqueryset=CommonCompanyDetailsModel.objects.all()
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
-            }
-            return render(request,'allifmaalcommonapp/companies/companies.html',context)
-        
+                allifqueryset=[]
+            context={"allifqueryset":allifqueryset,"formats":formats,"title":title,}
+            return render(request,'allifmaalcommonapp/accounts/chart-of-accs.html',context)
         else:
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
+            context={"allifqueryset":allifqueryset,"formats":formats,"title":title,"scopes":scopes
             }
             return render(request,'allifmaalcommonapp/companies/companies.html',context)
       
@@ -2891,39 +2783,21 @@ def commonChartofAccAdvanceSearch(request,*allifargs,**allifkwargs):
 
 ############################### EMAILS AND SMS ####################
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+@logged_in_user_must_have_profile
 def commonEmailsAndSMS(request,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         title="Emails and SMSs"
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-        logged_user_can_access_all=logged_user.can_access_all
-        allifqueryset=CommonEmailsModel.objects.filter(company=main_sbscrbr_entity)
-        if logged_user_profile!=None:
-            logged_user_division=logged_user_profile.division
-            logged_user_branch=logged_user_profile.branch
-            logged_user_department=logged_user_profile.department
-        else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
-            
-        if logged_user_can_access_all==True:
-            allifqueryset=CommonEmailsModel.objects.filter(company=main_sbscrbr_entity)
-      
-        else:# if true, it means that company exists and logged user is owner 
-            allifqueryset=CommonEmailsModel.objects.filter(company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
+        allifqueryset=CommonEmailsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         ################## Sending an Email ###########################################
         ahmed='info@allifmaal.com'
         muse='allifmaalengineering@gmail.com'
         subject = title
         message = f'Thank you for creating an account!'
-        email_sender=logged_user.email #'ahmedmusadir@gmail.com'
+        email_sender=allif_data.get("usernmeslg").email #'ahmedmusadir@gmail.com'
         recipient_list = [ahmed,muse]
         send_mail(subject, message, email_sender, recipient_list)# uncomment to send emails.
-        email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender,company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
+        email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender,company=allif_data.get("main_sbscrbr_entity"))
         #email.save()
 
         ################3 this below is for the SMS... this worked ###################
@@ -2935,57 +2809,44 @@ def commonEmailsAndSMS(request,*allifargs,**allifkwargs):
         from_="+17753731268",#virtual number from Twilio
         body="Testing Message Here") # message to be sent.
 
-    
-        context = {
-            "title":title,
-            "allifqueryset":allifqueryset,
-            
-        }
+        context={"title":title,"allifqueryset":allifqueryset,}
         return render(request,'allifmaalcommonapp/comms/emailsms.html',context)
     
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_is_admin
-@logged_in_user_can_delete  
+
+@logged_in_user_must_have_profile
 def commonDeleteEmail(request,pk,*allifargs,**allifkwargs):
     try:
-        usrslg=request.user.customurlslug
-        user_var=request.user.usercompany
+        allif_data=common_shared_data(request)
         CommonEmailsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonEmailsAndSMS',allifusr=usrslg,allifslug=user_var)
-        
+        return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+
 #################################### BANKS SECTION #############################
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonBanks(request,*allifargs,**allifkwargs):
     try:
         title="Banks"
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-        logged_user_can_access_all=logged_user.can_access_all
-        allifqueryset=CommonBanksModel.objects.filter(company=main_sbscrbr_entity)
-        if logged_user_profile!=None:
-            logged_user_division=logged_user_profile.division
-            logged_user_branch=logged_user_profile.branch
-            logged_user_department=logged_user_profile.department
+        allif_data=common_shared_data(request)
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=CommonBanksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=CommonBanksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=CommonBanksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=CommonBanksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
-            
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
-            
-        if logged_user_can_access_all==True:
-            allifqueryset=CommonBanksModel.objects.filter(company=main_sbscrbr_entity)
-      
-        else:# if true, it means that company exists and logged user is owner 
-            allifqueryset=CommonBanksModel.objects.filter(company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
-        
+            allifqueryset=[]
+
         context = {
             "title":title,
             "allifqueryset":allifqueryset,
@@ -2995,109 +2856,78 @@ def commonBanks(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_add
 def commonAddBank(request,allifusr,allifslug,*allifargs,**allifkwargs):
+    title="Add New Bank"
     try:
-        title="Add New Bank "
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
-        usr=request.user
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
-        form=CommonAddBankForm(main_sbscrbr_entity)
-        if  main_sbscrbr_entity!=None:
-            if request.method=='POST':
-                descrp=request.POST.get('name')
-                deptmnt=request.POST.get('department')
-                account=CommonBanksModel.objects.filter(name=descrp,company=main_sbscrbr_entity,department=deptmnt).first()
-                form=CommonAddBankForm(main_sbscrbr_entity,request.POST)
-                if form.is_valid():
-                    obj = form.save(commit=False)
-                    obj.company =main_sbscrbr_entity
-                    obj.owner =usr
-                    if account is None:
-                        obj.save()
-
-                        return redirect('allifmaalcommonapp:commonBanks',allifusr=usrslg,allifslug=user_var)
-                    else:
-                        error_message="Sorry, a similar description exists!!!"
-                        allifcontext={"error_message":error_message,"form":form,}
-                        return render(request,'allifmaalcommonapp/banks/add-bank.html',allifcontext)
-                        
-
-                else:
-                    form=CommonAddBankForm(main_sbscrbr_entity)
+        allif_data=common_shared_data(request)
+        form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"))
+        if request.method=='POST':
+            form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalcommonapp:commonBanks',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
-                form=CommonAddBankForm(main_sbscrbr_entity)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint') 
-        context = {
-            "title":title,
-            "form":form,
-        }
+            form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"))
+        context={"title":title,"form":form,}
         return render(request,'allifmaalcommonapp/banks/add-bank.html',context)
-    
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_edit
 def commonEditBank(request,pk,*allifargs,**allifkwargs):
+    title="Update Bank Details"
     try:
-        title="Update Bank Details"
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
+        allif_data=common_shared_data(request)
         allifquery_update=CommonBanksModel.objects.filter(id=pk).first()
-        form=CommonAddBankForm(main_sbscrbr_entity,instance=allifquery_update)
-        
+        form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         if request.method=='POST':
-            descrp=request.POST.get('name')
-            deprtmnt=request.POST.get('department')
-            account=CommonBanksModel.objects.filter(name=descrp,department=deprtmnt,company=main_sbscrbr_entity).first()
-            form=CommonAddBankForm(main_sbscrbr_entity,request.POST or None, instance=allifquery_update)
+            form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
             if form.is_valid():
-                obj = form.save(commit=False)
-                obj.owner=logged_user
-                if account is None:
-                    obj.save()
-                    return redirect('allifmaalcommonapp:commonBanks',allifusr=usrslg,allifslug=usrslg)
-                    
-                else:
-                    if int(account.id)!=int(allifquery_update.id):
-                       
-                        error_message="Sorry, a similar description exists!!!"
-                        allifcontext={"error_message":error_message,
-                            "form":form,
-                            "title":title,}
-                        return render(request,'allifmaalcommonapp/banks/add-bank.html',allifcontext)
-                    else:
-                        obj.save()
-                        return redirect('allifmaalcommonapp:commonBanks',allifusr=usrslg,allifslug=usrslg)
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalcommonapp:commonBanks',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+               
         else:
-            form=CommonAddBankForm(main_sbscrbr_entity,instance=allifquery_update)
-
-        context={"title":title,"form":form,}
+            form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
         return render(request,'allifmaalcommonapp/banks/add-bank.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
 def commonBankDetails(request,allifslug,*allifargs,**allifkwargs):
     try:
         title="Bank Details"
-        user_var=request.user.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
+        allif_data=common_shared_data(request)
         allifquery=CommonBanksModel.objects.filter(pk=allifslug).first()
-        allifqueryset=CommonBankWithdrawalsModel.objects.filter(bank=allifquery,company=main_sbscrbr_entity)
-        queryset=CommonBankWithdrawalsModel.objects.filter(bank=allifquery,company=main_sbscrbr_entity)
+        allifqueryset=CommonBankWithdrawalsModel.objects.filter(bank=allifquery,company=allif_data.get("main_sbscrbr_entity"))
+        queryset=CommonBankWithdrawalsModel.objects.filter(bank=allifquery,company=allif_data.get("main_sbscrbr_entity"))
         deposits=CommonShareholderBankDepositsModel.objects.filter(bank=allifquery)
-        
         context={
             "allifquery":allifquery,
             "title":title,
@@ -3110,7 +2940,10 @@ def commonBankDetails(request,allifslug,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
 @logged_in_user_can_delete  
 def commonWantToDeleteBank(request,pk,*allifargs,**allifkwargs):
     try:
@@ -3125,151 +2958,132 @@ def commonWantToDeleteBank(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)   
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+@logged_in_user_has_branches_delete
 @logged_in_user_can_delete  
 def commonDeleteBank(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        allif_data=common_shared_data(request)
         CommonBanksModel.objects.filter(pk=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonBanks',allifusr=usrslg,allifslug=user_var)
+        return redirect('allifmaalcommonapp:commonBanks',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
         
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view 
 def commonBankSearch(request,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         title="Search Results"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        searched_data=[]
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonBanksModel.objects.filter((Q(name__icontains=allifsearch)|Q(account__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
-           
-            context={
-           
-            "title":title,
-            "allifsearch":allifsearch,
-            "searched_data":searched_data,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
-           
-        }
+            if allif_data.get("logged_in_user_has_universal_access")==True:
+                searched_data=CommonBanksModel.objects.filter((Q(name__icontains=allifsearch)|Q(account__icontains=allifsearch)|Q(balance__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+            elif allif_data.get("logged_in_user_has_divisional_access")==True:
+                searched_data=CommonBanksModel.objects.filter((Q(name__icontains=allifsearch)|Q(account__icontains=allifsearch)|Q(balance__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")) & Q(division=allif_data.get("logged_user_division")))
+            elif allif_data.get("logged_in_user_has_branches_access")==True:
+                searched_data=CommonBanksModel.objects.filter((Q(name__icontains=allifsearch)|Q(account__icontains=allifsearch)|Q(balance__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")) & Q(division=allif_data.get("logged_user_division")) & Q(branch=allif_data.get("logged_user_branch")))
+            elif allif_data.get("logged_in_user_has_departmental_access")==True:
+                searched_data=CommonBanksModel.objects.filter((Q(name__icontains=allifsearch)|Q(account__icontains=allifsearch)|Q(balance__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")) & Q(division=allif_data.get("logged_user_division")) & Q(department=allif_data.get("logged_user_department")) & Q(branch=allif_data.get("logged_user_branch")))
+            else:
+                searched_data=[]
+        else:
+            searched_data=[]
+
+        context={"title":title,"allifsearch":allifsearch,"searched_data":searched_data,}
         return render(request,'allifmaalcommonapp/banks/banks.html',context)
             
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
 ############################################### BANK DEPOSITS ################################
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
-@logged_in_user_is_admin
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view 
 def commonBankShareholderDeposits(request,*allifargs,**allifkwargs):
     try:
         title="Bank Deposits"
+        allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-        logged_user_can_access_all=logged_user.can_access_all
-        allifqueryset=CommonBanksModel.objects.filter(company=main_sbscrbr_entity)
-        if logged_user_profile!=None:
-            logged_user_division=logged_user_profile.division
-            logged_user_branch=logged_user_profile.branch
-            logged_user_department=logged_user_profile.department
+        allifqueryset=[]
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
-            
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
-            
-        if logged_user_can_access_all==True:
-            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity)
-      
-        else:# if true, it means that company exists and logged user is owner 
-            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
-        
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            if selected_option=="ascending":
-                allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity).order_by('-amount')
-            else:
-                allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity)
-      
-        context={
-            "title":title,
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "datasorts":datasorts,
+            allifqueryset=[]
+        context={"title":title,"allifqueryset":allifqueryset,"formats":formats,
         }
         return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_add
+@logged_in_user_is_admin
 def commonAddBankShareholderDeposit(request,*allifargs,**allifkwargs):
+    title="Add New Bank Deposit"
     try:
-        title="Add New Bank Deposit"
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-        logged_user_can_access_all=logged_user.can_access_all
-        allifqueryset=CommonBanksModel.objects.filter(company=main_sbscrbr_entity)
-        if logged_user_profile!=None:
-            logged_user_division=logged_user_profile.division
-            logged_user_branch=logged_user_profile.branch
-            logged_user_department=logged_user_profile.department
-        else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
-        form=CommonBankDepositAddForm(main_sbscrbr_entity)
-        if  main_sbscrbr_entity!=None:
-            if request.method=='POST':
-                bank=request.POST.get('bank')
-                amount=request.POST.get('amount')
-                chartaccasset=request.POST.get('asset')
-                chartacceqty=request.POST.get('equity')
-                form=CommonBankDepositAddForm(main_sbscrbr_entity, request.POST)
-                if form.is_valid():
-                    obj = form.save(commit=False)
-                    obj.company =main_sbscrbr_entity
-                    obj.owner =logged_user
-                    obj.save()
-                    myquery=CommonBanksModel.objects.filter(id=bank).first()
-                    initial_bank_balnce=myquery.balance
-                    myquery.balance=initial_bank_balnce+Decimal(amount)
-                    myquery.deposit=Decimal(amount)
-                    myquery.withdrawal=0
-                    myquery.save()
+        allif_data=common_shared_data(request)
+        form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"))
+        if request.method=='POST':
+            bank=request.POST.get('bank')
+            amount=request.POST.get('amount')
+            chartaccasset=request.POST.get('asset')
+            chartacceqty=request.POST.get('equity')
+            form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"), request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                myquery=CommonBanksModel.objects.filter(id=bank).first()
+                initial_bank_balnce=myquery.balance
+                myquery.balance=initial_bank_balnce+Decimal(amount)
+                myquery.deposit=Decimal(amount)
+                #myquery.withdrawal=0
+                myquery.save()
 
-                    ########### increase the asset account
-                    query=CommonChartofAccountsModel.objects.filter(id=chartaccasset).first()
-                    initial_bank_balnce=query.balance
-                    query.balance=initial_bank_balnce+Decimal(amount)
-                    query.save()
+                ########### increase the asset account
+                query=CommonChartofAccountsModel.objects.filter(id=chartaccasset).first()
+                initial_bank_balnce=query.balance
+                query.balance=initial_bank_balnce+Decimal(amount)
+                query.save()
 
-                    ############ increase equity account ##############
-                    eqtyquery=CommonChartofAccountsModel.objects.filter(id=chartacceqty).first()
-                    initial_bank_balnce=eqtyquery.balance
-                    eqtyquery.balance=initial_bank_balnce+Decimal(amount)
-                    eqtyquery.save()
-
-                    return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=usrslg,allifslug=user_cmpny_slug)
-                        
-                else:
-                    form=CommonBankDepositAddForm(main_sbscrbr_entity)
-
+                ############ increase equity account ##############
+                eqtyquery=CommonChartofAccountsModel.objects.filter(id=chartacceqty).first()
+                initial_bank_balnce=eqtyquery.balance
+                eqtyquery.balance=initial_bank_balnce+Decimal(amount)
+                eqtyquery.save()
+                return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+               
         context={
             "form":form,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
+            "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
             "title":title,
-            
+           
             }
         return render(request,'allifmaalcommonapp/banks/deposits/shareholders/add-deposit-sh.html',context)
     
@@ -3277,38 +3091,40 @@ def commonAddBankShareholderDeposit(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
-@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_edit
 def commonEditBankShareholderDeposit(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
-        sector=str(main_sbscrbr_entity.sector)
-        user_var_update=CommonShareholderBankDepositsModel.objects.filter(id=pk).first()
-       
-        form=CommonBankDepositAddForm(main_sbscrbr_entity, instance=user_var_update)
-       
-        title=user_var_update
-
+        allif_data=common_shared_data(request)
+        allifquery_update=CommonShareholderBankDepositsModel.objects.filter(id=pk).first()
+        form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
+        title=allifquery_update
         if request.method=='POST':
-            form=CommonBankDepositAddForm(main_sbscrbr_entity, request.POST, instance=user_var_update)
+            form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=allifquery_update)
             if form.is_valid():
                 obj = form.save(commit=False)
-                obj.owner=user_var_update.owner
-                #obj.uid=allifuid
+                obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=usrslg,allifslug=user_var)
-               
-        context={"title":title,"form":form,"sector":sector,}
+                return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
+
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
         return render(request,'allifmaalcommonapp/banks/deposits/shareholders/add-deposit-sh.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
 def commonBankShareholderDepositDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonShareholderBankDepositsModel.objects.filter(pk=pk).first()
@@ -3322,8 +3138,10 @@ def commonBankShareholderDepositDetails(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view 
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_delete
 def commonWantToDeleteDeposit(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonShareholderBankDepositsModel.objects.filter(id=pk).first()
@@ -3337,66 +3155,67 @@ def commonWantToDeleteDeposit(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)         
-@login_required(login_url='allifmaalusersapp:userLoginPage')  
-@logged_in_user_can_view
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_delete
-@logged_in_user_is_admin
+@logged_in_user_has_branches_delete
 def commonDeleteBankShareholderDeposit(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        allif_data=common_shared_data(request)
         CommonShareholderBankDepositsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=usrslg,allifslug=user_var)
-        
+        return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonDepositSearch(request,*allifargs,**allifkwargs):
     try:
         title="Search Results"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        allif_data=common_shared_data(request)
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonShareholderBankDepositsModel.objects.filter((Q(description__icontains=allifsearch)|Q(amount__icontains=allifsearch)|Q(bank__name__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
-           
+            searched_data=CommonShareholderBankDepositsModel.objects.filter((Q(description__icontains=allifsearch)|Q(amount__icontains=allifsearch)|Q(bank__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
             context={
-           
             "title":title,
             "allifsearch":allifsearch,
             "searched_data":searched_data,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
-           
         }
         return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
             
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonDepositAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
         title="Advanced Search"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
-        allifqueryset=CommonCompanyDetailsModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=main_sbscrbr_entity)
-        allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity)
-       
-        firstDate=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity).first().date
-        lastDate=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity).last().date
-        largestAmount=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity).order_by('-amount').first().amount
-       
-        biggestAmount=CommonShareholderBankDepositsModel.objects.aggregate(Max('amount')).values()
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        current_date=timezone.now().date().today()
+        firstDate=current_date
+        lastDate=current_date
+        largestAmount=0
+        firstDepo=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
 
+        lastDepo=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
+        if firstDepo and lastDepo:
+            firstDate=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+            lastDate=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+            largestAmount=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+        else:
+            firstDate=current_date
+            lastDate=current_date
+     
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
             start_date=request.POST.get('startdate',selected_option) or None
@@ -3404,17 +3223,11 @@ def commonDepositAdvanceSearch(request,*allifargs,**allifkwargs):
             start_value=request.POST.get('startvalue') or None
             end_value=request.POST.get('endvalue') or None
             if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=main_sbscrbr_entity))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
+                searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
+               
                 if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/banks/deposits/shareholders/deposit-search-pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":main_sbscrbr_entity,
-                    "scopes":scopes
-                    }
+                    template_path='allifmaalcommonapp/banks/deposits/shareholders/deposit-search-pdf.html'
+                    allifcontext={"searched_data":searched_data,"title":title,"main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),"scopes":scopes,}
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
@@ -3430,19 +3243,9 @@ def commonDepositAdvanceSearch(request,*allifargs,**allifkwargs):
                     if pisa_status.err:
                         return HttpResponse('We had some errors <pre>' + html + '</pre>')
                     return response
-                # if excel is selected
-                elif selected_option=="excel":
-                    compnyresource=commonBankDepositsResource()
-                    dataset =compnyresource.export(searched_data)
-                    response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
-                    response['Content-Disposition'] = 'attachment; filename="zamzam-stock.xls"'
-                    return response
-                # if word is selected
-                elif selected_option=="word":
-                    pass
-
-                # if something else is selected or none is selected
+                
                 else:
+                    searched_data=[]
                     context = {
                     "searched_data":searched_data,
                     "formats":formats,
@@ -3452,16 +3255,12 @@ def commonDepositAdvanceSearch(request,*allifargs,**allifkwargs):
                     return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
                    
             else:
-                allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity)
-                
-                
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
-            }
-            return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
+                searched_data=[]
+                allifqueryset=[]
+                context={"allifqueryset":allifqueryset,"formats":formats,"title":title,
+                }
+                return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
+       
         else:
             context={
             "allifqueryset":allifqueryset,
@@ -3475,56 +3274,40 @@ def commonDepositAdvanceSearch(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonClearShareholderDepositSearch(request,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
-        return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=usrslg,allifslug=user_var)
+        allif_data=common_shared_data(request)
+        return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
 ############################################### BANK WITHDRAWALS ################################
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonBankWithdrawals(request,*allifargs,**allifkwargs):
     try:
         title="Bank Withdrawals"
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-        logged_user_can_access_all=logged_user.can_access_all
-        allifqueryset=CommonBanksModel.objects.filter(company=main_sbscrbr_entity)
-        if logged_user_profile!=None:
-            logged_user_division=logged_user_profile.division
-            logged_user_branch=logged_user_profile.branch
-            logged_user_department=logged_user_profile.department
+        allif_data=common_shared_data(request)
+        formats=CommonDocsFormatModel.objects.all()
+        allifqueryset=[]
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
-            context={
-                "logged_user":logged_user
-            }
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
-            
-        if logged_user_can_access_all==True:
-            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=main_sbscrbr_entity)
-      
-        else:# if true, it means that company exists and logged user is owner 
-            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
-        
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            if selected_option=="ascending":
-                allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=main_sbscrbr_entity).order_by('-amount')
-            else:
-                allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=main_sbscrbr_entity)
-        else:
-            pass
-        
+            allifqueryset=[]
         context={
             "title":title,
             "allifqueryset":allifqueryset,
@@ -3535,56 +3318,55 @@ def commonBankWithdrawals(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_add
 def commonAddBankWithdrawal(request,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usr=request.user
-        usrslg=request.user.customurlslug
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
         title="New Withdrawal"
-        form=CommonBankWithdrawalsAddForm(main_sbscrbr_entity)
-        if  main_sbscrbr_entity!=None:
-            if request.method=='POST':
-                bank=request.POST.get('bank')
-                amount=request.POST.get('amount')
-                chart_account=request.POST.get('asset')
-                bankcoa=request.POST.get('bankcoa')
+        allif_data=common_shared_data(request)
+        form=CommonBankWithdrawalsAddForm(allif_data.get("main_sbscrbr_entity"))
+        
+        if request.method=='POST':
+            bank=request.POST.get('bank')
+            amount=request.POST.get('amount')
+            chart_account=request.POST.get('asset')
+            bankcoa=request.POST.get('bankcoa')
+            
+            form=CommonBankWithdrawalsAddForm(allif_data.get("main_sbscrbr_entity"), request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+               
+                obj.save()
+                myquery=CommonBanksModel.objects.filter(id=bank).first()
+                initial_bank_balnce=myquery.balance
+                myquery.balance=initial_bank_balnce-Decimal(amount)
+                myquery.deposit=0
+                myquery.withdrawal=Decimal(amount)
+                myquery.save()
+                acc=CommonChartofAccountsModel.objects.filter(pk=chart_account).first()# The misc cost service supplier
+                init_acc_balance=acc.balance
+                acc.balance=init_acc_balance+Decimal(amount)
                 
-                form=CommonBankWithdrawalsAddForm(main_sbscrbr_entity, request.POST)
-                if form.is_valid():
-                    obj = form.save(commit=False)
-                    obj.company =main_sbscrbr_entity
-                    obj.owner =usr
-                    #obj.uid=allifuid
-                    obj.save()
-                    myquery=CommonBanksModel.objects.filter(id=bank).first()
-                    initial_bank_balnce=myquery.balance
-                    myquery.balance=initial_bank_balnce-Decimal(amount)
-                    myquery.deposit=0
-                    myquery.withdrawal=Decimal(amount)
-                    myquery.save()
-                    acc=CommonChartofAccountsModel.objects.filter(pk=chart_account).first()# The misc cost service supplier
-                    init_acc_balance=acc.balance
-                    acc.balance=init_acc_balance+Decimal(amount)
-                   
-                    acc.save()
+                acc.save()
 
-                    accnt=CommonChartofAccountsModel.objects.filter(pk=bankcoa).first()# The misc cost service supplier
-                    init_acc_balance=accnt.balance
-                    accnt.balance=init_acc_balance-Decimal(amount)
-                    accnt.save()
-                   
-                    return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=usrslg,allifslug=user_var)
-
-                else:
-                    form=CommonBankWithdrawalsAddForm(main_sbscrbr_entity)
+                accnt=CommonChartofAccountsModel.objects.filter(pk=bankcoa).first()# The misc cost service supplier
+                init_acc_balance=accnt.balance
+                accnt.balance=init_acc_balance-Decimal(amount)
+                accnt.save()
+                return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
 
         context={
             "form":form,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
             "title":title,
             
             }
@@ -3594,44 +3376,41 @@ def commonAddBankWithdrawal(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_edit
 def commonEditBankWithdrawal(request,pk,*allifargs,**allifkwargs):
     try:
-        
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
-        sector=str(main_sbscrbr_entity.sector)
-        user_var_update=CommonBankWithdrawalsModel.objects.filter(id=pk).first()
-       
-        form=CommonBankWithdrawalsAddForm(main_sbscrbr_entity, instance=user_var_update)
-       
-        title=user_var_update
-
+        allif_data=common_shared_data(request)
+        allifquery_update=CommonBankWithdrawalsModel.objects.filter(id=pk).first()
+        form=CommonBankWithdrawalsAddForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
+        title=allifquery_update
         if request.method=='POST':
-            form=CommonBankWithdrawalsAddForm(main_sbscrbr_entity, request.POST, instance=user_var_update)
+            form=CommonBankWithdrawalsAddForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=allifquery_update)
             if form.is_valid():
-                obj = form.save(commit=False)
-                obj.owner=user_var_update.owner
-                #obj.uid=allifuid
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=usrslg,allifslug=user_var)
-               
-        context={"title":title,"form":form,"sector":sector,}
+                return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
         return render(request,'allifmaalcommonapp/banks/withdrawals/add-withdrawal.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonBankWithdrawalDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonBankWithdrawalsModel.objects.filter(pk=pk).first()
         title="Withdrawal Details"
-
         context={
             "allifquery":allifquery,
             "title":title,
@@ -3641,10 +3420,10 @@ def commonBankWithdrawalDetails(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
-@logged_in_user_can_view
-@logged_in_user_is_admin
-@logged_in_user_can_delete 
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_delete
 def commonWantToDeleteWithdrawal(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonBankWithdrawalsModel.objects.filter(id=pk).first()
@@ -3658,66 +3437,70 @@ def commonWantToDeleteWithdrawal(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)              
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
-@logged_in_user_can_view
-@logged_in_user_is_admin
-@logged_in_user_can_delete  
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_delete
+@logged_in_user_has_branches_delete
 def commonDeleteBankWithdrawal(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        allif_data=common_shared_data(request)
         CommonBankWithdrawalsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=usrslg,allifslug=user_var)
-        
+        return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonWithdrawalSearch(request,*allifargs,**allifkwargs):
     try:
         title="Search Results"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        allif_data=common_shared_data(request)
+        searched_data=[]
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonBankWithdrawalsModel.objects.filter((Q(description__icontains=allifsearch)|Q(amount__icontains=allifsearch)|Q(bank__name__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
-           
-            context={
-           
-            "title":title,
-            "allifsearch":allifsearch,
-            "searched_data":searched_data,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
-           
+            searched_data=CommonBankWithdrawalsModel.objects.filter((Q(description__icontains=allifsearch)|Q(amount__icontains=allifsearch)|Q(bank__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+        else:
+            searched_data=[]
+
+        context={
+        "title":title,
+        "searched_data":searched_data,
         }
         return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
-        
-            
+   
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
         title="Advanced Search"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+        allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
-        allifqueryset=CommonCompanyDetailsModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=main_sbscrbr_entity)
-        allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=main_sbscrbr_entity)
-       
-        firstDate=CommonBankWithdrawalsModel.objects.filter(company=main_sbscrbr_entity).first().date
-        lastDate=CommonBankWithdrawalsModel.objects.filter(company=main_sbscrbr_entity).last().date
-        largestAmount=CommonBankWithdrawalsModel.objects.filter(company=main_sbscrbr_entity).order_by('-amount').first().amount
-       
-        biggestAmount=CommonBankWithdrawalsModel.objects.aggregate(Max('amount')).values()
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        current_date=timezone.now().date().today()
+        firstDate=current_date
+        lastDate=current_date
+        largestAmount=0
+        firstDepo=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
+
+        lastDepo=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
+        if firstDepo and lastDepo:
+            firstDate=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+            lastDate=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+            largestAmount=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+        else:
+            firstDate=current_date
+            lastDate=current_date
 
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
@@ -3726,7 +3509,7 @@ def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
             start_value=request.POST.get('startvalue') or None
             end_value=request.POST.get('endvalue') or None
             if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonBankWithdrawalsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=main_sbscrbr_entity))
+                searched_data=CommonBankWithdrawalsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
                 #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
                 # if pdf is selected
                 if selected_option=="pdf":
@@ -3734,7 +3517,7 @@ def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
                     allifcontext = {
                     "searched_data":searched_data,
                     "title":title,
-                    "main_sbscrbr_entity":main_sbscrbr_entity,
+                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
                     "scopes":scopes
                     }
                     
@@ -3753,18 +3536,9 @@ def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
                         return HttpResponse('We had some errors <pre>' + html + '</pre>')
                     return response
                 # if excel is selected
-                elif selected_option=="excel":
-                    compnyresource=commonBankWithdrawalResource()
-                    dataset =compnyresource.export(searched_data)
-                    response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
-                    response['Content-Disposition'] = 'attachment; filename="zamzam-stock.xls"'
-                    return response
-                # if word is selected
-                elif selected_option=="word":
-                    pass
-
-                # if something else is selected or none is selected
+                
                 else:
+                    searched_data=CommonBankWithdrawalsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
                     context = {
                     "searched_data":searched_data,
                     "formats":formats,
@@ -3774,7 +3548,7 @@ def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
                     return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
                     
             else:
-                allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity)
+                allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
                 
                 
             context={
@@ -3800,58 +3574,53 @@ def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 #################################### BANKS SECTION #############################
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonClearShareholderWithdrwlSearch(request,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
-        return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=usrslg,allifslug=user_var)
+        allif_data=common_shared_data(request)
+        return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
 
 ##############################33 suppliers section ###############3
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonSuppliers(request,*allifargs,**allifkwargs):
     try:
         title="Suppliers And Vendors"
-        compslg=request.user.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-
+        allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
-        user_cmpny_slug=request.user.usercompany
-        usrslg=request.user.customurlslug
-        logged_user=User.objects.filter(customurlslug=usrslg).first()
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_cmpny_slug).first()
-        logged_user_profile=CommonEmployeesModel.objects.filter(username=logged_user,company=main_sbscrbr_entity).first()
-        logged_user_can_access_all=logged_user.can_access_all
-        allifqueryset=[]
-        if logged_user_profile!=None:
-            logged_user_division=logged_user_profile.division
-            logged_user_branch=logged_user_profile.branch
-            logged_user_department=logged_user_profile.department
-        else:
-            return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html')
-            
-        if logged_user_can_access_all==True:
-            allifqueryset=CommonSuppliersModel.objects.filter(company=main_sbscrbr_entity)
-      
-        else:# if true, it means that company exists and logged user is owner 
-            allifqueryset=CommonSuppliersModel.objects.filter(company=main_sbscrbr_entity,division=logged_user_division,branch=logged_user_branch,department=logged_user_department)
-        
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
             if selected_option=="ascending":
-                allifqueryset=CommonSuppliersModel.objects.filter(company=main_sbscrbr_entity).order_by('-name')
-            else:
-                allifqueryset=CommonSuppliersModel.objects.filter(company=main_sbscrbr_entity)
+                if allif_data.get("logged_in_user_has_universal_access")==True:
+                    allifqueryset=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-name')
+                elif allif_data.get("logged_in_user_has_divisional_access")==True:
+                    allifqueryset=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('-name')
+                elif allif_data.get("logged_in_user_has_branches_access")==True:
+                    allifqueryset=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('-name')
+                elif allif_data.get("logged_in_user_has_departmental_access")==True:
+                    allifqueryset=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('-name')
+                else:
+                    allifqueryset=[]
         else:
-            pass
-
-       
+            if allif_data.get("logged_in_user_has_universal_access")==True:
+                allifqueryset=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('name')
+            elif allif_data.get("logged_in_user_has_divisional_access")==True:
+                allifqueryset=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
+            elif allif_data.get("logged_in_user_has_branches_access")==True:
+                allifqueryset=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
+            elif allif_data.get("logged_in_user_has_departmental_access")==True:
+                allifqueryset=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
+            else:
+                allifqueryset=[]
+          
         context = {
             "title":title,
             "allifqueryset":allifqueryset,
@@ -3863,69 +3632,71 @@ def commonSuppliers(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonSupplierSearch(request,*allifargs,**allifkwargs):
+    title="Search Results"
     try:
-        title="Search Results"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        
+        allif_data=common_shared_data(request)
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonSuppliersModel.objects.filter((Q(name__icontains=allifsearch)|Q(balance__icontains=allifsearch)|Q(address__icontains=allifsearch)) & Q(company=main_sbscrbr_entity))
-           
-            context={
-           
-            "title":title,
-            "allifsearch":allifsearch,
-            "searched_data":searched_data,
-            "main_sbscrbr_entity":main_sbscrbr_entity,
-           
-        }
+            searched_data=CommonSuppliersModel.objects.filter((Q(name__icontains=allifsearch)|Q(balance__icontains=allifsearch)|Q(address__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+        else:
+            allifsearch=[]
+
+        context={
+        "title":title,
+        "searched_data":searched_data,}
         return render(request,'allifmaalcommonapp/suppliers/suppliers.html',context)
-       
-     
+   
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonClearSupplierSearch(request,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
-        return redirect('allifmaalcommonapp:commonSuppliers',allifusr=usrslg,allifslug=user_var)
+        allif_data=common_shared_data(request)
+        return redirect('allifmaalcommonapp:commonSuppliers',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage')
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
 @logged_in_user_can_view
 def commonAddSupplier(request,allifusr,allifslug,*allifargs,**allifkwargs):
     try:
+        allif_data=common_shared_data(request)
         title="Add New Supplier"
-        user_var=request.user.usercompany
-        usr=request.user
-        usrslg=request.user.customurlslug
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
+        form=CommonAddSupplierForm(allif_data.get("main_sbscrbr_entity"))
+       
+        if request.method=='POST':
+            form=CommonAddSupplierForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalcommonapp:commonSuppliers',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-        form=CommonAddSupplierForm(main_sbscrbr_entity)
-        if  main_sbscrbr_entity!=None:
-            if request.method=='POST':
-                form=CommonAddSupplierForm(main_sbscrbr_entity,request.POST)
-                if form.is_valid():
-                    obj = form.save(commit=False)
-                    obj.company =main_sbscrbr_entity
-                    obj.owner =usr
-                    obj.save()
-                    return redirect('allifmaalcommonapp:commonSuppliers',allifusr=usrslg,allifslug=user_var)
-                else:
-                    form=CommonAddSupplierForm(main_sbscrbr_entity)
             else:
-                form=CommonAddSupplierForm(main_sbscrbr_entity)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+              
         else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint')
+            form=CommonAddSupplierForm(allif_data.get("main_sbscrbr_entity"))
+         
         context = {
             "title":title,
             "form":form,
@@ -3936,39 +3707,39 @@ def commonAddSupplier(request,allifusr,allifslug,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
-@logged_in_user_can_edit 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_edit
 def commonEditSupplier(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
         title="Update Supplier Details"
-        user_var_update=CommonSuppliersModel.objects.filter(id=pk).first()
-       
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=user_var).first()
-        form=CommonAddSupplierForm(main_sbscrbr_entity,instance=user_var_update)
+        allif_data=common_shared_data(request)
+        allifquery_update=CommonSuppliersModel.objects.filter(id=pk).first()
+        form=CommonAddSupplierForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         if request.method=='POST':
-            form=CommonAddSupplierForm(main_sbscrbr_entity,request.POST or None, instance=user_var_update)
+            form=CommonAddSupplierForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
             if form.is_valid():
-                obj = form.save(commit=False)
-                obj.owner=user_var_update.owner
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:commonSuppliers',allifusr=usrslg,allifslug=user_var)
+                return redirect('allifmaalcommonapp:commonSuppliers',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
-                form=CommonAddSupplierForm(main_sbscrbr_entity,instance=user_var_update)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonAddSupplierForm(main_sbscrbr_entity,instance=user_var_update)
+            form=CommonAddSupplierForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
            
-        context={"title":title,"form":form,}
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
         return render(request,'allifmaalcommonapp/suppliers/add-supplier.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalusersapp/error/error.html',error_context)
     
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view 
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
 def commonSupplierDetails(request,allifslug,*allifargs,**allifkwargs):
     try:
         title="Supplier Details"
@@ -3982,9 +3753,11 @@ def commonSupplierDetails(request,allifslug,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
-@logged_in_user_can_view
-@logged_in_user_is_admin 
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_delete
+@logged_in_user_has_departmental_delete
 def commonWantToDeleteSupplier(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonSuppliersModel.objects.filter(id=pk).first()
@@ -3997,34 +3770,46 @@ def commonWantToDeleteSupplier(request,pk,*allifargs,**allifkwargs):
 
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)      
-@login_required(login_url='allifmaalusersapp:userLoginPage') 
-@logged_in_user_can_view
-@logged_in_user_is_admin 
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)  
+        
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_delete
+@logged_in_user_has_departmental_delete
 def commonDeleteSupplier(request,pk,*allifargs,**allifkwargs):
     try:
-        user_var=request.user.usercompany
-        usrslg=request.user.customurlslug
+        allif_data=common_shared_data(request)
         CommonSuppliersModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonSuppliers',allifusr=usrslg,allifslug=user_var)
-       
+        return redirect('allifmaalcommonapp:commonSuppliers',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@login_required(login_url='allifmaalusersapp:userLoginPage')
-@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@subscriber_company_status
 def commonSupplierAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
         title="Advanced Search"
-        user_var=request.user
-        compslg=user_var.usercompany
-        main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-        allifqueryset=CommonSuppliersModel.objects.filter(company=main_sbscrbr_entity)
-        firstDate=CommonSuppliersModel.objects.filter(company=main_sbscrbr_entity).first().date
-        lastDate=CommonSuppliersModel.objects.filter(company=main_sbscrbr_entity).last().date
-        largestAmount=CommonSuppliersModel.objects.filter(company=main_sbscrbr_entity).order_by('-balance').first().balance
+        allifqueryset=[]
+        allif_data=common_shared_data(request)
+        formats=CommonDocsFormatModel.objects.all()
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        current_date=timezone.now().date().today()
+        firstDate=current_date
+        lastDate=current_date
+        largestAmount=0
+        firstDepo=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
     
+        lastDepo=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
+        if firstDepo and lastDepo:
+            firstDate=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+            lastDate=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+            largestAmount=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').first().balance
+        else:
+            firstDate=current_date
+            lastDate=current_date
+
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
             start_date=request.POST.get('startdate',selected_option) or None
@@ -4032,18 +3817,16 @@ def commonSupplierAdvanceSearch(request,*allifargs,**allifkwargs):
             start_value=request.POST.get('startvalue') or None
             end_value=request.POST.get('endvalue') or None
             if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonSuppliersModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(balance__gte=start_value or 0) & Q(balance__lte=end_value or largestAmount) & Q(company=main_sbscrbr_entity))
+                searched_data=CommonSuppliersModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(balance__gte=start_value or 0) & Q(balance__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
                 #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
                 # if pdf is selected
                 if selected_option=="pdf":
                     template_path = 'allifmaalcommonapp/suppliers/supsearchpdf.html'
                     allifcontext = {
                     "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":main_sbscrbr_entity,
-                    
-                    }
-                    
+                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
+                    "scopes":scopes,
+                    "title":title,}
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
                     response['Content-Disposition'] = 'filename="searched-result.pdf"'
@@ -4058,49 +3841,25 @@ def commonSupplierAdvanceSearch(request,*allifargs,**allifkwargs):
                     if pisa_status.err:
                         return HttpResponse('We had some errors <pre>' + html + '</pre>')
                     return response
-                # if excel is selected
-                elif selected_option=="excel":
-                    compnyresource=commonBankWithdrawalResource()
-                    dataset =compnyresource.export(searched_data)
-                    response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
-                    response['Content-Disposition'] = 'attachment; filename="suppliers.xls"'
-                    return response
-                # if word is selected
-                elif selected_option=="word":
-                    pass
-
-                # if something else is selected or none is selected
                 else:
-                    context = {
-                    "searched_data":searched_data,
-                    
-                    "title":title,
-                     
-                    }
+                    allifqueryset=CommonSuppliersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+                    context={"title":title,"allifqueryset":allifqueryset,}
                     return render(request,'allifmaalcommonapp/suppliers/suppliers.html',context)
-                    
             else:
-                allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=main_sbscrbr_entity)
-                
-                
-            context={
-            "allifqueryset":allifqueryset,
-            
-            "title":title,
-             
-            }
-            return render(request,'allifmaalcommonapp/suppliers/suppliers.html',context)
-           
+                searched_data=[]
+                main_sbscrbr_entity=allif_data.get("main_sbscrbr_entity")
         else:
-            context={
-            "allifqueryset":allifqueryset,
-           
-            "title":title,
-            
-            }
-            return render(request,'allifmaalcommonapp/suppliers/suppliers.html',context)
-          
-      
+            main_sbscrbr_entity=allif_data.get("main_sbscrbr_entity")
+            searched_data=[]
+
+        context={
+        "allifqueryset":allifqueryset,
+        "formats":formats,
+        "title":title,
+       
+        }
+        return render(request,'allifmaalcommonapp/suppliers/suppliers.html',context)
+
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
