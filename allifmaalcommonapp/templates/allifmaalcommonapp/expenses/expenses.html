@@ -40,23 +40,10 @@
     <a class="amel-table-list-identifier">Expenses:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 
-    <a href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Forms</a>
+    <a href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Expenses</a>
     <a href="{% url 'allifmaalcommonapp:commonAddExpense' user_var glblslug %}">Add New</a>
 
 
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
-     
-    </div>
-    </ul>
-  </div>
-  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
   </div>
   
       </div><!--end....header column-->

@@ -478,7 +478,7 @@ class CommonFormsAddForm(forms.ModelForm):
 class CommonClassesAddForm(forms.ModelForm):
     class Meta:
         model =CommonClassesModel
-        fields = ['name','form','size','owner','company','comments','division','department','branch','contact']
+        fields = ['name','form','size','owner','comments','division','department','branch','contact']
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'contact':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -486,7 +486,7 @@ class CommonClassesAddForm(forms.ModelForm):
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'form':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'owner':forms.Select(attrs={'class':'form-control','placeholder':''}),
-            'company':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -580,10 +580,10 @@ class CommonExpensesAddForm(forms.ModelForm):
         }
     def __init__(self,allifmaalparameter, *args, **kwargs):
         super(CommonExpensesAddForm, self).__init__(*args, **kwargs)
-        self.fields['funding_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter)
-        self.fields['expense_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter)
+        self.fields['funding_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=19999)
+        self.fields['expense_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=59999,code__gte=49999)
         self.fields['supplier'].queryset = CommonSuppliersModel.objects.filter(company=allifmaalparameter,)
-        self.fields['equity_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter)
+        self.fields['equity_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=49999,code__gte=29999)
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
@@ -776,7 +776,7 @@ class CommonAddInvoiceDetailsForm(forms.ModelForm):
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-
+        self.fields['salestax'].queryset = CommonTaxParametersModel.objects.filter(company=allifmaalparameter)
 class CommonAddInvoiceItemsForm(forms.ModelForm):
     class Meta:
         model = CommonInvoiceItemsModel

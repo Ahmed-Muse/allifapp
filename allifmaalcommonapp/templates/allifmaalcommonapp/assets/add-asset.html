@@ -30,9 +30,9 @@
 
 
   <div class="allifmaincontainer">
-
+{% if allifquery_update %}
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit New Asset</div>
+  <div class="table-details-content-description">Edit Asset</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -201,6 +201,162 @@
 <!--end of table-->
 
 </div><!--end of main container of the page....-->
+{% else %}
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">Add New Asset</div>
+  <form method='POST' action=''>{% csrf_token %}
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+       
+    
+      <tr>
+        <td class="allif-fix-table-col">Category</td>
+        <td>{{form.category}}</td>
+    
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Staff Responsible</td>
+          <td>{{form.employee}}</td>
+      
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Asset A/C</td>
+            <td>{{form.asset_account}}</td>
+        
+            </tr>
+        <tr>
+          <td class="allif-fix-table-col">Payment A/C</td>
+          <td>{{form.cost_account}}</td>
+      
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col">Supplier</td>
+            <td>{{form.supplier}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Status</td>
+              <td>{{form.asset_status}}</td>
+          
+              </tr>
+              <tr>
+                <td class="allif-fix-table-col">Depreciation Method</td>
+                <td>{{form.depreciation}}</td>
+            
+                </tr>
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+        
+          <tr>
+            <td class="allif-fix-table-col">Description</td>
+            <td>{{form.description}}</td>
+        
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Quantity</td>
+              <td>{{form.quantity}}</td>
+          
+              </tr>
+              <tr>
+                <td class="allif-fix-table-col">Value</td>
+                <td>{{form.value}}</td>
+            
+                </tr>
+               
+                  <tr>
+                    <td class="allif-fix-table-col">Deposit</td>
+                    <td>{{form.deposit}}</td>
+                
+                    </tr>
+                    <tr>
+                      <td class="allif-fix-table-col">Salvage Value</td>
+                      <td>{{form.salvage_value}}</td>
+                  
+                      </tr>
+                      <tr>
+                        <td class="allif-fix-table-col">Lifespan</td>
+                        <td>{{form.lifespan}}</td>
+                    
+                        </tr>
+         
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+         
+              <tr>
+                <td class="allif-fix-table-col">Comments</td>
+                <td>{{form.comments}}</td>
+            
+                </tr>
+                <tr>
+                  <td class="allif-fix-table-col">Terms</td>
+                  <td>{{form.terms}}</td>
+              
+                  </tr>
+                  <tr>
+                    <td class="allif-fix-table-col">Acquired On</td>
+                    <td>{{form.acquired}}</td>
+                
+                    </tr>
+                    <tr>
+                      <td class="allif-fix-table-col">Expires</td>
+                      <td>{{form.expires}}</td>
+                  
+                      </tr>
+                      <tr>
+                        <td class="allif-fix-table-col">Posting Status</td>
+                        <td>{{form.status}}</td>
+                    
+                        </tr>
+                       
+            <tr>
+              <td class="allif-fix-table-col">Action</td>
+              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+          
+              </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
+</div><!--end....table row-->
+</div>
+</form>
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+{% endif %}
 
 
 

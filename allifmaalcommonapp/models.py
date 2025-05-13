@@ -105,9 +105,11 @@ taxoptions = [
 
 payment_method=[
     ("Cash","Cash"),
-    ("Bank Transfer","Bank Transfer"),
+    ("Deposit","Deposit"),
+    ("Credit","Credit"),
+    ("Transfer","Transfer"),
     ("Cheque","Cheque"),
-    ("Credit Card","Credit Card"),
+   
     ]
 posting_status = [
     ('waiting','waiting'),

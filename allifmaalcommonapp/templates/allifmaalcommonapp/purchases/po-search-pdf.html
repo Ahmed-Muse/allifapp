@@ -7,40 +7,27 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-<style>
-    #allif-pdf-header{
-    font-size:2em;
-    color: #050eab;
-    float: right;
-    text-align: right;
-    margin: 0.4em;
-  }
-</style>
-
-<div id="allif-pdf-header">Purchase Orders </div>
-
-<div>
+<div class="allif_pdf_main_body_container">
+    <div class="allif_pdf_search_header">Customers Search Results</div>
     <table class="table-bordered">
     <tr>
     <thead>
     <tr class="allif-pdf-table-header">
-    
-    <th colspan="4">Purchase Order Details</th>
-    <th colspan="4">Supplier</th>
-    <th colspan="2">Amount</th>
-    <th colspan="2">Date</th>
+    <th>PO</th>
+    <th>Supplier</th>
+    <th>Amount</th>
+    <th>Date</th>
     </tr>
     </thead>
     <tbody>
     {% for item in searched_data %}
     <tr>
-    <td colspan="4">{{item.po_number}}</td>
-    <td colspan="4">{{item.supplier}}</td>
-    <td colspan="2">{{item.amount|intcomma}}</td>
-    <td colspan="2"> {{item.date|date:'d/m/Y'}}</td>
+    <td>{{item.po_number}}</td>
+    <td>{{item.supplier}}</td>
+    <td>{{item.amount|intcomma}}</td>
+    <td> {{item.date|date:'d/m/Y'}}</td>
     </tr>
     {% endfor %}
-   
     </tbody>
     </table>
         

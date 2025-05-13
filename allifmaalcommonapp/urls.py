@@ -176,14 +176,6 @@ path('Want/To/Delete/Withdrawal/<str:pk>/<str:allifusr>/<str:allifslug>/', views
 path('Search/Results/Withdrawals/<str:allifusr>/<str:allifslug>/', views.commonWithdrawalAdvanceSearch, name="commonWithdrawalAdvanceSearch"),
 path('Clear/Shareholder/Search/Results/Withdrawls/<str:allifusr>/<str:allifslug>/', views.commonClearShareholderWithdrwlSearch, name="commonClearShareholderWithdrwlSearch"),
 
-
-
-
-
-
-
-
-
 ############################ suppliers sections ##################################3
 path('Suppliers/<str:allifusr>/<str:allifslug>/List/', views.commonSuppliers, name="commonSuppliers"),
 path('Add/Supplier/<str:allifusr>/<str:allifslug>/New/', views.commonAddSupplier, name="commonAddSupplier"),
@@ -350,6 +342,16 @@ path('Search/For/Supplier/Payments/From/Database/<str:allifusr>/<str:allifslug>/
 path('Want/To/Delete/This/Supplier/Payment/Item/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/From/Invoice/', views.commonWantToDeleteSupplierPayment, name="commonWantToDeleteSupplierPayment"),
 path('Supplier/Statement/Pdf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonSupplierStatementpdf, name="commonSupplierStatementpdf"),
 path('Advanced/Search/For/Supplier/Payment/Details/<str:allifusr>/<str:allifslug>/', views.commonSupplierPaymentAdvanceSearch, name="commonSupplierPaymentAdvanceSearch"),
+
+
+
+
+
+
+
+
+
+
 
 ######################### customer payments and statments ########################
 path('Customer/Payments/<str:allifusr>/<str:allifslug>/', views.commonCustomerPayments, name="commonCustomerPayments"),
