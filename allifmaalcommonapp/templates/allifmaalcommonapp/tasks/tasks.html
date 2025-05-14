@@ -16,44 +16,7 @@
   <div class="col-md-12"><!--start....header column-->
   
   <div class="container-fluid amel-content-header">
-    <div class="dropdown allifmaal-content-dropdown">
-      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Search
-      </a>  
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <div class="content-dropdown-menu">
   
-        <li><a class="dropdown-item">Looking for something?</a></li>
-        <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Clear Search</a>
-          
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonTaskBasicSearch' user_var glblslug %}">{% csrf_token %}
-        
-          <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
-          placeholder="Type Here ...">
-        
-          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-          </form>
-          <hr>
-          <li><a class="dropdown-item">Select Ordering Option</a></li>
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-      
-        <div>
-        <select name="requiredformat" class="form-control">
-          {% for item in datasorts %}
-          <option>{{item.name}}</option>
-            
-           {% endfor %}
-           
-          </select>
-          </div>
-          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-      
-      </form>
-     
-      
-      </div>
-      </ul>
-    </div>
     <a class="amel-table-list-identifier">Tasks:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     <a href="{% url 'allifmaalcommonapp:commonCompletedTasks' user_var glblslug %}">Completed Tasks</a>
@@ -99,6 +62,10 @@
            
             <td id="allif-table-inline-form"> <input type="submit" value='Add Item' class="btn btn-success allifmaal-submit-btn"></td>
             
+            <div class="error-body">
+              <p>{{error_message}}</p>
+              </div>
+              
           </form>
           </tr>
          

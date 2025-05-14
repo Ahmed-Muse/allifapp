@@ -8,13 +8,13 @@
 {%endblock%}
 {% block body %}
 <div class="allif_pdf_main_body_container">
-    <div class="allif_pdf_search_header">Customer Payments Search Results</div>
+    <div class="allif_pdf_search_header">Staff Salaries Search Results</div>
     <table class="table-bordered">
     <tr>
     <thead>
     <tr class="allif-pdf-table-header">
+    <th>Staff</th>
     <th>Description</th>
-    <th>Customer</th>
     <th>Amount</th>
     <th>Date</th>
     </tr>
@@ -22,8 +22,8 @@
     <tbody>
     {% for item in searched_data %}
     <tr>
+    <td>{{item.staff}}</td>
     <td>{{item.description}}</td>
-    <td>{{item.customer}}</td>
     <td>{{item.amount|floatformat:2|intcomma}}</td>
     <td> {{item.date|date:'d/m/Y'}}</td>
     </tr>
@@ -39,4 +39,3 @@
 
 {% endblock %}
    
-

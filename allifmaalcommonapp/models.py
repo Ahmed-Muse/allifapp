@@ -1031,11 +1031,11 @@ class CommonTasksModel(models.Model):
     dueDate=models.DateTimeField(auto_now_add=False,auto_now=False,blank=True,null=True)
     taskDay = models.CharField(max_length=10,choices=day,default='Monday')
     assignedto=models.ForeignKey(CommonEmployeesModel,on_delete=models.SET_NULL,blank=True,null=True,related_name="tskempl")
-    owner= models.ForeignKey(User, related_name="cmnurtsk",on_delete=models.SET_NULL,null=True,blank=True)
-    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmntskscmpn",on_delete=models.SET_NULL,null=True,blank=True)
-    division= models.ForeignKey(CommonDivisionsModel,related_name="dvstasks",on_delete=models.SET_NULL,null=True,blank=True)
-    branch= models.ForeignKey(CommonBranchesModel,related_name="brnchtasks",on_delete=models.SET_NULL,null=True,blank=True)
-    department= models.ForeignKey(CommonDepartmentsModel,related_name="depttaskss",on_delete=models.SET_NULL,null=True,blank=True)
+    owner=models.ForeignKey(User, related_name="cmnurtsk",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmntskscmpn",on_delete=models.SET_NULL,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvstasks",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchtasks",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="depttaskss",on_delete=models.SET_NULL,null=True,blank=True)
     description=models.CharField(blank=True,null=True,default='Task Description',max_length=50)
     
     def __str__(self):
@@ -1068,17 +1068,17 @@ class CommonJobsModel(models.Model):
     #first_cust=CommonCustomersModel.objects.filter()[0]
   
     job_number=models.CharField(max_length=20,blank=True,null=True)
-    owner= models.ForeignKey(User, related_name="jobsown",on_delete=models.SET_NULL,null=True,blank=True)
-    customer= models.ForeignKey(CommonCustomersModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='jobcustrelname')
+    owner=models.ForeignKey(User, related_name="jobsown",on_delete=models.SET_NULL,null=True,blank=True)
+    customer=models.ForeignKey(CommonCustomersModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='jobcustrelname')
     description=models.CharField(max_length=30,blank=True,null=True)
-    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpjbs",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpjbs",on_delete=models.SET_NULL,null=True,blank=True)
     opened_date=models.DateField(blank=True,null=True,auto_now_add=True)
     ending_date=models.DateField(blank=True,null=True,auto_now_add=False)
-    status= models.CharField(max_length=20, blank=True, null=True,choices=job_status,default="open")
+    status=models.CharField(max_length=20, blank=True, null=True,choices=job_status,default="open")
     comments=models.CharField(max_length=20,blank=True,null=True)
-    division= models.ForeignKey(CommonDivisionsModel,related_name="dvsjobss",on_delete=models.SET_NULL,null=True,blank=True)
-    branch= models.ForeignKey(CommonBranchesModel,related_name="brnchjobss",on_delete=models.SET_NULL,null=True,blank=True)
-    department= models.ForeignKey(CommonDepartmentsModel,related_name="deptjobs",on_delete=models.SET_NULL,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsjobss",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchjobss",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptjobs",on_delete=models.SET_NULL,null=True,blank=True)
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
         return str(self.job_number)
@@ -1101,18 +1101,3 @@ class CommonContactsModel(models.Model):
     def __str__(self):
         return str(self.subject)
 
-
-class Product(models.Model):
-    name = models.CharField(max_length=255)
-    quantity = models.IntegerField()
-    unit_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def total_cost(self):
-        return self.quantity * self.unit_cost
-
-    def total_price(self):
-        return self.quantity * self.unit_price
-
-    def __str__(self):
-        return self.name

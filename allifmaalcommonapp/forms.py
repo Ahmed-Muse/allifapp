@@ -821,11 +821,12 @@ class CommonAddSupplierPaymentForm(forms.ModelForm):
 class CommonAddCustomerPaymentForm(forms.ModelForm):
     class Meta:
         model = CommonCustomerPaymentsModel
-        fields = ['customer','amount','comments','account','mode','status','division','branch','department']
+        fields = ['customer','amount','comments','description','account','mode','status','division','branch','department']
         widgets={
             'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'amount':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'mode':forms.Select(attrs={'class':'form-control','placeholder':''}),
             'account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'status':forms.Select(attrs={'class':'form-control','placeholder':''}),
@@ -836,7 +837,7 @@ class CommonAddCustomerPaymentForm(forms.ModelForm):
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super(CommonAddCustomerPaymentForm, self).__init__(*args, **kwargs)
         self.fields['customer'].queryset =CommonCustomersModel.objects.filter(company=allifmaalparameter)
-        self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter)
+        self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=19999)
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)

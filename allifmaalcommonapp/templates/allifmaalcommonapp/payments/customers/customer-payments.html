@@ -17,7 +17,7 @@
   <div class="container-fluid amel-content-header">
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Open Filters
+      Search
       </a>  
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
@@ -93,11 +93,12 @@
     </div>
     <a class="amel-table-list-identifier">Customer Payments:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a>
     <a href="{% url 'allifmaalcommonapp:commonCustomerPayments' user_var glblslug %}">Customer Payments</a>
 
     <a href="{% url 'allifmaalcommonapp:commonReceiveCustomerMoney' user_var glblslug %}">Receive Customer Payment</a>
     <a href="{% url 'allifmaalcommonapp:commonSupplierPayments' user_var glblslug %}">Supplier Payments</a>
-    <a href="{% url 'allifmaalcommonapp:commonSalaries' user_var glblslug %}">Salary Payments</a>
+    <a href="{% url 'allifmaalcommonapp:commonPostedCustomerPayments' user_var glblslug %}">Posted Customer Payments</a>
   </div>
   
       </div><!--end....header column-->

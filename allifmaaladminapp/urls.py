@@ -14,4 +14,16 @@ path('Block/Unblock/Company/Entity/<str:pk>/<str:allifusr>/<str:allifslug>/', vi
 
 
 
+############################3 BELOW ARE FOR TESTING PURPOSES ###############################3
+path('UI1/Home/<str:allifusr>/<str:allifslug>/', views.ui1, name="ui1"),
+path('UI2/Home/<str:allifusr>/<str:allifslug>/', views.ui2, name="ui2"),
+path('UI3/Home/<str:allifusr>/<str:allifslug>/', views.ui3, name="ui3"),
+path('UI4/Home/<str:allifusr>/<str:allifslug>/', views.ui4, name="ui4"),
+path('UI6/Home/<str:allifusr>/<str:allifslug>/', views.ui6, name="ui6"),
+path('UI7/Home/<str:allifusr>/<str:allifslug>/', views.ui7, name="ui7"),
+path('UI8/Home/<str:allifusr>/<str:allifslug>/', views.ui8, name="ui8"),
+path('add/dynamic_form_view/', views.dynamic_form_view, name='dynamic_form_view'),
+
+path('products/', views.product_list, name='product_list'),
+
 ]   

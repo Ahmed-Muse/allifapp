@@ -1,10 +1,11 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from allifmaalusersapp.models import User
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required 
 from allifmaalcommonapp.models import *
 from allifmaalcommonapp.decorators import allifmaal_admin, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
 # Create your views here.
+from allifmaalcommonapp.forms import CommonAddSectorForm
 
 #@allifmaal_admin
 def adminappHome(request,*allifargs,**allifkwargs):
@@ -171,3 +172,98 @@ def adminBlockUnblockEntity(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+
+
+##########################################################33
+
+def ui1(request,*allifargs,**allifkwargs):
+    print()
+    context = {
+           
+        }
+    return render(request,'allifmaaladminapp/ui/ui1.html',context)
+def ui2(request,*allifargs,**allifkwargs):
+    print()
+    context ={
+           
+        }
+    return render(request,'allifmaaladminapp/ui/ui2.html',context)
+def ui3(request,*allifargs,**allifkwargs):
+    print()
+    context = {
+           
+        }
+    return render(request,'allifmaaladminapp/ui/ui3.html',context)
+def ui4(request,*allifargs,**allifkwargs):
+    print()
+    context = {
+           
+        }
+    return render(request,'allifmaaladminapp/ui/ui4.html',context)
+
+def ui6(request,*allifargs,**allifkwargs):
+    print()
+    context ={
+
+        }
+    return render(request,'allifmaaladminapp/ui/ui6.html',context)
+def ui7(request,*allifargs,**allifkwargs):
+    print()
+    context = {
+           
+        }
+    return render(request,'allifmaaladminapp/ui/ui7.html',context)
+def ui8(request,*allifargs,**allifkwargs):
+    print()
+    context = {
+           
+        }
+    return render(request,'allifmaaladminapp/ui/ui8.html',context)
+
+#################### testingl inks
+
+@register.filter(name='allif_generate_links')
+def generate_new_link(link):
+    url = reverse(link.url_name, kwargs=link.url_params)
+    return f'<a href="{url}">{link.name}</a>'
+
+def dynamic_form_view(request):
+    if request.method == 'POST':
+        names = request.POST.getlist('name[]')
+        notes = request.POST.getlist('notes[]')
+
+        forms = []
+        for i in range(len(names)):
+            data = {
+                'name': names[i],
+                'notes': notes[i],
+            }
+            form =CommonAddSectorForm(data)
+            forms.append(form)
+
+        valid = True
+        for form in forms:
+            if not form.is_valid():
+                valid = False
+                break
+
+        if valid:
+            for form in forms:
+                sector_name = form.cleaned_data['name']
+                sector_notes = form.cleaned_data['notes']
+                # Create and save sector objects
+                sector = CommonSectorsModel(name=sector_name, notes=sector_notes)
+                sector.save()
+            return HttpResponse("Sectors added successfully!")
+        else:
+            return HttpResponse("Form has errors.")
+
+    return render(request, 'allifmaaladminapp/explore/dynamic_form.html')
+
+from .models import Product
+
+def product_list(request):
+    products = Product.objects.all()
+    context = {'table_data': products}
+    return render(request, 'allifmaaladminapp/product_list.html', context)

@@ -17,7 +17,7 @@
   <div class="container-fluid amel-content-header">
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Open Filters
+      Search
       </a>  
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
@@ -61,16 +61,7 @@
           <input type="date" class="form-control" name="enddate" placeholder="Ending Balance">
         </div>
 
-        <div>
-          <label>Start Value</label>
-          <input type="text" class="form-control" name="startvalue" placeholder="">
-        </div>
-        <div>
-          <label>End Value</label>
-          <input type="text" class="form-control" name="endvalue" placeholder="">
-        </div>
-        
-        
+      
         <div>
           <label >Select Option</label>
           <select name="requiredformat" class="form-control">
@@ -93,9 +84,7 @@
     </div>
     <a class="amel-table-list-identifier">Jobs:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankShareholderDeposits' user_var glblslug %}">Deposits</a>
-    <a href="{% url 'allifmaalcommonapp:commonBankWithdrawals' user_var glblslug %}">Withdrawals</a>
+    <a href="{% url 'allifmaalcommonapp:commonJobs' user_var glblslug %}">Jobs</a>
     <a href="{% url 'allifmaalcommonapp:commonNewJobs' user_var glblslug %}">New Job</a>
  
  

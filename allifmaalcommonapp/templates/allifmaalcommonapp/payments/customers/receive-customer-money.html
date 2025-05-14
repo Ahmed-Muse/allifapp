@@ -48,31 +48,24 @@
       <div class="table-responsive">
       <table class="table table-layout">
       <tbody>
-       
-      <tr>
-        <td class="allif-fix-table-col">Division</td>
-        <td>{{form.division}}</td>
-    
-        </tr>
-        
         <tr>
-          <td class="allif-fix-table-col">Branch</td>
-          <td>{{form.branch}}</td>
+          <td class="allif-fix-table-col">Description</td>
+          <td>{{form.description}}</td>
       
           </tr>
-          <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td>{{form.department}}</td>
-        
-            </tr>
-          <tr>
-            <td class="allif-fix-table-col">Receipt To Acccount</td>
-            <td>{{form.account}}</td>
-        
-            </tr>
-           
-             
-          
+     
+      <tr>
+        <td class="allif-fix-table-col">Amount</td>
+        <td>{{form.amount}}</td>
+    
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Comments</td>
+          <td>{{form.comments}}</td>
+      
+          </tr>
+
+       
         </tbody>
         </table>
       </div>
@@ -86,23 +79,22 @@
        <table class="table table-layout">
         <tbody>
          
+          <tr>
+            <td class="allif-fix-table-col">Customer</td>
+            <td>{{form.customer}}</td>
+        
+            </tr>
+       
             <tr>
-              <td class="allif-fix-table-col">Customer</td>
-              <td>{{form.customer}}</td>
+              <td class="allif-fix-table-col">Receipt To Acccount</td>
+              <td>{{form.account}}</td>
           
               </tr>
-         
-                    <tr>
-                      <td class="allif-fix-table-col">Posting Status</td>
-                      <td>{{form.status}}</td>
-                  
-                      </tr>
-                     
-                      <tr>
-                        <td class="allif-fix-table-col">Amount</td>
-                        <td>{{form.amount}}</td>
-                    
-                        </tr>   
+              <tr>
+                <td class="allif-fix-table-col">Terms</td>
+                <td>{{form.mode}}</td>
+            
+                </tr>
           </tbody>
           </table>
           </div>
@@ -115,23 +107,19 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-        
+      
             <tr>
-              <td class="allif-fix-table-col">Terms</td>
-              <td>{{form.mode}}</td>
+              <td class="allif-fix-table-col">Posting Status</td>
+              <td>{{form.status}}</td>
           
               </tr>
-            
-              <tr>
-                <td class="allif-fix-table-col">Comments</td>
-                <td>{{form.comments}}</td>
-            
-                </tr>
             <tr>
               <td class="allif-fix-table-col">Action</td>
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
           
               </tr>
+
+            
           </tbody>
           </table>
   </div>

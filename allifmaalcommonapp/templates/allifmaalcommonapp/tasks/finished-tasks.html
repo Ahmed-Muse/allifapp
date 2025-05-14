@@ -33,24 +33,7 @@
         
           <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
           </form>
-          <hr>
-          <li><a class="dropdown-item">Select Ordering Option</a></li>
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-      
-        <div>
-        <select name="requiredformat" class="form-control">
-          {% for item in datasorts %}
-          <option>{{item.name}}</option>
-            
-           {% endfor %}
-           
-          </select>
-          </div>
-          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-      
-      </form>
-     
-      
+         
       </div>
       </ul>
     </div>
@@ -210,7 +193,7 @@
           <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
           <div class="dropdown-content">
             <a href="{% url 'allifmaalcommonapp:commonEditTask' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-            <a href="{% url 'allifmaalcommonapp:commonMarkTaskComplete' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Complete</a>
+            <a href="{% url 'allifmaalcommonapp:commonMarkTaskComplete' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Incomplete</a>
             <a href="{% url 'allifmaalcommonapp:commonCompletedTasks' user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Completed</a>
             <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
             
