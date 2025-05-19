@@ -2,7 +2,8 @@ from .models import CommonCompanyDetailsModel
 from .sessions import Allifsessions
 
 def allifmaalcommonappglobalVariables(request):
-        user_var = 0
+        user_var=0
+        glbl_place_holder="This module is not yet configured"
         glblslug= "allifmaalfsjdfljengineeringjdjrwosdflimitedjfljj"
         main_sbscrbr_entity="Menu"
         open_link="Actions"
@@ -24,6 +25,7 @@ def allifmaalcommonappglobalVariables(request):
                 "sctr":sctr,
                 "main_sbscrbr_entity":main_sbscrbr_entity,
                 "open_link":open_link,
+                "glbl_place_holder":glbl_place_holder,
                 }
                 
         return {
@@ -31,6 +33,7 @@ def allifmaalcommonappglobalVariables(request):
             'glblslug':glblslug,
             "main_sbscrbr_entity":main_sbscrbr_entity,
             "open_link":open_link,
+            "glbl_place_holder":glbl_place_holder,
             }
     
 # create context process so that user sessions can be available on all pages

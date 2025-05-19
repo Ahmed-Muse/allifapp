@@ -8,34 +8,48 @@
 {%endblock%}
 {% block body %}
 <div class="allif_pdf_main_body_container">
-    <div class="allif_pdf_search_header">Main Creditors List</div>
-    <table class="table-bordered">
+
+<!--start of ... table main dynamic content section-->
+<div class="allif-pdf-table-content-body-section">
+    <table class="allif-pdf-table-body">
+
     <tr>
-    <thead>
-    <tr class="allif-pdf-table-header">
-    <th>Supplier</th>
-    <th>Phone</th>
-    <th>Balance</th>
+    <th colspan="8">Supplier</th>
+    <th colspan="2">Phone</th>
    
+    <th colspan="2">Balance</th>
     </tr>
-    </thead>
+
     <tbody>
     {% for item in allifqueryset %}
     <tr>
-    <td>{{item.name}}</td>
-    <td>{{item.phone}}</td>
-    <td>{{item.balance|floatformat:2|intcomma}}</td>
+    <td colspan="8">{{item.name}}</td>
+    <td colspan="2">{{item.phone}}</td>
    
+    <td colspan="2"> {{item.balance|floatformat:2|intcomma}}</td>
+    
     </tr>
     {% endfor %}
+
     </tbody>
     </table>
-        
+    </div>
+    <!--start of ... table main dynamic content section-->
+
+    <div class="allif-pdf-table-body-summary-section">
+    <table class="allif-pdf-table-body-summary">
+    <tbody>
+  
+  
 </div> 
+
 
 {% block scripts %}
 
 {% endblock %}
 
 {% endblock %}
-   
+{% block footer %}
+
+{% endblock %}
+ 

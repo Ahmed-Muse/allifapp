@@ -8,35 +8,48 @@
 {%endblock%}
 {% block body %}
 <div class="allif_pdf_main_body_container">
-    <div class="allif_pdf_search_header">Available Stock</div>
-    <table class="table-bordered">
+
+<!--start of ... table main dynamic content section-->
+<div class="allif-pdf-table-content-body-section">
+    <table class="allif-pdf-table-body">
+
     <tr>
-    <thead>
-    <tr class="allif-pdf-table-header">
-    <th>Part Number</th>
-    <th>Category</th>
-    <th>Description</th>
-    <th>Quantity</th>
+    <th colspan="2">Part Number</th>
+    <th colspan="2">Category</th>
+    <th colspan="6">Description</th>
+    <th colspan="2">Quantity</th>
     </tr>
-    </thead>
+
     <tbody>
     {% for item in allifqueryset %}
     <tr>
-    <td>{{item.partNumber}}</td>
-    <td>{{item.category}}</td>
-    <td> {{item.description}}</td>
-    <td>{{item.quantity|floatformat:2|intcomma}}</td>
+    <td colspan="2">{{item.partNumber}}</td>
+    <td colspan="2">{{item.category}}</td>
+    <td colspan="6">{{item.description}}</td>
+    <td colspan="2"> {{item.quantity|floatformat:2|intcomma}}</td>
     
     </tr>
     {% endfor %}
+
     </tbody>
     </table>
-        
+    </div>
+    <!--start of ... table main dynamic content section-->
+
+    <div class="allif-pdf-table-body-summary-section">
+    <table class="allif-pdf-table-body-summary">
+    <tbody>
+  
+  
 </div> 
+
 
 {% block scripts %}
 
 {% endblock %}
 
 {% endblock %}
-   
+{% block footer %}
+
+{% endblock %}
+ 

@@ -90,7 +90,14 @@
               <td class="allif-fix-table-col">Currency</td>
               <td>{{allifquery.currency}}</td>
               </tr>
-            
+             <tr>
+                <td class="allif-fix-table-col">Payment Terms</td>
+                <td>{{allifquery.payment_terms}}</td>
+                </tr>
+                 <tr>
+                <td class="allif-fix-table-col">Delivery</td>
+                <td>{{allifquery.delivery}}</td>
+                </tr>
         </tbody>
         </table>
       </div>
@@ -262,11 +269,7 @@
             <td>{{form.currency}}</td>
         
             </tr>
-            <tr>
-              <td class="allif-fix-table-col">Terms</td>
-              <td>{{form.terms}}</td>
-          
-              </tr>
+         
               <tr>
                 <td class="allif-fix-table-col">Discount</td>
                 <td>{{form.discount}}</td>
@@ -277,7 +280,17 @@
                 <td>{{form.discountValue}}</td>
             
                 </tr>
-
+          <tr>
+            <td class="allif-fix-table-col">Sales Tax</td>
+            <td>{{form.salestax}}</td>
+        
+            </tr>
+           
+                <tr>
+                  <td class="allif-fix-table-col">Tax Rate</td>
+                  <td>{{form.tax}}</td>
+              
+                  </tr>
           </tbody>
           </table>
           </div>
@@ -290,24 +303,22 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Sales Tax</td>
-            <td>{{form.salestax}}</td>
-        
-            </tr>
-           
-              <tr>
-                <td class="allif-fix-table-col">Terms</td>
-                <td>{{form.terms}}</td>
-            
-                </tr>
-          
-                <tr>
-                  <td class="allif-fix-table-col">Tax Rate</td>
-                  <td>{{form.tax}}</td>
+         
+                 <tr>
+                  <td class="allif-fix-table-col">Delivery</td>
+                  <td>{{form.delivery}}</td>
               
                   </tr>
-                 
+                   <tr>
+                  <td class="allif-fix-table-col">Payment Terms</td>
+                  <td>{{form.payment_terms}}</td>
+              
+                  </tr>
+                   <tr>
+                  <td class="allif-fix-table-col">Currency</td>
+                  <td>{{form.currency}}</td>
+              
+                  </tr> 
               <tr>
                 <td class="allif-fix-table-col">Comments</td>
                 <td>{{form.comments}}</td>

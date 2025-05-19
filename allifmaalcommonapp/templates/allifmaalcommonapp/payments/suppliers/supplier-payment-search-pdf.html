@@ -14,8 +14,8 @@
     <table class="allif-pdf-table-body">
 
     <tr>
-    <th colspan="2">Number</th>
-    <th colspan="6">Customer</th>
+    
+    <th colspan="8">Supplier</th>
     <th colspan="2">Amount</th>
     <th colspan="2">Date</th>
     </tr>
@@ -23,9 +23,9 @@
     <tbody>
     {% for item in searched_data %}
     <tr>
-    <td colspan="2">{{item.number}}</td>
-    <td colspan="6">{{item.customer}}</td>
-    <td colspan="2"> {{item.grandtotal|floatformat:2|intcomma}}</td>
+    <td colspan="8">{{item.supplier}}</td>
+    
+    <td colspan="2"> {{item.amount|floatformat:2|intcomma}}</td>
     <td colspan="2">{{item.date|date:'d/m/Y'}}</td>
     
     </tr>

@@ -104,14 +104,6 @@ taxoptions = [
     ]
 
 
-payment_method=[
-    ("Cash","Cash"),
-    ("Deposit","Deposit"),
-    ("Credit","Credit"),
-    ("Transfer","Transfer"),
-    ("Cheque","Cheque"),
-   
-    ]
 posting_status = [
     ('waiting','waiting'),
     ('posted', 'posted'), 
@@ -364,7 +356,7 @@ class CommonTaxParametersModel(models.Model):
     taxname = models.CharField(null=True, blank=True, max_length=30,unique=False)
     taxdescription= models.CharField(null=True, blank=True, max_length=30)
     taxtype = models.CharField(choices=taxoptions, blank=True, max_length=30)
-    taxrate=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    taxrate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     owner= models.ForeignKey(User, related_name="cmnowntax",on_delete=models.SET_NULL,null=True,blank=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmntaxcmp",on_delete=models.SET_NULL,null=True,blank=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
@@ -429,10 +421,10 @@ class CommonEmployeesModel(models.Model):
     comment = models.CharField(max_length=50,blank=True,null=True)
     dateJoined =  models.DateTimeField(auto_now_add=True,blank=True,null=True)
     #timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    salary=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    total_salary_paid=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    salary_payable=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    salary_balance=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    salary=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    total_salary_paid=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    salary_payable=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    salary_balance=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     username= models.OneToOneField(User, on_delete=models.CASCADE,related_name="secrlmmemply",null=True)
     uniqueId = models.CharField(null=True, blank=True, max_length=150)
     sysperms= models.CharField(choices=rights, blank=True, null=True,max_length=30,default="staff")
@@ -459,7 +451,7 @@ class CommonEmployeesModel(models.Model):
 ########################## CHART OF ACCOUNTS ##########################3
 class CommonGeneralLedgersModel(models.Model):
     description=models.CharField(max_length=50,blank=False,null=True,unique=False)
-    balance=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    balance=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="usrglrlnm",null=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="glcmprlnm",on_delete=models.SET_NULL,null=True,blank=True)
     division= models.ForeignKey(CommonDivisionsModel,related_name="gldvsrln",on_delete=models.SET_NULL,null=True,blank=True)
@@ -477,7 +469,7 @@ class CommonChartofAccountsModel(models.Model):
     division= models.ForeignKey(CommonDivisionsModel,related_name="chaccdvsrln",on_delete=models.SET_NULL,null=True,blank=True)
     branch= models.ForeignKey(CommonBranchesModel,related_name="chaccbrnchrlnm",on_delete=models.SET_NULL,null=True,blank=True)
     department= models.ForeignKey(CommonDepartmentsModel,related_name="chaccdptrlnm",on_delete=models.SET_NULL,null=True,blank=True)
-    balance=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    balance=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     category=models.ForeignKey(CommonGeneralLedgersModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='chaccmrln')
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     comments=models.CharField(max_length=100,blank=True,null=True,default="Comments")
@@ -489,9 +481,9 @@ class CommonChartofAccountsModel(models.Model):
 class CommonBanksModel(models.Model):
     name=models.CharField(max_length=30,blank=False,null=True)
     account=models.CharField(max_length=30,blank=True,null=True)
-    balance= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    deposit= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    withdrawal= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    balance= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    deposit= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    withdrawal= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     comments=models.CharField(max_length=50,blank=True,null=True, default='comment')
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="usrbnkrlnm",null=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpbnkrlnm",on_delete=models.SET_NULL,null=True,blank=True)
@@ -506,7 +498,7 @@ class CommonBanksModel(models.Model):
 class CommonShareholderBankDepositsModel(models.Model):
     description=models.CharField(max_length=30,blank=True,null=True)
     bank= models.ForeignKey(CommonBanksModel,related_name="depositbankrelnefds",on_delete=models.SET_NULL,blank=False,null=True)
-    amount= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    amount= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     comments=models.CharField(max_length=30,blank=True,null=True, default='Deposit comments')
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="usrbnksrlnmedf",null=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="depocmprlnmfd",on_delete=models.SET_NULL,null=True,blank=True)
@@ -524,7 +516,7 @@ class CommonShareholderBankDepositsModel(models.Model):
 class CommonBankWithdrawalsModel(models.Model):
     description=models.CharField(max_length=30,blank=True,null=True)
     bank= models.ForeignKey(CommonBanksModel,related_name="wthdrbnkrelnm",on_delete=models.SET_NULL,blank=False,null=True)
-    amount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    amount= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
    
     comments=models.CharField(max_length=30,blank=True,null=True, default='Withdrawal')
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="withdrusrbnkrlnmes",null=True)
@@ -570,8 +562,8 @@ class CommonSuppliersModel(models.Model):
     email= models.CharField(null=True, blank=True, max_length=100)
     city= models.CharField(null=True, blank=True, max_length=30)
     address = models.CharField(null=True, blank=True, max_length=30)
-    balance=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    turnover=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    balance=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    turnover=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     contact = models.CharField(null=True, blank=True, max_length=30)
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="spplusowncrln",null=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="suppusrlnm",on_delete=models.SET_NULL,null=True,blank=True)
@@ -587,7 +579,7 @@ class CommonSuppliersModel(models.Model):
 class CommonSupplierPaymentsModel(models.Model):
     
     supplier= models.ForeignKey(CommonSuppliersModel,related_name="allifsuprln",on_delete=models.SET_NULL,blank=True,null=True)
-    amount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    amount= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     date=models.DateField(auto_now=True)
     comments=models.CharField(max_length=100,blank=True,null=True, default='Supplier Payment')
     description=models.CharField(max_length=50,blank=True,null=True, default='Supplier payment')
@@ -607,9 +599,9 @@ class CommonSupplierPaymentsModel(models.Model):
 
 class CommonSupplierStatementsModel(models.Model):
     supplier= models.ForeignKey(CommonSuppliersModel,related_name="supstmrl",on_delete=models.SET_NULL,blank=True,null=True)
-    debit= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    credit= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    balance= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    debit= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    credit= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    balance= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     date=models.DateField(auto_now=True)
     comments=models.CharField(max_length=30,blank=True,null=True, default='comment')
     owner= models.ForeignKey(User, related_name="ownspstmnt",on_delete=models.SET_NULL,null=True,blank=True)
@@ -657,9 +649,9 @@ class CommonCustomersModel(models.Model):
     email= models.CharField(null=True, blank=True, max_length=100)
     city= models.CharField(null=True, blank=True, max_length=30)
     address = models.CharField(null=True, blank=True, max_length=30)
-    sales=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    balance=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    turnover=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    sales=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    balance=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    turnover=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     contact = models.CharField(null=True, blank=True, max_length=30)
     uniqueId = models.CharField(null=True, blank=True, max_length=100)
     customerslug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
@@ -700,7 +692,7 @@ class CommonCustomersModel(models.Model):
    
 class CommonCustomerPaymentsModel(models.Model):
     customer= models.ForeignKey(CommonCustomersModel,related_name="allifcustpaymentreltedname",on_delete=models.SET_NULL,blank=True,null=True)
-    amount= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    amount= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     date=models.DateField(auto_now=True)
     comments=models.CharField(max_length=30,blank=True,null=True, default='comment')
     account= models.ForeignKey(CommonChartofAccountsModel,related_name="allifcustpymaccrelnm",on_delete=models.SET_NULL,blank=True,null=True)
@@ -718,9 +710,9 @@ class CommonCustomerPaymentsModel(models.Model):
 
 class CommonCustomerStatementsModel(models.Model):
     customer= models.ForeignKey(CommonCustomersModel,related_name="custstmrlnm",on_delete=models.SET_NULL,blank=True,null=True)
-    debit= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    credit= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    balance= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    debit= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    credit= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    balance= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     date=models.DateField(auto_now=True)
     comments=models.CharField(max_length=30,blank=True,null=True, default='comment')
     owner= models.ForeignKey(User, related_name="usrcuststmnrln",on_delete=models.SET_NULL,null=True,blank=True)
@@ -734,11 +726,11 @@ class CommonLedgerEntriesModel(models.Model): # this is the journal entries...
     supplier= models.ForeignKey(CommonSuppliersModel,related_name="sppldgentr",on_delete=models.SET_NULL,blank=True,null=True)
     customer= models.ForeignKey(CommonCustomersModel,related_name="cstmldgentr",on_delete=models.SET_NULL,blank=True,null=True)
     staff= models.ForeignKey(CommonEmployeesModel,related_name="empldgentr",on_delete=models.SET_NULL,blank=True,null=True)
-    debit= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    credit= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    originalamount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    newamount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    balance= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    debit= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    credit= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    originalamount= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    newamount= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    balance= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     date=models.DateField(auto_now=True)
     comments=models.CharField(max_length=30,blank=True,null=True, default='comments')
     owner= models.ForeignKey(User, related_name="usrldgentr",on_delete=models.SET_NULL,null=True,blank=True)
@@ -771,26 +763,26 @@ class CommonAssetsModel(models.Model):
     cost_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='cstasschac')
     description=models.CharField(max_length=30,blank=False,null=True)
     years_depreciated=models.CharField(max_length=3000,blank=False,null=True)
-    quantity=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    value=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    value=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     sum_years_digits=models.IntegerField(blank=True,null=True,default=0)
     asset_life=models.IntegerField(blank=True,null=True,default=0)
     asset_age=models.IntegerField(blank=True,null=True,default=0)
     annual_value_drops=models.CharField(max_length=3000,blank=True,null=True)
     life=models.IntegerField(blank=True,null=True,default=0)
-    days_in_use=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    salvage_value=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    current_value=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    deposit=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
-    lifespan=models.CharField(max_length=10,blank=True,null=True)
+    days_in_use=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    salvage_value=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    current_value=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    deposit=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    lifespan=models.CharField(max_length=30,blank=True,null=True)
     acquired= models.DateField(blank=True, null=True)
-    per_day_value_drop=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=2,default=0)
+    per_day_value_drop=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,default=0)
     expires= models.DateField(blank=True, null=True)
-    annual_depreciation_rate=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=2,default=0)
+    annual_depreciation_rate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,default=0)
     status=models.CharField(choices=posting_status, default='waiting',max_length=20,blank=True,null=True)
     asset_status=models.CharField(choices=asset_current_status,max_length=20,blank=True,null=True)
     depreciation=models.CharField(choices=depreciation_method,max_length=50,blank=True,null=True)
-    depreciated_by=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    depreciated_by=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     comments= models.CharField(null=True, blank=True, max_length=50)
     category= models.ForeignKey(CommonAssetCategoriesModel, related_name="assetcat",on_delete=models.SET_NULL,null=True,blank=True)
@@ -817,10 +809,10 @@ class CommonExpensesModel(models.Model):
     mode=models.CharField(choices=payment_method,max_length=20,blank=False,null=True,default="Cash")
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     description=models.CharField(max_length=30,blank=False,null=True)
-    amount=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    amount=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     comments=models.CharField(max_length=30,blank=True,null=True)
     status=models.CharField(choices=posting_status, default='waiting', max_length=20,blank=True,null=True)
-    quantity=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     equity_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True, on_delete=models.SET_NULL,related_name='coexprln')
     division= models.ForeignKey(CommonDivisionsModel,related_name="dvsexpns",on_delete=models.SET_NULL,null=True,blank=True)
     branch= models.ForeignKey(CommonBranchesModel,related_name="brnchexpns",on_delete=models.SET_NULL,null=True,blank=True)
@@ -853,14 +845,14 @@ class CommonStocksModel(models.Model):
     category=models.ForeignKey(CommonStockCategoriesModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='catinvtconrlnm')
     partNumber = models.CharField(max_length=20, blank=False, null=False)# unique prevents data duplication
     description = models.CharField(max_length=30, blank=False, null=False)
-    quantity=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    buyingPrice=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    unitcost=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    standardUnitCost=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    unitPrice=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    buyingPrice=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    standardUnitCost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    unitPrice=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     comments= models.CharField(null=True, blank=True, max_length=50)
-    criticalnumber=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    criticalnumber=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     inventory_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='coainvrelnm')
     income_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='coaincomerelnm')
     expense_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='coaexprelnm')
@@ -879,17 +871,17 @@ class CommonPurchaseOrdersModel(models.Model):
     owner=models.ForeignKey(User, related_name="cmnownpo",on_delete=models.SET_NULL,null=True,blank=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmncmpnpo",on_delete=models.SET_NULL,null=True,blank=True)
     po_number = models.CharField(null=True, blank=True, max_length=100)
-    uplift=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=2,default=2)
+    uplift=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=2)
     comments = models.CharField(null=True, blank=True, max_length=100)
     supplier= models.ForeignKey(CommonSuppliersModel,related_name="suplporelnme",on_delete=models.SET_NULL,blank=False,null=True)
     
     
-    amount=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=2,default=0)
+    amount=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     date= models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    taxamount=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    misccosts=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=1,default=0)
-    grandtotal=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=1,default=0)
-    amounttaxincl=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=1,default=0)
+    taxamount=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    misccosts=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    grandtotal=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    amounttaxincl=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     posting_po_status=models.CharField(choices=posting_status, default='waiting', max_length=100,blank=True,null=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvspurchases",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnchpurchss",on_delete=models.SET_NULL,null=True,blank=True)
@@ -903,11 +895,11 @@ class CommonPurchaseOrdersModel(models.Model):
 
 class CommonPurchaseOrderItemsModel(models.Model):
     items= models.ForeignKey(CommonStocksModel,related_name="poitemrallirelnm",on_delete=models.CASCADE)
-    quantity=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=2,default=0)
-    unitcost=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=2,default=0)
+    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     po_item_con= models.ForeignKey(CommonPurchaseOrdersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='poitrelname')
-    taxRate=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=2,default=0)
-    discount=models.DecimalField(max_digits=20,blank=True,null=True,decimal_places=2,default=0)
+    taxRate=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    discount=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,default=0)
     date= models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
         return '{}'.format(self.items)
@@ -922,8 +914,8 @@ class CommonPurchaseOrderItemsModel(models.Model):
 class CommonPurchaseOrderMiscCostsModel(models.Model):
     supplier=models.ForeignKey(CommonSuppliersModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='suppmiscrlnme')
     description = models.CharField(max_length=30, blank=True, null=True)
-    unitcost=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    quantity=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     po_misc_cost_con= models.ForeignKey(CommonPurchaseOrdersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='pomiscrlnm')
     date =  models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
@@ -946,21 +938,21 @@ class CommonQuotesModel(models.Model):
     
     comments=models.CharField(blank=True,null=True,default='Quote',max_length=20)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
-    total=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    totalwithtax= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    totalwithdiscount= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    total=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    totalwithtax= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    totalwithdiscount= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     discount= models.CharField(choices=givediscount, default='No', max_length=20)
-    tax=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    discountValue= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    tax=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    discountValue= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     salestax= models.ForeignKey(CommonTaxParametersModel,related_name="txqr",on_delete=models.SET_NULL,blank=True,null=True)
-    taxAmount= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    discountAmount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    taxAmount= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    discountAmount= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     owner= models.ForeignKey(User, related_name="cmnownqts",on_delete=models.SET_NULL,null=True,blank=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmnqtsmpn",on_delete=models.SET_NULL,null=True,blank=True)
     division= models.ForeignKey(CommonDivisionsModel,related_name="dvsqts",on_delete=models.SET_NULL,null=True,blank=True)
     branch= models.ForeignKey(CommonBranchesModel,related_name="brnchqts",on_delete=models.SET_NULL,null=True,blank=True)
     department= models.ForeignKey(CommonDepartmentsModel,related_name="deptqtess",on_delete=models.SET_NULL,null=True,blank=True)
-    grandtotal= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    grandtotal= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     
     payment_terms=models.ForeignKey(CommonPaymentTermsModel, related_name="qtesspymntermdd",on_delete=models.SET_NULL,null=True,blank=True)
     delivery=models.CharField(null=True, blank=True, max_length=100)
@@ -971,8 +963,8 @@ class CommonQuotesModel(models.Model):
  
 class CommonQuoteItemsModel(models.Model):
     description= models.ForeignKey('CommonStocksModel',related_name="allifquoteitemdescrelatednm",on_delete=models.SET_NULL,blank=True,null=True)
-    quantity = models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    discount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    quantity = models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    discount= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     allifquoteitemconnector= models.ForeignKey(CommonQuotesModel, blank=True, null=True, on_delete=models.CASCADE,related_name='allifquoteitemrelated')
     date= models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
@@ -1000,26 +992,26 @@ class CommonInvoicesModel(models.Model):
     number = models.CharField(null=True, blank=True, max_length=20)
     description=models.CharField(blank=True,null=True,default='Quotation',max_length=100)
     customer= models.ForeignKey(CommonCustomersModel,related_name="allifrelatcustinvce",on_delete=models.SET_NULL,blank=True,null=True)
-    terms = models.CharField(choices=paymentTerms, default='Cash', max_length=20)
+   
     status= models.CharField(blank=True,null=True,choices=invoiceStatus, default='Current', max_length=20)
     
     comments=models.CharField(blank=True,null=True,default='Quote',max_length=20)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
-    total=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    totalwithtax= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    totalwithdiscount= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    total=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    totalwithtax= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    totalwithdiscount= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     discount= models.CharField(choices=givediscount, default='No', max_length=20)
-    tax=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    discountValue= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    tax=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    discountValue= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     salestax= models.ForeignKey(CommonTaxParametersModel,related_name="txinvce",on_delete=models.SET_NULL,blank=True,null=True)
-    taxAmount= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    discountAmount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    taxAmount= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    discountAmount= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     owner= models.ForeignKey(User, related_name="cmnowninvcs",on_delete=models.SET_NULL,null=True,blank=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmninvsmpn",on_delete=models.SET_NULL,null=True,blank=True)
     division= models.ForeignKey(CommonDivisionsModel,related_name="dvsinvc",on_delete=models.SET_NULL,null=True,blank=True)
     branch= models.ForeignKey(CommonBranchesModel,related_name="brnchinvc",on_delete=models.SET_NULL,null=True,blank=True)
     department= models.ForeignKey(CommonDepartmentsModel,related_name="deptinvcs",on_delete=models.SET_NULL,null=True,blank=True)
-    grandtotal= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    grandtotal= models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
 
     invoice_due_Date = models.DateField(null=True, blank=True)
     invoice_terms = models.CharField(choices=paymentTerms, default='Cash', max_length=20)
@@ -1027,10 +1019,10 @@ class CommonInvoicesModel(models.Model):
     invoice_currency = models.CharField(choices=Currency, default='$', max_length=20)
     invoice_comments=models.CharField(blank=True,null=True,default='invoice',max_length=20)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
-    invoice_total=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    invoice_total=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     posting_inv_status=models.CharField(choices=posting_status, default='waiting', max_length=100,blank=True,null=True)
-    invoice_items_total_cost=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    invoice_gross_profit=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    invoice_items_total_cost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    invoice_gross_profit=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     invoice_posting_date = models.DateField(null=True, blank=True)
 
     payment_terms=models.ForeignKey(CommonPaymentTermsModel, related_name="invpymnt",on_delete=models.SET_NULL,null=True,blank=True)
@@ -1043,8 +1035,8 @@ class CommonInvoicesModel(models.Model):
  
 class CommonInvoiceItemsModel(models.Model):
     description= models.ForeignKey(CommonStocksModel,related_name="invitmstckrlnm",on_delete=models.SET_NULL,blank=True,null=True)
-    quantity = models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    discount= models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    quantity = models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    discount= models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     allifinvitemconnector= models.ForeignKey(CommonInvoicesModel, blank=True, null=True, on_delete=models.CASCADE,related_name='invitmsrelnm')
     date= models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
@@ -1091,18 +1083,22 @@ class CommonSalariesModel(models.Model):
     description= models.CharField(max_length=30,blank=False,null=True)
     date =  models.DateTimeField(auto_now_add=True,blank=True,null=True)
    
-    amount=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    amount=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     account= models.ForeignKey(CommonChartofAccountsModel,related_name="amsalrn",on_delete=models.SET_NULL,blank=False,null=True)
     mode=models.CharField(choices=payment_method,max_length=20,blank=True,null=True,default="Cash")
     status=models.CharField(choices=posting_status, default='waiting', max_length=100,blank=True,null=True)
     comments= models.CharField(max_length=30,blank=True,null=True)
-    salary_payable=models.DecimalField(max_digits=10,blank=False,null=False,decimal_places=1,default=0)
+    salary_payable=models.DecimalField(max_digits=30,blank=False,null=False,decimal_places=1,default=0)
     owner= models.ForeignKey(User, related_name="hrmslrnm",on_delete=models.SET_NULL,null=True,blank=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmphrmrln",on_delete=models.SET_NULL,null=True,blank=True)
     division= models.ForeignKey(CommonDivisionsModel,related_name="dvssalrs",on_delete=models.SET_NULL,null=True,blank=True)
     branch= models.ForeignKey(CommonBranchesModel,related_name="brnchslrs",on_delete=models.SET_NULL,null=True,blank=True)
     department= models.ForeignKey(CommonDepartmentsModel,related_name="deptslrss",on_delete=models.SET_NULL,null=True,blank=True)
     
+    payment_terms=models.ForeignKey(CommonPaymentTermsModel, related_name="salripymtn",on_delete=models.SET_NULL,null=True,blank=True)
+    
+    currency=models.ForeignKey(CommonCurrenciesModel, related_name="crrnslries",on_delete=models.SET_NULL,null=True,blank=True)
+   
 
     def __str__(self):
     	return str(self.staff)
@@ -1124,6 +1120,11 @@ class CommonJobsModel(models.Model):
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnchjobss",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptjobs",on_delete=models.SET_NULL,null=True,blank=True)
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+
+    payment_terms=models.ForeignKey(CommonPaymentTermsModel, related_name="jobpymtn",on_delete=models.SET_NULL,null=True,blank=True)
+    
+    currency=models.ForeignKey(CommonCurrenciesModel, related_name="crrncjob",on_delete=models.SET_NULL,null=True,blank=True)
+   
     def __str__(self):
         return str(self.job_number)
    

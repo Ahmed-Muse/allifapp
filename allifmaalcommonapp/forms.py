@@ -794,17 +794,18 @@ class CommonAddQuoteItemsForm(forms.ModelForm):
 class CommonAddInvoiceDetailsForm(forms.ModelForm):
     class Meta:
         model =CommonInvoicesModel
-        fields = ['customer','description','terms','division','branch','department','status','currency','comments','discount','tax','discountValue','salestax']
+        fields = ['customer','description','delivery','payment_terms','division','branch','department','status','currency','comments','discount','tax','discountValue','salestax']
 
         widgets={
             'comments':forms.TextInput(attrs={'class':'form-control'}),
             'description':forms.TextInput(attrs={'class':'form-control'}),
             'tax':forms.TextInput(attrs={'class':'form-control'}),
+            'delivery':forms.TextInput(attrs={'class':'form-control'}),
             'discountValue':forms.TextInput(attrs={'class':'form-control'}),
             'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-            'terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+            'payment_terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'status':forms.Select(attrs={'class':'form-control'}),
-            'currency':forms.Select(attrs={'class':'form-control'}),
+            'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'discount':forms.Select(attrs={'class':'form-control'}),
             'salestax':forms.Select(attrs={'class':'form-control'}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -819,6 +820,8 @@ class CommonAddInvoiceDetailsForm(forms.ModelForm):
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
         self.fields['salestax'].queryset = CommonTaxParametersModel.objects.filter(company=allifmaalparameter)
+        self.fields['currency'].queryset = CommonCurrenciesModel.objects.filter(company=allifmaalparameter)
+        self.fields['payment_terms'].queryset = CommonPaymentTermsModel.objects.filter(company=allifmaalparameter)
 class CommonAddInvoiceItemsForm(forms.ModelForm):
     class Meta:
         model = CommonInvoiceItemsModel

@@ -964,10 +964,7 @@ def commonCompanyAdvanceSearch(request,*allifargs, **allifkwargs):
                 html = template.render(context)
                 response = HttpResponse(content_type='application/pdf')
                 response = HttpResponse(content_type='application/doc')
-                response['Content-Disposition'] = f'filename="Searched_Results.pdf"'
-
-
-               
+                response['Content-Disposition'] = f'filename="Companies-Search-Results.pdf"'
 
                 pisa_status = pisa.CreatePDF(html, dest=response)
                 if pisa_status.err:
@@ -2217,6 +2214,7 @@ def commonAddStaffProfile(request,allifusr,allifslug,*allifargs,**allifkwargs): 
     try:
         allif_data=common_shared_data(request)
         form=CommonAddStaffProfileForm(allif_data.get("main_sbscrbr_entity"))
+
         """
         if  main_sbscrbr_entity!=None:
             class CommonAddStaffProfileForm(forms.ModelForm):
@@ -2967,7 +2965,7 @@ def commonChartofAccAdvanceSearch(request,*allifargs,**allifkwargs):
                     allifcontext={"searched_data":searched_data,"title":title,"main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),"scopes":scopes}
                   
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = f'filename="Searched_Results.pdf"'
+                    response['Content-Disposition'] = f'filename="Chart-of-accounts-Advanced-Searched_Results.pdf"'
                     template = get_template(template_path)
                     html=template.render(allifcontext)
                     try:
@@ -3411,10 +3409,10 @@ def commonDepositSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonDepositAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Bank Deposits Advanced Search"
         allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         current_date=timezone.now().date().today()
         firstDate=current_date
@@ -3446,7 +3444,7 @@ def commonDepositAdvanceSearch(request,*allifargs,**allifkwargs):
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="bank-deposits-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -3697,10 +3695,10 @@ def commonWithdrawalSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Bank Withdrawals Advanced Search"
         allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         current_date=timezone.now().date().today()
         firstDate=current_date
@@ -3738,7 +3736,7 @@ def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="bank-withdrawals-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -4005,11 +4003,11 @@ def commonDeleteSupplier(request,pk,*allifargs,**allifkwargs):
 @subscriber_company_status
 def commonSupplierAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Supplier Advanced Search Results"
         allifqueryset=[]
         allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         current_date=timezone.now().date().today()
         firstDate=current_date
         lastDate=current_date
@@ -4044,7 +4042,7 @@ def commonSupplierAdvanceSearch(request,*allifargs,**allifkwargs):
                     "title":title,}
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="supplier-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -4609,7 +4607,7 @@ def commonCustomerSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonCustomerAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Customer Advanced Search Results"
         allif_data=common_shared_data(request)
         allifqueryset=[]
        
@@ -4617,6 +4615,7 @@ def commonCustomerAdvanceSearch(request,*allifargs,**allifkwargs):
         firstDate=current_date
         lastDate=current_date
         largestAmount=0
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         firstDepo=CommonCustomersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
     
         lastDepo=CommonCustomersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
@@ -4644,12 +4643,13 @@ def commonCustomerAdvanceSearch(request,*allifargs,**allifkwargs):
                     "searched_data":searched_data,
                     "title":title,
                     "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
+                    "scopes":scopes,
                 
                     }
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="Customer-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -6019,10 +6019,11 @@ def commonStockItemSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonStockItemAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Stock Items Advanced Search Results"
         allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         current_date=timezone.now().date().today()
         firstDate=current_date
         lastDate=current_date
@@ -6054,12 +6055,12 @@ def commonStockItemAdvanceSearch(request,*allifargs,**allifkwargs):
                     "searched_data":searched_data,
                     "title":title,
                     "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                    "scopes":scopes
+                    "scopes":scopes,
                     }
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="stock-items-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -6719,11 +6720,9 @@ def commonPOToPdf(request,pk,*allifargs,**allifkwargs):
         
         }
         
-        response=HttpResponse(content_type='application/pdf')
-        response = HttpResponse(content_type='application/doc')
-        response['Content-Disposition'] = 'filename="searched-result.pdf"'
         response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'filename="searched-result.pdf"'
+        response = HttpResponse(content_type='application/doc')
+        response['Content-Disposition'] = f'filename="{allifquery}/P.O.pdf"'
         template = get_template(template_path)
         html=template.render(context)
 
@@ -6773,7 +6772,7 @@ def commonPOSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonPOAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Purchase Order Advanced Search Results"
         allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
@@ -6782,7 +6781,8 @@ def commonPOAdvanceSearch(request,*allifargs,**allifkwargs):
         firstDate=CommonPurchaseOrdersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
         lastDate=CommonPurchaseOrdersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
         largestAmount=CommonPurchaseOrdersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
 
         current_date=timezone.now().date().today()
         firstDate=current_date
@@ -6823,7 +6823,7 @@ def commonPOAdvanceSearch(request,*allifargs,**allifkwargs):
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -7142,7 +7142,7 @@ def commonQuoteToPdf(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
         date_today=date.today()
        
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         allifquery=CommonQuotesModel.objects.filter(id=pk).first()
         allifqueryset=CommonQuoteItemsModel.objects.filter(allifquoteitemconnector=allifquery)
         title="Quote "+str(allifquery)
@@ -7231,7 +7231,7 @@ def commonQuotesSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonQuoteAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Advanced Quotes Search"
         allif_data=common_shared_data(request)
        
         formats=CommonDocsFormatModel.objects.all()
@@ -7241,7 +7241,7 @@ def commonQuoteAdvanceSearch(request,*allifargs,**allifkwargs):
         firstDate=CommonQuotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
         lastDate=CommonQuotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
         largestAmount=CommonQuotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-total').first().total
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
             start_date=request.POST.get('startdate',selected_option) or None
@@ -7265,7 +7265,7 @@ def commonQuoteAdvanceSearch(request,*allifargs,**allifkwargs):
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="quotes-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -7747,7 +7747,7 @@ def commonInvoiceToPdf(request,pk,*allifargs,**allifkwargs):
     
         date_today=date.today()
        
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         allifquery=CommonInvoicesModel.objects.filter(id=pk).first()
         allifqueryset=CommonInvoiceItemsModel.objects.filter(allifinvitemconnector=allifquery)
         title="Invoice "+str(allifquery)
@@ -7842,7 +7842,7 @@ def commonInvoicesSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonInvoiceAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Invoices Advanced Search"
         allif_data=common_shared_data(request)
        
         formats=CommonDocsFormatModel.objects.all()
@@ -7852,7 +7852,7 @@ def commonInvoiceAdvanceSearch(request,*allifargs,**allifkwargs):
         firstDate=CommonInvoicesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
         lastDate=CommonInvoicesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
         largestAmount=CommonInvoicesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-total').first().total
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
             start_date=request.POST.get('startdate',selected_option) or None
@@ -7876,7 +7876,7 @@ def commonInvoiceAdvanceSearch(request,*allifargs,**allifkwargs):
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="Invoices-advanced-searched-result.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -8038,14 +8038,14 @@ def commonLedgerEntrySearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonLedgerEntryAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Ledger Entries Advanced Search Results"
         allif_data=common_shared_data(request)
        
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
         allifqueryset=[]
        
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
 
         current_date=timezone.now().date().today()
         firstDate=current_date
@@ -8087,7 +8087,7 @@ def commonLedgerEntryAdvanceSearch(request,*allifargs,**allifkwargs):
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="ledger-entries-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -8287,7 +8287,7 @@ def commonSupplierPaymentSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonSupplierPaymentAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Supplier Payment Advanced Search Results"
         allif_data=common_shared_data(request)
        
         formats=CommonDocsFormatModel.objects.all()
@@ -8336,7 +8336,7 @@ def commonSupplierPaymentAdvanceSearch(request,*allifargs,**allifkwargs):
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="supplier-payment-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
@@ -8594,10 +8594,10 @@ def commonSupplierStatementpdf(request,pk,*allifargs,**allifkwargs):
 
         allifquery=CommonSuppliersModel.objects.filter(id=pk).first()
         allifqueryset=CommonLedgerEntriesModel.objects.filter(supplier=allifquery,company=allif_data.get("main_sbscrbr_entity")).order_by('date') 
-        total = sum(transaction.balance for transaction in allifqueryset) 
-        mydate=datetime.date.today()
+        total=sum(transaction.balance for transaction in allifqueryset) 
+        mydate=timezone.now().date().today()
         system_user=request.user
-        title="Customer Statement "+" "+str(allifquery)
+        title="Supplier Statement "+" "+str(allifquery)
         template_path = 'allifmaalcommonapp/statements/suppliers/supplier_statement_pdf.html'
       
         context = {
@@ -8928,7 +8928,7 @@ def commonPostedCustomerPayments(request,*allifargs,**allifkwargs):
 def commonCustomerStatementpdf(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        mydate=datetime.date.today()
+        mydate=timezone.now().date().today()
         AllifQueryDetails=get_object_or_404(CommonCustomersModel,id=pk)
         title="Customer Statement "+" "+str(AllifQueryDetails)
         scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
@@ -9010,7 +9010,7 @@ def commonCustomerPaymentSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_has_departmental_access
 def commonCustomerPaymentAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Advanced Search"
+        title="Customer Payment Advanced Search Results"
         allif_data=common_shared_data(request)
        
         formats=CommonDocsFormatModel.objects.all()
@@ -9059,7 +9059,7 @@ def commonCustomerPaymentAdvanceSearch(request,*allifargs,**allifkwargs):
                     
                     response = HttpResponse(content_type='application/pdf') # this opens on the same page
                     response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
+                    response['Content-Disposition'] = 'filename="customer-payment-advanced-searched-results.pdf"'
                     template = get_template(template_path)
                     html = template.render(allifcontext)
                     try:
