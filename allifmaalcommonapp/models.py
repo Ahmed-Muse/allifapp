@@ -43,6 +43,7 @@ from django.urls import reverse
 # we may have various views for various apps but they may share database
 # 
 # #
+
 gender = (
     ('Male', 'Male'),
     ('Female', 'Female'),
@@ -378,6 +379,35 @@ class CommonTaxParametersModel(models.Model):
     def clean(self):
         if self.taxrate<0:
             raise ValidationError("Tax Rate cannot be negative")
+
+
+class CommonCurrenciesModel(models.Model):
+    description=models.CharField(max_length=30,blank=False,null=True,unique=False)
+    owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="owncrrncy",null=True)
+    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpcrrncy",on_delete=models.SET_NULL,null=True,blank=True)
+    comments= models.CharField(null=True, blank=False, max_length=30)
+    date=models.DateField(blank=True,null=True,auto_now_add=True)
+    division= models.ForeignKey(CommonDivisionsModel,related_name="dvscrrncy",on_delete=models.SET_NULL,null=True,blank=True)
+    branch= models.ForeignKey(CommonBranchesModel,related_name="currnybrnch",on_delete=models.CASCADE,null=True,blank=True)
+    department= models.ForeignKey(CommonDepartmentsModel,related_name="currncydpt",on_delete=models.CASCADE,null=True,blank=True)
+    
+    def __str__(self):
+        return str(self.description)
+
+
+
+class CommonPaymentTermsModel(models.Model):
+    description=models.CharField(max_length=50,blank=False,null=True,unique=False)
+    owner= models.ForeignKey(User, on_delete=models.SET_NULL,related_name="owpymnterms",null=True)
+    company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmppymntrms",on_delete=models.SET_NULL,null=True,blank=True)
+    comments= models.CharField(null=True, blank=False, max_length=30)
+    date=models.DateField(blank=True,null=True,auto_now_add=True)
+    division= models.ForeignKey(CommonDivisionsModel,related_name="dvspymtrm",on_delete=models.SET_NULL,null=True,blank=True)
+    branch= models.ForeignKey(CommonBranchesModel,related_name="brnchpymntrms",on_delete=models.CASCADE,null=True,blank=True)
+    department= models.ForeignKey(CommonDepartmentsModel,related_name="paymntrmsdpt",on_delete=models.CASCADE,null=True,blank=True)
+    
+    def __str__(self):
+        return str(self.description)
 # #################3 HRM ################    
 class CommonEmployeesModel(models.Model):
     rights= [
@@ -846,34 +876,38 @@ class CommonStocksModel(models.Model):
 ##################################
 
 class CommonPurchaseOrdersModel(models.Model):
-    owner= models.ForeignKey(User, related_name="cmnownpo",on_delete=models.SET_NULL,null=True,blank=True)
+    owner=models.ForeignKey(User, related_name="cmnownpo",on_delete=models.SET_NULL,null=True,blank=True)
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmncmpnpo",on_delete=models.SET_NULL,null=True,blank=True)
     po_number = models.CharField(null=True, blank=True, max_length=100)
-    uplift=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=2)
+    uplift=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=2,default=2)
     comments = models.CharField(null=True, blank=True, max_length=100)
     supplier= models.ForeignKey(CommonSuppliersModel,related_name="suplporelnme",on_delete=models.SET_NULL,blank=False,null=True)
-    payment_terms = models.CharField(choices=payment_method, default='Cash', max_length=20)
-    amount=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    
+    
+    amount=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=2,default=0)
     date= models.DateTimeField(auto_now_add=True,blank=True,null=True)
     taxamount=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    misccosts=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    grandtotal=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    amounttaxincl=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    misccosts=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=1,default=0)
+    grandtotal=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=1,default=0)
+    amounttaxincl=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=1,default=0)
     posting_po_status=models.CharField(choices=posting_status, default='waiting', max_length=100,blank=True,null=True)
-    division= models.ForeignKey(CommonDivisionsModel,related_name="dvspurchases",on_delete=models.SET_NULL,null=True,blank=True)
-    branch= models.ForeignKey(CommonBranchesModel,related_name="brnchpurchss",on_delete=models.SET_NULL,null=True,blank=True)
-    department= models.ForeignKey(CommonDepartmentsModel,related_name="deptpurchss",on_delete=models.SET_NULL,null=True,blank=True)
-    description = models.CharField(null=True, blank=True, max_length=100)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvspurchases",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchpurchss",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptpurchss",on_delete=models.SET_NULL,null=True,blank=True)
+    description=models.CharField(null=True, blank=True, max_length=100)
+    payment_terms=models.ForeignKey(CommonPaymentTermsModel, related_name="popymnterms",on_delete=models.SET_NULL,null=True,blank=True)
+    delivery=models.CharField(null=True, blank=True, max_length=100)
+    currency=models.ForeignKey(CommonCurrenciesModel, related_name="crrncypo",on_delete=models.SET_NULL,null=True,blank=True)
     def __str__(self):
         return str(self.po_number)
-    
+
 class CommonPurchaseOrderItemsModel(models.Model):
     items= models.ForeignKey(CommonStocksModel,related_name="poitemrallirelnm",on_delete=models.CASCADE)
-    quantity=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    unitcost=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    quantity=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=2,default=0)
+    unitcost=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=2,default=0)
     po_item_con= models.ForeignKey(CommonPurchaseOrdersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='poitrelname')
-    taxRate=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
-    discount=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    taxRate=models.DecimalField(max_digits=20,blank=False,null=True,decimal_places=2,default=0)
+    discount=models.DecimalField(max_digits=20,blank=True,null=True,decimal_places=2,default=0)
     date= models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
         return '{}'.format(self.items)
@@ -907,9 +941,9 @@ class CommonQuotesModel(models.Model):
     number = models.CharField(null=True, blank=True, max_length=20)
     description=models.CharField(blank=True,null=True,default='Quotation',max_length=100)
     customer= models.ForeignKey(CommonCustomersModel,related_name="allifrelatcustquote",on_delete=models.SET_NULL,blank=True,null=True)
-    terms = models.CharField(choices=paymentTerms, default='Cash', max_length=20)
+    
     prospect = models.CharField(choices=prospects, default='Default', max_length=20)
-    currency = models.CharField(choices=Currency, default='$', max_length=20)
+    
     comments=models.CharField(blank=True,null=True,default='Quote',max_length=20)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     total=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
@@ -925,8 +959,13 @@ class CommonQuotesModel(models.Model):
     company= models.ForeignKey(CommonCompanyDetailsModel,related_name="cmnqtsmpn",on_delete=models.SET_NULL,null=True,blank=True)
     division= models.ForeignKey(CommonDivisionsModel,related_name="dvsqts",on_delete=models.SET_NULL,null=True,blank=True)
     branch= models.ForeignKey(CommonBranchesModel,related_name="brnchqts",on_delete=models.SET_NULL,null=True,blank=True)
-    department= models.ForeignKey(CommonDepartmentsModel,related_name="deptqts",on_delete=models.SET_NULL,null=True,blank=True)
+    department= models.ForeignKey(CommonDepartmentsModel,related_name="deptqtess",on_delete=models.SET_NULL,null=True,blank=True)
     grandtotal= models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
+    
+    payment_terms=models.ForeignKey(CommonPaymentTermsModel, related_name="qtesspymntermdd",on_delete=models.SET_NULL,null=True,blank=True)
+    delivery=models.CharField(null=True, blank=True, max_length=100)
+    currency=models.ForeignKey(CommonCurrenciesModel, related_name="crrncyqtes",on_delete=models.SET_NULL,null=True,blank=True)
+   
     def __str__(self):
         return '{}'.format(self.number)
  
@@ -963,7 +1002,7 @@ class CommonInvoicesModel(models.Model):
     customer= models.ForeignKey(CommonCustomersModel,related_name="allifrelatcustinvce",on_delete=models.SET_NULL,blank=True,null=True)
     terms = models.CharField(choices=paymentTerms, default='Cash', max_length=20)
     status= models.CharField(blank=True,null=True,choices=invoiceStatus, default='Current', max_length=20)
-    currency = models.CharField(choices=Currency, default='$', max_length=20)
+    
     comments=models.CharField(blank=True,null=True,default='Quote',max_length=20)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     total=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
@@ -993,6 +1032,11 @@ class CommonInvoicesModel(models.Model):
     invoice_items_total_cost=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     invoice_gross_profit=models.DecimalField(max_digits=10,blank=False,null=True,decimal_places=1,default=0)
     invoice_posting_date = models.DateField(null=True, blank=True)
+
+    payment_terms=models.ForeignKey(CommonPaymentTermsModel, related_name="invpymnt",on_delete=models.SET_NULL,null=True,blank=True)
+    delivery=models.CharField(null=True, blank=True, max_length=100)
+    currency=models.ForeignKey(CommonCurrenciesModel, related_name="crrncinv",on_delete=models.SET_NULL,null=True,blank=True)
+   
 
     def __str__(self):
         return '{}'.format(self.number)

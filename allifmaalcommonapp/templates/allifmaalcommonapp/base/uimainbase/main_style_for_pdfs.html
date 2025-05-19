@@ -1,73 +1,166 @@
 <style>
-    *{
-      font-family: system-ui,Helvetica, sans-serif,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
-    }
-    
-    .allif_pdf_main_body_container{
-     text-align: center;
-
-    } 
-    .allif_pdf_search_header{
-      text-align: center;
-      font-size: 1.5em;
-      margin-top: 1em;
-
-    }
-
-    .allif-pdf-table-header{
-      background-color: #e6e6e6;
+  :root {
+  --main-background-color: #F6F7F8;
+  --main-text-font-size:1em;
+  --headings-font-size:1.2em;
+  --main-font-type:system-ui,Helvetica, sans-serif,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+  --main-green-color:#07891c;
+  --main-blue-color:#3d22a7;
+  --main-black-color:#0a0a0a;
+  --main-table-links-color:#04010f;
+  --main-red-color:#bd0303;
+  --links-on-hover-text-color:#3a0bf7;
+  --button-on-hover-color:#eeeeee;
+  --box-shadow-specs:0em 0em 0.5em #858585;
+  --bottom-border-line:1px solid #dfdede;
+  --padding-spec:0.3em 0.3em 0.3em 0.3em;
+  --btn-hover-bg-color:#eee;
+  --table-list-identifier:#0314f8;
+  --main-border-line:1px solid #18b703;
+  --main-delete-color-background:#e17639;
+  --main-white-color:#fff;
+  --main-content-spacer-margins: 5px 2px 3px 4px;
+  --main-spacer-height:2px;
+  --main-width:100%;
+  --main-border-radius:3px;
+  --main-fixed-col-bg-clr:#f0f0f0;
+  
       }
+      
+  *{
+    font-family: system-ui,Helvetica, sans-serif,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+  }
     
-    table td {
-      vertical-align: middle !important;
-      text-align: left;
-      margin-left: 3px;
-      padding-left: 3px;
-      padding-top: 3px;
-      padding-bottom: 3px;
-      font-family:system-ui,Helvetica, sans-serif,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
-      font-size: 1em;
-    }
-    table,th  {
-      padding-top: 3px;
-      padding-bottom: 3px;
-      font-family:system-ui,Arial, Helvetica, sans-serif;
-      font-weight: normal;
-      font-size: 1.1em;
-      border:none;
-      text-align: left;
-    }
-    
-    .table-bordered {
-      background-color:#fdfdfd;
-    }
-    .table-bordered td, .table-bordered th {
-      border: 1px solid #b7e9fc;
-    }
-    
-    .company-details-section{
-      border: 1px solid #fcfbfb;
-      word-spacing: normal;
-      letter-spacing: normal;
-      line-height:0px;
-      font-family: system-ui,Helvetica, sans-serif,sans-serif,Arial,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
-      font-size: 1.1em;
-      margin-top: 0px;
-      font-weight: normal;
-    }
-    
-    .company-pdf-logo{
-      text-align: center;
-      width: 140px; 
-      max-height: 90px;
-    }
-    
-    .allif_pdf_footer_content{
-      text-align: center;
-      font-size: 1.5em;
-      margin-top: 2em;
-      color: blue;
+.allif_pdf_main_body_container{
+  text-align: center;
+  font-size: 1em;
 
-    }
+} 
+
+.allif-pdf-company-details-section{
+  border: 0.1em solid #fdfdfd;
+  word-spacing: normal;
+  letter-spacing: normal;
+  line-height:1px;
+  margin-top: 0.3em;
+  font-weight:normal;
+  font-size: 1em;
+  color:#171717;
+  font-style:normal;
+  background-color:#fff;
+  text-align: left;
+  padding-left: 0.3em;
+  margin-left: 0.3em;
+ 
+  }
+
+.company-pdf-logo{
+    text-align: left;
+    width: 150px; 
+    max-height: 100px;
+  }
+
+.allif_pdf_header_title{
+  font-size:1.4em;
+  color:#171717;
+  text-align:right;
+  margin: 1em;
+  font-weight: bold;
+  }
+
+.allif-pdf-table-header-section th{
+font-size: 1em;
+font-weight: bold;
+background-color: #fafafa;
+padding: 0.2em 0.2em 0.2em 0.2em;
+margin:  0.2em 0.2em 0.2em 0.2em;
+border: 1px solid #f1f0fc;
+  }
+    
+.allif-pdf-table-header-section td{
+  font-size: 1em;
+  background-color: #fff;
+  padding:0.3em 0.1em 0.1em 0.1em;
+  margin:  0.1em 0.1em 0.1em 0.1em;
+  border: 1px solid #f1f0fc;
+}
+
+.allif-pdf-table-content-headers{
+  font-size: 1em;
+  font-weight: bold;
+  color:#2b2c2f;
+ 
+}
+
+.allif-pdf-table-content-body-header{
+  font-size:1.3em;
+  color:#171717;
+  text-align:left;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  }
+
+.allif-pdf-table-body th{
+  font-size: 1.1em;
+  text-align: left;
+  border: 1px solid #f1f0fc;
+  background-color:#fafafa;
+  padding: 0.2em  0.2em  0.2em  0.2em;
+  color: #07012c;
+  
+  }
+
+.allif-pdf-table-body td{
+  text-align: left;
+  font-size: 1em;
+  border: 1px solid #f1f0fc;
+  padding: 0.2em  0.2em  0.1em  0.2em;
+}
+
+.allif-pdf-company-details-section td{
+  text-align: left;
+  margin:0.1em 0.1em 0.1em 0.1em;
+  padding: 0.2em  0.2em  0.1em  0.2em;
+}
+
+
+table th  {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-weight: normal;
+  text-align: left;
+}
+table td {
+  text-align: left;
+  margin:0.1em 0.1em 0.1em 0.1em;
+  padding: 0.2em  0.2em  0.1em  0.2em;
+}
+
+.allif_pdf_footer_content {
+  text-align: left;
+  font-size: 1.5em;
+  margin-top: 2em;
+  color: rgb(2, 20, 103);
+
+}
+
+.allif-pdf-table-body-summary-section{
+  margin-top: 0px;
+
+}
+.allif-pdf-table-body-summary td{
+  font-size: 1em;
+  column-span: 1;
+  font-size: 1em;
+  font-weight: bold;
+  border: 1px solid #f1f0fc;
+  
+  font-style: italic;
+}
+#allif-pdf-table-body-no-border{
+  border: none;
+ 
+}
+
     </style>
     

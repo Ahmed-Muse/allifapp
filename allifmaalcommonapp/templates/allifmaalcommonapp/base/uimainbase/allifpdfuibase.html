@@ -10,52 +10,43 @@
 {% endblock %}
 </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{% block style %}
-{% endblock %}
 
 </head>
 <body>
   {% include 'allifmaalcommonapp/base/uimainbase/main_style_for_pdfs.html' %}
-<table class="company-details-section">
+<table class="allif-pdf-company-details-section">
 <thead>
   <tr>
-  <th>
-    <div>
-    {% if main_sbscrbr_entity.logo %}
-    <div class="company-pdf-logo">
-    
-      <img src="{{main_sbscrbr_entity.logo.path}}">
-    
-    </div>
-    {% else %}
-    {{main_sbscrbr_entity}}
-    
-    {% endif %}
-    </div>
-  </th>
-  <th colspan="2">
-    <li> Address: {{main_sbscrbr_entity.address}}</li>
-    <li>Phone: {{main_sbscrbr_entity.phone1}} </li>
-    <li>E-mail: {{main_sbscrbr_entity.email}}</li>
-    <li>Website: {{main_sbscrbr_entity.website}} </li>
+
+  <th colspan="3"> <div class="company-pdf-logo">{% if main_sbscrbr_entity.logo %} <img src="{{main_sbscrbr_entity.logo.path}}"> {% else %} {{main_sbscrbr_entity}} {% endif %}</div></th>
+
+  <th colspan="5">
+    <strong> {{main_sbscrbr_entity.company}}</strong>
+    <li>{{main_sbscrbr_entity.address}}</li>
+    <li>{{main_sbscrbr_entity.phone1}} </li>
+    <li>{{main_sbscrbr_entity.email}}</li>
+    <li>{{main_sbscrbr_entity.website}} </li>
   </th>
 
-  <th>
-    {% for scope in scopes %}
-  <li>{{scope.name}}</li>
-  {% endfor %}
-  </th>
+  <th colspan="4">
+    <strong>Our Scope</strong>
+     {% for scope in scopes %} <li>{{scope.name}}</li> {% endfor %} </th>
     
   </tr>
 </thead>
 
 </table>
 
+<div class="allif_pdf_header_title">{{title}}</div>
 
 {% block body %}
 {% endblock %}
+
 <div class="allif_pdf_footer_content">
-  www.allifmaal.com
+  
+  <p>
+    Processed By: {{system_user}}
+  </p>
 </div>
 {% block scripts %}
 {% endblock %}

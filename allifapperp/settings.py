@@ -151,6 +151,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 """
 DATABASES = {
     "default": {
@@ -163,14 +164,14 @@ DATABASES = {
     }
 }
 """
-""""
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'allifmaal_db',
         'USER': 'root',
         'PASSWORD': 'amd30974153',
-        'HOST': 'localhost',
+        'HOST': 'root',
         'PORT': '3306',
     }
 }  

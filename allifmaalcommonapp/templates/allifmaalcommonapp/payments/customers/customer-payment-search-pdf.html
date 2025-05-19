@@ -8,35 +8,48 @@
 {%endblock%}
 {% block body %}
 <div class="allif_pdf_main_body_container">
-    <div class="allif_pdf_search_header">Customer Payments Search Results</div>
-    <table class="table-bordered">
+
+<!--start of ... table main dynamic content section-->
+<div class="allif-pdf-table-content-body-section">
+    <table class="allif-pdf-table-body">
+
     <tr>
-    <thead>
-    <tr class="allif-pdf-table-header">
-    <th>Description</th>
-    <th>Customer</th>
-    <th>Amount</th>
-    <th>Date</th>
+    <th colspan="2">Number</th>
+    <th colspan="6">Customer</th>
+    <th colspan="2">Amount</th>
+    <th colspan="2">Date</th>
     </tr>
-    </thead>
+   
     <tbody>
     {% for item in searched_data %}
     <tr>
-    <td>{{item.description}}</td>
-    <td>{{item.customer}}</td>
-    <td>{{item.amount|floatformat:2|intcomma}}</td>
-    <td> {{item.date|date:'d/m/Y'}}</td>
+    <td colspan="2">{{item.number}}</td>
+    <td colspan="6">{{item.customer}}</td>
+    <td colspan="2"> {{item.grandtotal|floatformat:2|intcomma}}</td>
+    <td colspan="2">{{item.date|date:'d/m/Y'}}</td>
+    
     </tr>
     {% endfor %}
+
     </tbody>
     </table>
-        
+    </div>
+    <!--start of ... table main dynamic content section-->
+
+    <div class="allif-pdf-table-body-summary-section">
+    <table class="allif-pdf-table-body-summary">
+    <tbody>
+  
+  
 </div> 
+
 
 {% block scripts %}
 
 {% endblock %}
 
 {% endblock %}
-   
+{% block footer %}
 
+{% endblock %}
+ 

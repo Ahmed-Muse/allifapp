@@ -75,6 +75,21 @@ path('Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonD
 path('Search/Departments/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepartmentSearch, name="commonDepartmentSearch"),
 path('Want/To/Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDepartment, name="commonWantToDeleteDepartment"),
 
+
+
+################################## Currencies ##############
+path('Currencies/Main/Money/Types/<str:allifusr>/<str:allifslug>/', views.commonCurrencies, name="commonCurrencies"),
+path('Add/New/Currency/<str:allifusr>/<str:allifslug>/', views.commonAddCurrency, name="commonAddCurrency"),
+path('Edit/Currency/Filter/Details/Money/Types/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCurrency, name="commonEditCurrency"),
+path('Delete/Currency/Record/Money/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteCurrency, name="commonDeleteCurrency"),
+
+
+################################## Payment Terms ##############
+path('Payment/Terms/Payment/Conditions/<str:allifusr>/<str:allifslug>/', views.commonPaymentTerms, name="commonPaymentTerms"),
+path('Add/New/Payment/Term/Payment/Conditions/<str:allifusr>/<str:allifslug>/', views.commonAddPaymentTerm, name="commonAddPaymentTerm"),
+path('Edit/Payment/Terms/Details/Money/Conditions/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPaymentTerm, name="commonEditPaymentTerm"),
+path('Delete/Payment/Term/s/Money/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeletePaymentTerm, name="commonDeletePaymentTerm"),
+
 ############################ HRM ##################################3
 path('HRM/<str:allifusr>/<str:allifslug>/', views.commonhrm, name="commonhrm"),
 path('Add/New/Staff/User/<str:allifusr>/<str:allifslug>/', views.commonAddUser, name="commonAddUser"),
@@ -342,16 +357,6 @@ path('Search/For/Supplier/Payments/From/Database/<str:allifusr>/<str:allifslug>/
 path('Want/To/Delete/This/Supplier/Payment/Item/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/From/Invoice/', views.commonWantToDeleteSupplierPayment, name="commonWantToDeleteSupplierPayment"),
 path('Supplier/Statement/Pdf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonSupplierStatementpdf, name="commonSupplierStatementpdf"),
 path('Advanced/Search/For/Supplier/Payment/Details/<str:allifusr>/<str:allifslug>/', views.commonSupplierPaymentAdvanceSearch, name="commonSupplierPaymentAdvanceSearch"),
-
-
-
-
-
-
-
-
-
-
 
 ######################### customer payments and statments ########################
 path('Customer/Payments/<str:allifusr>/<str:allifslug>/', views.commonCustomerPayments, name="commonCustomerPayments"),

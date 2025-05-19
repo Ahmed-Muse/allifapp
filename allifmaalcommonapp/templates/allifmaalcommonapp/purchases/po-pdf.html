@@ -7,86 +7,104 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-<style>
-    #allif-pdf-header{
-    font-size:2em;
-    color: #050eab;
-    float: right;
-    text-align: right;
-    margin: 0.4em;
-  }
-</style>
-
-<div id="allif-pdf-header">Purchase Order </div>
+<div class="allif_pdf_main_body_container">
   
-<table class="table-bordered">
+<!--start of ... Table header section-->
+<div class="allif-table-pdf-header">
+<table class="allif-pdf-table-header-section">
     <tr>
-      <th colspan="4">Purchase Order Details</th>
-      <th colspan="4">Supplier Details</th>
-      <th colspan="4">Terms Details</th>
+      <th>Purchase Order Details</th>
+      <th>Supplier Details</th>
+      <th>Terms Details</th>
+      
     </tr>
 
     <tr> 
-    <th colspan="4">
-    <li>PO Ref: {{allifquery.po_number}}</li>
-    <li>Description: {{allifquery.description}}</li> 
-    <li>Date: {{allifquery.date|date:'d/m/Y'}}</li>
-    </th>
-    <th colspan="4">
-    <li>Supplier:  {{allifquery.supplier}}</li> 
-    <li>Phone: {{allifquery.supplier.phone}}</li> 
-    <li>Supplier Address: {{allifquery.supplier.address}}</li> 
-    </th>
-    <th colspan="4">
-    <li>Comments: {{allifquery.comments}}</li>
-    <li>Terms : {{allifquery.payment_terms}}</li>
-    </th>
+    <td>
+    <li><span class="allif-pdf-table-content-headers">P.O.REF.</span> {{allifquery.po_number}}</li>
+    <li><span class="allif-pdf-table-content-headers">Department</span> {{allifquery.department}}</li>
+    <li><span class="allif-pdf-table-content-headers">Date</span> {{allifquery.date|date:'d/m/Y'}}</li>
+    </td>
+
+    <td>
+    <li><span class="allif-pdf-table-content-headers">Supplier</span> {{allifquery.supplier}}</li>
+    <li><span class="allif-pdf-table-content-headers">Phone</span> {{allifquery.supplier.phone}}</li>
+    <li><span class="allif-pdf-table-content-headers">Address</span> {{allifquery.supplier.address}}</li>
+    </td>
+
+    <td>
+    <li><span class="allif-pdf-table-content-headers">Comments</span> {{allifquery.comments}}</li>
+    <li><span class="allif-pdf-table-content-headers">Terms</span> {{allifquery.payment_terms}}</li>
+    <li><span class="allif-pdf-table-content-headers">Delivery</span> {{allifquery.delivery}}</li>
+
+    </td>
+
     </tr>
 
     </table>
-
-<div>
-    <table class="table-bordered">
-    <tr>
-    <thead>
-    <tr class="allif-pdf-table-header">
+    </div>
+    <!--end of ... Table header section-->
+    <div class="allif-pdf-table-content-body-header">
+    <span class="allif-pdf-table-content-headers">Subject: </span> {{allifquery.description}}
     
-    <th colspan="4">Item</th>
-    <th colspan="4">Quantity</th>
+    </div>
+
+
+<!--start of ... table main dynamic content section-->
+<div class="allif-pdf-table-content-body-section">
+    <table class="allif-pdf-table-body">
+
+    <tr>
+    <th colspan="5">Description</th>
+    <th colspan="2">Quantity</th>
     <th colspan="2">Unit Cost</th>
-    <th colspan="2">Amount</th>
+    <th colspan="3">Amount</th>
     </tr>
-    </thead>
+   
     <tbody>
     {% for item in allifqueryset %}
     <tr>
-    <td colspan="4">{{item.items}}</td>
-    <td colspan="4">{{item.quantity}}</td>
-    <td colspan="2">{{item.unitcost|intcomma}}</td>
-    <td colspan="2"> {{item.purchase_order_amount|intcomma}}</td>
+    <td colspan="5">{{item.items}}</td>
+    <td colspan="2">{{item.quantity|floatformat:2|intcomma}}</td>
+    <td colspan="2"> {{item.unitcost|floatformat:2|intcomma}}</td>
+    <td colspan="3">{{item.purchase_order_amount|floatformat:2|intcomma}}</td>
+    
     </tr>
     {% endfor %}
+
+    </tbody>
+    </table>
+    </div>
+    <!--start of ... table main dynamic content section-->
+
+    <div class="allif-pdf-table-body-summary-section">
+    <table class="allif-pdf-table-body-summary">
+    <tbody>
+    
     <tr>
-    <td colspan="8"></td>
-    <td colspan="2" class="text-right"> <strong> Sub Total</strong> </td>
-    <td colspan="2"> <strong>{{allifquery.amount|intcomma}}</strong> </td>
-    </tr>
-    <tr>
-    <td colspan="8"></td>
-    <td colspan="2" class="text-right"> <strong> Add Tax </strong> </td>
-    <td colspan="2"> <strong>{{allifquery.taxamount|intcomma}}</strong> </td>
+    <td colspan="5" id="allif-pdf-table-body-no-border"></td>
+    <td colspan="4"> Sub Total </td>
+    <td colspan="3">{{allifquery.amount|floatformat:2|intcomma}} </td>
     </tr>
 
     <tr>
-    <td colspan="8"></td>
-    <td colspan="2" class="text-right"> <strong> Tax Inclusive</strong> </td>
-    <td colspan="2"> <strong>{{allifquery.amounttaxincl|intcomma}}</strong> </td>
+    <td colspan="5" id="allif-pdf-table-body-no-border"></td>
+    <td colspan="4"> Add Tax  </td>
+    <td colspan="3"> {{allifquery.taxamount|floatformat:2|intcomma}}</td>
+    </tr>
+
+    <tr>
+    <td colspan="5" id="allif-pdf-table-body-no-border"></td>
+    <td colspan="4"> Tax Inclusive {{allifquery.currency}}</td>
+    <td colspan="3">{{allifquery.amounttaxincl|floatformat:2|intcomma}} </td>
     </tr>
 
     </tbody>
     </table>
-        
+    </div>
+  
 </div> 
+
 
 {% block scripts %}
 
@@ -94,3 +112,4 @@
 
 {% endblock %}
    
+ 

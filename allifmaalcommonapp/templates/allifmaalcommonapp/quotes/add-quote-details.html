@@ -149,6 +149,11 @@
                               <td class="allif-fix-table-col">Grand Total</td>
                               <td>{{allifquery.grandtotal|floatformat:2|intcomma}}</td>
                               </tr>
+                
+                               <tr>
+                              <td class="allif-fix-table-col">Selling Price With Discount</td>
+                              <td>{{allifquery.selling_price_with_disc|floatformat:2|intcomma}}</td>
+                              </tr>
                         
           </tbody>
           </table>
@@ -184,10 +189,14 @@
           </tr> 
           <tr>
             <td class="allif-fix-table-col">Terms</td>
-            <td>{{allifquery.terms}}</td>
+            <td>{{allifquery.payment_terms}}</td>
         
         </tr> 
-
+  <tr>
+            <td class="allif-fix-table-col">Delivery</td>
+            <td>{{allifquery.delivery}}</td>
+        
+        </tr> 
      
       
           </tbody>
@@ -261,12 +270,12 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Likelyhood</td>
-            <td>{{form.prospect}}</td>
+         
+            <tr>
+            <td class="allif-fix-table-col">Sales Tax</td>
+            <td>{{form.salestax}}</td>
         
             </tr>
-           
           <tr>
             <td class="allif-fix-table-col">Currency</td>
             <td>{{form.currency}}</td>
@@ -274,9 +283,14 @@
             </tr>
             <tr>
               <td class="allif-fix-table-col">Terms</td>
-              <td>{{form.terms}}</td>
+              <td>{{form.payment_terms}}</td>
           
               </tr>
+               <tr>
+            <td class="allif-fix-table-col">Likelyhood</td>
+            <td>{{form.prospect}}</td>
+        
+            </tr>
               <tr>
                 <td class="allif-fix-table-col">Discount</td>
                 <td>{{form.discount}}</td>
@@ -300,17 +314,8 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Sales Tax</td>
-            <td>{{form.salestax}}</td>
-        
-            </tr>
+         
            
-              <tr>
-                <td class="allif-fix-table-col">Terms</td>
-                <td>{{form.terms}}</td>
-            
-                </tr>
           
                 <tr>
                   <td class="allif-fix-table-col">Tax Rate</td>
@@ -323,6 +328,11 @@
                 <td>{{form.comments}}</td>
             
                 </tr>
+                  <tr>
+                  <td class="allif-fix-table-col">Delivery</td>
+                  <td>{{form.delivery}}</td>
+              
+                  </tr>
             
             <tr>
               <td class="allif-fix-table-col">Action</td>

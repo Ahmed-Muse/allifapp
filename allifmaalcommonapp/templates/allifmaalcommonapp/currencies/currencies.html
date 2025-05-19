@@ -1,0 +1,117 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<div class="allifmaal-main-container">
+ 
+  <!--start....main headere-->
+<div class="card-header">
+  <div class="row mt-12" ><!--start....header row-->
+  <div class="col-md-12"><!--start....header column-->
+  <div class="container-fluid amel-content-header">
+  
+    <a class="amel-table-list-identifier">Currencies:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    
+    <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}" >New Currency </a>
+   
+  <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
+
+
+  </div>
+    </div><!--end....header column-->
+    </div><!--end....header row-->
+  </div><!--end....main headere-->
+  
+    <div class="allifmaincontainer">
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Currency</td>
+       
+        <td>Comments</td>
+        <td>Department</td>
+        <td>Owner</td>
+        <td>Date</td>
+     
+        <td>Navigate</td>
+        
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in allifqueryset %} 
+        <tr data-id="{{item.id}}">
+        <td class="allif-fix-table-col"> {{item.description}}</td>
+       
+        
+          <td>
+          {{item.comments}}
+         </td>
+         <td>
+          {{item.department}}
+         </td>
+          <td>
+          {{item.owner}}
+         </td>
+         <td>
+          {{item.date|date:'d/m/Y'}}
+         </td>
+        
+        <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+              <div class="dropdown-content">
+                <a href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+                
+              </div>
+            </div>
+            <div class="dropdown allif-confirm-action">
+              
+              <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteCurrency' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            </div>
+  
+           
+          </td>
+       <td> . . . </td>
+       <td></td>
+      
+  
+    </tr>
+    {% endfor %}
+    
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+
+</div>
+
+</div>
+  {% block scripts %}
+ 
+  {% endblock %}
+  {% endblock %}
+
+
+
+
+
+

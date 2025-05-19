@@ -8,30 +8,37 @@
 {%endblock%}
 {% block body %}
 <div class="allif_pdf_main_body_container">
-    <div class="allif_pdf_search_header">Chart of Accounts Search Results</div>
-    <table class="table-bordered">
+  
+<!--start of ... table main dynamic content section-->
+<div class="allif-pdf-table-content-body-section">
+    <table class="allif-pdf-table-body">
+
     <tr>
-    <thead>
-    <tr class="allif-pdf-table-header">
-    <th>Code</th>
-    <th>Description</th>
-    <th>Balance</th>
-    <th>Category</th>
+    <th colspan="2">Code</th>
+    <th colspan="5">Description</th>
+    <th colspan="2">Balance</th>
+    <th colspan="3">Catetgory</th>
     </tr>
-    </thead>
+   
     <tbody>
     {% for item in searched_data %}
     <tr>
-    <td>{{item.code}}</td>
-    <td>{{item.description}}</td>
-    <td>{{item.balance|floatformat:2|intcomma}}</td>
-    <td> {{item.category}}</td>
+    <td colspan="2">{{item.code}}</td>
+    <td colspan="5">{{item.description}}</td>
+    <td colspan="2"> {{item.balance|floatformat:2|intcomma}}</td>
+    <td colspan="3">{{item.category}}</td>
+    
     </tr>
     {% endfor %}
+
     </tbody>
     </table>
-        
+    </div>
+    <!--start of ... table main dynamic content section-->
+
+  
 </div> 
+
 
 {% block scripts %}
 
@@ -39,3 +46,4 @@
 
 {% endblock %}
    
+ 

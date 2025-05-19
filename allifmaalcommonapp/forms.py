@@ -501,6 +501,41 @@ class CommonClassesAddForm(forms.ModelForm):
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
 
 
+class CommonAddCurrencyForm(forms.ModelForm):
+    class Meta:
+        model=CommonCurrenciesModel
+        fields = ['description','comments','division','branch','department']
+        widgets={
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+        }
+    def __init__(self,allifmaalparameter, *args, **kwargs):
+        super(CommonAddCurrencyForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+
+
+class CommonAddPaymentTermForm(forms.ModelForm):
+    class Meta:
+        model=CommonPaymentTermsModel
+        fields = ['description','comments','division','branch','department']
+        widgets={
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+        }
+    def __init__(self,allifmaalparameter, *args, **kwargs):
+        super(CommonAddPaymentTermForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+
 
 class CommonAddAssetCategoryForm(forms.ModelForm):
     class Meta:
@@ -645,7 +680,7 @@ class CommonStockItemAddForm(forms.ModelForm):
 class CommonPOAddForm(forms.ModelForm):
     class Meta:
         model = CommonPurchaseOrdersModel
-        fields = ['misccosts','uplift','grandtotal','taxamount','amount','description','division','branch','department', 'comments','supplier','payment_terms','posting_po_status']
+        fields = ['misccosts','uplift','currency','delivery','grandtotal','taxamount','amount','description','division','branch','department', 'comments','supplier','payment_terms','posting_po_status']
         widgets={
             
             'uplift':forms.TextInput(attrs={'class':'form-control'}),
@@ -655,14 +690,15 @@ class CommonPOAddForm(forms.ModelForm):
             'grandtotal':forms.TextInput(attrs={'class':'form-control'}),
             'comments':forms.TextInput(attrs={'class':'form-control'}),
             'supplier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-            'payment_terms':forms.Select(attrs={'class':'form-control'}),
+            'payment_terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'posting_po_status':forms.Select(attrs={'class':'form-control'}),
             'store':forms.Select(attrs={'class':'form-control'}),
             'description':forms.TextInput(attrs={'class':'form-control'}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            
+            'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'delivery':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
        
@@ -674,7 +710,8 @@ class CommonPOAddForm(forms.ModelForm):
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-
+        self.fields['currency'].queryset = CommonCurrenciesModel.objects.filter(company=allifmaalparameter)
+        self.fields['payment_terms'].queryset = CommonPaymentTermsModel.objects.filter(company=allifmaalparameter)
 class CommonPOItemAddForm(forms.ModelForm):
     class Meta:
         model =CommonPurchaseOrderItemsModel
@@ -710,18 +747,21 @@ class CommonPOMiscCostAddForm(forms.ModelForm):
 class CommonAddQuoteDetailsForm(forms.ModelForm):
     class Meta:
         model = CommonQuotesModel
-        fields = ['customer','description','terms','division','branch','department','prospect','currency','comments','discount','tax','discountValue','salestax']
+        fields = ['customer','description','delivery','payment_terms','currency','division','branch','department','prospect','currency','comments','discount','tax','discountValue','salestax']
 
         widgets={
             'comments':forms.TextInput(attrs={'class':'form-control'}),
             'description':forms.TextInput(attrs={'class':'form-control'}),
             'tax':forms.TextInput(attrs={'class':'form-control'}),
             'discountValue':forms.TextInput(attrs={'class':'form-control'}),
+            'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'delivery':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'prospect':forms.Select(attrs={'class':'form-control'}),
-            'currency':forms.Select(attrs={'class':'form-control'}),
+            'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'discount':forms.Select(attrs={'class':'form-control'}),
+            'payment_terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'salestax':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -735,6 +775,8 @@ class CommonAddQuoteDetailsForm(forms.ModelForm):
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
         self.fields['salestax'].queryset = CommonTaxParametersModel.objects.filter(company=allifmaalparameter)
+        self.fields['currency'].queryset = CommonCurrenciesModel.objects.filter(company=allifmaalparameter)
+        self.fields['payment_terms'].queryset = CommonPaymentTermsModel.objects.filter(company=allifmaalparameter)
 class CommonAddQuoteItemsForm(forms.ModelForm):
     class Meta:
         model = CommonQuoteItemsModel

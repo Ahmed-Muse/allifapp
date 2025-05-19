@@ -8,30 +8,37 @@
 {%endblock%}
 {% block body %}
 <div class="allif_pdf_main_body_container">
-    <div class="allif_pdf_search_header">Suppliers Search Results</div>
-    <table class="table-bordered">
+  
+<!--start of ... table main dynamic content section-->
+<div class="allif-pdf-table-content-body-section">
+    <table class="allif-pdf-table-body">
+
     <tr>
-    <thead>
-    <tr class="allif-pdf-table-header">
-    <th>Supplier</th>
-    <th>Address</th>
-    <th>Owner</th>
-    <th>Date</th>
+    <th colspan="4">Supplier</th>
+    <th colspan="4">Address</th>
+    <th colspan="2">Balance</th>
+    <th colspan="2">Date</th>
     </tr>
-    </thead>
+   
     <tbody>
     {% for item in searched_data %}
     <tr>
-    <td>{{item.name}}</td>
-    <td>{{item.address}}</td>
-    <td>{{item.owner}}</td>
-    <td> {{item.date|date:'d/m/Y'}}</td>
+    <td colspan="4">{{item.name}}</td>
+    <td colspan="4">{{item.address}}</td>
+    <td colspan="2"> {{item.balance|floatformat:2|intcomma}}</td>
+    <td colspan="2">{{item.date|date:'d/m/Y'}}</td>
+    
     </tr>
     {% endfor %}
+
     </tbody>
     </table>
-        
+    </div>
+    <!--start of ... table main dynamic content section-->
+
+  
 </div> 
+
 
 {% block scripts %}
 
