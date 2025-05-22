@@ -144,14 +144,14 @@ WSGI_APPLICATION = 'allifapperp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+"""
 """
 DATABASES = {
     "default": {
@@ -164,18 +164,18 @@ DATABASES = {
     }
 }
 """
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'allifmaal_db',
+        'NAME': 'allifmysqlcommondb',# this is the name of the database
         'USER': 'root',
-        'PASSWORD': 'amd30974153',
-        'HOST': 'root',
+        'PASSWORD': 'Allif@1442',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }  
-"""
+
 
 """... below worked for me as of 22nd feb 2024
 DATABASES = {

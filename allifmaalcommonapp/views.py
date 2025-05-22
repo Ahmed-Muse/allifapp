@@ -78,7 +78,7 @@ def CommonDecisionPoint(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 @logged_in_user_must_have_profile
-@subscriber_company_status
+#@subscriber_company_status
 def commonHome(request,*allifargs,**allifkwargs):
     try:
         if request.user.email.endswith("info@allifmaal.com"):#just for remembering purposes
@@ -424,7 +424,6 @@ def commonDeleteDataSort(request,pk):
 ########################3 currencies ######################
 
 @logged_in_user_must_have_profile
-@allifmaal_admin
 @logged_in_user_can_view
 def commonCurrencies(request,*allifargs,**allifkwargs):
     title="Currencies"
@@ -479,7 +478,6 @@ def commonAddCurrency(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 @logged_in_user_must_have_profile
-@allifmaal_admin
 @logged_in_user_can_edit
 def commonEditCurrency(request,pk,*allifargs,**allifkwargs):
     title="Update Currency Details"
@@ -512,8 +510,7 @@ def commonEditCurrency(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@logged_in_user_must_have_profile
-@allifmaal_admin  
+@logged_in_user_must_have_profile 
 @logged_in_user_can_delete
 def commonDeleteCurrency(request,pk,*allifargs,**allifkwargs):
     try:
@@ -529,7 +526,6 @@ def commonDeleteCurrency(request,pk,*allifargs,**allifkwargs):
 ########################3 Payment terms ######################
 
 @logged_in_user_must_have_profile
-@allifmaal_admin
 @logged_in_user_can_view
 def commonPaymentTerms(request,*allifargs,**allifkwargs):
     title="Payment Terms"
@@ -584,7 +580,6 @@ def commonAddPaymentTerm(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 @logged_in_user_must_have_profile
-@allifmaal_admin
 @logged_in_user_can_edit
 def commonEditPaymentTerm(request,pk,*allifargs,**allifkwargs):
     title="Update Payment Term Details"
@@ -617,8 +612,7 @@ def commonEditPaymentTerm(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@logged_in_user_must_have_profile
-@allifmaal_admin  
+@logged_in_user_must_have_profile  
 @logged_in_user_can_delete
 def commonDeletePaymentTerm(request,pk,*allifargs,**allifkwargs):
     try:
@@ -630,7 +624,7 @@ def commonDeletePaymentTerm(request,pk,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 ############################### .......Entities and companies details........... #########################3#
 @logged_in_user_must_have_profile
-@allifmaal_admin
+#@allifmaal_admin
 def commonCompanies(request,*allifargs,**allifkwargs):
     title="Registered Companies"
     try:
@@ -1561,7 +1555,7 @@ def commonDeleteDepartment(request,pk,*allifargs,**allifkwargs):
 
 #################################...HRM....... System users ..........#####################################
 @logged_in_user_must_have_profile
-@subscriber_company_status
+#@subscriber_company_status
 def commonhrm(request,*allifargs,**allifkwargs):
     title="Human Resources Management"
     try:
@@ -1690,7 +1684,7 @@ def commonEditUser(request,pk,*allifargs,**allifkwargs):
    
 @logged_in_user_must_have_profile
 @logged_in_user_is_admin
-@subscriber_company_status
+#@subscriber_company_status
 def commonUserDetails(request,pk,*allifargs,**allifkwargs):
     title="User Details"
     try:
@@ -1778,7 +1772,7 @@ def commonLoggedInUserDetails(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 @logged_in_user_must_have_profile
-@subscriber_company_status
+#@subscriber_company_status
 def commonShowClickedRowUserDetails(request,pk,*allifargs,**allifkwargs):
     title="User Details"
     try:
@@ -2157,7 +2151,6 @@ def commonUserHasDepartmentalAccess(request,pk,*allifargs,**allifkwargs):
     
 @logged_in_user_must_have_profile
 @subscriber_company_status
-@allifmaal_admin
 @logged_in_user_has_universal_access
 def commonUserAllifaamlAdmin(request,pk):
     try:
@@ -4458,7 +4451,7 @@ def commonAddCustomer(request,*allifargs,**allifkwargs):
         allifquery=CommonCustomersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         unque=str(uuid4()).split('-')[2]
         nmbr=int(allifquery.count())+int(1)
-        currntyear= datetime.date.today().year
+        currntyear=timezone.now().date().today().year
         allifuid=str(nmbr)+"/"+str(currntyear)+"/"+str(unque)
         ###### End... UID generation ##################
         
@@ -7128,7 +7121,7 @@ def commonDeleteQuoteItem(request,pk,*allifargs,**allifkwargs):
         myallifquery=CommonQuoteItemsModel.objects.filter(id=pk).first()
         myquery=myallifquery.allifquoteitemconnector
         myallifquery.delete()
-        return redirect('allifmaalcommonapp:commonAddQuoteItems',pk=myallifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        return redirect('allifmaalcommonapp:commonAddQuoteItems',pk=myquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
     except Exception as ex:
         error_context={'error_message': ex,}

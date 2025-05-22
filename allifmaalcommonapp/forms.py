@@ -282,7 +282,7 @@ class CommonAddChartofAccountForm(forms.ModelForm):
             'balance':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'code':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':'Chart of A/Cs'}),
             'statement':forms.Select(attrs={'class':'form-control','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),

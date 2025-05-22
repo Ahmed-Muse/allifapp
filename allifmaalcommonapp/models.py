@@ -192,7 +192,7 @@ class CommonSectorsModel(models.Model):# this is the company  hospitality logist
    
 
 class CommonDocsFormatModel(models.Model):# this is the company  hospitality logistics
-    name=models.CharField(max_length=20,blank=False,null=False,unique=True,default="pdf")
+    name=models.CharField(max_length=30,blank=False,null=False,unique=True,default="pdf")
     notes=models.CharField(max_length=50,blank=True,null=True,default="Write Document Type")
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="docformusr")
     date=models.DateField(blank=True,null=True,auto_now_add=True)
@@ -200,7 +200,7 @@ class CommonDocsFormatModel(models.Model):# this is the company  hospitality log
     def __str__(self):
         return self.name
 class CommonDataSortsModel(models.Model):# this is the company  hospitality logistics
-    name=models.CharField(max_length=20,blank=False,null=False,unique=True,default="asc")
+    name=models.CharField(max_length=30,blank=False,null=False,unique=True,default="asc")
     notes=models.CharField(max_length=50,blank=True,null=True,default="Write Document Type")
     owner= models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="datsortusr")
     date=models.DateField(blank=True,null=True,auto_now_add=True)
@@ -1108,10 +1108,10 @@ class CommonJobsModel(models.Model):
     #first_cust=CommonCustomersModel.objects.filter()[0]
   
     job_number=models.CharField(max_length=20,blank=True,null=True)
-    owner=models.ForeignKey(User, related_name="jobsown",on_delete=models.SET_NULL,null=True,blank=True)
+    owner=models.ForeignKey(User, related_name="jobsowner",on_delete=models.SET_NULL,null=True,blank=True)
     customer=models.ForeignKey(CommonCustomersModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='jobcustrelname')
     description=models.CharField(max_length=30,blank=True,null=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpjbs",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpyjbs",on_delete=models.SET_NULL,null=True,blank=True)
     opened_date=models.DateField(blank=True,null=True,auto_now_add=True)
     ending_date=models.DateField(blank=True,null=True,auto_now_add=False)
     status=models.CharField(max_length=20, blank=True, null=True,choices=job_status,default="open")
