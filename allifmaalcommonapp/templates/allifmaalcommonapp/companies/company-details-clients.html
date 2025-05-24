@@ -31,12 +31,37 @@
 <a class="amel-table-list-identifier">Settings:</a>
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
-<a href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}">Scopes</a>
-<a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
-<a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
-<a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
-<a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
-<a href="{% url 'allifmaalcommonapp:commonPaymentTerms' user_var glblslug %}">Payment Terms</a>
+
+<div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Company Levels
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a></li>
+     
+    </div>
+    </ul>
+  </div>
+
+  <div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Navigate
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}">Scopes</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPaymentTerms' user_var glblslug %}">Payment Terms</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Taxes</a></li>
+      
+      
+    </div>
+    </ul>
+  </div>
+
 
 </div>
 

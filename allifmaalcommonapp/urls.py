@@ -135,6 +135,10 @@ path('Tax/Parameters/<str:allifusr>/<str:allifslug>/', views.commonTaxParameters
 path('Update/Tax/Parameter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonUpdateTaxDetails, name="CommonUpdateTaxDetails"),
 path('Delete/Tax/Parameter/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonDeleteTaxParameter, name="CommonDeleteTaxParameter"),
 
+path('Tax/Suppliers/Parameters/<str:allifusr>/<str:allifslug>/', views.commonSupplierTaxParameters, name="commonSupplierTaxParameters"),
+path('Update/Tax/Suppliers/Parameter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonSupplierUpdateTaxDetails, name="CommonSupplierUpdateTaxDetails"),
+path('Delete/Tax/Parameter/Suppliers/Taxes/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonSupplierDeleteTaxParameter, name="CommonSupplierDeleteTaxParameter"),
+
 ##################################### General Ledger accounts ################
 path('General/Ledgers/Accounts/<str:allifusr>/<str:allifslug>/', views.commonGeneralLedgers, name="commonGeneralLedgers"),
 path('Add/General/Ledger/Account/<str:allifusr>/<str:allifslug>/', views.commonAddGeneralLedger, name="commonAddGeneralLedger"),
@@ -179,6 +183,7 @@ path('Search/Bank/Deposit/<str:allifusr>/<str:allifslug>/Shareholders/', views.c
 path('Want/To/Delete/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDeposit, name="commonWantToDeleteDeposit"),
 path('Search/Results/Deposits/<str:allifusr>/<str:allifslug>/Advaned/Search/', views.commonDepositAdvanceSearch, name="commonDepositAdvanceSearch"),
 path('Clear/Shareholder/Search/Results/Deposits/<str:allifusr>/<str:allifslug>/', views.commonClearShareholderDepositSearch, name="commonClearShareholderDepositSearch"),
+path('Post/This/Bank/Deposit/Post/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostShareholderDeposit, name="commonPostShareholderDeposit"),
 
 ####################################3 withdrawals ###########################3
 path('Bank/Withdrawals/<str:allifusr>/<str:allifslug>/', views.commonBankWithdrawals, name="commonBankWithdrawals"),

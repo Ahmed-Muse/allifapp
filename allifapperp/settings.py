@@ -144,14 +144,35 @@ WSGI_APPLICATION = 'allifapperp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-"""
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        ############ Unccoment below during deployemnt ###############
+        #'ENGINE': 'django.db.backends.mysql',
+        #'NAME': 'Ahmeddove$allifmysqlcommondb',# thi is the db name in the pythonanywhere database.
+        #'USER': 'Ahmeddove',
+        #'PASSWORD': 'Allif@6030114',# this is the MYSQL password in pythonanywhere
+        #'HOST': 'Ahmeddove.mysql.pythonanywhere-services.com',# this is db host name from pythonanywhere
+        #'PORT': '3306',
+
+        ################# comment out this section during deployment... it is for development ############
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'allifmysqlcommondb',# this is the name of the database
+        'USER': 'root',
+        'PASSWORD': 'Allif@1442',# Allif@6030114
+        #'PASSWORD': 'hidden',
+        'HOST': 'localhost',
+        'PORT': '3306',
+
+        ##############3 SQLITE3 SECTION ######################3
+        ##### uncomment below if you want to use sqlite3--- this can work for both development and deployemnt
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+       
     }
-}
-"""
+}  
+
+
 """
 DATABASES = {
     "default": {
@@ -164,33 +185,6 @@ DATABASES = {
     }
 }
 """
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'allifmysqlcommondb',# this is the name of the database
-        'USER': 'root',
-        'PASSWORD': 'Allif@1442',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}  
-
-
-"""... below worked for me as of 22nd feb 2024
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'MYSQL',
-        'USER': 'root',
-        'PASSWORD': 'hidden',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}  
-
-"""
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -274,9 +268,4 @@ MEDIA_URL='/media/'#fetch images/media using this path when viewing through the 
 
 AUTH_USER_MODEL = 'allifmaalusersapp.User'
 #SENDSMS_BACKEND = 'allifmaalusersapp.mysmsbackend.SmsBackend'
-
-
-
-
-################################
 

@@ -3,17 +3,17 @@ from .models import *
 
 ############################# start of datepicker customization ##############################
 class DatePickerInput(forms.DateInput):#use this class whereever you have a date and it will give you the calender
-    input_type = 'date'#
+    input_type='date'#
 class TimePickerInput(forms.TimeInput):#use this wherever you have time input
-    input_type = 'time'
+    input_type='time'
 class DateTimePickerInput(forms.DateTimeInput):#use this wherever you have datetime input
-    input_type = 'datetime'
+    input_type='datetime'
     ################################# end of datepicker customization ################################
 
 class CommonAddSectorForm(forms.ModelForm):
     class Meta:
-        model = CommonSectorsModel
-        fields = ['name','notes']
+        model=CommonSectorsModel
+        fields=['name','notes']
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'notes':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -76,7 +76,7 @@ class CommonEditCompanyDetailsFormByAllifAdmin(forms.ModelForm):
             'country':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'owner':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'sector':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'can_delete':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'can_delete':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             
            
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -103,7 +103,7 @@ class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
             'country':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'owner':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'sector':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'can_delete':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'can_delete':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
            
             'pobox':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -117,11 +117,21 @@ class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
 class CommonAddCompanyScopeForm(forms.ModelForm):
     class Meta:
         model = CommonCompanyScopeModel
-        fields = ['name','comments']
+        fields = ['name','comments','division','branch','department']
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
         } 
+    def __init__(self,allifmaalparameter,*args,**kwargs):
+        super (CommonAddCompanyScopeForm,self).__init__(*args,**kwargs) # populates the post
+        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
+
 class CommonAddDivisionForm(forms.ModelForm):
     class Meta:
         model =CommonDivisionsModel
@@ -232,6 +242,31 @@ class CommonAddTaxParameterForm(forms.ModelForm):
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter or 1)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter or 1)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
+
+
+#################### taxes #####################3
+class CommonSupplierAddTaxParameterForm(forms.ModelForm):
+    class Meta:
+        #mydefault=TaxParametersModel.objects.all().first().taxname
+        model = CommonSupplierTaxParametersModel
+        fields = ['taxname','taxtype','taxrate', 'taxdescription','division','branch','department']
+        widgets={
+            'taxname':forms.TextInput(attrs={'class':'form-control'}),
+             #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
+            'taxrate':forms.TextInput(attrs={'class':'form-control'}),
+             'taxtype':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+             'taxdescription':forms.TextInput(attrs={'class':'form-control'}),
+              'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
+        }
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super(CommonSupplierAddTaxParameterForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
+
 ######################################### chart of accounts ########################
 class CommonAddBankForm(forms.ModelForm):
     class Meta:
@@ -283,7 +318,7 @@ class CommonAddChartofAccountForm(forms.ModelForm):
             'code':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':'Chart of A/Cs'}),
-            'statement':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'statement':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -392,7 +427,7 @@ class CommonAddSupplierForm(forms.ModelForm):
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'phone':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'email':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'email':forms.EmailInput(attrs={'class':'form-control','placeholder':''}),
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'city':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'balance':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -421,7 +456,7 @@ class CommonCustomerAddForm(forms.ModelForm):
             'uid':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'phone':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'email':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'email':forms.EmailInput(attrs={'class':'form-control','placeholder':''}),
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'city':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'sales':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -435,12 +470,12 @@ class CommonCustomerAddForm(forms.ModelForm):
             'country':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
 
-            'gender':forms.Select(attrs={'class':'form-control','placeholder':''}),
-            'paymentType':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'gender':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'paymentType':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
-            'form':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'form':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             
-            'className':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'className':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
              'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -485,7 +520,7 @@ class CommonClassesAddForm(forms.ModelForm):
             'size':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'form':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'owner':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'owner':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -565,10 +600,10 @@ class CommonAssetsAddForm(forms.ModelForm):
             'value':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'deposit':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'lifespan':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'terms':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'asset_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'cost_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'status':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'acquired' : DatePickerInput(attrs={'class':'form-control'}),
             'expires' : DatePickerInput(attrs={'class':'form-control'}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -604,10 +639,10 @@ class CommonExpensesAddForm(forms.ModelForm):
             'quantity':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'amount':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'mode':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'mode':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'funding_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'expense_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'status':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            'equity_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -645,7 +680,7 @@ class CommonStockCatAddForm(forms.ModelForm):
 class CommonStockItemAddForm(forms.ModelForm):
     class Meta:
         model =CommonStocksModel
-        fields = ['category','comments','taxrate','criticalnumber','partNumber','division','branch','department','description','buyingPrice', 'quantity','unitcost','unitPrice','inventory_account','income_account','expense_account','standardUnitCost']
+        fields = ['category','suppliertaxrate','comments','taxrate','criticalnumber','partNumber','division','branch','department','description','buyingPrice', 'quantity','unitcost','unitPrice','inventory_account','income_account','expense_account','standardUnitCost']
         widgets={
             'partNumber':forms.TextInput(attrs={'class':'form-control'}),
             'description':forms.TextInput(attrs={'class':'form-control'}),
@@ -659,6 +694,7 @@ class CommonStockItemAddForm(forms.ModelForm):
             
             'inventory_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'taxrate':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+            'suppliertaxrate':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'income_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'expense_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
@@ -676,11 +712,12 @@ class CommonStockItemAddForm(forms.ModelForm):
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['taxrate'].queryset = CommonTaxParametersModel.objects.filter(company=allifmaalparameter)
+        self.fields['suppliertaxrate'].queryset=CommonSupplierTaxParametersModel.objects.filter(company=allifmaalparameter)
+        self.fields['taxrate'].queryset=CommonTaxParametersModel.objects.filter(company=allifmaalparameter)
 class CommonPOAddForm(forms.ModelForm):
     class Meta:
         model = CommonPurchaseOrdersModel
-        fields = ['misccosts','uplift','currency','delivery','grandtotal','taxamount','amount','description','division','branch','department', 'comments','supplier','payment_terms','posting_po_status']
+        fields = ['misccosts','uplift','taxrate','currency','delivery','grandtotal','taxamount','amount','description','division','branch','department', 'comments','supplier','payment_terms','posting_po_status']
         widgets={
             
             'uplift':forms.TextInput(attrs={'class':'form-control'}),
@@ -689,9 +726,10 @@ class CommonPOAddForm(forms.ModelForm):
             'taxamount':forms.TextInput(attrs={'class':'form-control'}),
             'grandtotal':forms.TextInput(attrs={'class':'form-control'}),
             'comments':forms.TextInput(attrs={'class':'form-control'}),
+            'taxrate':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'supplier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'payment_terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-            'posting_po_status':forms.Select(attrs={'class':'form-control'}),
+            'posting_po_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'store':forms.Select(attrs={'class':'form-control'}),
             'description':forms.TextInput(attrs={'class':'form-control'}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -707,6 +745,7 @@ class CommonPOAddForm(forms.ModelForm):
         super(CommonPOAddForm, self).__init__(*args, **kwargs)
        
         self.fields['supplier'].queryset = CommonSuppliersModel.objects.filter(company=allifmaalparameter)
+        self.fields['taxrate'].queryset = CommonSupplierTaxParametersModel.objects.filter(company=allifmaalparameter)
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
@@ -758,9 +797,9 @@ class CommonAddQuoteDetailsForm(forms.ModelForm):
             'delivery':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-            'prospect':forms.Select(attrs={'class':'form-control'}),
+            'prospect':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-            'discount':forms.Select(attrs={'class':'form-control'}),
+            'discount':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'payment_terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'salestax':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -804,10 +843,10 @@ class CommonAddInvoiceDetailsForm(forms.ModelForm):
             'discountValue':forms.TextInput(attrs={'class':'form-control'}),
             'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'payment_terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-            'status':forms.Select(attrs={'class':'form-control'}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-            'discount':forms.Select(attrs={'class':'form-control'}),
-            'salestax':forms.Select(attrs={'class':'form-control'}),
+            'discount':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+            'salestax':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -847,10 +886,10 @@ class CommonAddSupplierPaymentForm(forms.ModelForm):
             'amount':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'mode':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'mode':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
 
             'account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'status':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
 
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -872,9 +911,9 @@ class CommonAddCustomerPaymentForm(forms.ModelForm):
             'amount':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'mode':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'mode':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'status':forms.Select(attrs={'class':'form-control','placeholder':''}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -929,7 +968,7 @@ class CommonAddJobDetailsForm(forms.ModelForm):
            
             'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
            
-            'status':forms.Select(attrs={'class':'form-control'}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             
             #'ending_date':forms.DateInput(attrs={'class':'form-control'}),
             'ending_date' : DatePickerInput(attrs={'class':'form-control'}),
@@ -971,7 +1010,7 @@ class CommonAddTasksForm(forms.ModelForm): #the forms here is the one imported u
             
             'dueDate':DatePickerInput(attrs={'class':'form-control','placeholder':'Task due date'}),
             'taskDay':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-            'status':forms.Select(attrs={'class':'form-control'}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             
             'assignedto':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -980,9 +1019,9 @@ class CommonAddTasksForm(forms.ModelForm): #the forms here is the one imported u
             
             #form-control here is the css class that we are passing
         } 
+        
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super(CommonAddTasksForm, self).__init__(*args, **kwargs)
-        
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)

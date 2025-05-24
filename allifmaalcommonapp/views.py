@@ -3,15 +3,10 @@ from.models import *
 from datetime import date
 from django.core.mail import send_mail
 from .allifutils import common_shared_data
-#from sms import send_sms
-from django.contrib.sessions.models import Session
 
-from django.views.decorators.csrf import csrf_exempt
 from twilio.rest import Client
 from.forms import *
 from .decorators import subscriber_company_status, logged_in_user_must_have_profile,logged_in_user_has_universal_delete,logged_in_user_has_divisional_delete,logged_in_user_has_branches_delete,logged_in_user_has_departmental_delete,logged_in_user_has_universal_access,logged_in_user_has_divisional_access,logged_in_user_has_branches_access,logged_in_user_has_departmental_access,allifmaal_admin,allifmaal_admin_supperuser, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
-import datetime
-from datetime import datetime, timedelta
 from django.utils import timezone
 from django.core.serializers import serialize
 import json
@@ -27,8 +22,7 @@ from django.db.models import Q
 from xhtml2pdf import pisa
 from decimal import Decimal
 from django.db.models import Count,Min,Max,Avg,Sum
-from .resources import commonCompanyResource
-from tablib import Dataset
+
 from .resources import *
 def commonWebsite(request):
     try:
@@ -799,8 +793,8 @@ def commonEditEntityByAllifAdmin(request,allifpk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @logged_in_user_can_edit
 @logged_in_user_is_admin
@@ -829,8 +823,8 @@ def commonEditEntityByClients(request,allifpk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+        
 @logged_in_user_must_have_profile
 @logged_in_user_can_view
 @allifmaal_admin
@@ -987,18 +981,22 @@ def commonAddCompanyScope(request,*allifargs,**allifkwargs):
     title="Scopes"
     try:
         allif_data=common_shared_data(request)
-        form=CommonAddCompanyScopeForm()
+        form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"))
         allifqueryset=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         if request.method == 'POST':
-            form=CommonAddCompanyScopeForm(request.POST)
+            form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
-                add_item= form.save(commit=False)
-                add_item.company=allif_data.get("main_sbscrbr_entity")
-                add_item.owner=allif_data.get("logged_in_user")
-                add_item.save()
+                obj=form.save(commit=False)
+
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
                 return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
         else:
-            form=CommonAddCompanyScopeForm()
+            form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"))
         context={
                 "form":form,
                 "title":title,
@@ -1007,8 +1005,8 @@ def commonAddCompanyScope(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/scopes/scopes.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @logged_in_user_can_edit 
 @subscriber_company_status
@@ -1017,24 +1015,24 @@ def commonEditCompanyScope(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
         user_var_update=CommonCompanyScopeModel.objects.filter(pk=pk).first()
-        form=CommonAddCompanyScopeForm(instance=user_var_update)
+        form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),instance=user_var_update)
         if request.method=='POST':
-            form=CommonAddCompanyScopeForm(request.POST or None,request.FILES, instance=user_var_update)
+            form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None,request.FILES, instance=user_var_update)
             if form.is_valid():
                 obj = form.save(commit=False)
                 obj.save()
                 return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
-                form=CommonAddCompanyScopeForm(request.POST or None, instance=user_var_update)
+                form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=user_var_update)
         else:
-            form=CommonAddCompanyScopeForm(request.POST or None, instance=user_var_update)
+            form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=user_var_update)
         context={"title":title,"form":form,}
         return render(request,'allifmaalcommonapp/scopes/scopes.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+        
 @logged_in_user_must_have_profile
 @logged_in_user_can_delete
 @subscriber_company_status
@@ -1152,8 +1150,8 @@ def commonEditDivision(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 
 @logged_in_user_must_have_profile
 @logged_in_user_can_view
@@ -1299,9 +1297,8 @@ def commonEditBranch(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+        
 @logged_in_user_must_have_profile
 @logged_in_user_can_view
 def commonBranchDetails(request,pk,*allifargs,**allifkwargs):
@@ -1505,8 +1502,8 @@ def commonEditDepartment(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+        
 @logged_in_user_must_have_profile
 @logged_in_user_can_view 
 @subscriber_company_status
@@ -1617,7 +1614,7 @@ def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is 
     title="New Staff User Registeration"
     try:
         allif_data=common_shared_data(request)
-        print(allif_data.get("usernmeslg").userdivision)
+        
         allif_data=common_shared_data(request)
         form=CreateNewCustomUserForm()
         if request.method=='POST':
@@ -1680,8 +1677,8 @@ def commonEditUser(request,pk,*allifargs,**allifkwargs):
         return render(request,"allifmaalcommonapp/hrm/users/adduser.html",context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-   
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @logged_in_user_is_admin
 #@subscriber_company_status
@@ -2144,7 +2141,7 @@ def commonUserHasDepartmentalAccess(request,pk,*allifargs,**allifkwargs):
         allifquery.can_do_all=False
         allifquery.save()
         return redirect('allifmaalcommonapp:commonUserDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-
+        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -2389,8 +2386,6 @@ def commonProfileSearch(request,*allifargs,**allifkwargs):
 def commonTaxParameters(request,*allifargs,**allifkwargs):
     title="Applicable Tax Details"
     try:
-        for item in CommonQuotesModel.objects.all():
-            item.delete()
         allif_data=common_shared_data(request)
         allifqueryset=CommonTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         latest=CommonTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:3]
@@ -2470,6 +2465,92 @@ def CommonDeleteTaxParameter(request,pk,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 
+
+#####################3 supplier tax parameters ##########
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_add
+def commonSupplierTaxParameters(request,*allifargs,**allifkwargs):
+    title="Applicable Tax Details"
+    try:
+        allif_data=common_shared_data(request)
+        allifqueryset=CommonSupplierTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        latest=CommonSupplierTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:3]
+        form=CommonSupplierAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+        if request.method == 'POST':
+            form=CommonSupplierAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalcommonapp:commonSupplierTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=CommonSupplierAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"))
+        context={
+            "title":title,
+            "form":form,
+            "allifqueryset":allifqueryset,
+            "latest":latest,
+        }
+        return render(request,'allifmaalcommonapp/taxes/suppliertaxes.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_edit
+def CommonSupplierUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
+    title="Update Tax Details"
+    try:
+        allif_data=common_shared_data(request)
+        allifqueryset=CommonSupplierTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        update=CommonSupplierTaxParametersModel.objects.get(id=pk)
+        form=CommonSupplierAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),instance=update)
+        if request.method == 'POST':
+            form = CommonSupplierAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST,instance=update)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalcommonapp:commonSupplierTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form =CommonSupplierAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),instance=update)
+        context = {
+            'form':form,
+            "update":update,
+            "title":title,
+            "allifqueryset":allifqueryset,
+        }
+        
+        return render(request,'allifmaalcommonapp/taxes/suppliertaxes.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_delete
+def CommonSupplierDeleteTaxParameter(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        CommonSupplierTaxParametersModel.objects.get(id=pk).delete()
+        return redirect('allifmaalcommonapp:commonSupplierTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
 ################################# ACCOUNTS  #############################
 
 @logged_in_user_must_have_profile
@@ -2570,8 +2651,8 @@ def commonEditGeneralLedger(request,allifusr,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_is_admin
@@ -2845,8 +2926,8 @@ def commonEditChartofAccount(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+        
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_is_admin
@@ -3121,8 +3202,8 @@ def commonEditBank(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -3235,8 +3316,8 @@ def commonBankShareholderDeposits(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
@@ -3247,37 +3328,15 @@ def commonAddBankShareholderDeposit(request,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
         form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"))
         if request.method=='POST':
-            bank=request.POST.get('bank')
-            amount=request.POST.get('amount')
-            chartaccasset=request.POST.get('asset')
-            chartacceqty=request.POST.get('equity')
             form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"), request.POST)
             if form.is_valid():
-                obj = form.save(commit=False)
+                obj=form.save(commit=False)
                 obj.company=allif_data.get("main_sbscrbr_entity")
                 obj.division=allif_data.get("logged_user_division")
                 obj.branch=allif_data.get("logged_user_branch")
                 obj.department=allif_data.get("logged_user_department")
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                myquery=CommonBanksModel.objects.filter(id=bank).first()
-                initial_bank_balnce=myquery.balance
-                myquery.balance=initial_bank_balnce+Decimal(amount)
-                myquery.deposit=Decimal(amount)
-                #myquery.withdrawal=0
-                myquery.save()
-
-                ########### increase the asset account
-                query=CommonChartofAccountsModel.objects.filter(id=chartaccasset).first()
-                initial_bank_balnce=query.balance
-                query.balance=initial_bank_balnce+Decimal(amount)
-                query.save()
-
-                ############ increase equity account ##############
-                eqtyquery=CommonChartofAccountsModel.objects.filter(id=chartacceqty).first()
-                initial_bank_balnce=eqtyquery.balance
-                eqtyquery.balance=initial_bank_balnce+Decimal(amount)
-                eqtyquery.save()
                 return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     
             else:
@@ -3293,6 +3352,41 @@ def commonAddBankShareholderDeposit(request,*allifargs,**allifkwargs):
             }
         return render(request,'allifmaalcommonapp/banks/deposits/shareholders/add-deposit-sh.html',context)
     
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+        
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_add
+@logged_in_user_is_admin
+def commonPostShareholderDeposit(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        allifquery=CommonShareholderBankDepositsModel.objects.filter(id=pk).first()
+        if allifquery.status=="posted":
+            bank=allifquery.bank
+            amount=allifquery.amount
+            chartaccasset=allifquery.asset
+            chartacceqty=allifquery.equity
+            ########### increase the asset account
+            query=CommonChartofAccountsModel.objects.filter(id=chartaccasset.id).first()
+            initial_bank_balnce=query.balance
+            query.balance=initial_bank_balnce+Decimal(amount)
+            ###########query.save()
+
+            ############ increase equity account ##############
+            eqtyquery=CommonChartofAccountsModel.objects.filter(id=chartacceqty.id).first()
+            initial_bank_balnce=eqtyquery.balance
+            eqtyquery.balance=initial_bank_balnce+Decimal(amount)
+            allifquery.status="posted"
+            allifquery.save()
+            ################3eqtyquery.save()
+            return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        else:
+            return render(request,'allifmaalcommonapp/error/error.html',error_context)
+          
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaaladminapp/error/error.html',error_context)
@@ -3326,8 +3420,8 @@ def commonEditBankShareholderDeposit(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -3490,7 +3584,8 @@ def commonClearShareholderDepositSearch(request,*allifargs,**allifkwargs):
         return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 ############################################### BANK WITHDRAWALS ################################
 
 @logged_in_user_must_have_profile
@@ -3523,7 +3618,7 @@ def commonBankWithdrawals(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
@@ -3580,8 +3675,7 @@ def commonAddBankWithdrawal(request,*allifargs,**allifkwargs):
     
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_edit
@@ -3608,8 +3702,8 @@ def commonEditBankWithdrawal(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -3790,8 +3884,8 @@ def commonClearShareholderWithdrwlSearch(request,*allifargs,**allifkwargs):
 
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 ##############################33 suppliers section ###############3
 @logged_in_user_must_have_profile
 @subscriber_company_status
@@ -3872,8 +3966,8 @@ def commonClearSupplierSearch(request,*allifargs,**allifkwargs):
 
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+     
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -3941,8 +4035,8 @@ def commonEditSupplier(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -4096,8 +4190,8 @@ def commonForms(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/education/forms/forms.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
@@ -4130,8 +4224,8 @@ def commonAddForm(request,*allifargs,**allifkwargs):
       
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
- 
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_edit
@@ -4160,8 +4254,8 @@ def commonEditForm(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_delete
@@ -4261,8 +4355,8 @@ def commonClasses(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/education/classes/classes.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
@@ -4293,8 +4387,8 @@ def commonAddClass(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/education/classes/add-class.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-   
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_edit
@@ -4325,8 +4419,8 @@ def commonEditClass(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_delete
@@ -4437,8 +4531,8 @@ def commonCustomers(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/customers/customers.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
@@ -4491,8 +4585,8 @@ def commonAddCustomer(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/customers/add-customer.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_edit
@@ -4532,8 +4626,8 @@ def commonEditCustomer(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -4829,8 +4923,8 @@ def commonEditAssetCategory(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -4907,8 +5001,8 @@ def commonAssets(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/assets/assets.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -4967,9 +5061,8 @@ def commonAddAsset(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/assets/add-asset.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-    
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -4984,9 +5077,9 @@ def commonPostAsset(request,pk,*allifargs,**allifkwargs):
         asset_total_value=Decimal(allifquery.asset_total_amount)
         asset_posting_status=allifquery.status
         deposit_value=allifquery.deposit
-        print(allifquery.terms)
+       
         if asset_posting_status=="waiting":
-            if payment_option=="Cash": #.....this is hard-coding the db filter.....#
+            if str(payment_option)=="Cash": #.....this is hard-coding the db filter.....#
                 ##############.... Reduce the cash or cash equivalent account.........########3#####3
                 cost_acc_selected=CommonChartofAccountsModel.objects.filter(pk=cost_value_acc_id.id).first()
                 initial_cash_balance=cost_acc_selected.balance
@@ -5108,9 +5201,8 @@ def commonEditAsset(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -5249,9 +5341,6 @@ def commonDepreciateAsset(request,pk,*allifargs,**allifkwargs):
             }
             return render(request,'allifmaalcommonapp/assets/asset-details.html',context)
         
-
-            return redirect('allifmaalcommonapp:commonAssetDetails',pk=allifquery.id,allifusr=usrslg,allifslug=user_var)
-
         elif depreciation_method=="Declining-Balance":
             # Declining Balance Depreciation = Book Value x (1 / Useful_Life)..
             allifquery.current_value=allifquery.value
@@ -5394,8 +5483,8 @@ def commonDepreciateAsset(request,pk,*allifargs,**allifkwargs):
          
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 ############################################### EXPENSES ################################
 
 @logged_in_user_must_have_profile
@@ -5423,8 +5512,8 @@ def commonExpenses(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/expenses/expenses.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
@@ -5478,8 +5567,8 @@ def commonAddExpense(request,*allifargs,**allifkwargs):
     
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+     
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_edit
@@ -5509,8 +5598,8 @@ def commonEditExpense(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -5669,8 +5758,8 @@ def commonStockCats(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/stocks/stock-cats.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -5708,8 +5797,8 @@ def commonAddStockCat(request,*allifargs,**allifkwargs):
       
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-   
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -5739,8 +5828,8 @@ def commonEditStockCat(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -5960,9 +6049,8 @@ def commonEditStockItem(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-
-
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+     
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -6182,8 +6270,8 @@ def commonNewPurchaseOrder(request,*allifargs,**allifkwargs):
         nmbr=int(allifquery.count())+int(1)
         currntyear=timezone.now().date().today().year
         allifuid=str(nmbr)+"/"+str(currntyear)+"/"+str(unque)
-        ###### End... UID generation ##################
-
+        ###### End... UID generation ##################print()
+        
         if allifquery:
             purchaseNumber='PO'+"/"+str(allifuid)
         else:
@@ -6252,6 +6340,7 @@ def commonAddPODetails(request,pk,*allifargs,**allifkwargs):
         else:
             form=CommonPOAddForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
 
+
         context={
             
             "form":form,
@@ -6266,11 +6355,11 @@ def commonAddPODetails(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-#@logged_in_user_must_have_profile
-#@subscriber_company_status
-#@logged_in_user_can_view
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
 def commonAddPOItems(request,pk,*allifargs,**allifkwargs):
-    #try:
+    try:
         title="Add items to the purchase order"
         allif_data=common_shared_data(request)
      
@@ -6278,12 +6367,12 @@ def commonAddPOItems(request,pk,*allifargs,**allifkwargs):
         allifqueryset=CommonPurchaseOrderItemsModel.objects.filter(po_item_con=allifquery).order_by('-date')
         queryset=CommonPurchaseOrderMiscCostsModel.objects.filter(po_misc_cost_con=allifquery)
         # calculate po total of items and taxes
+      
         po_total=0
         po_tax_amount=0
         for items in allifqueryset:
-            po_total+=items.quantity*items.unitcost
-            tax=(items.items.taxrate.taxrate/100)
-            po_tax_amount+=items.quantity*items.unitcost*tax
+            po_total+=items.purchase_order_amount
+            po_tax_amount+=items.po_tax_amount
         # calculate misc costs
         miscCostotal=0
         for cost in queryset:
@@ -6294,9 +6383,10 @@ def commonAddPOItems(request,pk,*allifargs,**allifkwargs):
         allifquery.amounttaxincl=po_total+po_tax_amount
         allifquery.misccosts=miscCostotal
         allifquery.grandtotal=po_total+po_tax_amount+miscCostotal
+
         allifquery.save()
        
-
+      
         form=CommonPOItemAddForm(allif_data.get("main_sbscrbr_entity"))
         add_item= None
         if request.method == 'POST':
@@ -6322,7 +6412,7 @@ def commonAddPOItems(request,pk,*allifargs,**allifkwargs):
                 "allifqueryset":allifqueryset,
         }
         return render(request,'allifmaalcommonapp/purchases/add-po-items.html',context)
-    #except Exception as ex:
+    except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
@@ -6401,7 +6491,8 @@ def commonEditPOItem(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_delete
@@ -6612,7 +6703,7 @@ def commonPostPO(request,pk,*allifargs,**allifkwargs):
        
         ################# ...start of  misc costs...credit the service provider account....###################
         misc_costs=CommonPurchaseOrderMiscCostsModel.objects.filter(po_misc_cost_con=allifquery)
-        print(misc_costs)
+       
         if misc_costs!=None:
             for cost in misc_costs:
                 spent_amount=cost.purchase_order_misc_cost
@@ -7002,6 +7093,7 @@ def commonAddQuoteItems(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
        
         allifquery=CommonQuotesModel.objects.filter(id=pk).first()
+        allif_qte_discount=allifquery.discount
         form=CommonAddQuoteItemsForm(allif_data.get("main_sbscrbr_entity"))
         allifqueryset= CommonQuoteItemsModel.objects.filter(allifquoteitemconnector=allifquery)#this line helps to
         allifquerysettotal=0
@@ -7044,6 +7136,7 @@ def commonAddQuoteItems(request,pk,*allifargs,**allifkwargs):
         "allifquerysettotal":allifquerysettotal,
         "allifqueryset":allifqueryset,
         "title":title, 
+        "allif_qte_discount":allif_qte_discount,
         }
         return render(request,'allifmaalcommonapp/quotes/add-quote-items.html',context)
     except Exception as ex:
@@ -7082,8 +7175,8 @@ def commonEditQuoteItem(request,pk,*allifargs,**allifkwargs):
       
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_delete
@@ -7544,8 +7637,8 @@ def commonEditInvoiceItem(request,pk,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-    
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
 
 @logged_in_user_must_have_profile
 @subscriber_company_status
@@ -7786,8 +7879,7 @@ def commonSearchAjaxInvoice(request,*allifargs,**allifkwargs):
    
         if request.method=="GET":
             data_from_front_end=request.GET.get('search_result_key')
-            print(data_from_front_end)
-            
+          
             if (data_from_front_end!=None):
                 allifquery= list(CommonInvoicesModel.objects.filter( 
                     Q(invoice_number__icontains=data_from_front_end)).values("invoice_number","id","customer__name","invoice_total"))
@@ -7996,8 +8088,9 @@ def commonDeleteLedgerEntry(request,pk,*allifargs,**allifkwargs):
         CommonLedgerEntriesModel.objects.get(id=pk).delete()
         return redirect('allifmaalcommonapp:commonLedgerEntries',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
         
-    except:
-        return render(request,'allifmaalapp/error.html')
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 @logged_in_user_must_have_profile
 @subscriber_company_status
@@ -9997,11 +10090,11 @@ def commonTasks(request,*allifargs,**allifkwargs):
                 obj.department=allif_data.get("logged_user_department")
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                print(obj)
+               
                 #form=CommonAddTasksForm(allif_data.get("main_sbscrbr_entity"))#this clears out the form after adding the product
                 return redirect('allifmaalcommonapp:commonTasks',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
-                print("not seen")
+               
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
@@ -10265,8 +10358,8 @@ def commonProfitAndLoss(request,*allifargs,**allifkwargs):
        
     except Exception as ex:
         error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-  
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+        
 ######################################### REPORTS SECTION ############33
 @logged_in_user_must_have_profile
 @subscriber_company_status

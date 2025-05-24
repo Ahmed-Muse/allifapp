@@ -143,7 +143,7 @@
                              
                                 <tr>
                                   <td class="allif-fix-table-col">Tax Amount</td>
-                                  <td>{{allifquery.taxAmount}}</td>
+                                  <td>{{allifquery.taxAmount|floatformat:2|intcomma}}</td>
                                   </tr>
                             <tr>
                               <td class="allif-fix-table-col">Grand Total</td>
@@ -276,21 +276,22 @@
             <td>{{form.salestax}}</td>
         
             </tr>
-          <tr>
-            <td class="allif-fix-table-col">Currency</td>
-            <td>{{form.currency}}</td>
-        
-            </tr>
-            <tr>
-              <td class="allif-fix-table-col">Terms</td>
-              <td>{{form.payment_terms}}</td>
           
-              </tr>
                <tr>
             <td class="allif-fix-table-col">Likelyhood</td>
             <td>{{form.prospect}}</td>
         
             </tr>
+             <tr>
+                  <td class="allif-fix-table-col">Payment Terms</td>
+                  <td>{{form.payment_terms}}</td>
+              
+                  </tr>
+                   <tr>
+                  <td class="allif-fix-table-col">Currency</td>
+                  <td>{{form.currency}}</td>
+              
+                  </tr>
               <tr>
                 <td class="allif-fix-table-col">Discount</td>
                 <td>{{form.discount}}</td>
@@ -333,16 +334,7 @@
                   <td>{{form.delivery}}</td>
               
                   </tr>
-                   <tr>
-                  <td class="allif-fix-table-col">Payment Terms</td>
-                  <td>{{form.payment_terms}}</td>
-              
-                  </tr>
-                   <tr>
-                  <td class="allif-fix-table-col">Currency</td>
-                  <td>{{form.currency}}</td>
-              
-                  </tr>
+                  
             
             <tr>
               <td class="allif-fix-table-col">Action</td>

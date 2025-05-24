@@ -15,8 +15,8 @@
   <div class="container-fluid amel-content-header">
     <a class="amel-table-list-identifier">Taxes:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Taxes</a>
-  <a href="{% url 'allifmaalcommonapp:commonSupplierTaxParameters' user_var glblslug %}">Supplier Taxes</a>
+    <a href="{% url 'allifmaalcommonapp:commonSupplierTaxParameters' user_var glblslug %}">Supplier Taxes</a>
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a>
    
   
   </div>
@@ -98,15 +98,15 @@
           <div class="dropdown allifmaal-content-dropdown">
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
             <div class="dropdown-content">
-              <a href="{% url 'allifmaalcommonapp:CommonUpdateTaxDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="{% url 'allifmaalcommonapp:CommonSupplierUpdateTaxDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
               <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item </a>
               
             </div>
           </div>
           <div class="dropdown allif-confirm-action">
             
-            <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalcommonapp:CommonDeleteTaxParameter' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            <a href="{% url 'allifmaalcommonapp:commonSupplierTaxParameters' user_var glblslug %}" id="allif-confirm-delete">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalcommonapp:CommonSupplierDeleteTaxParameter' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
           </div>
 
 

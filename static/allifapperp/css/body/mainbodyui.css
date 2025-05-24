@@ -445,7 +445,7 @@ color: var(--main-red-color);
 .allifmaincontainer .allif-form-container {
   background-color:var(--main-background-color);
   margin-bottom: 2em;
-  margin-top: 1em;
+  margin-top: 0.2em;
 }
 
 .allif-form-container .allif-form-card {

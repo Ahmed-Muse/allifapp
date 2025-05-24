@@ -24,6 +24,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditBankShareholderDeposit' allifquery.id user_var glblslug %}">Edit Item</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPostShareholderDeposit' allifquery.id user_var glblslug %}">Post Item</a></li>
           
       <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteDeposit' allifquery.id user_var glblslug %}">Delete Item</a></li>
   
@@ -110,6 +111,11 @@
             <tr>
               <td class="allif-fix-table-col">Comments</td>
               <td> {{allifquery.comments}}</td>
+          
+              </tr>
+             <tr>
+              <td class="allif-fix-table-col">Status</td>
+              <td> {{allifquery.status}}</td>
           
               </tr>
              
