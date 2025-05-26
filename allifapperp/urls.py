@@ -33,6 +33,7 @@ urlpatterns = [
     path('Allifmaal/ERP/System/Distribution/Sales/App/', include('allifmaalsalesapp.urls')),
     path('Allifmaal/ERP/System/Healthcare/App/', include('allifmaalshaafiapp.urls')),
     path('Allifmaal/ERP/System/Services/App/', include('allifmaalservicesapp.urls')),
+    path('Allifmaal/ERP/System/Onlines/App/', include('allifmaalonlineapp.urls')),
 
 ]
 

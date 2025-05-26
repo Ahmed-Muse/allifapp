@@ -1,0 +1,39 @@
+<form action="{% url 'ecommerceapp:add-online-stock' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+   
+{{form}}
+    
+    <input id="form-button" class="btn btn-success btn-block" type="submit" value="Add">
+
+</form>
+<table class="table table-hover">
+    <thead>
+        
+      <tr>
+       
+        <th scope="col">Description</th>
+        <th scope="col">Quantity</th>
+        
+        <th scope="col">Price</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+     
+        <td>{{item.name}}</td>
+        <td>{{item.quantity}}</td>
+       
+        <td>${{item.price}}</td>
+
+       
+        <td><a href="{% url 'ecommerceapp:delete-online-stock' item.id %}">
+            <button style="width: auto;height: auto;border: none;background-color: red" > Delete </button></a></td>
+       
+      </tr>
+     
+    
+    </tbody>
+    {% endfor %}
+  </table>

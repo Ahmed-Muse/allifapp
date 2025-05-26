@@ -91,6 +91,7 @@ INSTALLED_APPS = [
      "allifmaalservicesapp",
      "allifmaalshaafiapp",
      "allifmaallogisticsapp",
+     "allifmaalonlineapp",
      
      
 ]

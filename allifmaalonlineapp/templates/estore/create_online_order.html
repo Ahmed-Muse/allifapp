@@ -1,0 +1,41 @@
+<form action="{% url 'ecommerceapp:create-online-order' %}" method="post">
+    {% csrf_token %}
+   
+{{form}}
+    
+    <input id="form-button" class="btn btn-success btn-block" type="submit" value="Add">
+
+</form>
+<table class="table table-hover">
+    <thead>
+        
+      <tr>
+       
+        <th scope="col">Customer</th>
+        <th scope="col">Date Ordered</th>
+        
+        <th scope="col">Status</th>
+        <th scope="col">Transaction ID</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+     
+        <td>{{order.customerName}}</td>
+        <td>{{order.date_ordered}}</td>
+       
+        <td>{{order.status}}</td>
+        <td>{{order.transaction_id}}</td>
+       
+        
+        <td><a href="{% url 'ecommerceapp:delete-online-order' order.id %}">
+            <button style="width: auto;height: auto;border: none;background-color: red" > Delete </button></a></td>
+      </tr>
+     
+    
+    </tbody>
+    {% endfor %}
+  </table>
+    

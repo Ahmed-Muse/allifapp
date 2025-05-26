@@ -130,6 +130,14 @@ path('Delete/Profile/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', view
 path('Want/Tp/Delete/Profile/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteProfile, name="commonWantToDeleteProfile"),
 path('Search/For/Employee/Profile/Details/HRM/Staff/Details/<str:allifusr>/<str:allifslug>/', views.commonProfileSearch, name="commonProfileSearch"),
 
+#################################### Approvers ########################### 
+path('Authorized/Company/Approvers/List/<str:allifusr>/<str:allifslug>/List/', views.commonApprovers, name="commonApprovers"),
+path('Add/New/Approver/For/Cmpny/<str:allifusr>/<str:allifslug>/', views.commonAddApprover, name="commonAddApprover"),
+path('Edit/Approver/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditApprover, name="commonEditApprover"),
+path('Want/To/Delete/Approver/Prmtly/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteApprover, name="commonWantToDeleteApprover"),
+path('Delete/Approver/Prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteApprover, name="commonDeleteApprover"),
+path('Approver/Details/Viewing/More/Ifn/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonApproverDetails, name="commonApproverDetails"),
+
 ################################### TAXES #########################3
 path('Tax/Parameters/<str:allifusr>/<str:allifslug>/', views.commonTaxParameters, name="commonTaxParameters"),
 path('Update/Tax/Parameter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonUpdateTaxDetails, name="CommonUpdateTaxDetails"),
@@ -269,6 +277,13 @@ path('Delete/Expense/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDele
 path('Post/Expense/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostExpense, name="commonPostExpense"),
 path('Search/Expense/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonExpenseSearch, name="commonExpenseSearch"),
 
+#################################### warehouses ###########################
+path('Warehouses/Stores/<str:allifusr>/<str:allifslug>/List/', views.commonWarehouses, name="commonWarehouses"),
+path('Add/New/Warehouse/Store/<str:allifusr>/<str:allifslug>/', views.commonAddWarehouse, name="commonAddWarehouse"),
+path('Edit/Warehouse/Store/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditWarehouse, name="commonEditWarehouse"),
+path('Want/To/Delete/Warehouse/Store/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteWarehouse, name="commonWantToDeleteWarehouse"),
+path('Delete/Warehouse/Store/Prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteWarehouse, name="commonDeleteWarehouse"),
+path('Warehouse/Details/Viewing/More/Ifn/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWarehouseDetails, name="commonWarehouseDetails"),
 ######################################## stocks ######################3
 path('Stock/Categories/<str:allifusr>/<str:allifslug>/List/', views.commonStockCats, name="commonStockCats"),
 path('Add/New/Stock/Category/<str:allifusr>/<str:allifslug>/List/', views.commonAddStockCat, name="commonAddStockCat"),
@@ -306,6 +321,25 @@ path('Want/To/Delete/This/Purchase/Order/Item/Now/<str:pk>/<str:allifusr>/<str:a
 path('Edit/Purchase/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPOItem, name="commonEditPOItem"),
 path('Calculate/Purchase/Order/s/Misc/Costs/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCalculatePOMiscCosts, name="commonCalculatePOMiscCosts"),
 
+################################# TRANSFRER ORDERS ##############################3
+
+######################################3 PURCHASES ###########################################
+path('Transfer/Orders/<str:allifusr>/<str:allifslug>/', views.commonTransferOrders, name="commonTransferOrders"),
+path('New/Transfer/Order/<str:allifusr>/<str:allifslug>/', views.commonNewTransferOrder, name="commonNewTransferOrder"),
+path('Delete/Transfer/Order/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteTransferOrder, name="commonDeleteTransferOrder"),
+path('Add/Transfer/Order/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddTransferOrderDetails, name="commonAddTransferOrderDetails"),
+path('Add/Transfer/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddTransferOrderItems, name="commonAddTransferOrderItems"),
+path('Delete/Transfer/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteTransferOrderItem, name="commonDeleteTransferOrderItem"),
+
+path('Post/Transfer/Order/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostTransferOrder, name="commonPostTransferOrder"),
+
+path('Convert/Transfer/Order/PDF/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonTransferOrderPdf, name="commonTransferOrderPdf"),
+
+path('Search/Transfer/Orders/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonTransferOrdersSearch, name="commonTransferOrdersSearch"),
+path('Want/To/Delete/Ths/Trnsfr/Order/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteTransferOrder, name="commonWantToDeleteTransferOrder"),
+
+path('Edit/Transfer/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditTransferOrderItem, name="commonEditTransferOrderItem"),
+
 ################################### QUOTATIONS #######################################
 path('Quotes/<str:allifusr>/<str:allifslug>/', views.commonQuotes, name="commonQuotes"),
 path('New/Quote/<str:allifusr>/<str:allifslug>/', views.commonNewQuote, name="commonNewQuote"),
@@ -337,6 +371,24 @@ path('Advanced/Invoices/Search/<str:allifusr>/<str:allifslug>/List/Invoices/', v
 path('Want/To/Delete/This/Invoice/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonWantToDeleteInvoice, name="commonWantToDeleteInvoice"),
 path('Want/To/Delete/This/Invoice/Item/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/From/Invoice/', views.commonWantToDeleteInvoiceItem, name="commonWantToDeleteInvoiceItem"),
 path('Edit/Invoice/Item/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Now/For/This/Invoice/', views.commonEditInvoiceItem, name="commonEditInvoiceItem"),
+
+
+########################3 credit notes ################# 
+path('Credit/Notes/<str:allifusr>/<str:allifslug>/', views.commonCreditNotes, name="commonCreditNotes"),
+path('New/Credit/Notes/Add/<str:allifusr>/<str:allifslug>/', views.commonNewCreditNote, name="commonNewCreditNote"),
+path('Delete/Credit/Note/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCreditNote, name="commonDeleteCreditNote"),
+path('Add/Credit/Note/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddCreditNoteDetails, name="commonAddCreditNoteDetails"),
+path('Add/Credit/Note/Items/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddCreditNoteItems, name="commonAddCreditNoteItems"),
+path('Delete/Credit/Note/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCreditNoteItem, name=".commonDeleteCreditNoteItem"),
+path('Post/Credit/Note/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostCreditNote, name="commonPostCreditNote"),
+path('Posted/Credit/Notes/<str:allifusr>/<str:allifslug>/', views.commonPostedCreditNotes, name="commonPostedCreditNotes"),
+path('Credit/Note/To/Pdf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCreditNotePdf, name="commonCreditNotePdf"),
+
+path('Search/For/Credit/Notes//<str:allifusr>/<str:allifslug>/', views.commonCreditNotesSearch, name="commonCreditNotesSearch"),
+path('Advanced/Credit/Notes/Search/<str:allifusr>/<str:allifslug>/List/Invoices/', views.commonCreditNotesAdvanceSearch, name="commonCreditNotesAdvanceSearch"),
+path('Want/To/Delete/This/Credit/Note/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonWantToDeleteCreditNote, name="commonWantToDeleteCreditNote"),
+
+path('Edit/Credit/Note/Item/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Now/For/This/Invoice/', views.commonEditCreditNoteItem, name="commonEditCreditNoteItem"),
 
 #################### Supplier Ledger Entries ##############
 path('Ledger/Entries/Common/<str:allifusr>/<str:allifslug>/', views.commonLedgerEntries, name="commonLedgerEntries"),

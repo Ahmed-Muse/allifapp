@@ -267,6 +267,10 @@ class CommonSupplierAddTaxParameterForm(forms.ModelForm):
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter or 1)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
 
+
+#######3
+
+
 ######################################### chart of accounts ########################
 class CommonAddBankForm(forms.ModelForm):
     class Meta:
@@ -632,31 +636,161 @@ class CommonAssetsAddForm(forms.ModelForm):
 class CommonExpensesAddForm(forms.ModelForm):
     class Meta:
         model =CommonExpensesModel
-        fields = ['supplier','division','branch','department','mode','equity_account','funding_account','expense_account','description','comments','amount','status','quantity']
+        fields = ['supplier','division','branch','department','mode','expense_account','description','comments','amount','status']
         widgets={
             'supplier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'quantity':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
             'amount':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'mode':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'funding_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
             'expense_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-           'equity_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }
     def __init__(self,allifmaalparameter, *args, **kwargs):
         super(CommonExpensesAddForm, self).__init__(*args, **kwargs)
-        self.fields['funding_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=19999)
+        
         self.fields['expense_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=59999,code__gte=49999)
         self.fields['supplier'].queryset = CommonSuppliersModel.objects.filter(company=allifmaalparameter,)
-        self.fields['equity_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=49999,code__gte=29999)
+        
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+
+
+#############3 warehouses ###############3
+class CommonAddWarehouseForm(forms.ModelForm):
+    class Meta:
+        #mydefault=TaxParametersModel.objects.all().first().taxname
+        model = CommonWarehousesModel
+        fields = ['name','comments','division','branch','department']
+        widgets={
+            'name':forms.TextInput(attrs={'class':'form-control'}),
+             #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
+            'comments':forms.TextInput(attrs={'class':'form-control'}),
+            
+              'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
+        }
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super(CommonAddWarehouseForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
+
+class CommonAddTransferOrderDetailsForm(forms.ModelForm):
+    class Meta:
+        #mydefault=TaxParametersModel.objects.all().first().taxname
+        model = CommonStockTransferOrdersModel
+        fields = ['from_store','to_store','comments','division','branch','department']
+        widgets={
+            'from_store':forms.TextInput(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+             #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
+            'to_store':forms.TextInput(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+             'comments':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+             
+              'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
+        }
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super(CommonAddTransferOrderDetailsForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
+
+class CommonAddTransferOrderItemForm(forms.ModelForm):
+    class Meta:
+        #mydefault=TaxParametersModel.objects.all().first().taxname
+        model = CommonStockTransferOrderItemsModel
+        fields = ['items','quantity','comments']
+        widgets={
+            'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+             #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
+            'quantity':forms.TextInput(attrs={'class':'form-control'}),
+             'comments':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+             
+             
+        }
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super(CommonAddTransferOrderItemForm, self).__init__(*args, **kwargs)
+        self.fields['items'].queryset = CommonStocksModel.objects.filter(company=allifmaalparameter)
+       
+
+class CommonAddApproverForm(forms.ModelForm):
+    class Meta:
+        #mydefault=TaxParametersModel.objects.all().first().taxname
+        model = CommonApproversModel
+        fields = ['approvers','comments','division','branch','department']
+        widgets={
+            'approvers':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+             #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
+            'taxrate':forms.TextInput(attrs={'class':'form-control'}),
+             'taxtype':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+             'taxdescription':forms.TextInput(attrs={'class':'form-control'}),
+              'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
+        }
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super(CommonAddApproverForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['approvers'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter or 1)
+
+class CommonAddCreditNoteDetailsForm(forms.ModelForm):
+    class Meta:
+        #mydefault=TaxParametersModel.objects.all().first().taxname
+        model = CommonCreditNotesModel
+        fields = ['customer','original_invoice','total_amount', 'status','division','branch','department']
+        widgets={
+            'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'original_invoice':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'total_amount':forms.TextInput(attrs={'class':'form-control'}),
+             #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
+            'status':forms.TextInput(attrs={'class':'form-control'}),
+             'taxtype':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+             'taxdescription':forms.TextInput(attrs={'class':'form-control'}),
+             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
+        }
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super(CommonAddTaxParameterForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['original_invoice'].queryset = CommonInvoicesModel.objects.filter(company=allifmaalparameter or 1)
+        self.fields['customer'].queryset = CommonCustomersModel.objects.filter(company=allifmaalparameter or 1)
+
+class CommonAddCreditNoteItemForm(forms.ModelForm):
+    class Meta:
+        #mydefault=TaxParametersModel.objects.all().first().taxname
+        model = CommonCreditNoteItemsModel
+        fields = ['items','credit_note']
+        widgets={
+           
+            'credit_note':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+        }
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super(CommonAddCreditNoteItemForm, self).__init__(*args, **kwargs)
+        self.fields['credit_note'].queryset = CommonCreditNotesModel.objects.filter(company=allifmaalparameter or 1)
+       
+        self.fields['items'].queryset = CommonStocksModel.objects.filter(company=allifmaalparameter)
+       
 ####################################3 STOCK ##############################33
 class CommonStockCatAddForm(forms.ModelForm):
     class Meta:
