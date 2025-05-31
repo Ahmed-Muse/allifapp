@@ -36,6 +36,14 @@
       font-family: var(--main-font-type);
   }
   
+
+.allif_common_error{
+  font-size:(--main-text-font-size);
+  color:var(--main-red-color);
+
+  }
+
+
 ::placeholder {
 text-align: center;
 }

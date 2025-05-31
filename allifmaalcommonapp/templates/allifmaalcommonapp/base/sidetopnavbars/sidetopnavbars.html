@@ -18,18 +18,24 @@
 
       {% if user_is_supper %}
       <li><a class="dropdown-item" href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}">Admin</a></li>
+
+      
      
       {% endif %}
+      
+
+      <li><a class="dropdown-item" href="{% url 'testapp:testinapp' %}">Explore</a></li>
+      
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a></li>
       
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpecificDashboard' user_var glblslug %}">Dashboard</a></li>
       
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalonlineapp:allifOnlineHome' %}">Online</a></li>
+     
     
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonWarehouses' user_var glblslug %}">Warehouses</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransferOrders' user_var glblslug %}">Transfers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCreditNotes' user_var glblslug %}">CreditNotes</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCreditNotes' user_var glblslug %}">CRNotes</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonApprovers' user_var glblslug %}">Approvers</a></li>
       
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a></li>

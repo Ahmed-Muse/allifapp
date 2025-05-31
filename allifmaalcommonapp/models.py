@@ -65,6 +65,11 @@ rights= [
     ('manager', 'manager'),
     ('director','director'),
 	]
+approval_status= [
+    ('pending', 'pending'),
+    ('approved', 'approved'),
+   
+	]
 posting_status = [
     ('waiting','waiting'),
     ('posted', 'posted'),
@@ -420,122 +425,17 @@ class CommonEmployeesModel(models.Model):
         self.stffslug=slugify('{} {} {} {} {}'.format(self.company,self.company.address, self.uniqueId,self.firstName,self.middleName))#this is what generates the slug
         super(CommonEmployeesModel, self).save(*args, **kwargs)
 
-
-###################### approvers lists ####################
-# models.py (Approval related)
-
-# Assuming existing: Company, User (Django's built-in User model)
-
-# 1. Approval Policy (Rules for what needs approval, by whom)
-class CommonApprovalPolicyModel(models.Model):
-    company = models.ForeignKey(CommonCompanyDetailsModel, on_delete=models.CASCADE, related_name='approval_policies')
-    name = models.CharField(max_length=255)
-    
-    # Define what type of document/transaction this policy applies to
-    # e.g., 'CreditNote', 'TransferOrder', 'PurchaseOrder', 'Bill'
-    document_type_choices = [
-        ('CreditNote', 'Credit Note'),
-        ('TransferOrder', 'Transfer Order'),
-        # Add other document types as your ERP expands
-    ]
-    document_type = models.CharField(max_length=50, choices=document_type_choices)
-
-    # Optional: Conditions for approval (e.g., amount > X, specific department)
-    # This could be a JSONField for complex rules or a separate rules engine
-    # For simplicity, let's keep it basic here.
-    min_amount = models.DecimalField(max_digits=15, decimal_places=2, default=0) # e.g., Credit Notes > $100 require approval
-    max_amount = models.DecimalField(max_digits=15, decimal_places=2, default=0)
-
-    is_active = models.BooleanField(default=True)
-
-    class Meta:
-        unique_together = ('company', 'document_type', 'name') # Ensures one policy type per name per company
-        verbose_name_plural = "Approval Policies"
-
-    def __str__(self):
-        return f"{self.name} for {self.document_type} ({self.company.name})"
-
-# 2. Approver Group/Role (who can approve)
-# You might link this to Django's Group model or create a custom one.
 class CommonApproversModel(models.Model):
     company=models.ForeignKey(CommonCompanyDetailsModel, on_delete=models.CASCADE, related_name='approver_groups')
     comments=models.CharField(max_length=100,null=True,blank=True)
-    approvers=models.ManyToManyField(CommonEmployeesModel, related_name='apprvrusrmbmrs') # Users in this group
+    approvers=models.ForeignKey(CommonEmployeesModel,null=True,blank=True, related_name='apprvrusrmbmrs',on_delete=models.SET_NULL) # Users in this group
     division=models.ForeignKey(CommonDivisionsModel,related_name="apprvrdvs",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="apprvrbrnch",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="apprvrdpt",on_delete=models.SET_NULL,null=True,blank=True)
-
+    date=models.DateField(blank=True,null=True,auto_now_add=True)
     def __str__(self):
         return str(self.approvers)
 
-# 3. Approval Step (who approves at what stage)
-class CommonApprovalStepsModel(models.Model):
-    policy = models.ForeignKey(CommonApprovalPolicyModel, on_delete=models.CASCADE, related_name='steps')
-    step_order = models.IntegerField() # e.g., 1, 2, 3 for sequential approvals
-    approver_group = models.ForeignKey(CommonApproversModel, on_delete=models.PROTECT) # Which group can approve this step
-    # Or specific user: approver_user = models.ForeignKey('auth.User', ...)
-    
-    # How many approvals needed in this step (e.g., any one, all)
-    approval_method_choices = [
-        ('Any', 'Any member approves'),
-        ('All', 'All members approve')
-    ]
-    approval_method = models.CharField(max_length=50, choices=approval_method_choices, default='Any')
-
-    class Meta:
-        unique_together = ('policy', 'step_order')
-        ordering = ['step_order']
-
-    def __str__(self):
-        return f"Step {self.step_order} ({self.approver_group.name}) for {self.policy.name}"
-
-# 4. Approval Request (A specific document needing approval)
-class CommonApprovalRequestsModel(models.Model):
-    company = models.ForeignKey(CommonCompanyDetailsModel, on_delete=models.CASCADE)
-    
-    # Generic Foreign Key to link to any document type (CreditNote, TransferOrder, etc.)
-    content_type = models.ForeignKey('contenttypes.ContentType', on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    #content_object =GenericForeignKey('content_type', 'object_id')
-    
-    policy = models.ForeignKey(CommonApprovalPolicyModel, on_delete=models.PROTECT) # The policy that triggered this request
-    current_step = models.ForeignKey(CommonApprovalStepsModel, on_delete=models.SET_NULL, null=True, blank=True) # Current step awaiting approval
-    
-    status_choices = [
-        ('Pending', 'Pending Approval'),
-        ('Approved', 'Approved'),
-        ('Rejected', 'Rejected'),
-        ('Cancelled', 'Cancelled')
-    ]
-    status = models.CharField(max_length=50, choices=status_choices, default='Pending')
-    
-    initiated_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='initiated_approvals')
-    initiated_at = models.DateTimeField(auto_now_add=True)
-    
-    approved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='approved_requests')
-    approved_at = models.DateTimeField(null=True, blank=True)
-    
-    rejection_reason = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return f"Approval for {self.content_object} ({self.status})"
-
-# 5. Approval Log (History of approvals/rejections for a request)
-class CommonApprovalLogsModel(models.Model):
-    approval_request = models.ForeignKey(CommonApprovalRequestsModel, on_delete=models.CASCADE, related_name='logs')
-    approver = models.ForeignKey(User, on_delete=models.PROTECT)
-    step = models.ForeignKey(CommonApprovalStepsModel, on_delete=models.SET_NULL, null=True, blank=True)
-    action_choices = [
-        ('Approved', 'Approved'),
-        ('Rejected', 'Rejected'),
-        ('Returned', 'Returned for Rework') # Optional action
-    ]
-    action = models.CharField(max_length=50, choices=action_choices)
-    comments = models.TextField(blank=True, null=True)
-    action_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.approver.username} {self.action} on {self.action_at.strftime('%Y-%m-%d')}"
 ########################## CHART OF ACCOUNTS ##########################3
 class CommonGeneralLedgersModel(models.Model):
     description=models.CharField(max_length=50,blank=False,null=True,unique=False)
@@ -911,6 +811,7 @@ class CommonWarehousesModel(models.Model):
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptswrhss",on_delete=models.SET_NULL,null=True,blank=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     comments=models.CharField(null=True, blank=True, max_length=50)
+    inventory_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='invaccwrhse')
     def __str__(self):
     		return str(self.name) # this will show up in the admin area
     
@@ -949,9 +850,24 @@ class CommonStocksModel(models.Model):
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptstocks",on_delete=models.SET_NULL,null=True,blank=True)
     taxrate=models.ForeignKey(CommonTaxParametersModel,related_name="stktxrte",on_delete=models.SET_NULL,null=True,blank=True)
     suppliertaxrate=models.ForeignKey(CommonSupplierTaxParametersModel,related_name="supplrstktxrte",on_delete=models.SET_NULL,null=True,blank=True)
+    warehouse=models.ForeignKey(CommonWarehousesModel,related_name="stckwarehouse",on_delete=models.SET_NULL,null=True,blank=True)
+    
+    class Meta:
+        # THIS IS THE CRUCIAL ADDITION/CONFIRMATION
+        unique_together = ('company', 'partNumber', 'warehouse')
+        
     def __str__(self):
     		return str(self.description) # this will show up in the admin area
 
+class CommonWarehouseItemsModel(models.Model):
+    warehouse=models.ForeignKey(CommonWarehousesModel, blank=True, null=True, on_delete=models.CASCADE,related_name='wrhseitms')
+    items=models.ForeignKey(CommonStocksModel,blank=False,null=False, on_delete=models.CASCADE,related_name='wrhseitemsstck')
+    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    class Meta:
+        # THIS IS THE CRUCIAL ADDITION/CONFIRMATION
+        unique_together = ('items', 'warehouse')
+    def __str__(self) :
+        return str(self.items)
 
 #########################################3 STOCK ##############################################
 class CommonStockTransferOrdersModel(models.Model):
@@ -963,18 +879,20 @@ class CommonStockTransferOrdersModel(models.Model):
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptintcmpstcktrnsfrs",on_delete=models.SET_NULL,null=True,blank=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     comments=models.CharField(null=True, blank=True, max_length=50)
-
+    status=models.CharField(choices=posting_status, default='waiting', max_length=20)
+ 
     from_store=models.ForeignKey(CommonWarehousesModel,related_name="frmintcmpstcktrnsfrs",on_delete=models.SET_NULL,null=True,blank=True)
     to_store=models.ForeignKey(CommonWarehousesModel,related_name="tointcmpstcktrnsfrs",on_delete=models.SET_NULL,null=True,blank=True)
     def __str__(self):
-    		return str(self.name) # this will show up in the admin area
+    		return str(self.number) # this will show up in the admin area
 
 class CommonStockTransferOrderItemsModel(models.Model):
-    items=models.ForeignKey(CommonStocksModel,related_name="stcktrnsfordrln",on_delete=models.CASCADE)
+    items=models.ForeignKey(CommonStocksModel,related_name="stcktrnsfordrlns",on_delete=models.CASCADE)
     quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     comments=models.CharField(null=True, blank=True, max_length=50)
-    trans_ord_items_con= models.ForeignKey(CommonStockTransferOrdersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='poitrelname')
+    trans_ord_items_con=models.ForeignKey(CommonStockTransferOrdersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='poitrelname')
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    
     def __str__(self):
         return '{}'.format(self.items)
     #below calculates the total selling price for the model
@@ -982,6 +900,14 @@ class CommonStockTransferOrderItemsModel(models.Model):
 ################################## PURCHASES ###########3
 
 class CommonPurchaseOrdersModel(models.Model):
+    class Status(models.TextChoices): # <--- Define choices using TextChoices
+        DRAFT = 'Draft', 'Draft'
+        PENDING_APPROVAL = 'Pending Approval', 'Pending Approval'
+        APPROVED = 'Approved', 'Approved'
+        ISSUED = 'Issued', 'Issued (GIN Created)'
+        RECEIVED = 'Received', 'Received (GRN Created)'
+        CANCELLED = 'Cancelled', 'Cancelled'
+
     owner=models.ForeignKey(User, related_name="cmnownpo",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmncmpnpo",on_delete=models.CASCADE,null=True,blank=True)
     po_number=models.CharField(null=True, blank=True, max_length=100)
@@ -1003,6 +929,7 @@ class CommonPurchaseOrdersModel(models.Model):
     delivery=models.CharField(null=True, blank=True, max_length=100)
     currency=models.ForeignKey(CommonCurrenciesModel, related_name="crrncypo",on_delete=models.SET_NULL,null=True,blank=True)
     taxrate=models.ForeignKey(CommonSupplierTaxParametersModel,related_name="sppltxrt",on_delete=models.SET_NULL,blank=True,null=True)
+    approval_status= models.CharField(max_length=50, choices=Status.choices, default=Status.DRAFT) 
     def __str__(self):
         return str(self.po_number)
 
@@ -1173,26 +1100,28 @@ class CommonInvoiceItemsModel(models.Model):
 
 class CommonCreditNotesModel(models.Model):
     company=models.ForeignKey(CommonCompanyDetailsModel, on_delete=models.CASCADE, related_name='cmpnycrdnt')
-    customer=models.ForeignKey(CommonCustomersModel, on_delete=models.PROTECT, related_name='cstmcrdtnot')
+    customer=models.ForeignKey(CommonCustomersModel, on_delete=models.SET_NULL, related_name='cstmcrdtnot',null=True,blank=True)
     original_invoice=models.ForeignKey(CommonInvoicesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='credtnorgninv')
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     number=models.CharField(max_length=50, unique=True)
-    total_amount=models.DecimalField(max_digits=30, decimal_places=2, default=0.00)
+    total_amount=models.DecimalField(max_digits=30, decimal_places=2, default=0.00,null=True,blank=True)
     reasons=models.CharField(max_length=100,blank=False)
-    status=models.CharField(max_length=50, default='Draft')
+    status=models.CharField(max_length=50,choices=posting_status, default='waiting',null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvscrdtnte",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnchcrdtnte",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptcrdtnte",on_delete=models.SET_NULL,null=True,blank=True)
+    owner=models.ForeignKey(User, related_name="credntown",on_delete=models.SET_NULL,null=True,blank=True)
+    return_location=models.ForeignKey(CommonWarehousesModel, on_delete=models.SET_NULL, null=True, blank=True)
     
+    approval_status=models.CharField(max_length=50,choices=approval_status, default='pending',null=True,blank=True)
     def __str__(self):
         return str(self.number)
 
 class CommonCreditNoteItemsModel(models.Model):
-    credit_note=models.ForeignKey(CommonCreditNotesModel, on_delete=models.CASCADE, related_name='crdntitems')
+    credit_note=models.ForeignKey(CommonCreditNotesModel, on_delete=models.CASCADE, related_name='crdntitems',null=True,blank=True)
     items=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL,blank=True,null=True)
-   
-    return_location=models.ForeignKey(CommonWarehousesModel, on_delete=models.SET_NULL, null=True, blank=True)
-
+    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
         return str(self.credit_note)
     

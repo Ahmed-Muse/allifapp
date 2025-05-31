@@ -2475,11 +2475,11 @@ def commonEditApprover(request,allifusr,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_is_admin
-def commonApproverDetails(request,allifslug,*allifargs,**allifkwargs):
+def commonApproverDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
         title="Account Details"
-        allifquery=CommonApproversModel.objects.filter(pk=allifslug).first()
+        allifquery=CommonApproversModel.objects.filter(id=pk).first()
         
         context={
             "allifquery":allifquery,
@@ -2526,7 +2526,7 @@ def commonDeleteApprover(request,pk,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 
-   
+
 ###################333 tax parameters settings ###############
 
 @logged_in_user_must_have_profile
@@ -5922,7 +5922,7 @@ def commonEditWarehouse(request,allifusr,pk,*allifargs,**allifkwargs):
         allifquery_update=CommonWarehousesModel.objects.filter(id=pk).first()
         form=CommonAddWarehouseForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         if request.method=='POST':
-            form==CommonAddWarehouseForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
+            form=CommonAddWarehouseForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.owner=allif_data.get("usernmeslg")
@@ -5933,7 +5933,7 @@ def commonEditWarehouse(request,allifusr,pk,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form==CommonAddWarehouseForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+            form=CommonAddWarehouseForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         context={"title":title,"form":form,"allifquery_update":allifquery_update,}
         return render(request,'allifmaalcommonapp/warehouses/add-warehouse.html',context)
        
@@ -5944,15 +5944,17 @@ def commonEditWarehouse(request,allifusr,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_is_admin
-def commonWarehouseDetails(request,allifslug,*allifargs,**allifkwargs):
+def commonWarehouseDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        title="Account Details"
-        allifquery=CommonWarehousesModel.objects.filter(pk=allifslug).first()
+        title="Warehouse Details"
+        allifquery=CommonWarehousesModel.objects.filter(id=pk).first()
+        allifqueryset=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),warehouse=allifquery)
         
         context={
             "allifquery":allifquery,
             "title":title,
+            "allifqueryset":allifqueryset,
            
         }
         return render(request,'allifmaalcommonapp/warehouses/warehouse-details.html',context)
@@ -7219,6 +7221,121 @@ def commonPOAdvanceSearch(request,*allifargs,**allifkwargs):
 
 #################################### INTER COMAPNY STOCK TRANSFERS #####################
 
+ ######################33 ADD WAREHOUSE ITEMS ###################
+################### inventory/stock###########3
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def commonWarehouStocks(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        allifquery=CommonWarehousesModel.objects.filter(id=pk,company=allif_data.get("main_sbscrbr_entity")).first()
+        title="Stock And Inventory"+str(allifquery)
+        
+        formats=CommonDocsFormatModel.objects.all()
+        datasorts=CommonDataSortsModel.objects.all()
+        allifqueryset=CommonWarehouseItemsModel.objects.filter(warehouse=allifquery)
+      
+        context={
+            "title":title,
+            "allifqueryset":allifqueryset,
+            "formats":formats,
+            "datasorts":datasorts,
+            "allifquery":allifquery,
+        }
+        return render(request,'allifmaalcommonapp/warehouses/stock/warehouse_stock.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def commonAddWarehouseItems(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        allifquery=CommonWarehousesModel.objects.filter(id=pk).first()
+        allifqueryset=CommonWarehouseItemsModel.objects.filter(warehouse=allifquery)
+        
+        title="Add items"+str(allifquery)
+        form=CommonAddWarehouseItemForm(allif_data.get("main_sbscrbr_entity"))
+        if request.method == 'POST':
+            form=CommonAddWarehouseItemForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.warehouse=allifquery
+                obj.save()
+                return redirect('allifmaalcommonapp:commonAddWarehouseItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=CommonAddWarehouseItemForm(allif_data.get("main_sbscrbr_entity"))
+
+        context={
+                "form":form,
+                "title":title,
+                "allifquery":allifquery,
+                
+                "allifqueryset":allifqueryset,
+        }
+        return render(request,'allifmaalcommonapp/warehouses/stock/add_warehouse_stock.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def commonEditWarehouseItem(request,pk,*allifargs,**allifkwargs):
+    try:
+        title="Edit Item Details"
+        allif_data=common_shared_data(request)
+        sector=str(allif_data.get("main_sbscrbr_entity").sector)
+        myquery=CommonWarehouseItemsModel.objects.filter(id=pk).first()
+        allifquery=myquery.warehouse
+        allifqueryset=CommonWarehouseItemsModel.objects.filter(warehouse=allifquery).order_by('-items')
+
+        form=CommonAddWarehouseItemForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
+        if request.method=='POST':
+            form=CommonAddWarehouseItemForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=myquery)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.save()
+                return redirect('allifmaalcommonapp:commonAddWarehouseItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=CommonAddWarehouseItemForm(allif_data.get("main_sbscrbr_entity"),instance=myquery)
+                
+         
+        context={"title":title,"form":form,"sector":sector,"allifquery":allifquery,
+                 "allifqueryset":allifqueryset,"myquery":myquery,}
+        return render(request,'allifmaalcommonapp/warehouses/stock/add_warehouse_stock.html',context)
+       
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+       
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_delete
+def commonDeleteWarehouseItem(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        allifquery=CommonWarehouseItemsModel.objects.filter(id=pk).first()
+        allifquery_id=allifquery.warehouse.id
+        allifquery.delete()
+        return redirect('allifmaalcommonapp:commonAddWarehouseItems',pk=allifquery_id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -7266,13 +7383,13 @@ def commonNewTransferOrder(request,*allifargs,**allifkwargs):
         unque=str(uuid4()).split('-')[2]
         nmbr=int(allifquery.count())+int(1)
         currntyear=timezone.now().date().today().year
-        allifuid=str(nmbr)+"/"+str(currntyear)+"/"+str(unque)
+        allifuid=str(nmbr)+"/"+str(unque)
         ###### End... UID generation ##################
 
         if allifquery:
-            sqnmbr='SQ'+"/"+str(allifuid)
+            sqnmbr='TRNSF/ORD'+"/"+str(allifuid)
         else:
-            sqnmbr= 'SQ/1'+"/"+str(currntyear)+"/"+str(uuid4()).split('-')[2]
+            sqnmbr= 'TRNSF/ORD/1'+"/"+str(uuid4()).split('-')[2]
 
         newQuoteNumber=CommonStockTransferOrdersModel.objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         newQuoteNumber.save()
@@ -7293,7 +7410,7 @@ def commonWantToDeleteTransferOrder(request,pk,*allifargs,**allifkwargs):
         "title":title,
         "allifquery":allifquery,
         }
-        return render(request,'allifmaalcommonapp/stocks/Transfers/delete-transfer-order-confrm.html',context)
+        return render(request,'allifmaalcommonapp/stocks/Transfers/delete-transfer-order-confirm.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -7321,6 +7438,7 @@ def commonAddTransferOrderDetails(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
        
         allifquery=CommonStockTransferOrdersModel.objects.filter(id=pk).first()
+        allifqueryset=CommonStockTransferOrderItemsModel.objects.filter(trans_ord_items_con=allifquery)
         form=CommonAddTransferOrderDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
         if request.method=='POST':
             form=CommonAddTransferOrderDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST,request.FILES,instance=allifquery)
@@ -7339,8 +7457,9 @@ def commonAddTransferOrderDetails(request,pk,*allifargs,**allifkwargs):
             "form":form,
             "allifquery":allifquery,
             "title":title,
+            "allifqueryset":allifqueryset,
         }
-        return render(request,'allifmaalcommonapp/stocks/transfers/transfer-order-details.html',context)
+        return render(request,'allifmaalcommonapp/stocks/transfers/add-transfer-order-details.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -7350,21 +7469,24 @@ def commonAddTransferOrderDetails(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_add
 def commonAddTransferOrderItems(request,pk,*allifargs,**allifkwargs):
     try:
-        title="Add Quote Items"
+        title="Add Transfer Order Items"
         allif_data=common_shared_data(request)
        
         allifquery=CommonStockTransferOrdersModel.objects.filter(id=pk).first()
-        allif_qte_discount=allifquery.discount
+        allifquery.from_store
+        
+        #form=CommonAddTransferOrderItemForm(allif_data.get("main_sbscrbr_entity"))
+        allifqueryset=CommonStockTransferOrderItemsModel.objects.filter(trans_ord_items_con=allifquery)#this line helps to
+        #myitems=CommonWarehouseItemsModel.objects.filter(items__items=allifquery.from_store)
+        #myitems=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         form=CommonAddTransferOrderItemForm(allif_data.get("main_sbscrbr_entity"))
-        allifqueryset=CommonStockTransferOrderItemsModel.objects.filter(allifquoteitemconnector=allifquery)#this line helps to
-       
-
+        #form=CommonAddTransferOrderItemForm(allifquery.from_store)
         add_item= None
         if request.method=='POST':
             form=CommonAddTransferOrderItemForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
                 add_item= form.save(commit=False)
-                add_item.allifquoteitemconnector=allifquery
+                add_item.trans_ord_items_con=allifquery
                 add_item.save()
                 return redirect('allifmaalcommonapp:commonAddTransferOrderItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -7373,7 +7495,8 @@ def commonAddTransferOrderItems(request,pk,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonAddQuoteItemsForm(allif_data.get("main_sbscrbr_entity"))
+            pass
+            #form=CommonAddTransferOrderItemForm(allif_data.get("main_sbscrbr_entity"))
 
         context={
         "form":form,
@@ -7381,9 +7504,9 @@ def commonAddTransferOrderItems(request,pk,*allifargs,**allifkwargs):
         
         "allifqueryset":allifqueryset,
         "title":title, 
-        "allif_qte_discount":allif_qte_discount,
+       
         }
-        return render(request,'allifmaalcommonapp/stocks/transfers/add-transfer-order-items.html',context)
+        return render(request,'allifmaalcommonapp/stocks/transfers/add-transfer-order-item.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -7393,11 +7516,11 @@ def commonAddTransferOrderItems(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_edit
 def commonEditTransferOrderItem(request,pk,*allifargs,**allifkwargs):
     try:
-        title="Edit Item Details"
+        title="Edit Transfer Order Item Details"
         allif_data=common_shared_data(request)
-        myquery=CommonQuoteItemsModel.objects.filter(id=pk).first()
-        allifquery=myquery.allifquoteitemconnector
-        allifqueryset=CommonStockTransferOrderItemsModel.objects.filter(allifquoteitemconnector=allifquery).order_by('-date')
+        myquery=CommonStockTransferOrderItemsModel.objects.filter(id=pk).first()
+        allifquery=myquery.trans_ord_items_con
+        allifqueryset=CommonStockTransferOrderItemsModel.objects.filter(trans_ord_items_con=allifquery).order_by('-date')
 
         form=CommonAddTransferOrderItemForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
         if request.method=='POST':
@@ -7415,7 +7538,7 @@ def commonEditTransferOrderItem(request,pk,*allifargs,**allifkwargs):
 
         context={"title":title,"form":form,"allifquery":allifquery,
                  "allifqueryset":allifqueryset,"myquery":myquery,}
-        return render(request,'allifmaalcommonapp/stocks/transfers/add-transfer-order-items.html',context)
+        return render(request,'allifmaalcommonapp/stocks/transfers/add-transfer-order-item.html',context)
         
       
     except Exception as ex:
@@ -7427,11 +7550,11 @@ def commonEditTransferOrderItem(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonDeleteTransferOrderItem(request,pk,*allifargs,**allifkwargs):
     try:
-        title="Add Quote Items"
+        title="Delete Transfer Order Items"
         allif_data=common_shared_data(request)
        
         myallifquery=CommonStockTransferOrderItemsModel.objects.filter(id=pk).first()
-        myquery=myallifquery.allifquoteitemconnector
+        myquery=myallifquery.trans_ord_items_con
         myallifquery.delete()
         return redirect('allifmaalcommonapp:commonAddTransferOrderItems',pk=myquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -7449,8 +7572,8 @@ def commonTransferOrderPdf(request,pk,*allifargs,**allifkwargs):
        
         scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         allifquery=CommonStockTransferOrdersModel.objects.filter(id=pk).first()
-        allifqueryset=CommonStockTransferOrderItemsModel.objects.filter(allifquoteitemconnector=allifquery)
-        title="Quote "+str(allifquery)
+        allifqueryset=CommonStockTransferOrderItemsModel.objects.filter(trans_ord_items_con=allifquery)
+        title="TRNSF/ORD "+str(allifquery)
         template_path = 'allifmaalcommonapp/stocks/transfers/transfer-order-pdf.html'
         context = {
         "allifqueryset":allifqueryset,
@@ -7494,7 +7617,7 @@ def commonTransferOrdersSearch(request,*allifargs,**allifkwargs):
        
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonStockTransferOrdersModel.objects.filter((Q(number__icontains=allifsearch)|Q(total__icontains=allifsearch)|Q(customer__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+            searched_data=CommonStockTransferOrdersModel.objects.filter((Q(number__icontains=allifsearch)|Q(to_store__name__icontains=allifsearch)|Q(from_store__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
            
             context={
             "title":title,
@@ -7508,111 +7631,98 @@ def commonTransferOrdersSearch(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
   
+# In your views.py file (e.g., allifmaalcommonapp/views.py)
+
+from django.db import transaction # Import this at the top
+from django.db.models import F # Import F for atomic updates
+from django.contrib import messages # For user feedback messages
+from decimal import Decimal # Ensure Decimal is imported for calculations
+
+# ... (other imports and functions like common_shared_data, decorators) ...
+
 @logged_in_user_must_have_profile
 @subscriber_company_status
-@logged_in_user_can_view
-def commonPostTransferOrder(request,pk,*allifargs,**allifkwargs):
+@logged_in_user_can_view # Assuming this permission allows posting transfers
+def commonPostTransferOrder(request, pk, *allifargs, **allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        allifquery=CommonStockTransferOrdersModel.objects.filter(id=pk).first()
-        po_amount=allifquery.amount or 1
-        po_amount_taxinclusve=allifquery.amounttaxincl
-        applied_uplift=allifquery.uplift
-        po_misccosts=allifquery.misccosts
-       
-        # post the po amount including tax into the supplier account
-        po_supplier=allifquery.supplier
-        if po_supplier!=None:
-            suplr_initial_balance=po_supplier.balance
-            suplr_intial_turnover=po_supplier.turnover
-            po_supplier.balance=suplr_initial_balance+po_amount_taxinclusve
-            po_supplier.turnover=suplr_intial_turnover+po_amount_taxinclusve
-            po_supplier.save()
-            CommonLedgerEntriesModel.objects.create(supplier=po_supplier,credit=po_amount_taxinclusve,
-        comments="purchase",company=allif_data.get("main_sbscrbr_entity"),owner=request.user,ledgowner="supplier")
-        else:
-            return HttpResponse("Please fill the missing fields")
+        transfer_order=CommonStockTransferOrdersModel.objects.filter(id=pk,company=allif_data.get("main_sbscrbr_entity")).first()
+        transfer_items=CommonStockTransferOrderItemsModel.objects.filter(trans_ord_items_con=transfer_order)
+
+        # Check if the transfer order is already posted/completed
+        if transfer_order.status=='posted': # Adjust status string if yours is different
+            messages.warning(request,"Sorry, this was posted")
+            return redirect('allifmaalcommonapp:commonAddTransferOrderDetails', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+
+        elif not transfer_items.exists():
+            return redirect('allifmaalcommonapp:commonAddTransferOrderItems', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+        
+        # Ensure source and destination stores are selected on the Transfer Order
+        elif not transfer_order.from_store or not transfer_order.to_store:
+            messages.error(request, "Please add both source and destination locations before posting.")
+            return redirect('allifmaalcommonapp:commonAddTransferOrderDetails', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+        
+        # Prevent transfer to/from the same store
+        elif transfer_order.from_store == transfer_order.to_store:
+            messages.error(request, "Source and destination must be different")
+            return redirect('allifmaalcommonapp:commonAddTransferOrderDetails', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+
+        with transaction.atomic():
+            for item_line in transfer_items:
+                if str(item_line.items.partNumber) in str(CommonWarehouseItemsModel.objects.filter(items__partNumber=item_line.items.partNumber,warehouse=transfer_order.from_store).values_list('items__partNumber')):
+                    if str(item_line.items.partNumber) in str(CommonWarehouseItemsModel.objects.filter(items__partNumber=item_line.items.partNumber,warehouse=transfer_order.to_store).values_list('items__partNumber')):
+                        item=CommonWarehouseItemsModel.objects.filter(items=item_line.items,warehouse=transfer_order.from_store).first()
+                        initial_stock_quanty=item.quantity
+                        
+                        if item_line.quantity<initial_stock_quanty:
+                            item.quantity=Decimal(initial_stock_quanty)-Decimal(item_line.quantity)
+                            item.save()
+                            item=CommonWarehouseItemsModel.objects.filter(items=item_line.items,warehouse=transfer_order.to_store).first()
+                            initial_stock_quanty=item.quantity
+                            print(initial_stock_quanty)
+                            item.quantity=Decimal(initial_stock_quanty)+Decimal(item_line.quantity)
+                            item.save()
+                        else:
+                            messages.error(request, f"'{item_line.items.partNumber}' is not enough in {transfer_order.from_store.name}")
+                            return redirect('allifmaalcommonapp:commonAddTransferOrderDetails', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+
+                    else:
+                        destination_stock_item,created=CommonWarehouseItemsModel.objects.get_or_create(
+                        warehouse=transfer_order.to_store, # The destination warehouse
+                        items=item_line.items,
+                        quantity=item_line.quantity,
+
+                        #you can add default values as below... system will pick these over actual
+                        #defaults={ # These defaults are used ONLY if a new record is created
+                        #'items': item_line.items,
+                        #'quantity': Decimal('00.00'), # New items start with 0 quantity before adding transferred amount
+                        #}
+                        )
+
+                        item=CommonWarehouseItemsModel.objects.filter(items=item_line.items,warehouse=transfer_order.from_store).first()
+                        print(item)
+                        initial_stock_quanty=item.quantity
+                        print(initial_stock_quanty)
+                        item.quantity=Decimal(initial_stock_quanty)-Decimal(item_line.quantity)
+                        item.save()
+                        messages.error(request, f"'{item_line.items.partNumber}' is not in {transfer_order.to_store.name}")
+                   
+                else:
+                    messages.error(request, f"'{item_line.items.partNumber}' is not in {transfer_order.from_store.name}")
+                    return redirect('allifmaalcommonapp:commonAddTransferOrderDetails', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+            
+              
+            return redirect('allifmaalcommonapp:commonAddTransferOrderDetails', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
            
-       
-        ################# ...start of  misc costs...credit the service provider account....###################
-        misc_costs=CommonPurchaseOrderMiscCostsModel.objects.filter(po_misc_cost_con=allifquery)
-       
-        if misc_costs!=None:
-            for cost in misc_costs:
-                spent_amount=cost.purchase_order_misc_cost
-                misc_cost_supplier_id=int(cost.supplier.id)
-                misc_cost_supplier=CommonSuppliersModel.objects.filter(pk=misc_cost_supplier_id).first()# The misc cost service supplier
-                supplier_acc_balance=misc_cost_supplier.balance
-                supplier_acc_turnover=misc_cost_supplier.turnover
-                misc_cost_supplier.balance=supplier_acc_balance-spent_amount
-                misc_cost_supplier.turnover=supplier_acc_turnover+spent_amount
-                misc_cost_supplier.save()
-            
-        ################### end of misc costs ###############
-    
-      
-        if allifquery.posting_po_status=="waiting":
-            allifquery.posting_po_status="posted"
-            allifquery.save()
-        else:
-            allifquery.posting_po_status="waiting"
-            allifquery.save()
-        
-        poItems =CommonPurchaseOrderItemsModel.objects.filter(po_item_con=allifquery)
-        for item in poItems:
-
-            # apportion the misc costs to each unit
-            item_unit_cost=item.unitcost#this gets the new unit buying price of the individual items from the po
-            quantity=item.quantity#this gets the quantity of the individual items
-            tax=(item.items.taxrate.taxrate/100)
-            po_tax_amount=item.quantity*item.unitcost*tax
-            
-            #apportioned unit cost = ((unit cost)/total_PO_value)*total_misc_cost
-            apportioned_misc_unit_cost=(item_unit_cost/po_amount)*po_misccosts
-            actual_item_unit_cost=apportioned_misc_unit_cost+item_unit_cost
-            
-            
-            #we need to calculate the weighted unit cost
-            #products=CommonStocksModel.objects.filter(description=item.items).first()
-            products=CommonStocksModel.objects.filter(pk=item.items.id).first()
-            existing_item_unit_quantity=item.items.quantity# this gives the quantities for existing items in the system
-            total_new_quantity=existing_item_unit_quantity+quantity# this gives the sum of existing quantities and those in the po.
-            existing_item_unit_cost=item.items.unitcost# this gives the unit cost for existing items in the system
-            weighted_new_unit_cost=(existing_item_unit_cost*existing_item_unit_quantity+quantity*actual_item_unit_cost)/Decimal(total_new_quantity or 1)
-            products.unitcost=weighted_new_unit_cost
-            products.standardUnitCost=item.items.unitcost
-            products.quantity=total_new_quantity
-            
-            
-            # deal with buying price --- get weighted buying price
-            existing_item_unit_buying_price=item.items.buyingPrice
-            weighted_new_buying_price=(existing_item_unit_buying_price*existing_item_unit_quantity+quantity*item_unit_cost)/(total_new_quantity or 1)
-            products.buyingPrice=weighted_new_buying_price
-
-            # .... set the selling price .......
-            products.unitPrice=applied_uplift*weighted_new_unit_cost
-            products.save()
-
-            
-            #....... debit item inventory account .............
-            inventory_acc_id=item.items.inventory_account
-            if inventory_acc_id !=None:
-                inventory_acc=CommonChartofAccountsModel.objects.filter(pk=inventory_acc_id.id).first()
-                item_initial_inventory_account_balance=inventory_acc.balance
-                item_new_inventory_account_balance = item_initial_inventory_account_balance + actual_item_unit_cost*quantity+po_tax_amount
-                inventory_acc.balance=item_new_inventory_account_balance
-                inventory_acc.save()
-            
-            else:
-                messgeone=messages.error(request, 'Seems that the items do not have inventory accounts specified')
-                messge=messages.error(request, 'Make sure every item has inventory account added')
-                return render(request,'allifmaalcommonapp/error/error.html')
-        
-        return redirect('allifmaalcommonapp:commonAddPODetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    except ValueError as ve: # Catch custom validation errors (like insufficient stock)
+        messages.error(request, str(ve))
+        # Redirect back to the details page with the error
+        return redirect('allifmaalcommonapp:commonAddTransferOrderDetails', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
 
     except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+        # Catch any other unexpected errors and display a generic error message
+        error_context = {'error_message': ex}
+        return render(request, 'allifmaalcommonapp/error/error.html', error_context)
 ######################### QUOTATION #########################
 @logged_in_user_must_have_profile
 @subscriber_company_status
@@ -7869,7 +7979,7 @@ def commonWantToDeleteQuoteItem(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonDeleteQuoteItem(request,pk,*allifargs,**allifkwargs):
     try:
-        title="Add Quote Items"
+        title="Delete Quote Items"
         allif_data=common_shared_data(request)
        
         myallifquery=CommonQuoteItemsModel.objects.filter(id=pk).first()
@@ -8679,6 +8789,7 @@ def commonInvoiceAdvanceSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonCreditNotes(request,*allifargs,**allifkwargs):
     try:
+        
         title="Credit Notes"
         allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
@@ -8730,9 +8841,9 @@ def commonNewCreditNote(request,*allifargs,**allifkwargs):
         ###### End... UID generation ##################
 
         if allifquery:
-            invnmbr='Inv'+"/"+str(allifuid)
+            invnmbr='CRD/NTE'+"/"+str(allifuid)
         else:
-            invnmbr= 'Inv/1'+"/"+str(currntyear)+"/"+str(uuid4()).split('-')[2]
+            invnmbr= 'CRD/NTE/1'+"/"+str(currntyear)+"/"+str(uuid4()).split('-')[2]
 
         newinv=CommonCreditNotesModel.objects.create(number=invnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         newinv.save()
@@ -8754,7 +8865,7 @@ def commonWantToDeleteCreditNote(request,pk,*allifargs,**allifkwargs):
         "allifquery":allifquery,
         
         }
-        return render(request,'allifmaalcommonapp/creditnotes/delete-credit-note-confrm.html',context)
+        return render(request,'allifmaalcommonapp/creditnotes/delete-credit-note-confirm.html',context)
       
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -8819,14 +8930,14 @@ def commonAddCreditNoteItems(request,pk,*allifargs,**allifkwargs):
       
         allifquery=CommonCreditNotesModel.objects.filter(id=pk).first()
         form=CommonAddCreditNoteItemForm(allif_data.get("main_sbscrbr_entity"))
-        allifqueryset= CommonInvoiceItemsModel.objects.filter(allifinvitemconnector=allifquery)#this line helps to
+        allifqueryset=CommonCreditNoteItemsModel.objects.filter(credit_note=allifquery)#this line helps to
        
         add_item= None
         if request.method=='POST':
             form=CommonAddCreditNoteItemForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
                 add_item= form.save(commit=False)
-                add_item.allifinvitemconnector=allifquery
+                add_item.credit_note=allifquery
                 add_item.save()
                 return redirect('allifmaalcommonapp:commonAddCreditNoteItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -8846,7 +8957,7 @@ def commonAddCreditNoteItems(request,pk,*allifargs,**allifkwargs):
                 "allifquery":allifquery,
                
         }
-        return render(request,'allifmaalcommonapp/creditnotes/add-credit-note-items.html',context)
+        return render(request,'allifmaalcommonapp/creditnotes/add_credit_note_items.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -8860,8 +8971,8 @@ def commonEditCreditNoteItem(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
         
         myquery=CommonCreditNoteItemsModel.objects.filter(id=pk).first()
-        allifquery=myquery.allifinvitemconnector
-        allifqueryset=CommonCreditNoteItemsModel.objects.filter(allifinvitemconnector=allifquery).order_by('-date')
+        allifquery=myquery.credit_note
+        allifqueryset=CommonCreditNoteItemsModel.objects.filter(credit_note=allifquery).order_by('-date')
 
         form=CommonAddCreditNoteItemForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
         if request.method=='POST':
@@ -8869,20 +8980,20 @@ def commonEditCreditNoteItem(request,pk,*allifargs,**allifkwargs):
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.save()
-                return redirect('allifmaalcommonapp:commonAddInvoiceItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalcommonapp:commonAddCreditNoteItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             myquery=CommonCreditNoteItemsModel.objects.filter(id=pk).first()
-            allifquery=myquery.allifinvitemconnector
-            allifqueryset=CommonCreditNoteItemsModel.objects.filter(allifinvitemconnector=allifquery).order_by('-date')
+            allifquery=myquery.credit_note
+            allifqueryset=CommonCreditNoteItemsModel.objects.filter(credit_note=allifquery).order_by('-date')
             form=CommonAddCreditNoteItemForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
      
         context={"title":title,"form":form,"allifquery":allifquery,
                  "allifqueryset":allifqueryset,"myquery":myquery,}
-        return render(request,'allifmaalcommonapp/creditnotes/add-credit-note-items.html',context)
+        return render(request,'allifmaalcommonapp/creditnotes/add_credit_note_items.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -8898,7 +9009,7 @@ def commonDeleteCreditNoteItem(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
        
         myallifquery=CommonCreditNoteItemsModel.objects.filter(id=pk).first()
-        myquery=myallifquery.allifinvitemconnector
+        myquery=myallifquery.credit_note
         myallifquery.delete()
         return redirect('allifmaalcommonapp:commonAddCreditNoteItems',pk=myquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -8919,27 +9030,29 @@ def commonPostCreditNote(request,pk,*allifargs,**allifkwargs):
         allifqueryset=CommonBanksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
        
         allifquery=CommonCreditNotesModel.objects.filter(id=pk).first()#very important to get id to go to particular shipment
-        allifqueryset=CommonCreditNoteItemsModel.objects.filter(allifinvitemconnector=allifquery)
+        allifqueryset=CommonCreditNoteItemsModel.objects.filter(credit_note=allifquery)
         myinvid=allifquery.id
         customer=allifquery.customer
-        amount=allifquery.total
+        amount=allifquery.total_amount
         if customer:
+            
             customer_id=customer.id
             for item in allifqueryset:
+                
                 invo_quantity=item.quantity # this gives the quantities in the invoice
-                invoice_item_id=item.description.id #this gives the IDs of the invoice item in the main AllifmaalStocksModel database.
-                per_line_cost_price=item.description.unitcost*item.quantity
-                per_line_selling_price=item.description.unitPrice*item.quantity
-                if item.description.inventory_account !=None:
-                    inventory_acc_id=item.description.inventory_account.id
-                    expense_acc_id=item.description.expense_account.id
-                    income_acc_id=item.description.income_account.id
+                invoice_item_id=item.items.id #this gives the IDs of the invoice item in the main AllifmaalStocksModel database.
+                per_line_cost_price=item.items.unitcost*item.quantity
+                per_line_selling_price=item.items.unitPrice*item.quantity
+                if item.items.inventory_account !=None:
+                    inventory_acc_id=item.items.inventory_account.id
+                    expense_acc_id=item.items.expense_account.id
+                    income_acc_id=item.items.income_account.id
                     
                     products=CommonStocksModel.objects.filter(pk=invoice_item_id,company=allif_data.get("main_sbscrbr_entity")).first()
                     initial_item_quantity=products.quantity
                     products.quantity=initial_item_quantity-invo_quantity # reduce stock by invoice quantity
                     products.save()
-
+                   
                     # ....... debit the inventory account ..........
                     inv_acc=CommonChartofAccountsModel.objects.filter(pk=inventory_acc_id,company=allif_data.get("main_sbscrbr_entity")).first()
                     initial_inv_bal=inv_acc.balance
@@ -8953,28 +9066,19 @@ def commonPostCreditNote(request,pk,*allifargs,**allifkwargs):
                     income_acc.balance=initial_income_bal + per_line_selling_price
                     income_acc.save()
 
-                    # ....... record the Cost of goods sold ..........
-                    cost_goods_sold_acc_exist=CommonChartofAccountsModel.objects.filter(description="COGS",company=allif_data.get("main_sbscrbr_entity"),department=allif_data.get("logged_user_department")).first()
-                    if cost_goods_sold_acc_exist:
-
-                        cost_goods_sold_acc=CommonChartofAccountsModel.objects.filter(description="COGS",company=allif_data.get("main_sbscrbr_entity"),department=allif_data.get("logged_user_department")).first()
-                        initial_cost_of_goods_sold_balance=cost_goods_sold_acc.balance
-                        cost_goods_sold_acc.balance=initial_cost_of_goods_sold_balance+per_line_cost_price
-                        cost_goods_sold_acc.save()
-                    else:
-                        return HttpResponse("COGS A/C is not added")
+                  
                 else:
-                    return HttpResponse("Please ensure invoice details are filled and that all items have been linked to the Chart of Accounts")
+                    messages.warning(request,"Please ensure credit note details are filled and that all items have been linked to the Chart of Accounts")
+                    return redirect('allifmaalcommonapp:commonAddCreditNoteDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-                    
-
+                
                 #increase customer turnover
-                mycustomer=CommonCustomersModel.objects.filter(pk=customer_id,company=allif_data.get("main_sbscrbr_entity"),department=allif_data.get("logged_user_department")).first()
+                mycustomer=CommonCustomersModel.objects.filter(pk=customer_id,company=allif_data.get("main_sbscrbr_entity")).first()
                 initial_customer_acc_turnover=mycustomer.turnover or 0
                
-                mycustomer.turnover=initial_customer_acc_turnover+item.description.unitPrice
+                mycustomer.turnover=initial_customer_acc_turnover+item.items.unitPrice
                 initial_customer_acc_balance=mycustomer.balance or 0
-                mycustomer.balance=initial_customer_acc_balance+item.description.unitPrice
+                mycustomer.balance=initial_customer_acc_balance+item.items.unitPrice
 
                 mycustomer.save()
              
@@ -8982,35 +9086,16 @@ def commonPostCreditNote(request,pk,*allifargs,**allifkwargs):
                         #comments="Invoice",balance=initial_customer_acc_balance+inv_total)#get the ord
             
 
-                # ......... credit the equity account .........
-                equity_acc=CommonChartofAccountsModel.objects.filter(description="Equity",company=allif_data.get("main_sbscrbr_entity"),department=allif_data.get("logged_user_department")).first()
-                if equity_acc:
-                    initial_equity_account_balance=equity_acc.balance
-                    equity_acc.balance=initial_equity_account_balance + item.description.unitPrice-item.description.unitcost
-                    equity_acc.save()
-                else:
-                    return HttpResponse("Please add equity account")
-                   
-
+               
                 ######## change invoice status
                 allifquery.posting_inv_status="posted"
                 allifquery.save()
 
-            # ....... record the gross profit ..........
-                gross_profit_acc_exist=CommonChartofAccountsModel.objects.filter(description="Gross Profit",company=allif_data.get("main_sbscrbr_entity"),department=allif_data.get("logged_user_department")).first()
-                if gross_profit_acc_exist:
-
-                    profit_and_loss_acc=CommonChartofAccountsModel.objects.filter(description="Gross Profit",company=allif_data.get("main_sbscrbr_entity"),department=allif_data.get("logged_user_department")).first()
-                    initial_profit_and_loss_balance=profit_and_loss_acc.balance
-                    profit_and_loss_acc.balance=initial_profit_and_loss_balance+item.description.unitPrice-item.description.unitcost
-                    profit_and_loss_acc.save()
-                    
-                else:
-                    return HttpResponse("Please add profit account")
                    
         else:
-            return HttpResponse("Please select a customer")
-            
+            messages.warning(request,"Please select a customer")
+            return redirect('allifmaalcommonapp:commonAddCreditNoteDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
         CommonLedgerEntriesModel.objects.create(customer=customer,credit=amount,
         comments="invoice",company=allif_data.get("main_sbscrbr_entity"),owner=request.user,ledgowner="customer")
         return redirect('allifmaalcommonapp:commonAddCreditNoteDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
@@ -9024,22 +9109,41 @@ def commonPostCreditNote(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonPostedCreditNotes(request,*allifargs,**allifkwargs):
     try:
+        title="Posted Credit Notes"
         allif_data=common_shared_data(request)
-        posted_invoices=CommonCreditNotesModel.objects.filter(posting_inv_status="posted")
-        posted_invoices_count=CommonCreditNotesModel.objects.filter(posting_inv_status="posted").count()
-        last_invoices=CommonCreditNotesModel.objects.filter(posting_inv_status="posted").order_by('-invoice_total')[:7]
-        
-        title="Posted Invoices"
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
        
-        allifqueryset=CommonCreditNotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         no_invoices=CommonCreditNotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).count()
+      
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=CommonCreditNotesModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=CommonCreditNotesModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=CommonCreditNotesModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=CommonCreditNotesModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        else:
+            allifqueryset=[]
+
         context={
-            "posted_invoices":posted_invoices,
+        #"last_invoices":last_invoices,
+        "title":title,
+        "no_invoices":no_invoices,
+        #"posted_invoices_total_value":posted_invoices_total_value,
+        #"latest_paid_invoices":latest_paid_invoices,
+        "allifqueryset":allifqueryset,
+        "formats":formats,
+        "datasorts":datasorts,
+            
+        }
+
+       
+        context={
+          
             "title":title,
-            "last_invoices":last_invoices,
-            "posted_invoices_count":posted_invoices_count,
+          
             "allifqueryset":allifqueryset,
             "datasorts":datasorts,
             "formats":formats,
@@ -9049,7 +9153,21 @@ def commonPostedCreditNotes(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def commonApproveCreditNote(request,pk,*allifargs,**allifkwargs):
+    try:
+        title="Approve Credit Note"
+        allif_data=common_shared_data(request)
+        allifquery=CommonCreditNotesModel.objects.filter(id=pk,company=allif_data.get("main_sbscrbr_entity")).first()
+        allifquery.approval_status='approved'
+        allifquery.save()
+        return redirect('allifmaalcommonapp:commonAddCreditNoteDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -9061,8 +9179,8 @@ def commonCreditNotePdf(request,pk,*allifargs,**allifkwargs):
        
         scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         allifquery=CommonCreditNotesModel.objects.filter(id=pk).first()
-        allifqueryset=CommonCreditNoteItemsModel.objects.filter(allifinvitemconnector=allifquery)
-        title="Invoice "+str(allifquery)
+        allifqueryset=CommonCreditNoteItemsModel.objects.filter(credit_note=allifquery)
+        title="Credit Note "+str(allifquery)
         template_path = 'allifmaalcommonapp/creditnotes/credit-note-pdf.html'
         context = {
         "allifqueryset":allifqueryset,
@@ -9076,7 +9194,7 @@ def commonCreditNotePdf(request,pk,*allifargs,**allifkwargs):
         
         response = HttpResponse(content_type='application/pdf')
         response = HttpResponse(content_type='application/doc')
-        response['Content-Disposition'] = f'filename="{allifquery} Invoice.pdf"'
+        response['Content-Disposition'] = f'filename="{allifquery} credit_note.pdf"'
         template = get_template(template_path)
         html = template.render(context)
 
@@ -9106,7 +9224,7 @@ def commonCreditNotesSearch(request,*allifargs,**allifkwargs):
       
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonCreditNotesModel.objects.filter((Q(number__icontains=allifsearch)|Q(total__icontains=allifsearch)|Q(customer__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+            searched_data=CommonCreditNotesModel.objects.filter((Q(number__icontains=allifsearch)|Q(total_amount__icontains=allifsearch)|Q(customer__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
         else:
             searched_data=[]
 
@@ -9127,7 +9245,7 @@ def commonCreditNotesSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonCreditNotesAdvanceSearch(request,*allifargs,**allifkwargs):
     try:
-        title="Invoices Advanced Search"
+        title="Credit Note Advanced Search"
         allif_data=common_shared_data(request)
        
         formats=CommonDocsFormatModel.objects.all()
@@ -9136,7 +9254,7 @@ def commonCreditNotesAdvanceSearch(request,*allifargs,**allifkwargs):
        
         firstDate=CommonCreditNotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
         lastDate=CommonCreditNotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-        largestAmount=CommonCreditNotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-total').first().total
+        largestAmount=CommonCreditNotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-total_amount').first().total_amount
         scopes=CommonCreditNotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         if request.method=='POST':
             selected_option=request.POST.get('requiredformat')
@@ -9145,11 +9263,11 @@ def commonCreditNotesAdvanceSearch(request,*allifargs,**allifkwargs):
             start_value=request.POST.get('startvalue') or None
             end_value=request.POST.get('endvalue') or None
             if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonInvoicesModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(total__gte=start_value or 0) & Q(total__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
+                searched_data=CommonCreditNotesModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(total_amount__gte=start_value or 0) & Q(total_amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
                 #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
                 # if pdf is selected
                 if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/invoices/invoice-search-pdf.html'
+                    template_path = 'allifmaalcommonapp/creditnotes/credit_notes_search_pdf.html'
                     allifcontext = {
                     "searched_data":searched_data,
                     "title":title,
@@ -9183,8 +9301,7 @@ def commonCreditNotesAdvanceSearch(request,*allifargs,**allifkwargs):
                     "datasorts":datasorts,
                    "formats":formats,
                     }
-                    return render(request,'allifmaalcommonapp/invoices/invoices.html',context)
-                 
+                    return render(request,'allifmaalcommonapp/creditnotes/credit-notes.html',context)
             else:
                 allifqueryset=CommonCreditNotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
          
@@ -9195,8 +9312,7 @@ def commonCreditNotesAdvanceSearch(request,*allifargs,**allifkwargs):
             "datashorts":datasorts,
             "formats":formats,
             }
-            return render(request,'allifmaalcommonapp/invoices/invoices.html',context)
-           
+            return render(request,'allifmaalcommonapp/creditnotes/credit-notes.html',context)
         else:
             context={
             "allifqueryset":allifqueryset,

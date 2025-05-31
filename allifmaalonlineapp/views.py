@@ -8,16 +8,18 @@ from django.contrib import messages#for flash messages
 from .models import OnlineProductsModel,OnlineOrdersModel
 from .forms import *
 from .utils import cookieCart,cartData,guestOrder
+from allifmaalcommonapp.models import CommonStocksModel
 
 def allifOnlineHome(request):
     context={
-        
+
     }
     return render(request,'allifmaalonlineapp/home/home.html',context)
 # Create your views here.
 def onlineStore(request):
     title="Online store"
-    onlineProducts=OnlineProductsModel.objects.all()
+    #onlineProducts=OnlineProductsModel.objects.all()
+    onlineProducts=CommonStocksModel.objects.all()
     data=cartData(request)
     cartItems=data['cartItems']
     
@@ -245,7 +247,7 @@ def addOnlineStock(request):
 
             form.save()
             messages.success(request, 'Item added successfully')
-        return redirect('ecommerceapp:online-store')
+        return redirect('allifmaalonlineapp:online-store')
    
     context={
         "title": title,
@@ -261,9 +263,9 @@ def deleteOnlineStock(request, pk):
         OnlineProductsModel.objects.get(id=pk).delete()
     except:
         messages.error(request, 'Something went wrong')
-        return redirect('ecommerceapp:online-store')
+        return redirect('allifmaalonlineapp:online-store')
 
-    return redirect('ecommerceapp:online-store')  
+    return redirect('allifmaalonlineapp:online-store')  
 
 def addOnlineCustomer(request):
     title="Add online customer"
@@ -272,7 +274,7 @@ def addOnlineCustomer(request):
     if form.is_valid():
         form.save()
         messages.success(request, 'Customer added successfully')
-        return redirect('ecommerceapp:online-store')
+        return redirect('allifmaalonlineapp:online-store')
    
     context={
         "title": title,
@@ -288,9 +290,9 @@ def deleteOnlineCustomer(request, pk):
         OnlineCustomersModel.objects.get(id=pk).delete()
     except:
         messages.error(request, 'Something went wrong')
-        return redirect('ecommerceapp:online-store')
+        return redirect('allifmaalonlineapp:online-store')
 
-    return redirect('ecommerceapp:online-store') 
+    return redirect('allifmaalonlineapp:online-store') 
 
 def createOnlineOrder(request):
     title="Create new order"
@@ -299,7 +301,7 @@ def createOnlineOrder(request):
     if form.is_valid():
         form.save()
         messages.success(request, 'Customer added successfully')
-        return redirect('ecommerceapp:online-store')
+        return redirect('allifmaalonlineapp:online-store')
    
     context={
         "title": title,
@@ -315,9 +317,9 @@ def deleteOnlineOrder(request, pk):
         OnlineOrdersModel.objects.get(id=pk).delete()
     except:
         messages.error(request, 'Something went wrong')
-        return redirect('ecommerceapp:online-store')
+        return redirect('allifmaalonlineapp:online-store')
 
-    return redirect('ecommerceapp:online-store') 
+    return redirect('allifmaalonlineapp:online-store') 
 
 def addOnlineItemsToOrder(request):
     title="Add online items to an order"
@@ -326,7 +328,7 @@ def addOnlineItemsToOrder(request):
     if form.is_valid():
         form.save()
         messages.success(request, 'Customer added successfully')
-        return redirect('ecommerceapp:online-store')
+        return redirect('allifmaalonlineapp:online-store')
    
     context={
         "title": title,
@@ -341,9 +343,9 @@ def deleteOnlineOrderedItem(request, pk):
         OnlineOrderedItemsModel.objects.get(id=pk).delete()
     except:
         messages.error(request, 'Something went wrong')
-        return redirect('ecommerceapp:online-store')
+        return redirect('allifmaalonlineapp:online-store')
 
-    return redirect('ecommerceapp:online-store') 
+    return redirect('allifmaalonlineapp:online-store') 
 
 def addOnlineCustomerShippingAddress(request):
     title="Allifmaal Online Stock"
@@ -352,7 +354,7 @@ def addOnlineCustomerShippingAddress(request):
     if form.is_valid():
         form.save()
         messages.success(request, 'Customer added successfully')
-        return redirect('ecommerceapp:online-store')
+        return redirect('allifmaalonlineapp:online-store')
    
     context={
         "title": title,

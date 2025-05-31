@@ -1,0 +1,88 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifpdfuibase.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<div class="allif_pdf_main_body_container">
+  
+<!--start of ... Table header section-->
+<div class="allif-table-pdf-header">
+<table class="allif-pdf-table-header-section">
+    <tr>
+      <th>Transfer Order Details</th>
+      <th>Location Details</th>
+      <th>More Information</th>
+      
+    </tr>
+
+    <tr> 
+    <td>
+    <li><span class="allif-pdf-table-content-headers">Transfer Order .No.</span> {{allifquery.number}}</li>
+    <li><span class="allif-pdf-table-content-headers">Department</span> {{allifquery.department}}</li>
+    
+    </td>
+
+    <td>
+    <li><span class="allif-pdf-table-content-headers">From</span> {{allifquery.from_store}}</li>
+    <li><span class="allif-pdf-table-content-headers">To</span> {{allifquery.to_store}}</li>
+    
+    </td>
+
+    <td>
+    <li><span class="allif-pdf-table-content-headers">Comments</span> {{allifquery.comments}}</li>
+   <li><span class="allif-pdf-table-content-headers">Date</span> {{allifquery.date|date:'d/m/Y'}}</li>
+    </td>
+
+    </tr>
+
+    </table>
+    </div>
+    <!--end of ... Table header section-->
+    <div class="allif-pdf-table-content-body-header">
+    <span class="allif-pdf-table-content-headers">Subject: </span> {{allifquery}}
+    
+    </div>
+
+
+<!--start of ... table main dynamic content section-->
+<div class="allif-pdf-table-content-body-section">
+    <table class="allif-pdf-table-body">
+
+    <tr>
+    <th colspan="5">Item Description</th>
+    <th colspan="2">Quantity</th>
+   
+    </tr>
+   
+    <tbody>
+    {% for item in allifqueryset %}
+    <tr>
+    <td colspan="5">{{item.items}}</td>
+    <td colspan="2">{{item.quantity|floatformat:2|intcomma}}</td>
+   
+    </tr>
+    {% endfor %}
+
+    </tbody>
+    </table>
+    </div>
+   
+  
+</div> 
+
+
+{% block scripts %}
+
+{% endblock %}
+
+{% endblock %}
+{% block footer %}
+<h6>Created By: {{usr_var}}</h6>
+<h6>Generated On: {{date_today}}</h6>
+
+{% endblock %}
+ 

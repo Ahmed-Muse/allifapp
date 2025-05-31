@@ -321,7 +321,11 @@ path('Want/To/Delete/This/Purchase/Order/Item/Now/<str:pk>/<str:allifusr>/<str:a
 path('Edit/Purchase/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPOItem, name="commonEditPOItem"),
 path('Calculate/Purchase/Order/s/Misc/Costs/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCalculatePOMiscCosts, name="commonCalculatePOMiscCosts"),
 
-################################# TRANSFRER ORDERS ##############################3
+################################# warehouse stocks ##############################3
+path('Warehouse/Stocks/Inventory/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWarehouStocks, name="commonWarehouStocks"),
+path('Add/Stock/Inventory/Items/To/Warehouse/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddWarehouseItems, name="commonAddWarehouseItems"),
+path('Delete/Warehouse/Stock/item/Invtry/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteWarehouseItem, name="commonDeleteWarehouseItem"),
+path('Edit/Warehouse/Item/Stock/Invtry/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditWarehouseItem, name="commonEditWarehouseItem"),
 
 ######################################3 PURCHASES ###########################################
 path('Transfer/Orders/<str:allifusr>/<str:allifslug>/', views.commonTransferOrders, name="commonTransferOrders"),
@@ -379,10 +383,13 @@ path('New/Credit/Notes/Add/<str:allifusr>/<str:allifslug>/', views.commonNewCred
 path('Delete/Credit/Note/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCreditNote, name="commonDeleteCreditNote"),
 path('Add/Credit/Note/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddCreditNoteDetails, name="commonAddCreditNoteDetails"),
 path('Add/Credit/Note/Items/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddCreditNoteItems, name="commonAddCreditNoteItems"),
-path('Delete/Credit/Note/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCreditNoteItem, name=".commonDeleteCreditNoteItem"),
+path('Delete/Credit/Note/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCreditNoteItem, name="commonDeleteCreditNoteItem"),
 path('Post/Credit/Note/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostCreditNote, name="commonPostCreditNote"),
 path('Posted/Credit/Notes/<str:allifusr>/<str:allifslug>/', views.commonPostedCreditNotes, name="commonPostedCreditNotes"),
 path('Credit/Note/To/Pdf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCreditNotePdf, name="commonCreditNotePdf"),
+path('Approve/This/Credit/Note/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonApproveCreditNote, name="commonApproveCreditNote"),
+
+
 
 path('Search/For/Credit/Notes//<str:allifusr>/<str:allifslug>/', views.commonCreditNotesSearch, name="commonCreditNotesSearch"),
 path('Advanced/Credit/Notes/Search/<str:allifusr>/<str:allifslug>/List/Invoices/', views.commonCreditNotesAdvanceSearch, name="commonCreditNotesAdvanceSearch"),

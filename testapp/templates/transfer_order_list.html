@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {# Assuming a base.html in your main templates folder #}
+{% block title %}Transfer Orders{% endblock %}
+
+{% block content %}
+<h2>Transfer Orders ({{ current_company.name }})</h2>
+<a href="{% url 'transfer_order_create' %}" class="btn btn-primary mb-3">Create New Transfer Order</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order #</th>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in transfer_orders %}
+        <tr>
+            <td><a href="{% url 'transfer_order_detail' pk=order.pk %}">{{ order.order_number }}</a></td>
+            <td>{{ order.source_location.name }}</td>
+            <td>{{ order.destination_location.name }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.status }}</td>
+            <td>
+                <a href="{% url 'transfer_order_detail' pk=order.pk %}" class="btn btn-sm btn-info">View</a>
+                {% if order.status == 'Draft' or order.status == 'Pending Approval' %}
+                    <a href="{% url 'transfer_order_approve' pk=order.pk %}" class="btn btn-sm btn-success">Approve</a>
+                {% elif order.status == 'Approved' %}
+                    <a href="{% url 'create_gin' to_pk=order.pk %}" class="btn btn-sm btn-warning">Create GIN</a>
+                {% elif order.status == 'Issued' %}
+                    <a href="{% url 'create_grn' to_pk=order.pk %}" class="btn btn-sm btn-success">Create GRN</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No transfer orders found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

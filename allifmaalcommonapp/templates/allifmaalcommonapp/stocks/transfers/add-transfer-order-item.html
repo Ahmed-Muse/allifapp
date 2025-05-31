@@ -1,0 +1,122 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<div class="allifmaal-main-container">
+<!--start....main headere-->
+<div class="card-header">
+  <div class="row mt-12" ><!--start....header row-->
+  <div class="col-md-12"><!--start....header column-->
+  <div class="container-fluid amel-content-header">
+    <a class="amel-table-list-identifier">Add Items {{allifquery}}:</a>
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    
+    <a href="{% url 'allifmaalcommonapp:commonTransferOrders' user_var glblslug %}">Transfer Orders</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddTransferOrderDetails' allifquery.id user_var glblslug %}">{{allifquery}}</a>
+    <a href="{% url 'allifmaalcommonapp:commonInvoiceToPdf' allifquery.id user_var glblslug %}">Download</a>
+    
+  </div>
+  
+      </div><!--end....header column-->
+    
+    </div><!--end....header row-->
+  
+  </div><!--end....main headere-->
+
+<div class="allifmaincontainer">
+
+
+
+  <div class="row mt-12"> <!--start....table row-->
+    <div class="col-md-12"><!--start of the first row body-->
+      <div class="allif-form-container">
+      
+      <div class="row"><!--start of row div --->
+        <div class="allif-scroll-table">
+          <div class="table-responsive allif-full-table">
+          <table class="table table-layout">
+            <thead>
+              <tr class="allif-table-header-row">
+               
+                <td>Item Description</td>
+                <td>Quantity</td>
+               
+              <td>Navigate</td>
+              
+              <td> . . . </td>
+              <td></td>
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+             
+              {% for item in allifqueryset %} 
+              <tr data-id="{{item.id}}">
+              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.items.id user_var glblslug %}">{{item.items}}</a></td>
+            
+          <td>{{item.quantity|floatformat:2|intcomma}}</td>
+         
+               <td>
+                <div class="dropdown allifmaal-content-dropdown">
+                  <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+                  <div class="dropdown-content">
+                    <a href="{% url 'allifmaalcommonapp:commonEditTransferOrderItem' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                    <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+                    
+                  </div>
+                </div>
+                <div class="dropdown allif-confirm-action">
+                  
+                  <a href="{% url 'allifmaalcommonapp:commonAddTransferOrderItems' item.trans_ord_items_con.id user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+                  <a href="{% url 'allifmaalcommonapp:commonDeleteTransferOrderItem' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+                </div>
+      
+               
+              </td>
+             <td> . . . </td>
+             <td></td>
+            
+        
+          </tr>
+          {% endfor %}
+
+           <tr>
+                <form method='POST' action=''>{% csrf_token %}
+                 
+                  <td id="allif-table-inline-form">{{form.items}}</td>
+                  <td id="allif-table-inline-form">{{form.quantity}}</td>
+                 
+                  <td id="allif-table-inline-form"> <input type="submit" value='Add' class="btn btn-success allifmaal-submit-btn"></td>
+                 
+                </form>
+                </tr>
+
+        
+            </tbody>
+          </table>
+          </div>
+         </div>
+
+        
+                   
+      <!--end of table-->
+          
+            </div><!--end of column 1-->
+        
+        </div><!--end of row div --->
+            
+        </div>
+            </div><!--end of first row body....-->
+
+
+  
+</div><!--end of main container of the page-->
+</div>
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

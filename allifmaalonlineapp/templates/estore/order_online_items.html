@@ -1,4 +1,14 @@
-<form action="{% url 'ecommerceapp:add-online-items' %}" method="post">
+
+  
+  {% extends 'estore/baseOnlineStore.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+	<div class="col-lg-12">
+		<div class="box-element">
+            <a  class="btn btn-outline-dark" href="{% url 'allifmaalonlineapp:online-store' %}">&#x2190; Continue Shopping</a>
+	<br>
+  <form action="{% url 'allifmaalonlineapp:add-online-items' %}" method="post">
     {% csrf_token %}
    
 {{form}}
@@ -29,7 +39,7 @@
         <td>{{orderitem.quantity}}</td>
         <td>{{orderitem.date_added}}</td>
        
-        <td><a href="{% url 'ecommerceapp:delete-online-ordered-item' orderitem.id %}">
+        <td><a href="{% url 'allifmaalonlineapp:delete-online-ordered-item' orderitem.id %}">
             <button style="width: auto;height: auto;border: none;background-color: red" > Delete </button></a></td>
       </tr>
       
@@ -37,3 +47,10 @@
     </tbody>
     {% endfor %}
   </table>
+
+
+
+</div>
+{% endblock content %}
+
+

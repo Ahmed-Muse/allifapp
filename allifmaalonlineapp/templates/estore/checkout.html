@@ -46,7 +46,7 @@
 
 	<div class="col-lg-6">
 		<div class="box-element">
-            <a  class="btn btn-outline-dark" href="{% url 'ecommerceapp:cart' %}">&#x2190; Back to Cart</a>
+            <a  class="btn btn-outline-dark" href="{% url 'allifmaalonlineapp:cart' %}">&#x2190; Back to Cart</a>
 	<hr>
 	<h3>Order Summary</h3>
 	<hr>
@@ -193,7 +193,7 @@
 		cart={}//this clears the cookies...set the cart value to an emtpy object
   		document.cookie='cart='+ JSON.stringify(cart) + ";domain=;path=/"//the cart here is the cart in the above line
 
-		window.location.href="{% url 'ecommerceapp:online-store' %}"
+		window.location.href="{% url 'allifmaalonlineapp:online-store' %}"
 	})
 	
 	}

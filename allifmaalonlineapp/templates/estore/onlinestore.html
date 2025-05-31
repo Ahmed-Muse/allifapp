@@ -12,16 +12,16 @@
 		
 
 		<div class="box-element product">
-            <h6><strong>{{onlineproduct.name}}</strong></h6>
+            <h6><strong>{{onlineproduct.description}}</strong></h6>
 		<hr>
 
-		<button data-product="{{onlineproduct.id}}" data-action="add" 
+		<button data-product="{{onlineproduct.description}}" data-action="add" 
 		class="btn btn-outline-secondary add-btn update-cart">
 
 			Add to Cart</button>
 		<!--confirm if product.id is under quotes-->
-		<a class="btn btn-outline-success" href="{% url 'ecommerceapp:cart' %}">View</a>
-		<h4 style="display: inline-block; float:right"><strong>${{onlineproduct.price|floatformat:2}}</strong></h4>
+		<a class="btn btn-outline-success" href="{% url 'allifmaalonlineapp:cart' %}">View</a>
+		<h4 style="float:right"><strong>${{onlineproduct.price|floatformat:2}}</strong></h4>
 
 		</div>
 	</div>

@@ -92,6 +92,7 @@ INSTALLED_APPS = [
      "allifmaalshaafiapp",
      "allifmaallogisticsapp",
      "allifmaalonlineapp",
+     "testapp",
      
      
 ]
@@ -104,6 +105,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'testapp.middleware.TenantMiddleware', # <--- Crucial: Position matters!
     
 ]
 
