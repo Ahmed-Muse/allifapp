@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,HttpResponse
 from .allifutils import common_shared_data
 from django.contrib.auth.decorators import login_required
-from .models import CommonCompanyDetailsModel
+from .models import CommonCompanyDetailsModel,CommonApproversModel
 from allifmaalusersapp.models import User
 def allifmaal_admin_supperuser(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
@@ -203,6 +203,21 @@ def logged_in_user_must_have_profile(allif_param_func):
                 return allif_param_func(request,*args,**kwargs)
             else:
                 return render(request,'allifmaalcommonapp/hrm/profiles/no-profile.html',context)
+        else:
+            return redirect('allifmaalusersapp:userLoginPage')
+    return allif_wrapper_func
+
+
+
+def logged_in_user_can_approve(allif_param_func):
+    def allif_wrapper_func(request,*args,**kwargs):
+        allif_data=common_shared_data(request)
+        if request.user.is_authenticated:
+            if CommonApproversModel.objects.filter(approvers=allif_data.get("logged_in_user_profile")).exists():
+                return allif_param_func(request,*args,**kwargs)
+            else:
+                return render(request,'allifmaalcommonapp/permissions/no_permission.html')
+               
         else:
             return redirect('allifmaalusersapp:userLoginPage')
     return allif_wrapper_func

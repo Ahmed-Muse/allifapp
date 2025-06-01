@@ -389,8 +389,6 @@ path('Posted/Credit/Notes/<str:allifusr>/<str:allifslug>/', views.commonPostedCr
 path('Credit/Note/To/Pdf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCreditNotePdf, name="commonCreditNotePdf"),
 path('Approve/This/Credit/Note/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonApproveCreditNote, name="commonApproveCreditNote"),
 
-
-
 path('Search/For/Credit/Notes//<str:allifusr>/<str:allifslug>/', views.commonCreditNotesSearch, name="commonCreditNotesSearch"),
 path('Advanced/Credit/Notes/Search/<str:allifusr>/<str:allifslug>/List/Invoices/', views.commonCreditNotesAdvanceSearch, name="commonCreditNotesAdvanceSearch"),
 path('Want/To/Delete/This/Credit/Note/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonWantToDeleteCreditNote, name="commonWantToDeleteCreditNote"),
