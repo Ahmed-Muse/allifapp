@@ -25,7 +25,7 @@ from pathlib import Path
 #load_dotenv(env_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent # This variable correctly points to your myproject/ root directory (where manage.py resides).
 
 
 # Quick-start development settings - unsuitable for production
@@ -43,7 +43,7 @@ DEBUG = False
 #else:
     #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #DEBUG = os.environ.get('ALLIF_DJANGO_DEBUG', '')
-ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','127.0.0.1','localhost','http://0.0.0.0:8000/']
+ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','allifapp.com/','127.0.0.1','localhost','http://0.0.0.0:8000/']
 
 SECRET_KEY ='sfsdfsjljgouduoetoej$%5gkkkjhhytfjh$django-insecure-c8*_cv^aw$^%(*k5zfx1+(svx3yw!448%^=ci6auje3ucz7gvn'
 #SECRET_KEY =allif_get_env_var("ALLIF_DJANGO_SECRET_KEY")
@@ -171,14 +171,15 @@ DATABASES = {
         ######################3 BELOW DATABASE IS FOR PRODUCTION ############3
 
         ################# comment out this section during deployment... it is for development ############
+        
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Ahmeddove$allifmysqlcommondb',# this is the name of the database
         'USER': 'Ahmeddove',
         'PASSWORD': 'Allif@6030114',# Allif@6030114
-        
         'HOST': 'Ahmeddove.mysql.pythonanywhere-services.com',
         'PORT': '3306',
-
+        #DEBUG=TRUE############ SET THIS FALSE
+        
         ##############3 SQLITE3 SECTION ######################3
         ##### uncomment below if you want to use sqlite3--- this can work for both development and deployemnt
         #'ENGINE': 'django.db.backends.sqlite3',
@@ -261,10 +262,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'## This is the URL prefix for static files (e.g., yoursite.com/static/css/base.css)
 #STATIC_ROOT='static'
 #STATICFILES_LOCATION='static'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+#This constructs the absolute path to the static folder located directly within in project's root.
+#This is the absolute path to a directory where python manage.py collectstatic will gather all static files from your project (from STATICFILES_DIRS and from each app's static/ directory) into one place for deployment. You typically don't serve files directly from STATIC_ROOT in development.
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -272,8 +276,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_LOCATION='static'
 
+#By adding this path to STATICFILES_DIRS, we are telling Django:
+#  "Hey, when you're looking for static files, also check inside the static folder at the project root."
+## This is the crucial part for common static files.
+# STATICFILES_DIRS tells Django where to look for additional static files
+# that are *not* inside an app's 'static' sub-directory.
+#STATICFILES_DIRS: This is a list of directories where Django's staticfiles app will look for static files in addition to the static/ subdirectory of each app.
+#  This is exactly what you need for your common styling.
 STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'static')
+    os.path.join(BASE_DIR,'static'),
+    #os.path.join(BASE_DIR,'allif'),
 ]
 
 MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
@@ -282,5 +294,5 @@ MEDIA_URL='/media/'#fetch images/media using this path when viewing through the 
 
 
 AUTH_USER_MODEL = 'allifmaalusersapp.User'
-#SENDSMS_BACKEND = 'allifmaalusersapp.mysmsbackend.SmsBackend'
+
 
