@@ -92,9 +92,7 @@ INSTALLED_APPS = [
      "allifmaalshaafiapp",
      "allifmaallogisticsapp",
      "allifmaalonlineapp",
-     "testapp",
-     
-     
+  
 ]
 
 MIDDLEWARE = [
@@ -105,7 +103,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'testapp.middleware.TenantMiddleware', # <--- Crucial: Position matters!
+   
     
 ]
 
@@ -163,10 +161,9 @@ DATABASES = {
         #'NAME': 'allifmysqlcommondb',# this is the name of the database
         #'USER': 'root',
         #'PASSWORD': 'Allif@1442',# Allif@6030114
+        #'PASSWORD': 'hidden',
         #'HOST': 'localhost',
         #'PORT': '3306',
-        #'PASSWORD': 'hidden',
-       
 
 
         ######################3 BELOW DATABASE IS FOR PRODUCTION ############3

@@ -207,8 +207,6 @@ def logged_in_user_must_have_profile(allif_param_func):
             return redirect('allifmaalusersapp:userLoginPage')
     return allif_wrapper_func
 
-
-
 def logged_in_user_can_approve(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
         allif_data=common_shared_data(request)

@@ -480,7 +480,7 @@ path('Debtors/Report/<str:allifusr>/<str:allifslug>/', views.commonDebtorsReport
 path('Creditors/Report/<str:allifusr>/<str:allifslug>/', views.commonCreditorsReportpdf, name="commonCreditorsReportpdf"),
 path('Available/Stock/Report/<str:allifusr>/<str:allifslug>/', views.commonAvailableStockpdf, name="commonAvailableStockpdf"),
 
+#########################3 customer contacts #############################################
 path('Contact/Information/Saving/', views.commonCustomerContacts, name="commonCustomerContacts"),
-
 
 ]   
