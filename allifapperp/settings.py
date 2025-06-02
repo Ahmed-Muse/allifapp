@@ -43,8 +43,8 @@ DEBUG = False
 #else:
     #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #DEBUG = os.environ.get('ALLIF_DJANGO_DEBUG', '')
-ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','allifapp.com/','127.0.0.1','localhost','http://0.0.0.0:8000/']
-
+#ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','www.allifapp.com','allifapp.com/','127.0.0.1','localhost','http://0.0.0.0:8000/']
+ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','www.allifapp.com','allifapp.com','127.0.0.1','localhost','http://0.0.0.0:8000/']
 SECRET_KEY ='sfsdfsjljgouduoetoej$%5gkkkjhhytfjh$django-insecure-c8*_cv^aw$^%(*k5zfx1+(svx3yw!448%^=ci6auje3ucz7gvn'
 #SECRET_KEY =allif_get_env_var("ALLIF_DJANGO_SECRET_KEY")
 #EMAIL_BACKEND=allif_get_env_var("ALLIF_EMAIL_BACKEND","email-backend")
