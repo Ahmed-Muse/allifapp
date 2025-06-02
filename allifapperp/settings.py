@@ -163,9 +163,10 @@ DATABASES = {
         #'NAME': 'allifmysqlcommondb',# this is the name of the database
         #'USER': 'root',
         #'PASSWORD': 'Allif@1442',# Allif@6030114
-        #'PASSWORD': 'hidden',
         #'HOST': 'localhost',
         #'PORT': '3306',
+        #'PASSWORD': 'hidden',
+       
 
 
         ######################3 BELOW DATABASE IS FOR PRODUCTION ############3
