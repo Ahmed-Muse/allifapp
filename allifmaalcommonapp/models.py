@@ -163,9 +163,9 @@ job_status=[
 
 # check lenght, ondelete, true/false
 class CommonSectorsModel(models.Model):# this is the company  hospitality logistics
-    name=models.CharField(max_length=30,blank=False,null=False,unique=True,default="Sector Name")
+    name=models.CharField(max_length=30,blank=False,null=False,unique=True,default="Sector Name",db_index=True)
     notes=models.CharField(max_length=50,blank=True,null=True,default="Sector Comments")
-    owner=models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="secownr")
+    owner=models.ForeignKey(User,db_index=True, on_delete=models.SET_NULL,blank=True,null=True,related_name="secownr")
     date=models.DateField(blank=True,null=True,auto_now_add=True)
    
     def __str__(self):
@@ -190,7 +190,7 @@ class CommonDataSortsModel(models.Model):# this is the company  hospitality logi
 # this company can be normal companies, hospital, hotels, schools, universities, etc
 #################3 Entity/Company Details ################
 class CommonCompanyDetailsModel(models.Model):# this is the company
-    company=models.CharField(max_length=50,blank=True,null=True)
+    company=models.CharField(max_length=50,blank=True,null=True,db_index=True)
     legalName=models.CharField(max_length=50,blank=True,null=True,default="CompanyLegalName")
     address=models.CharField(max_length=50,blank=True,null=True)
     companyuid=models.CharField(null=True, blank=True, max_length=250,unique=True)
