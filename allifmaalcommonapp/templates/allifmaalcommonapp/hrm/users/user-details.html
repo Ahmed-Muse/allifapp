@@ -25,7 +25,7 @@
     <div class="content-dropdown-menu">
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditUser' allifquery.id user_var glblslug %}">Edit User</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalusersapp:changeUserPasswordByAdmin' allifquery.customurlslug %}">Change Password By Admin</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Password</a></li> 
+      <li><a class="dropdown-item" href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Your Password</a></li> 
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStaffLedgerEntries' allifquery.id user_var glblslug %}">Ledger Entries</a></li> 
       <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteUser' allifquery.id user_var glblslug %}">Delete User</a></li>
      
@@ -105,7 +105,11 @@
               <td> {{allifquery.last_name}}</td>
           
               </tr>
-         
+          <tr>
+              <td class="allif-fix-table-col">Performance Rating</td>
+              <td> {{allifquery.peformance_counter}}</td>
+          
+              </tr>
        
        
           </tbody>

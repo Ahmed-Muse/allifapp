@@ -34,7 +34,7 @@ path('Delete/Data/Filter/<str:pk>/Permanently/', views.commonDeleteDataSort, nam
 path('Companies/<str:allifusr>/<str:allifslug>/', views.commonCompanies, name="commonCompanies"),
 path('Company/Settings/Details/For/Subscribers/<str:allifusr>/<str:allifslug>/', views.commonCompanyDetailsForClients, name="commonCompanyDetailsForClients"),
 path('Add/New/Entity/<str:allifusr>/Allifmaal/ERP/System/', views.commonAddnewEntity, name="commonAddnewEntity"),
-path('Edit/Entity/Details/By/Allifmaal/Admin/<slug:allifpk>/<str:allifusr>/<str:allifslug>/', views.commonEditEntityByAllifAdmin, name="commonEditEntityByAllifAdmin"),
+path('Edit/Entity/Details/By/Allifmaal/Admin/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditEntityByAllifAdmin, name="commonEditEntityByAllifAdmin"),
 path('Edit/Entity/Details/By/Owners/<slug:allifpk>/<str:allifusr>/<str:allifslug>/Clients/Subscribers/', views.commonEditEntityByClients, name="commonEditEntityByClients"),
 path('Company/Details/For/Allifmaal/Admin/<str:pk>/<str:allifusr>/<str:allifslug>/Only/', views.commonCompanyDetailsForAllifAdmin, name="commonCompanyDetailsForAllifAdmin"),
 path('Delete/Entity/<str:allifslug>/', views.commonDeleteEntity, name="commonDeleteEntity"),
@@ -74,8 +74,6 @@ path('View/Department/<str:allifslug>/<str:allifusr>/<str:allifrandom>/Details/'
 path('Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteDepartment, name="commonDeleteDepartment"),
 path('Search/Departments/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepartmentSearch, name="commonDepartmentSearch"),
 path('Want/To/Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDepartment, name="commonWantToDeleteDepartment"),
-
-
 
 ################################## Currencies ##############
 path('Currencies/Main/Money/Types/<str:allifusr>/<str:allifslug>/', views.commonCurrencies, name="commonCurrencies"),

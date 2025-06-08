@@ -768,11 +768,11 @@ def commonCompanyDetailsForClients(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @allifmaal_admin 
 @logged_in_user_can_edit
-def commonEditEntityByAllifAdmin(request,allifpk,*allifargs,**allifkwargs):
+def commonEditEntityByAllifAdmin(request,pk,*allifargs,**allifkwargs):
     title="Update Entity Details"
     try:
         allif_data=common_shared_data(request)
-        user_var_update=CommonCompanyDetailsModel.objects.filter(companyslug=allifpk).first()
+        user_var_update=CommonCompanyDetailsModel.objects.filter(id=pk).first()
         form=CommonEditCompanyDetailsFormByAllifAdmin(instance=user_var_update)
         if request.method=='POST':
             form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None,request.FILES, instance=user_var_update)
@@ -4709,7 +4709,7 @@ def commonAddCustomer(request,*allifargs,**allifkwargs):
         if request.method=='POST':
             form=CommonCustomerAddForm(allif_data.get("main_sbscrbr_entity"), request.POST)
             if form.is_valid():
-                obj = form.save(commit=False)
+                obj=form.save(commit=False)
                 obj.company=allif_data.get("main_sbscrbr_entity")
                 obj.division=allif_data.get("logged_user_division")
                 obj.branch=allif_data.get("logged_user_branch")
@@ -7776,13 +7776,13 @@ def commonNewQuote(request,*allifargs,**allifkwargs):
         unque=str(uuid4()).split('-')[2]
         nmbr=int(allifquery.count())+int(1)
         currntyear=timezone.now().date().today().year
-        allifuid=str(nmbr)+"/"+str(currntyear)+"/"+str(unque)
+        allifuid=str(nmbr)+"/"+str(unque)
         ###### End... UID generation ##################
 
         if allifquery:
             sqnmbr='SQ'+"/"+str(allifuid)
         else:
-            sqnmbr= 'SQ/1'+"/"+str(currntyear)+"/"+str(uuid4()).split('-')[2]
+            sqnmbr= 'SQ/1'+"/"+str(uuid4()).split('-')[2]
 
         newQuoteNumber= CommonQuotesModel.objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         newQuoteNumber.save()
@@ -8224,7 +8224,7 @@ def commonNewInvoice(request,*allifargs,**allifkwargs):
         unque=str(uuid4()).split('-')[2]
         nmbr=int(allifquery.count())+int(1)
         currntyear=timezone.now().date().today().year
-        allifuid=str(nmbr)+"/"+str(currntyear)+"/"+str(unque)
+        allifuid=str(nmbr)+"/"+str(unque)
         ###### End... UID generation ##################
 
         if allifquery:
@@ -8468,6 +8468,11 @@ def commonPostInvoice(request,pk,*allifargs,**allifkwargs):
         myinvid=allifquery.id
         customer=allifquery.customer
         amount=allifquery.total
+        
+        initial_rating=allif_data.get("usernmeslg").peformance_counter
+        allif_data.get("usernmeslg").peformance_counter=Decimal(initial_rating)+Decimal(1)
+        allif_data.get("usernmeslg").save()
+
         if customer:
             customer_id=customer.id
             for item in allifqueryset:
@@ -8483,6 +8488,8 @@ def commonPostInvoice(request,pk,*allifargs,**allifkwargs):
                     products=CommonStocksModel.objects.filter(pk=invoice_item_id,company=allif_data.get("main_sbscrbr_entity")).first()
                     initial_item_quantity=products.quantity
                     products.quantity=initial_item_quantity-invo_quantity # reduce stock by invoice quantity
+                    initial_sales_rate=products.total_units_sold
+                    products.total_units_sold=Decimal(initial_sales_rate)+Decimal(1)
                     products.save()
 
                     # ....... debit the inventory account ..........

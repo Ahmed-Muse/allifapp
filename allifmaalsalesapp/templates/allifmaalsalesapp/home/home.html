@@ -26,37 +26,42 @@
           </div><!--end....header column-->
           </div><!--end....header row-->
         </div><!--end....main headere-->
-        
+      
     <div class="allifmaincontainer">
-       <!--start of first row-->
-       <div class="row mt-12" >
+      <div class="table-details-content-description"> <strong>{{main_sbscrbr_entity}}</strong>: Home|KPIs</div>
+       <!--start of first row..ok -->
+       <hr>
+
+       
+<div class="row mt-12" >
+
           <div class="col-md-4">
           <div class="card">
           <div class="card-header allif-dashboard-card-header">
-            Top 10 Categories. <span>Total: <strong>{{catcount}}</strong></span>
+           Prospects: <span><strong>{{quotes_total|floatformat:2|intcomma}}</strong></span>
           </div>
       
           <div class="col-md-12">
           <div class="column allif-dashboard-card-body">
           
-    
         <div class="allif-scroll-table">
           <div class="table-responsive allif-full-table">
           <table class="table table-layout">
             <thead>
               <tr class="allif-table-header-row">
-              <td>Categories</td>
-              <td>Stocks items</td>
+              <td>Number</td>
+              <td>Value</td>
+              <td>Date</td>
               </tr>
               </thead>
               <tbody class="allif-table-body">
-              {% for item in categories %} 
+              {% for item in allifqueryset_quotes %} 
               <tr data-id="{{item.id}}">
-              <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddQuoteDetails' item.id user_var glblslug %}">{{item.number}}</a></td>
               <td>
-                {{item.votes|floatformat:2|intcomma}}
+                {{item.total|floatformat:2|intcomma}}
               </td>
-             
+              <td>{{item.date|date:'d/m/Y'}}</td>
         
           </tr>
           {% endfor %}
@@ -77,7 +82,7 @@
       <div class="col-md-4">
         <div class="card">
         <div class="card-header allif-dashboard-card-header">
-          Top 10 Companies. <span>Total: <strong>{{compcount}}</strong></span>
+          Premium Customers: <span><strong>{{customers_turnover|floatformat:2|intcomma}}</strong></span>
         </div>
     
         <div class="col-md-12">
@@ -89,19 +94,19 @@
         <table class="table table-layout">
           <thead>
             <tr class="allif-table-header-row">
-            <td>Companies</td>
-            <td>Votes</td>
+            <td>Customers</td>
+            <td>Turnover</td>
             </tr>
             </thead>
             <tbody class="allif-table-body">
              
             
-            {% for item in companies %} 
+            {% for item in allifqueryset_customers %} 
             <tr data-id="{{item.id}}">
             <td><a class="allif-table-links" href="">{{item.name}}</a></td>
            
             <td>
-              {{item.votes|floatformat:2|intcomma}}
+              {{item.turnover|floatformat:2|intcomma}}
             </td>
         </tr>
         {% endfor %}
@@ -123,9 +128,9 @@
     <div class="col-md-4">
         <div class="card">
         <div class="card-header allif-dashboard-card-header">
-          Top 10 Voters. <span>Total: <strong>{{voterscount}}</strong></span>
+          Premium Suppliers: <span> <strong>{{suppliers_turnover|floatformat:2|intcomma}}</strong></span>
         </div>
-    
+     
         <div class="col-md-12">
         <div class="column allif-dashboard-card-body">
         
@@ -135,21 +140,21 @@
         <table class="table table-layout">
           <thead>
             <tr class="allif-table-header-row">
-            <td>Name</td>
+            <td>Suppliers</td>
            
-            <td>Votes</td>
+            <td>Turnover</td>
         
             </tr>
             </thead>
             <tbody class="allif-table-body">
              
             
-            {% for item in allifqueryset %} 
+            {% for item in allifqueryset_suppliers %} 
             <tr data-id="{{item.id}}">
-            <td><a class="allif-table-links" href="">{{item.first_name}}</a></td>
+            <td><a class="allif-table-links" href="">{{item.name}}</a></td>
            
             <td>
-              {{item.castedvotes|floatformat:2|intcomma}}
+              {{item.turnover|floatformat:2|intcomma}}
             </td>
         </tr>
         {% endfor %}
@@ -172,15 +177,15 @@
       <!--end of first row-->
       
       <!--start of second row-->
-      
+      <hr>
        <!--start of first row-->
        <div class="row mt-12" >
         <div class="col-md-4">
             <div class="card">
             <div class="card-header allif-dashboard-card-header">
-              Top 10 Golden Sponsors. <span>Total: <strong>{{sponsorscount}}</strong></span>
+              Premium Stock Items <span>: <strong>{{gold_items_value|floatformat:2|intcomma}}</strong></span> 
             </div>
-        
+         
             <div class="col-md-12">
             <div class="column allif-dashboard-card-body">
             
@@ -190,22 +195,22 @@
             <table class="table table-layout">
               <thead>
                 <tr class="allif-table-header-row">
-                <td>Sponsors</td>
+                <td>Item</td>
                
-                <td>Amounts</td>
+                <td>Sold Units</td>
             
                 </tr>
                 </thead>
                 <tbody class="allif-table-body">
                  
                 
-                {% for item in sponsors %} 
+                {% for item in gold_items %} 
                 <tr data-id="{{item.id}}">
-                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+                <td><a class="allif-table-links" href="">{{item.description}}</a></td>
                
                
             <td>
-              {{item.amount|floatformat:2|intcomma}}
+              {{item.total_units_sold|floatformat:2|intcomma}}
             </td>
             </tr>
             {% endfor %}
@@ -223,11 +228,11 @@
         </div>
         </div>
         
-      
+       
         <div class="col-md-4">
             <div class="card">
             <div class="card-header allif-dashboard-card-header">
-              Top 10 Highest Expenses. <span>Total: <strong>{{expensescount}}</strong></span>
+              Top Debtors <span>: <strong>{{customers_balances|floatformat:2|intcomma}}</strong></span>
             </div>
         
             <div class="col-md-12">
@@ -239,7 +244,157 @@
             <table class="table table-layout">
               <thead>
                 <tr class="allif-table-header-row">
-                <td>Description</td>
+                <td>Customer</td>
+               
+                <td>Balance</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in allifqueryset_debtors %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+                  
+            <td>
+              {{item.balance|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Top Creditors <span>: <strong>{{suppliers_balances|floatformat:2|intcomma}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Supplier</td>
+               
+                <td>Balance</td>
+             
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in allifqueryset_creditors %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+               
+                <td>
+              {{item.balance|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+      </div>
+      
+      <!--end of first row-->
+      
+      <!--start of second row-->
+      <hr>
+       <!--start of first row-->
+       <div class="row mt-12" >
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              High Value Assets <span>: <strong>{{assets_value|floatformat:2|intcomma}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+    
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Item</td>
+               
+                <td>Value</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in high_value_assets %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.description}}</a></td>
+               
+               
+            <td>
+              {{item.value|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+       
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              High Value Expenses <span>: <strong>{{expenses_value|floatformat:2|intcomma}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Expense</td>
                
                 <td>Amount</td>
             
@@ -248,7 +403,7 @@
                 <tbody class="allif-table-body">
                  
                 
-                {% for item in expenses %} 
+                {% for item in high_value_expenses %} 
                 <tr data-id="{{item.id}}">
                 <td><a class="allif-table-links" href="">{{item.description}}</a></td>
                   
@@ -274,36 +429,36 @@
         <div class="col-md-4">
             <div class="card">
             <div class="card-header allif-dashboard-card-header">
-              10 Latest Votes. <span>Total: <strong>{{votescount}}</strong></span>
+              Top Invoices <span>: <strong>{{invoices_total|floatformat:2|intcomma}}</strong></span>
             </div>
         
             <div class="col-md-12">
             <div class="column allif-dashboard-card-body">
-            
-      
+         
           <div class="allif-scroll-table">
             <div class="table-responsive allif-full-table">
             <table class="table table-layout">
               <thead>
                 <tr class="allif-table-header-row">
-                <td>Voter</td>
+                <td>Supplier</td>
                
+                <td>Balance</td>
                 <td>Date</td>
-             
                 </tr>
                 </thead>
                 <tbody class="allif-table-body">
                  
                 
-                {% for item in votes %} 
+                {% for item in high_value_invoices %} 
                 <tr data-id="{{item.id}}">
-                <td><a class="allif-table-links" href="">{{item.voter}}</a></td>
+                <td><a class="allif-table-links" href="">{{item.number}}</a></td>
                
                 <td>
-                    {{item.date|date:'d/m/Y'}}
-                  </td>
-              
-               
+              {{item.total|floatformat:2|intcomma}}
+            </td>
+            <td>
+              {{item.date|date:'d/m/Y'}}
+            </td>
             </tr>
             {% endfor %}
             
@@ -321,13 +476,154 @@
         </div>
         
       </div>
-      
-      <!--end of first row-->
-      
-      <!--start of second row-->
-      
      
+      <hr>
+       <!--start of first row-->
+       <div class="row mt-12" >
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Highest Customer Payments <span>: <strong>{{customer_payments_total|floatformat:2|intcomma}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
     
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Customer</td>
+               
+                <td>Amount</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in high_value_customer_payments %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.customer}}</a></td>
+               
+               
+            <td>
+              {{item.amount|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+       
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Highest Supplier Payments <span>: <strong>{{supplier_payments_total|floatformat:2|intcomma}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Supplier</td>
+               
+                <td>Amount</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in high_value_supplier_payments %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.supplier}}</a></td>
+                  
+            <td>
+              {{item.amount|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Top 10 Performing Staff <span>: <strong>{{staff_rating|floatformat:2|intcomma}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+         
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Staff</td>
+               
+                <td>Rating</td>
+               
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in high_peformancing_staff %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.first_name}}</a></td>
+               
+                <td>
+              {{item.peformance_counter|floatformat:2|intcomma}}
+            </td>
+           
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+
+        </div>
+        
+      </div>
+    <hr>
     </div><!--end of main container of the page-->
     
     

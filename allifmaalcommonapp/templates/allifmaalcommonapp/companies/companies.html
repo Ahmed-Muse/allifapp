@@ -167,6 +167,9 @@
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
             <div class="dropdown-content">
               <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForAllifAdmin' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">More Details</a>
+              <a href="{% url 'allifmaalcommonapp:commonEditEntityByAllifAdmin' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit By Admin</a>
+
+              
               <a href="{% url 'allifmaaladminapp:adminBlockUnblockEntity' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link-delete">
                 {% if item.status == 'Blocked' %}
                 Unblock

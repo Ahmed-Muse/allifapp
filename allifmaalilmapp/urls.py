@@ -6,5 +6,4 @@ urlpatterns = [
 path('Education/Home/<str:allifusr>/<str:allifslug>/', views.ilmHome, name="ilmHome"),
 path('Education/Dashboard/<str:allifusr>/<str:allifslug>/', views.ilmDashboard, name="ilmDashboard"),
 
-
 ]  

@@ -1,341 +1,1965 @@
-{% extends 'allifmaalsalesapp/base/uimainbase/salesspecbase.html'%}
 {% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-   
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic ERP Dashboard</title>
+    <!-- Tailwind CSS CDN for utility classes .ok..........-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN for icons (though button is removed, keeping for other potential icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS for Inter font and additional styling -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-<div class="allifmaal-main-container">
-    <!--we can insert the other section here-->
-     
-      <!--start....main headere-->
-      <div class="card-header">
-        <div class="row mt-12" ><!--start....header row-->
-        <div class="col-md-12"><!--start....header column-->
-        <div class="container-fluid amel-content-header">
-        
-            <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-            <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
-            <a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
-            <a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
-            <a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
-        </div>
-          </div><!--end....header column-->
-          </div><!--end....header row-->
-        </div><!--end....main headere-->
-        
-    <div class="allifmaincontainer">
-       <!--start of first row-->
-       <div class="row mt-12" >
-          <div class="col-md-4">
-          <div class="card">
-          <div class="card-header allif-dashboard-card-header">
-            Top 10 Categories. <span>Total: <strong>{{catcount}}</strong></span>
-          </div>
-      
-          <div class="col-md-12">
-          <div class="column allif-dashboard-card-body">
-          
-    
-        <div class="allif-scroll-table">
-          <div class="table-responsive allif-full-table">
-          <table class="table table-layout">
-            <thead>
-              <tr class="allif-table-header-row">
-              <td>Categories</td>
-              <td>Votes</td>
-              </tr>
-              </thead>
-              <tbody class="allif-table-body">
-              {% for item in categories %} 
-              <tr data-id="{{item.id}}">
-              <td><a class="allif-table-links" href="">{{item.name}}</a></td>
-              <td>
-                {{item.votes|floatformat:2|intcomma}}
-              </td>
-             
-        
-          </tr>
-          {% endfor %}
-          
-            </tbody>
-          </table>
-          </div>
-         </div>
-      
-    
-      </div>
-      </div>
-      
-      
-      </div>
-      </div>
-      
-      <div class="col-md-4">
-        <div class="card">
-        <div class="card-header allif-dashboard-card-header">
-          Top 10 Companies. <span>Total: <strong>{{compcount}}</strong></span>
-        </div>
-    
-        <div class="col-md-12">
-        <div class="column allif-dashboard-card-body">
-        
-    
-      <div class="allif-scroll-table">
-        <div class="table-responsive allif-full-table">
-        <table class="table table-layout">
-          <thead>
-            <tr class="allif-table-header-row">
-            <td>Companies</td>
-            <td>Votes</td>
-            </tr>
-            </thead>
-            <tbody class="allif-table-body">
-             
-            
-            {% for item in companies %} 
-            <tr data-id="{{item.id}}">
-            <td><a class="allif-table-links" href="">{{item.name}}</a></td>
-           
-            <td>
-              {{item.votes|floatformat:2|intcomma}}
-            </td>
-        </tr>
-        {% endfor %}
-        
-          </tbody>
-        </table>
-        </div>
-       </div>
-    
-    
-    </div>
-    </div>
-    
-    
-    </div>
-    </div>
-    
-      
-    <div class="col-md-4">
-        <div class="card">
-        <div class="card-header allif-dashboard-card-header">
-          Top 10 Voters. <span>Total: <strong>{{voterscount}}</strong></span>
-        </div>
-    
-        <div class="col-md-12">
-        <div class="column allif-dashboard-card-body">
-        
-    
-      <div class="allif-scroll-table">
-        <div class="table-responsive allif-full-table">
-        <table class="table table-layout">
-          <thead>
-            <tr class="allif-table-header-row">
-            <td>Name</td>
-           
-            <td>Votes</td>
-        
-            </tr>
-            </thead>
-            <tbody class="allif-table-body">
-             
-            
-            {% for item in allifqueryset %} 
-            <tr data-id="{{item.id}}">
-            <td><a class="allif-table-links" href="">{{item.first_name}}</a></td>
-           
-            <td>
-              {{item.castedvotes|floatformat:2|intcomma}}
-            </td>
-        </tr>
-        {% endfor %}
-        
-          </tbody>
-        </table>
-        </div>
-       </div>
-    
-    
-    </div>
-    </div>
-    
-    
-    </div>
-    </div>
-    
-      </div>
-      
-      <!--end of first row-->
-      
-      <!--start of second row-->
-      
-       <!--start of first row-->
-       <div class="row mt-12" >
-        <div class="col-md-4">
-            <div class="card">
-            <div class="card-header allif-dashboard-card-header">
-              Top 10 Golden Sponsors. <span>Total: <strong>{{sponsorscount}}</strong></span>
-            </div>
-        
-            <div class="col-md-12">
-            <div class="column allif-dashboard-card-body">
-            
-      
-          <div class="allif-scroll-table">
-            <div class="table-responsive allif-full-table">
-            <table class="table table-layout">
-              <thead>
-                <tr class="allif-table-header-row">
-                <td>Sponsors</td>
-               
-                <td>Amounts</td>
-            
-                </tr>
-                </thead>
-                <tbody class="allif-table-body">
-                 
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #f0f2f5, #e0e6ed); /* Subtle gradient background */
+            min-height: 100vh; /* Full viewport height */
+            margin: 0;
+            display: block;
+            overflow-x: hidden; /* Prevent horizontal scroll due to layout shifts */
+            padding-top: 0;
+        }
+
+        /* Top Navigation Bar Styles */
+        .top-navbar {
+            background-color: #2d3748; /* Dark background */
+            color: #fff;
+            padding: 0.6rem 2rem; /* Reduced vertical padding for smaller height */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%; /* Full width */
+            position: relative; /* Default to relative for flow on mobile */
+            z-index: 1000; /* Ensure it stays on top */
+            border-radius: 0; /* Removed rounded corners */
+            transition: all 0.3s ease-in-out; /* Smooth transition for menu expansion */
+        }
+
+        /* Desktop: Fixed position for top navbar */
+        @media (min-width: 768px) {
+            .top-navbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+
+        .top-navbar-brand {
+            font-size: 1.4rem; /* Slightly smaller brand font */
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .top-navbar-menu {
+            display: flex; /* Horizontal menu items */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            align-items: center; /* Vertically align menu items */
+        }
+
+        .top-navbar-menu > li {
+            position: relative; /* For dropdown positioning */
+            margin-left: 1.2rem; /* Slightly reduced space between main menu items */
+        }
+
+        .top-navbar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.6rem 0.9rem; /* Smaller padding for links */
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            border-radius: 0.4rem; /* Slightly smaller rounded corners for links */
+            font-weight: 500;
+            font-size: 0.9rem; /* Smaller font for links */
+            white-space: nowrap; /* Prevent menu items from wrapping */
+        }
+
+        .top-navbar-link:hover {
+            background-color: #4a5568; /* Darker hover background */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        .top-navbar-link i {
+            margin-right: 0.4rem; /* Slightly reduced icon margin */
+            font-size: 0.8rem; /* Make icons slightly smaller too */
+        }
+
+        .top-navbar-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 5px); /* Adjusted to sit closer to parent link */
+            left: 0;
+            background-color: #3b4555; /* Slightly lighter than parent for dropdowns */
+            list-style: none;
+            padding: 0.4rem 0; /* Smaller padding for dropdown menu */
+            margin: 0;
+            border-radius: 0.4rem; /* Slightly smaller rounded corners for dropdown */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0; /* Hidden by default */
+            visibility: hidden;
+            transform: translateY(5px); /* Less initial transform */
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            min-width: 160px; /* Smaller minimum width for dropdown */
+            z-index: 1010; /* Above other content */
+        }
+
+        .top-navbar-dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .top-navbar-dropdown-menu li a {
+            display: block; /* Make dropdown links fill width */
+            padding: 0.6rem 1rem; /* Smaller padding for dropdown links */
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            font-size: 0.85rem; /* Smaller font for dropdown links */
+        }
+
+        .top-navbar-dropdown-menu li a:hover {
+            background-color: #4a5568; /* Darker background on hover */
+        }
+
+        .top-navbar-dropdown-icon {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .top-navbar-link.active .top-navbar-dropdown-icon {
+            transform: rotate(180deg); /* Rotate arrow when active */
+        }
+
+        /* Styling for nested dropdown menus */
+        .top-navbar-dropdown-menu .top-navbar-dropdown-menu {
+            position: absolute;
+            left: 100%; /* Position to the right of the parent menu item */
+            top: 0; /* Align with the top of the parent menu item */
+            margin-left: 5px; /* Small gap between parent and child dropdown */
+            border-left: 1px solid rgba(255,255,255,0.1); /* Visual separator */
+            background-color: #2f3743; /* Slightly darker background for nested dropdowns */
+        }
+
+        /* Ensure nested links look consistent */
+        .top-navbar-dropdown-menu li .top-navbar-link {
+            width: auto; /* Allow auto width for nested links */
+            justify-content: flex-start; /* Align text to start */
+            padding-left: 1rem; /* Adjust padding for visual hierarchy */
+        }
+
+        /* Responsive Top Navbar */
+        @media (max-width: 767px) {
+            .top-navbar {
+                flex-direction: column; /* Stack brand and menu vertically */
+                align-items: flex-start; /* Align items to start */
+                padding: 0.8rem 1rem; /* Adjust padding for mobile nav */
+            }
+            .top-navbar-brand {
+                font-size: 1.3rem; /* Even smaller brand font on mobile */
+            }
+            .top-navbar-mobile-toggle {
+                display: block; /* Show hamburger icon */
+                background-color: #3182ce;
+                color: white;
+                padding: 0.4rem 0.6rem; /* Smaller toggle button */
+                border-radius: 0.5rem;
+                cursor: pointer;
+                position: absolute; /* Position hamburger top-right relative to navbar */
+                top: 0.8rem; /* Align with new top padding */
+                right: 1rem;
+                z-index: 1001;
+                font-size: 1rem; /* Smaller icon */
+            }
+            .top-navbar-menu {
+                flex-direction: column; /* Stack menu items vertically */
+                width: 100%; /* Full width */
+                margin-top: 0.8rem; /* Space below brand on mobile */
+                display: none; /* Hide menu by default on mobile */
+            }
+            .top-navbar-menu.active {
+                display: flex; /* Show menu when active */
+            }
+            .top-navbar-menu > li {
+                margin: 0; /* REMOVED ALL MARGINS FOR MOBILE LINKS */
+                width: 100%;
+            }
+            .top-navbar-link {
+                width: 100%;
+                justify-content: space-between; /* Space out text and icon */
+                padding: 0.5rem 0.8rem; /* Smaller links on mobile */
+                font-size: 0.85rem;
+            }
+            .top-navbar-dropdown-menu {
+                position: static; /* Position normally within the flow */
+                width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+                transform: none; /* Remove transform */
+                padding-left: 1rem; /* Indent dropdown items */
+                background-color: #313a47; /* Slightly darker for deeper nesting */
+                padding: 0.3rem 0; /* Smaller padding for dropdown menu on mobile */
                 
-                {% for item in sponsors %} 
-                <tr data-id="{{item.id}}">
-                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
-               
-               
-            <td>
-              {{item.amount|floatformat:2|intcomma}}
-            </td>
-            </tr>
-            {% endfor %}
-            
-              </tbody>
-            </table>
-            </div>
-           </div>
-        
-      
-        </div>
-        </div>
-        
-        
-        </div>
-        </div>
-        
-      
-        <div class="col-md-4">
-            <div class="card">
-            <div class="card-header allif-dashboard-card-header">
-              Top 10 Highest Expenses. <span>Total: <strong>{{expensescount}}</strong></span>
-            </div>
-        
-            <div class="col-md-12">
-            <div class="column allif-dashboard-card-body">
-            
-      
-          <div class="allif-scroll-table">
-            <div class="table-responsive allif-full-table">
-            <table class="table table-layout">
-              <thead>
-                <tr class="allif-table-header-row">
-                <td>Description</td>
-               
-                <td>Amount</td>
-            
-                </tr>
-                </thead>
-                <tbody class="allif-table-body">
-                 
+                /* KEY CHANGE: Completely hide from layout when not active */
+                display: none;
+                /* Ensure these are not inherited from desktop hidden state */
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .top-navbar-dropdown-menu.active {
+                display: block; /* Make the dropdown menu visible */
+            }
+
+            /* Mobile adjustments for nested dropdowns */
+            .top-navbar-dropdown-menu .top-navbar-dropdown-menu {
+                position: static; /* Stack on mobile */
+                left: auto;
+                top: auto;
+                margin-left: 0;
+                padding-left: 1.5rem; /* Further indent on mobile */
+                background-color: #2a333d; /* Even darker background for deeper nesting */
+                border-left: none; /* Remove left border on mobile */
                 
-                {% for item in expenses %} 
-                <tr data-id="{{item.id}}">
-                <td><a class="allif-table-links" href="">{{item.description}}</a></td>
-                  
-            <td>
-              {{item.amount|floatformat:2|intcomma}}
-            </td>
-            </tr>
-            {% endfor %}
-            
-              </tbody>
-            </table>
+                /* KEY CHANGE: Ensure nested dropdowns are also hidden by default */
+                display: none;
+            }
+
+            .top-navbar-dropdown-menu .top-navbar-dropdown-menu.active {
+                display: block; /* Show nested dropdowns */
+            }
+        }
+        @media (min-width: 768px) {
+            .top-navbar-mobile-toggle {
+                display: none; /* Hide hamburger on desktop */
+            }
+        }
+
+        /* Main Content Wrapper for the dashboard cards */
+        .main-content-wrapper {
+            flex-grow: 1; /* Takes up remaining vertical space after top navbar */
+            padding: 20px;
+            width: 100%; /* Fill parent width */
+            /* Margin to push content below the fixed top navbar - applied only on desktop */
+        }
+
+        @media (min-width: 768px) {
+            .main-content-wrapper {
+                margin-top: 56px; /* Apply margin only when navbar is fixed */
+            }
+        }
+
+
+        /* Inner container for dashboard content to control max-width and centering */
+        .allifmaal-main-container {
+            width: 100%;
+            max-width: 1400px; /* Max width to contain elements */
+            margin: 0 auto; /* Center the content within the wrapper */
+            padding: 0; /* Padding handled by main-content-wrapper */
+        }
+
+        /* Chart Canvas Styling */
+        canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+        }
+
+        /* Responsive adjustments for overall dashboard grid */
+        @media (min-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        /* Adjusted for smaller grid on very small screens */
+        @media (max-width: 640px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        /* Table scroll for smaller screens */
+        .scrollable-table-container {
+            overflow-x: auto; /* Enable horizontal scroll only when necessary */
+            width: 100%;
+            border-radius: 0.75rem; /* Match card border-radius */
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05); /* Subtle inner shadow */
+        }
+        .scrollable-table {
+            width: 100%; /* Ensure table takes full width of its container */
+            border-collapse: collapse; /* For clean table borders */
+        }
+        .scrollable-table th, .scrollable-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e2e8f0; /* Light border for rows */
+            text-align: left;
+            white-space: nowrap; /* Prevent content from wrapping */
+        }
+        .scrollable-table th {
+            background-color: #edf2f7; /* Light gray background for headers */
+            font-weight: 600;
+            color: #4a5568;
+            position: sticky; /* Make headers sticky for horizontal scroll */
+            top: 0;
+            z-index: 2; /* Ensure headers are above scrolling content */
+        }
+        /* Style for alternating table rows for better readability */
+        .scrollable-table tbody tr:nth-child(odd) {
+            background-color: #f8fafd; /* Very light blue/gray */
+        }
+        .scrollable-table tbody tr:nth-child(even) {
+            background-color: #ffffff; /* White */
+        }
+        .scrollable-table tbody tr:hover {
+            background-color: #e2e8f0; /* Lighter hover effect */
+        }
+
+        /* Custom styles for dashboard cards and elements */
+        .table-details-content-description {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 6px solid #3182ce;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .allif-dashboard-card-header {
+            background-color: #2d3748;
+            color: #ffffff;
+            padding: 1.25rem 1.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .allif-dashboard-card-header span {
+            color: #a0aec0;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        .allif-dashboard-card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .allif-full-table {
+            width: 100%;
+        }
+
+        .allif-table-header-row {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            font-weight: 600;
+            border-bottom: 2px solid #cbd5e0;
+        }
+
+        .allif-table-header-row td {
+            padding: 0.75rem 1rem;
+        }
+
+        .allif-table-body td {
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .allif-table-body tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+
+        .allif-table-body tr:hover {
+            background-color: #dbeafe;
+        }
+
+        .allif-table-links {
+            color: #3182ce;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .allif-table-links:hover {
+            text-decoration: underline;
+            color: #2b6cb0;
+        }
+
+        hr {
+            border-top: 1px solid #e2e8f0;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+    <!-- Chart.js CDN (Version 2.9.4 as per your previous code's syntax) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <span class="top-navbar-mobile-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </span>
+        <div class="top-navbar-brand">ERP Dashboard</div>
+        <ul class="top-navbar-menu" id="topNavMenu">
+            <li><a href="#" class="top-navbar-link"><i class="fas fa-home"></i> Home</a></li>
+            <li class="top-navbar-dropdown">
+                <a href="#" class="top-navbar-link" data-dropdown-toggle="crm-dropdown">
+                    <i class="fas fa-users"></i> CRM <i class="fas fa-chevron-down top-navbar-dropdown-icon"></i>
+                </a>
+                <ul class="top-navbar-dropdown-menu" id="crm-dropdown">
+                    <li><a href="#">Customers</a></li>
+                    <li><a href="#">Prospects</a></li>
+                    <li><a href="#">Leads</a></li>
+                </ul>
+            </li>
+            <li class="top-navbar-dropdown">
+                <a href="#" class="top-navbar-link" data-dropdown-toggle="finance-dropdown">
+                    <i class="fas fa-money-check-alt"></i> Finance <i class="fas fa-chevron-down top-navbar-dropdown-icon"></i>
+                </a>
+                <ul class="top-navbar-dropdown-menu" id="finance-dropdown">
+                    <li><a href="#">Accounts Receivable</a></li>
+                    <li><a href="#">Accounts Payable</a></li>
+                    <li class="top-navbar-dropdown">
+                        <a href="#" class="top-navbar-link" data-dropdown-toggle="invoices-sub-dropdown">
+                            Invoices <i class="fas fa-chevron-down top-navbar-dropdown-icon"></i>
+                        </a>
+                        <ul class="top-navbar-dropdown-menu" id="invoices-sub-dropdown">
+                            <li><a href="#">Current Invoices</a></li>
+                            <li><a href="#">Posted Invoices</a></li>
+                        </ul>
+                    </li>
+                    <li class="top-navbar-dropdown">
+                        <a href="#" class="top-navbar-link" data-dropdown-toggle="payments-sub-dropdown">
+                            Payments <i class="fas fa-chevron-down top-navbar-dropdown-icon"></i>
+                        </a>
+                        <ul class="top-navbar-dropdown-menu" id="payments-sub-dropdown">
+                            <li><a href="#">Customer Payments</a></li>
+                            <li><a href="#">Supplier Payments</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">General Ledger</a></li>
+                </ul>
+            </li>
+            <li class="top-navbar-dropdown">
+                <a href="#" class="top-navbar-link" data-dropdown-toggle="inventory-dropdown">
+                    <i class="fas fa-box"></i> Inventory <i class="fas fa-chevron-down top-navbar-dropdown-icon"></i>
+                </a>
+                <ul class="top-navbar-dropdown-menu" id="inventory-dropdown">
+                    <li><a href="#">Stock Items</a></li>
+                    <li><a href="#">Warehouses</a></li>
+                    <li><a href="#">Stock Adjustments</a></li>
+                    <li class="top-navbar-dropdown">
+                        <a href="#" class="top-navbar-link" data-dropdown-toggle="inventory-valuation-sub-dropdown">
+                            Inventory Valuation <i class="fas fa-chevron-down top-navbar-dropdown-icon"></i>
+                        </a>
+                        <ul class="top-navbar-dropdown-menu" id="inventory-valuation-sub-dropdown">
+                            <li><a href="#">FIFO Valuation</a></li>
+                            <li><a href="#">LIFO Valuation</a></li>
+                            <li><a href="#">Weighted Average</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#" class="top-navbar-link"><i class="fas fa-chart-line"></i> Reports</a></li>
+            <li><a href="#" class="top-navbar-link"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <div id="mainContentWrapper" class="main-content-wrapper">
+        <!-- Dynamic Content from Provided HTML -->
+        <div class="allifmaal-main-container">
+           
+            <hr class="my-6">
+
+            <div class="dashboard-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card: Prospects with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Prospects: <span id="quotesTotalValue"><strong>N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="prospectsChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Number</td>
+                                            <td>Value</td>
+                                            <td>Date</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Premium Customers with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Premium Customers: <span id="customersTurnoverTotal"><strong>N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="platinumCustomersChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Customers</td>
+                                            <td>Turnover</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Premium Suppliers with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Premium Suppliers: <span id="suppliersTurnoverTotal"> <strong>N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="premiumSuppliersChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Suppliers</td>
+                                            <td>Turnover</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Premium Stock Items with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Premium Stock Items <span>: <strong id="goldItemsValueTotal">N/A</strong></span> 
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="premiumStockChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Item</td>
+                                            <td>Sold Units</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Top Debtors with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Top Debtors <span>: <strong id="customersBalancesTotal">N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="debtorsChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Customer</td>
+                                            <td>Balance</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Top Creditors with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Top Creditors <span>: <strong id="suppliersBalancesTotal">N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="creditorsChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Supplier</td>
+                                            <td>Balance</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: High Value Assets with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        High Value Assets <span>: <strong id="assetsValueTotal">N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="assetsChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Item</td>
+                                            <td>Value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: High Value Expenses with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        High Value Expenses <span>: <strong id="expensesValueTotal">N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="highExpensesChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Expense</td>
+                                            <td>Amount</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Top Invoices with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Top Invoices <span>: <strong id="invoicesTotalValue">N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="topInvoicesChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Invoice #</td>
+                                            <td>Total</td>
+                                            <td>Date</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Highest Customer Payments with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Highest Customer Payments <span>: <strong id="customerPaymentsTotalValue">N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="customerPaymentsChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Customer</td>
+                                            <td>Amount</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Highest Supplier Payments with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Highest Supplier Payments <span>: <strong id="supplierPaymentsTotalValue">N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="supplierPaymentsChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Supplier</td>
+                                            <td>Amount</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Top 10 Performing Staff with Chart -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Top 10 Performing Staff <span>: <strong id="staffRatingTotalValue">N/A</strong></span>
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="staffPerformanceChart"></canvas>
+                        </div>
+                        <div class="allif-scroll-table">
+                            <div class="scrollable-table-container">
+                                <table class="scrollable-table">
+                                    <thead>
+                                        <tr class="allif-table-header-row">
+                                            <td>Staff</td>
+                                            <td>Rating</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="allif-table-body">
+                                        <!-- Data will be populated by JavaScript simulation or actual backend -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW CHARTS START HERE -->
+
+                <!-- Card: Sales Funnel Analysis (Horizontal Bar Chart) -->
+                <div class="card col-span-1 md:col-span-2 lg:col-span-3">
+                    <div class="allif-dashboard-card-header">
+                        Sales Funnel Analysis
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 300px;">
+                            <canvas id="salesFunnelChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Product Category Sales (Bar Chart) -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Product Category Sales
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="productCategorySalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: New Customer Acquisition Trend (Line Chart) -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        New Customer Acquisition Trend
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="customerAcquisitionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Key Inventory Stock Levels (Bar Chart) -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Key Inventory Stock Levels
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="inventoryStockChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Employee Turnover Rate (Line Chart) -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Employee Turnover Rate
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="employeeTurnoverChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Website Traffic Sources (Doughnut Chart) -->
+                <div class="card">
+                    <div class="allif-dashboard-card-header">
+                        Website Traffic Sources
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 200px;">
+                            <canvas id="websiteTrafficChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Global Charts (spanning multiple columns) -->
+                <div class="card col-span-1 md:col-span-2 lg:col-span-3">
+                    <div class="allif-dashboard-card-header">
+                        Monthly Revenue vs. Expenses
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 300px;">
+                            <canvas id="revenueExpenseChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card col-span-1 md:col-span-2 lg:col-span-3">
+                    <div class="allif-dashboard-card-header">
+                        Sales by Region
+                    </div>
+                    <div class="allif-dashboard-card-body">
+                        <div class="relative w-full" style="height: 300px;">
+                            <canvas id="salesByRegionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-           </div>
-        
-      
+            <hr class="my-6">
         </div>
-        </div>
-        
-        
-        </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card">
-            <div class="card-header allif-dashboard-card-header">
-              10 Latest Votes. <span>Total: <strong>{{votescount}}</strong></span>
-            </div>
-        
-            <div class="col-md-12">
-            <div class="column allif-dashboard-card-body">
-            
-      
-          <div class="allif-scroll-table">
-            <div class="table-responsive allif-full-table">
-            <table class="table table-layout">
-              <thead>
-                <tr class="allif-table-header-row">
-                <td>Voter</td>
-               
-                <td>Date</td>
-             
-                </tr>
-                </thead>
-                <tbody class="allif-table-body">
-                 
-                
-                {% for item in votes %} 
-                <tr data-id="{{item.id}}">
-                <td><a class="allif-table-links" href="">{{item.voter}}</a></td>
-               
-                <td>
-                    {{item.date|date:'d/m/Y'}}
-                  </td>
-              
-               
-            </tr>
-            {% endfor %}
-            
-              </tbody>
-            </table>
-            </div>
-           </div>
-        
-      
-        </div>
-        </div>
-        
-        
-        </div>
-        </div>
-        
-      </div>
-      
-      <!--end of first row-->
-      
-      <!--start of second row-->
-      
-     
-    
-    </div><!--end of main container of the page-->
-    
-    
-     
-    <!--we can insert the other section here...-->
-    
     </div>
-       
-    
-   {% endblock %}
-   
+
+    <script>
+        // Store chart instances globally for easy access and updates
+        let assetsChartInstance, prospectsChartInstance, invoicesChartInstance,
+            debtorsChartInstance, creditorsChartInstance, platinumCustomersChartInstance,
+            revenueExpenseChartInstance, salesByRegionChartInstance, premiumSuppliersChartInstance,
+            premiumStockChartInstance, highExpensesChartInstance, topInvoicesChartInstance,
+            customerPaymentsChartInstance, supplierPaymentsChartInstance, staffPerformanceChartInstance,
+            salesFunnelChartInstance, productCategorySalesChartInstance, customerAcquisitionChartInstance,
+            inventoryStockChartInstance, employeeTurnoverChartInstance, websiteTrafficChartInstance; /* Added new chart instances */
+
+        // Utility function to format currency
+        const formatCurrency = (value) => {
+            if (value === undefined || value === null || isNaN(value)) return 'N/A';
+            // Use Math.round for consistent rounding before formatting
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(Math.round(value * 100) / 100);
+        };
+
+        // Function to display a message (now only logs to console, as message box is removed)
+        const showMessage = (message, type = 'info') => {
+            console.log(`Message (${type}): ${message}`);
+        };
+
+        // Function to generate random colors for charts
+        const generateRandomColors = (numColors) => {
+            const colors = [];
+            for (let i = 0; i < numColors; i++) {
+                const hue = (i * 137.508) % 360; // Use golden ratio conjugate for evenly distributed hues
+                const saturation = Math.floor(Math.random() * (70 - 50) + 50); // 50-70% saturation
+                const lightness = Math.floor(Math.random() * (60 - 40) + 40); // 40-60% lightness
+                colors.push(`hsla(${hue}, ${saturation}%, ${lightness}%, 0.8)`); // With transparency
+            }
+            return colors;
+        };
+
+        // Function to resize all Chart.js instances
+        const resizeAllCharts = () => {
+            [assetsChartInstance, prospectsChartInstance, invoicesChartInstance,
+             debtorsChartInstance, creditorsChartInstance, platinumCustomersChartInstance,
+             revenueExpenseChartInstance, salesByRegionChartInstance, premiumSuppliersChartInstance,
+             premiumStockChartInstance, highExpensesChartInstance, topInvoicesChartInstance,
+             customerPaymentsChartInstance, supplierPaymentsChartInstance, staffPerformanceChartInstance,
+             salesFunnelChartInstance, productCategorySalesChartInstance, customerAcquisitionChartInstance,
+             inventoryStockChartInstance, employeeTurnoverChartInstance, websiteTrafficChartInstance
+            ].forEach(chart => {
+                if (chart) chart.resize();
+            });
+            console.log("All charts resized.");
+        };
+
+        // --- Chart Initialization Functions ---
+
+        // Function to create or update Doughnut Chart (used for Assets, Sales by Region, Website Traffic)
+        function createOrUpdateDoughnutChart(chartInstance, canvasId, totalValueSpanId, labels, data, totalValue, chartLabel) {
+            console.log(`Attempting to create/update Doughnut Chart: ${canvasId}`); // Debug log
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) {
+                console.error(`Canvas element with ID '${canvasId}' not found for Doughnut Chart.`);
+                return null;
+            }
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error(`2D context not available for canvas ID '${canvasId}' for Doughnut Chart.`);
+                return null;
+            }
+
+            if (totalValueSpanId) {
+                const totalSpan = document.getElementById(totalValueSpanId);
+                if (totalSpan) totalSpan.textContent = formatCurrency(totalValue);
+            }
+
+            const backgroundColors = generateRandomColors(labels.length);
+            const borderColors = backgroundColors.map(color => color.replace('0.8', '1')); // Opaque border
+
+            if (chartInstance) {
+                chartInstance.data.labels = labels;
+                chartInstance.data.datasets[0].data = data;
+                chartInstance.data.datasets[0].backgroundColor = backgroundColors;
+                chartInstance.data.datasets[0].borderColor = borderColors;
+                chartInstance.update();
+                console.log(`Doughnut Chart '${canvasId}' updated.`); // Debug log
+            } else {
+                chartInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: chartLabel,
+                            data: data,
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutoutPercentage: 70, /* Thicker doughnut */
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                fontColor: '#4a5568', /* Text color for legend */
+                                fontFamily: 'Inter',
+                                boxWidth: 12, /* Smaller color box */
+                            }
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function(tooltipItem, chart) {
+                                    const dataset = chart.datasets[tooltipItem.datasetIndex];
+                                    const total = dataset.data.reduce((sum, val) => sum + parseFloat(val), 0);
+                                    const currentValue = parseFloat(dataset.data[tooltipItem.index]);
+                                    const percentage = ((currentValue / total) * 100).toFixed(2) + '%';
+                                    return `${chart.labels[tooltipItem.index]}: ${formatCurrency(currentValue)} (${percentage})`;
+                                }
+                            },
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            bodyFontFamily: 'Inter',
+                            titleFontFamily: 'Inter',
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            cornerRadius: 5,
+                        },
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        }
+                    }
+                });
+                console.log(`Doughnut Chart '${canvasId}' created.`); // Debug log
+            }
+            return chartInstance;
+        }
+
+        // Function to create or update Bar Chart (used for Prospects, Premium Customers, Premium Stock, Customer Payments, Supplier Payments, Product Category Sales, Inventory Stock)
+        function createOrUpdateBarChart(chartInstance, canvasId, totalValueSpanId, labels, data, totalValue, chartLabel, horizontal = false) {
+            console.log(`Attempting to create/update Bar Chart: ${canvasId}`); // Debug log
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) {
+                console.error(`Canvas element with ID '${canvasId}' not found for Bar Chart.`);
+                return null;
+            }
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error(`2D context not available for canvas ID '${canvasId}' for Bar Chart.`);
+                return null;
+            }
+
+            if (totalValueSpanId) {
+                const totalSpan = document.getElementById(totalValueSpanId);
+                if (totalSpan) totalSpan.textContent = formatCurrency(totalValue);
+            }
+
+            const backgroundColors = generateRandomColors(labels.length);
+            const borderColors = backgroundColors.map(color => color.replace('0.8', '1'));
+
+            if (chartInstance) {
+                chartInstance.data.labels = labels;
+                chartInstance.data.datasets[0].data = data;
+                chartInstance.data.datasets[0].backgroundColor = backgroundColors;
+                chartInstance.data.datasets[0].borderColor = borderColors;
+                chartInstance.update();
+                console.log(`Bar Chart '${canvasId}' updated.`); // Debug log
+            } else {
+                chartInstance = new Chart(ctx, {
+                    type: horizontal ? 'horizontalBar' : 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: chartLabel,
+                            data: data,
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1,
+                            borderRadius: 5, /* Rounded bars */
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: false,
+                        },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    fontColor: '#4a5568',
+                                    fontFamily: 'Inter',
+                                    callback: function(value, index, values) {
+                                        return horizontal ? formatCurrency(value) : value;
+                                    }
+                                },
+                                gridLines: {
+                                    display: false /* Hide vertical grid lines for cleaner look */
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: horizontal ? chartLabel : 'Name',
+                                    fontColor: '#4a5568',
+                                    fontFamily: 'Inter',
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    fontColor: '#4a5568',
+                                    fontFamily: 'Inter',
+                                    callback: function(value, index, values) {
+                                        return horizontal ? value : formatCurrency(value);
+                                    }
+                                },
+                                gridLines: {
+                                    color: 'rgba(200, 200, 200, 0.1)' /* Lighter horizontal grid lines */
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: horizontal ? 'Name' : chartLabel,
+                                    fontColor: '#4a5568',
+                                    fontFamily: 'Inter',
+                                }
+                            }]
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function(tooltipItem, chart) {
+                                    return `${chart.datasets[tooltipItem.datasetIndex].label}: ${formatCurrency(horizontal ? tooltipItem.xLabel : tooltipItem.yLabel)}`;
+                                }
+                            },
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            bodyFontFamily: 'Inter',
+                            titleFontFamily: 'Inter',
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            cornerRadius: 5,
+                        },
+                        animation: {
+                            duration: 1000, /* Slower animation */
+                            easing: 'easeOutBounce' /* Bouncier animation */
+                        }
+                    }
+                });
+                console.log(`Bar Chart '${canvasId}' created.`); // Debug log
+            }
+            return chartInstance;
+        }
+
+        // Function to create or update Pie Chart (used for Invoices)
+        function createOrUpdatePieChart(chartInstance, canvasId, totalValueSpanId, labels, data, totalValue, chartLabel) {
+            console.log(`Attempting to create/update Pie Chart: ${canvasId}`); // Debug log
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) {
+                console.error(`Canvas element with ID '${canvasId}' not found for Pie Chart.`);
+                return null;
+            }
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error(`2D context not available for canvas ID '${canvasId}' for Pie Chart.`);
+                return null;
+            }
+
+            if (totalValueSpanId) {
+                const totalSpan = document.getElementById(totalValueSpanId);
+                if (totalSpan) totalSpan.textContent = formatCurrency(totalValue);
+            }
+
+            const backgroundColors = generateRandomColors(labels.length);
+            const borderColors = backgroundColors.map(color => color.replace('0.8', '1'));
+
+            if (chartInstance) {
+                chartInstance.data.labels = labels;
+                chartInstance.data.datasets[0].data = data;
+                chartInstance.data.datasets[0].backgroundColor = backgroundColors;
+                chartInstance.data.datasets[0].borderColor = borderColors;
+                chartInstance.update();
+                console.log(`Pie Chart '${canvasId}' updated.`); // Debug log
+            } else {
+                chartInstance = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: chartLabel,
+                            data: data,
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: 'right', /* Legend on the right for Pie */
+                            labels: {
+                                fontColor: '#4a5568',
+                                fontFamily: 'Inter',
+                                boxWidth: 12,
+                            }
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function(tooltipItem, chart) {
+                                    const dataset = chart.datasets[tooltipItem.datasetIndex];
+                                    const total = dataset.data.reduce((sum, val) => sum + parseFloat(val), 0);
+                                    const currentValue = parseFloat(dataset.data[tooltipItem.index]);
+                                    const percentage = ((currentValue / total) * 100).toFixed(2) + '%';
+                                    return `${chart.labels[tooltipItem.index]}: ${formatCurrency(currentValue)} (${percentage})`;
+                                }
+                            },
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            bodyFontFamily: 'Inter',
+                            titleFontFamily: 'Inter',
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            cornerRadius: 5,
+                        },
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        }
+                    }
+                });
+                console.log(`Pie Chart '${canvasId}' created.`); // Debug log
+            }
+            return chartInstance;
+        }
+
+        // Function to create or update Polar Area Chart (used for Creditors)
+        function createOrUpdatePolarAreaChart(chartInstance, canvasId, totalValueSpanId, labels, data, totalValue, chartLabel) {
+            console.log(`Attempting to create/update Polar Area Chart: ${canvasId}`); // Debug log
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) {
+                console.error(`Canvas element with ID '${canvasId}' not found for Polar Area Chart.`);
+                return null;
+            }
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error(`2D context not available for canvas ID '${canvasId}' for Polar Area Chart.`);
+                return null;
+            }
+
+            if (totalValueSpanId) {
+                const totalSpan = document.getElementById(totalValueSpanId);
+                if (totalSpan) totalSpan.textContent = formatCurrency(totalValue);
+            }
+
+            const backgroundColors = generateRandomColors(labels.length);
+            const borderColors = backgroundColors.map(color => color.replace('0.8', '1'));
+
+            if (chartInstance) {
+                chartInstance.data.labels = labels;
+                chartInstance.data.datasets[0].data = data;
+                chartInstance.data.datasets[0].backgroundColor = backgroundColors;
+                chartInstance.data.datasets[0].borderColor = borderColors;
+                chartInstance.update();
+                console.log(`Polar Area Chart '${canvasId}' updated.`); // Debug log
+            } else {
+                chartInstance = new Chart(ctx, {
+                    type: 'polarArea',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: chartLabel,
+                            data: data,
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                fontColor: '#4a5568',
+                                fontFamily: 'Inter',
+                                boxWidth: 12,
+                            }
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function(tooltipItem, chart) {
+                                    const dataset = chart.datasets[tooltipItem.datasetIndex];
+                                    const total = dataset.data.reduce((sum, val) => sum + parseFloat(val), 0);
+                                    const currentValue = parseFloat(dataset.data[tooltipItem.index]);
+                                    const percentage = ((currentValue / total) * 100).toFixed(2) + '%';
+                                    return `${chart.labels[tooltipItem.index]}: ${formatCurrency(currentValue)} (${percentage})`;
+                                }
+                            },
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            bodyFontFamily: 'Inter',
+                            titleFontFamily: 'Inter',
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            cornerRadius: 5,
+                        },
+                        scale: { /* Settings for the polar area scale */
+                            ticks: {
+                                beginAtZero: true,
+                                backdropColor: 'rgba(0,0,0,0)', /* Transparent background for ticks */
+                                fontColor: '#4a5568',
+                                fontFamily: 'Inter',
+                                callback: function(value, index, values) {
+                                    return formatCurrency(value);
+                                }
+                            },
+                            pointLabels: {
+                                fontColor: '#4a5568',
+                                fontFamily: 'Inter',
+                            }
+                        },
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        }
+                    }
+                });
+                console.log(`Polar Area Chart '${canvasId}' created.`); // Debug log
+            }
+            return chartInstance;
+        }
+
+        // Function to create or update Line Chart (used for Monthly Revenue vs. Expenses, Customer Acquisition, Employee Turnover)
+        function createOrUpdateLineChart(chartInstance, canvasId, labels, datasets) {
+            console.log(`Attempting to create/update Line Chart: ${canvasId}`); // Debug log
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) {
+                console.error(`Canvas element with ID '${canvasId}' not found for Line Chart.`);
+                return null;
+            }
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error(`2D context not available for canvas ID '${canvasId}' for Line Chart.`);
+                return null;
+            }
+
+            if (chartInstance) {
+                chartInstance.data.labels = labels;
+                chartInstance.data.datasets = datasets;
+                chartInstance.update();
+                console.log(`Line Chart '${canvasId}' updated.`); // Debug log
+            } else {
+                chartInstance = new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: labels,
+                        datasets: datasets
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                fontColor: '#4a5568',
+                                fontFamily: 'Inter',
+                                boxWidth: 12,
+                            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    fontColor: '#4a5568',
+                                    fontFamily: 'Inter',
+                                    callback: function(value, index, values) {
+                                        return formatCurrency(value);
+                                    }
+                                },
+                                gridLines: {
+                                    color: 'rgba(200, 200, 200, 0.2)' /* Lighter grid lines */
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Amount (USD)',
+                                    fontColor: '#4a5568',
+                                    fontFamily: 'Inter',
+                                }
+                            }],
+                            xAxes: [{
+                                ticks: {
+                                    fontColor: '#4a5568',
+                                    fontFamily: 'Inter',
+                                },
+                                gridLines: {
+                                    color: 'rgba(200, 200, 200, 0.2)'
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Month',
+                                    fontColor: '#4a5568',
+                                    fontFamily: 'Inter',
+                                }
+                            }]
+                        },
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(tooltipItem, chart) {
+                                    // Custom callback for line charts to handle different dataset labels
+                                    const label = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                    let value = tooltipItem.yLabel;
+                                    // For turnover rate or numbers, don't format as currency, or add percentage
+                                    if (canvasId === 'employeeTurnoverChart') {
+                                        return `${label}: ${value.toFixed(2)}%`;
+                                    } else if (canvasId === 'customerAcquisitionChart') {
+                                        return `${label}: ${value} new customers`;
+                                    }
+                                    return `${label}: ${formatCurrency(value)}`;
+                                }
+                            },
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            bodyFontFamily: 'Inter',
+                            titleFontFamily: 'Inter',
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            cornerRadius: 5,
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        animation: {
+                            duration: 1500, /* Slower line animation */
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+                console.log(`Line Chart '${canvasId}' created.`); // Debug log
+            }
+            return chartInstance;
+        }
+
+
+        // --- Data Loading and Chart Rendering ---
+
+        // Function to populate table rows
+        const populateTable = (tableBodySelector, data, columns) => {
+            const tableBody = document.querySelector(tableBodySelector);
+            if (!tableBody) {
+                console.warn(`Table body with selector '${tableBodySelector}' not found.`);
+                return;
+            }
+            tableBody.innerHTML = ''; // Clear existing rows
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-id', item.id || index); // Use item.id if available, otherwise index
+                columns.forEach(col => {
+                    const td = document.createElement('td');
+                    let content = item[col.key];
+                    if (col.format === 'currency') {
+                        content = formatCurrency(content);
+                    } else if (col.format === 'date') {
+                        // Simple date formatting, adjust as needed
+                        const d = new Date(content);
+                        content = d.toLocaleDateString('en-GB'); // DD/MM/YYYY
+                    }
+                    if (col.link) {
+                        const link = document.createElement('a');
+                        link.classList.add('allif-table-links');
+                        link.href = col.link.replace('{{item.id}}', item.id || index); // Basic placeholder replacement
+                        link.textContent = content;
+                        td.appendChild(link);
+                    } else {
+                        td.textContent = content;
+                    }
+                    row.appendChild(td);
+                });
+                tableBody.appendChild(row);
+            });
+        };
+
+
+        // Function to simulate fetching new data (replace with actual Django AJAX calls)
+        const fetchDashboardData = () => {
+            console.log("fetchDashboardData started."); // Debug log
+            showMessage('Loading dashboard data...', 'info'); // Show loading message
+
+            /* Simulate a network delay */
+            setTimeout(() => {
+                // --- Simulated Data for Charts and Tables ---
+
+                // Prospects Data (Chart & Table) - based on allifqueryset_quotes (number, total, date)
+                const allifqueryset_quotes_sim = [
+                    { id: 1, number: 'Q-001', total: 45000 + Math.random() * 3000, date: '2023-05-01' },
+                    { id: 2, number: 'Q-002', total: 60000 + Math.random() * 4000, date: '2023-05-05' },
+                    { id: 3, number: 'Q-003', total: 20000 + Math.random() * 1000, date: '2023-05-10' },
+                    { id: 4, number: 'Q-004', total: 80000 + Math.random() * 5000, date: '2023-05-15' },
+                    { id: 5, number: 'Q-005', total: 35000 + Math.random() * 2000, date: '2023-05-20' }
+                ];
+                const quotesLabels = allifqueryset_quotes_sim.map(item => item.number);
+                const quotesData = allifqueryset_quotes_sim.map(item => item.total);
+                const quotesTotal = quotesData.reduce((sum, val) => sum + val, 0);
+                prospectsChartInstance = createOrUpdateBarChart(prospectsChartInstance, 'prospectsChart', 'quotesTotalValue', quotesLabels, quotesData, quotesTotal, 'Prospect Value');
+                populateTable('.card:nth-of-type(1) .allif-table-body', allifqueryset_quotes_sim, [
+                    { key: 'number', link: '#quote-details-{{item.id}}' }, // Placeholder link
+                    { key: 'total', format: 'currency' },
+                    { key: 'date', format: 'date' }
+                ]);
+
+
+                // Premium Customers Turnover (Chart & Table) - based on allifqueryset_customers (name, turnover)
+                const allifqueryset_customers_sim = [
+                    { id: 10, name: 'Acme Corp', turnover: 70000 + Math.random() * 5000 },
+                    { id: 11, name: 'Globex Inc.', turnover: 85000 + Math.random() * 5000 },
+                    { id: 12, name: 'Hooli LLC', turnover: 82000 + Math.random() * 5000 },
+                    { id: 13, name: 'Pied Piper', turnover: 95000 + Math.random() * 5000 },
+                    { id: 14, name: 'Stark Industries', turnover: 110000 + Math.random() * 5000 }
+                ];
+                const customersLabels = allifqueryset_customers_sim.map(item => item.name);
+                const customersData = allifqueryset_customers_sim.map(item => item.turnover);
+                const customersTurnoverTotal = customersData.reduce((sum, val) => sum + val, 0);
+                platinumCustomersChartInstance = createOrUpdateBarChart(platinumCustomersChartInstance, 'platinumCustomersChart', 'customersTurnoverTotal', customersLabels, customersData, customersTurnoverTotal, 'Customer Turnover');
+                populateTable('.card:nth-of-type(2) .allif-table-body', allifqueryset_customers_sim, [
+                    { key: 'name', link: '#' },
+                    { key: 'turnover', format: 'currency' }
+                ]);
+
+                // Premium Suppliers Turnover (Chart & Table) - based on allifqueryset_suppliers (name, turnover)
+                const allifqueryset_suppliers_sim = [
+                    { id: 20, name: 'Supplier A', turnover: 150000 + Math.random() * 8000 },
+                    { id: 21, name: 'Supplier B', turnover: 90000 + Math.random() * 5000 },
+                    { id: 22, name: 'Supplier C', turnover: 200000 + Math.random() * 10000 },
+                    { id: 23, name: 'Supplier D', turnover: 70000 + Math.random() * 4000 },
+                    { id: 24, name: 'Supplier E', turnover: 120000 + Math.random() * 6000 },
+                ].sort((a, b) => a.turnover - b.turnover); /* Sort for better horizontal bar visualization */
+                const suppliersLabels = allifqueryset_suppliers_sim.map(item => item.name);
+                const suppliersData = allifqueryset_suppliers_sim.map(item => item.turnover);
+                const suppliersTurnoverTotal = suppliersData.reduce((sum, val) => sum + val, 0);
+                premiumSuppliersChartInstance = createOrUpdateBarChart(premiumSuppliersChartInstance, 'premiumSuppliersChart', 'suppliersTurnoverTotal', suppliersLabels, suppliersData, suppliersTurnoverTotal, 'Supplier Turnover', true);
+                populateTable('.card:nth-of-type(3) .allif-table-body', allifqueryset_suppliers_sim, [
+                    { key: 'name', link: '#' },
+                    { key: 'turnover', format: 'currency' }
+                ]);
+
+                // Premium Stock Items (Chart & Table) - based on gold_items (description, total_units_sold)
+                const gold_items_sim = [
+                    { id: 30, description: 'Laptop Pro X', total_units_sold: 120 + Math.random() * 10 },
+                    { id: 31, description: 'Office Chairs', total_units_sold: 80 + Math.random() * 8 },
+                    { id: 32, description: 'Monitor 27"', total_units_sold: 200 + Math.random() * 15 },
+                    { id: 33, description: 'Server Rack', total_units_sold: 180 + Math.random() * 12 },
+                    { id: 34, description: 'Arc Reactor', total_units_sold: 50 + Math.random() * 5 },
+                ];
+                const goldItemsLabels = gold_items_sim.map(item => item.description);
+                const goldItemsData = gold_items_sim.map(item => item.total_units_sold);
+                const goldItemsValueTotal = goldItemsData.reduce((sum, val) => sum + val, 0);
+                premiumStockChartInstance = createOrUpdateBarChart(premiumStockChartInstance, 'premiumStockChart', 'goldItemsValueTotal', goldItemsLabels, goldItemsData, goldItemsValueTotal, 'Units Sold');
+                populateTable('.card:nth-of-type(4) .allif-table-body', gold_items_sim, [
+                    { key: 'description', link: '#' },
+                    { key: 'total_units_sold' }
+                ]);
+
+
+                // Top Debtors (Chart & Table) - based on allifqueryset_debtors (name, balance)
+                const allifqueryset_debtors_sim = [
+                    { id: 40, name: 'Debtor 1', balance: 25000 + Math.random() * 2000 },
+                    { id: 41, name: 'Debtor 2', balance: 18000 + Math.random() * 1500 },
+                    { id: 42, name: 'Debtor 3', balance: 15000 + Math.random() * 1200 },
+                    { id: 43, name: 'Debtor 4', balance: 12000 + Math.random() * 1000 },
+                    { id: 44, name: 'Debtor 5', balance: 10000 + Math.random() * 800 }
+                ].sort((a,b) => a.balance - b.balance);
+                const debtorsLabels = allifqueryset_debtors_sim.map(item => item.name);
+                const debtorsData = allifqueryset_debtors_sim.map(item => item.balance);
+                const customersBalancesTotal = debtorsData.reduce((sum, val) => sum + val, 0);
+                debtorsChartInstance = createOrUpdateBarChart(debtorsChartInstance, 'debtorsChart', 'customersBalancesTotal', debtorsLabels, debtorsData, customersBalancesTotal, 'Debtor Balance', true);
+                populateTable('.card:nth-of-type(5) .allif-table-body', allifqueryset_debtors_sim, [
+                    { key: 'name', link: '#' },
+                    { key: 'balance', format: 'currency' }
+                ]);
+
+                // Top Creditors (Chart & Table) - based on allifqueryset_creditors (name, balance)
+                const allifqueryset_creditors_sim = [
+                    { id: 50, name: 'Supplier X', balance: 30000 + Math.random() * 2500 },
+                    { id: 51, name: 'Supplier Y', balance: 22000 + Math.random() * 1800 },
+                    { id: 52, name: 'Supplier Z', balance: 10000 + Math.random() * 900 },
+                    { id: 53, name: 'Vendor A', balance: 8000 + Math.random() * 700 },
+                    { id: 54, name: 'Vendor B', balance: 5000 + Math.random() * 400 }
+                ];
+                const creditorsLabels = allifqueryset_creditors_sim.map(item => item.name);
+                const creditorsData = allifqueryset_creditors_sim.map(item => item.balance);
+                const suppliersBalancesTotal = creditorsData.reduce((sum, val) => sum + val, 0);
+                creditorsChartInstance = createOrUpdatePolarAreaChart(creditorsChartInstance, 'creditorsChart', 'suppliersBalancesTotal', creditorsLabels, creditorsData, suppliersBalancesTotal, 'Creditor Balance');
+                populateTable('.card:nth-of-type(6) .allif-table-body', allifqueryset_creditors_sim, [
+                    { key: 'name', link: '#' },
+                    { key: 'balance', format: 'currency' }
+                ]);
+
+                // High Value Assets (Chart & Table) - based on high_value_assets (description, value)
+                const high_value_assets_sim = [
+                    { id: 60, description: 'Building', value: 500000 + Math.random() * 10000 },
+                    { id: 61, description: 'Vehicles', value: 75000 + Math.random() * 5000 },
+                    { id: 62, description: 'Machinery', value: 120000 + Math.random() * 7000 },
+                    { id: 63, description: 'Cash', value: 30000 + Math.random() * 2000 },
+                    { id: 64, description: 'Inventory', value: 90000 + Math.random() * 6000 }
+                ];
+                const assetsLabels = high_value_assets_sim.map(item => item.description);
+                const assetsData = high_value_assets_sim.map(item => item.value);
+                const assetsValueTotal = assetsData.reduce((sum, val) => sum + val, 0);
+                assetsChartInstance = createOrUpdateDoughnutChart(assetsChartInstance, 'assetsChart', 'assetsValueTotal', assetsLabels, assetsData, assetsValueTotal, 'Asset Value');
+                populateTable('.card:nth-of-type(7) .allif-table-body', high_value_assets_sim, [
+                    { key: 'description', link: '#' },
+                    { key: 'value', format: 'currency' }
+                ]);
+
+                // High Value Expenses (Chart & Table) - based on high_value_expenses (description, amount)
+                const high_value_expenses_sim = [
+                    { id: 70, description: 'Rent', amount: 15000 + Math.random() * 1000 },
+                    { id: 71, description: 'Salaries', amount: 40000 + Math.random() * 2000 },
+                    { id: 72, description: 'Utilities', amount: 8000 + Math.random() * 500 },
+                    { id: 73, description: 'Marketing', amount: 12000 + Math.random() * 800 },
+                    { id: 74, description: 'Maintenance', amount: 5000 + Math.random() * 300 },
+                ].sort((a,b) => a.amount - b.amount); /* Sort for better horizontal visualization */
+                const highExpensesLabels = high_value_expenses_sim.map(item => item.description);
+                const highExpensesData = high_value_expenses_sim.map(item => item.amount);
+                const expensesValueTotal = highExpensesData.reduce((sum, val) => sum + val, 0);
+                highExpensesChartInstance = createOrUpdateBarChart(highExpensesChartInstance, 'highExpensesChart', 'expensesValueTotal', highExpensesLabels, highExpensesData, expensesValueTotal, 'Expense Amount', true);
+                populateTable('.card:nth-of-type(8) .allif-table-body', high_value_expenses_sim, [
+                    { key: 'description', link: '#' },
+                    { key: 'amount', format: 'currency' }
+                ]);
+
+
+                // Top Invoices (Chart & Table) - based on high_value_invoices (number, total)
+                const high_value_invoices_sim = [
+                    { id: 80, number: 'INV-001', total: 25000 + Math.random() * 1500, date: '2023-04-10' },
+                    { id: 81, number: 'INV-002', total: 18000 + Math.random() * 1000, date: '2023-04-12' },
+                    { id: 82, number: 'INV-003', total: 30000 + Math.random() * 2000, date: '2023-04-15' },
+                    { id: 83, number: 'INV-004', total: 10000 + Math.random() * 700, date: '2023-04-18' },
+                    { id: 84, number: 'INV-005', total: 40000 + Math.random() * 2500, date: '2023-04-20' },
+                ];
+                const topInvoicesLabels = high_value_invoices_sim.map(item => item.number);
+                const topInvoicesData = high_value_invoices_sim.map(item => item.total);
+                const invoicesTotal = topInvoicesData.reduce((sum, val) => sum + val, 0);
+                topInvoicesChartInstance = createOrUpdatePieChart(topInvoicesChartInstance, 'topInvoicesChart', 'invoicesTotalValue', topInvoicesLabels, topInvoicesData, invoicesTotal, 'Invoice Total');
+                populateTable('.card:nth-of-type(9) .allif-table-body', high_value_invoices_sim, [
+                    { key: 'number', link: '#' },
+                    { key: 'total', format: 'currency' },
+                    { key: 'date', format: 'date' }
+                ]);
+
+
+                // Highest Customer Payments (Chart & Table) - based on high_value_customer_payments (customer, amount)
+                const high_value_customer_payments_sim = [
+                    { id: 90, customer: 'Cust P', amount: 50000 + Math.random() * 3000 },
+                    { id: 91, customer: 'Cust Q', amount: 35000 + Math.random() * 2000 },
+                    { id: 92, customer: 'Cust R', amount: 60000 + Math.random() * 4000 },
+                    { id: 93, customer: 'Cust S', amount: 20000 + Math.random() * 1000 },
+                    { id: 94, customer: 'Cust T', amount: 45000 + Math.random() * 2500 },
+                ];
+                const customerPaymentsLabels = high_value_customer_payments_sim.map(item => item.customer);
+                const customerPaymentsData = high_value_customer_payments_sim.map(item => item.amount);
+                const customerPaymentsTotal = customerPaymentsData.reduce((sum, val) => sum + val, 0);
+                customerPaymentsChartInstance = createOrUpdateBarChart(customerPaymentsChartInstance, 'customerPaymentsChart', 'customerPaymentsTotalValue', customerPaymentsLabels, customerPaymentsData, customerPaymentsTotal, 'Payment Amount');
+                populateTable('.card:nth-of-type(10) .allif-table-body', high_value_customer_payments_sim, [
+                    { key: 'customer', link: '#' },
+                    { key: 'amount', format: 'currency' }
+                ]);
+
+                // Highest Supplier Payments (Chart & Table) - based on high_value_supplier_payments (supplier, amount)
+                const high_value_supplier_payments_sim = [
+                    { id: 100, supplier: 'Supp V', amount: 40000 + Math.random() * 2500 },
+                    { id: 101, supplier: 'Supp W', amount: 25000 + Math.random() * 1500 },
+                    { id: 102, supplier: 'Supp X', amount: 55000 + Math.random() * 3500 },
+                    { id: 103, supplier: 'Supp Y', amount: 30000 + Math.random() * 2000 },
+                    { id: 104, supplier: 'Supp Z', amount: 48000 + Math.random() * 3000 },
+                ];
+                const supplierPaymentsLabels = high_value_supplier_payments_sim.map(item => item.supplier);
+                const supplierPaymentsData = high_value_supplier_payments_sim.map(item => item.amount);
+                const supplierPaymentsTotal = supplierPaymentsData.reduce((sum, val) => sum + val, 0);
+                supplierPaymentsChartInstance = createOrUpdateBarChart(supplierPaymentsChartInstance, 'supplierPaymentsChart', 'supplierPaymentsTotalValue', supplierPaymentsLabels, supplierPaymentsData, supplierPaymentsTotal, 'Payment Amount');
+                populateTable('.card:nth-of-type(11) .allif-table-body', high_value_supplier_payments_sim, [
+                    { key: 'supplier', link: '#' },
+                    { key: 'amount', format: 'currency' }
+                ]);
+
+                // Top 10 Performing Staff (Chart & Table) - based on high_peformancing_staff (first_name, peformance_counter)
+                const high_peformancing_staff_sim = [
+                    { id: 110, first_name: 'Ali', peformance_counter: 95 + Math.random() * 2 },
+                    { id: 111, first_name: 'Fatima', peformance_counter: 92 + Math.random() * 2 },
+                    { id: 112, first_name: 'Ahmed', peformance_counter: 88 + Math.random() * 2 },
+                    { id: 113, first_name: 'Layla', peformance_counter: 90 + Math.random() * 2 },
+                    { id: 114, first_name: 'Omar', peformance_counter: 85 + Math.random() * 2 },
+                    { id: 115, first_name: 'Sara', peformance_counter: 91 + Math.random() * 2 },
+                    { id: 116, first_name: 'Khalid', peformance_counter: 87 + Math.random() * 2 },
+                    { id: 117, first_name: 'Nadia', peformance_counter: 93 + Math.random() * 2 },
+                    { id: 118, first_name: 'Yousef', peformance_counter: 89 + Math.random() * 2 },
+                    { id: 119, first_name: 'Zahra', peformance_counter: 94 + Math.random() * 2 },
+                ].sort((a,b) => a.peformance_counter - b.peformance_counter); /* Sort for better horizontal visualization */
+                const staffPerformanceLabels = high_peformancing_staff_sim.map(item => item.first_name);
+                const staffPerformanceData = high_peformancing_staff_sim.map(item => item.peformance_counter);
+                const staffRatingTotal = staffPerformanceData.reduce((sum, val) => sum + val, 0); /* Not directly used as sum, but total average could be derived */
+                staffPerformanceChartInstance = createOrUpdateBarChart(staffPerformanceChartInstance, 'staffPerformanceChart', 'staffRatingTotalValue', staffPerformanceLabels, staffPerformanceData, staffRatingTotal, 'Performance Rating', true);
+                populateTable('.card:nth-of-type(12) .allif-table-body', high_peformancing_staff_sim, [
+                    { key: 'first_name', link: '#' },
+                    { key: 'peformance_counter' }
+                ]);
+
+
+                // Revenue vs. Expenses Data (Global Chart)
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const revenueData = months.map(() => 50000 + Math.random() * 15000);
+                const expenseData = months.map(() => 30000 + Math.random() * 10000);
+
+                const revenueExpenseDatasets = [
+                    {
+                        label: 'Revenue',
+                        data: revenueData,
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.4)',
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(75, 192, 192)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(75, 192, 192)'
+                    },
+                    {
+                        label: 'Expenses',
+                        data: expenseData,
+                        fill: false,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.4)',
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(255, 99, 132)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(255, 99, 132)'
+                    }
+                ];
+                revenueExpenseChartInstance = createOrUpdateLineChart(revenueExpenseChartInstance, 'revenueExpenseChart', months, revenueExpenseDatasets);
+
+
+                // Sales by Region Data (Global Chart)
+                const regions = ['North', 'South', 'East', 'West', 'Central'];
+                const regionalSales = regions.map(() => 100000 + Math.random() * 50000);
+                const regionalSalesTotal = regionalSales.reduce((sum, val) => sum + val, 0);
+                salesByRegionChartInstance = createOrUpdateDoughnutChart(salesByRegionChartInstance, 'salesByRegionChart', 'assetsValueTotal', regions, regionalSales, regionalSalesTotal, 'Sales by Region');
+
+                // --- NEW CHARTS DATA AND RENDERING ---
+
+                // Sales Funnel Analysis
+                const salesFunnelLabels = ['Leads', 'Qualified Leads', 'Proposals', 'Negotiations', 'Closed Won'];
+                const salesFunnelData = [
+                    1000 + Math.random() * 100, // Leads
+                    500 + Math.random() * 50,  // Qualified Leads
+                    250 + Math.random() * 25,  // Proposals
+                    120 + Math.random() * 10,  // Negotiations
+                    60 + Math.random() * 5     // Closed Won
+                ];
+                salesFunnelChartInstance = createOrUpdateBarChart(salesFunnelChartInstance, 'salesFunnelChart', null, salesFunnelLabels, salesFunnelData, null, 'Number of Opportunities', true);
+
+                // Product Category Sales
+                const productCategories = ['Electronics', 'Home Goods', 'Apparel', 'Books', 'Groceries'];
+                const categorySalesData = productCategories.map(() => 200000 + Math.random() * 50000);
+                productCategorySalesChartInstance = createOrUpdateBarChart(productCategorySalesChartInstance, 'productCategorySalesChart', null, productCategories, categorySalesData, null, 'Sales Amount');
+
+                // New Customer Acquisition Trend
+                const acquisitionMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+                const newCustomersData = acquisitionMonths.map((_, i) => 50 + (i * 10) + Math.random() * 15);
+                const customerAcquisitionDatasets = [
+                    {
+                        label: 'New Customers',
+                        data: newCustomersData,
+                        fill: false,
+                        borderColor: 'rgb(54, 162, 235)', // Blue
+                        backgroundColor: 'rgba(54, 162, 235, 0.4)',
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(54, 162, 235)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(54, 162, 235)'
+                    }
+                ];
+                customerAcquisitionChartInstance = createOrUpdateLineChart(customerAcquisitionChartInstance, 'customerAcquisitionChart', acquisitionMonths, customerAcquisitionDatasets);
+
+                // Key Inventory Stock Levels
+                const inventoryItems = ['Product A', 'Product B', 'Product C', 'Product D', 'Product E'];
+                const stockLevelsData = inventoryItems.map(() => Math.floor(100 + Math.random() * 100)); // Units
+                inventoryStockChartInstance = createOrUpdateBarChart(inventoryStockChartInstance, 'inventoryStockChart', null, inventoryItems, stockLevelsData, null, 'Stock Units');
+
+                // Employee Turnover Rate
+                const turnoverMonths = ['Q1 2023', 'Q2 2023', 'Q3 2023', 'Q4 2023', 'Q1 2024', 'Q2 2024'];
+                const turnoverRatesData = turnoverMonths.map((_, i) => 5 + (Math.sin(i) * 2) + Math.random() * 1.5); // Percentage
+                const employeeTurnoverDatasets = [
+                    {
+                        label: 'Turnover Rate (%)',
+                        data: turnoverRatesData,
+                        fill: false,
+                        borderColor: 'rgb(255, 159, 64)', // Orange
+                        backgroundColor: 'rgba(255, 159, 64, 0.4)',
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(255, 159, 64)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(255, 159, 64)'
+                    }
+                ];
+                employeeTurnoverChartInstance = createOrUpdateLineChart(employeeTurnoverChartInstance, 'employeeTurnoverChart', turnoverMonths, employeeTurnoverDatasets);
+
+                // Website Traffic Sources
+                const trafficSources = ['Organic Search', 'Direct', 'Social Media', 'Referral', 'Paid Ads'];
+                const trafficData = trafficSources.map(() => 1000 + Math.random() * 500);
+                const totalTraffic = trafficData.reduce((sum, val) => sum + val, 0);
+                websiteTrafficChartInstance = createOrUpdateDoughnutChart(websiteTrafficChartInstance, 'websiteTrafficChart', null, trafficSources, trafficData, totalTraffic, 'Traffic Sources');
+
+
+                showMessage('Dashboard updated!', 'success');
+                console.log("fetchDashboardData finished."); // Debug log
+            }, 1000); /* Simulate 1 second loading time */
+        };
+
+        // --- Top Navbar Dropdown Logic (Updated for Nested Dropdowns) ---
+
+        // Function to close all open dropdown menus and remove active classes from their toggles
+        function closeAllDropdowns() {
+            document.querySelectorAll('.top-navbar-dropdown-menu.active').forEach(menu => {
+                menu.classList.remove('active');
+                // Find the direct parent link (toggle) that opened this menu
+                const toggle = menu.previousElementSibling; // Assuming structure is <a toggle> <ul menu>
+                if (toggle && toggle.matches('.top-navbar-link[data-dropdown-toggle]')) {
+                    toggle.classList.remove('active');
+                }
+            });
+        }
+
+        // Add event listener for all dropdown toggles (main and sub-level)
+        document.querySelectorAll('[data-dropdown-toggle]').forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                e.stopPropagation(); // Stop propagation to prevent document click listener from firing immediately
+
+                const clickedMenuId = toggle.dataset.dropdownToggle;
+                const clickedMenu = document.getElementById(clickedMenuId);
+
+                if (!clickedMenu) return; // Exit if menu not found
+
+                const isActive = clickedMenu.classList.contains('active');
+
+                // Close all currently active dropdowns, but only those not in the current click path
+                document.querySelectorAll('.top-navbar-dropdown-menu.active').forEach(menu => {
+                    // Check if 'menu' is an ancestor of 'clickedMenu'
+                    let isAncestorOfClicked = false;
+                    let tempParent = clickedMenu.parentElement; // Start from parent UL
+                    while (tempParent && tempParent !== document.body) {
+                        if (tempParent === menu) {
+                            isAncestorOfClicked = true;
+                            break;
+                        }
+                        tempParent = tempParent.parentElement;
+                    }
+
+                    // If 'menu' is not the clicked menu and not an ancestor of the clicked menu, close it
+                    if (menu !== clickedMenu && !isAncestorOfClicked) {
+                        menu.classList.remove('active');
+                        const associatedToggle = menu.previousElementSibling; // Get the toggle before the UL
+                        if (associatedToggle && associatedToggle.matches('.top-navbar-link[data-dropdown-toggle]')) {
+                            associatedToggle.classList.remove('active');
+                        }
+                    }
+                });
+
+                // Toggle the clicked menu
+                clickedMenu.classList.toggle('active');
+                toggle.classList.toggle('active');
+            });
+        });
+
+        // Get main navigation menu and mobile toggle for general closing logic
+        const topNavMenu = document.getElementById('topNavMenu');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+
+
+        // Close all dropdowns when clicking anywhere else on the document
+        document.addEventListener('click', (e) => {
+            // Check if the click target or any of its ancestors is a dropdown toggle or a dropdown menu
+            const isInsideDropdownInteraction = e.target.closest('.top-navbar-dropdown') || e.target.closest('.top-navbar-dropdown-menu');
+            const isMobileToggleClick = e.target.closest('#mobileMenuToggle');
+
+            if (!isInsideDropdownInteraction && !isMobileToggleClick) {
+                closeAllDropdowns(); // Close all nested dropdowns
+                // Also close the main mobile menu if it's open and clicked outside
+                if (topNavMenu && topNavMenu.classList.contains('active') && window.innerWidth < 768) {
+                    topNavMenu.classList.remove('active');
+                }
+            }
+        });
+
+        // Mobile menu toggle
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent this click from bubbling up and triggering document listener
+                if (topNavMenu) {
+                    topNavMenu.classList.toggle('active');
+                }
+                // When opening mobile menu, close any open sub-dropdowns within it
+                if (topNavMenu && topNavMenu.classList.contains('active')) {
+                    document.querySelectorAll('.top-navbar-dropdown-menu.active').forEach(menu => {
+                        // Only close sub-dropdowns, not the main mobile menu itself
+                        if (!menu.closest('.top-navbar-menu.active')) { // Check if it's not the primary menu wrapper
+                            menu.classList.remove('active');
+                            const toggle = menu.previousElementSibling;
+                             if (toggle && toggle.matches('.top-navbar-link[data-dropdown-toggle]')) {
+                                 toggle.classList.remove('active');
+                             }
+                        }
+                    });
+                }
+            });
+        }
+
+
+        // Initial data fetch and chart rendering on window load
+        window.onload = () => {
+            console.log("Window loaded. Initial data fetch initiated.");
+            fetchDashboardData();
+            // Trigger chart resize initially to ensure they fit correctly
+            resizeAllCharts();
+        };
+
+        // Add event listener for window resize to handle Chart.js responsiveness
+        window.addEventListener('resize', () => {
+            console.log("Window resized. Attempting to resize charts.");
+            resizeAllCharts();
+        });
+    </script>
+</body>
+</html>

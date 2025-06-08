@@ -454,7 +454,7 @@ class CommonAddSupplierForm(forms.ModelForm):
 class CommonCustomerAddForm(forms.ModelForm):
     class Meta:
         model = CommonCustomersModel
-        fields = ['uid','name','phone','division','branch','department','email','address','city','sales','balance','country','comments',
+        fields = ['uid','seen','register','triaged','name','phone','division','branch','department','email','address','city','sales','balance','country','comments',
                   'turnover','gender','contact','nextkin','relationship','age','paymentType','className','form']
         widgets={
             'uid':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -470,7 +470,7 @@ class CommonCustomerAddForm(forms.ModelForm):
             'nextkin':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'relationship':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'age':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-
+           
             'country':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
 
@@ -596,7 +596,7 @@ class CommonAssetsAddForm(forms.ModelForm):
     class Meta:
         model =CommonAssetsModel
         fields = ['supplier','division','branch','current_value','salvage_value','depreciated_by','depreciation','terms','asset_account','cost_account','description','quantity','value','lifespan',
-                  'acquired','status','comments','category','department','employee','expires','deposit','asset_status']
+                  'acquired','status','comments','category','department','employee_in_charge','expires','deposit','asset_status']
         widgets={
             'supplier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -614,7 +614,7 @@ class CommonAssetsAddForm(forms.ModelForm):
 
             'category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'employee':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'employee_in_charge':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            'asset_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'current_value':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'depreciated_by':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -630,7 +630,7 @@ class CommonAssetsAddForm(forms.ModelForm):
         self.fields['supplier'].queryset = CommonSuppliersModel.objects.filter(company=allifmaalparameter,)
         self.fields['category'].queryset = CommonAssetCategoriesModel.objects.filter(company=allifmaalparameter,)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter,)
-        self.fields['employee'].queryset = CommonEmployeesModel.objects.filter(company=allifmaalparameter,)
+        self.fields['employee_in_charge'].queryset = CommonEmployeesModel.objects.filter(company=allifmaalparameter,)
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
 class CommonExpensesAddForm(forms.ModelForm):
@@ -840,13 +840,14 @@ class CommonStockCatAddForm(forms.ModelForm):
 class CommonStockItemAddForm(forms.ModelForm):
     class Meta:
         model =CommonStocksModel
-        fields = ['category','warehouse','suppliertaxrate','comments','taxrate','criticalnumber','partNumber','division','branch','department','description','buyingPrice', 'quantity','unitcost','unitPrice','inventory_account','income_account','expense_account','standardUnitCost']
+        fields = ['category','total_units_sold','warehouse','suppliertaxrate','comments','taxrate','criticalnumber','partNumber','division','branch','department','description','buyingPrice', 'quantity','unitcost','unitPrice','inventory_account','income_account','expense_account','standardUnitCost']
         widgets={
             'partNumber':forms.TextInput(attrs={'class':'form-control'}),
             'description':forms.TextInput(attrs={'class':'form-control'}),
             'comments':forms.TextInput(attrs={'class':'form-control'}),
             'quantity':forms.TextInput(attrs={'class':'form-control'}),
             'unitcost':forms.TextInput(attrs={'class':'form-control'}),
+            'total_units_sold':forms.TextInput(attrs={'class':'form-control'}),
             'unitPrice':forms.TextInput(attrs={'class':'form-control'}),
             'criticalnumber':forms.TextInput(attrs={'class':'form-control'}),
             'standardUnitCost':forms.TextInput(attrs={'class':'form-control'}),
@@ -994,7 +995,7 @@ class CommonAddQuoteItemsForm(forms.ModelForm):
 class CommonAddInvoiceDetailsForm(forms.ModelForm):
     class Meta:
         model =CommonInvoicesModel
-        fields = ['customer','description','delivery','payment_terms','division','branch','department','status','currency','comments','discount','tax','discountValue','salestax']
+        fields = ['customer','posting_inv_status','invoice_status','description','delivery','payment_terms','division','branch','department','status','currency','comments','discount','tax','discountValue','salestax']
 
         widgets={
             'comments':forms.TextInput(attrs={'class':'form-control'}),
@@ -1003,6 +1004,9 @@ class CommonAddInvoiceDetailsForm(forms.ModelForm):
             'delivery':forms.TextInput(attrs={'class':'form-control'}),
             'discountValue':forms.TextInput(attrs={'class':'form-control'}),
             'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+            'invoice_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+
+            'posting_inv_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'payment_terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),

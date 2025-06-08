@@ -265,16 +265,10 @@
         <tbody>
         
           <tr>
-            <td class="allif-fix-table-col">Currency</td>
-            <td>{{form.currency}}</td>
+            <td class="allif-fix-table-col">Discount</td>
+            <td>{{form.discount}}</td>
         
             </tr>
-         
-              <tr>
-                <td class="allif-fix-table-col">Discount</td>
-                <td>{{form.discount}}</td>
-            
-                </tr>
               <tr>
                 <td class="allif-fix-table-col">Discount Rate %</td>
                 <td>{{form.discountValue}}</td>
@@ -286,11 +280,19 @@
         
             </tr>
            
-                <tr>
-                  <td class="allif-fix-table-col">Tax Rate</td>
-                  <td>{{form.tax}}</td>
-              
-                  </tr>
+        <tr>
+          <td class="allif-fix-table-col">Tax Rate</td>
+          <td>{{form.tax}}</td>
+      
+          </tr>
+
+           <tr>
+          <td class="allif-fix-table-col">Posting Status</td>
+          <td>{{form.posting_inv_status}}</td>
+      
+          </tr>
+
+                  
           </tbody>
           </table>
           </div>
@@ -324,7 +326,12 @@
                 <td>{{form.comments}}</td>
             
                 </tr>
+            <tr>
+                <td class="allif-fix-table-col">Payment Status</td>
+                <td>{{form.invoice_status}}</td>
             
+                </tr>
+                
             <tr>
               <td class="allif-fix-table-col">Action</td>
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>

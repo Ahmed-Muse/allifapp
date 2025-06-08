@@ -169,9 +169,25 @@
         
             </tr>
 
- 
+              {% if sctr == 'Healthcare' %}
+             <tr>
+            <td class="allif-fix-table-col">Registered</td>
+            <td> {{allifquery.register}}</td>
+        
+            </tr>
 
-          
+             <tr>
+            <td class="allif-fix-table-col">Seen</td>
+            <td> {{allifquery.seen}}</td>
+        
+            </tr>
+
+           <tr>
+            <td class="allif-fix-table-col">Triaged</td>
+            <td> {{allifquery.triaged}}</td>
+        
+            </tr>
+            {% endif %}
             <tr>
               <td class="allif-fix-table-col">Comments</td>
               <td> {{allifquery.comments}}</td>

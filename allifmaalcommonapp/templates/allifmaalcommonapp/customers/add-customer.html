@@ -141,7 +141,36 @@
               <td>{{form.turnover}}</td>
           
               </tr>
-             
+         {% if sctr == 'Healthcare' %}
+
+        <tr>
+            <td class="allif-fix-table-col">Age</td>
+            <td>{{form.age}}</td>
+        </tr>
+         <tr>
+            <td class="allif-fix-table-col">Next Kin</td>
+            <td>{{form.nextkin}}</td>
+        </tr>
+        
+         <tr>
+            <td class="allif-fix-table-col">Relationship</td>
+            <td>{{form.relationship}}</td>
+        </tr>
+         <tr>
+            <td class="allif-fix-table-col">Register Patient</td>
+            <td>{{form.register}}</td>
+        </tr>
+         <tr>
+            <td class="allif-fix-table-col">Triage Status</td>
+            <td>{{form.triaged}}</td>
+        </tr>
+         <tr>
+            <td class="allif-fix-table-col">Seen By Doctor</td>
+            <td>{{form.seen}}</td>
+        </tr>
+
+  
+      {% endif %}   
 
     <tr>
       <td class="allif-fix-table-col">Balance</td>
@@ -283,6 +312,40 @@
           <tr>
             <td class="allif-fix-table-col">Payment Type</td>
             <td>{{form.paymentType}}</td>
+        </tr>
+
+        {% if sctr == 'Healthcare' %}
+
+        <tr>
+            <td class="allif-fix-table-col">Age</td>
+            <td>{{form.age}}</td>
+        </tr>
+         <tr>
+            <td class="allif-fix-table-col">Next Kin</td>
+            <td>{{form.nextkin}}</td>
+        </tr>
+        
+         <tr>
+            <td class="allif-fix-table-col">Relationship</td>
+            <td>{{form.relationship}}</td>
+        </tr>
+         <tr>
+            <td class="allif-fix-table-col">Register Patient</td>
+            <td>{{form.register}}</td>
+        </tr>
+         <tr>
+            <td class="allif-fix-table-col">Triage Status</td>
+            <td>{{form.triaged}}</td>
+        </tr>
+         <tr>
+            <td class="allif-fix-table-col">Seen By Doctor</td>
+            <td>{{form.seen}}</td>
+        </tr>
+
+  
+      {% endif %}
+
+      
       <tr>
         <td class="allif-fix-table-col">Action</td>
         <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>

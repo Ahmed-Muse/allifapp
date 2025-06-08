@@ -30,6 +30,7 @@ class User(AbstractUser):# this is for creating new user... the fields are below
     userdepartment= models.CharField(max_length=250, blank=True, null=True)
     fullNames= models.CharField(max_length=255, null=True,blank=True,default="User Full Names")
     phone=models.CharField(max_length=50,blank=True,null=True)
+    peformance_counter=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     can_do_all=models.BooleanField('Can do all',default=False)
     can_add=models.BooleanField('Can add',default=False)
     can_edit=models.BooleanField('Can edit',default=False)

@@ -151,19 +151,24 @@
                 </tr>
     
               </tr>
-<tr>
-  <td class="allif-fix-table-col">Created By</td>
-  <td>{{allifquery.owner}}</td>
-  </tr>
           <tr>
-            <td class="allif-fix-table-col">Date</td>
-            <td>{{allifquery.date|date:'d/m/Y'}}</td>
+            <td class="allif-fix-table-col">Created By</td>
+            <td>{{allifquery.owner}}</td>
             </tr>
-          
+            <tr>
+              <td class="allif-fix-table-col">Date</td>
+              <td>{{allifquery.date|date:'d/m/Y'}}</td>
+              </tr>
+            
            
           <tr>
             <td class="allif-fix-table-col">Tax Rate</td>
             <td>{{allifquery.taxrate}}</td>
+        
+        </tr> 
+         <tr>
+            <td class="allif-fix-table-col">Total Units Sold</td>
+            <td>{{allifquery.total_units_sold|floatformat:2|intcomma}}</td>
         
         </tr> 
           </tbody>

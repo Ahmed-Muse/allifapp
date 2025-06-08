@@ -22,21 +22,20 @@
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}" >Sectors</a></li>
+       
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSectors' user_var glblslug %}">Sectors</a></li>
       
-      </div>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a></li>
+       <li><a class="dropdown-item" href="{% url 'allifmaaladminapp:adminappUsers' user_var glblslug %}">Subscribers</a></li>
+      
+      
+    
+    </div>
       </ul>
     </div>
     
-    
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaaladminapp:adminappUsers' user_var glblslug %}">Subscribers</a>
-    
-    
-    <a href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Your Password</a>
-    
+   
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Sales
@@ -49,7 +48,7 @@
     </div>
     </ul>
   </div>
-  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a>
+  <a href="{% url 'allifmaalcommonapp:commonWebsite' %}">Websites</a>
   
   </div>
       </div><!--end....header column-->
@@ -69,26 +68,34 @@
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}" >Suppliers</a></li>
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
-      
+          
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDocsFormat' user_var glblslug %}">Doc Formats</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDataSorts' user_var glblslug %}">Data Filters</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Settings</a></li>
+     
       </div>
       </ul>
     </div>
 
   <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
+  Explore
     </a>
+
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Employees</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEmailsAndSMS' user_var glblslug %}">Communications</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalonlineapp:online-store' %}">Online Shop</a></li>
+        <li><a class="dropdown-item"href="{% url 'allifmaaladminapp:ui1' user_var glblslug %}">UIs</a></li>
+        <li><a class="dropdown-item"href="{% url 'allifmaaladminapp:product_list' %}">Products</a></li>
      
+        <li><a class="dropdown-item" href="{% url 'allifmaaladminapp:adminCustomerContacts' user_var glblslug %}">Contacts</a></li>
+    
+
     </div>
     </ul>
   </div>
-  <a href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a>
+  <a href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">To do list</a>
  
   </div>
       </div><!--end....header column-->
@@ -101,7 +108,7 @@
 
   
 <div class="allif-admin-img-container">
-<img src="{% static 'allifapperp/css/images/allifmaal-icon.png' %}" alt="Allifmaal" class="admin-home-image">
+<img src="{% static 'allifapperp/css/images/Allifmaal-icon.png' %}" alt="Allifmaal" class="admin-home-image">
 </div>
 
 </div><!--end of main container of the page-->

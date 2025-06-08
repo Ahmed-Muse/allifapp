@@ -3,16 +3,22 @@ from allifmaalusersapp.models import User
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required 
 from allifmaalcommonapp.models import *
+from django.db.models import Sum
 from allifmaalcommonapp.decorators import allifmaal_admin, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
 # Create your views here.
 from allifmaalcommonapp.forms import CommonAddSectorForm
 def holdingFunction(request):
     chartaccs_values_list=CommonChartofAccountsModel.objects.all().values_list('description', flat=True)
+    for items in chartaccs_values_list:
+        if all([items.quantity<=items.item.drugQuantity]):
+            pass
     if "Equity" in chartaccs_values_list:
         myequityacc=CommonChartofAccountsModel.objects.filter(description="Equity").first()
         initial_equity_bal=myequityacc.balance
         myequityacc.balance=initial_equity_bal-0
         myequityacc.save()
+        balance=CommonChartofAccountsModel.objects.filter(customer=12).aggregate(Sum('amount'))#fi
+        account_amount=balance['amount__sum']
     return HttpResponse("nothing to show")
 
 #@allifmaal_admin

@@ -32,22 +32,27 @@
      
     
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a></li>
+       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">CRM</a></li>
+       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">FRM</a></li>
+       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">SRM</a></li>
       
       <li><a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">Accounts</a></li>
      
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a></li>
       
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Forms</a></li>
+      
+     
+      {% if sctr == 'Education' %}
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Students</a></li>
+      
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Lecturers</a></li>
+       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Forms</a></li>
 
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonClasses' user_var glblslug %}">Classes</a></li>
       
-      {% if sctr == 'Education' %}
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" >Students</a></li>
-      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Lecturers</a></li>
       {% elif sctr == 'Healthcare' %}
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}" >Patients</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Patients</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Doctors</a></li>
       {% else %}
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>

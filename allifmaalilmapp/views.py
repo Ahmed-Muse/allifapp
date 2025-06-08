@@ -33,4 +33,3 @@ def ilmDashboard(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
