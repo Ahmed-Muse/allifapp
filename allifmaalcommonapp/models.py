@@ -1314,14 +1314,7 @@ class CommonExpensesModel(models.Model):
     
     def __str__(self):
         return str(self.description)
-    #def save(self, *args, **kwargs):
-        #if self.pay_from is None:
-        #self.pay_from== AllifmaalChartOfAccountsModel.objects.filter(description="Cash")
-       
-       
-        #super(AllifmaalExpensesModel, self).save(*args, **kwargs)
-
-
+   
 #########################################3 STOCK ##############################################
 class CommonWarehousesModel(models.Model):
     name=models.CharField(max_length=30, blank=False, null=True)

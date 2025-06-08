@@ -1,39 +1,7 @@
-from django.db import models
-
-# Create your models here.
-from django.db import models
-from django.utils import timezone
-from django.template.defaultfilters import register, slugify
-from uuid import uuid4
-from allifmaalcommonapp.models import CommonCustomersModel
-
-from django.http.response import HttpResponse
-# realestateapp/models.py (Conceptual BaseModel)
-from django.db import models
-from django.conf import settings
-from django.utils import timezone
-from decimal import Decimal
 from allifmaalusersapp.models import User
-
-import uuid # For generating unique IDs if needed
-
-
-# logisticsapp/models.py
 from django.db import models
-from django.conf import settings
-from django.utils import timezone
-from decimal import Decimal
-import uuid # For generating unique IDs if needed
+from allifmaalcommonapp.models import (CommonCompanyDetailsModel, CommonCustomersModel,CommonDivisionsModel, CommonBranchesModel, CommonDepartmentsModel,)
 
-# Import common models from allifmaalcommonapp
-from allifmaalcommonapp.models import (
-    CommonCompanyDetailsModel, CommonCustomersModel,
-    CommonDivisionsModel, CommonBranchesModel, CommonDepartmentsModel,
-    # CommonPaymentTermsModel # Assuming you have a payment terms model if needed
-)
-
-    
-# Create your models here.
 class AirportsModel(models.Model):
     owner=models.ForeignKey(User,related_name="airports_owner",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="airports_company_relname",on_delete=models.CASCADE,null=True,blank=True)

@@ -1,24 +1,8 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
-#from quotation.models import ClientsModel
 from allifmaalcommonapp.constants import BED_TYPES, PRESCRIPTION_FORMULATIONS, ADMINISTRATION_ROUTES, DOSAGE_UNITS, OCCUPANCY_STATUSES, APPOINTMENT_STATUSES, ADMISSION_STATUSES, REFERRAL_TYPES, REFERRAL_STATUSES, LAB_TEST_STATUSES, IMAGING_TEST_STATUSES, PATIENT_GENDERS, BLOOD_GROUPS, ENCOUNTER_TYPES, MEDICAL_SERVICE_TYPES
-from django.utils import timezone
+
 from allifmaalusersapp.models import User
-from django.template.defaultfilters import register, slugify
-from uuid import uuid4
-from django.urls import reverse
 from allifmaalcommonapp.models import CommonOrdersModel, CommonServicesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
-# the following models will be leveraged from the common apps model...
-# HRMMODELS - Holds all staff like doctors, nurses specialists
-# PATIENTS - all types of patients... inpatient, outpatient...etc
-# accounts - chart of accounts, ledgers, gls, journals
-# Divisions, branches, departments, etc
-# inventory, purchases, quotes, invoices, stock categories
-# assets, expenses ...
-# payments - to suppliers and from patients/customers####
-# ###
 
 class PrescriptionsModel(models.Model):
     """
