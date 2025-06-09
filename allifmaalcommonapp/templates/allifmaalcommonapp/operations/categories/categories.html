@@ -24,9 +24,9 @@
         <div class="content-dropdown-menu">
   
         <li><a class="dropdown-item">Looking for something?</a></li>
-        <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStockCats' user_var glblslug %}">Clear Search</a>
+        <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCategories' user_var glblslug %}">Clear Search</a>
           
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonStockCategorySearch' user_var glblslug %}">{% csrf_token %}
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonCategorySearch' user_var glblslug %}">{% csrf_token %}
         
           <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
           placeholder="Type Here ...">
@@ -39,8 +39,8 @@
     </div>
     <a class="amel-table-list-identifier">Stock Categories:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-   
-    <a href="{% url 'allifmaalcommonapp:commonAddStockCat' user_var glblslug %}">New Stock Category</a>
+   <a href="{% url 'allifmaalcommonapp:commonCategories' user_var glblslug %}">Main Categories</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddCategory' user_var glblslug %}">New Category</a>
  
     <a href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">Stocks</a>
   </div>
@@ -64,9 +64,9 @@
           <tr class="allif-table-header-row">
           <td class="allif-fix-table-col">Category</td>
        
-          <td>Created By</td>
+          <td>Code</td>
           <td>Department</td>
-          <td>Date</td>
+          <td>Created On</td>
         
         
           <td>Navigate</td>
@@ -80,11 +80,11 @@
           
           {% for item in allifqueryset %} 
           <tr data-id="{{item.id}}">
-          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockCategoryDetails' item.id user_var glblslug %}">{{item.description}}</a></td>
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCategoryDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
          
           
            <td>
-            {{item.owner}}
+            {{item.code}}
            </td>
            <td>
               {{item.department}}
@@ -98,15 +98,15 @@
             <div class="dropdown allifmaal-content-dropdown">
               <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
               <div class="dropdown-content">
-                <a href="{% url 'allifmaalcommonapp:commonEditStockCat' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="{% url 'allifmaalcommonapp:commonEditCategory' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
                 <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
                 
               </div>
             </div>
             <div class="dropdown allif-confirm-action">
               
-              <a href="{% url 'allifmaalcommonapp:commonStockCats' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-              <a href="{% url 'allifmaalcommonapp:commonDeleteStockCat' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+              <a href="{% url 'allifmaalcommonapp:commonCategories' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteCategory' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
             </div>
   
            
@@ -120,42 +120,42 @@
       {% if searched_data %}
       {% for item in searched_data %}
       <tr data-id="{{item.id}}">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockCategoryDetails' item.id user_var glblslug %}">{{item.description}}</a></td>
-       
-        
-         <td>
-          {{item.owner}}
-         </td>
-         <td>
-            {{item.department}}
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCategoryDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
+         
+          
+           <td>
+            {{item.code}}
            </td>
-         
-         <td>
-          {{item.date|date:'d/m/Y'}}
-         </td>
-        
-         <td>
-          <div class="dropdown allifmaal-content-dropdown">
-            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
-            <div class="dropdown-content">
-              <a href="{% url 'allifmaalcommonapp:commonEditStockCat' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
-              
+           <td>
+              {{item.department}}
+             </td>
+           
+           <td>
+            {{item.date|date:'d/m/Y'}}
+           </td>
+          
+           <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+              <div class="dropdown-content">
+                <a href="{% url 'allifmaalcommonapp:commonEditCategory' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+                
+              </div>
             </div>
-          </div>
-          <div class="dropdown allif-confirm-action">
-            
-            <a href="{% url 'allifmaalcommonapp:commonStockCats' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalcommonapp:commonDeleteStockCat' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-          </div>
-
-         
-        </td>
-       <td> . . . </td>
-       <td></td>
-      
+            <div class="dropdown allif-confirm-action">
+              
+              <a href="{% url 'allifmaalcommonapp:commonCategories' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteCategory' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            </div>
   
-    </tr>
+           
+          </td>
+         <td> . . . </td>
+         <td></td>
+        
+    
+      </tr>
       {% endfor %}
         {%endif %}
   

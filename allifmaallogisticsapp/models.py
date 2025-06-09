@@ -3,7 +3,7 @@ from django.db import models
 from allifmaalcommonapp.models import (CommonCompanyDetailsModel, CommonCustomersModel,CommonDivisionsModel, CommonBranchesModel, CommonDepartmentsModel,)
 
 class AirportsModel(models.Model):
-    owner=models.ForeignKey(User,related_name="airports_owner",on_delete=models.SET_NULL,null=True,blank=True)
+    owner=models.ForeignKey(User,related_name="airports_owners",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="airports_company_relname",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="airports_division",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="airports_branch",on_delete=models.SET_NULL,null=True,blank=True)

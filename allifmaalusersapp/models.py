@@ -2,9 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
 from uuid import uuid4
-
-class User(AbstractUser):# this is for creating new user... the fields are below and those from parent class
-    user_level= [
+user_level= [
     ('owner','owner'),
     ('chairman','chairman'),
     ('ceo','ceo'),
@@ -14,6 +12,8 @@ class User(AbstractUser):# this is for creating new user... the fields are below
     ('staff', 'staff'),
     ('guest', 'guest'),
     ]
+class User(AbstractUser):# this is for creating new user... the fields are below and those from parent class
+   
     #db_table = 'auth_user'# you may uncomment this if you get cusotmization related errors and see if will solve
     USERNAME_FIELD = 'email'
     username = models.CharField(max_length=255, null=True,blank=True)

@@ -22,14 +22,16 @@
   </a>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditStockCat' allifquery.id user_var glblslug %}">Edit Item</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditCategory' allifquery.id user_var glblslug %}">Edit Item</a></li>
         
-        <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteStockCat' allifquery.id user_var glblslug %}">Delete Item</a></li>
+        <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteCategory' allifquery.id user_var glblslug %}">Delete Item</a></li>
     
    </div>
   </ul>
 </div>
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+<a href="{% url 'allifmaalcommonapp:commonCategories' user_var glblslug %}">Main Categories</a>
+
 
 <a href="{% url 'allifmaalcommonapp:commonAssetCategories' user_var glblslug %}">Asset Categories</a>
 
@@ -69,8 +71,15 @@
         <td>{{allifquery.branch}}</td>
         </tr>
      
-      
-   
+      <tr>
+            <td class="allif-fix-table-col">Department</td>
+            <td>{{allifquery.department}}</td>
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Description</td>
+            <td>{{allifquery.description}}</td>
+            </tr>
+          
         </tbody>
         </table>
       </div>
@@ -84,19 +93,29 @@
        <table class="table table-layout">
         <tbody>
           <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td>{{allifquery.department}}</td>
-            </tr>
-          <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{allifquery.description}}</td>
-            </tr>
-          <tr>
             <td class="allif-fix-table-col">Created By</td>
             <td>{{allifquery.owner}}</td>
             </tr>
          
-       
+      <tr>
+            <td class="allif-fix-table-col">Category Name</td>
+            <td>{{allifquery.name}}</td>
+            </tr>
+           
+            <tr>
+            <td class="allif-fix-table-col">Category Code</td>
+            <td>{{allifquery.code}}</td>
+            </tr>
+            <tr>
+            <td class="allif-fix-table-col">Operation Year</td>
+            <td>{{allifquery.operation_year}}</td>
+            </tr>
+            <tr>
+            <td class="allif-fix-table-col">Operation Term</td>
+            <td>{{allifquery.operation_term}}</td>
+            </tr>
+           
+           
           </tbody>
           </table>
           </div>
@@ -109,6 +128,18 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
+           <tr>
+            <td class="allif-fix-table-col">Status</td>
+            <td>{{allifquery.is_current}}</td>
+            </tr>
+            <tr>
+            <td class="allif-fix-table-col">Start Date</td>
+            <td>{{allifquery.start_date}}</td>
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">End Date</td>
+            <td>{{allifquery.end_date}}</td>
+            </tr>
           <tr>
             <td class="allif-fix-table-col">Date</td>
             <td>{{allifquery.date|date:'d/m/Y'}}</td>
@@ -137,7 +168,7 @@
 <div class="row mt-12"> <!--start....table row-->
   <div class="row">
   <div class="col-md-12"> <!--start....table column-->
-    <div class="table-content-description"> <a href="" class="allif-table-links">{{allifquery}} Assets</a> </div>
+    <div class="table-content-description"> <a href="" class="allif-table-links">{{allifquery}} Related Items</a> </div>
   <div class="allif-scroll-table">
     <div class="table-responsive allif-full-table">
     <table class="table table-layout">

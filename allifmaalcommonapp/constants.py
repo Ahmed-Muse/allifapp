@@ -1,6 +1,12 @@
 # healthcare_app/constants.py (or a similar location)
 
 # Medical Service Types
+operation_year_options= [
+    ('Current', 'Current'),
+    ('Passed', 'Passed'),
+    ('Future', 'Future'),
+  
+]
 MEDICAL_SERVICE_TYPES = [
     ('CONS', 'Consultation'),
     ('LAB', 'Lab Test'),
@@ -31,6 +37,14 @@ ADMINISTRATION_ROUTES = [
     ('TOPIC', 'Topical'),
     ('SUBQ', 'Subcutaneous'),
 ]
+
+###########3 below defines item stock status... is it physical or service ...
+item_in_physical_state_or_service = [
+    ('Physical', 'Physical'),
+    ('Service', 'Service'),
+  
+]
+
 
 # Dosage Units
 DOSAGE_UNITS = [

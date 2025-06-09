@@ -2,7 +2,7 @@ from django.db import models
 from allifmaalcommonapp.constants import BED_TYPES, PRESCRIPTION_FORMULATIONS, ADMINISTRATION_ROUTES, DOSAGE_UNITS, OCCUPANCY_STATUSES, APPOINTMENT_STATUSES, ADMISSION_STATUSES, REFERRAL_TYPES, REFERRAL_STATUSES, LAB_TEST_STATUSES, IMAGING_TEST_STATUSES, PATIENT_GENDERS, BLOOD_GROUPS, ENCOUNTER_TYPES, MEDICAL_SERVICE_TYPES
 
 from allifmaalusersapp.models import User
-from allifmaalcommonapp.models import CommonOrdersModel, CommonServicesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
+from allifmaalcommonapp.models import CommonOrdersModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
 
 class PrescriptionsModel(models.Model):
     """
@@ -21,7 +21,7 @@ class PrescriptionsModel(models.Model):
     owner=models.ForeignKey(User, related_name="ownrprescrptns",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpprescrptns",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvsprescrptns",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchprescrptns",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchprescrptn",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptprescrptns",on_delete=models.SET_NULL,null=True,blank=True)
     frequency=models.CharField(max_length=350,blank=True,null=True)
     duration=models.CharField(max_length=350,blank=True,null=True)
@@ -48,7 +48,7 @@ class WardsModel(models.Model):
     ward_name=models.TextField(max_length=250,blank=True,null=True,default='Ward')
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     owner=models.ForeignKey(User, related_name="ownrwards",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpwards",on_delete=models.CASCADE,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpwardsrelatnme",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvswards",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnchwards",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptwards",on_delete=models.SET_NULL,null=True,blank=True)
@@ -101,7 +101,7 @@ class AppointmentsModel(models.Model):
     doctor=models.ForeignKey(CommonEmployeesModel,related_name="ownrappointment",on_delete=models.SET_NULL,null=True,blank=True)
 
     #linking to MedicalServicesModel if appointment is for a specific service (e.g., X-ray)
-    scheduled_service=models.ForeignKey(CommonServicesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="service_appointments",help_text="The medical service for which this appointment is scheduled (optional).")
+    scheduled_service=models.ForeignKey(CommonCategoriesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="service_appointments",help_text="The medical service for which this appointment is scheduled (optional).")
 
     appointment_date_time=models.DateTimeField(blank=True, null=True,help_text="Scheduled date and time of the appointment.")
     duration_minutes = models.IntegerField(blank=True, null=True, default=30,help_text="Expected duration of the appointment in minutes.")

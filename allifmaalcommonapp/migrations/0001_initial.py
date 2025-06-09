@@ -504,7 +504,6 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(blank=True, max_length=255, null=True)),
                 ('code', models.CharField(blank=True, help_text='Unique code for the program, e.g., BSCIT', max_length=50, null=True)),
                 ('description', models.TextField(blank=True, null=True)),
-                ('is_active', models.BooleanField(blank=True, default=True, null=True)),
                 ('branch', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='brnch_programs', to='allifmaalcommonapp.commonbranchesmodel')),
                 ('company', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='cmp_programs', to='allifmaalcommonapp.commoncompanydetailsmodel')),
                 ('department', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='dept_programs', to='allifmaalcommonapp.commondepartmentsmodel')),

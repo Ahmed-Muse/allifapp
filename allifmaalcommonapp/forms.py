@@ -576,6 +576,69 @@ class CommonAddPaymentTermForm(forms.ModelForm):
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
 
 
+class CommonAddUnitForm(forms.ModelForm):
+    class Meta:
+        model=CommonUnitsModel
+        fields = ['description','comments','division','branch','department']
+        widgets={
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+        }
+    def __init__(self,allifmaalparameter, *args, **kwargs):
+        super(CommonAddUnitForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+
+
+class CommonAddOperationYearForm(forms.ModelForm):
+    class Meta:
+        model=CommonOperationYearsModel
+        fields = ['year','comments','start_date','end_date','department','is_current','branch','division']
+        widgets={
+            'year':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'end_date':DatePickerInput(attrs={'class':'form-control'}),
+            'start_date':DatePickerInput(attrs={'class':'form-control'}),
+            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+        }
+    def __init__(self,allifmaalparameter, *args, **kwargs):
+        super(CommonAddOperationYearForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+
+
+class CommonAddOperationYearTermForm(forms.ModelForm):
+    class Meta:
+        model=CommonOperationYearTermsModel
+        fields = ['operation_year','name','is_active','comments','start_date','end_date','department','is_current','branch','division']
+        widgets={
+            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'end_date':DatePickerInput(attrs={'class':'form-control'}),
+            'start_date':DatePickerInput(attrs={'class':'form-control'}),
+            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+        }
+    def __init__(self,allifmaalparameter, *args, **kwargs):
+        super(CommonAddOperationYearTermForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['operation_year'].queryset =CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
+
+
+    
 class CommonAddAssetCategoryForm(forms.ModelForm):
     class Meta:
         model = CommonAssetCategoriesModel
@@ -817,25 +880,39 @@ class CommonAddCreditNoteItemForm(forms.ModelForm):
         
         self.fields['items'].queryset = CommonStocksModel.objects.filter(company=allifmaalparameter)
        
-####################################3 STOCK ##############################33
-class CommonStockCatAddForm(forms.ModelForm):
+####################################3 CATEGORIES ##############################33
+class CommonCategoryAddForm(forms.ModelForm):
     class Meta:
-        model =CommonStockCategoriesModel
-        fields = ['description','division','branch','department','comments']
+        model=CommonCategoriesModel
+        fields = ['description','start_date','end_date','is_current','operation_year','operation_term','name','code','division','branch','department','comments']
         widgets={
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
+            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'code':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
+            'end_date':DatePickerInput(attrs={'class':'form-control'}),
+            'start_date':DatePickerInput(attrs={'class':'form-control'}),
+            'operation_term':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
            
         
         }
     def __init__(self,allifmaalparameter, *args, **kwargs):
-        super(CommonStockCatAddForm, self).__init__(*args, **kwargs)
+        super(CommonCategoryAddForm, self).__init__(*args, **kwargs)
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        
+        self.fields['operation_year'].queryset =CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
+        self.fields['operation_term'].queryset =CommonOperationYearTermsModel.objects.filter(company=allifmaalparameter)
+
 
 class CommonStockItemAddForm(forms.ModelForm):
     class Meta:
@@ -869,7 +946,7 @@ class CommonStockItemAddForm(forms.ModelForm):
         self.fields['inventory_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=19999)
         self.fields['expense_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=19999)
         self.fields['income_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=49999,code__gte=39999)
-        self.fields['category'].queryset = CommonStockCategoriesModel.objects.filter(company=allifmaalparameter)
+        self.fields['category'].queryset = CommonCategoriesModel.objects.filter(company=allifmaalparameter)
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
@@ -1091,6 +1168,7 @@ class CommonAddCustomerPaymentForm(forms.ModelForm):
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
 
+
 class CommonAddSalaryForm(forms.ModelForm): #the forms here is the one imported up there.
     class Meta:
         model = CommonSalariesModel
@@ -1119,6 +1197,40 @@ class CommonAddSalaryForm(forms.ModelForm): #the forms here is the one imported 
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+
+    
+####################################3 ORDERS ##############################33
+class CommonAddOrderDetailsForm(forms.ModelForm):
+    class Meta:
+        model=CommonOrdersModel
+        fields = ['description','start_date','end_date','is_current','operation_year','operation_term','name','code','division','branch','department','comments']
+        widgets={
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
+            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'code':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
+            'end_date':DatePickerInput(attrs={'class':'form-control'}),
+            'start_date':DatePickerInput(attrs={'class':'form-control'}),
+            'operation_term':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+           
+        
+        }
+    def __init__(self,allifmaalparameter, *args, **kwargs):
+        super(CommonCategoryAddForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        
+        self.fields['operation_year'].queryset =CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
+        self.fields['operation_term'].queryset =CommonOperationYearTermsModel.objects.filter(company=allifmaalparameter)
 
 
 class CommonAddJobDetailsForm(forms.ModelForm):
@@ -1192,3 +1304,91 @@ class CommonAddTasksForm(forms.ModelForm): #the forms here is the one imported u
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
         self.fields['assignedto'].queryset = CommonEmployeesModel.objects.filter(company=allifmaalparameter,)
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ###############3 you might delete below is not used so far... ##########3
+ 
+class CommonAddProgramForm(forms.ModelForm):
+    class Meta:
+        model=CommonProgramsModel
+        fields = ['name','start_date','operation_year','operation_term','end_date','code','description','department','is_current','branch','division']
+        widgets={
+            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'code':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'end_date':DatePickerInput(attrs={'class':'form-control'}),
+            'start_date':DatePickerInput(attrs={'class':'form-control'}),
+            'operation_term':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+             # --- Add is_active here ---
+         
+        
+        }
+        
+    def __init__(self,allifmaalparameter, *args, **kwargs):
+        super(CommonAddProgramForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['operation_year'].queryset =CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
+        self.fields['operation_term'].queryset =CommonOperationYearTermsModel.objects.filter(company=allifmaalparameter)
+
+
+class CommonAddServiceForm(forms.ModelForm):
+    class Meta:
+        model=CommonServicesModel
+        fields = ['description','name','start_date','operation_year','unitprice','unitcost','quantity',
+                  'operation_term','comments','end_date','code','normal_range_info','unit_of_measure',
+                  'program','credits','department','is_current','branch','division']
+        widgets={
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'credits':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'code':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'unitprice':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'unitcost':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'quantity':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'normal_range_info':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'end_date':DatePickerInput(attrs={'class':'form-control'}),
+            'program':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'unit_of_measure':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'start_date':DatePickerInput(attrs={'class':'form-control'}),
+            'operation_term':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+        
+        }
+        
+    def __init__(self,allifmaalparameter, *args, **kwargs):
+        super(CommonAddServiceForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['operation_year'].queryset =CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
+        self.fields['operation_term'].queryset =CommonOperationYearTermsModel.objects.filter(company=allifmaalparameter)
+
+        self.fields['unit_of_measure'].queryset =CommonUnitsModel.objects.filter(company=allifmaalparameter)
+        self.fields['program'].queryset =CommonProgramsModel.objects.filter(company=allifmaalparameter)
+    

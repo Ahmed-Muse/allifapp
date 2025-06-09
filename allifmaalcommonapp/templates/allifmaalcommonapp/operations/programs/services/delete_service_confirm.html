@@ -17,7 +17,7 @@
 
 <div class="container-fluid amel-content-header">
   <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-<a href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Forms</a>
+<a href="{% url 'allifmaalcommonapp:commonPrograms' user_var glblslug %}">Programs</a>
 </div>
 
     </div><!--end....header column-->
@@ -115,7 +115,7 @@
     <tr>
         <td>
         <div class="delete-options-container">
-          <a href="{% url 'allifmaalcommonapp:commonStockCats' user_var glblslug %}">Back</a>
+          <a href="{% url 'allifmaalcommonapp:commonServices' user_var glblslug %}">Back</a>
         </div>
         </td>
       </tr>
@@ -135,7 +135,7 @@
           <tr>
             <td>
             <div class="delete-options-container">
-              <a href="{% url 'allifmaalcommonapp:commonStockCats' user_var glblslug %}">No</a>
+              <a href="{% url 'allifmaalcommonapp:commonServices' user_var glblslug %}">No</a>
             </div>
             </td>
           </tr>
@@ -156,7 +156,7 @@
           <tr>
             <td>
             <div class="delete-options-container">
-              <a href="{% url 'allifmaalcommonapp:commonDeleteStockCat' allifquery.id user_var glblslug %}" class="body-delete-link">Yes</a></li>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteService' allifquery.id user_var glblslug %}" class="body-delete-link">Yes</a></li>
             </div>
             </td>
           </tr>

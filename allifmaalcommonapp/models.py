@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 from .constants import PRESCRIPTION_FORMULATIONS, ADMINISTRATION_ROUTES, DOSAGE_UNITS, OCCUPANCY_STATUSES, APPOINTMENT_STATUSES, ADMISSION_STATUSES, REFERRAL_TYPES, REFERRAL_STATUSES, LAB_TEST_STATUSES, IMAGING_TEST_STATUSES, PATIENT_GENDERS, BLOOD_GROUPS, ENCOUNTER_TYPES, MEDICAL_SERVICE_TYPES
 from django.urls import reverse
+from django.utils import timezone # Make sure to import timezone
 from .constants import *
 from decimal import Decimal
 from django.http.response import HttpResponse, JsonResponse
@@ -277,7 +278,6 @@ class CommonPaymentTermsModel(models.Model):
     def __str__(self):
         return str(self.description)
     
-
 class CommonUnitsModel(models.Model):
     description=models.CharField(max_length=50,blank=False,null=True,unique=False)
     owner=models.ForeignKey(User, on_delete=models.SET_NULL,related_name="owner_units",blank=True,null=True)
@@ -290,28 +290,51 @@ class CommonUnitsModel(models.Model):
     
     def __str__(self):
         return str(self.description)
+
 class CommonOperationYearsModel(models.Model):
     """
-    defines the opreational/fiscal/academic year
+    defines the opreational/fiscal/academic year..
     
     """
-    year=models.CharField(max_length=50,blank=False,null=True,unique=False,help_text="e.g., 2023-2024")
+    year=models.CharField(max_length=50,blank=True,default="Operation Year",null=True,unique=False,help_text="e.g., 2023-2024")
     owner=models.ForeignKey(User, on_delete=models.SET_NULL,related_name="owner_operation_year",blank=True,null=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmppy_operation_year",on_delete=models.CASCADE,null=True,blank=True)
-    comments=models.CharField(null=True, blank=False, max_length=50)
+    comments=models.CharField(null=True, blank=True, max_length=50)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_operation_year",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_operation_year",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="paym_operation_year",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="paym_operations_year",on_delete=models.SET_NULL,null=True,blank=True)
     
-    start_date=models.DateField(blank=True,null=True)
-    end_date=models.DateField(blank=True,null=True)
-    is_current=models.BooleanField(default=False,blank=True,null=True)
+    start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
+   
     
     def __str__(self):
         return str(self.year)
     
-  
+
+# --- Function to get the default Operation Year ---
+def get_default_operation_year():
+    """
+    Returns the CommonOperationYearsModel instance marked as 'Current'.
+    If multiple 'Current' years exist, it picks the latest one by 'start_date'.
+    If no 'Current' year exists, it falls back to the overall latest year by 'start_date'.
+    """
+    try:
+        # Try to find a year explicitly marked as 'Current'.
+        # If there's a possibility of multiple 'Current' years (which should ideally be avoided
+        # in practice), .latest('start_date') will pick the one with the most recent start_date.
+        return CommonOperationYearsModel.objects.filter(is_current='Current').latest('start_date')
+    except CommonOperationYearsModel.DoesNotExist:
+        # If no year is explicitly marked 'Current', fall back to the overall latest year by its start_date.
+        try:
+            return CommonOperationYearsModel.objects.latest('start_date')
+        except CommonOperationYearsModel.DoesNotExist:
+            # If no operation years exist at all, print a warning and return None.
+            # Returning None means the ForeignKey field must be defined with `null=True`.
+            return None
+
 class CommonOperationYearTermsModel(models.Model):
     """
     this model captures operational year sections like terms, semisters, quarters ...etc
@@ -321,24 +344,26 @@ class CommonOperationYearTermsModel(models.Model):
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmppy_operation_year_terms",on_delete=models.CASCADE,null=True,blank=True)
     comments=models.CharField(blank=True,null=True, max_length=50)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_operation_year_terms",on_delete=models.SET_NULL,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_operation_year_term",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_operation_year_terms",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="paym_operation_year_terms",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="paym_operation_year_term",on_delete=models.SET_NULL,null=True,blank=True)
     
-    is_current=models.BooleanField(default=False,blank=True,null=True)
+    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
+   
+    operation_year=models.ForeignKey(CommonOperationYearsModel,default=get_default_operation_year,blank=True,null=True, on_delete=models.CASCADE, related_name='termsyear')
+    start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    is_active=models.BooleanField(default=False,blank=True,null=True)
     
-    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='termsyear')
-    
-    start_date = models.DateField(blank=True,null=True)
-    end_date = models.DateField(blank=True,null=True)
-    is_active = models.BooleanField(default=False,blank=True,null=True)
    
     def __str__(self):
-        return str(self.year)
+        return str(self.name)
 
-class CommonProgramsModel(models.Model):
+
+#########################################3 stock, items, services, subjects categories.. ##############################################
+class CommonCategoriesModel(models.Model):
     """
-    Defines programs that are offered by a particular entity
+    Defines the categories of programs/items/subject/services that are offered by a particular entity
     for example:
     Sales...sales, manufacturing, repairs, services contracts etc.
     Education...Bachelor of Science in IT, Diploma in Nursing, PhD in MBA etc.
@@ -349,129 +374,28 @@ class CommonProgramsModel(models.Model):
     Services...consultancy, financial services, audit, legal, accounting etc..
     
     """
+   
+    description=models.CharField(max_length=30, blank=False, null=True)
+    owner=models.ForeignKey(User, related_name="cmnurstkcat",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmnstcatrln",on_delete=models.CASCADE,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsstockcats",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchstockcats",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptstockcats",on_delete=models.SET_NULL,null=True,blank=True)
+    date=models.DateField(blank=True,null=True,auto_now_add=True)
+    comments=models.CharField(null=True, blank=True, max_length=50)
+    
     name=models.CharField(max_length=255,blank=True,null=True)
     code=models.CharField(max_length=50,blank=True,null=True, unique=False, help_text="Unique code for the program, e.g., BSCIT")
-    description=models.TextField(blank=True, null=True)
-    is_active=models.BooleanField(default=True,blank=True,null=True)
     
-    owner=models.ForeignKey(User,related_name="ownr_programs",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_programs",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_programs",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_programs",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_programs",on_delete=models.SET_NULL,null=True,blank=True)
-    
-
-    def __str__(self):
-        return f"{self.name}"
-
-class CommonServicesModel(models.Model):
+    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='categories_operation_year')
+    operation_term=models.ForeignKey(CommonOperationYearTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='terms_categories')
+    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
    
-    """
-    Defines individual courses/subjects/services/goods within a program that are offered by a particular entity
-    for example:
-    Sales...selling of various items, item repairs, consultancy etc
-    Education...sciences, math, electrical current, strenghth of materials, dental surgery etc..
-    Healthcare...general consultations, dental washing, maternity and delivery, heart surgery etc.
-    Hospitality...Accommodation, outdoor catering, room bookings,conferences, events etc
-    Logistics....ticketing, cargo shipment, cargo handling
-    Realestate...letting spaces, building management, BMS
-    Services...consultancy, financial services, auditing, legal services, accounting services etc..
-    
-    
-    """
-    program=models.ForeignKey(CommonProgramsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='coursesprograms')
-   
-    code=models.CharField(max_length=50, help_text="Course code, e.g., CS101",blank=True,null=True)
-    description=models.TextField(blank=True, null=True)
-    credits=models.DecimalField(max_digits=4,blank=True,null=True, decimal_places=2, default=0.00, help_text="Credit hours for the course")
-    is_active=models.BooleanField(default=True,blank=True,null=True)
-    
-    service_name=models.CharField(null=True, blank=True,max_length=250,default='Medical Services')
-    unitprice=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    quantity=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    unitcost=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    lastUpdated=models.DateTimeField(blank=True, null=True)
-    
-    owner=models.ForeignKey(User,related_name="ownr_services",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_services",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_services",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_services",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_services",on_delete=models.SET_NULL,null=True,blank=True)
-    
-    
-    service_description=models.TextField(blank=True, null=True)
-    normal_range_info=models.CharField(max_length=250, blank=True, null=True,help_text="General normal range information for this test (e.g., '70-110 mg/dL').")
-    unit_of_measure=models.CharField(max_length=50, blank=True, null=True,help_text="Standard unit of measure for the test result (e.g., 'mg/dL', 'cells/mm3').")
-   
-  
+    start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
     def __str__(self):
-        return f"{self.name} ({self.code})"
+    		return str(self.name) # this will show up in the admin area
 
-#################3 common categories....#############3
-
-class CommonCategoriesModel(models.Model):
-    """
-    Defines programs that are offered by a particular entity
-    for example:
-    Sales...software,solar, water,cement, oil, etc.
-    Education...Bachelor of Science in IT, Diploma in Nursing, PhD in MBA etc.
-    Healthcare...pharmacy will use to identity items.
-    Hospitality...rooms, halls,parking
-    Logistics....
-    Realestate...residential,commercial,leasing,inudstrial,land, mixed-use
-    Services...consultancy, financial services, audit, legal, accounting etc..
-    
-    """
-    name=models.CharField(max_length=255,blank=True,null=True)
-    code=models.CharField(max_length=50,blank=True,null=True, unique=False, help_text="Unique code for the program, e.g., BSCIT")
-    description=models.TextField(blank=True, null=True)
-    is_active=models.BooleanField(default=True,blank=True,null=True)
-    
-    owner=models.ForeignKey(User,related_name="ownr_categories",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_categories",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_categories",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_categories",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_categories",on_delete=models.SET_NULL,null=True,blank=True)
-    
-
-    def __str__(self):
-        return f"{self.name}"
-
-
-#######3 progess statuses ############3
-
-class CommonProgresStatusModel(models.Model):
-    """
-    Defines status...complete, planned, onhold, sold...etc.
-    """
-    name=models.CharField(max_length=255,blank=True,null=True)
-   
-    owner=models.ForeignKey(User,related_name="ownr_progress_status",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_progress_status",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_progress_status",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_progress_status",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_progress_status",on_delete=models.SET_NULL,null=True,blank=True)
-    
-
-    def __str__(self):
-        return f"{self.name}"
-
-class CommonPriorityLevelsModel(models.Model):
-    """
-    Defines priorities... like high, low , medium ...etc.
-    """
-    name=models.CharField(max_length=255,blank=True,null=True)
-   
-    owner=models.ForeignKey(User,related_name="ownr_priroties_level",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_priroties_level",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_priroties_level",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_priroties_level",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_priroties_level",on_delete=models.SET_NULL,null=True,blank=True)
-    
-
-    def __str__(self):
-        return f"{self.name}"
 
 # #################3 HRM ################    
 class CommonEmployeesModel(models.Model):
@@ -734,7 +658,7 @@ class CommonCustomersModel(models.Model):
     #..... start.... below fields is special for educational setup....
     form=models.ForeignKey(CommonFormsModel,on_delete=models.SET_NULL,blank=True,null=True)
     className=models.ForeignKey(CommonClassesModel,on_delete=models.SET_NULL,blank=True,null=True)
-    course=models.ForeignKey(CommonServicesModel,blank=True,null=True, on_delete=models.CASCADE, related_name='course_enrollments')
+    course_category=models.ForeignKey(CommonCategoriesModel,blank=True,null=True, on_delete=models.CASCADE, related_name='course_enrollments')
     operation_year=models.ForeignKey(CommonOperationYearsModel, on_delete=models.CASCADE, related_name='year_enrollments',null=True,blank=True)
     term=models.ForeignKey(CommonOperationYearTermsModel, on_delete=models.CASCADE, related_name='term_enrollments',blank=True,null=True)
     enrollment_date=models.DateField(auto_now_add=True,blank=True,null=True)
@@ -829,79 +753,31 @@ class CommonLedgerEntriesModel(models.Model): # this is the journal entries...
         return '{}'.format(self.comments)
 
 
-class CommonAttendancesModel(models.Model):
-    """
-    Tracks student/staff attendance for classes/jobs.
-    """
-    # general fields
-    staff=models.ForeignKey(CommonEmployeesModel, on_delete=models.CASCADE, related_name='staff_attendances',blank=True,null=True)
-    attendance_date=models.DateField()
-    is_present=models.BooleanField(default=False)
-    is_late=models.BooleanField(default=False)
-    comments=models.TextField(blank=True, null=True)
-    
-    # below fields are specific in educational setup
-    student=models.ForeignKey(CommonCustomersModel, on_delete=models.CASCADE, related_name='student_attendances',blank=True,null=True)
-    operation_term=models.ForeignKey(CommonOperationYearTermsModel, on_delete=models.CASCADE, related_name='term_attendances',blank=True,null=True)
-    course=models.ForeignKey(CommonServicesModel, on_delete=models.CASCADE, related_name='course_attendances',blank=True,null=True)
-    instructor=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='teaching_schedules')
-    classroom = models.ForeignKey(CommonClassesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='schedules')
-    day_of_week=models.CharField(max_length=3, choices=day_of_week_choices,blank=True,null=True)
-    
-   
-    def __str__(self):
-        return str(self.attendance_date)
 
 
-class CommonLaboratoriesModel(models.Model):
-    
-    """
-    this records laboratories in various organizations...
-    sales... lab for normal tests... eg water testing lab, RND
-    Healthcare... normal labs.
-    education... biology lab, physics lab, computer lab etc..
-    
-    """
-    lab_name=models.CharField(null=True, blank=True,max_length=250)
-    owner=models.ForeignKey(User, related_name="ownrlbtfrm",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmplbtfrm",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvslbtfrm",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchlbtfrm",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptlbtfrm",on_delete=models.SET_NULL,null=True,blank=True)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    contact_person=models.CharField(max_length=250, blank=True, null=True)
-    phone=models.CharField(max_length=50, blank=True, null=True)
-    email=models.EmailField(blank=True, null=True)
-    address=models.TextField(blank=True, null=True)
-    is_internal=models.BooleanField(default=True,help_text="True if this is an internal lab within the healthcare entity.",blank=True,null=True)
-    def __str__(self):
-        return str(self.lab_name)
 
-class CommonDiagnosesModel(models.Model):
-    """
-    Catalogue of standardized medical diagnoses (e.g., ICD codes).
-    This should primarily be a master data list, not transaction-specific.
-    """
-    description=models.CharField(null=True, blank=True,max_length=250)
-    owner=models.ForeignKey(User, related_name="ownrdiagnsis",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpdiagnsis",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsdiagnsis",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchdiagnsis",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptdiagnsis",on_delete=models.SET_NULL,null=True,blank=True)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    code=models.CharField(max_length=50, unique=True, blank=True, null=True,help_text="Standardized diagnosis code (e.g., ICD-10 code).")
-    is_active = models.BooleanField(default=True,blank=True,null=True) # Added: To enable/disable diagnoses
-    class Meta:
-        verbose_name = "Diagnosis Definition"
-        verbose_name_plural = "Diagnosis Definitions"
-    def __str__(self):
-        return str(self.description)
+
+
+
+
+
+
+
+
+
+
+
 
        
-class CommonOrdersModel(models.Model):# this represents patient encounters..so every time the patient comes to the hospital, a new medical record is created that will hold all the information about the patient on that particular visit
+class CommonOrdersModel(models.Model):# very important model
     """
-    Represents a single visit or interaction a patient has with the healthcare facility.
+    healthcare....Represents a single visit or interaction a patient has with the healthcare facility.
     This acts as the central hub for all clinical activities during that specific encounter.
+    sales... can represent sales orders, sales requisitions...
+    education...can act as exam events, fees payment event etc
+    services... service order to customers...
+    realestate.... can act normal sales order when selling rents, properties, services etc..
+    hospitality... can act as guest hosting event, customer orders from restaurents... etc
     """
     # general fields
     order_number=models.CharField(max_length=50, blank=False, null=True)
@@ -927,17 +803,30 @@ class CommonOrdersModel(models.Model):# this represents patient encounters..so e
     diagnosis=models.TextField(max_length=250,blank=True,null=True,default='diagnosis')
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     
+    start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
+    
+    description=models.CharField(max_length=255,blank=True,null=True)
+    comments=models.CharField(max_length=255,blank=True,null=True)
+    name=models.CharField(max_length=255,blank=True,null=True)
+    code=models.CharField(max_length=50,blank=True,null=True, unique=False, help_text="Unique code for the program, e.g., BSCIT")
+    
+    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='common_orders_operation_year')
+    operation_term=models.ForeignKey(CommonOperationYearTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='terms_common_orders')
+    
+    
     def __str__(self):
         return f"Visit for {self.customer} ({self.encounter_type}) on {self.date.strftime('%Y-%m-%d %H:%M')}"
    
 class CommonAssessmentTypesModel(models.Model):
     """
     Defines various assessment types as below.
-    sales....physical conditions, dimensions etc.
-    Healthcare...checkup, doc observations, follow up etc.
+    sales....physical conditions, dimensions of physical items...etc.
+    Healthcare...checkup, doc observations, triage follow up etc.
     Education...QUIZ,EXAM,Assignment,Project,Participation,Other
-    Hospitality...cleanliness etc
-    Logistics...leakage, dents, etc
+    Hospitality...cleanliness, readyness etc etc
+    Logistics...leakage, dents, physical conditions etc
     Realestate...physical, paint, general condition
     Services...physical, color, dents, location etc.
     
@@ -995,7 +884,7 @@ class CommonAssessmentsModel(models.Model):
     triage_date_time = models.DateTimeField(auto_now_add=True, blank=True, null=True) # Renamed 'date' to specific, auto_now_add
     last_updated = models.DateTimeField(auto_now=True, blank=True, null=True) # Changed to auto_now
     # Link to DiagnosesModel for structured diagnosis. Can be ManyToMany for multiple diagnoses.
-    diagnoses=models.ManyToManyField(CommonDiagnosesModel,help_text="Diagnoses made during this encounter.")
+    #diagnoses=models.ManyToManyField(CommonDiagnosesModel,help_text="Diagnoses made during this encounter.")
     
      # Added: Doctor's assessment/summary (A in SOAP)
     assessment=models.TextField(blank=True, null=True,help_text="Doctor's assessment of the patient's condition.")
@@ -1006,16 +895,16 @@ class CommonAssessmentsModel(models.Model):
     observation_date_time=models.DateTimeField(auto_now_add=True, blank=True, null=True) # Renamed 'date', auto_now_add
     last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
     # test_From...like from blood, urine, stool, saliva etc
-    test_from=models.ForeignKey(CommonServicesModel, max_length=200,blank=True,null=True,on_delete=models.CASCADE,related_name="lbtsfrm")
-    test_for=models.ForeignKey(CommonServicesModel,blank=True,null=True, on_delete=models.CASCADE, related_name="patient_orders",help_text="The type of lab test ordered.")
+    test_from=models.ForeignKey(CommonCategoriesModel, max_length=200,blank=True,null=True,on_delete=models.CASCADE,related_name="lbtsfrm")
+    test_for=models.ForeignKey(CommonCategoriesModel,blank=True,null=True, on_delete=models.CASCADE, related_name="patient_orders",help_text="The type of lab test ordered.")
     # Link to the MedicalServiceModel if this specific order is to be charged as a service
-    charged_service=models.ForeignKey(CommonServicesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="labortry_order_charges",limit_choices_to={'service_type': 'LAB'},help_text="The specific medical service entry used for billing this lab test.")
+    charged_service=models.ForeignKey(CommonCategoriesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="labortry_order_charges",limit_choices_to={'service_type': 'LAB'},help_text="The specific medical service entry used for billing this lab test.")
     status=models.CharField(max_length=10,blank=True,null=True, choices=LAB_TEST_STATUSES, default='ORD',help_text="Current status of the lab test.")
     notes=models.TextField(blank=True, null=True) # For any specific notes related to the order
 
     
     # education specific fields...
-    course=models.ForeignKey(CommonServicesModel, on_delete=models.CASCADE, related_name='course_assessments',blank=True,null=True)
+    course=models.ForeignKey(CommonCategoriesModel, on_delete=models.CASCADE, related_name='course_assessments',blank=True,null=True)
     term=models.ForeignKey(CommonOperationYearTermsModel, on_delete=models.CASCADE, related_name='term_assessments',blank=True,null=True)
     name=models.CharField(max_length=255,blank=True,null=True)
     assessment_type = models.ForeignKey(CommonAssessmentTypesModel,  on_delete=models.CASCADE, related_name='type_assessments',blank=True,null=True)
@@ -1029,7 +918,7 @@ class CommonAssessmentsModel(models.Model):
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptassessment",on_delete=models.SET_NULL,null=True,blank=True)
     
     # select the lab to do the test assuming there are many labs in the company
-    lab_name=models.ForeignKey(CommonLaboratoriesModel,blank=True,null=True, max_length=200,on_delete=models.CASCADE,related_name="labtlabtest")
+    #lab_name=models.ForeignKey(CommonLaboratoriesModel,blank=True,null=True, max_length=200,on_delete=models.CASCADE,related_name="labtlabtest")
     
     def __str__(self):
         return f"{self.name} for {self.course.code} ({self.term.name})"
@@ -1051,8 +940,8 @@ class CommonResultsModel(models.Model):
     result_given_by=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='grades_given_by')
     score=models.CharField(max_length=250,blank=True, null=True)
     comments=models.TextField(blank=True, null=True)
-    test_from=models.ForeignKey(CommonServicesModel,blank=True,null=True, max_length=200,on_delete=models.CASCADE,related_name="lbtestreln")
-    charged_service=models.ForeignKey(CommonServicesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="lab_order_charges",limit_choices_to={'service_type': 'LAB'},help_text="The specific medical service entry used for billing this lab test.")
+    test_from=models.ForeignKey(CommonCategoriesModel,blank=True,null=True, max_length=200,on_delete=models.CASCADE,related_name="lbtestreln")
+    charged_service=models.ForeignKey(CommonCategoriesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="lab_order_charges",limit_choices_to={'service_type': 'LAB'},help_text="The specific medical service entry used for billing this lab test.")
 
     
     owner=models.ForeignKey(User, related_name="ownr_grades",on_delete=models.SET_NULL,null=True,blank=True)
@@ -1063,7 +952,7 @@ class CommonResultsModel(models.Model):
    
     
     # healthcare fields...
-    lab_name=models.ForeignKey(CommonLaboratoriesModel,blank=True,null=True, max_length=200,on_delete=models.CASCADE,related_name="lab_result_con")
+    #lab_name=models.ForeignKey(CommonLaboratoriesModel,blank=True,null=True, max_length=200,on_delete=models.CASCADE,related_name="lab_result_con")
    
     expected_completion_date=models.DateField(blank=True, null=True)
     #Tracking status of the lab test
@@ -1140,29 +1029,7 @@ class CommonTrackingModel(models.Model):
 
 # --- Financial Models (Integration with CommonApp) ---
 
-class CommonFeesModel(models.Model):
-    """
-    Defines the fees for different programs/academic years/terms.
-    """
-    owner=models.ForeignKey(User, related_name="ownr_fees",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpfees",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsfees",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchfees",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptfees",on_delete=models.SET_NULL,null=True,blank=True)
-   
-    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='year_fee_structures')
-    program=models.ForeignKey(CommonProgramsModel, on_delete=models.CASCADE, null=True, blank=True, related_name='programs_fee_structures')
-    term=models.ForeignKey(CommonOperationYearTermsModel, on_delete=models.CASCADE, null=True, blank=True, related_name='terms_fee_structures')
-    fee_name=models.CharField(max_length=255,blank=True,null=True, help_text="e.g., 'fees that apply to the selected service'")
-    amount=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
-   
-    # Link to a General Ledger account for revenue recognition if specific to fees
-    # from allifmaalcommonapp.models import CommonGeneralLedgersModel # Assuming this is your Chart of Accounts
-    # revenue_account = models.ForeignKey(CommonGeneralLedgersModel, on_delete=models.SET_NULL, null=True, blank=True)
 
-   
-    def __str__(self):
-        return f"{self.fee_name} - {self.amount} for {self.operation_year}"
 
 ################################3assets######################################################
 
@@ -1338,22 +1205,23 @@ class CommonWarehousesModel(models.Model):
 
     def __str__(self):
     		return str(self.name) # this will show up in the admin area
-    
-#########################################3 STOCK ##############################################
-class CommonStockCategoriesModel(models.Model):
-    description=models.CharField(max_length=30, blank=False, null=True)
-    owner=models.ForeignKey(User, related_name="cmnurstkcat",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmnstcatrln",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsstockcats",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchstockcats",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptstockcats",on_delete=models.SET_NULL,null=True,blank=True)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    comments=models.CharField(null=True, blank=True, max_length=50)
-    def __str__(self):
-    		return str(self.description) # this will show up in the admin area
-
+ 
 class CommonStocksModel(models.Model):
-    category=models.ForeignKey(CommonStockCategoriesModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='catinvtconrlnm')
+    
+    """
+    Defines individual courses/subjects/services/goods within a program that are offered by a particular entity
+    for example:
+    Sales...selling of various items, item repairs, consultancy etc
+    Education...sciences, math, electrical current, strenghth of materials, dental surgery etc..
+    Healthcare...general consultations, dental washing, maternity and delivery, heart surgery etc.
+    Hospitality...Accommodation, outdoor catering, room bookings,conferences, events etc
+    Logistics....ticketing, cargo shipment, cargo handling
+    Realestate...letting spaces, building management, BMS
+    Services...consultancy, financial services, auditing, legal services, accounting services etc..
+    
+    
+    """
+    category=models.ForeignKey(CommonCategoriesModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='catinvtconrlnm')
     partNumber=models.CharField(max_length=30, blank=False, null=False)# unique prevents data duplication
     description=models.CharField(max_length=50, blank=False, null=False)
     quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
@@ -1384,6 +1252,34 @@ class CommonStocksModel(models.Model):
     drugUnit=models.CharField(choices=DrugUnits,default='Please selection', max_length=100,blank=True,null=True)
    
     drug_notes=models.CharField(blank=True,null=True,default="notes",max_length=250)
+    
+    code=models.CharField(max_length=50, help_text="Course code, e.g., CS101",blank=True,null=True)
+    
+    credits=models.DecimalField(max_digits=4,blank=True,null=True, decimal_places=2, default=0.00, help_text="Credit hours for the course")
+   
+    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='stocks_operation_year')
+    operation_term=models.ForeignKey(CommonOperationYearTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='stocks_program')
+    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
+   
+    start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    comments=models.CharField(blank=True,null=True, max_length=250)
+    
+    # this field helps a lot.. for instance when invoicing, it will only affect current stock if it  is a physical item
+    # if it is service, it will invoice but it will not affect the current stock as it is intangible
+    item_is_physical_or_service=models.CharField(choices=item_in_physical_state_or_service,max_length=50,blank=True,null=True,default="Current")
+   
+    
+    
+    name=models.CharField(null=True, blank=True,max_length=250)
+   
+    
+    normal_range_info=models.CharField(max_length=250, blank=True, null=True,help_text="General normal range information for this test (e.g., '70-110 mg/dL').")
+   
+    unit_of_measure=models.ForeignKey(CommonUnitsModel,related_name="unit_of_measure_stocks",on_delete=models.SET_NULL,null=True,blank=True)
+    
+    
+    
 
     class Meta:
         # THIS IS THE CRUCIAL ADDITION/CONFIRMATION
@@ -1554,10 +1450,11 @@ class CommonProjectTasksModel(models.Model):
     due_date=models.DateField(blank=True, null=True)
     completion_date=models.DateField(blank=True, null=True)
 
-    status=models.ForeignKey(CommonProgresStatusModel,blank=True,null=True, on_delete=models.CASCADE, related_name='tasks')
     
-    priority_level=models.ForeignKey(CommonPriorityLevelsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='tasks')
-
+    # options for this field are like planned, onhold, compelted...
+    status=models.CharField(max_length=10,blank=True,null=True, choices=STATUS_CHOICES)
+    
+    priority_level=models.CharField(max_length=10,blank=True,null=True, choices=PRIORITY_TYPES)
     spares_cost=models.IntegerField(blank=True,null=True,default=0)
     labor_cost=models.IntegerField(blank=True,null=True,default=0)
    
@@ -2505,3 +2402,104 @@ class CommonContactsModel(models.Model):
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
         return str(self.subject)
+
+
+
+
+
+
+
+
+
+
+########################## consider deletting eblow models ################
+
+class CommonProgramsModel(models.Model):# not used...may be deleted
+    """
+    Defines programs that are offered by a particular entity
+    for example:
+    Sales...sales, manufacturing, repairs, services contracts etc.
+    Education...Bachelor of Science in IT, Diploma in Nursing, PhD in MBA etc.
+    Healthcare...General surgery, Maternity, Dental, Checkups etc.
+    Hospitality...Accommodation, outdoor catering, spacing letting(malls/apartments),conferences, events etc
+    Logistics....travelling, tourism, Hajj,Umrah,Cargo, handling, clearing etc
+    Realestate...spacing letting(malls/apartments),property management,property development etc
+    Services...consultancy, financial services, audit, legal, accounting etc..
+    
+    """
+    name=models.CharField(max_length=255,blank=True,null=True)
+    code=models.CharField(max_length=50,blank=True,null=True, unique=False, help_text="Unique code for the program, e.g., BSCIT")
+    description=models.CharField(blank=True, null=True,max_length=250)
+    date=models.DateField(blank=True,null=True,auto_now_add=True)
+    
+    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='program_operation_year')
+    operation_term=models.ForeignKey(CommonOperationYearTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='terms_program')
+    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
+   
+    start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+   
+    owner=models.ForeignKey(User,related_name="ownr_programm",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_programs",on_delete=models.CASCADE,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_programs",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_programs",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_programm",on_delete=models.SET_NULL,null=True,blank=True)
+    
+
+    def __str__(self):
+        return str(self.name)
+
+class CommonServicesModel(models.Model):# not used for now...may be deleted later
+    
+   
+    """
+    Defines individual courses/subjects/services/goods within a program that are offered by a particular entity
+    for example:
+    Sales...selling of various items, item repairs, consultancy etc
+    Education...sciences, math, electrical current, strenghth of materials, dental surgery etc..
+    Healthcare...general consultations, dental washing, maternity and delivery, heart surgery etc.
+    Hospitality...Accommodation, outdoor catering, room bookings,conferences, events etc
+    Logistics....ticketing, cargo shipment, cargo handling
+    Realestate...letting spaces, building management, BMS
+    Services...consultancy, financial services, auditing, legal services, accounting services etc..
+    
+    
+    """
+    
+    program=models.ForeignKey(CommonProgramsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='coursesprograms')
+   
+    code=models.CharField(max_length=50, help_text="Course code, e.g., CS101",blank=True,null=True)
+    description=models.TextField(blank=True, null=True)
+    credits=models.DecimalField(max_digits=4,blank=True,null=True, decimal_places=2, default=0.00, help_text="Credit hours for the course")
+   
+    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='service_operation_year')
+    operation_term=models.ForeignKey(CommonOperationYearTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='services_program')
+    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
+   
+    start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+    comments=models.CharField(blank=True,null=True, max_length=250)
+    
+    
+    
+    name=models.CharField(null=True, blank=True,max_length=250)
+    unitprice=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    quantity=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    unitcost=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+   
+    owner=models.ForeignKey(User,related_name="ownr_services",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_services",on_delete=models.CASCADE,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_services",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_services",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_services",on_delete=models.SET_NULL,null=True,blank=True)
+    
+    
+    normal_range_info=models.CharField(max_length=250, blank=True, null=True,help_text="General normal range information for this test (e.g., '70-110 mg/dL').")
+    unit_of_measure=models.CharField(max_length=50, blank=True, null=True,help_text="Standard unit of measure for the test result (e.g., 'mg/dL', 'cells/mm3').")
+    unit_of_measure=models.ForeignKey(CommonUnitsModel,related_name="unit_of_measure_services",on_delete=models.SET_NULL,null=True,blank=True)
+    
+  
+    def __str__(self):
+        return f"{self.name} ({self.code})"
+    
