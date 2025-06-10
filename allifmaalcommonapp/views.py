@@ -6328,30 +6328,30 @@ def commonPostExpense(request,pk,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
 
-############################## STTART OF ORDERS SECTION ###################################3
+############################## STTART OF ORDERS SECTION... ###################################3
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonOrders(request,*allifargs,**allifkwargs):
+def commonTransactions(request,*allifargs,**allifkwargs):
     try:
-        title="Orders"
+        title="Transactions"
         allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
        
-        no_of_quotes=CommonOrdersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).count()
-        no_of_prospects=CommonOrdersModel.objects.filter(prospect="Likely",company=allif_data.get("main_sbscrbr_entity")).count()
-        prospects=CommonOrdersModel.objects.filter(prospect='Likely',company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:7]
-        total_value_of_prospects=CommonOrdersModel.objects.filter(prospect="Likely",company=allif_data.get("main_sbscrbr_entity")).aggregate(Sum('total'))['total__sum']
+        no_of_quotes=CommonTransactionEventsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).count()
+        no_of_prospects=CommonTransactionEventsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).count()
+        prospects=CommonTransactionEventsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:7]
+        total_value_of_prospects=CommonTransactionEventsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         
         if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonOrdersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+            allifqueryset=CommonTransactionEventsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonOrdersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+            allifqueryset=CommonTransactionEventsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
         elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonOrdersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+            allifqueryset=CommonTransactionEventsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
         elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonOrdersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+            allifqueryset=CommonTransactionEventsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
             allifqueryset=[]
         context={
@@ -6364,7 +6364,7 @@ def commonOrders(request,*allifargs,**allifkwargs):
             "formats":formats,
             "datasorts":datasorts,
         }
-        return render(request, 'allifmaalcommonapp/quotes/quotes.html',context)
+        return render(request, 'allifmaalcommonapp/transactions/transactions.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -6372,26 +6372,25 @@ def commonOrders(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonNewQuote(request,*allifargs,**allifkwargs):
+def commonNewTransaction(request,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
        
         ###### start... UID generation ##################
-        allifquery=CommonQuotesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        allifquery=CommonTransactionEventsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         unque=str(uuid4()).split('-')[2]
         nmbr=int(allifquery.count())+int(1)
-        currntyear=timezone.now().date().today().year
         allifuid=str(nmbr)+"/"+str(unque)
         ###### End... UID generation ##################
 
         if allifquery:
-            sqnmbr='SQ'+"/"+str(allifuid)
+            nmbr='TRANS'+"/"+str(allifuid)
         else:
-            sqnmbr= 'SQ/1'+"/"+str(uuid4()).split('-')[2]
+            nmbr= 'TRANS/1'+"/"+str(uuid4()).split('-')[2]
 
-        newQuoteNumber= CommonQuotesModel.objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        newQuoteNumber.save()
-        return redirect('allifmaalcommonapp:commonQuotes',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        number=CommonTransactionEventsModel.objects.create(trans_number=nmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        number.save()
+        return redirect('allifmaalcommonapp:commonTransactions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -6400,15 +6399,15 @@ def commonNewQuote(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonWantToDeleteQuote(request,pk,*allifargs,**allifkwargs): 
+def commonWantToDeleteTransaction(request,pk,*allifargs,**allifkwargs): 
     try:
-        allifquery=CommonQuotesModel.objects.filter(id=pk).first()
+        allifquery=CommonTransactionEventsModel.objects.filter(id=pk).first()
         title="Are u sure to delete"
         context={
         "title":title,
         "allifquery":allifquery,
         }
-        return render(request,'allifmaalcommonapp/quotes/x-qt-confrm.html',context)
+        return render(request,'allifmaalcommonapp/transactions/delete_trans_confirm.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -6417,11 +6416,11 @@ def commonWantToDeleteQuote(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_delete
-def commonDeleteQuote(request,pk,*allifargs,**allifkwargs):
+def commonDeleteTransaction(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        CommonQuotesModel.objects.get(id=pk).delete()
-        return redirect('allifmaalcommonapp:commonQuotes',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        CommonTransactionEventsModel.objects.get(id=pk).delete()
+        return redirect('allifmaalcommonapp:commonTransactions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -6430,32 +6429,32 @@ def commonDeleteQuote(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonAddQuoteDetails(request,pk,*allifargs,**allifkwargs):
+def commonAddTransactionDetails(request,pk,*allifargs,**allifkwargs):
     try:
-        title="Quote Details"
+        title="Transaction Details"
         allif_data=common_shared_data(request)
        
-        allifquery=CommonQuotesModel.objects.filter(id=pk).first()
-        form=CommonAddOrderDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
+        allifquery=CommonTransactionEventsModel.objects.filter(id=pk).first()
+        form=CommonAddTransactionDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
         if request.method == 'POST':
-            form=CommonAddOrderDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST,request.FILES,instance=allifquery)
+            form=CommonAddTransactionDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST,request.FILES,instance=allifquery)
             if form.is_valid():
                 form.save()
-                return redirect('allifmaalcommonapp:commonAddQuoteDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalcommonapp:commonAddTransactionDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonAddOrderDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
+            form=CommonAddTransactionDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
 
         context={
             "form":form,
             "allifquery":allifquery,
             "title":title,
         }
-        return render(request,'allifmaalcommonapp/quotes/add-quote-details.html',context)
+        return render(request,'allifmaalcommonapp/transactions/transaction_details.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -6463,12 +6462,12 @@ def commonAddQuoteDetails(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
-def commonAddQuoteItems(request,pk,*allifargs,**allifkwargs):
+def commonAddTransactionItems(request,pk,*allifargs,**allifkwargs):
     try:
         title="Add Quote Items"
         allif_data=common_shared_data(request)
        
-        allifquery=CommonQuotesModel.objects.filter(id=pk).first()
+        allifquery=CommonTransactionEventsModel.objects.filter(id=pk).first()
         allif_qte_discount=allifquery.discount
         form=CommonAddQuoteItemsForm(allif_data.get("main_sbscrbr_entity"))
         allifqueryset= CommonQuoteItemsModel.objects.filter(allifquoteitemconnector=allifquery)#this line helps to

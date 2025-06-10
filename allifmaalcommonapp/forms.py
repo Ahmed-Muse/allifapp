@@ -1200,10 +1200,10 @@ class CommonAddSalaryForm(forms.ModelForm): #the forms here is the one imported 
 
     
 ####################################3 ORDERS ##############################33
-class CommonAddOrderDetailsForm(forms.ModelForm):
+class CommonAddTransactionDetailsForm(forms.ModelForm):
     class Meta:
-        model=CommonOrdersModel
-        fields = ['description','start_date','end_date','is_current','operation_year','operation_term','name','code','division','branch','department','comments']
+        model=CommonTransactionEventsModel
+        fields = ['employee_in_charge','start_date','end_date','is_current','operation_year','operation_term','name','code','division','branch','department','comments']
         widgets={
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -1224,7 +1224,7 @@ class CommonAddOrderDetailsForm(forms.ModelForm):
         
         }
     def __init__(self,allifmaalparameter, *args, **kwargs):
-        super(CommonCategoryAddForm, self).__init__(*args, **kwargs)
+        super(CommonAddTransactionDetailsForm, self).__init__(*args, **kwargs)
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)

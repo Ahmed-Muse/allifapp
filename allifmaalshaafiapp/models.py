@@ -2,7 +2,7 @@ from django.db import models
 from allifmaalcommonapp.constants import BED_TYPES, PRESCRIPTION_FORMULATIONS, ADMINISTRATION_ROUTES, DOSAGE_UNITS, OCCUPANCY_STATUSES, APPOINTMENT_STATUSES, ADMISSION_STATUSES, REFERRAL_TYPES, REFERRAL_STATUSES, LAB_TEST_STATUSES, IMAGING_TEST_STATUSES, PATIENT_GENDERS, BLOOD_GROUPS, ENCOUNTER_TYPES, MEDICAL_SERVICE_TYPES
 
 from allifmaalusersapp.models import User
-from allifmaalcommonapp.models import CommonOrdersModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
+from allifmaalcommonapp.models import CommonTransactionEventsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
 
 class PrescriptionsModel(models.Model):
     """
@@ -26,7 +26,7 @@ class PrescriptionsModel(models.Model):
     frequency=models.CharField(max_length=350,blank=True,null=True)
     duration=models.CharField(max_length=350,blank=True,null=True)
     
-    medical_file=models.ForeignKey(CommonOrdersModel, on_delete=models.CASCADE, related_name="prescriptions", blank=True, null=True,help_text="The encounter this prescription belongs to.")
+    medical_file=models.ForeignKey(CommonTransactionEventsModel, on_delete=models.CASCADE, related_name="prescriptions", blank=True, null=True,help_text="The encounter this prescription belongs to.")
     prescribed_by_doctor=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="issued_prescriptions",help_text="The doctor who issued this prescription.")
     
     # Added: How often the medication should be taken
@@ -131,7 +131,7 @@ class AdmissionsModel(models.Model):
     status=models.CharField(max_length=100, choices=ADMISSION_STATUSES, default='ADM',help_text="Current status of the admission (e.g., Admitted, Discharged).")
     discharge_date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient discharge (if applicable).")
     discharge_reason=models.TextField(blank=True, null=True,help_text="Reason for patient discharge (e.g., 'Recovered', 'Transferred').")
-    medical_file=models.ForeignKey(CommonOrdersModel, on_delete=models.SET_NULL, related_name="mdcladmnss", blank=True, null=True,)
+    medical_file=models.ForeignKey(CommonTransactionEventsModel, on_delete=models.SET_NULL, related_name="mdcladmnss", blank=True, null=True,)
     date_created=models.DateTimeField(auto_now_add=True, blank=True, null=True)
     last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
     def __str__(self):
@@ -151,7 +151,7 @@ class VitalSignsModel(models.Model):
     
     recorded_by_nurse=models.ForeignKey(CommonEmployeesModel, help_text="The nurse or staff member who recorded the vital signs.",related_name="refering_nurse",on_delete=models.SET_NULL,null=True,blank=True)
    
-    medical_file=models.ForeignKey(CommonOrdersModel, on_delete=models.CASCADE, related_name="vital_signs", blank=True, null=True,help_text="The encounter this vital signs record belongs to.")
+    medical_file=models.ForeignKey(CommonTransactionEventsModel, on_delete=models.CASCADE, related_name="vital_signs", blank=True, null=True,help_text="The encounter this vital signs record belongs to.")
     
     temperature=models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,help_text="Temperature in Celsius.")
     blood_pressure_systolic=models.IntegerField(blank=True, null=True,help_text="Systolic blood pressure (mmHg).")
@@ -185,7 +185,7 @@ class ReferralsModel(models.Model):
     referring_doctor=models.ForeignKey(CommonEmployeesModel,help_text="The doctor issuing the referral.",related_name="referring_doctor",on_delete=models.SET_NULL,null=True,blank=True)
     referred_on=models.DateField(blank=True, null=True)
     
-    medical_file=models.ForeignKey(CommonOrdersModel, on_delete=models.CASCADE, related_name="referrals_medfile", blank=True, null=True,help_text="The encounter this referral belongs to.")
+    medical_file=models.ForeignKey(CommonTransactionEventsModel, on_delete=models.CASCADE, related_name="referrals_medfile", blank=True, null=True,help_text="The encounter this referral belongs to.")
     
     referral_type=models.CharField(max_length=10, choices=REFERRAL_TYPES, default='INT',help_text="Type of referral (Internal or External).")
     referred_to_doctor=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="received_referrals",help_text="The doctor to whom the patient is referred (if internal).")
@@ -211,7 +211,7 @@ class MedicalAdministrationsModel(models.Model):
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnchamedcladmins",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptmedcladmins",on_delete=models.SET_NULL,null=True,blank=True)
    
-    medical_file=models.ForeignKey(CommonOrdersModel, on_delete=models.CASCADE, related_name="medication_administrations", blank=True, null=True,help_text="The encounter this medication administration belongs to.")
+    medical_file=models.ForeignKey(CommonTransactionEventsModel, on_delete=models.CASCADE, related_name="medication_administrations", blank=True, null=True,help_text="The encounter this medication administration belongs to.")
     # Link to the prescription this administration fulfills (optional, but good for tracking)
     prescription=models.ForeignKey(PrescriptionsModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="administrations",help_text="The prescription being administered (optional)." )
     drug_name=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="administered_medications",help_text="The actual drug administered (from inventory).")
@@ -240,7 +240,7 @@ class NursingNotesModel(models.Model):
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnchnrsingntes",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptnrsingntes",on_delete=models.SET_NULL,null=True,blank=True)
    
-    medical_file=models.ForeignKey(CommonOrdersModel, on_delete=models.CASCADE, related_name="nursing_notes", blank=True, null=True,help_text="The encounter this nursing note belongs to.")
+    medical_file=models.ForeignKey(CommonTransactionEventsModel, on_delete=models.CASCADE, related_name="nursing_notes", blank=True, null=True,help_text="The encounter this nursing note belongs to.")
     recorded_by_nurse=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="authored_nursing_notes",help_text="The nurse who recorded these notes.")
     notes=models.TextField(blank=True, null=True,help_text="Detailed nursing observations and progress notes.")
 

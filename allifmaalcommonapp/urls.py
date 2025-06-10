@@ -305,8 +305,13 @@ path('Post/Expense/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostEx
 path('Search/Expense/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonExpenseSearch, name="commonExpenseSearch"),
 
 
-#################################### ORDER SECTION ##################
-path('Common/Orders/<str:allifusr>/<str:allifslug>/List/', views.commonOrders, name="commonOrders"),
+#################################### ORDER SECTION... ##################
+path('Transactions/Orders/Events/<str:allifusr>/<str:allifslug>/List/', views.commonTransactions, name="commonTransactions"),
+path('Initiate/New/Transaction/s/Order/s/Events/<str:allifusr>/<str:allifslug>/List/', views.commonNewTransaction, name="commonNewTransaction"),
+
+path('Add/Transaction/s/Order/s/Events/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddTransactionDetails, name="commonAddTransactionDetails"),
+path('Delete/This/Transaction/s/Order/s/Events/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteTransaction, name="commonDeleteTransaction"),
+
 
 #################################### warehouses ###########################
 path('Warehouses/Stores/<str:allifusr>/<str:allifslug>/List/', views.commonWarehouses, name="commonWarehouses"),

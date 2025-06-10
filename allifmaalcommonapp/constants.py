@@ -1,4 +1,19 @@
 # healthcare_app/constants.py (or a similar location)
+############ below is for teh common orders/transactions model... can be applied there....
+COMMON_EVENT_TYPES = [
+    ('SALES_ORDER', 'Sales Order'),
+    ('PATIENT_ENCOUNTER', 'Patient Encounter (Healthcare)'),
+    ('GUEST_ACCOMMODATION', 'Guest Accommodation (Hospitality)'),
+    ('GUEST_FOOD_ORDER', 'Guest Food Order (Hospitality)'),
+    ('STUDENT_ENROLLMENT', 'Student Enrollment (Education)'),
+    ('STUDENT_PAYMENT', 'Student Payment (Education)'),
+    ('COURSE_REGISTRATION', 'Course Registration (Education)'),
+    ('EXAM_EVENT', 'Exam Event (Education)'),
+    ('SHIPPING_MANIFEST', 'Shipping Manifest (Logistics)'),
+    ('PROPERTY_LEASE_AGREEMENT', 'Property Lease Agreement (Real Estate)'),
+    ('CONSULTING_SESSION', 'Consulting Session (Services)'),
+    # Add more as needed for different industries, ensuring unique codes
+]
 
 # Medical Service Types
 operation_year_options= [
@@ -417,4 +432,15 @@ Transport_Mode=[
     ]
 ##############3 healthcare #########3
 SAMPLE_TYPES=[('BLOOD', 'Blood'), ('URINE', 'Urine'), ('TISSUE', 'Tissue'),('SWAB', 'Swab'), ('OTHER', 'Other')]
-    
+
+
+    # Generic Status for the event lifecycle
+GENERIC_STATUS_CHOICES = [
+    ('ACTIVE', 'Active/Open'),
+    ('COMPLETED', 'Completed'),
+    ('CANCELLED', 'Cancelled'),
+    ('PENDING', 'Pending'),
+    ('ON_HOLD', 'On Hold'),
+    # Add more generic statuses as needed based on your overall ERP workflow
+    ]
+

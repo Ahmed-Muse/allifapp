@@ -769,7 +769,7 @@ class CommonLedgerEntriesModel(models.Model): # this is the journal entries...
 
 
        
-class CommonOrdersModel(models.Model):# very important model
+class CommonTransactionEventsModel(models.Model):# very important model
     """
     healthcare....Represents a single visit or interaction a patient has with the healthcare facility.
     This acts as the central hub for all clinical activities during that specific encounter.
@@ -777,10 +777,10 @@ class CommonOrdersModel(models.Model):# very important model
     education...can act as exam events, fees payment event etc
     services... service order to customers...
     realestate.... can act normal sales order when selling rents, properties, services etc..
-    hospitality... can act as guest hosting event, customer orders from restaurents... etc
+    hospitality... can act as guest hosting event, customer orders from restaurents... etc...
     """
     # general fields
-    order_number=models.CharField(max_length=50, blank=False, null=True)
+    trans_number=models.CharField(max_length=50, blank=True, null=True)
     employee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="encounters_as_primary_doctor",help_text="The main doctor attending this encounter.")
     customer=models.ForeignKey(CommonCustomersModel, on_delete=models.CASCADE,blank=True,null=True, related_name="medicalrecordcustmr",help_text="The patient associated with this encounter.")
     order_date_time=models.DateTimeField(auto_now_add=True,help_text="Date and time when this patient encounter record was created.",blank=True,null=True)
@@ -818,7 +818,8 @@ class CommonOrdersModel(models.Model):# very important model
     
     def __str__(self):
         return f"Visit for {self.customer} ({self.encounter_type}) on {self.date.strftime('%Y-%m-%d %H:%M')}"
-   
+
+
 class CommonAssessmentTypesModel(models.Model):
     """
     Defines various assessment types as below.
@@ -857,7 +858,7 @@ class CommonAssessmentsModel(models.Model):
     person_assessing=models.ForeignKey(CommonEmployeesModel,related_name="person_assessing",on_delete=models.SET_NULL,null=True,blank=True)
     assessed_person=models.ForeignKey(CommonCustomersModel, on_delete=models.CASCADE, related_name='person_assessed',blank=True,null=True)
     operation_year=models.ForeignKey(CommonOperationYearsModel, on_delete=models.CASCADE, related_name='year_assessments',blank=True,null=True)
-    order=models.ForeignKey(CommonOrdersModel, on_delete=models.CASCADE, related_name="mdclrcdobsv", blank=True, null=True,help_text="The encounter this triage record belongs to.")
+    order=models.ForeignKey(CommonTransactionEventsModel, on_delete=models.CASCADE, related_name="mdclrcdobsv", blank=True, null=True,help_text="The encounter this triage record belongs to.")
   
     # healthcare specific fields.... like examination doctor field, patient field etc
     complaints=models.CharField(null=True, blank=True,max_length=250,help_text="Patient's main symptoms or reason for visit.")
@@ -934,7 +935,7 @@ class CommonResultsModel(models.Model):
     services...
     """
     # general fields....
-    result_for_order=models.ForeignKey(CommonOrdersModel, on_delete=models.CASCADE, related_name="lab_orders", blank=True, null=True,help_text="The encounter this lab order belongs to.")
+    result_for_order=models.ForeignKey(CommonTransactionEventsModel, on_delete=models.CASCADE, related_name="lab_orders", blank=True, null=True,help_text="The encounter this lab order belongs to.")
     result_owner=models.ForeignKey(CommonCustomersModel,blank=True,null=True, on_delete=models.CASCADE, related_name='grade_given_to')
     assessment=models.ForeignKey(CommonAssessmentsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='assessment_grades')
     result_given_by=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='grades_given_by')
@@ -1000,7 +1001,7 @@ class CommonTrackingModel(models.Model):
     education... track student performance...
     Healthcare....Tracks the lifecycle of a lab sample from collection to archiving/disposal.
     """
-    tracked_order=models.ForeignKey(CommonOrdersModel,blank=True,null=True, max_length=100,on_delete=models.CASCADE,related_name="labsmpletracking")
+    tracked_order=models.ForeignKey(CommonTransactionEventsModel,blank=True,null=True, max_length=100,on_delete=models.CASCADE,related_name="labsmpletracking")
     owner=models.ForeignKey(User, related_name="ownrrsmpletracking",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpsmpletracking",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvssmpletracking",on_delete=models.SET_NULL,null=True,blank=True)
