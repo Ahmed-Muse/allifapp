@@ -23,9 +23,9 @@
         <div class="content-dropdown-menu">
          
         <li><a class="dropdown-item">Looking for something?</a></li>
-        <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonInvoices' user_var glblslug %}">Clear Search</a>
+        <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Clear Search</a>
           
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonInvoicesSearch' user_var glblslug %}">{% csrf_token %}
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonTransactionsSearch' user_var glblslug %}">{% csrf_token %}
         
           <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
           placeholder="Type Here ...">
@@ -34,7 +34,7 @@
           </form>
           <hr>
           <li><a class="dropdown-item">Select Ordering Option</a></li>
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonInvoices' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
       
         <div>
         <select name="requiredformat" class="form-control">
@@ -42,7 +42,7 @@
           <option>{{item.name}}</option>
             
            {% endfor %}
-           
+         
           </select>
           </div>
           <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
@@ -50,7 +50,7 @@
       </form>
       <hr>
       <li><a class="dropdown-item">Advanced Searching</a></li>
-      <form method='POST' action="{% url 'allifmaalcommonapp:commonInvoiceAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
+      <form method='POST' action="{% url 'allifmaalcommonapp:commonTransactionAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
         
         <div>
           <label>Start Date</label>
@@ -116,11 +116,10 @@
         <tr class="allif-table-header-row">
         <td class="allif-fix-table-col">Transaction No.</td>
         
-        <td>Customer</td>
-        <td>Value</td>
-        <td>Status</td>
+        <td>Code</td>
+        <td>Name</td>
+        <td>Client</td>
         <td>Date</td>
-        <td>Owner</td>
       
         <td>Navigate</td>
         
@@ -137,26 +136,22 @@
         <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.id user_var glblslug %}">{{item.trans_number}}</a></td>
     
     <td>
-    {{item.customer}}
+    {{item.code}}
    </td>
    <td>
     
     <a href="" class="allif-table-links">
       
-    {{item.total|floatformat:2|intcomma}}
+    {{item.name}}
     </a>
    </td>
    <td>
-    {{item.status}}
+    {{item.customer}}
    </td>
    <td>
     {{item.date|date:'d/m/Y'}}
    </td>
-   <td>
-    {{item.owner}}
-   </td>
-    
-          
+  
          <td>
           <div class="dropdown allifmaal-content-dropdown">
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>

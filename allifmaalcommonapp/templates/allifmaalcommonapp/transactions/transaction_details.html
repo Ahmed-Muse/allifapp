@@ -22,12 +22,24 @@
   </a>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddInvoiceDetails' allifquery.id user_var glblslug %}">Edit Item</a></li>
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddInvoiceItems' allifquery.id user_var glblslug %}">Add Item</a></li>
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPostInvoice' allifquery.id user_var glblslug %}">Post Invoice</a></li>
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonInvoiceToPdf' allifquery.id user_var glblslug %}">Generate Pdf</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' allifquery.id user_var glblslug %}">Edit Item</a></li>
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionItems' allifquery.id user_var glblslug %}">Add Item</a></li>
+
+          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactionToPdf' allifquery.id user_var glblslug %}">Download</a></li>
     
-          <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteInvoice' allifquery.id user_var glblslug %}">Delete Item</a></li>
+         <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpaceBookings' allifquery.id user_var glblslug %}">Bookings</a></li>
+         <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonProgress' user_var glblslug %}">Progress Records</a></li>
+
+         
+    
+          
+          <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteTransaction' allifquery.id user_var glblslug %}">Delete Item</a></li>
+           
+          
+          <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonAddSpaceBookingItems' allifquery.id user_var glblslug %}">Book Space</a></li>
+          
+
+
           
    </div>
   </ul>
@@ -79,25 +91,18 @@
             
           <tr>
             <td class="allif-fix-table-col">Number</td>
-            <td>{{allifquery.number}}</td>
+            <td>{{allifquery.trans_number}}</td>
             </tr>
      
           <tr>
-            <td class="allif-fix-table-col">Customer</td>
+            <td class="allif-fix-table-col">Client</td>
             <td>{{allifquery.customer}}</td>
             </tr>
             <tr>
-              <td class="allif-fix-table-col">Currency</td>
-              <td>{{allifquery.currency}}</td>
+              <td class="allif-fix-table-col">Name</td>
+              <td>{{allifquery.name}}</td>
               </tr>
-             <tr>
-                <td class="allif-fix-table-col">Payment Terms</td>
-                <td>{{allifquery.payment_terms}}</td>
-                </tr>
-                 <tr>
-                <td class="allif-fix-table-col">Delivery</td>
-                <td>{{allifquery.delivery}}</td>
-                </tr>
+           
         </tbody>
         </table>
       </div>
@@ -110,48 +115,39 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
-        
+            <tr>
+          <td class="allif-fix-table-col">Code</td>
+          <td>{{allifquery.code}}</td>
+          </tr>
+                
+         <tr>
+                <td class="allif-fix-table-col">Description</td>
+                <td>{{allifquery.description}}</td>
+                </tr>
                     <tr>
-                      <td class="allif-fix-table-col">Total With Discount</td>
-                      <td>{{allifquery.totalwithdiscount|floatformat:2|intcomma}}</td>
+                      <td class="allif-fix-table-col">End Date & Time</td>
+                      <td>{{allifquery.end_date_time}}</td>
                       </tr>
                     
                     <tr>
-                      <td class="allif-fix-table-col">Total With Tax</td>
-                      <td>{{allifquery.totalwithtax|floatformat:2|intcomma}}</td>
+                      <td class="allif-fix-table-col">Start Date</td>
+                      <td>{{allifquery.start_date}}</td>
                       </tr>
                       <tr>
-                        <td class="allif-fix-table-col">Discount Amount</td>
-                        <td>{{allifquery.discountAmount|floatformat:2|intcomma}}</td>
+                        <td class="allif-fix-table-col">End Date</td>
+                        <td>{{allifquery.end_date}}</td>
                         </tr>
                         <tr>
-                          <td class="allif-fix-table-col">Discount Value</td>
-                          <td>{{allifquery.discountValue|floatformat:2|intcomma}}</td>
+                          <td class="allif-fix-table-col">Type</td>
+                          <td>{{allifquery.is_current}}</td>
                           </tr>
 
                         <tr>
-                          <td class="allif-fix-table-col">Total</td>
-                          <td>{{allifquery.total|floatformat:2|intcomma}}</td>
+                          <td class="allif-fix-table-col">Main Complaints</td>
+                          <td>{{allifquery.main_complaints}}</td>
                           </tr>
 
-                          <tr>
-                            <td class="allif-fix-table-col">Taxes</td>
-                            <td>{{allifquery.taxAmount|floatformat:2|intcomma}}</td>
-                            </tr>
-                            <tr>
-                              <td class="allif-fix-table-col">Tax</td>
-                              <td>{{allifquery.tax|floatformat:2|intcomma}}</td>
-                              </tr>
-                             
-                                <tr>
-                                  <td class="allif-fix-table-col">Tax Amount</td>
-                                  <td>{{allifquery.taxAmount}}</td>
-                                  </tr>
-                            <tr>
-                              <td class="allif-fix-table-col">Grand Total</td>
-                              <td>{{allifquery.grandtotal|floatformat:2|intcomma}}</td>
-                              </tr>
-                        
+                              
           </tbody>
           </table>
           </div>
@@ -164,15 +160,34 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-        
-<tr>
-  <td class="allif-fix-table-col">Description</td>
-  <td>{{allifquery.description}}</td>
-  </tr>
-<tr>
-  <td class="allif-fix-table-col">Created By</td>
-  <td>{{allifquery.owner}}</td>
-  </tr>
+          
+          <tr>
+            <td class="allif-fix-table-col">Diagnosis</td>
+            <td>{{allifquery.diagnosis}}</td>
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Transaction Type</td>
+              <td>{{allifquery.encounter_type}}</td>
+              </tr>
+              
+            <tr>
+                <td class="allif-fix-table-col">Operation Year</td>
+                <td>{{allifquery.operation_year}}</td>
+                </tr>
+          <tr>
+            <td class="allif-fix-table-col">Operation Term</td>
+            <td>{{allifquery.operation_term}}</td>
+            </tr>
+                        
+                  
+          <tr>
+            <td class="allif-fix-table-col">Staff In Charge</td>
+            <td>{{allifquery.employee_in_charge}}</td>
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Created By</td>
+            <td>{{allifquery.owner}}</td>
+            </tr>
 
           <tr>
             <td class="allif-fix-table-col">Date</td>
@@ -184,13 +199,7 @@
               <td>{{allifquery.comments}}</td>
           
           </tr> 
-          <tr>
-            <td class="allif-fix-table-col">Terms</td>
-            <td>{{allifquery.terms}}</td>
         
-        </tr> 
-
-     
       
           </tbody>
           </table>
@@ -209,7 +218,7 @@
 <hr>
 
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit Invoice Details</div>
+  <div class="table-details-content-description">Add/Edit Transaction Details</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -239,18 +248,34 @@
             <td>{{form.department}}</td>
         
             </tr>
+         
           <tr>
-            <td class="allif-fix-table-col">Customer</td>
-            <td>{{form.customer}}</td>
+            <td class="allif-fix-table-col">Description</td>
+            <td>{{form.description}}</td>
         
             </tr>
           
               <tr>
-                <td class="allif-fix-table-col">Description</td>
-                <td>{{form.description}}</td>
+            <td class="allif-fix-table-col">Number</td>
+            <td>{{form.trans_number}}</td>
+        
+            </tr>
+              <tr>
+                <td class="allif-fix-table-col">End Date & Time</td>
+                <td>{{form.end_date_time}}</td>
             
                 </tr>
-               
+                 <tr>
+          <td class="allif-fix-table-col">Status</td>
+          <td>{{form.status}}</td>
+      
+          </tr>
+        <tr>
+          <td class="allif-fix-table-col">Type</td>
+          <td>{{form.is_current}}</td>
+      
+          </tr>
+          
         </tbody>
         </table>
       </div>
@@ -264,35 +289,33 @@
        <table class="table table-layout">
         <tbody>
         
+         <tr>
+          <td class="allif-fix-table-col">Main Complaints</td>
+          <td>{{form.main_complaints}}</td>
+      
+          </tr>
           <tr>
-            <td class="allif-fix-table-col">Discount</td>
-            <td>{{form.discount}}</td>
-        
-            </tr>
-              <tr>
-                <td class="allif-fix-table-col">Discount Rate %</td>
-                <td>{{form.discountValue}}</td>
-            
-                </tr>
-          <tr>
-            <td class="allif-fix-table-col">Sales Tax</td>
-            <td>{{form.salestax}}</td>
+            <td class="allif-fix-table-col">Diagnosis</td>
+            <td>{{form.diagnosis}}</td>
         
             </tr>
            
         <tr>
-          <td class="allif-fix-table-col">Tax Rate</td>
-          <td>{{form.tax}}</td>
+          <td class="allif-fix-table-col">Encounter Type</td>
+          <td>{{form.encounter_type}}</td>
       
           </tr>
-
+      <tr>
+          <td class="allif-fix-table-col">Operation Year</td>
+          <td>{{form.operation_year}}</td>
+      
+          </tr>
            <tr>
-          <td class="allif-fix-table-col">Posting Status</td>
-          <td>{{form.posting_inv_status}}</td>
+          <td class="allif-fix-table-col">Operation Term</td>
+          <td>{{form.operation_term}}</td>
       
           </tr>
-
-                  
+          
           </tbody>
           </table>
           </div>
@@ -306,37 +329,47 @@
        <table class="table table-layout">
         <tbody>
          
-                 <tr>
-                  <td class="allif-fix-table-col">Delivery</td>
-                  <td>{{form.delivery}}</td>
-              
-                  </tr>
-                   <tr>
-                  <td class="allif-fix-table-col">Payment Terms</td>
-                  <td>{{form.payment_terms}}</td>
-              
-                  </tr>
-                   <tr>
-                  <td class="allif-fix-table-col">Currency</td>
-                  <td>{{form.currency}}</td>
-              
-                  </tr> 
+       
               <tr>
-                <td class="allif-fix-table-col">Comments</td>
-                <td>{{form.comments}}</td>
-            
-                </tr>
-            <tr>
-                <td class="allif-fix-table-col">Payment Status</td>
-                <td>{{form.invoice_status}}</td>
-            
-                </tr>
-                
-            <tr>
-              <td class="allif-fix-table-col">Action</td>
-              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+              <td class="allif-fix-table-col">Customer</td>
+              <td>{{form.customer}}</td>
           
               </tr>
+                <tr>
+              <td class="allif-fix-table-col">Staff in charge</td>
+              <td>{{form.employee_in_charge}}</td>
+          
+              </tr> 
+          <tr>
+            <td class="allif-fix-table-col">Comments</td>
+            <td>{{form.comments}}</td>
+        
+            </tr>
+        <tr>
+            <td class="allif-fix-table-col">Name</td>
+            <td>{{form.name}}</td>
+        
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">Code</td>
+            <td>{{form.code}}</td>
+        
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">Start Date</td>
+            <td>{{form.start_date}}</td>
+        
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">End Date</td>
+            <td>{{form.end_date}}</td>
+        
+            </tr>
+        <tr>
+          <td class="allif-fix-table-col">Action</td>
+          <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+      
+          </tr>
           </tbody>
           </table>
   </div>

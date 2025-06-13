@@ -35,7 +35,7 @@
      
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a></li>
 
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Transactions</a></li>
+      
      
       
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
@@ -56,7 +56,10 @@
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
       
       {% endif %}
-
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Transactions</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a></li>
+      
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransits' user_var glblslug %}">Transport</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAssets' user_var glblslug %}">Assets</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Expenses</a></li>
      

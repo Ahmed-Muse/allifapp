@@ -23,9 +23,9 @@
         <div class="content-dropdown-menu">
   
         <li><a class="dropdown-item">Looking for something?</a></li>
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonClasses' user_var glblslug %}">Clear Search</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCategories' user_var glblslug %}">Clear Search</a></li>
        
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonAssetCategorySearch' user_var glblslug %}">{% csrf_token %}
+        <form method='POST' action="{% url 'allifmaalcommonapp:commonCategorySearch' user_var glblslug %}">{% csrf_token %}
         
           <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
           placeholder="Type Here ...">
@@ -40,9 +40,9 @@
     <a class="amel-table-list-identifier">Asset Categories:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 
-    <a href="{% url 'allifmaalcommonapp:commonAssetCategories' user_var glblslug %}">Asset Categories</a>
+    <a href="{% url 'allifmaalcommonapp:commonCategories' user_var glblslug %}"> Categories</a>
     <a href="{% url 'allifmaalcommonapp:commonAssets' user_var glblslug %}">Assets</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddAssetCategory' user_var glblslug %}">Add Asset Category</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddCategory' user_var glblslug %}">Add Category</a>
 
   </div>
   
@@ -78,7 +78,7 @@
           
           {% for item in allifqueryset %} 
           <tr data-id="{{item.id}}">
-          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAssetCategoryDetails' item.id user_var glblslug %}">{{item.description}}</a></td>
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCategoryDetails' item.id user_var glblslug %}">{{item.description}}</a></td>
          
             <td>
               {{item.department}}
