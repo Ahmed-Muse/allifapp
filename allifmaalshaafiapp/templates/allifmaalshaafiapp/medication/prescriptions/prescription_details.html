@@ -56,23 +56,49 @@
       <div class="table-responsive">
       <table class="table table-layout">
       <tbody>
-       
       <tr>
-        <td class="allif-fix-table-col">Company</td>
-        <td>{{allifquery.company}}</td>
+        <td class="allif-fix-table-col">Division</td>
+        <td>{{allifquery.division}}</td>
     
         </tr>
+        
         <tr>
-          <td class="allif-fix-table-col">Division</td>
-          <td> {{allifquery.division}}</td>
+          <td class="allif-fix-table-col">Branch</td>
+          <td>{{allifquery.branch}}</td>
       
           </tr>
-          <tr>
-            <td class="allif-fix-table-col">Branch</td>
-            <td> {{allifquery.branch}}</td>
+            <tr>
+            <td class="allif-fix-table-col">Department</td>
+            <td>{{allifquery.department}}</td>
         
             </tr>
-           
+        <tr>
+          <td class="allif-fix-table-col">Patient</td>
+          <td>{{allifquery.medical_file}}</td>
+      
+          </tr>
+         <tr>
+            <td class="allif-fix-table-col">Medication</td>
+            <td>{{allifquery.medication}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Dosage From</td>
+            <td>{{allifquery.dosage_form}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Dosage</td>
+            <td>{{allifquery.dosage}}</td>
+        
+            </tr>
+       
+             <tr>
+            <td class="allif-fix-table-col">Via</td>
+            <td>{{allifquery.via}}</td>
+        
+            </tr>
+            
         </tbody>
         </table>
       </div>
@@ -85,25 +111,18 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
+         
+           <tr>
+            <td class="allif-fix-table-col">Instructions</td>
+            <td>{{allifquery.instructions}}</td>
+        
+            </tr>
               <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td> {{allifquery.department}}</td>
+            <td class="allif-fix-table-col">Quantity</td>
+            <td>{{allifquery.quantity}}</td>
         
             </tr>
-           
-          <tr>
-            <td class="allif-fix-table-col">Warehouse</td>
-            <td>{{allifquery.name}}</td>
-        
-            </tr>
-          
-          <tr>
-            <td class="allif-fix-table-col">Comments</td>
-            <td>{{allifquery.comments}}</td>
-        
-            </tr>
-
-           
+            
           </tbody>
           </table>
           </div>
@@ -116,19 +135,43 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-
-          <tr>
-            <td class="allif-fix-table-col">Date</td>
-            <td>{{allifquery.date}}</td>
+  <tr>
+            <td class="allif-fix-table-col">Frequency</td>
+            <td>{{allifquery.frequency}}</td>
         
             </tr>
-            <tr>
-              <td class="allif-fix-table-col">Owner</td>
-              <td>{{allifquery.owner}}</td>
-          
-              </tr>
-         
+             <tr>
+            <td class="allif-fix-table-col">Duration</td>
+            <td>{{allifquery.duration}}</td>
         
+            </tr>
+           
+           <tr>
+            <td class="allif-fix-table-col">Prescribed By</td>
+            <td>{{allifquery.prescribed_by_doctor}}</td>
+         
+            </tr>
+               <tr>
+            <td class="allif-fix-table-col">Issued By</td>
+            <td>{{allifquery.issued_by_pharmacist}}</td>
+        
+            </tr>
+       
+           <tr>
+            <td class="allif-fix-table-col">Status</td>
+            <td>{{allifquery.is_issued}}</td>
+        
+            </tr>
+        <tr>
+            <td class="allif-fix-table-col">Issued On</td>
+            <td>{{allifquery.issued_date_time}}</td>
+        
+            </tr>
+        <tr>
+            <td class="allif-fix-table-col">Issued On</td>
+            <td>{{allifquery.issued_date_time}}</td>
+        
+            </tr>
           </tbody>
           </table>
   </div>

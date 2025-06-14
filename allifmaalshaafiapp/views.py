@@ -402,7 +402,7 @@ def EditAdmission(request,allifusr,pk,*allifargs,**allifkwargs):
                 obj=form.save(commit=False)
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:admissions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalshaafiapp:admissions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
@@ -568,7 +568,7 @@ def addTreatment(request,*allifargs,**allifkwargs):
 @logged_in_user_can_edit
 @logged_in_user_is_admin
 def EditTreatment(request,allifusr,pk,*allifargs,**allifkwargs):
-    title="Update Referral Details"
+    title="Update Treatment Details"
     try:
         allif_data=common_shared_data(request)
         allifquery_update=MedicalAdministrationsModel.objects.filter(id=pk).first()
@@ -585,7 +585,7 @@ def EditTreatment(request,allifusr,pk,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=AddReferralForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+            form=AddMedicalAdminstrationForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         context={"title":title,"form":form,"allifquery_update":allifquery_update,}
         return render(request,'allifmaalshaafiapp/medication/prescriptions/treatments/add_treatment.html',context)
     
@@ -681,7 +681,7 @@ def deleteTreatment(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 @logged_in_user_is_admin
 def discharges(request,*allifargs,**allifkwargs):
-    title="Referrals"
+    title="Discharges"
     try:
         allif_data=common_shared_data(request)
         if allif_data.get("logged_in_user_has_universal_access")==True:
@@ -760,7 +760,7 @@ def EditDischarge(request,allifusr,pk,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=AddReferralForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+            form=AddDischargeForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         context={"title":title,"form":form,"allifquery_update":allifquery_update,}
         return render(request,'allifmaalshaafiapp/medication/admissions/discharge/add_discharge.html',context)
     
@@ -931,7 +931,7 @@ def EditReferral(request,allifusr,pk,*allifargs,**allifkwargs):
                 obj=form.save(commit=False)
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:admissions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalshaafiapp:referrals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}

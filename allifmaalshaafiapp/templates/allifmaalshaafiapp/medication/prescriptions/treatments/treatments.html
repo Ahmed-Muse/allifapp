@@ -131,7 +131,7 @@
         
         {% for item in allifqueryset %} 
         <tr data-id="{{item.id}}">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:prescriptionDetails' item.id user_var glblslug %}">{{item.medical_file}}</a></td>
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:treatmentDetails' item.id user_var glblslug %}">{{item.medical_file}}</a></td>
        
             <td>
             {{item.customer}}
@@ -154,7 +154,7 @@
           <div class="dropdown allifmaal-content-dropdown">
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
             <div class="dropdown-content">
-              <a href="{% url 'allifmaalshaafiapp:EditPrescription' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="{% url 'allifmaalshaafiapp:EditTreatment' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
              
               
               <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
@@ -163,8 +163,8 @@
           </div>
           <div class="dropdown allif-confirm-action">
             
-            <a href="{% url 'allifmaalshaafiapp:prescriptions' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalshaafiapp:deletePrescription' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            <a href="{% url 'allifmaalshaafiapp:treatments' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+            <a href="{% url 'allifmaalshaafiapp:deleteTreatment' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
           </div>
 
          

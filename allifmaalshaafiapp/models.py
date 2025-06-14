@@ -4,7 +4,7 @@ from allifmaalcommonapp.constants import BED_TYPES, PRESCRIPTION_FORMULATIONS, A
 from allifmaalusersapp.models import User
 from allifmaalcommonapp.models import CommonTransactionsModel,CommonSpacesModel,CommonSpaceUnitsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
 
-class MedicationsModel(models.Model):
+class MedicationsModel(models.Model):# prescriptions...
     """
     Represents an actual prescription of medication  and otherprescriptions issued by a doctor for a patient.
     """
@@ -53,12 +53,12 @@ class AdmissionsModel(models.Model):
     department=models.ForeignKey(CommonDepartmentsModel,related_name="deptadmissns",on_delete=models.SET_NULL,null=True,blank=True)
     description=models.CharField(max_length=50, help_text="Type of referral (Internal or External).",blank=True,null=True)
     admitting_doctor=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="admitted_patients",)
-    admission_date_time=models.DateTimeField(blank=True, null=True, auto_now_add=True,help_text="Date and time of patient admission.")
+    date_time=models.DateTimeField(blank=True, null=True, auto_now_add=True,help_text="Date and time of patient admission.")
     reason_for_admission=models.TextField(max_length=250,blank=True, null=True,help_text="The primary reason for patient admission.")
     ward=models.ForeignKey(CommonSpacesModel, on_delete=models.CASCADE, related_name="admissions", blank=True, null=True,help_text="The ward to which the patient is admitted.")
     bed=models.ForeignKey(CommonSpaceUnitsModel, on_delete=models.CASCADE, related_name="admissions", blank=True, null=True,help_text="The specific bed allocated to the patient.")
     status=models.CharField(max_length=100, choices=ADMISSION_STATUSES, default='ADM',help_text="Current status of the admission (e.g., Admitted, Discharged).")
-    discharge_date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient discharge (if applicable).")
+    admission_date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient discharge (if applicable).")
     
     medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.SET_NULL, related_name="mdcladmnss", blank=True, null=True,)
     date_created=models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -91,7 +91,7 @@ class MedicalAdministrationsModel(models.Model):
     last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
    
     def __str__(self):
-        return str(self.patient)
+        return str(self.medical_file)
 
 class DischargesModel(models.Model):
     #For inpatients, a summary at discharge.
@@ -142,4 +142,4 @@ class ReferralsModel(models.Model):
     last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __str__(self):
-        return str(self.patient)
+        return str(self.medical_file)

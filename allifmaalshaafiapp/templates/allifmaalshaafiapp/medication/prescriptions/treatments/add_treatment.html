@@ -58,7 +58,29 @@
           <td>{{form.branch}}</td>
       
           </tr>
-       
+        <tr>
+          <td class="allif-fix-table-col">Patient</td>
+          <td>{{form.medical_file}}</td>
+      
+          </tr>
+ 
+        <tr>
+            <td class="allif-fix-table-col">Medication</td>
+            <td>{{form.prescription}}</td>
+        
+            </tr>
+          
+             <tr>
+            <td class="allif-fix-table-col">Dosage Value</td>
+            <td>{{form.dosage_value}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Dosage Unit</td>
+            <td>{{form.dosage_unit}}</td>
+        
+            </tr>
+          
            
         </tbody>
         </table>
@@ -78,13 +100,18 @@
             <td>{{form.department}}</td>
         
             </tr>
-            <tr>
-              <td class="allif-fix-table-col">Warehouse</td>
-              <td>{{form.name}}</td>
-          
-              </tr>
+          <tr>
+            <td class="allif-fix-table-col">Given On</td>
+            <td>{{form.given_on}}</td>
         
+            </tr>
+        <tr>
+            <td class="allif-fix-table-col">Via</td>
+            <td>{{form.via}}</td>
+        
+            </tr>
            
+            </tr>
           </tbody>
           </table>
           </div>
@@ -97,17 +124,17 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-          <tr>
+             <tr>
+            <td class="allif-fix-table-col">Given By</td>
+            <td>{{form.administered_by_nurse}}</td>
+        
+            </tr>
+             <tr>
             <td class="allif-fix-table-col">Comments</td>
             <td>{{form.comments}}</td>
         
             </tr>
-             <tr>
-            <td class="allif-fix-table-col">Inventory A/C</td>
-            <td>{{form.inventory_account}}</td>
-        
-            </tr>
- 
+           
             <tr>
               <td class="allif-fix-table-col">Action</td>
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
@@ -148,7 +175,7 @@
       <table class="table table-layout">
       <tbody>
         <tr>
-          <td class="allif-fix-table-col">Medical File</td>
+          <td class="allif-fix-table-col">Patient</td>
           <td>{{form.medical_file}}</td>
       
           </tr>
@@ -158,11 +185,7 @@
             <td>{{form.prescription}}</td>
         
             </tr>
-             <tr>
-            <td class="allif-fix-table-col">Given By</td>
-            <td>{{form.administered_by_nurse}}</td>
-        
-            </tr>
+          
              <tr>
             <td class="allif-fix-table-col">Dosage Value</td>
             <td>{{form.dosage_value}}</td>
@@ -173,13 +196,7 @@
             <td>{{form.dosage_unit}}</td>
         
             </tr>
-             <tr>
-            <td class="allif-fix-table-col">Dosage From</td>
-            <td>{{form.dosage_form}}</td>
-        
-            </tr>
-            
-           
+          
         </tbody>
         </table>
       </div>
@@ -202,25 +219,7 @@
             <td>{{form.via}}</td>
         
             </tr>
-             <tr>
-            <td class="allif-fix-table-col">Duration</td>
-            <td>{{form.duration}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Prescribed By</td>
-            <td>{{form.prescribed_by_doctor}}</td>
-         
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Instructions</td>
-            <td>{{form.instructions}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Issued By</td>
-            <td>{{form.issued_by_pharmacist}}</td>
-        
+           
             </tr>
            
           </tbody>
@@ -235,19 +234,9 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-        <tr>
-            <td class="allif-fix-table-col">Issued On</td>
-            <td>{{form.issued_date_time}}</td>
-        
-            </tr>
-           
+       
              <tr>
-            <td class="allif-fix-table-col">Monthly Rent</td>
-            <td>{{form.monthly_rent}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Description</td>
+            <td class="allif-fix-table-col">Given By</td>
             <td>{{form.administered_by_nurse}}</td>
         
             </tr>

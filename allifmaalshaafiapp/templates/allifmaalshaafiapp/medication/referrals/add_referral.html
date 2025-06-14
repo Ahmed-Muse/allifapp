@@ -58,7 +58,34 @@
           <td>{{form.branch}}</td>
       
           </tr>
-       
+        <tr>
+          <td class="allif-fix-table-col">Medical File</td>
+          <td>{{form.medical_file}}</td>
+      
+          </tr>
+
+        <tr>
+            <td class="allif-fix-table-col">Referring Doctor</td>
+            <td>{{form.referring_doctor}}</td>
+        
+            </tr>
+            
+             <tr>
+            <td class="allif-fix-table-col">Referred On</td>
+            <td>{{form.referred_on}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Referal Type</td>
+            <td>{{form.referral_type}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Referred To</td>
+            <td>{{form.referred_to_doctor}}</td>
+        
+            </tr>
+            
            
         </tbody>
         </table>
@@ -78,13 +105,11 @@
             <td>{{form.department}}</td>
         
             </tr>
-            <tr>
-              <td class="allif-fix-table-col">Warehouse</td>
-              <td>{{form.name}}</td>
-          
-              </tr>
+         <tr>
+            <td class="allif-fix-table-col">Referral Reasons</td>
+            <td>{{form.reason_for_referral}}</td>
         
-           
+            </tr>
           </tbody>
           </table>
           </div>
@@ -97,17 +122,16 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Comments</td>
-            <td>{{form.comments}}</td>
+            <tr>
+            <td class="allif-fix-table-col">Refer Externally</td>
+            <td>{{form.referred_to_external_organization}}</td>
         
             </tr>
-             <tr>
-            <td class="allif-fix-table-col">Inventory A/C</td>
-            <td>{{form.inventory_account}}</td>
+        <tr>
+            <td class="allif-fix-table-col">Status</td>
+            <td>{{form.status}}</td>
         
             </tr>
- 
             <tr>
               <td class="allif-fix-table-col">Action</td>
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
@@ -158,11 +182,7 @@
             <td>{{form.referring_doctor}}</td>
         
             </tr>
-             <tr>
-            <td class="allif-fix-table-col">Referral Reasons</td>
-            <td>{{form.reason_for_referral}}</td>
-        
-            </tr>
+            
              <tr>
             <td class="allif-fix-table-col">Referred On</td>
             <td>{{form.referred_on}}</td>
@@ -192,37 +212,12 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Refer Externally</td>
-            <td>{{form.referred_to_external_organization}}</td>
+           <tr>
+            <td class="allif-fix-table-col">Referral Reasons</td>
+            <td>{{form.reason_for_referral}}</td>
         
             </tr>
-        <tr>
-            <td class="allif-fix-table-col">Status</td>
-            <td>{{form.status}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Duration</td>
-            <td>{{form.duration}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Prescribed By</td>
-            <td>{{form.prescribed_by_doctor}}</td>
          
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Instructions</td>
-            <td>{{form.instructions}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Issued By</td>
-            <td>{{form.issued_by_pharmacist}}</td>
-        
-            </tr>
-           
           </tbody>
           </table>
           </div>
@@ -235,33 +230,17 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
+           <tr>
+            <td class="allif-fix-table-col">Refer Externally</td>
+            <td>{{form.referred_to_external_organization}}</td>
+        
+            </tr>
         <tr>
-            <td class="allif-fix-table-col">Issued On</td>
-            <td>{{form.issued_date_time}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Max Occupancy</td>
-            <td>{{form.max_occupancy}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Monthly Rent</td>
-            <td>{{form.monthly_rent}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
-        
-            </tr>
-             <tr>
             <td class="allif-fix-table-col">Status</td>
-            <td>{{form.current_status}}</td>
+            <td>{{form.status}}</td>
         
             </tr>
-           
-          
+            
         <tr>
           <td class="allif-fix-table-col">Action</td>
           <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>

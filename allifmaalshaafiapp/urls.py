@@ -24,7 +24,7 @@ path('medical/adminstrations/treatments/s/of/clients/s/<str:allifusr>/<str:allif
 path('Add/New/Treatment/s/medication/s/<str:allifusr>/<str:allifslug>/', views.addTreatment, name="addTreatment"),
 path('Edit/Update/treatment/medication/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.EditTreatment, name="EditTreatment"),
 path('Search/For/treatment/medication/s/Details/<str:allifusr>/<str:allifslug>/', views.treatmentSearch, name="treatmentSearch"),
-path('treatment/medication/s/Details/Information/s/<str:int>/<str:allifusr>/<str:allifslug>/', views.treatmentDetails, name="treatmentDetails"),
+path('treatment/medication/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.treatmentDetails, name="treatmentDetails"),
 path('Do/You/u/Really/Want/to/Delete/This/treatment/s/medication/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteTreatment, name="wantToDeleteTreatment"),
 path('Delete/This/Treatments/now/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteTreatment, name="deleteTreatment"),
 
@@ -35,7 +35,7 @@ path('Admission/patient/s/<str:allifusr>/<str:allifslug>/', views.admissions, na
 path('Add/New/admission/s/medication/s/<str:allifusr>/<str:allifslug>/', views.addAdmission, name="addAdmission"),
 path('Edit/Update/admission/s/medication/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.EditAdmission, name="EditAdmission"),
 path('Search/For/admission/medication/s/Details/<str:allifusr>/<str:allifslug>/', views.admissionSearch, name="admissionSearch"),
-path('admission/s/medication/s/Details/Information/s/<str:int>/<str:allifusr>/<str:allifslug>/', views.admissionDetails, name="admissionDetails"),
+path('admission/s/medication/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.admissionDetails, name="admissionDetails"),
 path('Do/You/u/Really/Want/to/Delete/This/admission/s/s/medication/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteAdmission, name="wantToDeleteAdmission"),
 path('Delete/This/admission/s/now/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteAdmission, name="deleteAdmission"),
 
@@ -58,7 +58,7 @@ path('Referals/s/of/clients/s/<str:allifusr>/<str:allifslug>/', views.referrals,
 path('Add/New/referral/s/medication/s/<str:allifusr>/<str:allifslug>/', views.addReferral, name="addReferral"),
 path('Edit/Update/referral/s/medication/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.EditReferral, name="EditReferral"),
 path('Search/For/referral/s/medication/s/Details/<str:allifusr>/<str:allifslug>/', views.referralSearch, name="referralSearch"),
-path('Referral/s/medication/s/Details/Information/s/<str:int>/<str:allifusr>/<str:allifslug>/', views.referralDetails, name="referralDetails"),
+path('Referral/s/medication/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.referralDetails, name="referralDetails"),
 path('Do/You/u/Really/Want/to/Delete/This/Referral/s/now/s/medication/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteReferral, name="wantToDeleteReferral"),
 path('Delete/This/Referral/s/now/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteReferral, name="deleteReferral"),
 

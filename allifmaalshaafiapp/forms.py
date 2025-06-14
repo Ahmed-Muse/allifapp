@@ -18,8 +18,19 @@ class AddPrescriptionForm(forms.ModelForm):
                   'frequency','duration','prescribed_by_doctor','instructions','issued_by_pharmacist',
                   'issued_date_time']
         widgets={
-            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'frequency':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'issued_date_time' : DatePickerInput(attrs={'class':'form-control'}),
+            'instructions':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            'dosage':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'dosage_form':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'medication':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'quantity':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'duration':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'via':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'issued_by_pharmacist':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'prescribed_by_doctor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -39,12 +50,18 @@ class AddPrescriptionForm(forms.ModelForm):
 class AddAdmissionForm(forms.ModelForm):
     class Meta:
         model = AdmissionsModel
-        fields = ['medical_file','ward','bed','discharge_date_time','description','division','branch','department',
+        fields = ['medical_file','ward','bed','admission_date_time','description','division','branch','department',
                   'status','admitting_doctor','reason_for_admission'
                   ]
         widgets={
-            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'reason_for_admission':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'ward':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'bed':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'admitting_doctor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'admission_date_time' : DatePickerInput(attrs={'class':'form-control'}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -68,8 +85,24 @@ class AddMedicalAdminstrationForm(forms.ModelForm):
                   'comments',
                   ]
         widgets={
-            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'dosage_value':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
+           
+            'given_on' : DatePickerInput(attrs={'class':'form-control'}),
+          
+            'administered_by_nurse':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
+            'prescription':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
+           
+            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'via':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+          
+            
+            'dosage_unit':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
+
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -92,7 +125,12 @@ class AddDischargeForm(forms.ModelForm):
                   ]
         widgets={
             
-            'discharge_summary':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'discharge_summary':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            'discharge_diagnosis':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'medications_at_discharge':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'follow_up_plan':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'recorded_on' : DatePickerInput(attrs={'class':'form-control'}),
+            'admission':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -113,8 +151,18 @@ class AddReferralForm(forms.ModelForm):
                   'status',
                   ]
         widgets={
-            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'reason_for_referral':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+           
+            'referred_on' : DatePickerInput(attrs={'class':'form-control'}),
+            
+            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'referring_doctor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'referral_type':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'referred_to_doctor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'referred_to_external_organization':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
+            
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
