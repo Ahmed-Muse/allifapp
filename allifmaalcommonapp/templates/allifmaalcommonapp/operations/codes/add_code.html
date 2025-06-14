@@ -33,7 +33,7 @@
 
     {% if allifquery_update %}
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Edit {{allifquery_update}} Category</div>
+  <div class="table-details-content-description">Edit {{allifquery_update}} Code</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -163,7 +163,7 @@
 
 {% else %}
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add New Category</div>
+  <div class="table-details-content-description">Add New Code</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -188,12 +188,7 @@
       
           </tr>
 
-          
-          <tr>
-          <td class="allif-fix-table-col">Code Description</td>
-          <td>{{form.description}}</td>
-      
-          </tr>
+         
          
         </tbody>
         </table>
@@ -207,22 +202,12 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
-          <tr>
-          <td class="allif-fix-table-col">Start Date</td>
-          <td>{{form.start_date}}</td>
-      
-          </tr>
-          <tr>
-          <td class="allif-fix-table-col">End Date</td>
-          <td>{{form.end_date}}</td>
-      
-          </tr>
           
           <tr>
-            <td class="allif-fix-table-col">Comments</td>
-            <td>{{form.comments}}</td>
-        
-            </tr>
+          <td class="allif-fix-table-col">Code Description</td>
+          <td>{{form.description}}</td>
+      
+          </tr>
          
           </tbody>
           </table>
@@ -237,23 +222,7 @@
        <table class="table table-layout">
         <tbody>
          
-          <tr>
-          <td class="allif-fix-table-col">Operation Year</td>
-          <td>{{form.operation_year}}</td>
-      
-          </tr>
-          <tr>
-          <td class="allif-fix-table-col">Operation Term</td>
-          <td>{{form.operation_term}}</td>
-      
-          </tr>
-          <tr>
-          <td class="allif-fix-table-col">Status</td>
-          <td>{{form.is_current}}</td>
-      
-          </tr>
-         
-         
+        
             <tr>
               <td class="allif-fix-table-col">Action</td>
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>

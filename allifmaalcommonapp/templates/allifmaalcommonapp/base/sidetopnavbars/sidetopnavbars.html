@@ -30,8 +30,8 @@
       
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a></li>
      
-    
-      <li><a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">Accounts</a></li>
+    <li><a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a></li>
+
      
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a></li>
 
@@ -45,10 +45,7 @@
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Students</a></li>
       
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Lecturers</a></li>
-       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonForms' user_var glblslug %}">Forms</a></li>
-
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonClasses' user_var glblslug %}">Classes</a></li>
-      
+     
       {% elif sctr == 'Healthcare' %}
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Patients</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Doctors</a></li>
@@ -56,14 +53,18 @@
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
       
       {% endif %}
+       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAssets' user_var glblslug %}">Assets</a></li>
+           
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Expenses</a></li>
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">Inventory</a></li>
+      
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Transactions</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a></li>
+      
       
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransits' user_var glblslug %}">Transport</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAssets' user_var glblslug %}">Assets</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Expenses</a></li>
+
      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">Inventory</a></li>
+     
 
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPurchaseOrders' user_var glblslug %}">Procurement</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonQuotes' user_var glblslug %}">Quotes</a></li>

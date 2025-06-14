@@ -15,10 +15,9 @@
   <div class="col-md-12"><!--start....header column-->
   
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Warehouses/Stores:</a>
-       <div class="dropdown allifmaal-content-dropdown">
+      <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Filters
+      Search Filters
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
@@ -32,6 +31,7 @@
       </div>
       </ul>
     </div>
+    <a class="amel-table-list-identifier">Space Units</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a>
        <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
@@ -55,9 +55,10 @@
       <table class="table table-layout">
         <thead>
           <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Space</td>
+          <td class="allif-fix-table-col">Space Unit</td>
         
-          <td>Asset</td>
+          <td>Unit Number</td>
+           <td>Space</td>
           <td>Date</td>
        
           <td>Navigate</td>
@@ -74,11 +75,13 @@
           <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceUnitDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
          
             <td>
-            {{item.asset}}
+            {{item.space_number}}
            </td>
-          
+            <td>
+            {{item.space}}
+           </td>
            <td>
-            {{item.date}}
+            {{item.date|date:'d/m/Y'}}
            </td>
           
            <td>
@@ -104,6 +107,45 @@
     
       </tr>
       {% endfor %}
+      {% if searched_data %}
+    {% for item in searched_data %}
+     <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceUnitDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
+         
+            <td>
+            {{item.space_number}}
+           </td>
+            <td>
+            {{item.space}}
+           </td>
+           <td>
+            {{item.date|date:'d/m/Y'}}
+           </td>
+          
+           <td>
+            <div class="dropdown allifmaal-content-dropdown">
+              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
+              <div class="dropdown-content">
+                <a href="{% url 'allifmaalcommonapp:commonEditSpaceUnit' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+                
+              </div>
+            </div>
+            <div class="dropdown allif-confirm-action">
+              
+              <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteSpaceUnit' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            </div>
+  
+           
+          </td>
+         <td> . . . </td>
+         <td></td>
+        
+    
+      </tr>
+    {% endfor %}
+      {%endif %}
      
         </tbody>
       </table>

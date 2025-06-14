@@ -1,5 +1,47 @@
 # healthcare_app/constants.py (or a similar location)
 ############ below is for teh common orders/transactions model... can be applied there....
+
+##################3 start of used options#####################3
+
+PROPERTY_TYPES = [
+        ('Residential', 'Residential'),
+        ('Commercial', 'Commercial'),
+        ('Industrial', 'Industrial'),
+        ('Land', 'Land'),
+        ('Mixed-Use', 'Mixed-Use'),
+    ]
+FLOOR_CHOICES = [(i, str(i)) for i in range(1, 30)]
+
+CURRENT_STATUS_CHOICES = [
+        ('Available', 'Available'),
+        ('Occupied', 'Occupied'),
+        ('Maintenance', 'Maintenance'),
+        ('Sale', 'For Sale'), ('Rent', 'For Rent'), ('Development', 'For Development'),
+      ('Pending', 'Pending'), ('Sold', 'Sold'),
+    ('Rented', 'Rented'), ('Cancelled', 'Cancelled')
+    ]
+
+
+
+PROPERTY_UNIT_TYPES = [
+        ('Apartment', 'Apartment'),
+        ('Room', 'Room'),
+        ('Shop', 'Shop'),
+        ('Office', 'Office'),
+        ('House', 'House'),
+        ('Warehouse', 'Warehouse'),
+        ('Other', 'Other'),
+    ]
+
+
+
+
+
+
+
+#############################################################################
+
+
 COMMON_EVENT_TYPES = [
     ('SALES_ORDER', 'Sales Order'),
     ('PATIENT_ENCOUNTER', 'Patient Encounter (Healthcare)'),
@@ -291,14 +333,8 @@ job_status=[
 payment_status = [('PENDING', 'Pending'), ('PAID', 'Paid'), ('DUE', 'Due')]
 ####################3 hospitality ######################
  #Example for up to 20 floors
-FLOOR_CHOICES = [(i, str(i)) for i in range(1, 21)]
 
-CURRENT_STATUS_CHOICES = [
-        ('AVAIL', 'Available'),
-        ('OCC', 'Occupied'),
-        ('MAINT', 'Maintenance'),
-        ('DIRTY', 'Dirty'),
-    ]
+
 BOOKING_STATUS_CHOICES = [
         ('PEND', 'Pending'),
         ('CONF', 'Confirmed'),
@@ -338,22 +374,6 @@ day_of_week_choices = [
 
 ############################ real estates #####################3
 
-PROPERTY_TYPES = [
-        ('RES', 'Residential'),
-        ('COM', 'Commercial'),
-        ('IND', 'Industrial'),
-        ('LAND', 'Land'),
-        ('MIXED', 'Mixed-Use'),
-    ]
-PROPERTY_UNIT_TYPES = [
-        ('APT', 'Apartment'),
-        ('ROOM', 'ROOM'),
-        ('SHOP', 'Shop'),
-        ('OFFICE', 'Office'),
-        ('HOUSE', 'House'),
-        ('WAREHOUSE', 'Warehouse'),
-        ('OTHER', 'Other'),
-    ]
 PROJECT_STATUS_CHOICES=[
         ('PLAN', 'Planned'), ('INPR', 'In Progress'), ('PAUSE', 'Paused'),('SCHED', 'Scheduled'),
         ('COMP', 'Completed'), ('CANC', 'Cancelled')

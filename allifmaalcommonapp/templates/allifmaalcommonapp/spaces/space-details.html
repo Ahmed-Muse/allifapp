@@ -75,6 +75,37 @@
             <td> {{allifquery.branch}}</td>
         
             </tr>
+              <tr>
+            <td class="allif-fix-table-col">Department</td>
+            <td> {{allifquery.department}}</td>
+        
+            </tr>
+               <tr>
+          <td class="allif-fix-table-col">Space Number</td>
+          <td>{{allifquery.space_number}}</td>
+      
+          </tr>
+        <tr>
+          <td class="allif-fix-table-col">Name</td>
+          <td>{{allifquery.name}}</td>
+      
+          </tr>
+      <tr>
+            <td class="allif-fix-table-col">Description</td>
+            <td>{{allifquery.description}}</td>
+        
+            </tr>
+        <tr>
+            <td class="allif-fix-table-col">#Units</td>
+            <td>{{allifquery.number_of_units}}</td>
+        
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">#Rooms</td>
+            <td>{{allifquery.number_of_bedrooms}}</td>
+        
+            </tr>
+             
            
         </tbody>
         </table>
@@ -88,25 +119,53 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
-              <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td> {{allifquery.department}}</td>
+             <tr>
+            <td class="allif-fix-table-col">#Washrooms</td>
+            <td>{{allifquery.number_of_bathrooms}}</td>
         
             </tr>
+          <tr>
+            <td class="allif-fix-table-col">Capacity</td>
+            <td>{{allifquery.capacity}}</td>
+        
+            </tr>
+               
            
-          <tr>
-            <td class="allif-fix-table-col">Warehouse</td>
-            <td>{{allifquery.name}}</td>
+           <tr>
+            <td class="allif-fix-table-col">Base Price/Night</td>
+            <td>{{allifquery.base_price_per_night}}</td>
         
             </tr>
-          
-          <tr>
-            <td class="allif-fix-table-col">Comments</td>
-            <td>{{allifquery.comments}}</td>
+             <tr>
+            <td class="allif-fix-table-col">Max Occupancy</td>
+            <td>{{allifquery.max_occupancy}}</td>
         
             </tr>
+             <tr>
+            <td class="allif-fix-table-col">Monthly Rent</td>
+            <td>{{allifquery.monthly_rent}}</td>
+        
+            </tr>
+            
+           
 
-           
+        <tr>
+            <td class="allif-fix-table-col">Amenities</td>
+            <td>{{allifquery.amenities}}</td>
+        
+            </tr>
+       
+             <tr>
+            <td class="allif-fix-table-col">Space Floor</td>
+            <td>{{allifquery.space_floor}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Space Type</td>
+            <td>{{allifquery.space_type}}</td>
+        
+            </tr>
+            
           </tbody>
           </table>
           </div>
@@ -130,7 +189,33 @@
               <td>{{allifquery.owner}}</td>
           
               </tr>
-         
+            <tr>
+            <td class="allif-fix-table-col">Asset</td>
+            <td>{{allifquery.asset}}</td>
+        
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">Staff in Charge</td>
+            <td>{{allifquery.emplyee_in_charge}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Phone</td>
+            <td>{{allifquery.contact_phone}}</td>
+        
+            </tr>
+           
+              <tr>
+            <td class="allif-fix-table-col">City</td>
+            <td>{{allifquery.city}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Address</td>
+            <td>{{allifquery.address}}</td>
+        
+            </tr>
+          
         
           </tbody>
           </table>
@@ -153,9 +238,10 @@
       <table class="table table-layout">
         <thead>
           <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Stock Item</td>
-          <td>Quantity</td>
-         
+          <td class="allif-fix-table-col">Unit Name</td>
+           <td>Unit Number</td>
+          <td>Building</td>
+        
           <td>Navigate</td>
           
           <td> . . . </td>
@@ -167,33 +253,40 @@
           
           {% for item in allifqueryset %} 
           <tr data-id="{{item.id}}">
-          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.id user_var glblslug %}">{{item.description}}</a></td>
-          
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceUnitDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
+         
             <td>
-            {{item.quantity}}
+            {{item.space_number}}
            </td>
-           
-          <td>
+            <td>
+            {{item.space}}
+           </td>
+           <td>
+            {{item.date|date:'d/m/Y'}}
+           </td>
+          
+           <td>
             <div class="dropdown allifmaal-content-dropdown">
               <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
               <div class="dropdown-content">
-                <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="{% url 'allifmaalcommonapp:commonEditSpaceUnit' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
                 <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
                 
               </div>
             </div>
             <div class="dropdown allif-confirm-action">
               
-              <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-              <a href="{% url 'allifmaalcommonapp:commonDeleteStockItem' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+              <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteSpaceUnit' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
             </div>
   
            
           </td>
-  
          <td> . . . </td>
          <td></td>
-        </tr>
+        
+    
+      </tr>
         {% endfor %}
         </tbody>
       </table>

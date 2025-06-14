@@ -15,12 +15,15 @@
   <div class="col-md-12"><!--start....header column-->
   
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Warehouses/Stores:</a>
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Warehouses</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddSpace' user_var glblslug %}">Add New Space</a>
+   <a class="amel-table-list-identifier">Spaces:</a>
+
+  <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+  <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a>
+  <a href="{% url 'allifmaalcommonapp:commonAddSpace' user_var glblslug %}">Add New Space</a>
+  
   <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
-   <a href="{% url 'allifmaalcommonapp:commonAddSpaceUnit' user_var glblslug %}">Add New Space Unit</a>
+  <a href="{% url 'allifmaalcommonapp:commonAddSpaceUnit' user_var glblslug %}">Add New Unit</a>
+
   </div>
   
       </div><!--end....header column-->
@@ -39,8 +42,8 @@
       <table class="table table-layout">
         <thead>
           <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Space</td>
-        
+          <td class="allif-fix-table-col">Space Unit</td>
+         <td>Ref. Number</td>
           <td>Asset</td>
           <td>Date</td>
        
@@ -56,13 +59,15 @@
           {% for item in allifqueryset %} 
           <tr data-id="{{item.id}}">
           <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
-         
+          <td>
+            {{item.space_number}}
+           </td>
             <td>
             {{item.asset}}
            </td>
           
            <td>
-            {{item.date}}
+            {{item.date|date:'d/m/Y'}}
            </td>
           
            <td>

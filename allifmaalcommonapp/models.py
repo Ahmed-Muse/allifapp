@@ -93,7 +93,6 @@ class CommonCompanyDetailsModel(models.Model):# this is the company
     logo=models.FileField(upload_to='myfiles/',null=True, blank=True)
     owner=models.OneToOneField(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="secrlmown")
     sector=models.ForeignKey(CommonSectorsModel,related_name="secrlmcompcmmnapp",on_delete=models.PROTECT,null=True,blank=False)
-    #branch=models.CharField(max_length=50,blank=True,null=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     updatedon=models.DateTimeField(blank=True, null=True)
     created_date=models.DateField(null=True, blank=True)
@@ -682,7 +681,7 @@ class CommonCustomerPaymentsModel(models.Model):
     comments=models.CharField(max_length=50,blank=True,null=True, default='comment')
     account=models.ForeignKey(CommonChartofAccountsModel,related_name="allifcustpymaccrelnm",on_delete=models.SET_NULL,blank=True,null=True)
     mode=models.ForeignKey(CommonPaymentTermsModel, related_name="custmrpymnterms",on_delete=models.SET_NULL,null=True,blank=True)
-    status=models.CharField(choices=posting_status, default='waiting', max_length=20,blank=True,null=True)
+    status=models.CharField(choices=posting_status, default='waiting', max_length=200,blank=True,null=True)
     owner=models.ForeignKey(User, related_name="ownrcstmpymnt",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpcspymnt",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvscustmrpymnt",on_delete=models.SET_NULL,null=True,blank=True)
@@ -725,20 +724,6 @@ class CommonLedgerEntriesModel(models.Model): # this is the journal entries...
         return '{}'.format(self.comments)
  
 
-################################3assets######################################################
-
-class CommonAssetCategoriesModel(models.Model):
-    description=models.CharField(max_length=30,blank=False,null=True,unique=False)
-    owner=models.ForeignKey(User, on_delete=models.SET_NULL,related_name="asstcatusr",blank=True,null=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpasstcatasst",on_delete=models.CASCADE,null=True,blank=True)
-    comments=models.CharField(null=True, blank=True, max_length=50)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsasstscats",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchasstscats",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptasstscats",on_delete=models.SET_NULL,null=True,blank=True)
-    
-    def __str__(self):
-        return str(self.description)
 class CommonAssetsModel(models.Model):
     """
     thi can represent a normal asset to any company...vehicles, equipment, properties etc...
@@ -820,6 +805,94 @@ class CommonAssetsModel(models.Model):
         assetamount=self.quantity*self.value
         return assetamount
 
+#########################################3 SPACES ##############################################
+
+class CommonSpacesModel(models.Model):
+    """
+    It represents any definable, usable, and often bookable/assignable unit or area within a building or property.
+    This can be a hotel room, halls, a hospital wards, a classrooms, an office, an apartment, a restaurant table, an event hall, a storage bay etc.
+    """
+    owner=models.ForeignKey(User, related_name="owned_rooms", on_delete=models.SET_NULL, null=True, blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_rooms", on_delete=models.CASCADE, null=True, blank=True)
+    division=models.ForeignKey(CommonDivisionsModel, related_name="division_rooms", on_delete=models.SET_NULL, null=True, blank=True)
+    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_rooms", on_delete=models.SET_NULL, null=True, blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_rooms", on_delete=models.SET_NULL, null=True, blank=True)
+    
+    asset=models.ForeignKey(CommonAssetsModel, related_name="asset_space", on_delete=models.SET_NULL, null=True, blank=True)
+    space_number=models.CharField(max_length=50,blank=True,null=True)
+    number_of_units=models.CharField(max_length=50,blank=True,null=True)
+    name=models.CharField(max_length=30,blank=True,null=True)
+    description=models.CharField(max_length=100,blank=True,null=True)
+    space_type=models.CharField(max_length=250,blank=True,null=True, choices=PROPERTY_TYPES, default='AVAIL')
+    space_floor=models.PositiveSmallIntegerField(choices=FLOOR_CHOICES, blank=True, null=True)
+    current_status = models.CharField(max_length=250,blank=True,null=True, choices=CURRENT_STATUS_CHOICES, default='AVAIL')
+    base_price_per_night=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
+    monthly_rent=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
+    max_occupancy=models.CharField(max_length=100,blank=True,null=True)
+    amenities=models.CharField(max_length=250,blank=True,null=True)
+    number_of_bedrooms=models.CharField(max_length=100,blank=True,null=True)
+    number_of_bathrooms=models.CharField(max_length=100,blank=True,null=True)
+    address=models.TextField(blank=True,null=True)
+    city=models.CharField(max_length=100,blank=True,null=True)
+    capacity=models.CharField(max_length=100,blank=True,null=True)
+    emplyee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='managed_warehouses')
+    contact_phone = models.CharField(max_length=50, blank=True, null=True)
+    
+    date=models.DateField(blank=True,null=True,auto_now_add=True)
+    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
+   
+    def __str__(self):
+        return str(self.name)
+
+
+class CommonSpaceUnitsModel(models.Model):
+    """
+    this defines the sub-units of available spaces....
+    sales... office rooms, cubicles, etc
+    healthcare...rooms, beds, etc
+    education...rooms, beds, etc
+    realestates...rooms,beds, etc
+    
+    """
+    owner=models.ForeignKey(User, related_name="owned_space_units", on_delete=models.SET_NULL, null=True, blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_space_units", on_delete=models.CASCADE, null=True, blank=True)
+    division=models.ForeignKey(CommonDivisionsModel, related_name="division_space_units", on_delete=models.SET_NULL, null=True, blank=True)
+    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_space_units", on_delete=models.SET_NULL, null=True, blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_space_units", on_delete=models.SET_NULL, null=True, blank=True)
+    
+    space=models.ForeignKey(CommonSpacesModel, related_name="units_space", on_delete=models.SET_NULL, null=True, blank=True)
+    space_number=models.CharField(max_length=250,blank=True,null=True)
+    name=models.CharField(max_length=50,blank=True,null=True)
+    description=models.CharField(max_length=250,blank=True,null=True)
+    space_type=models.CharField(max_length=250,blank=True,null=True, choices=PROPERTY_TYPES, default='AVAIL')
+    space_floor=models.PositiveSmallIntegerField(choices=FLOOR_CHOICES, blank=True, null=True)
+    
+    current_status = models.CharField(max_length=250,blank=True,null=True, choices=CURRENT_STATUS_CHOICES, default='AVAIL')
+    date=models.DateField(blank=True,null=True,auto_now_add=True)
+    base_price_per_night=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
+    monthly_rent=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
+    
+    unitcost=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
+    unitprice=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
+    rooms=models.CharField(max_length=100,blank=True,null=True)
+    washrooms=models.CharField(max_length=100,blank=True,null=True)
+    
+    max_occupancy=models.CharField(max_length=100,blank=True,null=True)
+    amenities=models.CharField(max_length=100,blank=True,null=True)
+   
+    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
+    
+    capacity=models.CharField(max_length=100,blank=True,null=True)
+    emplyee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='speces_units_staff')
+   
+    unit_type=models.CharField(max_length=10,blank=True,null=True, choices=PROPERTY_UNIT_TYPES)
+    
+    area_sqm=models.CharField(max_length=100,blank=True,null=True)
+   
+    def __str__(self):
+        return str(self.name)
+
+
 ##################3 EXPENSES ###########################     
 class CommonExpensesModel(models.Model):
     owner=models.ForeignKey(User, related_name="cmnurexpns",on_delete=models.SET_NULL,null=True,blank=True)
@@ -842,104 +915,24 @@ class CommonExpensesModel(models.Model):
     def __str__(self):
         return str(self.description)
    
-#########################################3 SPACES ##############################################
-
-class CommonSpacesModel(models.Model):
-    """
-    It represents any definable, usable, and often bookable/assignable unit or area within a building or property.
-    This can be a hotel room, halls, a hospital wards, a classrooms, an office, an apartment, a restaurant table, an event hall, a storage bay etc.
-    """
-    owner=models.ForeignKey(User, related_name="owned_rooms", on_delete=models.SET_NULL, null=True, blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_rooms", on_delete=models.CASCADE, null=True, blank=True)
-    division=models.ForeignKey(CommonDivisionsModel, related_name="division_rooms", on_delete=models.SET_NULL, null=True, blank=True)
-    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_rooms", on_delete=models.SET_NULL, null=True, blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_rooms", on_delete=models.SET_NULL, null=True, blank=True)
-    
-    asset=models.ForeignKey(CommonAssetsModel, related_name="asset_space", on_delete=models.SET_NULL, null=True, blank=True)
-    space_number=models.CharField(max_length=50,blank=True,null=True)
-    name=models.CharField(max_length=100,blank=True,null=True)
-    description=models.TextField(blank=True, null=True)
-    space_type=models.CharField(max_length=10,blank=True,null=True, choices=CURRENT_STATUS_CHOICES, default='AVAIL')
-    space_floor=models.PositiveSmallIntegerField(choices=FLOOR_CHOICES, blank=True, null=True)
-    
-    current_status = models.CharField(max_length=10,blank=True,null=True, choices=CURRENT_STATUS_CHOICES, default='AVAIL')
-  
-    base_price_per_night=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
-    monthly_rent=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
-    max_occupancy=models.PositiveSmallIntegerField(default=2,blank=True,null=True)
-    amenities=models.TextField(blank=True, null=True, help_text="e.g., WiFi, AC, Balcony, Minibar")
-    is_active=models.BooleanField(default=True,blank=True,null=True)
-    date=models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of note-taking
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-    
-    inventory_account=models.ForeignKey(CommonChartofAccountsModel, blank=True, null=True,on_delete=models.SET_NULL,related_name='invaccwrhse')
-    
-    address=models.TextField(blank=True,null=True)
-    city=models.CharField(max_length=100,blank=True,null=True)
-    capacity = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Storage capacity in square meters")
-    emplyee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='managed_warehouses')
-    contact_phone = models.CharField(max_length=20, blank=True, null=True)
-    is_active = models.BooleanField(default=True,blank=True,null=True)
-
-    
-    unit_type=models.CharField(max_length=10,blank=True,null=True, choices=PROPERTY_UNIT_TYPES)
-    number_of_bedrooms=models.PositiveSmallIntegerField(blank=True, null=True)
-    number_of_bathrooms=models.PositiveSmallIntegerField(blank=True, null=True)
-    area_sqft=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    rental_price=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Monthly rental price for the unit")
-    is_available=models.BooleanField(default=True,blank=True,null=True, help_text="Is this unit currently available for rent/sale?")
-    description=models.TextField(blank=True, null=True)
    
-    def __str__(self):
-        return str(self.name)
-
-
-class CommonSpaceUnitsModel(models.Model):
-    """
-    this defines the sub-units of available spaces....
-    sales... office rooms, cubicles, etc
-    healthcare...rooms, beds, etc
-    education...rooms, beds, etc
-    realestates...rooms,beds, etc
-    
-    """
-    owner=models.ForeignKey(User, related_name="owned_space_units", on_delete=models.SET_NULL, null=True, blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_space_units", on_delete=models.CASCADE, null=True, blank=True)
-    division=models.ForeignKey(CommonDivisionsModel, related_name="division_space_units", on_delete=models.SET_NULL, null=True, blank=True)
-    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_space_units", on_delete=models.SET_NULL, null=True, blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_space_units", on_delete=models.SET_NULL, null=True, blank=True)
-    
-    space=models.ForeignKey(CommonSpacesModel, related_name="units_space", on_delete=models.SET_NULL, null=True, blank=True)
-    space_number=models.CharField(max_length=50,blank=True,null=True)
-    name=models.CharField(max_length=100,blank=True,null=True)
-    description=models.TextField(blank=True, null=True)
-    space_type=models.CharField(max_length=10,blank=True,null=True, choices=CURRENT_STATUS_CHOICES, default='AVAIL')
-    space_floor=models.PositiveSmallIntegerField(choices=FLOOR_CHOICES, blank=True, null=True)
-    
-    current_status = models.CharField(max_length=10,blank=True,null=True, choices=CURRENT_STATUS_CHOICES, default='AVAIL')
-  
-    base_price_per_night=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
-    monthly_rent=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
-    max_occupancy=models.PositiveSmallIntegerField(default=2,blank=True,null=True)
-    amenities=models.TextField(blank=True, null=True, help_text="e.g., WiFi, AC, Balcony, Minibar")
-    is_active=models.BooleanField(default=True,blank=True,null=True)
-    date=models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of note-taking
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-    
-    capacity = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Storage capacity in square meters")
-    emplyee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='speces_units_staff')
    
-    unit_type=models.CharField(max_length=10,blank=True,null=True, choices=PROPERTY_UNIT_TYPES)
-    
-    area_sqft=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    rental_price=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Monthly rental price for the unit")
-    is_available=models.BooleanField(default=True,blank=True,null=True, help_text="Is this unit currently available for rent/sale?")
-    description=models.TextField(blank=True, null=True)
-    
-
-    def __str__(self):
-        return str(self.name)
- 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 class CommonStocksModel(models.Model):
     
     """
@@ -1822,6 +1815,22 @@ class CommonContactsModel(models.Model):
 
 
 ########################## consider deletting eblow models ################
+
+################################3assets######################################################
+
+class CommonAssetCategoriesModel(models.Model):
+    description=models.CharField(max_length=30,blank=False,null=True,unique=False)
+    description=models.CharField(max_length=30,blank=False,null=True,unique=False)
+    owner=models.ForeignKey(User, on_delete=models.SET_NULL,related_name="asstcatusr",blank=True,null=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpasstcatasst",on_delete=models.CASCADE,null=True,blank=True)
+    comments=models.CharField(null=True, blank=True, max_length=50)
+    date=models.DateField(blank=True,null=True,auto_now_add=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsasstscats",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchasstscats",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptasstscats",on_delete=models.SET_NULL,null=True,blank=True)
+ 
+    def __str__(self):
+        return str(self.description)
 
 class CommonProgramsModel(models.Model):# not used...may be deleted
     """

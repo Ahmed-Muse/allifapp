@@ -1,584 +1,1092 @@
 {% load static %}
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Alifmaal ERP</title>
-    <!-- Favicons back-to-top -->
-    <link rel="shortcut icon" href='{% static "allifapperp/css/images/allifmaal-icon.png" %}' type="png/ico">
-    <link href="{% static 'allifapperp/css/common/bootstrap.min.css' %}" rel="stylesheet">
-    
-  <!-- Template Main CSS File -->
-    <link href="{% static 'allifapperp/css/website/website.css' %}" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  </head>
-  
-  <body>
-  
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-      <div class="container d-flex align-items-center">
-  
-        <!-- image logo  -->
-        <a href="" class="logo me-auto"><img src='{% static "allifapperp/css/images/allifmaal_logo.png" %}' alt="Allifmaal" class="img-fluid"></a>
-    
-        <!--uncomment below if you want to use word logo-->
-        <!-- <h1 class="logo me-auto"><a href="">Allifmaal</a></h1> -->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allifapp - The Future of ERP</title>
 
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+    <!-- Favicons -->
+    <link rel="shortcut icon" href='{% static "allifapperp/css/images/allifmaal-icon.png" %}' type="image/png">
 
-            <li><a class="nav-link scrollto" href="#about">About</a></li>
-            <li><a class="nav-link scrollto" href="#modules">Modules</a></li>
-            <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            <li><a class="nav-link scrollto" href="{% url 'allifmaalcommonapp:commonEngineering' %}">Engineering</a></li>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-            
-            <li><a class="getstarted scrollto" href="{% url 'allifmaalusersapp:userLoginPage' %}">Login</a></li>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'allifapp-navy': '#2C3E50',       /* Softer Charcoal Blue */
+                        'allifapp-light-navy': '#34495E', /* Slightly lighter for backgrounds */
+                        'allifapp-green': '#2ECC71',      /* Bright, Fresh Green */
+                        'allifapp-light-green': '#82E0AA',/* Very Light Green */
+                        'allifapp-white': '#FFFFFF',
+                        'allifapp-text-gray': '#4A5568',  /* Darker gray for readability */
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        typewriter: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' }
+                        },
+                        blinkCaret: {
+                            'from, to': { 'border-color': 'transparent' },
+                            '50%': { 'border-color': 'var(--allifapp-green)' }
+                        },
+                         barGrow: {
+                            '0%': { height: '0%' },
+                            '100%': { height: 'var(--bar-height)' },
+                        },
+                        drawLine: {
+                            to: { 'stroke-dashoffset': '0' }
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'scale-in': 'scaleIn 0.8s ease-out forwards',
+                        'typewriter-effect': 'typewriter 3s steps(40, end) forwards, blinkCaret 0.75s step-end infinite',
+                        'bar-grow': 'barGrow 1s ease-out forwards',
+                        'draw-line': 'drawLine 2s forwards ease-in-out',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: theme('colors.allifapp-text-gray');
+            overflow-x: hidden;
+        }
 
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle">Menu</i>
-        </nav><!-- .navbar -->
-      </div>
-    </header><!-- End Header -->
-  
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
-  
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1">
-            <h1>Achieve your business goals with AI driven <span class="allifmaal-erp-styling">Allifmaal ERP</span>,
-             
-                the smarter way to manage your organization seamlessly.</h1>
-            <h6>Digitize your deal, discover your dreams.</h6>
-            <div class="d-flex justify-content-center justify-content-lg-start">
-              <a href="#about" class="btn-get-started scrollto">About Allifmaal ERP</a>
-             
+        /* Hero section specific background and overlay */
+        #hero {
+            background: url("{% static 'allifapperp/css/images/hero-bg-3.jpg' %}") no-repeat center center / cover; /* Updated hero image */
+            position: relative;
+        }
+        #hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.85), rgba(46, 204, 113, 0.7)); /* Green to Navy overlay */
+            z-index: 1;
+        }
+
+        /* Sticky Navbar styles */
+        .header-sticky {
+            background-color: theme('colors.allifapp-navy'); /* Always solid navy */
+            transition: box-shadow 0.3s ease-in-out, padding 0.3s ease-in-out;
+            padding: 20px 0;
+            z-index: 999;
+        }
+        .header-sticky.scrolled {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* More prominent shadow when sticky */
+            padding: 10px 0; /* Shrink padding on scroll */
+        }
+        .header-sticky .logo-img {
+            max-height: 40px; /* Default logo size */
+            transition: max-height 0.3s ease-in-out;
+        }
+        .header-sticky.scrolled .logo-img {
+            max-height: 30px; /* Smaller logo on scroll */
+        }
+
+        /* Mobile menu specific styles */
+        #mobile-menu {
+            transition: transform 0.3s ease-out;
+            transform: translateX(100%); /* Start hidden */
+        }
+        #mobile-menu.active {
+            transform: translateX(0%); /* Slide in */
+        }
+
+        /* Typewriter effect */
+        .typewriter-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid transparent;
+            font-size: theme('fontSize.lg'); /* Smaller font for subtitle */
+            line-height: theme('lineHeight.relaxed');
+            display: inline-block;
+        }
+        /* Override default animation to ensure it's controlled by JS for visibility */
+        .typewriter-text.animated {
+             animation: theme('animation.typewriter-effect');
+        }
+
+
+        /* SVG Icons for Features and Modules */
+        .icon-box-svg {
+            width: 3rem; /* Tailwind w-12 */
+            height: 3rem; /* Tailwind h-12 */
+            fill: currentColor;
+        }
+
+        /* Chart Animations */
+        .bar-chart-container {
+            display: flex;
+            align-items: flex-end;
+            height: 200px;
+            gap: 10px;
+            background-color: theme('colors.allifapp-white');
+            padding: 20px;
+            border-radius: theme('borderRadius.xl');
+            box-shadow: theme('boxShadow.lg');
+            position: relative; /* For absolute positioning of labels */
+        }
+        .bar {
+            width: 20%;
+            background-color: theme('colors.allifapp-green');
+            border-radius: theme('borderRadius.md') theme('borderRadius.md') 0 0;
+            height: 0;
+            opacity: 0; /* Initial hidden state for JS animation */
+            transform: translateY(20px); /* Initial state for slide up */
+            transition: all 0.8s ease-out; /* For JS controlled animation */
+        }
+        .bar.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: theme('animation.bar-grow'); /* Apply CSS animation once visible */
+        }
+        .bar-label {
+            position: absolute;
+            bottom: -25px; /* Below the bar */
+            font-size: theme('fontSize.sm');
+            font-weight: theme('fontWeight.semibold');
+            color: theme('colors.allifapp-text-gray');
+            text-align: center;
+        }
+
+        .line-chart-svg {
+            stroke: theme('colors.allifapp-green');
+            stroke-width: 4;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 600; /* Arbitrary length longer than path */
+            stroke-dashoffset: 600; /* Start hidden */
+        }
+        .line-chart-svg.is-visible {
+            animation: theme('animation.draw-line');
+        }
+
+        .pie-chart-svg circle {
+            transition: stroke-dasharray 1s ease-out, stroke-dashoffset 1s ease-out;
+            transform-origin: center;
+        }
+        .pie-chart-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            fill: theme('colors.allifapp-navy');
+        }
+
+        /* Accordion Custom Styling */
+        .accordion-button {
+            transition: color 0.3s ease-in-out;
+        }
+        .accordion-button svg {
+            transition: transform 0.3s ease-in-out;
+        }
+        .accordion-button.active svg {
+            transform: rotate(180deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.active {
+            max-height: 200px; /* Max height to allow transition, adjust as needed */
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header id="main-header" class="header-sticky fixed top-0 left-0 w-full z-50">
+        <nav class="container mx-auto px-6 flex justify-between items-center py-4">
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center space-x-2">
+                <img src='{% static "allifapperp/css/images/allifmaal_logo.png" %}' alt="Allifapp Logo" class="logo-img">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#hero" class="nav-link text-allifapp-white hover:text-allifapp-green font-semibold">Home</a>
+                <a href="#about" class="nav-link text-allifapp-white hover:text-allifapp-green font-semibold">About</a>
+                <a href="#features" class="nav-link text-allifapp-white hover:text-allifapp-green font-semibold">Features</a>
+                <a href="#insights" class="nav-link text-allifapp-white hover:text-allifapp-green font-semibold">Insights</a>
+                <a href="#modules" class="nav-link text-allifapp-white hover:text-allifapp-green font-semibold">Modules</a>
+                <a href="#pricing" class="nav-link text-allifapp-white hover:text-allifapp-green font-semibold">Pricing</a>
+                <a href="#contact" class="nav-link text-allifapp-white hover:text-allifapp-green font-semibold">Contact</a>
+                <a href="{% url 'allifmaalusersapp:userLoginPage' %}" class="px-5 py-2 rounded-lg bg-allifapp-green text-allifapp-white font-medium hover:bg-allifapp-light-green transition duration-300 ease-in-out shadow-lg">Login</a>
             </div>
-          </div>
-          <div class="col-lg-6 order-1 order-lg-2 hero-img">
-            <img src="{% static 'allifapperp/css/images/hero-img.png' %}" class="img-fluid animated" alt="Allifmaal">
-          </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="mobile-menu-button focus:outline-none text-allifapp-white">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (initially off-screen) -->
+        <div id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-allifapp-white shadow-xl z-40 md:hidden pt-20">
+            <nav class="flex flex-col space-y-4 p-6">
+                <a href="#hero" class="block text-allifapp-navy hover:bg-gray-100 p-2 rounded-md font-medium">Home</a>
+                <a href="#about" class="block text-allifapp-navy hover:bg-gray-100 p-2 rounded-md font-medium">About</a>
+                <a href="#features" class="block text-allifapp-navy hover:bg-gray-100 p-2 rounded-md font-medium">Features</a>
+                <a href="#insights" class="block text-allifapp-navy hover:bg-gray-100 p-2 rounded-md font-medium">Insights</a>
+                <a href="#modules" class="block text-allifapp-navy hover:bg-gray-100 p-2 rounded-md font-medium">Modules</a>
+                <a href="#pricing" class="block text-allifapp-navy hover:bg-gray-100 p-2 rounded-md font-medium">Pricing</a>
+                <a href="#contact" class="block text-allifapp-navy hover:bg-gray-100 p-2 rounded-md font-medium">Contact</a>
+                <a href="{% url 'allifmaalusersapp:userLoginPage' %}" class="block bg-allifapp-green text-allifapp-white p-2 rounded-md text-center font-medium hover:bg-allifapp-light-green mt-4">Login</a>
+            </nav>
         </div>
-      </div>
-  
-    </section><!-- End Hero -->
-  
-    <main id="main">
-  
-      <!-- ======= About Us Section ======= -->
-      <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <h2>About Allifmaal ERP</h2>
-          </div>
-  
-          <div class="row content">
-            <div class="col-lg-6">
-              <p>
-                Allifmaal ERP is a leading world-class user friendly suite of business management applications for all types of companies and organizations.
-                Being a cutting-edge ERP system, it was designed to streamline operations, enhance productivity, and drive growth.
-              </p>
+    </header>
 
-           
-         
-            <img src="{% static 'allifapperp/css/images/saas.webp' %}" class="img-fluid animated" alt="Allifmaal">
-          
+    <!-- Hero Section -->
+    <section id="hero" class="relative flex items-center justify-center min-h-screen text-center py-24 px-6 overflow-hidden">
+        <div class="relative z-10 max-w-5xl mx-auto text-allifapp-white">
+            <h1 class="text-5xl md:text-5xl font-extrabold leading-tight mb-6 animate-fade-in-up">
+                Achieve your business goals with AI-driven
+                <span class="text-allifapp-green">Allifapp ERP</span>
+            </h1>
+            <p class="text-lg md:text-xl mb-10 font-light relative">
+                <span class="typewriter-text font-medium text-allifapp-light-green">
+                    The smarter way to manage your organization seamlessly. Digitize your deal, discover your dreams.
+                </span>
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up delay-200">
+                <a href="#features" class="px-8 py-3 bg-allifapp-green text-allifapp-white text-lg font-semibold rounded-lg shadow-xl hover:bg-allifapp-light-green transition duration-300 transform hover:scale-105">
+                    Explore Features
+                </a>
+                <a href="#contact" class="px-8 py-3 border-2 border-allifapp-green text-allifapp-white text-lg font-semibold rounded-lg hover:bg-allifapp-green transition duration-300 transform hover:scale-105">
+                    Request a Demo
+                </a>
             </div>
-            <div class="col-lg-6 pt-4 pt-lg-0">
-
-              <p>
-                Allifmaal ERP is meticulously developed by a team of experienced developers. Our developers bring years of expertise in software engineering, business processes, and industry best practices to create a robust and reliable ERP solution tailored to meet the diverse needs of modern businesses world.
-              </p>
-            
-              <div>
-                <img src="{% static 'allifapperp/css/images/alliferp.webp' %}" class="img-fluid animated" alt="Allifmaal">
-              </div>
-            </div>
-            
-          </div>
-  
         </div>
-      </section><!-- End About Us Section -->
+    </section>
 
-      
-    
-      <!-- ======= About Us Section ======= -->
-      <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <h2>Allifmaal ERP Serves The Following Industries</h2>
-          </div>
-  
-          <div class="row content">
-            <div class="col-lg-6">
-             
-                      
-
-          <ul>
-            <li><i class="ri-check-double-line"></i><strong>Sales</strong> - Wholesale, Retail, Distribution, Direct Sales.</li>
-            <li><i class="ri-check-double-line"></i><strong>Healthcare</strong> - Hospitals, Clinics, Pharmaceuticals, Insurances.</li>
-            <li><i class="ri-check-double-line"></i><strong>Education</strong>- Schools, Colleges, Universities.</li>
-            <li><i class="ri-check-double-line"></i><strong>Hospitality</strong> - Hotels, Restaurents, Events.</li>
-            
-          </ul>
-         
-           
+    <!-- About Us Section - Three Smaller Cards -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-allifapp-navy mb-12 animate-fade-in">About Allifapp ERP</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- About Card 1: What Allifapp Is -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 animate-fade-in-up">
+                    <img src="{% static 'allifapperp/css/images/saas.webp' %}" class="rounded-lg shadow-md mb-6 w-full h-40 object-cover" alt="Allifapp System Overview">
+                    <h3 class="text-xl font-bold text-allifapp-navy mb-3">The Allifapp Advantage</h3>
+                    <p class="text-allifapp-text-gray text-base leading-relaxed">
+                        Allifapp ERP is a cutting-edge, user-friendly suite of business management applications designed to streamline operations, enhance productivity, and drive growth for all types of companies and organizations.
+                    </p>
+                </div>
+                <!-- About Card 2: Who We Are -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 animate-fade-in-up delay-100">
+                    <img src="{% static 'allifapperp/css/images/alliferp.webp' %}" class="rounded-lg shadow-md mb-6 w-full h-40 object-cover" alt="Development Team">
+                    <h3 class="text-xl font-bold text-allifapp-navy mb-3">Our Expert Team</h3>
+                    <p class="text-allifapp-text-gray text-base leading-relaxed">
+                        Meticulously developed by a team of experienced professionals, Allifapp brings years of expertise in software engineering, business processes, and industry best practices to deliver a robust and reliable ERP solution.
+                    </p>
+                </div>
+                <!-- About Card 3: Our Vision & Impact -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 animate-fade-in-up delay-200">
+                    <img src="https://placehold.co/600x400/82E0AA/2C3E50?text=Global+Vision" class="rounded-lg shadow-md mb-6 w-full h-40 object-cover" alt="Global Vision">
+                    <h3 class="text-xl font-bold text-allifapp-navy mb-3">Future-Proofing Your Business</h3>
+                    <p class="text-allifapp-text-gray text-base leading-relaxed">
+                        We are committed to empowering modern businesses worldwide with an ERP solution that not only meets their current diverse needs but also evolves to match future demands and market dynamics.
+                    </p>
+                </div>
             </div>
-            <div class="col-lg-6 pt-4 pt-lg-0">
-
-             
-              <ul>
-                <li><i class="ri-check-double-line"></i><strong>Finance</strong> - FinTech, Banking, Investments, Societies.</li>
-                <li><i class="ri-check-double-line"></i><strong>Real Estate</strong> - Residential, Commercial, Industrial.</li>
-                <li><i class="ri-check-double-line"></i><strong>Logistics</strong> - Transport, Travel Agencies, Courier, Freighters.</li>
-                <li><i class="ri-check-double-line"></i><strong>Service</strong>- Consulting, Legal, Accounting, ICT.</li>
-                
-              </ul>
-           
-            </div>
-            
-          </div>
-  
         </div>
-      </section><!-- End About Us Section -->
-  
-      <!-- ======= Why Us Section ======= -->
-      <section id="why-us" class="why-us section-bg">
-        
-        <div class="container-fluid" data-aos="fade-up">
-  
-          <div class="row">
-            <div class="content-why-allifmaal-erp">
-              <h3>Why Choose Allifmaal ERP?</h3>
-             
-            </div>
-  
-            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
-  
-              <div class="accordion-list">
-                <ul>
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>1</span>Comprehensive Integration<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        Allifmaal ERP seamlessly integrates all essential business functions, including finance, HR, supply chain, and customer relationship management (CRM). This centralizes data, eliminates silos, and ensures that all departments work cohesively.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>2</span>Enhanced Automation<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        Automating repetitive tasks like payroll, order processing, and reporting reduces manual errors and frees up your employees to focus on more strategic activities. This leads to increased productivity and efficiency in your organization.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>3</span>Real-Time Data and Reporting <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        Allifmaal ERP provides real-time insights and analytics, enabling better decision-making. With up-to-date information at their fingertips, managers can quickly respond to market dynamics and optimize operations.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>4</span>Scalability and Flexibility<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        As your business grows, Allifmaal ERP can scale with you. It offers the flexibility to add new modules and features as needed, ensuring that your system evolves with your business.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>5</span>Improved Data Security<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        Role based access control (RBAC) coupled with robust security measures, Allifmaal ERP system protects sensitive data from unauthorized access. Centralized data storage also reduces the risk of data breaches and ensures compliance with industry regulations.
-                      </p>
-                    </div>
-                  </li>
-                 
+    </section>
+
+    <!-- Industries Section -->
+    <section id="industries" class="py-20 bg-allifapp-light-navy text-allifapp-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-12 animate-fade-in">Allifapp ERP Serves The Following Industries</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-6 text-left">
+                <ul class="space-y-4 animate-fade-in-up">
+                    <li class="flex items-start"><svg class="w-6 h-6 mr-3 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> <div><strong>Sales</strong> - Wholesale, Retail, Distribution, Direct Sales.</div></li>
+                    <li class="flex items-start"><svg class="w-6 h-6 mr-3 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg> <div><strong>Healthcare</strong> - Hospitals, Clinics, Pharmaceuticals, Insurances.</div></li>
+                    <li class="flex items-start"><svg class="w-6 h-6 mr-3 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 11-6L12 3zm0 14.8V21h8V9l-8 4.8-8-4.8v8.6z"/></svg> <div><strong>Education</strong> - Schools, Colleges, Universities.</div></li>
+                    <li class="flex items-start"><svg class="w-6 h-6 mr-3 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 11c1.66 0 2.99-1.34 2.99-3S13.66 5 12 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm0 2c-2.33 0-6.91 1.17-8 3.5V19h16v-2.5c-1.09-2.33-5.67-3.5-8-3.5z"/></svg> <div><strong>Hospitality</strong> - Hotels, Restaurants, Events.</div></li>
                 </ul>
-              </div>
-  
-            </div>
-            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
-              
-             
-  
-              <div class="accordion-list">
-                <ul>
-                  
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>6</span> Cost Savings<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        By streamlining processes and improving efficiency, Allifmaal ERP system helps reduce operational costs. It minimizes the need for multiple software solutions and reduces the time spent on manual tasks.
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>7</span>Better Customer Service<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        With integrated CRM capabilities, Allifmaal ERP system helps manage customer interactions more effectively and efficiently. This leads to improved customer satisfaction and loyalty, as you can respond to their needs more quickly and accurately.
-                      </p>
-                    </div>
-                  </li>
-
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>8</span>Customization and Personalization<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        Allifmaal ERP system can be tailored to meet the specific needs of your business. This customization ensures that the system aligns perfectly with your workflows and business processes.
-                      </p>
-                    </div>
-                  </li>
-
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>9</span> Vendor Support and Training<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        Allifmaal ERP system comes with comprehensive support and training resources. This ensures that your team can quickly get up to speed and make the most of the system's features.
-                      </p>
-                    </div>
-                  </li>
-
-                  <li>
-                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>10</span>User-Friendly<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                      <p>
-                        As the saying goes, "Simplicity is a sign of maturity". Using Allifmaal, you will Enjoy an intuitive and easy-to-navigate experience.
-                      </p>
-                    </div>
-                  </li>
-                 
+                <ul class="space-y-4 animate-fade-in-up delay-100">
+                    <li class="flex items-start"><svg class="w-6 h-6 mr-3 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8.5l-9 9z"/></svg> <div><strong>Finance</strong> - FinTech, Banking, Investments, Societies.</div></li>
+                    <li class="flex items-start"><svg class="w-6 h-6 mr-3 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> <div><strong>Real Estate</strong> - Residential, Commercial, Industrial.</div></li>
+                    <li class="flex items-start"><svg class="w-6 h-6 mr-3 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20 10h-3V7c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v5h20v-5c0-1.1-.9-2-2-2zm-5-3c0-.55-.45-1-1-1H9c-.55 0-1 .45-1 1v3h7V7z"/></svg> <div><strong>Logistics</strong> - Transport, Travel Agencies, Courier, Freighters.</div></li>
+                    <li class="flex items-start"><svg class="w-6 h-6 mr-3 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-10c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-2-9h4v2h-4v-2z"/></svg> <div><strong>Service</strong> - Consulting, Legal, Accounting, ICT.</div></li>
                 </ul>
-              </div>
             </div>
-  
-            <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("/static/img/why-us.png")' %} data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
-          
-          </div>
-  
         </div>
-        
-      </section><!-- End Why Us Section -->
-  
-      <!-- ======= Services Section ======= -->
-      <section id="modules" class="services section-bg">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <h2>Allifmaal Modules</h2>
-            <p>Allifmaal ERP comprises of the below sub-modules that work togther to achieve the goals of your organization.</p>
-          </div>
-  
-          <div class="row">
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-              <div class="icon-box">
-                <div class="icon" ><i class="bx bx-layer"></i></div>
-                <h4><a href="">CRM</a></h4>
-                <p>The Customer Relation Management module is used to manage customer related activities like customer registrations, customer payments
-                  customer statements, customer account activities and much more.
-                </p>
-              </div>
-            </div>
-  
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-layer"></i></div>
-                <h4><a href="">HRM</a></h4>
-                <p>The Human Resource Management module is used to manage staff related activities like employees registrations, staff payments and benefits, salaries,
-                  employee statements, employee account activities and many other tasks.</p>
-              </div>
-            </div>
-  
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-layer"></i></div>
-                <h4><a href="">FRM</a></h4>
-                <p>The Financial Resources Management module is used to manage finance related activities like accounts, payments, debts, credits, financial statments and other account operations.</p>
-              </div>
-            </div>
-  
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-layer"></i></div>
-                <h4><a href="">SRM</a></h4>
-                <p>The Supplier Relation Management module is used to manage supplier related activities like supplier registrations, supplier payments
-                  supplier statements, procurement, orders, supplier account activities and much more.</p>
-              </div>
-            </div>
-  
-          </div>
-  
-        </div>
-      </section><!-- End Services Section -->
-  
-    
-      <!-- ======= Portfolio Section ======= -->
-      <section id="portfolio" class="portfolio">
-        <div class="container" data-aos="fade-up">
-  
-        <div class="section-title">
-          <h2>Allifmaal Galery</h2>
-          <p>Feel the difference</p>
-        </div>
-  
-          <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-img"><img src="{% static 'allifapperp/css/images/settings.png' %}" class="img-fluid" alt=""></div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-img"><img src="{% static 'allifapperp/css/images/distribution-dashboard.png' %}" class="img-fluid" alt=""></div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-img"><img src="{% static 'allifapperp/css/images/customer-details.png' %}" class="img-fluid" alt=""></div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-img"><img src="{% static 'allifapperp/css/images/full-table.png' %}" class="img-fluid" alt=""></div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-img"><img src="{% static 'allifapperp/css/images/nus-table.png' %}" class="img-fluid" alt=""></div>
-            </div>
+    </section>
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-img"><img src="{% static 'allifapperp/css/images/stock-dash.png' %}" class="img-fluid" alt=""></div>
+    <!-- Why Us Section (Accordion) -->
+    <section id="why-us" class="py-16 bg-gray-50"> <!-- Reduced padding -->
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-allifapp-navy mb-12 animate-fade-in">Why Choose Allifapp ERP?</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div class="space-y-4 animate-fade-in-up">
+                    <!-- Accordion Item 1 -->
+                    <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <button class="accordion-button w-full flex justify-between items-center text-left text-allifapp-navy text-xl font-semibold focus:outline-none py-2" data-accordion="item-1">
+                            <span><span class="text-allifapp-green mr-4">1</span> Comprehensive Integration</span>
+                            <svg class="w-6 h-6 transform" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div id="accordion-content-item-1" class="accordion-content">
+                            <p class="text-allifapp-text-gray pt-2">Allifapp ERP seamlessly integrates all essential business functions, including finance, HR, supply chain, and customer relationship management (CRM). This centralizes data, eliminates silos, and ensures that all departments work cohesively.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 2 -->
+                    <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <button class="accordion-button w-full flex justify-between items-center text-left text-allifapp-navy text-xl font-semibold focus:outline-none py-2" data-accordion="item-2">
+                            <span><span class="text-allifapp-green mr-4">2</span> Enhanced Automation</span>
+                            <svg class="w-6 h-6 transform" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div id="accordion-content-item-2" class="accordion-content">
+                            <p class="text-allifapp-text-gray pt-2">Automating repetitive tasks like payroll, order processing, and reporting reduces manual errors and frees up your employees to focus on more strategic activities. This leads to increased productivity and efficiency in your organization.</p>
+                        </div>
+                    </div>
+                     <!-- Accordion Item 3 -->
+                    <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <button class="accordion-button w-full flex justify-between items-center text-left text-allifapp-navy text-xl font-semibold focus:outline-none py-2" data-accordion="item-3">
+                            <span><span class="text-allifapp-green mr-4">3</span> Real-Time Data and Reporting</span>
+                            <svg class="w-6 h-6 transform" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div id="accordion-content-item-3" class="accordion-content">
+                            <p class="text-allifapp-text-gray pt-2">Allifapp ERP provides real-time insights and analytics, enabling better decision-making. With up-to-date information at their fingertips, managers can quickly respond to market dynamics and optimize operations.</p>
+                        </div>
+                    </div>
+                     <!-- Accordion Item 4 -->
+                    <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <button class="accordion-button w-full flex justify-between items-center text-left text-allifapp-navy text-xl font-semibold focus:outline-none py-2" data-accordion="item-4">
+                            <span><span class="text-allifapp-green mr-4">4</span> Scalability and Flexibility</span>
+                            <svg class="w-6 h-6 transform" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div id="accordion-content-item-4" class="accordion-content">
+                            <p class="text-allifapp-text-gray pt-2">As your business grows, Allifapp ERP can scale with you. It offers the flexibility to add new modules and features as needed, ensuring that your system evolves with your business.</p>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 5 -->
+                    <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <button class="accordion-button w-full flex justify-between items-center text-left text-allifapp-navy text-xl font-semibold focus:outline-none py-2" data-accordion="item-5">
+                            <span><span class="text-allifapp-green mr-4">5</span> Improved Data Security</span>
+                            <svg class="w-6 h-6 transform" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div id="accordion-content-item-5" class="accordion-content">
+                            <p class="text-allifapp-text-gray pt-2">Role-based access control (RBAC) coupled with robust security measures, Allifapp ERP system protects sensitive data from unauthorized access. Centralized data storage also reduces the risk of data breaches and ensures compliance with industry regulations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden lg:block animate-fade-in-up delay-100">
+                    <img src="{% static 'allifapperp/css/images/why-us.png' %}" class="rounded-xl shadow-lg w-full h-auto" alt="Why Choose Us">
+                </div>
             </div>
-          </div>
-  
         </div>
-      </section><!-- End Portfolio Section -->
-  
-      <!-- ======= Pricing Section ======= -->
-      <section id="pricing" class="pricing">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <h2>Pricing</h2>
-            <p>Get a competitive quotation from our dedicated team.</p>
-          </div>
-  
-          <div class="row">
-  
-            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-              <div class="box">
-                <h3>Startup Plan</h3>
-                <h4><sup>$</sup>20<span>per month/user</span></h4>
-                <div class="billed-annually">(Billed Annually)</div>
-                
-                <h5>Some of its features</h5>
-                <ul>
-                  <li><i class="bx bx-check"></i>Main Modules</li>
-                  <li><i class="bx bx-check"></i> Cloud Protection</li>
-                  <li><i class="bx bx-check"></i> Available in web-based</li>
-                  
-                </ul>
-               
-              </div>
-            </div>
-  
-            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-              <div class="box featured">
-                <h3>Business Plan</h3>
-                <h4><sup>$</sup>30<span>per month/user</span></h4>
-                <div class="billed-annually">(Billed Annually)</div>
-                <ul>
-                  <li><i class="bx bx-check"></i>Everything in Startup Plan</li>
-                  <li><i class="bx bx-check"></i> Full training to users</li>
-                  <li><i class="bx bx-check"></i> Main Modules accessable</li>
-                  
-                </ul>
-                
-              </div>
-            </div>
-  
-            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
-              <div class="box">
-                <h3>Gold Plan</h3>
-                <h4><sup>$</sup>50<span>per month/user</span></h4>
-                <div class="billed-annually">(Billed Annually)</div>
-                <ul>
-                  <li><i class="bx bx-check"></i>Everything in Business Plan</li>
-                  <li><i class="bx bx-check"></i> All Modules Accessable</li>
-                  <li><i class="bx bx-check"></i> Initial Setup training</li>
-                  <li><i class="bx bx-check"></i> Support Priority</li>
-                  <li><i class="bx bx-check"></i> Cloudbased database</li>
-                  <li><i class="bx bx-check"></i> Unlimited support</li>
-                  <li><i class="bx bx-check"></i> Protection prioritization</li>
-                  <li><i class="bx bx-check"></i> Unlimited consultancy</li>
-                  <li><i class="bx bx-check"></i>Intelligence reports</li>
-                 
-                  
-                </ul>
-                
-              </div>
-            </div>
-  
-          </div>
-  
-        </div>
-      </section><!-- End Pricing Section -->
-  
-      <!-- ======= Contact Section ======= -->
-      <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <h2>Contact Us</h2>
-            <p>Feel free to contact us for support and for more information.</p>
-          </div>
-  
-          <div class="row">
-  
-            <div class="col-lg-5 d-flex align-items-stretch">
-              <div class="info">
-                <div class="address">
-                  <i class="bi bi-geo-alt"></i>
-                  <h4>Location:</h4>
-                  <p>Ecobank House, Niarobi</p>
-                </div>
-  
-                <div class="email">
-                  
-                  <i class="bi bi-envelope"></i>
-                  <h4>Email:</h4>
-                  <p>info@allifmaal.com</p>
-                  <i class="bi bi-envelope"></i>
-                  <h4>Gmail:</h4>
-                  <p>allifmaalengineering@gmail.com</p>
-                </div>
-  
-                <div class="phone">
-                  <i class="bi bi-phone"></i>
-                  <h4>Call:</h4>
-                  <p>+254722314212</p>
-                </div>
-  
-              </div>
-  
-            </div>
-  
-            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-              
-                <form method='POST' action="{% url 'allifmaalcommonapp:commonCustomerContacts' %}" role="form" class="html-contact-form" >{% csrf_token %}
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label for="name">Your Name</label>
-                    <input type="text" name="name" class="form-control" id="name" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="name">Your Email</label>
-                    <input type="email" class="form-control" name="email" id="email" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="name">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject" required>
-                </div>
-                <div class="form-group">
-                  <label for="name">Message</label>
-                  <textarea class="form-control" name="message" rows="10" required></textarea>
-                </div>
-               
-                <div class="text-center"><button type="submit">Send Message</button></div>
-              </form>
-            </div>
-  
-          </div>
-  
-        </div>
-      </section><!-- End Contact Section -->
-  
-    </main><!-- End #main -->
-  
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-    <hr>
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
+    </section>
 
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Contacts</h4>
-              <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#"><a href="#"><strong>Address:</strong>Ecobank House, Nairobi.</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#"><strong>Phone:</strong> +254722314212</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#"><strong>Email:</strong> info@allifmaal.com</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#"><strong>Gmail:</strong> allifmaalengineering@gmail.com</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#"><strong>Website:</strong> <a href="https://allifmaal.com/"> Allifmaal</a></li>
-              </ul>
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-allifapp-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-allifapp-navy mb-12 animate-fade-in">Empower Your Enterprise with Allifapp</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Feature Card 1: Growth -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 group animate-fade-in-up">
+                    <div class="text-allifapp-green mb-4 inline-block p-3 rounded-full bg-green-100 group-hover:bg-green-200 transition-colors">
+                        <svg class="icon-box-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-3">Accelerate Growth</h3>
+                    <p class="text-allifapp-text-gray">Gain a competitive edge with scalable tools designed for expansion and market leadership.</p>
+                </div>
+
+                <!-- Feature Card 2: Finance -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 group animate-fade-in-up delay-100">
+                    <div class="text-allifapp-green mb-4 inline-block p-3 rounded-full bg-green-100 group-hover:bg-green-200 transition-colors">
+                        <svg class="icon-box-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm0 2.22l6.81 3.05-6.81 3.05-6.81-3.05L12 3.22zM12 19.5c-3.14-.93-5.5-3.8-5.5-7.5V6.47l5.5-2.46 5.5 2.46V12c0 3.7-2.36 6.57-5.5 7.5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-3">Master Your Finance</h3>
+                    <p class="text-allifapp-text-gray">Comprehensive financial management, from budgeting to real-time expense tracking.</p>
+                </div>
+
+                <!-- Feature Card 3: Trust -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 group animate-fade-in-up delay-200">
+                    <div class="text-allifapp-green mb-4 inline-block p-3 rounded-full bg-green-100 group-hover:bg-green-200 transition-colors">
+                        <svg class="icon-box-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-3">Build Trust & Security</h3>
+                    <p class="text-allifapp-text-gray">Secure data, robust permissions, and transparent operations foster unparalleled trust.</p>
+                </div>
+
+                <!-- Feature Card 4: Completeness -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 group animate-fade-in-up delay-300">
+                    <div class="text-allifapp-green mb-4 inline-block p-3 rounded-full bg-green-100 group-hover:bg-green-200 transition-colors">
+                        <svg class="icon-box-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="3" y1="15" x2="21" y2="15"></line>
+                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                            <line x1="15" y1="3" x2="15" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-3">Comprehensive Solutions</h3>
+                    <p class="text-allifapp-text-gray">An all-encompassing suite of tools covering every aspect of your business operations.</p>
+                </div>
+
+                <!-- Feature Card 5: Control -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 group animate-fade-in-up delay-400">
+                    <div class="text-allifapp-green mb-4 inline-block p-3 rounded-full bg-green-100 group-hover:bg-green-200 transition-colors">
+                        <svg class="icon-box-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M16.24 7.76l-2.12 2.12m0 0l-2.12 2.12m2.12-2.12L7.76 16.24m0 0L5.64 14.12m2.12 2.12L10.61 19.39m0 0L12 21m-1.39-1.61L7.76 16.24m0 0L5.64 14.12m2.12 2.12L10.61 19.39m0 0L12 21"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-3">Empower Your Control</h3>
+                    <p class="text-allifapp-text-gray">Granular control over workflows, data access, and reporting for precise management.</p>
+                </div>
+
+                <!-- Feature Card 6: Innovation -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 group animate-fade-in-up delay-500">
+                    <div class="text-allifapp-green mb-4 inline-block p-3 rounded-full bg-green-100 group-hover:bg-green-200 transition-colors">
+                        <svg class="icon-box-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 11a9 9 0 0 1 9 9m-9-4a5 5 0 0 1 5 5m-5-9a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
+                            <path d="M22 4L12 14L16 18L22 12L22 4Z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-3">Future-Proof Innovation</h3>
+                    <p class="text-allifapp-text-gray">Continuously updated with the latest technologies to keep your business ahead of the curve.</p>
+                </div>
             </div>
-  
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Useful Links</h4>
-              <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-              </ul>
-            </div>
-  
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Our Services</h4>
-              <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Business Applications</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">ERP Applications</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Software Solutions</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Mobile Applications</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Websites</a></li>
-              </ul>
-            </div>
-  
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Our Social Networks</h4>
-              <p>Follow us on</p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
-            </div>
-  
-          </div>
         </div>
-      </div>
-  
-      <div class="container footer-bottom clearfix">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Allifmaal</span></strong>. All Rights Reserved
+    </section>
+
+    <!-- Insights & Dashboards Section -->
+    <section id="insights" class="py-20 bg-allifapp-navy text-allifapp-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-12 animate-fade-in">Real-time Insights & Dynamic Dashboards</h2>
+            <p class="text-xl mb-16 opacity-80 max-w-3xl mx-auto animate-fade-in-up delay-100">
+                Allifapp brings your data to life. Visualize key performance indicators, track trends, and make informed decisions instantly with our intuitive and customizable dashboards.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Bar Chart -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-2xl animate-scale-in border-b-4 border-allifapp-green">
+                    <h3 class="text-2xl font-bold text-allifapp-navy mb-6">Sales Performance (Q2)</h3>
+                    <div class="bar-chart-container h-48 w-full">
+                        <div class="bar" style="--bar-height: 75%;"></div>
+                        <div class="bar" style="--bar-height: 90%;"></div>
+                        <div class="bar" style="--bar-height: 60%;"></div>
+                        <div class="bar" style="--bar-height: 85%;"></div>
+                    </div>
+                    <div class="flex justify-between text-allifapp-text-gray mt-4 text-sm font-semibold">
+                        <span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span>
+                    </div>
+                </div>
+
+                <!-- Line Chart -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-2xl animate-scale-in delay-100 border-b-4 border-allifapp-green">
+                    <h3 class="text-2xl font-bold text-allifapp-navy mb-6">Customer Acquisition Trend</h3>
+                    <div class="w-full h-48 flex items-center justify-center p-4">
+                        <svg class="line-chart-svg w-full h-full" viewBox="0 0 200 100" preserveAspectRatio="none">
+                            <path d="M0,80 Q 50,20 100,70 Q 150,30 200,60" class="line-path"></path>
+                        </svg>
+                    </div>
+                    <div class="flex justify-between text-allifapp-text-gray mt-4 text-sm font-semibold">
+                        <span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span>
+                    </div>
+                </div>
+
+                <!-- Pie Chart -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-2xl animate-scale-in delay-200 border-b-4 border-allifapp-green">
+                    <h3 class="text-2xl font-bold text-allifapp-navy mb-6">Revenue Breakdown</h3>
+                    <div class="w-full h-48 flex items-center justify-center relative">
+                        <svg class="pie-chart-svg w-full h-full" viewBox="0 0 100 100">
+                            <!-- Background circle -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#E0E0E0" stroke-width="20"></circle>
+
+                            <!-- Slices -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="theme('colors.allifapp-green')" stroke-width="20"
+                                    stroke-dasharray="0 251.32" stroke-dashoffset="0" data-percent="45" data-label="Service" class="pie-slice">
+                            </circle>
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="theme('colors.allifapp-navy')" stroke-width="20"
+                                    stroke-dasharray="0 251.32" stroke-dashoffset="0" data-percent="30" data-label="Products" class="pie-slice">
+                            </circle>
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="theme('colors.allifapp-light-green')" stroke-width="20"
+                                    stroke-dasharray="0 251.32" stroke-dashoffset="0" data-percent="25" data-label="Other" class="pie-slice">
+                            </circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-3xl font-extrabold text-allifapp-navy leading-none" id="total-revenue-percent">0%</span>
+                            <span class="text-sm text-allifapp-text-gray">Total Revenue</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center space-x-4 mt-6">
+                        <div class="flex items-center">
+                            <span class="w-3 h-3 rounded-full bg-allifapp-green mr-2"></span>
+                            <span class="text-sm text-allifapp-text-gray">Service</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-3 h-3 rounded-full bg-allifapp-navy mr-2"></span>
+                            <span class="text-sm text-allifapp-text-gray">Products</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-3 h-3 rounded-full bg-allifapp-light-green mr-2"></span>
+                            <span class="text-sm text-allifapp-text-gray">Other</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-          Developed by <a href="https://allifmaal.com/">Allifmaal</a>
+    </section>
+
+    <!-- Comprehensive Modules Section -->
+    <section id="modules" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-allifapp-navy mb-12 animate-fade-in">Allifapp: Your Complete ERP Solution</h2>
+            <p class="text-xl mb-12 opacity-80 max-w-3xl mx-auto text-allifapp-text-gray animate-fade-in-up delay-100">
+                A truly unified platform, Allifapp consolidates all your critical business functions into one powerful system, designed for comprehensive control and efficiency.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Module Card 1: Financial Management -->
+                <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in-up">
+                    <svg class="icon-box-svg mx-auto mb-4 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-2">Financial Management</h3>
+                    <p class="text-allifapp-text-gray text-sm">General Ledger, Accounts Payable/Receivable, Budgeting, Reporting.</p>
+                </div>
+                <!-- Module Card 2: Human Resources -->
+                <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in-up delay-100">
+                    <svg class="icon-box-svg mx-auto mb-4 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-2">Human Resources</h3>
+                    <p class="text-allifapp-text-gray text-sm">Payroll, Employee Records, Recruitment, Performance Management.</p>
+                </div>
+                <!-- Module Card 3: Supply Chain & Inventory -->
+                <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in-up delay-200">
+                    <svg class="icon-box-svg mx-auto mb-4 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM4 20V4h16l.01 16H4zm9-5.75L16.25 10l3.75 3.75V19H4.25L9 14.5l3-3.75z"/></svg>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-2">Inventory & Supply Chain</h3>
+                    <p class="text-allifapp-text-gray text-sm">Stock Control, Warehousing, Procurement, Order Management.</p>
+                </div>
+                <!-- Module Card 4: Customer Relationship Management -->
+                <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in-up delay-300">
+                    <svg class="icon-box-svg mx-auto mb-4 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-2">Customer Relations (CRM)</h3>
+                    <p class="text-allifapp-text-gray text-sm">Lead Management, Sales Pipeline, Customer Service, Support.</p>
+                </div>
+                <!-- Module Card 5: Project Management -->
+                <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in-up delay-400">
+                    <svg class="icon-box-svg mx-auto mb-4 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/></svg>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-2">Project Management</h3>
+                    <p class="text-allifapp-text-gray text-sm">Task Tracking, Resource Allocation, Milestones, Progress Monitoring.</p>
+                </div>
+                <!-- Module Card 6: Reporting & Analytics -->
+                <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in-up delay-500">
+                    <svg class="icon-box-svg mx-auto mb-4 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M19 19H5V5h14v14zm-2-2V7H7v10h10zM11 15h2v-4h-2v4zm-4 0h2V9H7v6zm8 0h2v-2h-2v2z"/></svg>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-2">Reporting & Analytics</h3>
+                    <p class="text-allifapp-text-gray text-sm">Customizable Reports, Predictive Analytics, Business Intelligence Dashboards.</p>
+                </div>
+                 <!-- Module Card 7: Manufacturing & Production -->
+                <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in-up delay-600">
+                    <svg class="icon-box-svg mx-auto mb-4 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M20 12c0-1.1-.9-2-2-2V7c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v5h20v-5zm-4-8c0-.55-.45-1-1-1H9c-.55 0-1 .45-1 1v3h8V4z"/></svg>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-2">Manufacturing & Production</h3>
+                    <p class="text-allifapp-text-gray text-sm">Production Planning, Quality Control, Bill of Materials (BOM), Shop Floor Control.</p>
+                </div>
+                 <!-- Module Card 8: Sales & Marketing -->
+                <div class="bg-allifapp-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in-up delay-700">
+                    <svg class="icon-box-svg mx-auto mb-4 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.92V12h2v7.92c-1.12.08-2.16.14-3 .14-1.13 0-2.7-.2-4-.4V10.08c1.3.15 2.7.27 4 .27 1.14 0 2.18-.06 3-.14V4.08c-1.12-.08-2.16-.14-3-.14-1.13 0-2.7.2-4 .4V3.08c1.3-.15 2.7-.27 4-.27 1.14 0 2.18.06 3-.14V12h-2v7.92z"/></svg>
+                    <h3 class="text-xl font-semibold text-allifapp-navy mb-2">Sales & Marketing</h3>
+                    <p class="text-allifapp-text-gray text-sm">Campaign Management, Sales Forecasting, Lead Scoring, E-commerce Integration.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </footer><!-- End Footer -->
-  
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i>Top</a>
-  
-    <script src="{% static 'allifapperp/js/website/website.js' %}"></script>
-  </body>
-  
-  </html>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-allifapp-light-navy text-allifapp-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-12 animate-fade-in">What Our Valued Clients Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-allifapp-white p-8 rounded-lg shadow-xl animate-fade-in-up delay-100">
+                    <p class="text-lg italic text-allifapp-text-gray mb-6">"Allifapp transformed our operations. The insights are invaluable, helping us achieve efficiency we never thought possible."</p>
+                    <p class="font-semibold text-allifapp-navy">- Jane Doe, CEO, <span class="text-allifapp-green">Tech Innovations Inc.</span></p>
+                </div>
+                <div class="bg-allifapp-white p-8 rounded-lg shadow-xl animate-fade-in-up delay-200">
+                    <p class="text-lg italic text-allifapp-text-gray mb-6">"The seamless integration and intuitive design of Allifapp made our transition smooth. A truly comprehensive ERP solution!"</p>
+                    <p class="font-semibold text-allifapp-navy">- John Smith, Operations Director, <span class="text-allifapp-green">Global Logistics</span></p>
+                </div>
+                <div class="bg-allifapp-white p-8 rounded-lg shadow-xl animate-fade-in-up delay-300">
+                    <p class="text-lg italic text-allifapp-text-gray mb-6">"Our decision-making has never been sharper. The real-time data from Allifapp gives us the edge we need in a competitive market."</p>
+                    <p class="font-semibold text-allifapp-navy">- Sarah Khan, CFO, <span class="text-allifapp-green">Future Ventures</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-allifapp-navy mb-12 animate-fade-in">Transparent Pricing, Tailored for Growth</h2>
+            <p class="text-xl mb-12 opacity-80 max-w-3xl mx-auto text-allifapp-text-gray animate-fade-in-up delay-100">
+                Choose the plan that best fits your business needs. All packages are designed to provide maximum value and flexibility.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Pricing Card: Startup Plan -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-lg border-b-4 border-transparent hover:border-allifapp-green transition-all duration-300 transform hover:-translate-y-2 animate-fade-in-up">
+                    <h3 class="text-2xl font-bold text-allifapp-navy mb-4">Startup Plan</h3>
+                    <div class="text-5xl font-extrabold text-allifapp-green mb-2"><sup>$</sup>20<span class="text-xl font-normal text-allifapp-text-gray">/user/month</span></div>
+                    <p class="text-sm text-allifapp-text-gray mb-6">(Billed Annually)</p>
+                    <ul class="text-left space-y-2 text-allifapp-text-gray mb-8">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Core ERP Modules</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Secure Cloud Hosting</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Web-based Access</li>
+                        <li class="flex items-center text-gray-400"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> 24/7 Basic Support</li>
+                    </ul>
+                    <a href="#contact" class="inline-block px-8 py-3 bg-allifapp-navy text-allifapp-white font-semibold rounded-lg hover:bg-allifapp-light-navy transition duration-300">Choose Plan</a>
+                </div>
+
+                <!-- Pricing Card: Business Plan (Featured) -->
+                <div class="bg-allifapp-navy p-8 rounded-xl shadow-xl border-b-4 border-allifapp-green transform scale-105 animate-fade-in-up delay-100">
+                    <p class="text-allifapp-white text-sm font-semibold mb-2">Most Popular</p>
+                    <h3 class="text-2xl font-bold text-allifapp-white mb-4">Business Plan</h3>
+                    <div class="text-5xl font-extrabold text-allifapp-green mb-2"><sup>$</sup>30<span class="text-xl font-normal text-gray-300">/user/month</span></div>
+                    <p class="text-sm text-gray-300 mb-6">(Billed Annually)</p>
+                    <ul class="text-left space-y-2 text-allifapp-white mb-8">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> **Everything in Startup Plan**</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Full User Training</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Advanced Reporting</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Dedicated Account Manager</li>
+                    </ul>
+                    <a href="#contact" class="inline-block px-8 py-3 bg-allifapp-green text-allifapp-white font-semibold rounded-lg hover:bg-allifapp-light-green transition duration-300">Choose Plan</a>
+                </div>
+
+                <!-- Pricing Card: Gold Plan -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-lg border-b-4 border-transparent hover:border-allifapp-green transition-all duration-300 transform hover:-translate-y-2 animate-fade-in-up delay-200">
+                    <h3 class="text-2xl font-bold text-allifapp-navy mb-4">Gold Plan</h3>
+                    <div class="text-5xl font-extrabold text-allifapp-green mb-2"><sup>$</sup>50<span class="text-xl font-normal text-allifapp-text-gray">/user/month</span></div>
+                    <p class="text-sm text-allifapp-text-gray mb-6">(Billed Annually)</p>
+                    <ul class="text-left space-y-2 text-allifapp-text-gray mb-8">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> **Everything in Business Plan**</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> All Modules Accessible</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Priority Support & Consultancy</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-allifapp-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> On-site Setup & Training (Custom)</li>
+                    </ul>
+                    <a href="#contact" class="inline-block px-8 py-3 bg-allifapp-navy text-allifapp-white font-semibold rounded-lg hover:bg-allifapp-light-navy transition duration-300">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-allifapp-light-navy text-allifapp-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 animate-fade-in">Get In Touch</h2>
+            <p class="text-xl text-center mb-12 opacity-80 max-w-3xl mx-auto animate-fade-in-up delay-100">
+                Have questions or need a personalized demo? Reach out to us, and our team will be happy to assist you.
+            </p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-xl animate-fade-in-up">
+                    <h3 class="text-2xl font-bold text-allifapp-navy mb-6">Our Contact Details</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <svg class="w-7 h-7 mr-4 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <div>
+                                <h4 class="text-lg font-semibold text-allifapp-navy">Location:</h4>
+                                <p class="text-allifapp-text-gray">Ecobank House, Nairobi</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-7 h-7 mr-4 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <div>
+                                <h4 class="text-lg font-semibold text-allifapp-navy">Email:</h4>
+                                <p class="text-allifapp-text-gray">info@allifmaal.com <br> allifmaalengineering@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-7 h-7 mr-4 text-allifapp-green flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.57.12.35.03.75-.25 1.02l-2.2 2.2z"/></svg>
+                            <div>
+                                <h4 class="text-lg font-semibold text-allifapp-navy">Call:</h4>
+                                <p class="text-allifapp-text-gray">+254722314212</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-allifapp-white p-8 rounded-xl shadow-xl animate-fade-in-up delay-200">
+                    <h3 class="text-2xl font-bold text-allifapp-navy mb-6">Send Us a Message</h3>
+                    <form action="{% url 'allifmaalcommonapp:commonCustomerContacts' %}" method="POST" class="space-y-6">
+                        {% csrf_token %}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-allifapp-navy text-sm font-semibold mb-2">Your Name</label>
+                                <input type="text" name="name" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-allifapp-green" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-allifapp-navy text-sm font-semibold mb-2">Your Email</label>
+                                <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-allifapp-green" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-allifapp-navy text-sm font-semibold mb-2">Subject</label>
+                            <input type="text" name="subject" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-allifapp-green" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-allifapp-navy text-sm font-semibold mb-2">Message</label>
+                            <textarea name="message" id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-allifapp-green" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="inline-block px-10 py-4 bg-allifapp-green text-allifapp-white font-semibold rounded-lg shadow-lg hover:bg-allifapp-light-green transition duration-300 transform hover:scale-105">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-allifapp-navy text-allifapp-white py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Allifapp</h3>
+                <p class="text-gray-400">&copy; 2025 Allifapp. All rights reserved.</p>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-4 text-allifapp-green">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="#hero" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">Home</a></li>
+                    <li><a href="#about" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">About us</a></li>
+                    <li><a href="#features" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">Features</a></li>
+                    <li><a href="#pricing" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">Pricing</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-4 text-allifapp-green">Our Services</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">Business Applications</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">ERP Applications</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">Software Solutions</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">Mobile Applications</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-allifapp-light-green transition duration-300">Websites</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-4 text-allifapp-green">Follow Us</h4>
+                <div class="flex justify-center md:justify-start space-x-4 mt-4">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-allifapp-green transition duration-300"><svg class="w-6 h-6 text-allifapp-white" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.84.37-1.75.62-2.67.73.96-.58 1.7-1.48 2.05-2.55-.9.53-1.9.91-2.92 1.11-1.7-.85-3.66-.25-4.5 1.55-1.38 2.92.2 6.2 3.5 7.5-.6.05-1.1.08-1.7.08-2.6 0-5.1-1.4-6.7-4.2-.4.7-1.2 1.2-2.1 1.4-1.2.3-2.5.1-3.6-.5.9 3.2 3.7 5.5 6.9 5.8-2.6 1.8-5.7 2.1-8.5 1-.9-.07-1.8-.1-2.7-.1-1.3 0-2.5-.2-3.7-.6 3.2 2 7 3.2 11.2 3.2 13.4 0 20.8-11.1 20.8-20.8 0-.3-.02-.6-.02-.9.96-.7 1.8-1.5 2.5-2.5z"/></svg></a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-allifapp-green transition duration-300"><svg class="w-6 h-6 text-allifapp-white" fill="currentColor" viewBox="0 0 24 24"><path d="M14.01 4L11 6.98 14 10l-3 3.01 3 3.01L11 19l3 3.01 3-3.01L14 16l3-3.01L14 10l3-3.01z"/></svg></a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-allifapp-green transition duration-300"><svg class="w-6 h-6 text-allifapp-white" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2ZM7.6 4C6.5 4 5.8 4.7 5.8 5.8C5.8 6.9 6.5 7.6 7.6 7.6C8.7 7.6 9.4 6.9 9.4 5.8C9.4 4.7 8.7 4 7.6 4ZM12 7C9.2 7 7 9.2 7 12S9.2 17 12 17 17 14.8 17 12 14.8 7 12 7ZM16.2 4H16.2V4ZM12 9C10.3 9 9 10.3 9 12S10.3 15 12 15 15 13.7 15 12 13.7 9 12 9ZM16.6 7.6C15.5 7.6 14.8 8.3 14.8 9.4S15.5 11.2 16.6 11.2C17.7 11.2 18.4 10.5 18.4 9.4S17.7 7.6 16.6 7.6ZM12 4C10.9 4 10.2 4.7 10.2 5.8S10.9 7.6 12 7.6C13.1 7.6 13.8 6.9 13.8 5.8S13.1 4 12 4Z"/></svg></a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 hover:bg-allifapp-green transition duration-300"><svg class="w-6 h-6 text-allifapp-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8.6 15.6H6.5V9.4H8.6V15.6zM7.5 7.8c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2zM18 15.6H15.9V12.1c0-.8-.3-1.2-.8-1.2-.4 0-.7.2-.9.5-.2.2-.2.6-.2.8v3.4H11.8s.1-3.6 0-4.2h.1V9.4H12.9V10c.4-.4.8-.6 1.4-.6 1.1 0 1.9.7 1.9 2.2V15.6H18V15.6z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 pt-8 mt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
+            &copy; Copyright <strong><span>Allifmaal</span></strong>. All Rights Reserved. Developed by <a href="https://allifmaal.com/" class="text-allifapp-green hover:underline">Allifmaal</a>.
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top fixed bottom-4 right-4 bg-allifapp-green text-allifapp-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 invisible hover:bg-allifapp-light-green z-50">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6l-8-8z"/></svg>
+    </a>
+
+    <script>
+        // --- Navbar and Mobile Menu Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const logoImg = document.querySelector('.logo-img');
+
+            const scrolledThreshold = 80; // Pixels scrolled down to trigger sticky styles
+
+            // Toggle mobile menu visibility
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                if (mobileMenu.classList.contains('active')) {
+                    mobileMenuButton.innerHTML = '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+                } else {
+                    mobileMenuButton.innerHTML = '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                }
+            });
+
+            // Close mobile menu on nav link click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuButton.innerHTML = '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                });
+            });
+
+            // Sticky header logic (only shadow and padding change)
+            const applyHeaderStyles = () => {
+                if (window.scrollY > scrolledThreshold) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            };
+            window.addEventListener('scroll', applyHeaderStyles);
+            window.addEventListener('load', applyHeaderStyles);
+
+
+            // --- Smooth Scrolling for all nav links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - header.offsetHeight, // Adjust for fixed header height
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // --- Back to top button logic ---
+            const backToTopButton = document.querySelector('.back-to-top');
+            const toggleBackToTop = () => {
+                if (window.scrollY > 300) { // Show after scrolling 300px
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                }
+            };
+            window.addEventListener('scroll', toggleBackToTop);
+            window.addEventListener('load', toggleBackToTop);
+
+
+            // --- Intersection Observer for Animations (General Fade-in-up, Scale-in) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const animateElements = document.querySelectorAll('[class*="animate-fade-in-up"], [class*="animate-fade-in"], [class*="animate-scale-in"]');
+            animateElements.forEach(element => {
+                // Initial state
+                element.style.opacity = '0';
+                if (element.classList.contains('animate-fade-in-up')) {
+                    element.style.transform = 'translateY(20px)';
+                } else if (element.classList.contains('animate-scale-in')) {
+                    element.style.transform = 'scale(0.8)';
+                }
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            entry.target.style.transform = 'scale(1)';
+
+                            // Apply animation delays dynamically for staggered effects
+                            const delay = parseFloat(entry.target.className.match(/delay-(\d+)/)?.[1] || 0) / 1000;
+                            if (delay > 0) {
+                                entry.target.style.transitionDelay = `${delay}s`;
+                            }
+                            // Re-apply the animation property itself
+                            if (entry.target.classList.contains('animate-fade-in-up')) {
+                                entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                            } else if (entry.target.classList.contains('animate-fade-in')) {
+                                entry.target.style.animation = 'fadeIn 0.6s ease-out forwards';
+                            } else if (entry.target.classList.contains('animate-scale-in')) {
+                                entry.target.style.animation = 'scaleIn 0.8s ease-out forwards';
+                            }
+
+                            observer.unobserve(entry.target); // Stop observing once animated
+                        } else {
+                            // Optional: reset if it leaves viewport AND you want it to re-animate on re-entry
+                            // For a landing page, usually animate once is sufficient.
+                            // If you want re-animate, uncomment the lines below:
+                            /*
+                            element.style.opacity = '0';
+                            if (element.classList.contains('animate-fade-in-up')) {
+                                element.style.transform = 'translateY(20px)';
+                            } else if (element.classList.contains('animate-scale-in')) {
+                                element.style.transform = 'scale(0.8)';
+                            }
+                            */
+                        }
+                    });
+                }, observerOptions);
+                observer.observe(element);
+            });
+
+            // --- Typewriter effect for Hero Subtitle ---
+            const typewriterElement = document.querySelector('.typewriter-text');
+            if (typewriterElement) {
+                // Trigger typewriter animation once element is visible
+                const typewriterObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            typewriterElement.classList.add('animated'); // Add class to trigger animation
+                            typewriterObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.8 }); // Trigger when 80% visible
+                typewriterObserver.observe(typewriterElement);
+            }
+
+
+            // --- Accordion Logic (Why Us Section) ---
+            document.querySelectorAll('[data-accordion]').forEach(button => {
+                const contentId = `accordion-content-${button.dataset.accordion}`;
+                const content = document.getElementById(contentId);
+                const svgIcon = button.querySelector('svg');
+
+                // Initial state: all content hidden
+                content.style.maxHeight = '0';
+                content.classList.add('hidden'); // Ensure it's hidden initially
+
+                button.addEventListener('click', () => {
+                    const isActive = content.classList.contains('active');
+
+                    // Close all other open accordions
+                    document.querySelectorAll('.accordion-content.active').forEach(otherContent => {
+                        if (otherContent.id !== contentId) {
+                            otherContent.classList.remove('active');
+                            otherContent.style.maxHeight = '0';
+                            otherContent.classList.add('hidden');
+                            otherContent.previousElementSibling.querySelector('svg').classList.remove('rotate-180');
+                        }
+                    });
+
+                    // Toggle current accordion
+                    if (!isActive) {
+                        content.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + 'px'; // Set height for transition
+                        content.classList.remove('hidden');
+                        svgIcon.classList.add('rotate-180');
+                    } else {
+                        content.classList.remove('active');
+                        content.style.maxHeight = '0';
+                        content.classList.add('hidden');
+                        svgIcon.classList.remove('rotate-180');
+                    }
+                });
+            });
+
+            // --- Chart Animations Triggered by IntersectionObserver ---
+            const insightsSection = document.getElementById('insights');
+            const chartsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Bar chart animation
+                        document.querySelectorAll('.bar').forEach((bar, index) => {
+                            setTimeout(() => {
+                                bar.classList.add('is-visible');
+                            }, index * 150); // Stagger
+                        });
+
+                        // Line chart animation
+                        const linePath = document.querySelector('.line-chart-svg .line-path');
+                        linePath.classList.add('is-visible'); // Trigger CSS animation
+
+                        // Pie chart animation
+                        const pieSlices = document.querySelectorAll('.pie-slice');
+                        const circumference = 2 * Math.PI * 40; // 2 * PI * R (R=40)
+                        let currentOffsetAngle = 0; // Cumulative angle for slices
+
+                        pieSlices.forEach((slice, index) => {
+                            const percent = parseFloat(slice.dataset.percent);
+                            const dasharray = (percent / 100) * circumference;
+
+                            slice.style.strokeDasharray = `${dasharray} ${circumference}`;
+                            slice.style.transformOrigin = '50% 50%'; // Ensure rotation origin is center
+
+                            // Animate stroke-dashoffset to draw the slice from the end of the previous one
+                            // Calculate the starting point of this slice as a percentage of circumference
+                            const startAngle = (currentOffsetAngle / 100) * circumference;
+                            const endAngle = ((currentOffsetAngle + percent) / 100) * circumference;
+
+                            // Set initial dashoffset to hide the slice, then transition to show it
+                            slice.style.transition = 'none'; // Temporarily disable transition
+                            slice.style.strokeDashoffset = circumference; // Hide it
+                            void slice.offsetWidth; // Trigger reflow
+
+                            setTimeout(() => {
+                                slice.style.transition = 'stroke-dashoffset 1s ease-out';
+                                // The dashoffset needs to move to reveal the slice from its starting point
+                                // The end of the dash is at `dashoffset`. We want to move the start of the dash.
+                                // It's complex with `stroke-dashoffset` for segments, simpler to draw from 0
+                                // and manage rotation, or just animate `stroke-dasharray`
+                                // For simplicity and the "drawing" effect, we animate dasharray from 0 to its value.
+                                slice.style.strokeDashoffset = circumference - dasharray - startAngle;
+
+                                // Alternative for drawing pie slices:
+                                // Instead of manipulating dashoffset, animate stroke-dasharray directly
+                                slice.style.transition = 'stroke-dasharray 1s ease-out';
+                                slice.style.strokeDasharray = `0 ${circumference}`; // Start empty
+                                void slice.offsetWidth; // Reflow
+                                slice.style.strokeDasharray = `${dasharray} ${circumference - dasharray}`; // Fill to percent
+
+                                // Rotate for the next slice's starting point
+                                slice.style.transform = `rotate(${currentOffsetAngle * 3.6}deg)`; // Convert % to degrees
+
+                            }, 100 + index * 300); // Stagger animation
+
+                            currentOffsetAngle += percent;
+                        });
+
+                        // Animate total revenue percentage
+                        const totalRevenueElement = document.getElementById('total-revenue-percent');
+                        let currentPercent = 0;
+                        const targetPercent = 100;
+                        const duration = 1500;
+                        let startTime = null;
+
+                        const animateTotalRevenue = (timestamp) => {
+                            if (!startTime) startTime = timestamp;
+                            const progress = Math.min((timestamp - startTime) / duration, 1);
+                            currentPercent = Math.floor(progress * targetPercent);
+                            totalRevenueElement.textContent = `${currentPercent}%`;
+
+                            if (progress < 1) {
+                                requestAnimationFrame(animateTotalRevenue);
+                            } else {
+                                totalRevenueElement.textContent = `${targetPercent}%`;
+                            }
+                        };
+                        requestAnimationFrame(animateTotalRevenue);
+
+                        chartsObserver.unobserve(insightsSection); // Stop observing once animations start
+                    }
+                });
+            }, { threshold: 0.3 }); // Trigger when 30% of the section is visible
+
+            chartsObserver.observe(insightsSection);
+        });
+    </script>
+    <!-- Your existing website.js if it contains other scripts -->
+    <!-- <script src="{% static 'allifapperp/js/website/website.js' %}"></script> -->
+</body>
+</html>

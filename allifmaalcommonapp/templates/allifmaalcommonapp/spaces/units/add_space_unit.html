@@ -17,15 +17,12 @@
 
 <div class="container-fluid amel-content-header">
 
-  <a class="amel-table-list-identifier">Add General Ledger Account:</a>
-
+  <a class="amel-table-list-identifier">Add Unit Space:</a>
   <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-  <a href="{% url 'allifmaalcommonapp:commonAddGeneralLedger' user_var glblslug %}">New GL A/C</a>
-  
   <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a>
-  
-<a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
-
+      <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
+  <a href="{% url 'allifmaalcommonapp:commonAddSpaceUnit' user_var glblslug %}">Add New Space Unit</a>
+ 
 </div>
 
     </div><!--end....header column-->
@@ -38,7 +35,7 @@
   <div class="allifmaincontainer">
 {% if allifquery_update %}
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Edit {{allifquery}} Warehouse Details</div>
+  <div class="table-details-content-description">Edit {{allifquery_update}} Details</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -63,6 +60,46 @@
           <td>{{form.branch}}</td>
       
           </tr>
+          <tr>
+            <td class="allif-fix-table-col">Department</td>
+            <td>{{form.department}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Main Space</td>
+            <td>{{form.space}}</td>
+        
+            </tr>
+         <tr>
+          <td class="allif-fix-table-col">Unit Number</td>
+          <td>{{form.space_number}}</td>
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Name</td>
+          <td>{{form.name}}</td>
+      
+          </tr>
+            <tr>
+            <td class="allif-fix-table-col">Description</td>
+            <td>{{form.description}}</td>
+            </tr>
+       
+           
+             <tr>
+            <td class="allif-fix-table-col">Amenities</td>
+            <td>{{form.amenities}}</td>
+        
+            </tr>
+      
+       
+        <tr>
+          <td class="allif-fix-table-col">Unit Cost</td>
+          <td>{{form.unitcost}}</td>
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Unit Price</td>
+          <td>{{form.unitprice}}</td>
+        </tr>
        
            
         </tbody>
@@ -77,19 +114,40 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
-        
-          <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td>{{form.department}}</td>
+         <tr>
+            <td class="allif-fix-table-col">Base Price/Night</td>
+            <td>{{form.base_price_per_night}}</td>
         
             </tr>
-            <tr>
-              <td class="allif-fix-table-col">Warehouse</td>
-              <td>{{form.name}}</td>
-          
-              </tr>
+             <tr>
+            <td class="allif-fix-table-col">Max Occupancy</td>
+            <td>{{form.max_occupancy}}</td>
         
-           
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Monthly Rent</td>
+            <td>{{form.monthly_rent}}</td>
+        
+            </tr>
+        
+          <tr>
+            <td class="allif-fix-table-col">Capacity</td>
+            <td>{{form.capacity}}</td>
+        
+            </tr>
+       <tr>
+          <td class="allif-fix-table-col">Area in m2</td>
+          <td>{{form.area_sqm}}</td>
+        </tr>
+         <tr>
+          <td class="allif-fix-table-col">#Rooms</td>
+          <td>{{form.rooms}}</td>
+        </tr>
+         <tr>
+          <td class="allif-fix-table-col">#Washrooms</td>
+          <td>{{form.washrooms}}</td>
+        </tr>
+     
           </tbody>
           </table>
           </div>
@@ -102,17 +160,34 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Comments</td>
-            <td>{{form.comments}}</td>
+        <tr>
+          <td class="allif-fix-table-col">Space Floor</td>
+          <td>{{form.space_floor}}</td>
+        </tr>
+
+             <tr>
+            <td class="allif-fix-table-col">Space Type</td>
+            <td>{{form.space_type}}</td>
+        
+            </tr>
+           
+             <tr>
+            <td class="allif-fix-table-col">Unit Type</td>
+            <td>{{form.unit_type}}</td>
+        
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">Status</td>
+            <td>{{form.current_status}}</td>
         
             </tr>
              <tr>
-            <td class="allif-fix-table-col">Inventory A/C</td>
-            <td>{{form.inventory_account}}</td>
+            <td class="allif-fix-table-col">Staff in Charge</td>
+            <td>{{form.emplyee_in_charge}}</td>
         
             </tr>
- 
+           
+       
             <tr>
               <td class="allif-fix-table-col">Action</td>
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
@@ -139,7 +214,7 @@
 {% else %}
 
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit New General Ledger Account</div>
+  <div class="table-details-content-description">Add New Unit Space </div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -152,38 +227,42 @@
       <div class="table-responsive">
       <table class="table table-layout">
       <tbody>
+         <tr>
+            <td class="allif-fix-table-col">Main Space</td>
+            <td>{{form.space}}</td>
+        
+            </tr>
+         <tr>
+          <td class="allif-fix-table-col">Unit Number</td>
+          <td>{{form.space_number}}</td>
+        </tr>
         <tr>
           <td class="allif-fix-table-col">Name</td>
           <td>{{form.name}}</td>
       
           </tr>
-
-        <tr>
-            <td class="allif-fix-table-col">Capacity</td>
-            <td>{{form.capacity}}</td>
-        
+            <tr>
+            <td class="allif-fix-table-col">Description</td>
+            <td>{{form.description}}</td>
             </tr>
-             <tr>
-            <td class="allif-fix-table-col">City</td>
-            <td>{{form.city}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Address</td>
-            <td>{{form.address}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Inventory Account</td>
-            <td>{{form.inventory_account}}</td>
-        
-            </tr>
+       
+           
              <tr>
             <td class="allif-fix-table-col">Amenities</td>
             <td>{{form.amenities}}</td>
         
             </tr>
-            
+      
+       
+        <tr>
+          <td class="allif-fix-table-col">Unit Cost</td>
+          <td>{{form.unitcost}}</td>
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Unit Price</td>
+          <td>{{form.unitprice}}</td>
+        </tr>
+       
            
         </tbody>
         </table>
@@ -197,50 +276,7 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Asset</td>
-            <td>{{form.asset}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">Space Number</td>
-            <td>{{form.space_number}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Space Floor</td>
-            <td>{{form.space_floor}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Space Type</td>
-            <td>{{form.space_type}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Phone</td>
-            <td>{{form.contact_phone}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Staff in Charge</td>
-            <td>{{form.emplyee_in_charge}}</td>
-        
-            </tr>
-           
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-        <tr>
+           <tr>
             <td class="allif-fix-table-col">Base Price/Night</td>
             <td>{{form.base_price_per_night}}</td>
         
@@ -255,18 +291,64 @@
             <td>{{form.monthly_rent}}</td>
         
             </tr>
-             <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
+        
+          <tr>
+            <td class="allif-fix-table-col">Capacity</td>
+            <td>{{form.capacity}}</td>
         
             </tr>
+       <tr>
+          <td class="allif-fix-table-col">Area in m2</td>
+          <td>{{form.area_sqm}}</td>
+        </tr>
+         <tr>
+          <td class="allif-fix-table-col">#Rooms</td>
+          <td>{{form.rooms}}</td>
+        </tr>
+         <tr>
+          <td class="allif-fix-table-col">#Washrooms</td>
+          <td>{{form.washrooms}}</td>
+        </tr>
+     
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+         <tr>
+          <td class="allif-fix-table-col">Space Floor</td>
+          <td>{{form.space_floor}}</td>
+        </tr>
+
              <tr>
+            <td class="allif-fix-table-col">Space Type</td>
+            <td>{{form.space_type}}</td>
+        
+            </tr>
+           
+             <tr>
+            <td class="allif-fix-table-col">Unit Type</td>
+            <td>{{form.unit_type}}</td>
+        
+            </tr>
+              <tr>
             <td class="allif-fix-table-col">Status</td>
             <td>{{form.current_status}}</td>
         
             </tr>
-           
-          
+             <tr>
+            <td class="allif-fix-table-col">Staff in Charge</td>
+            <td>{{form.emplyee_in_charge}}</td>
+        
+            </tr>
+        
         <tr>
           <td class="allif-fix-table-col">Action</td>
           <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>

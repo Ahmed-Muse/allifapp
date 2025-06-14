@@ -1002,9 +1002,16 @@ class CommonAddSpaceForm(forms.ModelForm):
     class Meta:
         #mydefault=TaxParametersModel.objects.all().first().taxname
         model = CommonSpacesModel
-        fields = ['asset','contact_phone','space_number','emplyee_in_charge','capacity','city','address','inventory_account','amenities','max_occupancy','monthly_rent','base_price_per_night','current_status','name','space_floor','space_type','description','division','branch','department']
+        fields = ['asset','contact_phone','space_number','emplyee_in_charge','number_of_units',
+                  'capacity','city','address','amenities',
+                  'max_occupancy','monthly_rent','base_price_per_night',
+                  'current_status','name','space_floor','space_type','description',
+                  'division','branch','department','number_of_bedrooms','number_of_bathrooms']
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control'}),
+            'number_of_units':forms.TextInput(attrs={'class':'form-control'}),
+            'number_of_bedrooms':forms.TextInput(attrs={'class':'form-control'}),
+            'number_of_bathrooms':forms.TextInput(attrs={'class':'form-control'}),
             'contact_phone':forms.TextInput(attrs={'class':'form-control'}),
              #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
             'space_number':forms.TextInput(attrs={'class':'form-control'}),
@@ -1020,7 +1027,7 @@ class CommonAddSpaceForm(forms.ModelForm):
             'space_type':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'space_floor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'current_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'inventory_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            #'inventory_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'emplyee_in_charge':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -1035,14 +1042,24 @@ class CommonAddSpaceForm(forms.ModelForm):
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
         self.fields['asset'].queryset=CommonAssetsModel.objects.filter(company=allifmaalparameter)
 
-
+    
 class CommonAddSpaceUnitForm(forms.ModelForm):
     class Meta:
         #mydefault=TaxParametersModel.objects.all().first().taxname
         model = CommonSpaceUnitsModel
-        fields = ['space','emplyee_in_charge','capacity','amenities','max_occupancy','monthly_rent','base_price_per_night','current_status','name','space_floor','space_type','description','division','branch','department']
+        fields = ['space','space_number','unitcost','unitprice','area_sqm','rooms','washrooms',
+                  'unit_type',
+                  'emplyee_in_charge','capacity','amenities','max_occupancy','monthly_rent',
+                  'base_price_per_night','current_status','name','space_floor','space_type',
+                  'description','division','branch','department']
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control'}),
+            'unitcost':forms.TextInput(attrs={'class':'form-control'}),
+            'unitprice':forms.TextInput(attrs={'class':'form-control'}),
+            'area_sqm':forms.TextInput(attrs={'class':'form-control'}),
+            'rooms':forms.TextInput(attrs={'class':'form-control'}),
+            'washrooms':forms.TextInput(attrs={'class':'form-control'}),
+          
             'contact_phone':forms.TextInput(attrs={'class':'form-control'}),
              #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
             'space_number':forms.TextInput(attrs={'class':'form-control'}),
@@ -1060,6 +1077,8 @@ class CommonAddSpaceUnitForm(forms.ModelForm):
             'current_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'inventory_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'emplyee_in_charge':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'unit_type':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'space':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),

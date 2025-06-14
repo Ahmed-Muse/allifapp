@@ -20,6 +20,7 @@ from allifmaalusersapp.forms import UpdateCustomUserForm
 from django.template.loader import get_template
 from django.db.models import Q
 from xhtml2pdf import pisa
+from django.utils import timezone
 from decimal import Decimal
 from django.db.models import Count,Min,Max,Avg,Sum
 
@@ -6651,7 +6652,7 @@ def commonSpaceDetails(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
         title="Space Details"
         allifquery=CommonSpacesModel.objects.filter(id=pk).first()
-        allifqueryset=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),warehouse=allifquery)
+        allifqueryset=CommonSpaceUnitsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),space=allifquery)
         
         context={
             "allifquery":allifquery,
@@ -6801,7 +6802,7 @@ def commonSpaceUnitSearch(request,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonSpaceUnitsModel.objects.filter((Q(description__icontains=allifsearch)|Q(partNumber__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+            searched_data=CommonSpaceUnitsModel.objects.filter((Q(description__icontains=allifsearch)|Q(space_number__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
         
         else:
             searched_data=[]
@@ -11098,7 +11099,7 @@ def commonPostCustomerPayment(request,pk,*allifargs,**allifkwargs):
             mycust=CommonCustomersModel.objects.get(id=customer.id)
             initial_cust_acc_bal=mycust.balance
             mycust.balance= Decimal(initial_cust_acc_bal)-Decimal(myamount)
-            mycust.status="posted"
+            mycust.status=='posted'
             mycust.save()
 
             # debit the asset account where the money from customer is received to
