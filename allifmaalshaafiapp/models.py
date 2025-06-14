@@ -119,7 +119,7 @@ class ReferralsModel(models.Model):
     """
     
     reason_for_referral=models.CharField(null=True, blank=True,max_length=250, help_text="The reason for the referral.")
-    owner=models.ForeignKey(User, related_name="ownrrefrals",on_delete=models.SET_NULL,null=True,blank=True)
+    owner=models.ForeignKey(User, related_name="owner_referalls",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmprefrals",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvsrefrals",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brncharefrals",on_delete=models.SET_NULL,null=True,blank=True)

@@ -163,10 +163,8 @@ DATABASES = {
         #'USER': 'root',
         #'PASSWORD': 'Allif@1442',# Allif@6030114
         #'PORT': '3306',
+        #'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",}
         #'PASSWORD': 'hidden',
-        #'OPTIONS': {
-            #'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        #}
        
 
 
@@ -180,9 +178,7 @@ DATABASES = {
         'PASSWORD': 'Allif@6030114',# Allif@6030114
         'HOST': 'Ahmeddove.mysql.pythonanywhere-services.com',
         'PORT': '3306',
-         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
+        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",}
         #DEBUG=TRUE############ SET THIS FALSE
         
         ##############3 SQLITE3 SECTION ######################3
