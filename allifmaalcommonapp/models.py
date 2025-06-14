@@ -313,28 +313,6 @@ class CommonOperationYearsModel(models.Model):
     def __str__(self):
         return str(self.year)
     
-
-# --- Function to get the default Operation Year ---
-def get_default_operation_year():
-    """
-    Returns the CommonOperationYearsModel instance marked as 'Current'.
-    If multiple 'Current' years exist, it picks the latest one by 'start_date'.
-    If no 'Current' year exists, it falls back to the overall latest year by 'start_date'.
-    """
-    try:
-        # Try to find a year explicitly marked as 'Current'.
-        # If there's a possibility of multiple 'Current' years (which should ideally be avoided
-        # in practice), .latest('start_date') will pick the one with the most recent start_date.
-        return CommonOperationYearsModel.objects.filter(is_current='Current').latest('start_date')
-    except CommonOperationYearsModel.DoesNotExist:
-        # If no year is explicitly marked 'Current', fall back to the overall latest year by its start_date.
-        try:
-            return CommonOperationYearsModel.objects.latest('start_date')
-        except CommonOperationYearsModel.DoesNotExist:
-            # If no operation years exist at all, print a warning and return None.
-            # Returning None means the ForeignKey field must be defined with `null=True`.
-            return None
-
 class CommonOperationYearTermsModel(models.Model):
     """
     this model captures operational year sections like terms, semisters, quarters ...etc
@@ -350,7 +328,7 @@ class CommonOperationYearTermsModel(models.Model):
     
     is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
    
-    operation_year=models.ForeignKey(CommonOperationYearsModel,default=get_default_operation_year,blank=True,null=True, on_delete=models.CASCADE, related_name='termsyear')
+    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='termsyear')
     start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
     end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
     is_active=models.BooleanField(default=False,blank=True,null=True)
