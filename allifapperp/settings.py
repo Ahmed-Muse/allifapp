@@ -35,7 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent # This variable correctly poin
 #SECRET_KEY = 'django-insecure-c8*_cv^aw$^%(*k5zfx1+(svx3yw!448%^=ci6auje3ucz7gvn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # Add a setting for maintenance mode
 
 #if DEBUG:
@@ -157,12 +157,12 @@ DATABASES = {
         #'PORT': '3306',
 
         ################# comment out this section during deployment... it is for development ############
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'allifmysqlcommondb',# this is the name of the database
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'Allif@1442',# Allif@6030114
-        'PORT': '3306',
+        #'ENGINE': 'django.db.backends.mysql',
+        #'NAME': 'allifmysqlcommondb',# this is the name of the database
+        #'HOST': 'localhost',
+        #'USER': 'root',
+        #'PASSWORD': 'Allif@1442',# Allif@6030114
+        #'PORT': '3306',
         #'PASSWORD': 'hidden',
        
 
@@ -171,12 +171,12 @@ DATABASES = {
 
         ################# comment out this section during deployment... it is for development ############
         
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'Ahmeddove$allifmysqlcommondb',# this is the name of the database
-        #'USER': 'Ahmeddove',
-        #'PASSWORD': 'Allif@6030114',# Allif@6030114
-        #'HOST': 'Ahmeddove.mysql.pythonanywhere-services.com',
-        #'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Ahmeddove$allifmysqlcommondb',# this is the name of the database
+        'USER': 'Ahmeddove',
+        'PASSWORD': 'Allif@6030114',# Allif@6030114
+        'HOST': 'Ahmeddove.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
         #DEBUG=TRUE############ SET THIS FALSE
         
         ##############3 SQLITE3 SECTION ######################3
