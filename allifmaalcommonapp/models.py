@@ -349,6 +349,17 @@ class CommonCategoriesModel(models.Model):
     Logistics....travelling, tourism, Hajj,Umrah,Cargo, handling, clearing etc
     Realestate...spacing letting(malls/apartments),property management,property development etc
     Services...consultancy, financial services, audit, legal, accounting etc..
+    ....
+    another list is as below....
+    this defines the item types of various industreis...
+    sales... these are Physical Products like solid, gas, chemicals, liquid...
+    healthcare...tablets, syrub, injection, vial, powder,Cream/Ointment, medical device, consumable,vaccine, service etc.
+    education....subjects, courses, textbooks, stationery item, lab equipment, digital resource, tuition fee etc.
+    Realestate... residential, commercial, mixed-use, land parcel, plot, service, lease agrement...
+    logistics...Package, Pallet, Container, Freight Unit, spare, Service (Transport), Seat/Ticket...
+    hospitality... Standard Room, Deluxe room, Suite, Food, Beverage, drink, Dish (Prepared), Consumable (Guest, toiletries, towels, minibar items), Linen: For bedsheets, tableclothses,
+    Service (Hotel such laundry service, room service, concierge, Event Space: For inventoryin....
+    Service... documents, software, consultaning hours, training, service ...etc..
     
     """
    
@@ -374,7 +385,6 @@ class CommonCategoriesModel(models.Model):
     		return str(self.name) # this will show up in the admin area
 
 ###################3 comon codes ##############
-
 class CommonCodesModel(models.Model):
     """
     this defines the codes used by various entities...
@@ -397,6 +407,8 @@ class CommonCodesModel(models.Model):
     
     def __str__(self):
         return f"{self.code}: {self.name}:"
+
+
 
 # #################3 HRM ################    
 class CommonEmployeesModel(models.Model):
@@ -971,42 +983,19 @@ class CommonStocksModel(models.Model):
     suppliertaxrate=models.ForeignKey(CommonSupplierTaxParametersModel,related_name="supplrstktxrte",on_delete=models.SET_NULL,null=True,blank=True)
     warehouse=models.ForeignKey(CommonSpacesModel,related_name="stckwarehouse",on_delete=models.SET_NULL,null=True,blank=True)
     total_units_sold=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
-    ################### for medicals ##################
-    
-    #drugInvConnector= models.ForeignKey(GeneralInvoicesModel,related_name="druginvoiceconnector",on_delete=models.CASCADE,null=True,blank=True)
-    drugDescription=models.CharField(null=True, blank=True, max_length=100)
-    drugform=models.CharField(choices=DrugForm,default='Please selection', max_length=100,blank=True,null=True)
-    drugUnit=models.CharField(choices=DrugUnits,default='Please selection', max_length=100,blank=True,null=True)
    
-    drug_notes=models.CharField(blank=True,null=True,default="notes",max_length=250)
-    
-    code=models.CharField(max_length=50, help_text="Course code, e.g., CS101",blank=True,null=True)
-    
-    credits=models.DecimalField(max_digits=4,blank=True,null=True, decimal_places=2, default=0.00, help_text="Credit hours for the course")
-   
-    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='stocks_operation_year')
-    operation_term=models.ForeignKey(CommonOperationYearTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='stocks_program')
-    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
-   
-    start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
-    end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
-    comments=models.CharField(blank=True,null=True, max_length=250)
+    weight=models.CharField(blank=True,null=True,default="weight",max_length=250)
+    length=models.CharField(blank=True,null=True,default="length",max_length=250)
+    width=models.CharField(blank=True,null=True,default="width",max_length=250)
+    height=models.CharField(blank=True,null=True,default="height",max_length=250)
+    expires=models.DateField(blank=True, null=True)
     
     # this field helps a lot.. for instance when invoicing, it will only affect current stock if it  is a physical item
     # if it is service, it will invoice but it will not affect the current stock as it is intangible
-    item_is_physical_or_service=models.CharField(choices=item_in_physical_state_or_service,max_length=50,blank=True,null=True,default="Current")
-   
+    item_state=models.CharField(choices=item_in_physical_state_or_service,max_length=50,blank=True,null=True,default="Current")
+    normal_range=models.CharField(max_length=250, blank=True, null=True,help_text="General normal range information for this test (e.g., '70-110 mg/dL').")
+    units=models.ForeignKey(CommonUnitsModel,related_name="unit_of_measure_stocks",on_delete=models.SET_NULL,null=True,blank=True)
     
-    
-    name=models.CharField(null=True, blank=True,max_length=250)
-   
-    
-    normal_range_info=models.CharField(max_length=250, blank=True, null=True,help_text="General normal range information for this test (e.g., '70-110 mg/dL').")
-   
-    unit_of_measure=models.ForeignKey(CommonUnitsModel,related_name="unit_of_measure_stocks",on_delete=models.SET_NULL,null=True,blank=True)
-    
-    
-
     class Meta:
         # THIS IS THE CRUCIAL ADDITION/CONFIRMATION
         unique_together = ('company', 'partNumber', 'warehouse')

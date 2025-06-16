@@ -1630,6 +1630,109 @@ def commonCompanyAdvanceSearch(request,*allifargs, **allifkwargs):
         error_context = {'error_message': ex}
         return render(request, 'allifmaalcommonapp/error/error.html', error_context)
 
+############################ Creating default values #####################....
+  
+# dont add pre-conditions here like the requirement for the profiles
+@login_required(login_url='allifmaalusersapp:userLoginPage') 
+def commonCreateDefaultValues(request,*allifargs,**allifkwargs):
+    title="Entity Registration"
+    try:
+        usrslg=request.user.customurlslug
+        usernmeslg=User.objects.filter(customurlslug=usrslg).first()
+        user_var_comp=request.user.usercompany
+        # create divisions, branches and department when the company is created to have profile for the new user....
+        main_division="Main Division"
+        main_division="Main Division"
+        main_branch="Main Branch"
+        main_department="Main Department"
+        allif_data=common_shared_data(request)
+        form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+        if request.method=='POST':
+            form=CommonAddCompanyDetailsForm(request.POST,request.FILES)
+            if form.is_valid():
+                sector=int(request.POST.get('sector'))
+                name=request.POST.get('company')
+                address=request.POST.get('address')
+                if CommonCompanyDetailsModel.objects.filter(company=name).exists():
+                    messages.info(request,'Sorry! A company with similar name exists. Please Choose another name.')
+                    return redirect('allifmaalcommonapp:commonAddnewEntity',allifusr=allif_data.get("logged_in_user"))
+                else:
+                    if name and sector!="":
+                        sectorselec=CommonSectorsModel.objects.filter(id=sector).first()
+                        obj=form.save(commit=False)
+                        obj.owner=usernmeslg
+                         # if the legal name changes, the slug will change and the company will lose all data related to it.
+                        obj.legalName=str(f'{name}+{address}')#important...used to generate company slug...dont change the legal name of the company
+                        obj.save()
+                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
+                        #set the user division, branch and department
+                        usernmeslg.usercompany=str(newcompny.companyslug)
+                        main_div=str(main_division+"-"+str(newcompny))
+                        main_bran=str(main_branch+"-"+str(newcompny))
+                        main_dept=str(main_department+"-"+str(newcompny))
+        
+                        usernmeslg.userdivision=str(main_div)
+                        usernmeslg.userbranch=str(main_bran)
+                        usernmeslg.userdepartment=str(main_dept)
+
+                            # since we need to create user profile next, create default division, branch and department
+                        new_division=CommonDivisionsModel(division=main_div,company=newcompny).save()
+                        new_branch=CommonBranchesModel(branch=main_bran,division=new_division,company=newcompny).save()
+                        new_department=CommonDepartmentsModel(department=main_dept,division=new_division,branch=new_branch,company=newcompny).save()
+
+                        # give the user all the permissions since they are the owner of this enttity
+                        usernmeslg.can_do_all=True
+                        usernmeslg.can_add=True
+                        usernmeslg.can_edit=True
+                        usernmeslg.can_view=True
+                        usernmeslg.can_delete=True
+                        usernmeslg.universal_delete=True
+                        usernmeslg.divisional_delete=True
+                        usernmeslg.branches_delete=True
+                        usernmeslg.departmental_delete=True
+                        usernmeslg.universal_access=True
+                        usernmeslg.divisional_access=True
+                        usernmeslg.branches_access=True
+                        usernmeslg.departmental_access=True
+                        usernmeslg.can_access_all=True
+                        usernmeslg.can_access_related=True
+                        usernmeslg.user_category="admin"
+                        usernmeslg.save()
+                        if sectorselec is not None:
+                            if sectorselec.name=="Sales":
+                                return redirect('allifmaalsalesapp:salesHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Healthcare":
+                                return redirect('allifmaalshaafiapp:shaafiHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Hospitality":
+                                return redirect('allifmaalhotelsapp:hotelsHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Education":
+                                return redirect('allifmaalilmapp:ilmHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Logistics":
+                                return redirect('allifmaallogisticsapp:logisticsHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Realestate":
+                                return redirect('allifmaalrealestateapp:realestateHome',allifusr=usrslg,allifslug=user_var_comp)
+                            elif sectorselec.name=="Services":
+                                return redirect('allifmaalservicesapp:servicesHome',allifusr=usrslg,allifslug=user_var_comp)
+                            else:
+                                form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+                        else:
+                            form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+                    else:
+                        form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+            else:
+                form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+
+        context={"form":form,
+                 "title":title,"user_var":usernmeslg,}
+        return render(request,'allifmaalcommonapp/companies/newentity.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 ##########################3 company scope ######################################
 
 @logged_in_user_must_have_profile

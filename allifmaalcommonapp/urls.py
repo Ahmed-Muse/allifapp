@@ -43,6 +43,9 @@ path('Advanced/Search/Results/<str:allifusr>/<str:allifslug>/', views.commonComp
 path('Viewing/Company/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Row/', views.commonShowClickedRowCompanyDetails, name="commonShowClickedRowCompanyDetails"),
 path('Want/To/Delete/Entity/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteCompany, name="commonWantToDeleteCompany"),
 
+################## create default values.... #####################
+path('Create/default/values/<str:allifusr>/<str:allifslug>/', views.commonCreateDefaultValues, name="commonCreateDefaultValues"),
+
 ########################3 company scopes ###################
 path('Company/Scopes/<str:allifusr>/<str:allifslug>/', views.commonAddCompanyScope, name="commonAddCompanyScope"),
 path('Edit/Company/Scope/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCompanyScope, name="commonEditCompanyScope"),

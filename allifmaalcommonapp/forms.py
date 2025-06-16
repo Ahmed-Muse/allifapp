@@ -888,14 +888,24 @@ class CommonCategoryAddForm(forms.ModelForm):
         self.fields['operation_year'].queryset =CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
         self.fields['operation_term'].queryset =CommonOperationYearTermsModel.objects.filter(company=allifmaalparameter)
 
-
 class CommonStockItemAddForm(forms.ModelForm):
     class Meta:
         model =CommonStocksModel
-        fields = ['category','total_units_sold','warehouse','suppliertaxrate','comments','taxrate','criticalnumber','partNumber','division','branch','department','description','buyingPrice', 'quantity','unitcost','unitPrice','inventory_account','income_account','expense_account','standardUnitCost']
+        fields = ['category','total_units_sold','weight','expires','item_state','normal_range',
+                  'length','height','width','units',
+                  'warehouse','suppliertaxrate',
+                  'comments','taxrate','criticalnumber','partNumber','division','branch','department','description','buyingPrice', 'quantity','unitcost','unitPrice','inventory_account','income_account','expense_account','standardUnitCost']
         widgets={
             'partNumber':forms.TextInput(attrs={'class':'form-control'}),
             'description':forms.TextInput(attrs={'class':'form-control'}),
+            'normal_range':forms.TextInput(attrs={'class':'form-control'}),
+            
+            'weight':forms.TextInput(attrs={'class':'form-control'}),
+            'height':forms.TextInput(attrs={'class':'form-control'}),
+            'length':forms.TextInput(attrs={'class':'form-control'}),
+            'width':forms.TextInput(attrs={'class':'form-control'}),
+            'expires' : DatePickerInput(attrs={'class':'form-control'}),
+            
             'comments':forms.TextInput(attrs={'class':'form-control'}),
             'quantity':forms.TextInput(attrs={'class':'form-control'}),
             'unitcost':forms.TextInput(attrs={'class':'form-control'}),
@@ -904,6 +914,8 @@ class CommonStockItemAddForm(forms.ModelForm):
             'criticalnumber':forms.TextInput(attrs={'class':'form-control'}),
             'standardUnitCost':forms.TextInput(attrs={'class':'form-control'}),
             'buyingPrice':forms.TextInput(attrs={'class':'form-control'}),
+            'item_state':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+            'units':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'warehouse':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'inventory_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'taxrate':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),

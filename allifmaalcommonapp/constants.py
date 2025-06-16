@@ -34,6 +34,23 @@ PROPERTY_UNIT_TYPES = [
     ]
 
 
+item_state = [
+    ('Tablet','Tablet'),
+    ('Syrub', 'Syrub'),
+    ('Powder','Powder'),
+    ('Liquid','Liquid'),
+     ('physical','physical'),
+      ('solid','gas')
+   
+    ]
+DrugUnits = [
+    ('Grams','Grams'),
+    ('Pieces', 'Pieces'),
+    ('Miligrams','Miligrams'),
+    ('Mililiters','Mililiters'),
+   
+    ]
+    
 
 
 
@@ -266,21 +283,6 @@ taxoptions = [
    
     ]
 
-DrugForm = [
-    ('Tablet','Tablet'),
-    ('Syrub', 'Syrub'),
-    ('Powder','Powder'),
-    ('Liquid','Liquid')
-   
-    ]
-DrugUnits = [
-    ('Grams','Grams'),
-    ('Pieces', 'Pieces'),
-    ('Miligrams','Miligrams'),
-    ('Mililiters','Mililiters'),
-   
-    ]
-    
 
 ledgerentryowner= [
     ('supplier','supplier'),
