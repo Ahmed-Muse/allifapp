@@ -44,13 +44,21 @@ path('Viewing/Company/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Row/', vie
 path('Want/To/Delete/Entity/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteCompany, name="commonWantToDeleteCompany"),
 
 ################## create default values.... #####################
-path('Create/default/values/<str:allifusr>/<str:allifslug>/', views.commonCreateDefaultValues, name="commonCreateDefaultValues"),
+
+path('Default/values/Creation/Area/<str:allifusr>/<str:allifslug>/', views.commonDefaultValues, name="commonDefaultValues"),
+path('Allifmaal/Initiate/Create/Default/value/s/Creation/Area/<str:allifusr>/<str:allifslug>/', views.commonAdminCreateDefaultValues, name="commonAdminCreateDefaultValues"),
+
+path('Create/default/Value/s/Default/Data/<str:allifusr>/<str:allifslug>/', views.commonCreateDefaultValues, name="commonCreateDefaultValues"),
+
+path('Delete/All/The/Default/s/value/s/<str:allifusr>/<str:allifslug>/', views.commonDeleteDefaultValues, name="commonDeleteDefaultValues"),
+
 
 ########################3 company scopes ###################
 path('Company/Scopes/<str:allifusr>/<str:allifslug>/', views.commonAddCompanyScope, name="commonAddCompanyScope"),
 path('Edit/Company/Scope/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCompanyScope, name="commonEditCompanyScope"),
 path('Delete/Company/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCompanyScope, name="commonDeleteCompanyScope"),
 path('Want/To/Delete/This/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteScope, name="commonWantToDeleteScope"),
+
 
 #########################33 divisions ########################
 path('Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonDivisions, name="commonDivisions"),

@@ -64,7 +64,7 @@ class CommonDocsFormatModel(models.Model):# this is the company  hospitality log
     notes=models.CharField(max_length=50,blank=True,null=True,default="Write Document Type")
     owner=models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="docformusr")
     date=models.DateField(blank=True,null=True,auto_now_add=True)
-   
+  
     def __str__(self):
         return self.name
 class CommonDataSortsModel(models.Model):# this is the company  hospitality logistics
@@ -128,7 +128,9 @@ class CommonDivisionsModel(models.Model):# this is the company
     created_date=models.DateField(null=True, blank=True)
     edit_date=models.DateField(null=True, blank=True)
     comments=models.TextField(max_length=100, help_text="Enter a brief description of the division",blank=True,null=True)
-    
+    class Meta:
+        # ensures that the same value is not repeated in the same company
+        unique_together = ('company', 'division')
     def __str__(self):
         return str(self.division)
     def save(self, *args, **kwargs):
@@ -157,6 +159,9 @@ class CommonBranchesModel(models.Model):# this is the company
     updatedon=models.DateTimeField(blank=True, null=True)
     created_date=models.DateField(null=True, blank=True)
     edit_date=models.DateField(null=True, blank=True)
+    class Meta:
+        # ensures that the same value is not repeated in the same company
+        unique_together = ('branch', 'division','company')
 
     def __str__(self):
         return str(self.branch)
@@ -186,7 +191,9 @@ class CommonDepartmentsModel(models.Model):
     departmentuid=models.CharField(null=True, blank=True, max_length=100,unique=True)
     departmentslug=models.SlugField(max_length=250, unique=True, blank=True, null=True)
     updatedon=models.DateTimeField(blank=True, null=True)
-    
+    class Meta:
+        # ensures that the same value is not repeated in the same company
+        unique_together = ('company', 'division','branch')
     def __str__(self):
         return str(self.department)
     
@@ -208,7 +215,7 @@ class CommonCompanyScopeModel(models.Model):# this is the company  hospitality l
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvscpe",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="scopebrcnh",on_delete=models.SET_NULL,null=True,blank=True)
     department= models.ForeignKey(CommonDepartmentsModel,related_name="scopdptm",on_delete=models.SET_NULL,null=True,blank=True)
-    
+  
     def __str__(self):
         return self.name
     
@@ -307,8 +314,7 @@ class CommonOperationYearsModel(models.Model):
     start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
     end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
     is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
-   
-    
+  
     def __str__(self):
         return str(self.year)
     
@@ -331,7 +337,6 @@ class CommonOperationYearTermsModel(models.Model):
     start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
     end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
     is_active=models.BooleanField(default=False,blank=True,null=True)
-    
    
     def __str__(self):
         return str(self.name)
@@ -387,7 +392,7 @@ class CommonCategoriesModel(models.Model):
 ###################3 comon codes ##############
 class CommonCodesModel(models.Model):
     """
-    this defines the codes used by various entities...
+    this defines the codes used by various entities.....
     sales...codes of various items...
     healthcare...codes of various places, items, staff, wards, rooms, equipment etc
     logistics...codes of airports, cities, items, passengers etc..
@@ -403,7 +408,7 @@ class CommonCodesModel(models.Model):
     code=models.CharField(max_length=100,blank=True,null=True)
     name=models.CharField(max_length=100,blank=True,null=True)
     description=models.CharField(max_length=50,blank=True,null=True)
-  
+    date=models.DateField(blank=True,null=True,auto_now_add=True)
     
     def __str__(self):
         return f"{self.code}: {self.name}:"

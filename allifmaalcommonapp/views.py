@@ -3,6 +3,19 @@ from.models import *
 from datetime import date
 from django.core.mail import send_mail
 from .allifutils import common_shared_data
+from django.db import IntegrityError, transaction # Import transaction for atomicity
+
+# --- Import the default data lists ---
+import logging
+logger=logging.getLogger(__name__)
+from .defaults_data import (
+    DEFAULT_COMPANY_SCOPES, DEFAULT_TAXES, DEFAULT_CURRENCIES,
+    DEFAULT_PAYMENT_TERMS, DEFAULT_UNITS_OF_MEASURE,
+    DEFAULT_OPERATION_YEARS, DEFAULT_OPERATION_YEAR_TERMS,
+    DEFAULT_CODES, DEFAULT_CATEGORIES,
+    DEFAULT_GL_ACCOUNT_CATEGORIES, DEFAULT_CHART_OF_ACCOUNTS
+)
+
 
 from twilio.rest import Client
 from.forms import *
@@ -1631,109 +1644,585 @@ def commonCompanyAdvanceSearch(request,*allifargs, **allifkwargs):
         return render(request, 'allifmaalcommonapp/error/error.html', error_context)
 
 ############################ Creating default values #####################....
-  
+
+@logged_in_user_must_have_profile
+@logged_in_user_can_delete
+@logged_in_user_is_admin 
+def commonDefaultValues(request,*allifargs,**allifkwargs):
+    try:
+        title="Default Values"
+        
+        context={
+       
+        "title":title,
+        }
+        return render(request,'allifmaalcommonapp/operations/defaults/defaults.html',context)
+
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)   
+
 # dont add pre-conditions here like the requirement for the profiles
 @login_required(login_url='allifmaalusersapp:userLoginPage') 
-def commonCreateDefaultValues(request,*allifargs,**allifkwargs):
-    title="Entity Registration"
+def commonAdminCreateDefaultValues(request,*allifargs,**allifkwargs):
     try:
-        usrslg=request.user.customurlslug
-        usernmeslg=User.objects.filter(customurlslug=usrslg).first()
-        user_var_comp=request.user.usercompany
-        # create divisions, branches and department when the company is created to have profile for the new user....
-        main_division="Main Division"
-        main_division="Main Division"
-        main_branch="Main Branch"
-        main_department="Main Department"
         allif_data=common_shared_data(request)
-        form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
-        if request.method=='POST':
-            form=CommonAddCompanyDetailsForm(request.POST,request.FILES)
-            if form.is_valid():
-                sector=int(request.POST.get('sector'))
-                name=request.POST.get('company')
-                address=request.POST.get('address')
-                if CommonCompanyDetailsModel.objects.filter(company=name).exists():
-                    messages.info(request,'Sorry! A company with similar name exists. Please Choose another name.')
-                    return redirect('allifmaalcommonapp:commonAddnewEntity',allifusr=allif_data.get("logged_in_user"))
-                else:
-                    if name and sector!="":
-                        sectorselec=CommonSectorsModel.objects.filter(id=sector).first()
-                        obj=form.save(commit=False)
-                        obj.owner=usernmeslg
-                         # if the legal name changes, the slug will change and the company will lose all data related to it.
-                        obj.legalName=str(f'{name}+{address}')#important...used to generate company slug...dont change the legal name of the company
-                        obj.save()
-                        newcompny=CommonCompanyDetailsModel.objects.filter(company=obj).first()
-                        #set the user division, branch and department
-                        usernmeslg.usercompany=str(newcompny.companyslug)
-                        main_div=str(main_division+"-"+str(newcompny))
-                        main_bran=str(main_branch+"-"+str(newcompny))
-                        main_dept=str(main_department+"-"+str(newcompny))
+    
+        doc_formats=[
+            {'name': 'pdf', 'notes': 'document formats'},
+           
+            ]
+        data_sorts=[
+            {'name': 'ascending', 'notes': 'data sort format'},
+            {'name': 'descending', 'notes': 'data sort format'},
+            ]
+        # --- END MODIFIED PART ---
         
-                        usernmeslg.userdivision=str(main_div)
-                        usernmeslg.userbranch=str(main_bran)
-                        usernmeslg.userdepartment=str(main_dept)
+        current_owner = allif_data.get("usernmeslg")
+        current_date=timezone.now().date()
+    
+        # Use a transaction to ensure all or none are saved cleanly
+        with transaction.atomic():
+            for data in doc_formats:
+                if data['name'] not in CommonDocsFormatModel.objects.filter(name=data['name']):
+                    CommonDocsFormatModel.objects.get_or_create(
+                    name=data['name'],
+                    notes=data['notes'],
+                    owner=current_owner,
+                    date=current_date,)
+            
+            for data in data_sorts:
+                if data['name'] not in CommonDataSortsModel.objects.filter(name=data['name']):
+                    CommonDataSortsModel.objects.get_or_create(
+                    name=data['name'],
+                    notes=data['notes'],
+                    owner=current_owner,
+                    date=current_date,)
+                else:
+                    return redirect('allifmaalcommonapp:commonDefaultValues',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-                            # since we need to create user profile next, create default division, branch and department
-                        new_division=CommonDivisionsModel(division=main_div,company=newcompny).save()
-                        new_branch=CommonBranchesModel(branch=main_bran,division=new_division,company=newcompny).save()
-                        new_department=CommonDepartmentsModel(department=main_dept,division=new_division,branch=new_branch,company=newcompny).save()
+        
+        return redirect('allifmaalcommonapp:commonDefaultValues',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-                        # give the user all the permissions since they are the owner of this enttity
-                        usernmeslg.can_do_all=True
-                        usernmeslg.can_add=True
-                        usernmeslg.can_edit=True
-                        usernmeslg.can_view=True
-                        usernmeslg.can_delete=True
-                        usernmeslg.universal_delete=True
-                        usernmeslg.divisional_delete=True
-                        usernmeslg.branches_delete=True
-                        usernmeslg.departmental_delete=True
-                        usernmeslg.universal_access=True
-                        usernmeslg.divisional_access=True
-                        usernmeslg.branches_access=True
-                        usernmeslg.departmental_access=True
-                        usernmeslg.can_access_all=True
-                        usernmeslg.can_access_related=True
-                        usernmeslg.user_category="admin"
-                        usernmeslg.save()
-                        if sectorselec is not None:
-                            if sectorselec.name=="Sales":
-                                return redirect('allifmaalsalesapp:salesHome',allifusr=usrslg,allifslug=user_var_comp)
-                            elif sectorselec.name=="Healthcare":
-                                return redirect('allifmaalshaafiapp:shaafiHome',allifusr=usrslg,allifslug=user_var_comp)
-                            elif sectorselec.name=="Hospitality":
-                                return redirect('allifmaalhotelsapp:hotelsHome',allifusr=usrslg,allifslug=user_var_comp)
-                            elif sectorselec.name=="Education":
-                                return redirect('allifmaalilmapp:ilmHome',allifusr=usrslg,allifslug=user_var_comp)
-                            elif sectorselec.name=="Logistics":
-                                return redirect('allifmaallogisticsapp:logisticsHome',allifusr=usrslg,allifslug=user_var_comp)
-                            elif sectorselec.name=="Realestate":
-                                return redirect('allifmaalrealestateapp:realestateHome',allifusr=usrslg,allifslug=user_var_comp)
-                            elif sectorselec.name=="Services":
-                                return redirect('allifmaalservicesapp:servicesHome',allifusr=usrslg,allifslug=user_var_comp)
-                            else:
-                                form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
-                        else:
-                            form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
-                    else:
-                        form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+
+@login_required(login_url='allifmaalusersapp:userLoginPage')
+def commonCreateDefaultValues(request, *allifargs, **allifkwargs):
+    try:
+        """
+        Generates ALL default setup values (Units, COA, Taxes, etc.) for a new company.
+        """
+        allif_data = common_shared_data(request)
+
+        # --- Retrieve common context data ---
+        current_owner = allif_data.get("usernmeslg")
+        current_company = allif_data.get("main_sbscrbr_entity")
+        current_branch = allif_data.get("logged_user_branch")
+        current_division = allif_data.get("logged_user_division")
+        current_department = allif_data.get("logged_user_department")
+        current_date = timezone.now().date() # For fields that don't have auto_now_add
+
+        # --- Initial Validation ---
+        if not current_company:
+            messages.error(request, "Company context missing. Cannot generate default values.")
+            logger.error("commonCreateDefaultValues: Attempted to run without a current_company in allif_data.")
+            return redirect('allifmaalcommonapp:commonHome', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+
+        # --- Initialize counters and error list for all sections ---
+        results = {
+            'company_scopes': {'created': 0, 'skipped': 0, 'errors': []},
+            'taxes': {'created': 0, 'skipped': 0, 'errors': []},
+            'supplier_taxes': {'created': 0, 'skipped': 0, 'errors': []},
+            'currencies': {'created': 0, 'skipped': 0, 'errors': []},
+            'payment_terms': {'created': 0, 'skipped': 0, 'errors': []},
+            'units': {'created': 0, 'skipped': 0, 'errors': []},
+            'operation_years': {'created': 0, 'skipped': 0, 'errors': []},
+            'operation_year_terms': {'created': 0, 'skipped': 0, 'errors': []},
+            'codes': {'created': 0, 'skipped': 0, 'errors': []},
+            'categories': {'created': 0, 'skipped': 0, 'errors': []},
+            'gl_categories': {'created': 0, 'skipped': 0, 'errors': []},
+            'chart_of_accounts': {'created': 0, 'skipped': 0, 'errors': []},
+            'overall_error': False
+        }
+
+        try:
+            # --- START: ONE SINGLE TRANSACTION FOR ALL DEFAULTS ---
+            with transaction.atomic():
+
+                # --- Process Company Scopes ---
+                for scope_data in DEFAULT_COMPANY_SCOPES:
+                    try:
+                        _, created = CommonCompanyScopeModel.objects.get_or_create(
+                            name=scope_data['name'],
+                            company=current_company,
+                            defaults={
+                                'comments': scope_data['comments'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date,
+                            }
+                        )
+                        if created: results['company_scopes']['created'] += 1
+                        else: results['company_scopes']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['company_scopes']['skipped'] += 1
+                        results['company_scopes']['errors'].append(f"Duplicate scope '{scope_data['name']}': {e}")
+                        logger.warning(f"IntegrityError for Company Scope '{scope_data['name']}': {e}")
+                    except Exception as e:
+                        results['company_scopes']['skipped'] += 1
+                        results['company_scopes']['errors'].append(f"Error creating scope '{scope_data['name']}': {e}")
+                        logger.exception(f"Unexpected error for Company Scope '{scope_data['name']}'.")
+
+                # --- Process Taxes ---
+                for tax_data in DEFAULT_TAXES:
+                    # CommonTaxParametersModel
+                    try:
+                        _, created = CommonTaxParametersModel.objects.get_or_create(
+                            taxname=tax_data['taxname'],
+                            company=current_company,
+                            defaults={
+                                'taxdescription': tax_data['taxdescription'],
+                                'taxrate': tax_data['taxrate'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date,
+                            }
+                        )
+                        if created: results['taxes']['created'] += 1
+                        else: results['taxes']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['taxes']['skipped'] += 1
+                        results['taxes']['errors'].append(f"Duplicate tax '{tax_data['taxname']}': {e}")
+                        logger.warning(f"IntegrityError for Tax '{tax_data['taxname']}': {e}")
+                    except Exception as e:
+                        results['taxes']['skipped'] += 1
+                        results['taxes']['errors'].append(f"Error creating tax '{tax_data['taxname']}': {e}")
+                        logger.exception(f"Unexpected error for Tax '{tax_data['taxname']}'.")
+
+                    # CommonSupplierTaxParametersModel
+                    try:
+                        _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                            taxname=tax_data['taxname'],
+                            company=current_company,
+                            defaults={
+                                'taxdescription': tax_data['taxdescription'],
+                                'taxrate': tax_data['taxrate'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date,
+                            }
+                        )
+                        if created: results['supplier_taxes']['created'] += 1
+                        else: results['supplier_taxes']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['supplier_taxes']['skipped'] += 1
+                        results['supplier_taxes']['errors'].append(f"Duplicate supplier tax '{tax_data['taxname']}': {e}")
+                        logger.warning(f"IntegrityError for Supplier Tax '{tax_data['taxname']}': {e}")
+                    except Exception as e:
+                        results['supplier_taxes']['skipped'] += 1
+                        results['supplier_taxes']['errors'].append(f"Error creating supplier tax '{tax_data['taxname']}': {e}")
+                        logger.exception(f"Unexpected error for Supplier Tax '{tax_data['taxname']}'.")
+
+                # --- Process Currencies ---
+                for currency_data in DEFAULT_CURRENCIES:
+                    try:
+                        _, created = CommonCurrenciesModel.objects.get_or_create(
+                            description=currency_data['description'],
+                            company=current_company,
+                            defaults={
+                                'comments': currency_data['comments'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date,
+                            }
+                        )
+                        if created: results['currencies']['created'] += 1
+                        else: results['currencies']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['currencies']['skipped'] += 1
+                        results['currencies']['errors'].append(f"Duplicate currency '{currency_data['description']}': {e}")
+                        logger.warning(f"IntegrityError for Currency '{currency_data['description']}': {e}")
+                    except Exception as e:
+                        results['currencies']['skipped'] += 1
+                        results['currencies']['errors'].append(f"Error creating currency '{currency_data['description']}': {e}")
+                        logger.exception(f"Unexpected error for Currency '{currency_data['description']}'.")
+
+                # --- Process Payment Terms ---
+                for term_data in DEFAULT_PAYMENT_TERMS:
+                    try:
+                        _, created = CommonPaymentTermsModel.objects.get_or_create(
+                            description=term_data['description'],
+                            company=current_company,
+                            defaults={
+                                'comments': term_data['comments'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date,
+                            }
+                        )
+                        if created: results['payment_terms']['created'] += 1
+                        else: results['payment_terms']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['payment_terms']['skipped'] += 1
+                        results['payment_terms']['errors'].append(f"Duplicate payment term '{term_data['description']}': {e}")
+                        logger.warning(f"IntegrityError for Payment Term '{term_data['description']}': {e}")
+                    except Exception as e:
+                        results['payment_terms']['skipped'] += 1
+                        results['payment_terms']['errors'].append(f"Error creating payment term '{term_data['description']}': {e}")
+                        logger.exception(f"Unexpected error for Payment Term '{term_data['description']}'.")
+
+                # --- Process Units ---
+                for unit_data in DEFAULT_UNITS_OF_MEASURE:
+                    try:
+                        _, created = CommonUnitsModel.objects.get_or_create(
+                            description=unit_data['description'],
+                            company=current_company,
+                            defaults={
+                                'comments': unit_data['comments'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date, # Only if 'date' is NOT auto_now_add=True
+                            }
+                        )
+                        if created: results['units']['created'] += 1
+                        else: results['units']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['units']['skipped'] += 1
+                        results['units']['errors'].append(f"Duplicate unit '{unit_data['description']}': {e}")
+                        logger.warning(f"IntegrityError for Unit '{unit_data['description']}': {e}")
+                    except Exception as e:
+                        results['units']['skipped'] += 1
+                        results['units']['errors'].append(f"Error creating unit '{unit_data['description']}': {e}")
+                        logger.exception(f"Unexpected error for Unit '{unit_data['description']}'.")
+
+                # --- Process Operation Years ---
+                operation_year_map = {} # To store mapping for terms
+                for year_data in DEFAULT_OPERATION_YEARS:
+                    try:
+                        year_instance, created = CommonOperationYearsModel.objects.get_or_create(
+                            year=year_data['year'], # Assuming 'year' is the unique identifier field
+                            company=current_company,
+                            defaults={
+                                'comments': year_data['comments'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date,
+                                'start_date': current_date, # Assuming default start/end dates
+                                'end_date': current_date,
+                            }
+                        )
+                        operation_year_map[year_data['year']] = year_instance
+                        if created: results['operation_years']['created'] += 1
+                        else: results['operation_years']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['operation_years']['skipped'] += 1
+                        results['operation_years']['errors'].append(f"Duplicate year '{year_data['year']}': {e}")
+                        logger.warning(f"IntegrityError for Operation Year '{year_data['year']}': {e}")
+                        try: # Try to get the existing one to link future terms
+                            operation_year_map[year_data['year']] = CommonOperationYearsModel.objects.get(
+                                year=year_data['year'], company=current_company
+                            )
+                        except CommonOperationYearsModel.DoesNotExist:
+                            logger.error(f"Failed to retrieve existing Operation Year '{year_data['year']}' after IntegrityError.")
+                            results['operation_years']['errors'].append(f"Failed to link existing Operation Year: {year_data['year']}")
+                    except Exception as e:
+                        results['operation_years']['skipped'] += 1
+                        results['operation_years']['errors'].append(f"Error creating year '{year_data['year']}': {e}")
+                        logger.exception(f"Unexpected error for Operation Year '{year_data['year']}'.")
+
+                # --- Process Operation Year Terms ---
+                for term_data in DEFAULT_OPERATION_YEAR_TERMS:
+                    parent_year = operation_year_map.get(term_data['operation_year_name'])
+                    if not parent_year:
+                        results['operation_year_terms']['skipped'] += 1
+                        results['operation_year_terms']['errors'].append(f"Missing parent year '{term_data['operation_year_name']}' for term '{term_data['name']}'.")
+                        logger.error(f"Skipping term '{term_data['name']}' due to missing parent year '{term_data['operation_year_name']}'.")
+                        continue
+                    try:
+                        _, created = CommonOperationYearTermsModel.objects.get_or_create(
+                            name=term_data['name'], # Assuming 'name' is the unique field for terms within a year
+                            operation_year=parent_year, # Link to the actual year instance
+                            company=current_company,
+                            defaults={
+                                'comments': term_data['comments'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date,
+                                'start_date': current_date, # Assuming default start/end dates
+                                'end_date': current_date,
+                            }
+                        )
+                        if created: results['operation_year_terms']['created'] += 1
+                        else: results['operation_year_terms']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['operation_year_terms']['skipped'] += 1
+                        results['operation_year_terms']['errors'].append(f"Duplicate term '{term_data['name']}' for year '{term_data['operation_year_name']}': {e}")
+                        logger.warning(f"IntegrityError for Operation Year Term '{term_data['name']}': {e}")
+                    except Exception as e:
+                        results['operation_year_terms']['skipped'] += 1
+                        results['operation_year_terms']['errors'].append(f"Error creating term '{term_data['name']}' for year '{term_data['operation_year_name']}': {e}")
+                        logger.exception(f"Unexpected error for Operation Year Term '{term_data['name']}'.")
+
+                # --- Process Codes ---
+                for code_data in DEFAULT_CODES:
+                    try:
+                        _, created = CommonCodesModel.objects.get_or_create(
+                            code=code_data['code'], # Assuming 'code' is the unique identifier field
+                            company=current_company,
+                            defaults={
+                                'name': code_data['name'],
+                                'description': code_data['description'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                # 'date' not included if auto_now_add=True
+                            }
+                        )
+                        if created: results['codes']['created'] += 1
+                        else: results['codes']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['codes']['skipped'] += 1
+                        results['codes']['errors'].append(f"Duplicate code '{code_data['code']}': {e}")
+                        logger.warning(f"IntegrityError for Code '{code_data['code']}': {e}")
+                    except Exception as e:
+                        results['codes']['skipped'] += 1
+                        results['codes']['errors'].append(f"Error creating code '{code_data['code']}': {e}")
+                        logger.exception(f"Unexpected error for Code '{code_data['code']}'.")
+
+                # --- Process Categories ---
+                for cat_data in DEFAULT_CATEGORIES:
+                    try:
+                        _, created = CommonCategoriesModel.objects.get_or_create(
+                            name=cat_data['name'], # Assuming 'name' is the unique identifier field
+                            company=current_company,
+                            defaults={
+                                'description': cat_data['description'],
+                                'code': cat_data['code'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date,
+                                'start_date': current_date, # Assuming default start/end dates
+                                'end_date': current_date,
+                            }
+                        )
+                        if created: results['categories']['created'] += 1
+                        else: results['categories']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['categories']['skipped'] += 1
+                        results['categories']['errors'].append(f"Duplicate category '{cat_data['name']}': {e}")
+                        logger.warning(f"IntegrityError for Category '{cat_data['name']}': {e}")
+                    except Exception as e:
+                        results['categories']['skipped'] += 1
+                        results['categories']['errors'].append(f"Error creating category '{cat_data['name']}': {e}")
+                        logger.exception(f"Unexpected error for Category '{cat_data['name']}'.")
+
+                # --- Process GL Account Categories (Phase 1 of COA) ---
+                gl_category_objects_map = {} # To store mapping for individual accounts
+                for gl_cat_data in DEFAULT_GL_ACCOUNT_CATEGORIES:
+                    try:
+                        gl_category_instance, created = CommonGeneralLedgersModel.objects.get_or_create(
+                            description=gl_cat_data['description'], # Lookup by 'description' which is the category name
+                            company=current_company,
+                            #defaults={'type': gl_cat_data['type']} # Pass 'type' as a default
+                        )
+                        logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+                        gl_category_objects_map[gl_cat_data['description']] = gl_category_instance
+                        if created: results['gl_categories']['created'] += 1
+                        else: results['gl_categories']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['gl_categories']['skipped'] += 1
+                        results['gl_categories']['errors'].append(f"Duplicate GL Category: {gl_cat_data['description']}")
+                        logger.warning(f"IntegrityError for GL Category '{gl_cat_data['description']}': {e}")
+                        # Attempt to get the existing category to link future accounts
+                        try:
+                            gl_category_objects_map[gl_cat_data['description']] = CommonGeneralLedgersModel.objects.get(
+                                description=gl_cat_data['description'], company=current_company
+                            )
+                        except CommonGeneralLedgersModel.DoesNotExist:
+                            logger.error(f"Failed to retrieve existing GL Category '{gl_cat_data['description']}' after IntegrityError.")
+                            results['gl_categories']['errors'].append(f"Failed to link existing GL Category: {gl_cat_data['description']}")
+                    except Exception as e:
+                        results['gl_categories']['skipped'] += 1
+                        results['gl_categories']['errors'].append(f"Error creating GL Category {gl_cat_data['description']}: {e}")
+                        logger.exception(f"Unexpected error for GL Category '{gl_cat_data['description']}'.")
+
+                # --- Process Chart of Accounts (Ledger Accounts) ---
+                for account_data in DEFAULT_CHART_OF_ACCOUNTS:
+                    category_name = account_data['category_name']
+                    target_category = gl_category_objects_map.get(category_name)
+
+                    if not target_category:
+                        results['chart_of_accounts']['skipped'] += 1
+                        results['chart_of_accounts']['errors'].append(f"Missing GL Category '{category_name}' for account {account_data['description']}. Skipping.")
+                        logger.error(f"Skipping account '{account_data['description']}' due to missing GL category '{category_name}'.")
+                        continue # Skip this account if its category isn't available
+
+                    try:
+                        # Assuming CommonLedgerAccountModel has a 'code' field that is unique_together with 'company'
+                        _, created = CommonChartofAccountsModel.objects.get_or_create(
+                            code=account_data['code'],
+                            company=current_company,
+                            defaults={
+                                'description': account_data['description'],
+                                'category': target_category, # Link to the actual Django Category object
+                                'comments': account_data['comments'],
+                                'owner': current_owner,
+                                'branch': current_branch,
+                                'division': current_division,
+                                'department': current_department,
+                                'date': current_date,
+                                'balance': 0.00, # Initial balance, assuming the model can handle it
+                            }
+                        )
+                        if created: results['chart_of_accounts']['created'] += 1
+                        else: results['chart_of_accounts']['skipped'] += 1
+                    except IntegrityError as e:
+                        results['chart_of_accounts']['skipped'] += 1
+                        results['chart_of_accounts']['errors'].append(f"Duplicate Account Code '{account_data['code']}': {e}")
+                        logger.warning(f"IntegrityError for Account '{account_data['code']}': {e}")
+                    except Exception as e:
+                        results['chart_of_accounts']['skipped'] += 1
+                        results['chart_of_accounts']['errors'].append(f"Error creating account '{account_data['code']}': {e}")
+                        logger.exception(f"Unexpected error for Account '{account_data['code']}'.")
+
+            # --- END: ONE SINGLE TRANSACTION FOR ALL DEFAULTS ---
+
+            # --- Final User Feedback ---
+            total_errors = sum(len(res['errors']) for key, res in results.items() if isinstance(res, dict))
+            total_created = sum(res['created'] for key, res in results.items() if isinstance(res, dict))
+            total_skipped = sum(res['skipped'] for key, res in results.items() if isinstance(res, dict))
+
+            if total_errors > 0:
+                messages.warning(request, f"Default setup completed with {total_errors} issues. Created: {total_created}, Skipped: {total_skipped}. Please check system logs for details.")
+                logger.error(f"Default setup for {current_company.company} completed with errors. Results: {results}")
+            elif total_created > 0:
+                messages.success(request, f"Default setup completed successfully! Created {total_created} entries. Skipped {total_skipped} existing entries.")
+                logger.info(f"Default setup for {current_company.company} completed successfully. Results: {results}")
             else:
-                form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
+                messages.info(request, "All default settings already exist for this company. No new entries were generated.")
+                logger.info(f"Default setup for {current_company.company}: All entries already existed. Results: {results}")
 
-        context={"form":form,
-                 "title":title,"user_var":usernmeslg,}
-        return render(request,'allifmaalcommonapp/companies/newentity.html',context)
+        except Exception as outer_e:
+            # This catches any critical errors that caused the entire transaction to fail and roll back
+            messages.error(request, f"A critical error prevented the default setup. Please try again. ({outer_e})")
+            logger.critical(f"CRITICAL ERROR (Full Default Setup). Transaction rolled back for {current_company.name}: {outer_e}", exc_info=True)
+            results['overall_error'] = True # Mark that an overall error occurred
+
+        return redirect('allifmaalcommonapp:commonHome', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 ##########################3 company scope ######################################
+
+@logged_in_user_must_have_profile
+@logged_in_user_can_add 
+@subscriber_company_status
+def commonDeleteDefaultValues(request,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        """
+        Deletes all associated data for a specific company across multiple models.
+        This function should be called from a view or management command.
+        """
+        company= allif_data.get("main_sbscrbr_entity")
+
+        company_name = allif_data.get("main_sbscrbr_entity")
+
+        # --- Initialize counters for feedback ---
+        deleted_counts = {}
+        skipped_models = []
+        error_messages = []
+
+    
+        # --- Use a single transaction for all deletions ---
+        with transaction.atomic():
+          
+            count, _ = CommonGeneralLedgersModel.objects.filter(company=company).delete()
+            deleted_counts['CommonGeneralLedgersModel'] = count
+            logger.info(f"Deleted {count} CommonGeneralLedgersModel entries for {company_name}.")
+            
+            count, _ = CommonChartofAccountsModel.objects.filter(company=company).delete()
+            deleted_counts['CommonChartofAccountsModel'] = count
+            logger.info(f"Deleted {count} CommonChartofAccountsModel entries for {company_name}.")
+
+            # 3. Delete Units
+            # Be careful if CommonUnitsModel has PROTECT and is_system_default logic.
+            # You might need to exclude the system default unit here.
+            # Example: count, _ = CommonUnitsModel.objects.filter(company=company, is_system_default=False).delete()
+            count, _ = CommonUnitsModel.objects.filter(company=company).delete()
+            deleted_counts['CommonUnitsModel'] = count
+            logger.info(f"Deleted {count} CommonUnitsModel entries for {company_name}.")
+
+            # 4. Delete Company Scopes
+            count, _ = CommonCompanyScopeModel.objects.filter(company=company).delete()
+            deleted_counts['CommonCompanyScopeModel'] = count
+            logger.info(f"Deleted {count} CommonCompanyScopeModel entries for {company_name}.")
+
+            # 5. Delete Tax Parameters
+            count, _ = CommonTaxParametersModel.objects.filter(company=company).delete()
+            deleted_counts['CommonTaxParametersModel'] = count
+            logger.info(f"Deleted {count} CommonTaxParametersModel entries for {company_name}.")
+
+            count, _ = CommonSupplierTaxParametersModel.objects.filter(company=company).delete()
+            deleted_counts['CommonSupplierTaxParametersModel'] = count
+            logger.info(f"Deleted {count} CommonSupplierTaxParametersModel entries for {company_name}.")
+
+            # 6. Delete Currencies
+            count, _ = CommonCurrenciesModel.objects.filter(company=company).delete()
+            deleted_counts['CommonCurrenciesModel'] = count
+            logger.info(f"Deleted {count} CommonCurrenciesModel entries for {company_name}.")
+
+            # 7. Delete Payment Terms
+            count, _ = CommonPaymentTermsModel.objects.filter(company=company).delete()
+            deleted_counts['CommonPaymentTermsModel'] = count
+            logger.info(f"Deleted {count} CommonPaymentTermsModel entries for {company_name}.")
+
+            # 8. Delete Operation Year Terms (children of CommonOperationYearsModel)
+            count, _ = CommonOperationYearTermsModel.objects.filter(company=company).delete()
+            deleted_counts['CommonOperationYearTermsModel'] = count
+            logger.info(f"Deleted {count} CommonOperationYearTermsModel entries for {company_name}.")
+
+            # 9. Delete Operation Years
+            count, _ = CommonOperationYearsModel.objects.filter(company=company).delete()
+            deleted_counts['CommonOperationYearsModel'] = count
+            logger.info(f"Deleted {count} CommonOperationYearsModel entries for {company_name}.")
+
+            # 10. Delete Codes
+            count, _ = CommonCodesModel.objects.filter(company=company).delete()
+            deleted_counts['CommonCodesModel'] = count
+            logger.info(f"Deleted {count} CommonCodesModel entries for {company_name}.")
+
+            # 11. Delete Categories
+            count, _ = CommonCategoriesModel.objects.filter(company=company).delete()
+            deleted_counts['CommonCategoriesModel'] = count
+            logger.info(f"Deleted {count} CommonCategoriesModel entries for {company_name}.")
+
+            return redirect('allifmaalcommonapp:commonHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 @logged_in_user_must_have_profile
 @logged_in_user_can_add 
@@ -3469,6 +3958,7 @@ def CommonSupplierDeleteTaxParameter(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_is_admin
 def commonGeneralLedgers(request,allifusr,allifslug,*allifargs,**allifkwargs):
     title="General Ledger Accounts"
+    
     try:
         allif_data=common_shared_data(request)
         if allif_data.get("logged_in_user_has_universal_access")==True:
