@@ -12,10 +12,10 @@
   <div class="row mt-12" ><!--start....header row-->
   <div class="col-md-12"><!--start....header column-->
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Add Items {{allifquery}}:</a>
+
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     <a href="{% url 'allifmaalcommonapp:commonAddShipmentItems' allifquery.id user_var glblslug %}">Refresh</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddTransitDetails' allifquery.id user_var glblslug %}">Quote Details</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddTransitDetails' allifquery.id user_var glblslug %}">Shipment Details</a>
     
     <a href="{% url 'allifmaalcommonapp:commonTransits' user_var glblslug %}">Shipments</a>
 
@@ -31,9 +31,8 @@
 
 <div class="allifmaincontainer">
 
-
-
   <div class="row mt-12"> <!--start....table row-->
+      <div class="table-details-content-description">{{allifquery}} Shipment Items</div>
     <div class="col-md-12"><!--start of the first row body-->
       <div class="allif-form-container">
       
@@ -45,15 +44,12 @@
               <tr class="allif-table-header-row">
                
                 <td>Item Description</td>
+                <td>Details</td>
                 <td>Quantity</td>
-                <td>Discount</td>
-                <td>Part No.</td>
-                <td>In Stock</td>
-                <td>Unit Cost</td>
-                <td>Unit Price</td>
-                <td>Amount</td>
-             
-             
+                <td>Measured In</td>
+                <td>Origin</td>
+                <td>Destination</td>
+              
               <td>Navigate</td>
               
               <td> . . . </td>
@@ -64,18 +60,12 @@
              
               {% for item in allifqueryset %} 
               <tr data-id="{{item.id}}">
-              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.shipment.id user_var glblslug %}">{{item.items}}</a></td>
-            
-          <td>{{item.quantity|floatformat:2|intcomma}}</td>
-          <td>{{item.discount|floatformat:2|intcomma}}%</td>
-          <td> {{item.description.partNumber}}</td>
-         
-          <td>{{item.description.quantity|floatformat:2|intcomma}}</td>
-          <td>{{item.description.unitcost|floatformat:2|intcomma}}</td>
-          <td>{{item.description.unitPrice|floatformat:2|intcomma}}</td>
-          
-          <td>{{item.quote_selling_price|floatformat:2|intcomma}}</td>
-          
+              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonShipmentItemDetails' item.id user_var glblslug %}">{{item.items}}</a></td>
+              <td>{{item.details}}</td>
+              <td>{{item.quantity|floatformat:2|intcomma}}</td>
+              <td>{{item.unit_of_measure}}</td>
+              <td>{{item.origin}}</td>
+              <td>{{item.destination}}</td>
          
                <td>
                 <div class="dropdown allifmaal-content-dropdown">
@@ -101,63 +91,6 @@
           </tr>
           {% endfor %}
 
-           <tr>
-                <form method='POST' action=''>{% csrf_token %}
-                 
-                  <td id="allif-table-inline-form">{{form.items}}</td>
-                  <td id="allif-table-inline-form">{{form.quantity}}</td>
-                  <td id="allif-table-inline-form">{{form.discount}}</td>
-                  <td id="allif-table-inline-form"> <input type="submit" value='Add' class="btn btn-success allifmaal-submit-btn"></td>
-                  <td id="allif-table-inline-form">_______________</td>
-                  <td id="allif-table-inline-form">_______________</td>
-                  <td id="allif-table-inline-form">_______________</td>
-                  <td id="allif-table-inline-form" colspan="5">_______________</td>
-                
-                
-                
-                </form>
-                </tr>
-
-          <tr>
-            <td id="allif-table-sums-section" colspan="3"></td>
-            <td id="allif-table-sums-section" colspan="4">Sub Total</td>
-            <td id="allif-table-sums-section" colspan="2">{{allifquery.total|floatformat:2|intcomma}}</td>
-            <td id="allif-table-sums-section" colspan="3"></td>
-            
-          </tr>
-  
-          <tr>
-            <td id="allif-table-sums-section" colspan="3"></td>
-            <td id="allif-table-sums-section" colspan="4">Discount</td>
-            <td id="allif-table-sums-section" colspan="2">{{allifquery.discountAmount|floatformat:2|intcomma}}</td>
-            <td id="allif-table-sums-section" colspan="3"></td>
-            
-            </tr>
-            <tr>
-            <td id="allif-table-sums-section" colspan="3"></td>
-              <td id="allif-table-sums-section" colspan="4">Total</td>
-              <td id="allif-table-sums-section" colspan="2">{{allifquery.totalwithdiscount|floatformat:2|intcomma}}</td>
-              <td id="allif-table-sums-section" colspan="3"></td>
-              
-              </tr>
-  
-            
-            <tr>
-             <td id="allif-table-sums-section" colspan="3"></td>
-              <td id="allif-table-sums-section" colspan="4"> Add Tax {{allifquery.salestax.taxrate}}%</td>
-              <td id="allif-table-sums-section" colspan="2">{{allifquery.taxAmount|floatformat:2|intcomma}}</td>
-              <td id="allif-table-sums-section" colspan="3"></td>
-              
-              </tr>
-          
-                <tr>
-                 <td id="allif-table-sums-section" colspan="3"></td>
-                  <td id="allif-table-sums-section" colspan="4"><strong>Grand Total {{allifquery.currency}}</strong></td>
-                  <td id="allif-table-sums-section" colspan="2"><strong>{{allifquery.grandtotal|floatformat:2|intcomma}}</strong></td>
-                  <td id="allif-table-sums-section" colspan="4"></td>
-                  
-                  </tr>
-          
          
             </tbody>
           </table>
@@ -175,6 +108,174 @@
         </div>
             </div><!--end of first row body....-->
 
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">Add/Edit {{allifquery}} Shipment Details</div>
+  <form method='POST' action=''>{% csrf_token %}
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+
+             <tr>
+            <td class="allif-fix-table-col">Consigner</td>
+            <td>{{form.consigner}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Consignee</td>
+            <td>{{form.consignee}}</td>
+        
+            </tr>
+            
+          <tr>
+            <td class="allif-fix-table-col">Items</td>
+            <td>{{form.items}}</td>
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">Quantity</td>
+            <td>{{form.quantity}}</td>
+            </tr>
+             
+             <tr>
+            <td class="allif-fix-table-col">Details</td>
+            <td>{{form.details}}</td>
+        
+            </tr>
+          
+             <tr>
+            <td class="allif-fix-table-col">Item Value</td>
+            <td>{{form.value}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Chargeable Rate</td>
+            <td>{{form.rate}}</td>
+        
+            </tr>
+             <tr>
+              <td class="allif-fix-table-col">Origin</td>
+              <td>{{form.origin}}</td>
+              </tr>
+            <tr>
+              <td class="allif-fix-table-col">Destination</td>
+              <td>{{form.destination}}</td>
+              
+             </tr>
+          
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+       <tr>
+            <td class="allif-fix-table-col">Weight</td>
+            <td>{{form.weight}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Length</td>
+            <td>{{form.length}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Width</td>
+            <td>{{form.width}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Height</td>
+            <td>{{form.height}}</td>
+        
+            </tr>
+           
+             
+               <tr>
+                <td class="allif-fix-table-col">Status</td>
+                <td>{{form.status}}</td>
+                </tr>
+              
+                 <tr>
+                <td class="allif-fix-table-col">Dispatched By</td>
+                <td>{{form.dispatched_by}}</td>
+                </tr>
+               <tr>
+            <td class="allif-fix-table-col">Measured In</td>
+            <td>{{form.unit_of_measure}}</td>
+            </tr>
+         
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+         
+           <tr>
+            <td class="allif-fix-table-col">Received On</td>
+            <td>{{form.received}}</td>
+        
+            </tr>
+            <tr>
+          <td class="allif-fix-table-col">Expected</td>
+          <td>{{form.expected}}</td>
+          </tr>
+              <tr>
+                <td class="allif-fix-table-col">Expires</td>
+                <td>{{form.expires}}</td>
+                </tr>
+
+          <tr>
+          <td class="allif-fix-table-col">Delivered On</td>
+          <td>{{form.delivered_on}}</td>
+          </tr>
+
+        <tr>
+        <td class="allif-fix-table-col">Comments</td>
+        <td>{{form.comments}}</td>
+        </tr>
+
+        <tr>
+          <td class="allif-fix-table-col">Action</td>
+          <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+      
+          </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
+</div><!--end....table row-->
+</div>
+</form>
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+<hr>
 
   
 </div><!--end of main container of the page-->

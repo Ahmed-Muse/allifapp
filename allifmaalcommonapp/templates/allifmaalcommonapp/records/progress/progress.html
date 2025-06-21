@@ -15,12 +15,11 @@
   <div class="col-md-12"><!--start....header column-->
   
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Warehouses/Stores:</a>
+    
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Warehouses</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddSpace' user_var glblslug %}">Add New Space</a>
-  <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
-   <a href="{% url 'allifmaalcommonapp:commonAddProgress' user_var glblslug %}">New Progress Record</a>
+    <a href="{% url 'allifmaalcommonapp:commonProgress' allifquery.id user_var glblslug %}">Progress Records</a>
+  
+   <a href="{% url 'allifmaalcommonapp:commonAddProgress' allifquery.id user_var glblslug %}">Add New Progress</a>
   </div>
   
       </div><!--end....header column-->
@@ -31,7 +30,7 @@
 
 <div class="allifmaincontainer">  
 <div class="row mt-12"> <!--start....table row-->
-
+ <div class="table-details-content-description">Progress Records for {{allifquery}} </div>
   <div class="col-md-12"> <!--start....table column-->
 
     <div class="allif-scroll-table">
@@ -39,9 +38,9 @@
       <table class="table table-layout">
         <thead>
           <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Space</td>
-        
-          <td>Asset</td>
+          <td class="allif-fix-table-col">Progress Description</td>
+        <td>Recorded By</td>
+          <td>Recorded On</td>
           <td>Date</td>
        
           <td>Navigate</td>
@@ -56,13 +55,15 @@
           {% for item in allifqueryset %} 
           <tr data-id="{{item.id}}">
           <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonProgressDetails' item.id user_var glblslug %}">{{item.description}}</a></td>
-         
+          <td>
+            {{item.owner}}
+           </td>
             <td>
-            {{item.asset}}
+            {{item.recorded_on|date:'d/m/Y'}}
            </td>
           
            <td>
-            {{item.date}}
+            {{item.date|date:'d/m/Y'}}
            </td>
           
            <td>
@@ -76,7 +77,7 @@
             </div>
             <div class="dropdown allif-confirm-action">
               
-              <a href="{% url 'allifmaalcommonapp:commonProgress' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+              <a href="{% url 'allifmaalcommonapp:commonProgress' item.trans_number.id user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
               <a href="{% url 'allifmaalcommonapp:commonDeleteProgress' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
             </div>
   

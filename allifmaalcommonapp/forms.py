@@ -703,17 +703,17 @@ class CommonAddSpaceBookingItemForm(forms.ModelForm):
     class Meta:
         #mydefault=TaxParametersModel.objects.all().first().taxname
         model =CommonSpaceBookingItemsModel
-        fields = ['space']
+        fields = ['space','space_unit','quantity']
         widgets={
             'space':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-             #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
-            #'quantity':forms.TextInput(attrs={'class':'form-control'}),
-           
+            'space_unit':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+            'quantity':forms.TextInput(attrs={'class':'form-control'}),
              
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super(CommonAddSpaceBookingItemForm, self).__init__(*args, **kwargs)
         self.fields['space'].queryset = CommonSpacesModel.objects.filter(company=allifmaalparameter)
+        self.fields['space_unit'].queryset = CommonSpaceUnitsModel.objects.filter(company=allifmaalparameter)
        
 
 
@@ -1286,16 +1286,15 @@ class CommonAddSalaryForm(forms.ModelForm): #the forms here is the one imported 
 class CommonAddTransactionDetailsForm(forms.ModelForm):
     class Meta:
         model=CommonTransactionsModel
-        fields = ['trans_number','description','status','end_date_time','diagnosis','encounter_type','main_complaints','customer','employee_in_charge','start_date','end_date',
-                  'is_current','operation_year','operation_term',
+        fields = ['description','customer','payment_mode','employee_in_charge','start_date','end_date',
+                  'operation_year','operation_term',
                   'name','code','division','branch','department','comments']
         widgets={
-            'trans_number':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
             'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'diagnosis':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'encounter_type':forms.Select(attrs={'class':'form-control','placeholder':''}),
+           
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'main_complaints':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -1304,12 +1303,13 @@ class CommonAddTransactionDetailsForm(forms.ModelForm):
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'code':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'payment_mode':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
             'end_date':DatePickerInput(attrs={'class':'form-control'}),
             'end_date_time':DatePickerInput(attrs={'class':'form-control'}),
             'start_date':DatePickerInput(attrs={'class':'form-control'}),
             'operation_term':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
             'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
            
@@ -1320,6 +1320,7 @@ class CommonAddTransactionDetailsForm(forms.ModelForm):
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['payment_mode'].queryset = CommonPaymentTermsModel.objects.filter(company=allifmaalparameter)
         
         self.fields['operation_year'].queryset =CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
         self.fields['operation_term'].queryset =CommonOperationYearTermsModel.objects.filter(company=allifmaalparameter)
@@ -1429,21 +1430,27 @@ class CommonAddTasksForm(forms.ModelForm): #the forms here is the one imported u
 class CommonAddTransitDetailsForm(forms.ModelForm):
     class Meta:
         model=CommonTransitModel
-        fields = ['carrier','shipment_number','description','status','expected','origin','via',
+        fields = ['carrier','shipment_number','received_on','description','status','expected','origin','via',
                   'dispatched_by','customer','received_by',
-                  'destination','delivery_confirmed_by_employee',
+                  'destination','delivery_confirmed_by_employee','delivery_confirmation_date_time',
                   'exit_warehouse','supplier','delivery_confirmed_by_customer','delivery_notes',
-                  'notes','entry_warehouse','division','branch','department','comments',
-                  'unit_of_measure']
+                  'entry_warehouse','division','branch','department','comments',]
         widgets={
+            'delivery_notes':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'delivery_confirmed_by_employee':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'delivery_confirmed_by_customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'dispatched_by':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'received_by':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
+            'carrier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'shipment_number':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'origin':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'entry_warehouse':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'exit_warehouse':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'supplier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'unit_of_measure':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'via':forms.Select(attrs={'class':'form-control','placeholder':''}),
+           
+            'via':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'main_complaints':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -1452,18 +1459,14 @@ class CommonAddTransitDetailsForm(forms.ModelForm):
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'employee_in_charge':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'destination':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'notes':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
             'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
             'expected':DatePickerInput(attrs={'class':'form-control'}),
-            'entry_date':DatePickerInput(attrs={'class':'form-control'}),
-            'start_date':DatePickerInput(attrs={'class':'form-control'}),
-            'operation_term':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-           
-           
-        
+            
+            'received_on':DatePickerInput(attrs={'class':'form-control'}),
+            'delivery_confirmation_date_time':DatePickerInput(attrs={'class':'form-control'}),
+         
         }
     def __init__(self,allifmaalparameter, *args, **kwargs):
         super(CommonAddTransitDetailsForm, self).__init__(*args, **kwargs)
@@ -1475,20 +1478,51 @@ class CommonAddTransitDetailsForm(forms.ModelForm):
         self.fields['entry_warehouse'].queryset =CommonSpacesModel.objects.filter(company=allifmaalparameter)
         self.fields['supplier'].queryset =CommonSuppliersModel.objects.filter(company=allifmaalparameter)
 
+   
 class CommonAddTransitItemsForm(forms.ModelForm):
     class Meta:
-        model =CommonTransitItemsModel
-        fields = ['quantity','items']
+        model=CommonTransitItemsModel
+        fields = ['quantity','items','unit_of_measure','expected','dispatched_by','expires','delivered_on',
+                  'consigner','consignee','details','weight','length','width','height','received','value','rate',
+                  'status','destination','origin','comments','department','branch','division',
+                  ]
 
         widgets={
+            'details':forms.TextInput(attrs={'class':'form-control'}),
+            'origin':forms.TextInput(attrs={'class':'form-control'}),
+            'weight':forms.TextInput(attrs={'class':'form-control'}),
+            'length':forms.TextInput(attrs={'class':'form-control'}),
+            'width':forms.TextInput(attrs={'class':'form-control'}),
+            'height':forms.TextInput(attrs={'class':'form-control'}),
+            'value':forms.TextInput(attrs={'class':'form-control'}),
+            'rate':forms.TextInput(attrs={'class':'form-control'}),
+            'destination':forms.TextInput(attrs={'class':'form-control'}),
+            'comments':forms.TextInput(attrs={'class':'form-control'}),
+            'received':DatePickerInput(attrs={'class':'form-control'}),
+            'expires':DatePickerInput(attrs={'class':'form-control'}),
+            'expected':DatePickerInput(attrs={'class':'form-control'}),
+            'delivered_on':DatePickerInput(attrs={'class':'form-control'}),
+            'consigner':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'consignee':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'dispatched_by':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'quantity':forms.TextInput(attrs={'class':'form-control'}),
-           
-           
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           'unit_of_measure':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super(CommonAddTransitItemsForm, self).__init__(*args, **kwargs)
         self.fields['items'].queryset =CommonStocksModel.objects.filter(company=allifmaalparameter)
+        self.fields['unit_of_measure'].queryset =CommonUnitsModel.objects.filter(company=allifmaalparameter)
+        self.fields['consigner'].queryset =CommonCustomersModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        
+        self.fields['consignee'].queryset =CommonCustomersModel.objects.filter(company=allifmaalparameter)
  
 
 ################################### PROGRESS REPORTING/RECORDINGS ################
@@ -1498,12 +1532,12 @@ class CommonAddTransitItemsForm(forms.ModelForm):
 class CommonAddProgressForm(forms.ModelForm):
     class Meta:
         model =CommonProgressModel
-        fields = ['description','recorded_by','trans_number','recorded_on','division','branch','department']
+        fields = ['description','recorded_on','division','branch','department']
 
         widgets={
            
             'recorded_on':DatePickerInput(attrs={'class':'form-control'}),
-            'description':forms.TextInput(attrs={'class':'form-control'}),
+            'description':forms.Textarea(attrs={'class':'form-control'}),
            
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -1511,9 +1545,7 @@ class CommonAddProgressForm(forms.ModelForm):
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super(CommonAddProgressForm, self).__init__(*args, **kwargs)
-        self.fields['recorded_by'].queryset =CommonEmployeesModel.objects.filter(company=allifmaalparameter)
-        self.fields['trans_number'].queryset =CommonTransactionsModel.objects.filter(company=allifmaalparameter)
-        
+      
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
@@ -1533,7 +1565,8 @@ class CommonAddProgressForm(forms.ModelForm):
 class CommonAddProgramForm(forms.ModelForm):
     class Meta:
         model=CommonProgramsModel
-        fields = ['name','start_date','operation_year','operation_term','end_date','code','description','department','is_current','branch','division']
+        fields = ['name','start_date','operation_year','operation_term','end_date','code','description',
+                  'department','is_current','branch','division']
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'code':forms.TextInput(attrs={'class':'form-control','placeholder':''}),

@@ -1,0 +1,114 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifpdfuibase.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<div class="allif_pdf_main_body_container">
+  
+<!--start of ... Table header section-->
+<div class="allif-table-pdf-header">
+<table class="allif-pdf-table-header-section">
+    <tr>
+      <th>Transaction Details</th>
+      <th>Customer Details</th>
+      <th>Terms Details</th>
+      
+    </tr>
+
+    <tr> 
+    <td>
+    <li><span class="allif-pdf-table-content-headers">Transaction Ref. No.</span> {{allifquery.trans_number}}</li>
+    <li><span class="allif-pdf-table-content-headers">Department</span> {{allifquery.department}}</li>
+    <li><span class="allif-pdf-table-content-headers">Date</span> {{allifquery.date|date:'d/m/Y'}}</li>
+    </td>
+
+    <td>
+    <li><span class="allif-pdf-table-content-headers">Customer</span> {{allifquery.customer}}</li>
+    <li><span class="allif-pdf-table-content-headers">Phone</span> {{allifquery.customer.phone}}</li>
+    <li><span class="allif-pdf-table-content-headers">Address</span> {{allifquery.customer.address}}</li>
+    </td>
+
+    <td>
+    <li><span class="allif-pdf-table-content-headers">Comments</span> {{allifquery.comments}}</li>
+    <li><span class="allif-pdf-table-content-headers">Terms</span> {{allifquery.payment_mode}}</li>
+    <li><span class="allif-pdf-table-content-headers">Starts</span> {{allifquery.start_date|date:'d/m/Y'}}</li>
+    <li><span class="allif-pdf-table-content-headers">Ends</span> {{allifquery.end_date|date:'d/m/Y'}}</li>
+
+    </td>
+
+    </tr>
+
+    </table>
+    </div>
+    <!--end of ... Table header section-->
+    <div class="allif-pdf-table-content-body-header">
+    <span class="allif-pdf-table-content-headers">Subject: </span> {{allifquery.description}}
+    
+    </div>
+
+
+<!--start of ... table main dynamic content section-->
+<div class="allif-pdf-table-content-body-section">
+    <table class="allif-pdf-table-body">
+
+    <tr>
+    <th colspan="4">Building</th>
+    <th colspan="4">Space Unit</th>
+    <th colspan="1">Price</th>
+    <th colspan="1">Quantity</th>
+    <th colspan="2">Amount</th>
+   
+    </tr>
+   
+    <tbody>
+    {% for item in allifqueryset %}
+    <tr>
+    <td colspan="4">{{item.space}}</td>
+    <td colspan="4">{{item.space_unit}}</td>
+    <td colspan="1"> {{item.space_unit.unitprice|floatformat:2|intcomma}}</td>
+    <td colspan="1"> {{item.quantity|floatformat:2|intcomma}}</td>
+    <td colspan="2"> {{item.space_allocation_amount|floatformat:2|intcomma}}</td>
+
+    
+  
+    </tr>
+    {% endfor %}
+
+    </tbody>
+    </table>
+    </div>
+    <!--start of ... table main dynamic content section-->
+
+    <div class="allif-pdf-table-body-summary-section">
+    <table class="allif-pdf-table-body-summary">
+    <tbody>
+    
+    <tr>
+    <td colspan="8" id="allif-pdf-table-body-no-border"></td>
+    <td colspan="2">Total </td>
+    <td colspan="2">{{allifquery.amount|floatformat:2|intcomma}} </td>
+    </tr>
+
+   
+    </tbody>
+    </table>
+    </div>
+  
+</div> 
+
+
+{% block scripts %}
+
+{% endblock %}
+
+{% endblock %}
+{% block footer %}
+<h6>Created By: {{usr_var}}</h6>
+<h6>Generated On: {{date_today}}</h6>
+
+{% endblock %}
+ 

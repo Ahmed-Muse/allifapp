@@ -4,6 +4,40 @@ from allifmaalcommonapp.constants import BED_TYPES, PRESCRIPTION_FORMULATIONS, A
 from allifmaalusersapp.models import User
 from allifmaalcommonapp.models import CommonTransactionsModel,CommonSpacesModel,CommonSpaceUnitsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
 
+
+class TriagesModel(models.Model):# very important model
+    """
+    these are the triage records of the various healthcare entities
+    """
+    employee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="en_triage",help_text="The main employee attending this encounter.")
+    medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE,blank=True,null=True, related_name="filetranige",help_text="The customer associated with this encounter.")
+    owner=models.ForeignKey(User, related_name="owned_encounters_triage", on_delete=models.SET_NULL, null=True, blank=True)
+   
+    triage_date=models.DateField(blank=True,null=True)
+    description=models.CharField(max_length=255,blank=True,null=True)
+    complaints=models.CharField(null=True, blank=True,max_length=250,help_text="Patient's main symptoms or reason for visit.")
+    weight=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    # Added height for BMI calculation max_digits=5, decimal_places=2, blank=True, null=True,
+    height=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,help_text="Patient's height in centimeters.")# normally in cm
+    # Blood pressure separated for better data handling
+    blood_pressure_systolic=models.IntegerField(blank=True, null=True,help_text="Systolic blood pressure (mmHg).")
+    blood_pressure_diastolic=models.IntegerField(blank=True, null=True,help_text="Diastolic blood pressure (mmHg).")
+    # temperatures are normally assumed to be in Celsius ... or specify the unit
+    temperature=models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,help_text="Patient's temperature in Celsius.")
+    pulse_rate = models.IntegerField(blank=True, null=True,help_text="Patient's pulse rate (beats per minute).")
+    respiration_rate = models.IntegerField(blank=True, null=True,help_text="Patient's respiration rate (breaths per minute).")
+    oxygen_saturation = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True,help_text="Patient's oxygen saturation (SpO2 %).")
+
+    past_medical_history = models.TextField(blank=True, null=True,help_text="Relevant past medical history provided by the patient.")
+    known_chronic_conditions_triage = models.TextField(blank=True, null=True,help_text="Patient's reported chronic conditions at triage.")
+    # Consider linking to a structured MedicationHistoryModel instead of free text 'drugs'
+    current_medications_at_triage = models.TextField(blank=True, null=True,help_text="Medications patient is currently taking, reported at triage.")
+
+    treatment_plan=models.TextField(blank=True, null=True,help_text="Treatment plan (medications, tests, referrals, follow-up).")
+
+    def __str__(self):
+        return str(self.customer)
+    
 class MedicationsModel(models.Model):# prescriptions...
     """
     Represents an actual prescription of medication  and otherprescriptions issued by a doctor for a patient.

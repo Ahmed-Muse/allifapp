@@ -122,21 +122,7 @@
               <td class="allif-fix-table-col">Critical No.</td>
               <td>{{allifquery.criticalnumber|floatformat:2|intcomma}}</td>
               </tr>
-             
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-          
-          <tr>
+               <tr>
             <td class="allif-fix-table-col">Income A/C</td>
             <td>{{allifquery.income_account}}</td>
             </tr>
@@ -151,6 +137,20 @@
                 </tr>
     
               </tr>
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          
+        
           <tr>
             <td class="allif-fix-table-col">Created By</td>
             <td>{{allifquery.owner}}</td>
@@ -169,6 +169,31 @@
          <tr>
             <td class="allif-fix-table-col">Total Units Sold</td>
             <td>{{allifquery.total_units_sold|floatformat:2|intcomma}}</td>
+        
+        </tr> 
+          <tr>
+            <td class="allif-fix-table-col">Normal Range</td>
+            <td>{{allifquery.normal_range}}</td>
+        
+        </tr> 
+          <tr>
+            <td class="allif-fix-table-col">Expires</td>
+            <td>{{allifquery.expires}}</td>
+        
+        </tr> 
+          <tr>
+            <td class="allif-fix-table-col">Length</td>
+            <td>{{allifquery.length}}</td>
+        
+        </tr> 
+          <tr>
+            <td class="allif-fix-table-col">Width</td>
+            <td>{{allifquery.width}}</td>
+        
+        </tr> 
+          <tr>
+            <td class="allif-fix-table-col">Height</td>
+            <td>{{allifquery.height}}</td>
         
         </tr> 
           </tbody>

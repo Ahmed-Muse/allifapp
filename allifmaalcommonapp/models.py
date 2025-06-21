@@ -409,6 +409,9 @@ class CommonCodesModel(models.Model):
     name=models.CharField(max_length=100,blank=True,null=True)
     description=models.CharField(max_length=50,blank=True,null=True)
     date=models.DateField(blank=True,null=True,auto_now_add=True)
+    class Meta:
+        # ensures that the same value is not repeated in the same company
+        unique_together = ('company', 'code','name')
     
     def __str__(self):
         return f"{self.code}: {self.name}:"
@@ -932,24 +935,6 @@ class CommonExpensesModel(models.Model):
     def __str__(self):
         return str(self.description)
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
 class CommonStocksModel(models.Model):
     
     """
@@ -1046,174 +1031,44 @@ class CommonStockTransferOrderItemsModel(models.Model):
         return '{}'.format(self.items)
     #below calculates the total selling price for the model
 
+
 ################# TRANSACTIONS SECTION ############3
 
 class CommonTransactionsModel(models.Model):# very important model
     """
     healthcare....Represents a single visit or interaction a patient has with the healthcare facility.
     This acts as the central hub for all clinical activities during that specific encounter.
-    sales... can represent sales orders, sales requisitions...
-    education...can act as exam events, fees payment event etc
-    services... service order to customers...
-    realestate.... can act normal sales order when selling rents, properties, services,renting etc..
+    sales... can represent sales orders, sales requisitions etc...
+    education...can act as an accademic year file for each student, an exam events, fees payment event etc
+    services... service order to customers, maintenance orders...
+    realestate.... can act normal sales order when selling rents, properties, services,renting, monthyly rent payments etc..
     hospitality... can act as guest hosting event, customer orders from restaurents... etc...
     """
     
     
     # general fields,,
     trans_number=models.CharField(max_length=50, blank=True, null=True)
-    employee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="encounters_as_primary_doctor",help_text="The main doctor attending this encounter.")
-    customer=models.ForeignKey(CommonCustomersModel, on_delete=models.CASCADE,blank=True,null=True, related_name="medicalrecordcustmr",help_text="The patient associated with this encounter.")
-    order_date_time=models.DateTimeField(auto_now_add=True,help_text="Date and time when this patient encounter record was created.",blank=True,null=True)
-  
-    # healthcare specific fields
-    main_complaints=models.TextField(blank=True, null=True,help_text="The main reason for the patient's visit.")
-    encounter_type=models.CharField(max_length=100,blank=True,null=True, choices=ENCOUNTER_TYPES, default='OUTP',help_text="Type of medical encounter (e.g., Outpatient, Inpatient, Emergency).")
-    diagnosis=models.TextField(max_length=250,blank=True,null=True,default='diagnosis')
-    end_date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time when the encounter officially ended.")
-    # Optional: Status of the encounter (e.g., 'Open', 'Closed', 'Pending')
-    status=models.CharField(max_length=20,blank=True,null=True, default='Open',choices=[('Open', 'Open'), ('Closed', 'Closed'), ('Pending', 'Pending')],help_text="Current status of the encounter.")
-
-    # Common ERP fields (owner, company, division, branch, department)
+    employee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="encounters_as_primary_doctor",help_text="The main employee attending this encounter.")
+    customer=models.ForeignKey(CommonCustomersModel, on_delete=models.SET_NULL,blank=True,null=True, related_name="custmtransrlnme",help_text="The customer associated with this encounter.")
     owner=models.ForeignKey(User, related_name="owned_encounters", on_delete=models.SET_NULL, null=True, blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_encounters", on_delete=models.CASCADE, null=True, blank=True)
     division=models.ForeignKey(CommonDivisionsModel, related_name="division_encounters", on_delete=models.SET_NULL, null=True, blank=True)
     branch=models.ForeignKey(CommonBranchesModel, related_name="branch_encounters", on_delete=models.SET_NULL, null=True, blank=True)
     department=models.ForeignKey(CommonDepartmentsModel, related_name="department_encounters", on_delete=models.SET_NULL, null=True, blank=True)
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True) # Renamed for consistency
-    diagnosis=models.TextField(max_length=250,blank=True,null=True,default='diagnosis')
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
     
+    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     start_date=models.DateField(blank=True,null=True)
     end_date=models.DateField(blank=True,null=True)
-    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
-    
     description=models.CharField(max_length=255,blank=True,null=True)
     comments=models.CharField(max_length=255,blank=True,null=True)
     name=models.CharField(max_length=255,blank=True,null=True)
     code=models.CharField(max_length=50,blank=True,null=True, unique=False, help_text="Unique code for the program, e.g., BSCIT")
-    
     operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='common_orders_operation_year')
     operation_term=models.ForeignKey(CommonOperationYearTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='terms_common_orders')
-    
-    
-    
-    # healthcare specific fields.... like examination doctor field, patient field etc
-    complaints=models.CharField(null=True, blank=True,max_length=250,help_text="Patient's main symptoms or reason for visit.")
-   
-    weight=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    # Added height for BMI calculation max_digits=5, decimal_places=2, blank=True, null=True,
-    height=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,help_text="Patient's height in centimeters.")# normally in cm
-    # Blood pressure separated for better data handling
-    blood_pressure_systolic=models.IntegerField(blank=True, null=True,help_text="Systolic blood pressure (mmHg).")
-    blood_pressure_diastolic=models.IntegerField(blank=True, null=True,help_text="Diastolic blood pressure (mmHg).")
-    # temperatures are normally assumed to be in Celsius ... or specify the unit
-    temperature=models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,help_text="Patient's temperature in Celsius.")
-    pulse_rate = models.IntegerField(blank=True, null=True,help_text="Patient's pulse rate (beats per minute).")
-    respiration_rate = models.IntegerField(blank=True, null=True,help_text="Patient's respiration rate (breaths per minute).")
-    oxygen_saturation = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True,help_text="Patient's oxygen saturation (SpO2 %).")
-
-    chief_complaints = models.TextField(blank=True, null=True,help_text="Patient's main symptoms or reason for visit.")
-    past_medical_history = models.TextField(blank=True, null=True,help_text="Relevant past medical history provided by the patient.")
-    known_chronic_conditions_triage = models.TextField(blank=True, null=True,help_text="Patient's reported chronic conditions at triage.")
-    # Consider linking to a structured MedicationHistoryModel instead of free text 'drugs'
-    current_medications_at_triage = models.TextField(blank=True, null=True,help_text="Medications patient is currently taking, reported at triage.")
-
-    triage_date_time=models.DateTimeField(auto_now_add=True, blank=True, null=True) # Renamed 'date' to specific, auto_now_add
-    last_updated = models.DateTimeField(auto_now=True, blank=True, null=True) # Changed to auto_now
-   
-    treatment_plan=models.TextField(blank=True, null=True,help_text="Treatment plan (medications, tests, referrals, follow-up).")
-
-    
-    
-    date=models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of note-taking
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-    
-    
-    
-    
+    payment_mode=models.ForeignKey(CommonPaymentTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='terms_payment_mode_trans')
+    amount=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     def __str__(self):
         return str(self.customer)
-       
-class CommonTransactionItemsModel(models.Model):
-    """
-    Defines general transaction items...
-    sales...can be used for sales orders, reservations, raise requisitions of materials, project management etc...
-    Healthcare...can be used for doctor assessments on patients,triage by nurses,...
-    for instance doctor can write test for maleria, typhoid, CBC ... this means that the 
-    stock will represent in this case the services of the hospital...etc...
-    Education...can be used student assessments (e.g., Quizzes, Exams, Assignments).
-    for instance, lecturer can test for physics, math etc
-    Logistics..this can be used as adding items to a shipment... so the transaction model represents
-    a shipment order, then this adds the particular items that shipment......
-    Realestate...the transaction order can represnt a service to customer then these adds the particulars
-    of that service... for instance, the transaction initiated is April rent and in the list of item
-    you add the appril rent as an item....
-    Service...can be used to add service items like consultancy, viewing, valuation to the service order
-    hospitality... restaurant is order then add items like tea, milk, rice etc...
-    for hotels is adding items to guest order......
-    """
-    # general fields...
-    trans_number=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="mdclrcdobsv", blank=True, null=True,help_text="The encounter this triage record belongs to.")
-    items=models.ForeignKey(CommonStocksModel,blank=True,null=True, on_delete=models.CASCADE, related_name="patient_orders",help_text="The type of lab test ordered.")
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
-    unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
-    unitprice=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
-    comments=models.TextField(blank=True, null=True,help_text="Doctor's assessment of the patient's condition.")
-  
-    owner=models.ForeignKey(User, related_name="ownr_assessmente",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpassessment",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsassessment",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchassessment",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptassessment",on_delete=models.SET_NULL,null=True,blank=True)
-    
-    # select the lab to do the test assuming there are many labs in the company
-    #lab_name=models.ForeignKey(CommonLaboratoriesModel,blank=True,null=True, max_length=200,on_delete=models.CASCADE,related_name="labtlabtest")
-    
-    def __str__(self):
-        return str(self.items)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class CommonBookingsModel(models.Model):
-    """
-    # not sure if tranaction is required here....
-    trans_number=models.ForeignKey(CommonTransactionsModel, related_name="trans_bookings", on_delete=models.CASCADE, null=True, blank=True)
-    booking_number=models.CharField(max_length=100,blank=True,null=True)
-    
-    description=models.CharField(max_length=100,blank=True,null=True)
-    owner=models.ForeignKey(User, related_name="owned_room_booking", on_delete=models.SET_NULL, null=True, blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_room_booking", on_delete=models.CASCADE, null=True, blank=True)
-    division=models.ForeignKey(CommonDivisionsModel, related_name="division_room_booking", on_delete=models.SET_NULL, null=True, blank=True)
-    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_room_booking", on_delete=models.SET_NULL, null=True, blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_room_booking", on_delete=models.SET_NULL, null=True, blank=True)
-    
-    check_in_date_time=models.DateTimeField(blank=True,null=True)
-    check_out_date=models.DateTimeField(blank=True,null=True)
-    number_of_adults=models.PositiveSmallIntegerField(default=1,blank=True,null=True)
-    number_of_children=models.PositiveSmallIntegerField(default=0,blank=True,null=True)
-    total_price=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Calculated total price for the stay")
-   
-    status=models.CharField(max_length=10,blank=True,null=True, choices=BOOKING_STATUS_CHOICES, default='PEND')
-    booking_notes=models.TextField(blank=True, null=True)
-    
-    date=models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of note-taking
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-    """
-    def __str__(self):
-        return str(self.booking_number)
-
 
 class CommonSpaceBookingItemsModel(models.Model):
     
@@ -1223,7 +1078,7 @@ class CommonSpaceBookingItemsModel(models.Model):
     for instance in:
     sales....booking/renting/leasing of any space the entity may own...
     healthcare... ward booking/renting/leasing/occupying...this can also mean booking of doctors or equipment to be used...
-    education...booking of any space that the school may own and want to use for operations
+    education...booking of any space/room/hostel/apartment etc that the education entity may own and want to use for operations
     like exams, events etc or to charge the use of these spaces like rooms, storages, parkings etc.
     realestate...renting/leasing of apartments, rooms, parkings, stores, stalls, malls etc.
     hospitality... hotel rooms by guests, halls for conferences/weddings, restaurants, cubicles etc.
@@ -1231,125 +1086,48 @@ class CommonSpaceBookingItemsModel(models.Model):
     
     """
     trans_number=models.ForeignKey(CommonTransactionsModel, related_name="trans_bookings_items", on_delete=models.CASCADE, null=True, blank=True)
-   
     space=models.ForeignKey(CommonSpacesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='bookings') # Nullable if room not assigned yet
-    
+    space_unit=models.ForeignKey(CommonSpaceUnitsModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='bookings_space_unit') # Nullable if room not assigned yet
+    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
-        return str(self.space)
+        return str(self.space_unit)
+    @property
+    def space_allocation_amount(self):
+        booking_amount=self.quantity * self.space_unit.unitprice
+        return booking_amount
 
-# --- Restaurant/F&B Models ---
-class CommonRestaurantsModel(models.Model):
+
+class CommonProgressModel(models.Model):
     """
-    This is designed to represent an actual and a physical establishment where food and beverages are prepared and consumed.
-    It represents a restaurant or food & beverage outlet within a hotel/school/hospital/company or it can be a standalone restaurants
-    that is not connected to any company and is a company on its own.
+    this can be used to record various progresses of customers, staff, students, patients etc..
+    Records continuous or periodic vital signs for a patient during an visit or admision.
+    healthcare...patient records, patient progress, like nurses can use this to record vital signs...
+    education... teachers can use this to record student progress
+    realestate...to record customer related progress like renting, maintenances etc.
+    hospitality...can be used to record guest progress,like their stayings..
+    logistics...shipment progress record....
+    sales...item progress record...
+    services...service progress record...
     """
-    """
-    owner=models.ForeignKey(User, related_name="owned_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_restaurant", on_delete=models.CASCADE, null=True, blank=True)
-    division=models.ForeignKey(CommonDivisionsModel, related_name="division_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
-    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
-    #space=models.ForeignKey(CommonSpacesModel, related_name="space_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
-    name=models.CharField(max_length=250,blank=True,null=True)
-    contact_phone=models.CharField(max_length=20, blank=True, null=True)
-    description=models.TextField(blank=True, null=True)
-    date=models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of note-taking
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-    """
+    
+    owner=models.ForeignKey(User, related_name="ownvtlsgns",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpvtlsgns",on_delete=models.CASCADE,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsvtlsgns",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchvtlsgns",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptvtlsgns",on_delete=models.SET_NULL,null=True,blank=True)
+    description=models.CharField(max_length=250, blank=True, null=True)
+   
+    trans_number=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="vital_signs", blank=True, null=True,help_text="The encounter this vital signs record belongs to.")
+    
+    date=models.DateTimeField(auto_now_add=True, blank=True, null=True) # Renamed 'date', auto_now_add
+    recorded_on = models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of measurement
    
     def __str__(self):
-        restaurant_info = f"({self.name})" if self.description else ""
-        return f"{self.name} {restaurant_info} - {self.company.company}"
-
-class CommonRestaurantMenuItemsModel(models.Model):
-    """
-    Individual items on a restaurant's menu.
-    """
-    """
-    #restaurant=models.ForeignKey(CommonMaterialRequisitionsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='menu_items')
-    #category=models.ForeignKey(CommonCategoriesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='menu_items')
-    #name=models.CharField(max_length=255,blank=True,null=True)
-    #stock=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='stocks_menu_items')
-    #description=models.TextField(blank=True, null=True)
-    #price=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
-    #is_available=models.BooleanField(default=True,blank=True,null=True)
-    # Link to CommonStocksModel for ingredients if managing recipe costs
-    # ingredients = models.ManyToManyField(CommonStocksModel, through='MenuItemIngredient', blank=True)
-    """
-    def __str__(self):
-        return f"{self.name} ({self.restaurant.name})"
-
-class CommonRestaurantTablesModel(models.Model):
-    """
-    Represents a table in a restaurant.
-    """
-    """
-    restaurant=models.ForeignKey(CommonRestaurantsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='tables')
-    table_number=models.CharField(max_length=50,blank=True,null=True)
-    capacity=models.PositiveSmallIntegerField(default=1,blank=True,null=True)
-    table_location=models.CharField(max_length=255, blank=True, null=True, help_text="e.g., 'Window Side', 'Patio'")
-    status=models.CharField(max_length=10,blank=True,null=True, choices=STATUS_CHOICES, default='AVAIL')
-    is_active=models.BooleanField(default=True,blank=True,null=True)
+        return str(self.trans_number.customer)
     
-    owner=models.ForeignKey(User, related_name="owned_restaurant_tables", on_delete=models.SET_NULL, null=True, blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_restaurant_tables", on_delete=models.CASCADE, null=True, blank=True)
-    division=models.ForeignKey(CommonDivisionsModel, related_name="division_restaurant_tables", on_delete=models.SET_NULL, null=True, blank=True)
-    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_restaurant_tables", on_delete=models.SET_NULL, null=True, blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_restaurant_tables", on_delete=models.SET_NULL, null=True, blank=True)
+
     
-    """
-    def __str__(self):
-        return f"Table {self.table_number} ({self.restaurant.name})"
-
-class CommonRestaurantOrdersModel(models.Model):
-    """
-    Represents a customer's order in a restaurant.
-    """
-    """
-    restaurant=models.ForeignKey(CommonRestaurantsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='orders')
-    customer=models.ForeignKey(CommonCustomersModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='restaurant_orders', help_text="Can be a guest or walk-in customer")
-    table=models.ForeignKey(CommonRestaurantTablesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
-    order_number=models.CharField(max_length=50, unique=True, blank=True, null=True)
-    order_date_time=models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    total_amount=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2, default=Decimal('0.00'))
-    
-    status=models.CharField(max_length=10, choices=ORDER_STATUS_CHOICES,blank=True,null=True, default='PEND')
-    served_by=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders_served')
-    notes=models.TextField(blank=True, null=True)
-    """
-
-    def __str__(self):
-        table_info = f"Table {self.table.table_number}" if self.table else "Delivery"
-        return f"Order #{self.order_number or self.pk} for {self.customer.name if self.customer else 'Walk-in'} ({table_info}) ({self.total_amount()}) - {self.table}"
-
-class CommonRestaurantOrderItemsModel(models.Model):
-    """
-    Individual items within a restaurant order.
-    """
-    """
-    order=models.ForeignKey(CommonRestaurantOrdersModel,blank=True,null=True, on_delete=models.CASCADE, related_name='items')
-    menu_item=models.ForeignKey(CommonRestaurantMenuItemsModel,blank=True,null=True, on_delete=models.SET_NULL, related_name='ordered_items') # PROTECT to prevent deleting menu item if ordered
-    quantity=models.PositiveSmallIntegerField(default=1,blank=True,null=True)
-    stock_items=models.ForeignKey(CommonStocksModel,blank=True,null=True, on_delete=models.CASCADE, related_name='items_order_Restau')
-    unit_price=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    total_price=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    preparation_notes=models.TextField(blank=True, null=True, help_text="e.g., 'No onions', 'Well done'")
-    status = models.CharField(max_length=10,blank=True,null=True, choices=STATUS_CHOICES_STATE, default='PEND')
-    """
-    def __str__(self):
-        return f"{self.quantity} x {self.menu_item.name} for Order #{self.order.order_number or self.order.pk}"
-
-    def save(self, *args, **kwargs):
-        if not self.unit_price:
-            self.unit_price = self.menu_item.price
-        self.total_price = self.quantity * self.unit_price
-        super().save(*args, **kwargs)
-        # Recalculate parent order's total_amount
-        self.order.total_amount = sum(self.total_price for item in self.order.items.all())
-        self.order.save()
-
-
 ################################## PURCHASES ###########3
 
 class CommonPurchaseOrdersModel(models.Model):
@@ -1701,13 +1479,14 @@ class CommonTransitModel(models.Model):
     
     description=models.CharField(max_length=50,blank=True,null=True)
     carrier=models.ForeignKey(CommonAssetsModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='carrier_related')
-    date=models.DateTimeField(null=True, blank=True)
-    expected= models.DateTimeField(null=True, blank=True)
-    status= models.CharField(choices=Shipment_Status,null=True, blank=True, max_length=20,default="Booked")
-    origin= models.CharField(null=True, blank=True, max_length=20)
-    destination= models.CharField(null=True, blank=True, max_length=20)
-    via= models.CharField(choices=Transport_Mode,null=True, blank=True, max_length=20,default="Road")
-    shipment_number= models.CharField(null=True, blank=True, max_length=20)
+    
+    date=models.DateField(auto_now_add=True,null=True,blank=True)
+    expected=models.DateTimeField(null=True, blank=True)
+    status=models.CharField(choices=Shipment_Status,null=True, blank=True, max_length=20,default="Booked")
+    origin=models.CharField(null=True, blank=True, max_length=20)
+    destination=models.CharField(null=True, blank=True, max_length=20)
+    via=models.CharField(choices=Transport_Mode,null=True, blank=True, max_length=20,default="Road")
+    shipment_number=models.CharField(null=True, blank=True, max_length=20)
     comments=models.CharField(blank=True,null=True,max_length=30)
     
     exit_warehouse=models.ForeignKey(CommonSpacesModel,blank=True,null=True, on_delete=models.CASCADE, related_name='exits')
@@ -1715,27 +1494,22 @@ class CommonTransitModel(models.Model):
     
     dispatched_by=models.ForeignKey(CommonEmployeesModel,related_name='shipment_dispatched_by', on_delete=models.SET_NULL, null=True, blank=True)
     customer=models.ForeignKey(CommonCustomersModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='goods_received')
-    
-    notes=models.TextField(blank=True, null=True)
-    
-    unit_of_measure=models.CharField(max_length=50, blank=True, null=True)
-    entry_date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    received_by=models.ForeignKey(CommonEmployeesModel,related_name='shipment_received_by', on_delete=models.SET_NULL, null=True, blank=True)
+   
+    received_on=models.DateTimeField(blank=True,null=True)
+    received_by=models.ForeignKey(CommonEmployeesModel,related_name='shipment_received_by_emplye', on_delete=models.SET_NULL, null=True, blank=True)
     supplier=models.ForeignKey(CommonSuppliersModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='goods_supplied') # Assuming suppliers are customers
-    notes=models.TextField(blank=True, null=True)
-    
+   
     delivery_confirmed_by_customer=models.ForeignKey(CommonCustomersModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='confirmed_deliveries_customer')
     delivery_confirmed_by_employee=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='confirmed_deliveries_employee')
-    delivery_confirmation_date_time=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    delivery_confirmation_date_time=models.DateTimeField(blank=True,null=True)
     delivery_notes=models.CharField(blank=True, null=True,max_length=250)
   
     def __str__(self):
          return '{}'.format(self.shipment_number)
  
- 
 class CommonTransitItemsModel(models.Model):
     """
-    Individual items within a shipment, linked to CommonStocksModel.
+    Individual items within a shipment, linked to CommonStocksModel.....
     """
     owner=models.ForeignKey(User,related_name="shipment_items_owner",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="shipment_items_company",on_delete=models.CASCADE,null=True,blank=True)
@@ -1746,49 +1520,36 @@ class CommonTransitItemsModel(models.Model):
     shipment=models.ForeignKey(CommonTransitModel,blank=True,null=True, on_delete=models.CASCADE, related_name='items')
     items=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='shipment_occurrences')
     quantity=models.DecimalField(max_digits=10, decimal_places=2,blank=True,null=True)
-    unit_of_measure = models.CharField(max_length=50, blank=True, null=True)
-    # You might add fields like actual_weight_kg, actual_volume_cbm per item
-    # unit_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True) # For costing/billing
-    # total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-
+   
+    unit_of_measure=models.ForeignKey(CommonUnitsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='items_units_shipment')
+    expected=models.DateTimeField(null=True, blank=True)
+    expires=models.DateTimeField(null=True, blank=True)
+    delivered_on=models.DateTimeField(null=True, blank=True)
+    consigner= models.ForeignKey(CommonCustomersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='consignerrelated')
+    consignee= models.ForeignKey(CommonCustomersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='consigneerelated')
+    details=models.CharField(blank=True,null=True,max_length=200)
+   
+    weight=models.CharField(null=True, blank=True, max_length=50)
     
-
+    length=models.CharField(null=True, blank=True, max_length=50)
+    width=models.CharField(null=True, blank=True, max_length=50)
+    height=models.CharField(null=True, blank=True, max_length=50)
+    received= models.DateTimeField(null=True, blank=True)
+    value=models.CharField(blank=True,null=True,max_length=50)
+    rate=models.CharField(blank=True,null=True,max_length=50)
+   
+    status=models.CharField(choices=Shipment_Status,null=True, blank=True, max_length=20,default="Booked")
+    origin= models.CharField(null=True, blank=True, max_length=50)
+    destination= models.CharField(null=True, blank=True, max_length=50)
+    comments= models.CharField(null=True, blank=True, max_length=50)
+    
+    
+    dispatched_by=models.ForeignKey(CommonEmployeesModel,related_name='shipment_dispatched_by_shipment_items', on_delete=models.SET_NULL, null=True, blank=True)
+   
     def __str__(self):
         return str(self.items)
      
 
-class CommonProgressModel(models.Model):
-    """
-    this can be used to record various progresses of customers, staff, students, patients etc..
-    Records continuous or periodic vital signs for a patient during an visit or admision.
-    healthcare...patient records, patient progress, like nurses can use this to record vital signs...
-    education... teachers can use this to record student progress
-    realestate...to record customer related progress like renting, maintenances etc.
-    hospitality...can be used to record guest progress,like their stayings..
-    logistics...shipment progress record....
-    sales...item progress record...
-    services...service progress record...
-    """
-    
-    owner=models.ForeignKey(User, related_name="ownvtlsgns",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpvtlsgns",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsvtlsgns",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchvtlsgns",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptvtlsgns",on_delete=models.SET_NULL,null=True,blank=True)
-    description=models.CharField(max_length=50, blank=True, null=True)
-    recorded_by=models.ForeignKey(CommonEmployeesModel, help_text="The nurse or staff member who recorded the vital signs.",related_name="refering_nurse",on_delete=models.SET_NULL,null=True,blank=True)
-   
-    trans_number=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="vital_signs", blank=True, null=True,help_text="The encounter this vital signs record belongs to.")
-    
-    recording_date_time = models.DateTimeField(auto_now_add=True, blank=True, null=True) # Renamed 'date', auto_now_add
-    recorded_on = models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of measurement
-    last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
-   
-    def __str__(self):
-        return str(self.patient)
-    
-
-    
  ##################33 contacts from the website ############3       
 class CommonContactsModel(models.Model):
     name=models.CharField(max_length=50,blank=False,null=True,default="name")
@@ -1798,6 +1559,166 @@ class CommonContactsModel(models.Model):
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
         return str(self.subject)
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##################### chekc if below are needed
+
+class CommonTransactionItemsModel(models.Model):
+    """
+    Defines general transaction items...
+    sales...can be used for sales orders, reservations, raise requisitions of materials, project management etc...
+    Healthcare...can be used for doctor assessments on patients,triage by nurses,...
+    for instance doctor can write test for maleria, typhoid, CBC ... this means that the 
+    stock will represent in this case the services of the hospital...etc...
+    Education...can be used student assessments (e.g., Quizzes, Exams, Assignments).
+    for instance, lecturer can test for physics, math etc
+    Logistics..this can be used as adding items to a shipment... so the transaction model represents
+    a shipment order, then this adds the particular items that shipment......
+    Realestate...the transaction order can represnt a service to customer then these adds the particulars
+    of that service... for instance, the transaction initiated is April rent and in the list of item
+    you add the appril rent as an item....
+    Service...can be used to add service items like consultancy, viewing, valuation to the service order
+    hospitality... restaurant is order then add items like tea, milk, rice etc....
+    for hotels is adding items to guest order......
+    .....
+    healthcare... doctor uses this as lab tests... he can select and test for maleria, cbc, typhoid etc....
+    """
+    # general fields...
+    trans_number=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="mdclrcdobsv", blank=True, null=True,help_text="The encounter this triage record belongs to.")
+    items=models.ForeignKey(CommonStocksModel,blank=True,null=True, on_delete=models.CASCADE, related_name="patient_orders",help_text="The type of lab test ordered.")
+    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    unitprice=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    comments=models.TextField(blank=True, null=True,help_text="Doctor's assessment of the patient's condition.")
+  
+    owner=models.ForeignKey(User, related_name="ownr_assessmente",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpassessment",on_delete=models.CASCADE,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsassessment",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchassessment",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptassessment",on_delete=models.SET_NULL,null=True,blank=True)
+    
+    # select the lab to do the test assuming there are many labs in the company
+    #lab_name=models.ForeignKey(CommonLaboratoriesModel,blank=True,null=True, max_length=200,on_delete=models.CASCADE,related_name="labtlabtest")
+    
+    def __str__(self):
+        return str(self.items)
+
+
+
+
+class CommonBookingsModel(models.Model):
+    """
+    # not sure if tranaction is required here....
+    trans_number=models.ForeignKey(CommonTransactionsModel, related_name="trans_bookings", on_delete=models.CASCADE, null=True, blank=True)
+    booking_number=models.CharField(max_length=100,blank=True,null=True)
+    
+    description=models.CharField(max_length=100,blank=True,null=True)
+    owner=models.ForeignKey(User, related_name="owned_room_booking", on_delete=models.SET_NULL, null=True, blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_room_booking", on_delete=models.CASCADE, null=True, blank=True)
+    division=models.ForeignKey(CommonDivisionsModel, related_name="division_room_booking", on_delete=models.SET_NULL, null=True, blank=True)
+    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_room_booking", on_delete=models.SET_NULL, null=True, blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_room_booking", on_delete=models.SET_NULL, null=True, blank=True)
+    
+    check_in_date_time=models.DateTimeField(blank=True,null=True)
+    check_out_date=models.DateTimeField(blank=True,null=True)
+    number_of_adults=models.PositiveSmallIntegerField(default=1,blank=True,null=True)
+    number_of_children=models.PositiveSmallIntegerField(default=0,blank=True,null=True)
+    total_price=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Calculated total price for the stay")
+   
+    status=models.CharField(max_length=10,blank=True,null=True, choices=BOOKING_STATUS_CHOICES, default='PEND')
+    booking_notes=models.TextField(blank=True, null=True)
+    
+    date=models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of note-taking
+    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
+    """
+    def __str__(self):
+        return str(self.booking_number)
+
+
+# --- Restaurant/F&B Models ---
+class CommonRestaurantsModel(models.Model):
+    """
+    This is designed to represent an actual and a physical establishment where food and beverages are prepared and consumed.
+    It represents a restaurant or food & beverage outlet within a hotel/school/hospital/company or it can be a standalone restaurants
+    that is not connected to any company and is a company on its own.
+    """
+    """
+    owner=models.ForeignKey(User, related_name="owned_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_restaurant", on_delete=models.CASCADE, null=True, blank=True)
+    division=models.ForeignKey(CommonDivisionsModel, related_name="division_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
+    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
+    #space=models.ForeignKey(CommonSpacesModel, related_name="space_restaurant", on_delete=models.SET_NULL, null=True, blank=True)
+    name=models.CharField(max_length=250,blank=True,null=True)
+    contact_phone=models.CharField(max_length=20, blank=True, null=True)
+    description=models.TextField(blank=True, null=True)
+    date=models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of note-taking
+    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
+    """
+   
+    def __str__(self):
+        restaurant_info = f"({self.name})" if self.description else ""
+        return f"{self.name} {restaurant_info} - {self.company.company}"
+
+class CommonRestaurantMenuItemsModel(models.Model):
+    """
+    Individual items on a restaurant's menu.
+    """
+    """
+    #restaurant=models.ForeignKey(CommonMaterialRequisitionsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='menu_items')
+    #category=models.ForeignKey(CommonCategoriesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='menu_items')
+    #name=models.CharField(max_length=255,blank=True,null=True)
+    #stock=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='stocks_menu_items')
+    #description=models.TextField(blank=True, null=True)
+    #price=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2)
+    #is_available=models.BooleanField(default=True,blank=True,null=True)
+    # Link to CommonStocksModel for ingredients if managing recipe costs
+    # ingredients = models.ManyToManyField(CommonStocksModel, through='MenuItemIngredient', blank=True)
+    """
+    def __str__(self):
+        return f"{self.name} ({self.restaurant.name})"
+
+class CommonRestaurantTablesModel(models.Model):
+    """
+    Represents a table in a restaurant.
+    """
+    """
+    restaurant=models.ForeignKey(CommonRestaurantsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='tables')
+    table_number=models.CharField(max_length=50,blank=True,null=True)
+    capacity=models.PositiveSmallIntegerField(default=1,blank=True,null=True)
+    table_location=models.CharField(max_length=255, blank=True, null=True, help_text="e.g., 'Window Side', 'Patio'")
+    status=models.CharField(max_length=10,blank=True,null=True, choices=STATUS_CHOICES, default='AVAIL')
+    is_active=models.BooleanField(default=True,blank=True,null=True)
+    
+    owner=models.ForeignKey(User, related_name="owned_restaurant_tables", on_delete=models.SET_NULL, null=True, blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_restaurant_tables", on_delete=models.CASCADE, null=True, blank=True)
+    division=models.ForeignKey(CommonDivisionsModel, related_name="division_restaurant_tables", on_delete=models.SET_NULL, null=True, blank=True)
+    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_restaurant_tables", on_delete=models.SET_NULL, null=True, blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_restaurant_tables", on_delete=models.SET_NULL, null=True, blank=True)
+    
+    """
+    def __str__(self):
+        return f"Table {self.table_number} ({self.restaurant.name})"
 
 
 
@@ -1809,6 +1730,56 @@ class CommonContactsModel(models.Model):
 
 
 ########################## consider deletting eblow models ################
+
+
+class CommonRestaurantOrdersModel(models.Model):
+    """
+    Represents a customer's order in a restaurant.
+    """
+    """
+    restaurant=models.ForeignKey(CommonRestaurantsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='orders')
+    customer=models.ForeignKey(CommonCustomersModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='restaurant_orders', help_text="Can be a guest or walk-in customer")
+    table=models.ForeignKey(CommonRestaurantTablesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
+    order_number=models.CharField(max_length=50, unique=True, blank=True, null=True)
+    order_date_time=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    total_amount=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2, default=Decimal('0.00'))
+    
+    status=models.CharField(max_length=10, choices=ORDER_STATUS_CHOICES,blank=True,null=True, default='PEND')
+    served_by=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders_served')
+    notes=models.TextField(blank=True, null=True)
+    """
+
+    def __str__(self):
+        table_info = f"Table {self.table.table_number}" if self.table else "Delivery"
+        return f"Order #{self.order_number or self.pk} for {self.customer.name if self.customer else 'Walk-in'} ({table_info}) ({self.total_amount()}) - {self.table}"
+
+class CommonRestaurantOrderItemsModel(models.Model):
+    """
+    Individual items within a restaurant order.
+    """
+    """
+    order=models.ForeignKey(CommonRestaurantOrdersModel,blank=True,null=True, on_delete=models.CASCADE, related_name='items')
+    menu_item=models.ForeignKey(CommonRestaurantMenuItemsModel,blank=True,null=True, on_delete=models.SET_NULL, related_name='ordered_items') # PROTECT to prevent deleting menu item if ordered
+    quantity=models.PositiveSmallIntegerField(default=1,blank=True,null=True)
+    stock_items=models.ForeignKey(CommonStocksModel,blank=True,null=True, on_delete=models.CASCADE, related_name='items_order_Restau')
+    unit_price=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    total_price=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    preparation_notes=models.TextField(blank=True, null=True, help_text="e.g., 'No onions', 'Well done'")
+    status = models.CharField(max_length=10,blank=True,null=True, choices=STATUS_CHOICES_STATE, default='PEND')
+    """
+    def __str__(self):
+        return f"{self.quantity} x {self.menu_item.name} for Order #{self.order.order_number or self.order.pk}"
+
+    def save(self, *args, **kwargs):
+        if not self.unit_price:
+            self.unit_price = self.menu_item.price
+        self.total_price = self.quantity * self.unit_price
+        super().save(*args, **kwargs)
+        # Recalculate parent order's total_amount
+        self.order.total_amount = sum(self.total_price for item in self.order.items.all())
+        self.order.save()
+
+
 
 ################################3assets######################################################
 

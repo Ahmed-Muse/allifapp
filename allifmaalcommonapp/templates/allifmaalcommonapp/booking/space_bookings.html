@@ -15,11 +15,15 @@
   <div class="col-md-12"><!--start....header column-->
   
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Warehouses/Stores:</a>
+  
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Warehouses</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddSpaceBookingItems' allifquery.id user_var glblslug %}">Add New Space Booking</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' allifquery.id user_var glblslug %}">Transaction</a>
+    <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a>
+    <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddSpaceBookingItems' allifquery.id user_var glblslug %}">Allocate Space</a>
+     <a href="{% url 'allifmaalcommonapp:commonSpaceAllocationPdf' allifquery.id user_var glblslug %}">Download</a>
  
+    
   </div>
   
       </div><!--end....header column-->
@@ -30,7 +34,7 @@
 
 <div class="allifmaincontainer">  
 <div class="row mt-12"> <!--start....table row-->
-
+<div class="table-details-content-description"> Space Allocations for {{allifquery}} </div>
   <div class="col-md-12"> <!--start....table column-->
 
     <div class="allif-scroll-table">
@@ -61,14 +65,14 @@
            </td>
           
            <td>
-            {{item.date}}
+            {{item.date|date:'d/m/Y'}}
            </td>
           
            <td>
             <div class="dropdown allifmaal-content-dropdown">
               <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
               <div class="dropdown-content">
-                <a href="{% url 'allifmaalcommonapp:commonEditSpace' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                <a href="{% url 'allifmaalcommonapp:commonEditSpaceBookingItem' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
                 <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
                 
               </div>
@@ -76,10 +80,10 @@
             <div class="dropdown allif-confirm-action">
               
               <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-              <a href="{% url 'allifmaalcommonapp:commonDeleteSpace' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteSpaceBookingItem' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
             </div>
   
-           
+            
           </td>
          <td> . . . </td>
          <td></td>

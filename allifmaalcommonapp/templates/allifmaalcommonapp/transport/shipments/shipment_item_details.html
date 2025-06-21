@@ -1,0 +1,206 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<div class="allifmaal-main-container">
+
+<!--start....main headere-->
+<div class="card-header">
+
+<div class="row mt-12" ><!--start....header row-->
+
+<div class="col-md-12"><!--start....header column-->
+
+<div class="container-fluid amel-content-header">
+<div class="dropdown allifmaal-content-dropdown">
+  <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  Actions
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <div class="content-dropdown-menu">
+    
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonShipmentItemDetails' allifquery.id user_var glblslug %}">Item Details</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditShipmentItem' allifquery.id user_var glblslug %}">Edit Item</a></li>
+   
+      <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonDeleteShipmentItem' allifquery.id user_var glblslug %}">Delete Item</a></li>
+
+   </div>
+  </ul>
+</div>
+<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+
+<a href="{% url 'allifmaalcommonapp:commonTransits' user_var glblslug %}">Transportations</a>
+
+
+</div>
+
+    </div><!--end....header column-->
+  
+  </div><!--end....header row-->
+
+</div><!--end....main headere-->
+
+  <div class="allifmaincontainer">
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">{{allifquery}} Shipment Details</div>
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+         <tr>
+        <td class="allif-fix-table-col">Consigner</td>
+        <td>{{allifquery.consigner}}</td>
+        </tr>
+     <tr>
+        <td class="allif-fix-table-col">Consignee</td>
+        <td>{{allifquery.consignee}}</td>
+        </tr>
+
+         <tr>
+        <td class="allif-fix-table-col">Item</td>
+        <td>{{allifquery.items}}</td>
+        </tr>
+         <tr>
+        <td class="allif-fix-table-col">Quantity</td>
+        <td>{{allifquery.quantity}}</td>
+        </tr>
+         <tr>
+        <td class="allif-fix-table-col">Details</td>
+        <td>{{allifquery.details}}</td>
+        </tr>
+         <tr>
+        <td class="allif-fix-table-col">Expected</td>
+        <td>{{allifquery.expected}}</td>
+        </tr>
+         <tr>
+        <td class="allif-fix-table-col">Expires</td>
+        <td>{{allifquery.expires}}</td>
+        </tr>
+
+        <tr>
+        <td class="allif-fix-table-col">Value</td>
+        <td>{{allifquery.value}}</td>
+        </tr>
+        
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+        <tr>
+        <td class="allif-fix-table-col">Rate</td>
+        <td>{{allifquery.rate}}</td>
+        </tr>
+         <tr>
+        <td class="allif-fix-table-col">Measured In</td>
+        <td>{{allifquery.unit_of_measure}}</td>
+        </tr>
+           <tr>
+        <td class="allif-fix-table-col">Weight</td>
+        <td>{{allifquery.weight}}</td>
+        </tr>
+         <tr>
+        <td class="allif-fix-table-col">Length</td>
+        <td>{{allifquery.length}}</td>
+        </tr>
+         <tr>
+        <td class="allif-fix-table-col">Width</td>
+        <td>{{allifquery.width}}</td>
+        </tr>
+         <tr>
+        <td class="allif-fix-table-col">Height</td>
+        <td>{{allifquery.height}}</td>
+        </tr>
+          <tr>
+            <td class="allif-fix-table-col">Expected</td>
+            <td>{{allifquery.expected|date:'d/m/Y'}}</td>
+            </tr>
+                 <tr>
+                <td class="allif-fix-table-col">Origin</td>
+                <td>{{allifquery.origin}}</td>
+                </tr>
+              
+               
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+            <tr>
+            <td class="allif-fix-table-col">Staff Dispatched</td>
+            <td>{{allifquery.dispatched_by}}</td>
+            </tr>
+                <tr>
+            <td class="allif-fix-table-col">Delivered On</td>
+            <td>{{allifquery.delivered_on}}</td>
+            </tr>
+                <tr>
+            <td class="allif-fix-table-col">Comments</td>
+            <td>{{allifquery.comments}}</td>
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Destination</td>
+            <td>{{allifquery.destination}}</td>
+            </tr>
+
+          <tr>
+            <td class="allif-fix-table-col">Created By</td>
+            <td>{{allifquery.owner}}</td>
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Comments</td>
+              <td>{{allifquery.comments}}</td>
+          
+          </tr> 
+         <tr>
+              <td class="allif-fix-table-col">Status</td>
+              <td>{{allifquery.status}}</td>
+          
+          </tr> 
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
+</div><!--end....table row-->
+</div>
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+
+
+</div>
+</div>
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

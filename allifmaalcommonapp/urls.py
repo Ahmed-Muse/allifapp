@@ -349,10 +349,10 @@ path('Search/for/space/unit/s/<str:allifusr>/<str:allifslug>/', views.commonSpac
 
 ##################3 space bookings ....###############
 path('Space/Booking/s/initiated/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonSpaceBookings, name="commonSpaceBookings"),
-
 path('Add/Space/Booking/Ifn/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddSpaceBookingItems, name="commonAddSpaceBookingItems"),
-
-
+path('Edit/Space/Item/Booking/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditSpaceBookingItem, name="commonEditSpaceBookingItem"),
+path('Delete/space/booking/s/item/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteSpaceBookingItem, name="commonDeleteSpaceBookingItem"),
+path('Convert/Space/Allocation/to/PDF/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonSpaceAllocationPdf, name="commonSpaceAllocationPdf"),
 
 
 ######################################## stocks ######################3
@@ -561,10 +561,12 @@ path('Delete/Shipments/Items/Transportations/Logistics/Prmntly/<str:pk>/<str:all
 path('Edit/Shipment/Item/s/Details/Update/Transportations/Logistics/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditShipmentItem, name="commonEditShipmentItem"),
 path('Search/for/Transits/Transportations/Logistics/<str:allifusr>/<str:allifslug>/', views.commonTransitSearch, name="commonTransitSearch"),
 
+path('Shipment/s/Item/s/Detail/s/view/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonShipmentItemDetails, name="commonShipmentItemDetails"),
+
 
 #######################3 progress reports/records ##############3
-path('Progress/s/stages/s/<str:allifusr>/<str:allifslug>/List/', views.commonProgress, name="commonProgress"),
-path('Add/New/progress/records/information/area/<str:allifusr>/<str:allifslug>/', views.commonAddProgress, name="commonAddProgress"),
+path('Progress/s/stages/s/<str:pk>/<str:allifusr>/<str:allifslug>/List/', views.commonProgress, name="commonProgress"),
+path('Add/New/progress/records/information/area/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddProgress, name="commonAddProgress"),
 path('Edit/progress/sses/records/inf/s/e/Details/update/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditProgress, name="commonEditProgress"),
 path('Want/To/Delete/progress/s/ses/records/s/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteProgress, name="commonWantToDeleteProgress"),
 path('Delete/Progress/s/details/s/records/Prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteProgress, name="commonDeleteProgress"),

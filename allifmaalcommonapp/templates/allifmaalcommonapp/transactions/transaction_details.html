@@ -23,16 +23,15 @@
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' allifquery.id user_var glblslug %}">Edit Item</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpaceBookings' allifquery.id user_var glblslug %}">Space Allocation</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonProgress' allifquery.id user_var glblslug %}">Progress Records</a></li>
           <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionItems' allifquery.id user_var glblslug %}">Add Item</a></li>
 
           <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactionToPdf' allifquery.id user_var glblslug %}">Download</a></li>
     
-         <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpaceBookings' allifquery.id user_var glblslug %}">Bookings</a></li>
-         <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonProgress' user_var glblslug %}">Progress Records</a></li>
-
          
-    
-          
+         
+
           <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteTransaction' allifquery.id user_var glblslug %}">Delete Item</a></li>
            
           
@@ -98,10 +97,7 @@
             <td class="allif-fix-table-col">Client</td>
             <td>{{allifquery.customer}}</td>
             </tr>
-            <tr>
-              <td class="allif-fix-table-col">Name</td>
-              <td>{{allifquery.name}}</td>
-              </tr>
+           
            
         </tbody>
         </table>
@@ -115,6 +111,10 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
+           <tr>
+              <td class="allif-fix-table-col">Name</td>
+              <td>{{allifquery.name}}</td>
+              </tr>
             <tr>
           <td class="allif-fix-table-col">Code</td>
           <td>{{allifquery.code}}</td>
@@ -124,11 +124,7 @@
                 <td class="allif-fix-table-col">Description</td>
                 <td>{{allifquery.description}}</td>
                 </tr>
-                    <tr>
-                      <td class="allif-fix-table-col">End Date & Time</td>
-                      <td>{{allifquery.end_date_time}}</td>
-                      </tr>
-                    
+                   
                     <tr>
                       <td class="allif-fix-table-col">Start Date</td>
                       <td>{{allifquery.start_date}}</td>
@@ -137,17 +133,7 @@
                         <td class="allif-fix-table-col">End Date</td>
                         <td>{{allifquery.end_date}}</td>
                         </tr>
-                        <tr>
-                          <td class="allif-fix-table-col">Type</td>
-                          <td>{{allifquery.is_current}}</td>
-                          </tr>
-
-                        <tr>
-                          <td class="allif-fix-table-col">Main Complaints</td>
-                          <td>{{allifquery.main_complaints}}</td>
-                          </tr>
-
-                              
+                     
           </tbody>
           </table>
           </div>
@@ -160,16 +146,7 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-          
-          <tr>
-            <td class="allif-fix-table-col">Diagnosis</td>
-            <td>{{allifquery.diagnosis}}</td>
-            </tr>
-            <tr>
-              <td class="allif-fix-table-col">Transaction Type</td>
-              <td>{{allifquery.encounter_type}}</td>
-              </tr>
-              
+       
             <tr>
                 <td class="allif-fix-table-col">Operation Year</td>
                 <td>{{allifquery.operation_year}}</td>
@@ -189,17 +166,17 @@
             <td>{{allifquery.owner}}</td>
             </tr>
 
-          <tr>
-            <td class="allif-fix-table-col">Date</td>
-            <td>{{allifquery.date|date:'d/m/Y'}}</td>
-            </tr>
-          
+        
             <tr>
               <td class="allif-fix-table-col">Comments</td>
               <td>{{allifquery.comments}}</td>
           
           </tr> 
-        
+          <tr>
+              <td class="allif-fix-table-col">Mode of Payment</td>
+              <td>{{allifquery.payment_mode}}</td>
+          
+          </tr> 
       
           </tbody>
           </table>
@@ -218,7 +195,7 @@
 <hr>
 
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit Transaction Details</div>
+  <div class="table-details-content-description">Add/Edit {{allifquery}} Transaction Details</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -248,6 +225,11 @@
             <td>{{form.department}}</td>
         
             </tr>
+             <tr>
+              <td class="allif-fix-table-col">Customer</td>
+              <td>{{form.customer}}</td>
+          
+              </tr>
          
           <tr>
             <td class="allif-fix-table-col">Description</td>
@@ -255,26 +237,7 @@
         
             </tr>
           
-              <tr>
-            <td class="allif-fix-table-col">Number</td>
-            <td>{{form.trans_number}}</td>
-        
-            </tr>
-              <tr>
-                <td class="allif-fix-table-col">End Date & Time</td>
-                <td>{{form.end_date_time}}</td>
             
-                </tr>
-                 <tr>
-          <td class="allif-fix-table-col">Status</td>
-          <td>{{form.status}}</td>
-      
-          </tr>
-        <tr>
-          <td class="allif-fix-table-col">Type</td>
-          <td>{{form.is_current}}</td>
-      
-          </tr>
           
         </tbody>
         </table>
@@ -288,34 +251,34 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
-        
-         <tr>
-          <td class="allif-fix-table-col">Main Complaints</td>
-          <td>{{form.main_complaints}}</td>
       
-          </tr>
-          <tr>
-            <td class="allif-fix-table-col">Diagnosis</td>
-            <td>{{form.diagnosis}}</td>
+             
+             <tr>
+            <td class="allif-fix-table-col">Name</td>
+            <td>{{form.name}}</td>
         
             </tr>
-           
+              <tr>
+            <td class="allif-fix-table-col">Code</td>
+            <td>{{form.code}}</td>
+        
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Comments</td>
+            <td>{{form.comments}}</td>
+        
+            </tr>
         <tr>
-          <td class="allif-fix-table-col">Encounter Type</td>
-          <td>{{form.encounter_type}}</td>
-      
-          </tr>
-      <tr>
-          <td class="allif-fix-table-col">Operation Year</td>
-          <td>{{form.operation_year}}</td>
-      
-          </tr>
-           <tr>
-          <td class="allif-fix-table-col">Operation Term</td>
-          <td>{{form.operation_term}}</td>
-      
-          </tr>
-          
+            <td class="allif-fix-table-col">Start Date</td>
+            <td>{{form.start_date}}</td>
+        
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">End Date</td>
+            <td>{{form.end_date}}</td>
+        
+            </tr>
+         
           </tbody>
           </table>
           </div>
@@ -328,43 +291,31 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
-         
-       
-              <tr>
-              <td class="allif-fix-table-col">Customer</td>
-              <td>{{form.customer}}</td>
           
-              </tr>
-                <tr>
+              <tr>
               <td class="allif-fix-table-col">Staff in charge</td>
               <td>{{form.employee_in_charge}}</td>
           
               </tr> 
-          <tr>
-            <td class="allif-fix-table-col">Comments</td>
-            <td>{{form.comments}}</td>
-        
-            </tr>
         <tr>
-            <td class="allif-fix-table-col">Name</td>
-            <td>{{form.name}}</td>
+            <td class="allif-fix-table-col">Mode of Payment</td>
+            <td>{{form.payment_mode}}</td>
         
             </tr>
-              <tr>
-            <td class="allif-fix-table-col">Code</td>
-            <td>{{form.code}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">Start Date</td>
-            <td>{{form.start_date}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">End Date</td>
-            <td>{{form.end_date}}</td>
-        
-            </tr>
+           
+     
+      <tr>
+          <td class="allif-fix-table-col">Operation Year</td>
+          <td>{{form.operation_year}}</td>
+      
+          </tr>
+           <tr>
+          <td class="allif-fix-table-col">Operation Term</td>
+          <td>{{form.operation_term}}</td>
+      
+          </tr>
+          
+             
         <tr>
           <td class="allif-fix-table-col">Action</td>
           <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>

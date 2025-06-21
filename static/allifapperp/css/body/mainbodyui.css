@@ -588,7 +588,9 @@ color: var(--main-red-color);
   height: 0;
   }
     
-
+#allif-work-complete-column{
+  background-color:#03e028;
+}
 .content-hidden-sidenavbar .closebtn {
   position: relative;
   color: var(--main-blue-color);

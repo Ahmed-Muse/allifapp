@@ -7473,10 +7473,11 @@ def commonDeleteSpaceUnit(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_add
 def commonSpaceBookings(request,pk,*allifargs,**allifkwargs):
     try:
-        title="Add Space Booking Items"
+        
         allif_data=common_shared_data(request)
        
         allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
+        title=str(allifquery) +" - "+ "Space Alloctions"
         allifqueryset=CommonSpaceBookingItemsModel.objects.filter(trans_number=allifquery)#this line helps to
     
         context={
@@ -7498,14 +7499,21 @@ def commonSpaceBookings(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_add
 def commonAddSpaceBookingItems(request,pk,*allifargs,**allifkwargs):
     try:
-        title="Add Space Booking Items"
+        title="Add Space Allocations"
         allif_data=common_shared_data(request)
        
         allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
       
         form=CommonAddSpaceBookingItemForm(allif_data.get("main_sbscrbr_entity"))
         allifqueryset=CommonSpaceBookingItemsModel.objects.filter(trans_number=allifquery)#this line helps to
-    
+
+        total=0
+        for items in allifqueryset:
+            total+=items.space_allocation_amount
+        allifquery.amount=total
+        allifquery.save()
+        
+        
         if request.method=='POST':
             form=CommonAddSpaceBookingItemForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
@@ -7541,13 +7549,13 @@ def commonEditSpaceBookingItem(request,pk,*allifargs,**allifkwargs):
     try:
         title="Edit Item Details"
         allif_data=common_shared_data(request)
-        myquery=CommonTransactionItemsModel.objects.filter(id=pk).first()
-        allifquery=myquery.trans_number
+        myquery_update=CommonSpaceBookingItemsModel.objects.filter(id=pk).first()
+        allifquery=myquery_update.trans_number
         allifqueryset=CommonSpaceBookingItemsModel.objects.filter(trans_number=allifquery)
 
-        form=CommonAddSpaceBookingItemForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
+        form=CommonAddSpaceBookingItemForm(allif_data.get("main_sbscrbr_entity"), instance=myquery_update)
         if request.method=='POST':
-            form=CommonAddSpaceBookingItemForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=myquery)
+            form=CommonAddSpaceBookingItemForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=myquery_update)
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.save()
@@ -7557,17 +7565,62 @@ def commonEditSpaceBookingItem(request,pk,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonAddSpaceBookingItemForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
+            form=CommonAddSpaceBookingItemForm(allif_data.get("main_sbscrbr_entity"), instance=myquery_update)
 
         context={"title":title,"form":form,"allifquery":allifquery,
-                 "allifqueryset":allifqueryset,"myquery":myquery,}
+                 "allifqueryset":allifqueryset,"myquery_update":myquery_update,}
         return render(request,'allifmaalcommonapp/booking/add_space_booking.html',context)
       
       
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-   
+
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def commonSpaceAllocationPdf(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        date_today=date.today()
+       
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
+        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
+        allifqueryset=CommonSpaceBookingItemsModel.objects.filter(trans_number=allifquery)
+        title="Space Allocations For "+" "+str(allifquery)
+        template_path = 'allifmaalcommonapp/booking/space_allocation_pdf.html'
+        context = {
+        "allifqueryset":allifqueryset,
+        "allifquery":allifquery,
+        "title":title,
+        "scopes":scopes,
+        "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
+        "usr_var":allif_data.get("usernmeslg"),
+        "date_today":date_today,
+            }
+        
+        response = HttpResponse(content_type='application/pdf')
+        response = HttpResponse(content_type='application/doc')
+        response['Content-Disposition'] = f'filename="{allifquery} space_allocation.pdf"'
+        template = get_template(template_path)
+        html = template.render(context)
+
+        # create a pdf
+        try:
+            pisa_status = pisa.CreatePDF(
+        html, dest=response)
+        except:
+            return HttpResponse("Something went wrong!")
+        # if error then show some funy view
+        if pisa_status.err:
+            return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        
+        return response
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+      
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -13285,7 +13338,7 @@ def commonAvailableStockpdf(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonTransits(request,*allifargs,**allifkwargs):
     try:
-        title="Shipments"
+        title="Transportations"
         allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
@@ -13332,9 +13385,9 @@ def commonNewTransit(request,*allifargs,**allifkwargs):
         ###### End... UID generation ##################
 
         if allifquery:
-            sqnmbr='SQ'+"/"+str(allifuid)
+            sqnmbr='SHP'+"/"+str(allifuid)
         else:
-            sqnmbr= 'SQ/1'+"/"+str(uuid4()).split('-')[2]
+            sqnmbr= 'SHP/1'+"/"+str(uuid4()).split('-')[2]
 
         newQuoteNumber=CommonTransitModel.objects.create(shipment_number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         newQuoteNumber.save()
@@ -13383,6 +13436,7 @@ def commonAddTransitDetails(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
        
         allifquery=CommonTransitModel.objects.filter(id=pk).first()
+        allifqueryset=CommonTransitItemsModel.objects.filter(shipment=allifquery)
         form=CommonAddTransitDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
         if request.method == 'POST':
             form=CommonAddTransitDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST,request.FILES,instance=allifquery)
@@ -13401,6 +13455,7 @@ def commonAddTransitDetails(request,pk,*allifargs,**allifkwargs):
             "form":form,
             "allifquery":allifquery,
             "title":title,
+            "allifqueryset":allifqueryset,
         }
         return render(request,'allifmaalcommonapp/transport/add_transit_details.html',context)
     except Exception as ex:
@@ -13420,17 +13475,19 @@ def commonAddShipmentItems(request,pk,*allifargs,**allifkwargs):
 
         form=CommonAddTransitItemsForm(allif_data.get("main_sbscrbr_entity"))
         allifqueryset= CommonTransitItemsModel.objects.filter(shipment=allifquery)#this line helps to
-        allifquerysettotal=0
-        allifqerytotalafterdiscount=0
-        qte_line_tax=0
-       
-        add_item= None
+    
         if request.method=='POST':
             form=CommonAddTransitItemsForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
-                add_item= form.save(commit=False)
-                add_item.shipment=allifquery
-                add_item.save()
+                obj=form.save(commit=False)
+                obj.shipment=allifquery
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.shipment=allifquery
+                obj.save()
                 return redirect('allifmaalcommonapp:commonAddShipmentItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
             else:
@@ -13443,7 +13500,7 @@ def commonAddShipmentItems(request,pk,*allifargs,**allifkwargs):
         context={
         "form":form,
         "allifquery":allifquery,
-        "allifquerysettotal":allifquerysettotal,
+       
         "allifqueryset":allifqueryset,
         "title":title, 
        
@@ -13460,15 +13517,21 @@ def commonEditShipmentItem(request,pk,*allifargs,**allifkwargs):
     try:
         title="Edit Item Details"
         allif_data=common_shared_data(request)
-        myquery=CommonTransitModel.objects.filter(id=pk).first()
-        allifquery=myquery.shipment_number
-        allifqueryset=CommonTransitItemsModel.objects.filter(shipment_number=allifquery).order_by('-date')
+        myquery=CommonTransitItemsModel.objects.filter(id=pk).first()
+        allifquery=myquery.shipment
+        allifqueryset=CommonTransitItemsModel.objects.filter(shipment=allifquery)
 
         form=CommonAddTransitItemsForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
         if request.method=='POST':
             form=CommonAddTransitItemsForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=myquery)
             if form.is_valid():
                 obj=form.save(commit=False)
+                obj.shipment=allifquery
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonAddShipmentItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
@@ -13476,7 +13539,7 @@ def commonEditShipmentItem(request,pk,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonAddQuoteItemsForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
+            form=CommonAddTransitItemsForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
 
         context={"title":title,"form":form,"allifquery":allifquery,
                  "allifqueryset":allifqueryset,"myquery":myquery,}
@@ -13487,7 +13550,27 @@ def commonEditShipmentItem(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
      
-
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+def commonShipmentItemDetails(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        
+        allifquery=CommonTransitItemsModel.objects.filter(id=pk).first()
+        title=str(allifquery)+" "+ "Shipment Item Details"
+      
+        context={
+            "allifquery":allifquery,
+            "title":title,
+          
+        }
+        return render(request,'allifmaalcommonapp/transport/shipments/shipment_item_details.html',context)
+     
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -13497,7 +13580,7 @@ def commonDeleteShipmentItem(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
        
         myallifquery=CommonTransitItemsModel.objects.filter(id=pk).first()
-        myquery=myallifquery.shipment_number
+        myquery=myallifquery.shipment
         myallifquery.delete()
         return redirect('allifmaalcommonapp:commonAddShipmentItems',pk=myquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -13666,21 +13749,13 @@ def commonTransitAdvanceSearch(request,*allifargs,**allifkwargs):
 @subscriber_company_status
 @logged_in_user_can_view
 @logged_in_user_is_admin
-def commonProgress(request,*allifargs,**allifkwargs):
+def commonProgress(request,pk,*allifargs,**allifkwargs):
     title="Progress Records"
     try:
+        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
         allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonProgressModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonProgressModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonProgressModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonProgressModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,}
+        allifqueryset=CommonProgressModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),trans_number=allifquery)
+        context={"title":title,"allifqueryset":allifqueryset,"allifquery":allifquery,}
         return render(request,'allifmaalcommonapp/records/progress/progress.html',context)
     
     except Exception as ex:
@@ -13691,23 +13766,27 @@ def commonProgress(request,*allifargs,**allifkwargs):
 @subscriber_company_status
 @logged_in_user_can_add
 @logged_in_user_is_admin
-def commonAddProgress(request,allifusr,allifslug,*allifargs,**allifkwargs):
+def commonAddProgress(request,pk,*allifargs,**allifkwargs):
     title="Add New Progress Record"
     try:
         allif_data=common_shared_data(request)
+        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
         form=CommonAddProgressForm(allif_data.get("main_sbscrbr_entity"))
         if request.method=='POST':
             form=CommonAddProgressForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
                 obj=form.save(commit=False)
+                obj.trans_number=allifquery
                 obj.company=allif_data.get("main_sbscrbr_entity")
                 obj.division=allif_data.get("logged_user_division")
                 obj.branch=allif_data.get("logged_user_branch")
                 obj.department=allif_data.get("logged_user_department")
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:commonProgress',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalcommonapp:commonAddProgress',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
                
+          
+
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
@@ -13717,6 +13796,7 @@ def commonAddProgress(request,allifusr,allifslug,*allifargs,**allifkwargs):
         context = {
             "title":title,
             "form":form,
+            "allifquery":allifquery,
         }
         return render(request,'allifmaalcommonapp/records/progress/add_progress.html',context)
     
@@ -13728,11 +13808,12 @@ def commonAddProgress(request,allifusr,allifslug,*allifargs,**allifkwargs):
 @subscriber_company_status
 @logged_in_user_can_edit
 @logged_in_user_is_admin
-def commonEditProgress(request,allifusr,pk,*allifargs,**allifkwargs):
+def commonEditProgress(request,pk,*allifargs,**allifkwargs):
     title="Update Progress Record Details"
     try:
         allif_data=common_shared_data(request)
         allifquery_update=CommonProgressModel.objects.filter(id=pk).first()
+        allifquery=allifquery_update.trans_number
         form=CommonAddProgressForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         if request.method=='POST':
             form=CommonAddProgressForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
@@ -13740,14 +13821,14 @@ def commonEditProgress(request,allifusr,pk,*allifargs,**allifkwargs):
                 obj=form.save(commit=False)
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:commonProgress',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalcommonapp:commonProgress',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
             form=CommonAddProgressForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,"allifquery":allifquery}
         return render(request,'allifmaalcommonapp/records/progress/add_progress.html',context)
        
     except Exception as ex:
@@ -13827,8 +13908,12 @@ def commonWantToDeleteProgress(request,pk,*allifargs,**allifkwargs):
 def commonDeleteProgress(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        CommonProgressModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonProgress',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        
+        allifdata=CommonProgressModel.objects.filter(id=pk).first()
+        trans_id=allifdata.trans_number.id
+        allifdata.delete()
+      
+        return redirect('allifmaalcommonapp:commonProgress',pk=trans_id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
