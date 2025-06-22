@@ -6957,6 +6957,7 @@ def commonEditTransactionItem(request,pk,*allifargs,**allifkwargs):
             form=CommonAddTransactionItemForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=myquery)
             if form.is_valid():
                 obj=form.save(commit=False)
+                obj.trans_number=allifquery
                 obj.save()
                 return redirect('allifmaalcommonapp:commonAddTransactionItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
@@ -13598,9 +13599,9 @@ def commonTransitToPdf(request,pk,*allifargs,**allifkwargs):
        
         scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
         allifquery=CommonTransitModel.objects.filter(id=pk).first()
-        allifqueryset=CommonTransitItemsModel.objects.filter(shipment_number=allifquery)
-        title="Quote "+str(allifquery)
-        template_path = 'allifmaalcommonapp/shipments/shipment_pdf.html'
+        allifqueryset=CommonTransitItemsModel.objects.filter(shipment=allifquery)
+        title="Shipment "+str(allifquery)
+        template_path = 'allifmaalcommonapp/transport/shipment_pdf.html'
         context = {
         "allifqueryset":allifqueryset,
         "allifquery":allifquery,

@@ -22,24 +22,14 @@
   </a>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' allifquery.id user_var glblslug %}">Edit Item</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' allifquery.id user_var glblslug %}">Refresh</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionItems' allifquery.id user_var glblslug %}">Add Item</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpaceBookings' allifquery.id user_var glblslug %}">Space Allocation</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddSpaceBookingItems' allifquery.id user_var glblslug %}">Allocate Space</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonProgress' allifquery.id user_var glblslug %}">Progress Records</a></li>
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionItems' allifquery.id user_var glblslug %}">Add Item</a></li>
-
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactionToPdf' allifquery.id user_var glblslug %}">Download</a></li>
-    
-         
-         
-
-          <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteTransaction' allifquery.id user_var glblslug %}">Delete Item</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactionToPdf' allifquery.id user_var glblslug %}">Download</a></li>
+      <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteTransaction' allifquery.id user_var glblslug %}">Delete Item</a></li>
            
-          
-          <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonAddSpaceBookingItems' allifquery.id user_var glblslug %}">Book Space</a></li>
-          
-
-
-          
    </div>
   </ul>
 </div>

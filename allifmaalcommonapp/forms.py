@@ -1329,12 +1329,12 @@ class CommonAddTransactionDetailsForm(forms.ModelForm):
 class CommonAddTransactionItemForm(forms.ModelForm):
     class Meta:
         model=CommonTransactionItemsModel
-        fields = ['trans_number','items','quantity','unitcost','unitprice','comments','division','branch','department']
+        fields = ['trans_number','items','quantity','comments','date','description','division','branch','department']
         widgets={
             'trans_number':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'quantity':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'unitcost':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'unitprice':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'date':DatePickerInput(attrs={'class':'form-control'}),
             'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),

@@ -13,8 +13,8 @@
 <div class="allif-table-pdf-header">
 <table class="allif-pdf-table-header-section">
     <tr>
-      <th>Quote Details</th>
-      <th>Supplier Details</th>
+      <th>Transaction Details</th>
+      <th>Customer Details</th>
       <th>Terms Details</th>
       
     </tr>
@@ -33,9 +33,9 @@
     </td>
 
     <td>
-    <li><span class="allif-pdf-table-content-headers">Comments</span> {{allifquery.comments}}</li>
-    <li><span class="allif-pdf-table-content-headers">Terms</span> {{allifquery.payment_terms}}</li>
-    <li><span class="allif-pdf-table-content-headers">Delivery</span> {{allifquery.delivery}}</li>
+    <li><span class="allif-pdf-table-content-headers">Code</span> {{allifquery.code}}</li>
+    <li><span class="allif-pdf-table-content-headers">Name</span> {{allifquery.name}}</li>
+    <li><span class="allif-pdf-table-content-headers">Description</span> {{allifquery.description}}</li>
 
     </td>
 
@@ -55,19 +55,22 @@
     <table class="allif-pdf-table-body">
 
     <tr>
-    <th colspan="5">Item Description</th>
+    <th colspan="3">Item Description</th>
     <th colspan="2">Quantity</th>
-    <th colspan="2">Unit Price</th>
-    <th colspan="3">Amount</th>
+    <th colspan="3">Details</th>
+    <th colspan="2">Comments</th>
+    <th colspan="2">Date</th>
     </tr>
    
     <tbody>
     {% for item in allifqueryset %}
     <tr>
-    <td colspan="5">{{item.description}}</td>
+    <td colspan="3">{{item.items}}</td>
     <td colspan="2">{{item.quantity|floatformat:2|intcomma}}</td>
-    <td colspan="2"> {{item.description.unitPrice|floatformat:2|intcomma}}</td>
-    <td colspan="3">{{item.quote_selling_price|floatformat:2|intcomma}}</td>
+    <td colspan="3">{{item.description}}</td>
+    
+    <td colspan="2"> {{item.comments}}</td>
+    <td colspan="2">{{item.date|date:'d/m/Y'}}</td>
     
     </tr>
     {% endfor %}
@@ -81,30 +84,6 @@
     <table class="allif-pdf-table-body-summary">
     <tbody>
     
-    <tr>
-    <td colspan="5" id="allif-pdf-table-body-no-border"></td>
-    <td colspan="4"> Sub Total </td>
-    <td colspan="3">{{allifquery.total|floatformat:2|intcomma}} </td>
-    </tr>
-
-    <tr>
-    <td colspan="5" id="allif-pdf-table-body-no-border"></td>
-    <td colspan="4"> Discount Amount </td>
-    <td colspan="3"> {{allifquery.discountAmount|floatformat:2|intcomma}}</td>
-    </tr>
-
-     <tr>
-    <td colspan="5" id="allif-pdf-table-body-no-border"></td>
-    <td colspan="4"> Tax Amount {{allifquery.salestax.taxrate}}% </td>
-    <td colspan="3"> {{allifquery.taxAmount|floatformat:2|intcomma}}</td>
-    </tr>
-
-    <tr>
-    <td colspan="5" id="allif-pdf-table-body-no-border"></td>
-    <td colspan="4"> Grand Total Tax Inclusive {{allifquery.currency}}</td>
-    <td colspan="3">{{allifquery.grandtotal|floatformat:2|intcomma}} </td>
-    </tr>
-
     </tbody>
     </table>
     </div>

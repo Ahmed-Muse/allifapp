@@ -10,6 +10,96 @@ class DateTimePickerInput(forms.DateTimeInput):#use this wherever you have datet
     input_type='datetime'
     ################################# end of datepicker customization ################################
 
+class AddTriageDetailsForm(forms.ModelForm):
+    class Meta:
+        model = TriagesModel
+        fields = ['medical_file','record_date','staff','description','complaints','weight','height','division','branch','department',
+                  'blood_pressure_systolic','blood_pressure_diastolic','temperature','pulse_rate',
+                  'respiration_rate','oxygen_saturation','past_medical_history','known_chronic_conditions',
+                  'current_medication',
+                  'treatment_plan']
+        widgets={
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'blood_pressure_diastolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'current_medication':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'oxygen_saturation':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'temperature':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'respiration_rate':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'known_chronic_conditions':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'pulse_rate':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'record_date' : DatePickerInput(attrs={'class':'form-control'}),
+            'treatment_plan':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            'staff':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+          
+            'complaints':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            'weight':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'height':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+         
+            'blood_pressure_systolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'past_medical_history':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
+        } 
+    def __init__(self,allifmaalparameter,*args,**kwargs):
+        super (AddTriageDetailsForm,self).__init__(*args,**kwargs) # populates the post
+        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
+       
+        self.fields['staff'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
+      
+
+
+class AddAssessmentDetailsForm(forms.ModelForm):
+    class Meta:
+        model = AssessmentsModel
+        fields = ['medical_file','record_date','staff','description','complaints','weight','height','division','branch','department',
+                  'blood_pressure_systolic','blood_pressure_diastolic','temperature','pulse_rate',
+                  'respiration_rate','oxygen_saturation','past_medical_history','known_chronic_conditions',
+                  'current_medication',
+                  'treatment_plan']
+        widgets={
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'blood_pressure_diastolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'current_medication':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'oxygen_saturation':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'temperature':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'respiration_rate':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'known_chronic_conditions':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'pulse_rate':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'record_date' : DatePickerInput(attrs={'class':'form-control'}),
+            'treatment_plan':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            'staff':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+          
+            'complaints':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            'weight':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'height':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+         
+            'blood_pressure_systolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'past_medical_history':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
+        } 
+    def __init__(self,allifmaalparameter,*args,**kwargs):
+        super (AddAssessmentDetailsForm,self).__init__(*args,**kwargs) # populates the post
+        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
+       
+        self.fields['staff'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
+      
 
 class AddPrescriptionForm(forms.ModelForm):
     class Meta:
