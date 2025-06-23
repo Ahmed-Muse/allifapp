@@ -6866,7 +6866,7 @@ def commonDeleteTransaction(request,pk,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
+from allifmaalshaafiapp.models import *
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -6876,6 +6876,7 @@ def commonAddTransactionDetails(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
        
         allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
+        triages=TriagesModel.objects.filter(medical_file=allifquery)
         form=CommonAddTransactionDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
         if request.method == 'POST':
             form=CommonAddTransactionDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST,request.FILES,instance=allifquery)
@@ -6894,6 +6895,7 @@ def commonAddTransactionDetails(request,pk,*allifargs,**allifkwargs):
             "form":form,
             "allifquery":allifquery,
             "title":title,
+            "triages":triages,
         }
         return render(request,'allifmaalcommonapp/transactions/transaction_details.html',context)
     except Exception as ex:
@@ -7153,6 +7155,7 @@ def commonTransactionAdvanceSearch(request,*allifargs,**allifkwargs):
 def commonSpaces(request,allifusr,allifslug,*allifargs,**allifkwargs):
     title="Spaces"
     try:
+        
         allif_data=common_shared_data(request)
         if allif_data.get("logged_in_user_has_universal_access")==True:
             allifqueryset=CommonSpacesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))

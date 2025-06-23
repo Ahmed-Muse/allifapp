@@ -99,8 +99,84 @@ class AddAssessmentDetailsForm(forms.ModelForm):
         self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
        
         self.fields['staff'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
-      
 
+
+###########3 lab requests ############3
+
+class AddLabTestRequestForm(forms.ModelForm):
+    class Meta:
+        model = LabTestRequestsModel
+        fields = ['medical_file','date_time','items','description','division','branch','department',
+                  'lab_name','status','priority','specimen','comments',
+                 ]
+        widgets={
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
+            'date_time' : DatePickerInput(attrs={'class':'form-control'}),
+            
+            'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+          
+            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
+            'lab_name':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'priority':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'specimen':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
+        } 
+    def __init__(self,allifmaalparameter,*args,**kwargs):
+        super (AddLabTestRequestForm,self).__init__(*args,**kwargs) # populates the post
+        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
+       
+        self.fields['items'].queryset=CommonStocksModel.objects.filter(company=allifmaalparameter)
+    
+###############33 lab results #############
+
+class AddLabTestResultForm(forms.ModelForm):
+    class Meta:
+        model = LabTestResultsModel
+        fields = ['medical_file','date_time','results','description','division','branch','department',
+                  'lab_name','comments','test_request',
+                 ]
+        widgets={
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'results':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
+            'date_time' : DatePickerInput(attrs={'class':'form-control'}),
+            
+            'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+          
+            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
+            'lab_name':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+            'test_request':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
+        } 
+    def __init__(self,allifmaalparameter,*args,**kwargs):
+        super (AddLabTestResultForm,self).__init__(*args,**kwargs) # populates the post
+        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
+       
+        self.fields['test_request'].queryset=LabTestRequestsModel.objects.filter(company=allifmaalparameter)
+        
 class AddPrescriptionForm(forms.ModelForm):
     class Meta:
         model = MedicationsModel

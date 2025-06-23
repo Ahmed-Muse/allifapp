@@ -47,6 +47,1098 @@ def shaafiDashboard(request,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
+##################3 Triage ####################
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+@logged_in_user_is_admin
+def triageData(request,*allifargs,**allifkwargs):
+    title="Triage Data"
+    try:
+        allif_data=common_shared_data(request)
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=CommonTransactionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=CommonTransactionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=CommonTransactionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=CommonTransactionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        else:
+            allifqueryset=[]
+        context={"title":title,"allifqueryset":allifqueryset,}
+        return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_add
+@logged_in_user_is_admin
+def AddTriageData(request,pk,*allifargs,**allifkwargs):
+    title="Add New Triage Data"
+    try:
+        allif_data=common_shared_data(request)
+        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
+        form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"))
+        if request.method=='POST':
+            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.medical_file=allifquery
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+               
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"))
+        context = {
+            "title":title,
+            "form":form,
+        }
+        return render(request,'allifmaalshaafiapp/triage/add_triage_data.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_edit
+@logged_in_user_is_admin
+def editTriageData(request,pk,*allifargs,**allifkwargs):
+    title="Update Triage Data Details"
+    try:
+        allif_data=common_shared_data(request)
+        allifquery_update=TriagesModel.objects.filter(id=pk).first()
+        form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        if request.method=='POST':
+            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
+        return render(request,'allifmaalshaafiapp/triage/add_triage_data.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def triageDataSearch(request,*allifargs,**allifkwargs):
+    try:
+        title="Search Results"
+        allif_data=common_shared_data(request)
+        if request.method=='POST':
+            allifsearch=request.POST.get('allifsearchcommonfieldname')
+            searched_data=TriagesModel.objects.filter((Q(complaints__icontains=allifsearch)|Q(medical_file__customer__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+        
+        else:
+            searched_data=[]
+
+        context={
+        
+        "title":title,
+        "searched_data":searched_data,
+        
+        }
+        return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
+       
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def triageDataAdvancedSearch(request,*allifargs,**allifkwargs):
+    try:
+        title="Purchase Order Advanced Search Results"
+        allif_data=common_shared_data(request)
+       
+        allifqueryset=[]
+       
+        firstDate=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+        lastDate=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+        largestAmount=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
+
+        current_date=timezone.now().date().today()
+        firstDate=current_date
+        lastDate=current_date
+        largestAmount=0
+        searched_data=[]
+        firstDepo=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
+    
+        lastDepo=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
+        if firstDepo and lastDepo:
+            firstDate=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+            lastDate=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+            largestAmount=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+        else:
+            firstDate=current_date
+            lastDate=current_date
+
+        if request.method=='POST':
+            selected_option=request.POST.get('requiredformat')
+            start_date=request.POST.get('startdate',selected_option) or None
+            end_date=request.POST.get('enddate') or None
+            start_value=request.POST.get('startvalue') or None
+            end_value=request.POST.get('endvalue') or None
+            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
+                searched_data=MedicationsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
+                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
+                # if pdf is selected
+                if selected_option=="pdf":
+                    template_path = 'allifmaalcommonapp/triages/triage_data_search_pdf.html'
+                    allifcontext = {
+                    "searched_data":searched_data,
+                    "title":title,
+                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
+                 
+                   "scopes":scopes,
+                    }
+                    
+                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
+                    response = HttpResponse(content_type='application/doc')
+                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
+                    template = get_template(template_path)
+                    html = template.render(allifcontext)
+                    try:
+                        pisa_status=pisa.CreatePDF(html, dest=response)
+                    except Exception as ex:
+                        error_context={'error_message': ex,}
+                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+                    # if error then show some funy view
+                    if pisa_status.err:
+                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+                    return response
+                # if excel is selected
+                
+                else:
+                    searched_data=[]
+                    context = {
+                    "searched_data":searched_data,
+                   
+                    }
+                    return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
+            else:
+                searched_data=[]
+              
+                context={
+                    "searched_data":searched_data,
+            
+                }
+                return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
+        else:
+            context={
+            "allifqueryset":allifqueryset,
+           
+            "title":title,
+           
+            }
+            return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+         
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+def triageDataDetails(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        title="Prescription Details"
+        allifquery=TriagesModel.objects.filter(id=pk).first()
+      
+        context={
+            "allifquery":allifquery,
+            "title":title,
+          
+        }
+        return render(request,'allifmaalshaafiapp/triages/triage_data_details.html',context)
+    
+      
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+@logged_in_user_has_departmental_delete
+@logged_in_user_can_delete
+def wantToDeleteTriageData(request,pk,*allifargs,**allifkwargs):
+    try:
+        allifquery=TriagesModel.objects.filter(id=pk).first()
+        title="Are you sure to delete?"
+        context={
+        "allifquery":allifquery,
+        "title":title,
+        }
+        return render(request,'allifmaalshaafiapp/triages/delete_triage_data_confirm.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+@logged_in_user_has_universal_delete
+@logged_in_user_can_delete
+def deleteTriageData(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        TriagesModel.objects.filter(id=pk).first().delete()
+        return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+
+######################### doctor assessments/observations #######################
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+@logged_in_user_is_admin
+def doctorAssessments(request,*allifargs,**allifkwargs):
+    title="Add Triage Data"
+    try:
+        allif_data=common_shared_data(request)
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        else:
+            allifqueryset=[]
+        context={"title":title,"allifqueryset":allifqueryset,}
+        return render(request,'allifmaalshaafiapp/assessments/doctor_assessments.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_add
+@logged_in_user_is_admin
+def addDoctorAssessment(request,pk,*allifargs,**allifkwargs):
+    title="Add Doctor Assessment"
+    try:
+        allif_data=common_shared_data(request)
+        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
+        form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"))
+        if request.method=='POST':
+            form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.medical_file=allifquery
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+               
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"))
+        context = {
+            "title":title,
+            "form":form,
+        }
+        return render(request,'allifmaalshaafiapp/assessments/doctor_assessments.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_edit
+@logged_in_user_is_admin
+def editDoctorAssessment(request,pk,*allifargs,**allifkwargs):
+    title="Update Triage Data Details"
+    try:
+        allif_data=common_shared_data(request)
+        allifquery_update=AssessmentsModel.objects.filter(id=pk).first()
+        form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        if request.method=='POST':
+            form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
+        return render(request,'allifmaalshaafiapp/assessments/add_doctor_assessment.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def doctorAssessmentSearch(request,*allifargs,**allifkwargs):
+    try:
+        title="Search Results"
+        allif_data=common_shared_data(request)
+        if request.method=='POST':
+            allifsearch=request.POST.get('allifsearchcommonfieldname')
+            searched_data=AssessmentsModel.objects.filter((Q(complaints__icontains=allifsearch)|Q(medical_file__customer__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+        
+        else:
+            searched_data=[]
+
+        context={
+        
+        "title":title,
+        "searched_data":searched_data,
+        
+        }
+        return render(request,'allifmaalshaafiapp/assessments/doctor_assessments.html',context)
+       
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def doctorAssessmentAdvancedSearch(request,*allifargs,**allifkwargs):
+    try:
+        title="Purchase Order Advanced Search Results"
+        allif_data=common_shared_data(request)
+       
+        allifqueryset=[]
+       
+        firstDate=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+        lastDate=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+        largestAmount=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
+
+        current_date=timezone.now().date().today()
+        firstDate=current_date
+        lastDate=current_date
+        largestAmount=0
+        searched_data=[]
+        firstDepo=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
+    
+        lastDepo=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
+        if firstDepo and lastDepo:
+            firstDate=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+            lastDate=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+            largestAmount=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+        else:
+            firstDate=current_date
+            lastDate=current_date
+
+        if request.method=='POST':
+            selected_option=request.POST.get('requiredformat')
+            start_date=request.POST.get('startdate',selected_option) or None
+            end_date=request.POST.get('enddate') or None
+            start_value=request.POST.get('startvalue') or None
+            end_value=request.POST.get('endvalue') or None
+            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
+                searched_data=MedicationsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
+                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
+                # if pdf is selected
+                if selected_option=="pdf":
+                    template_path = 'allifmaalcommonapp/triages/triage_data_search_pdf.html'
+                    allifcontext = {
+                    "searched_data":searched_data,
+                    "title":title,
+                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
+                 
+                   "scopes":scopes,
+                    }
+                    
+                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
+                    response = HttpResponse(content_type='application/doc')
+                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
+                    template = get_template(template_path)
+                    html = template.render(allifcontext)
+                    try:
+                        pisa_status=pisa.CreatePDF(html, dest=response)
+                    except Exception as ex:
+                        error_context={'error_message': ex,}
+                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+                    # if error then show some funy view
+                    if pisa_status.err:
+                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+                    return response
+                # if excel is selected
+                
+                else:
+                    searched_data=[]
+                    context = {
+                    "searched_data":searched_data,
+                   
+                    }
+                    return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
+            else:
+                searched_data=[]
+              
+                context={
+                    "searched_data":searched_data,
+            
+                }
+                return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
+        else:
+            context={
+            "allifqueryset":allifqueryset,
+           
+            "title":title,
+           
+            }
+            return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+         
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+def doctorAssessmentDetails(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        title="Prescription Details"
+        allifquery=AssessmentsModel.objects.filter(id=pk).first()
+      
+        context={
+            "allifquery":allifquery,
+            "title":title,
+          
+        }
+        return render(request,'allifmaalshaafiapp/assessment/doctor_assessment_details.html',context)
+    
+      
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+@logged_in_user_has_departmental_delete
+@logged_in_user_can_delete
+def wantToDeleteDoctorAssessment(request,pk,*allifargs,**allifkwargs):
+    try:
+        allifquery=AssessmentsModel.objects.filter(id=pk).first()
+        title="Are you sure to delete?"
+        context={
+        "allifquery":allifquery,
+        "title":title,
+        }
+        return render(request,'allifmaalshaafiapp/triages/delete_triage_data_confirm.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+@logged_in_user_has_universal_delete
+@logged_in_user_can_delete
+def deleteDoctorAssessment(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        AssessmentsModel.objects.filter(id=pk).first().delete()
+        return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+####################3 lab test requests ###################
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+@logged_in_user_is_admin
+def labTestRequests(request,*allifargs,**allifkwargs):
+    title="Lab Test Requests"
+    try:
+        allif_data=common_shared_data(request)
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        else:
+            allifqueryset=[]
+        context={"title":title,"allifqueryset":allifqueryset,}
+        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_add
+@logged_in_user_is_admin
+def addLabTestRequest(request,pk,*allifargs,**allifkwargs):
+    title="Add Doctor Assessment"
+    try:
+        allif_data=common_shared_data(request)
+        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
+        form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"))
+        if request.method=='POST':
+            form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.medical_file=allifquery
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+               
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"))
+        context = {
+            "title":title,
+            "form":form,
+        }
+        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/add_lab_test_request.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_edit
+@logged_in_user_is_admin
+def editLabTestRequest(request,pk,*allifargs,**allifkwargs):
+    title="Update Lab Test Details"
+    try:
+        allif_data=common_shared_data(request)
+        allifquery_update=LabTestRequestsModel.objects.filter(id=pk).first()
+        form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        if request.method=='POST':
+            form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
+        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/add_lab_test_request.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def labTestRequestSearch(request,*allifargs,**allifkwargs):
+    try:
+        title="Search Results"
+        allif_data=common_shared_data(request)
+        if request.method=='POST':
+            allifsearch=request.POST.get('allifsearchcommonfieldname')
+            searched_data=LabTestRequestsModel.objects.filter((Q(medical_file__icontains=allifsearch)|Q(medical_file__customer__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+        
+        else:
+            searched_data=[]
+
+        context={
+        
+        "title":title,
+        "searched_data":searched_data,
+        
+        }
+        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
+    
+      
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def labTestRequestAdvancedSearch(request,*allifargs,**allifkwargs):
+    try:
+        title="Purchase Order Advanced Search Results"
+        allif_data=common_shared_data(request)
+       
+        allifqueryset=[]
+       
+        firstDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+        lastDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+        largestAmount=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
+
+        current_date=timezone.now().date().today()
+        firstDate=current_date
+        lastDate=current_date
+        largestAmount=0
+        searched_data=[]
+        firstDepo=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
+    
+        lastDepo=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
+        if firstDepo and lastDepo:
+            firstDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+            lastDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+            largestAmount=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+        else:
+            firstDate=current_date
+            lastDate=current_date
+
+        if request.method=='POST':
+            selected_option=request.POST.get('requiredformat')
+            start_date=request.POST.get('startdate',selected_option) or None
+            end_date=request.POST.get('enddate') or None
+            start_value=request.POST.get('startvalue') or None
+            end_value=request.POST.get('endvalue') or None
+            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
+                searched_data=MedicationsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
+                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
+                # if pdf is selected
+                if selected_option=="pdf":
+                    template_path = 'allifmaalcommonapp/triages/triage_data_search_pdf.html'
+                    allifcontext = {
+                    "searched_data":searched_data,
+                    "title":title,
+                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
+                 
+                   "scopes":scopes,
+                    }
+                    
+                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
+                    response = HttpResponse(content_type='application/doc')
+                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
+                    template = get_template(template_path)
+                    html = template.render(allifcontext)
+                    try:
+                        pisa_status=pisa.CreatePDF(html, dest=response)
+                    except Exception as ex:
+                        error_context={'error_message': ex,}
+                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+                    # if error then show some funy view
+                    if pisa_status.err:
+                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+                    return response
+                # if excel is selected
+                
+                else:
+                    searched_data=[]
+                    context = {
+                    "searched_data":searched_data,
+                   
+                    }
+                    return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
+    
+            else:
+                searched_data=[]
+              
+                context={
+                    "searched_data":searched_data,
+            
+                }
+                return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
+    
+        else:
+            context={
+            "allifqueryset":allifqueryset,
+           
+            "title":title,
+           
+            }
+            return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+         
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+def labTestRequestDetails(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        title="Prescription Details"
+        allifquery=LabTestRequestsModel.objects.filter(id=pk).first()
+      
+        context={
+            "allifquery":allifquery,
+            "title":title,
+          
+        }
+        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_request_details.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+@logged_in_user_has_departmental_delete
+@logged_in_user_can_delete
+def wantToDeleteLabTestRequest(request,pk,*allifargs,**allifkwargs):
+    try:
+        allifquery=LabTestRequestsModel.objects.filter(id=pk).first()
+        title="Are you sure to delete?"
+        context={
+        "allifquery":allifquery,
+        "title":title,
+        }
+        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/delete_lab_test_request_confirm.html',context)
+    
+     
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+@logged_in_user_has_universal_delete
+@logged_in_user_can_delete
+def deleteLabTestRequest(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        LabTestRequestsModel.objects.filter(id=pk).first().delete()
+        return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+
+#########################3 lab test request results sections ####################3
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+@logged_in_user_is_admin
+def labTestResults(request,*allifargs,**allifkwargs):
+    title="Lab Test Results"
+    try:
+        allif_data=common_shared_data(request)
+        if allif_data.get("logged_in_user_has_universal_access")==True:
+            allifqueryset=LabTestResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+        elif allif_data.get("logged_in_user_has_divisional_access")==True:
+            allifqueryset=LabTestResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+        elif allif_data.get("logged_in_user_has_branches_access")==True:
+            allifqueryset=LabTestResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+        elif allif_data.get("logged_in_user_has_departmental_access")==True:
+            allifqueryset=LabTestResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        else:
+            allifqueryset=[]
+        context={"title":title,"allifqueryset":allifqueryset,}
+        return render(request,'allifmaalshaafiapp/assessments/labtests/results/lab_test_results.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_add
+@logged_in_user_is_admin
+def addLabTestResult(request,pk,*allifargs,**allifkwargs):
+    title="Add Doctor Assessment"
+    try:
+        allif_data=common_shared_data(request)
+        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
+        form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"))
+        if request.method=='POST':
+            form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.medical_file=allifquery
+                obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+               
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"))
+        context = {
+            "title":title,
+            "form":form,
+        }
+        return render(request,'allifmaalshaafiapp/assessments/labtests/results/add_lab_test_result.html',context)
+      
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_edit
+@logged_in_user_is_admin
+def editLabTestResult(request,pk,*allifargs,**allifkwargs):
+    title="Update Lab Test Details"
+    try:
+        allif_data=common_shared_data(request)
+        allifquery_update=LabTestRequestsModel.objects.filter(id=pk).first()
+        form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        if request.method=='POST':
+            form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
+        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/add_lab_test_request.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def labTestResultSearch(request,*allifargs,**allifkwargs):
+    try:
+        title="Search Results"
+        allif_data=common_shared_data(request)
+        if request.method=='POST':
+            allifsearch=request.POST.get('allifsearchcommonfieldname')
+            searched_data=LabTestResultsModel.objects.filter((Q(medical_file__icontains=allifsearch)|Q(medical_file__customer__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+        
+        else:
+            searched_data=[]
+
+        context={
+        
+        "title":title,
+        "searched_data":searched_data,
+        
+        }
+        return render(request,'allifmaalshaafiapp/assessments/labtests/results/lab_test_results.html',context)
+      
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+def labTestResultAdvancedSearch(request,*allifargs,**allifkwargs):
+    try:
+        title="Purchase Order Advanced Search Results"
+        allif_data=common_shared_data(request)
+       
+        allifqueryset=[]
+       
+        firstDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+        lastDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+        largestAmount=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+
+        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
+
+        current_date=timezone.now().date().today()
+        firstDate=current_date
+        lastDate=current_date
+        largestAmount=0
+        searched_data=[]
+        firstDepo=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
+    
+        lastDepo=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
+        if firstDepo and lastDepo:
+            firstDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+            lastDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+            largestAmount=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+        else:
+            firstDate=current_date
+            lastDate=current_date
+
+        if request.method=='POST':
+            selected_option=request.POST.get('requiredformat')
+            start_date=request.POST.get('startdate',selected_option) or None
+            end_date=request.POST.get('enddate') or None
+            start_value=request.POST.get('startvalue') or None
+            end_value=request.POST.get('endvalue') or None
+            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
+                searched_data=MedicationsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
+                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
+                # if pdf is selected
+                if selected_option=="pdf":
+                    template_path = 'allifmaalcommonapp/triages/triage_data_search_pdf.html'
+                    allifcontext = {
+                    "searched_data":searched_data,
+                    "title":title,
+                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
+                 
+                   "scopes":scopes,
+                    }
+                    
+                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
+                    response = HttpResponse(content_type='application/doc')
+                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
+                    template = get_template(template_path)
+                    html = template.render(allifcontext)
+                    try:
+                        pisa_status=pisa.CreatePDF(html, dest=response)
+                    except Exception as ex:
+                        error_context={'error_message': ex,}
+                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+                    # if error then show some funy view
+                    if pisa_status.err:
+                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+                    return response
+                # if excel is selected
+                
+                else:
+                    searched_data=[]
+                    context = {
+                    "searched_data":searched_data,
+                   
+                    }
+                    return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
+    
+            else:
+                searched_data=[]
+              
+                context={
+                    "searched_data":searched_data,
+            
+                }
+                return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
+    
+        else:
+            context={
+            "allifqueryset":allifqueryset,
+           
+            "title":title,
+           
+            }
+            return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+         
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+def labTestResultDetails(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        title="Prescription Details"
+        allifquery=LabTestResultsModel.objects.filter(id=pk).first()
+      
+        context={
+            "allifquery":allifquery,
+            "title":title,
+          
+        }
+        return render(request,'allifmaalshaafiapp/assessments/labtests/results/lab_test_result_details.html',context)
+      
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+@logged_in_user_has_departmental_delete
+@logged_in_user_can_delete
+def wantToDeleteLabTestResult(request,pk,*allifargs,**allifkwargs):
+    try:
+        allifquery=LabTestResultsModel.objects.filter(id=pk).first()
+        title="Are you sure to delete?"
+        context={
+        "allifquery":allifquery,
+        "title":title,
+        }
+        return render(request,'allifmaalshaafiapp/assessments/labtests/results/delete_lab_test_result_confirm.html',context)
+    
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_is_admin
+@logged_in_user_has_universal_delete
+@logged_in_user_can_delete
+def deleteLabTestResult(request,pk,*allifargs,**allifkwargs):
+    try:
+        allif_data=common_shared_data(request)
+        LabTestRequestsModel.objects.filter(id=pk).first().delete()
+        return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+
+
+
 ############### prescriptions and medications #############
 
 @logged_in_user_must_have_profile

@@ -44,19 +44,19 @@ def ilmDashboard(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonForms(request,*allifargs,**allifkwargs):
+def examinations(request,*allifargs,**allifkwargs):
     try:
         title="Forms And Faculties"
         allif_data=common_shared_data(request)
         allifqueryset=[]
         if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonFormsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+            allifqueryset=ExaminationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonFormsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+            allifqueryset=ExaminationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
         elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonFormsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+            allifqueryset=ExaminationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
         elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonFormsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+            allifqueryset=ExaminationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
             allifqueryset=[]
 
@@ -64,7 +64,7 @@ def commonForms(request,*allifargs,**allifkwargs):
             "title":title,
             "allifqueryset":allifqueryset,
         }
-        return render(request,'allifmaalcommonapp/education/forms/forms.html',context)
+        return render(request,'allifmaalilmapp/exams/exams.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -72,13 +72,13 @@ def commonForms(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
-def commonAddForm(request,*allifargs,**allifkwargs):
+def addExamDetails(request,*allifargs,**allifkwargs):
     title="Forms, Faculties Registration"
     try:
         allif_data=common_shared_data(request)
-        form=CommonFormsAddForm(allif_data.get("main_sbscrbr_entity"))
+        form=AddExamDetailsForm(allif_data.get("main_sbscrbr_entity"))
         if request.method=='POST':
-            form=CommonFormsAddForm(allif_data.get("main_sbscrbr_entity"),request.POST)
+            form=AddExamDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.company=allif_data.get("main_sbscrbr_entity")
@@ -93,12 +93,12 @@ def commonAddForm(request,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonFormsAddForm(allif_data.get("main_sbscrbr_entity"))
+            form=AddExamDetailsForm(allif_data.get("main_sbscrbr_entity"))
        
         context={
             "form":form,"title":title,}
-        return render(request,'allifmaalcommonapp/education/forms/add-form.html',context)
-      
+        return render(request,'allifmaalilmapp/exams/add_exam.html',context)
+       
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -106,14 +106,14 @@ def commonAddForm(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_edit
-def commonEditForm(request,pk,*allifargs,**allifkwargs):
+def editExamDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
         title="Update Forms And Faculties Details"
-        allifquery_update=CommonFormsModel.objects.filter(id=pk).first()
-        form=CommonFormsAddForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        allifquery_update=ExaminationsModel.objects.filter(id=pk).first()
+        form=AddExamDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         if request.method=='POST':
-            form=CommonFormsAddForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
+            form=AddExamDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.owner=allif_data.get("usernmeslg")
@@ -124,11 +124,11 @@ def commonEditForm(request,pk,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonFormsAddForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+            form=AddExamDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
          
         context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalcommonapp/education/forms/add-form.html',context)
-       
+        return render(request,'allifmaalilmapp/exams/add_exam.html',context)
+      
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -136,16 +136,16 @@ def commonEditForm(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_delete
-def commonWantToDeleteForm(request,pk,*allifargs,**allifkwargs):
+def wantToDeleteExam(request,pk,*allifargs,**allifkwargs):
     try:
-        allifquery=CommonFormsModel.objects.filter(id=pk).first()
+        allifquery=ExaminationsModel.objects.filter(id=pk).first()
         title="Are you sure to delete?"
         context={
         "allifquery":allifquery,
         "title":title,
         }
-        return render(request,'allifmaalcommonapp/education/forms/form-delete-confirm.html',context)
-
+        return render(request,'allifmaalilmapp/exams/delete_exam_confirm.html',context)
+     
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)       
@@ -154,10 +154,10 @@ def commonWantToDeleteForm(request,pk,*allifargs,**allifkwargs):
 @subscriber_company_status
 @logged_in_user_can_edit
 @logged_in_user_has_departmental_delete
-def commonDeleteForm(request,pk,*allifargs,**allifkwargs):
+def deleteExam(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        CommonFormsModel.objects.filter(id=pk).first().delete()
+        ExaminationsModel.objects.filter(id=pk).first().delete()
         return redirect('allifmaalcommonapp:commonForms',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -166,17 +166,16 @@ def commonDeleteForm(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonFormDetails(request,pk,*allifargs,**allifkwargs):
+def examDetails(request,pk,*allifargs,**allifkwargs):
     try:
         title="Form/Faculty Details"
-        allifquery=CommonFormsModel.objects.filter(id=pk).first()
+        allifquery=ExaminationsModel.objects.filter(id=pk).first()
         context={
             "allifquery":allifquery,
             "title":title,
         }
-        return render(request,'allifmaalcommonapp/education/forms/forms-details.html',context)
-        
-    
+        return render(request,'allifmaalilmapp/exams/exam_details.html',context)
+      
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -184,22 +183,21 @@ def commonFormDetails(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonFormSearch(request,*allifargs,**allifkwargs):
+def examSearch(request,*allifargs,**allifkwargs):
     try:
         title="Search Results"
         allif_data=common_shared_data(request)
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonFormsModel.objects.filter((Q(name__icontains=allifsearch)|Q(comments__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+            searched_data=ExaminationsModel.objects.filter((Q(name__icontains=allifsearch)|Q(comments__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
         else:
             searched_data=[]
         context={
         "title":title,
         "allifsearch":allifsearch,
-        "searched_data":searched_data,
-    }
-        return render(request,'allifmaalcommonapp/education/forms/forms.html',context)
-        
+        "searched_data":searched_data,}
+        return render(request,'allifmaalilmapp/exams/exams.html',context)
+       
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -208,19 +206,19 @@ def commonFormSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonClasses(request,*allifargs,**allifkwargs):
+def examResults(request,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
         title="Classes"
         allifqueryset=[]
         if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonClassesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+            allifqueryset=ExamResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonClassesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+            allifqueryset=ExamResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
         elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonClassesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+            allifqueryset=ExamResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
         elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonClassesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+            allifqueryset=ExamResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
             allifqueryset=[]
        
@@ -229,7 +227,8 @@ def commonClasses(request,*allifargs,**allifkwargs):
             "title":title,
             "allifqueryset":allifqueryset,
         }
-        return render(request,'allifmaalcommonapp/education/classes/classes.html',context)
+        return render(request,'allifmaalilmapp/exams/results/results.html',context)
+        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -237,13 +236,13 @@ def commonClasses(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
-def commonAddClass(request,*allifargs,**allifkwargs):
+def addExamResult(request,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
         title="Add New Class"
-        form=CommonClassesAddForm(allif_data.get("main_sbscrbr_entity"))
+        form=AddExamResultsForm(allif_data.get("main_sbscrbr_entity"))
         if request.method=='POST':
-            form=CommonClassesAddForm(allif_data.get("main_sbscrbr_entity"), request.POST)
+            form=AddExamResultsForm(allif_data.get("main_sbscrbr_entity"), request.POST)
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.company=allif_data.get("main_sbscrbr_entity")
@@ -258,10 +257,11 @@ def commonAddClass(request,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form=CommonClassesAddForm(allif_data.get("main_sbscrbr_entity"))
+            form=AddExamResultsForm(allif_data.get("main_sbscrbr_entity"))
 
         context={"form":form,"title":title,}
-        return render(request,'allifmaalcommonapp/education/classes/add-class.html',context)
+        return render(request,'allifmaalilmapp/exams/results/add_result.html',context)
+       
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -269,14 +269,14 @@ def commonAddClass(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_edit
-def commonEditClass(request,pk,*allifargs,**allifkwargs):
+def editExamResult(request,pk,*allifargs,**allifkwargs):
     try:
         title="Update Class Details"
         allif_data=common_shared_data(request)
-        allifquery_update=CommonClassesModel.objects.filter(id=pk).first()
-        form=CommonClassesAddForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
+        allifquery_update=ExamResultsModel.objects.filter(id=pk).first()
+        form=AddExamResultsForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
         if request.method=='POST':
-            form=CommonClassesAddForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=allifquery_update)
+            form=AddExamResultsForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=allifquery_update)
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.owner=allif_data.get("usernmeslg")
@@ -289,11 +289,11 @@ def commonEditClass(request,pk,*allifargs,**allifkwargs):
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
                
         else:
-            form=CommonClassesAddForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
+            form=AddExamResultsForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
 
         context={"title":title,"form":form,"allifquery_update":allifquery_update}
-        return render(request,'allifmaalcommonapp/education/classes/add-class.html',context)
-       
+        return render(request,'allifmaalilmapp/exams/results/add_result.html',context)
+     
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -302,10 +302,10 @@ def commonEditClass(request,pk,*allifargs,**allifkwargs):
 @subscriber_company_status
 @logged_in_user_can_delete
 @logged_in_user_has_departmental_delete
-def commonDeleteClass(request,pk,*allifargs,**allifkwargs):
+def deleteExamResult(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        CommonClassesModel.objects.filter(id=pk).first().delete()
+        ExamResultsModel.objects.filter(id=pk).first().delete()
         return redirect('allifmaalcommonapp:commonClasses',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
       
     except Exception as ex:
@@ -315,15 +315,15 @@ def commonDeleteClass(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonClassDetails(request,pk,*allifargs,**allifkwargs):
+def examResultDetails(request,pk,*allifargs,**allifkwargs):
     try:
         title="Class Details"
-        allifquery=CommonClassesModel.objects.filter(id=pk).first()
+        allifquery=ExamResultsModel.objects.filter(id=pk).first()
         context={
             "allifquery":allifquery,
             "title":title,
         }
-        return render(request,'allifmaalcommonapp/education/classes/class-details.html',context)
+        return render(request,'allifmaalilmapp/exams/results/result_details.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -332,13 +332,13 @@ def commonClassDetails(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-def commonClassSearch(request,*allifargs,**allifkwargs):
+def examResultSearch(request,*allifargs,**allifkwargs):
     try:
         title="Search Results"
         allif_data=common_shared_data(request)
         if request.method=='POST':
             allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonClassesModel.objects.filter((Q(name__icontains=allifsearch)|Q(comments__icontains=allifsearch)|Q(form__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+            searched_data=ExamResultsModel.objects.filter((Q(name__icontains=allifsearch)|Q(comments__icontains=allifsearch)|Q(form__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
            
             context={
            
@@ -347,7 +347,8 @@ def commonClassSearch(request,*allifargs,**allifkwargs):
             "searched_data":searched_data,
           
         }
-        return render(request,'allifmaalcommonapp/education/classes/classes.html',context)
+        return render(request,'allifmaalilmapp/exams/results/results.html',context)
+        
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
@@ -355,16 +356,16 @@ def commonClassSearch(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_has_departmental_delete
-def commonWantToDeleteClass(request,pk,*allifargs,**allifkwargs):
+def wantToDeleteExamResult(request,pk,*allifargs,**allifkwargs):
     try:
-        allifquery=CommonClassesModel.objects.filter(id=pk).first()
+        allifquery=ExamResultsModel.objects.filter(id=pk).first()
         title="Are you sure to delete?"
         context={
         "allifquery":allifquery,
         "title":title,
         }
-        return render(request,'allifmaalcommonapp/education/classes/class-delete-confirm.html',context)
-
+        return render(request,'allifmaalilmapp/exams/results/delete_result_confirm.html',context)
+       
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)       

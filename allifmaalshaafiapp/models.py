@@ -1,5 +1,5 @@
 from django.db import models
-from allifmaalcommonapp.constants import BED_TYPES, PRESCRIPTION_FORMULATIONS, ADMINISTRATION_ROUTES, DOSAGE_UNITS, OCCUPANCY_STATUSES, APPOINTMENT_STATUSES, ADMISSION_STATUSES, REFERRAL_TYPES, REFERRAL_STATUSES, LAB_TEST_STATUSES, IMAGING_TEST_STATUSES, PATIENT_GENDERS, BLOOD_GROUPS, ENCOUNTER_TYPES, MEDICAL_SERVICE_TYPES
+from allifmaalcommonapp.constants import BED_TYPES,SPECIMEN_TYPE,PRIORITY_LEVELS, PRESCRIPTION_FORMULATIONS, ADMINISTRATION_ROUTES, DOSAGE_UNITS, OCCUPANCY_STATUSES, APPOINTMENT_STATUSES, ADMISSION_STATUSES, REFERRAL_TYPES, REFERRAL_STATUSES, LAB_TEST_STATUSES, IMAGING_TEST_STATUSES, PATIENT_GENDERS, BLOOD_GROUPS, ENCOUNTER_TYPES, MEDICAL_SERVICE_TYPES
 
 from allifmaalusersapp.models import User
 from allifmaalcommonapp.models import CommonTransactionsModel,CommonSpacesModel,CommonSpaceUnitsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
@@ -80,7 +80,60 @@ class AssessmentsModel(models.Model):# very important model
     department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_assessments",on_delete=models.SET_NULL,null=True,blank=True)
     def __str__(self):
         return str(self.medical_file)
+
+
+class LabTestRequestsModel(models.Model):
+    """
+    Represents a request from a healthcare professional for one or more laboratory tests.
+    """
+    owner=models.ForeignKey(User, related_name="owner_lab_test_requests",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="company_lab_test_requests",on_delete=models.CASCADE,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="divisions_lab_test_requests",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="branch_lab_test_requests",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_lab_test_requests",on_delete=models.SET_NULL,null=True,blank=True)
     
+    description=models.CharField(max_length=50, help_text="Type of referral (Internal or External).",blank=True,null=True)
+    items=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="items_lab_test_requests",)
+    date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient admission.")
+  
+    medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.SET_NULL, related_name="medical_file_lab_test_requests", blank=True, null=True,)
+    status=models.CharField(max_length=50,choices=LAB_TEST_STATUSES,default='Pending',help_text="Current status of the lab order.")
+    priority=models.CharField(max_length=50,choices=PRIORITY_LEVELS,default='Pending',help_text="Current status of the lab order.")
+    lab_name=models.ForeignKey(CommonSpacesModel, on_delete=models.SET_NULL, related_name="lab_name_lab_test_requests", blank=True, null=True,)
+    specimen=models.CharField(max_length=50,choices=SPECIMEN_TYPE,default='Blood',help_text="Current status of the lab order.")
+
+    comments = models.TextField(blank=True, null=True,help_text="Additional instructions or clinical notes for the laboratory.")
+
+    def __str__(self):
+        return str(self.medical_file)
+    
+class LabTestResultsModel(models.Model):
+    """
+    Stores the results for a specific test item from a laboratory order.
+    """
+    owner=models.ForeignKey(User, related_name="owner_lab_test_requests_results",on_delete=models.SET_NULL,null=True,blank=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="company_lab_test_requests_results",on_delete=models.CASCADE,null=True,blank=True)
+    division=models.ForeignKey(CommonDivisionsModel,related_name="divisions_lab_test_requests_results",on_delete=models.SET_NULL,null=True,blank=True)
+    branch=models.ForeignKey(CommonBranchesModel,related_name="branch_lab_test_requests_results",on_delete=models.SET_NULL,null=True,blank=True)
+    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_lab_test_requests_results",on_delete=models.SET_NULL,null=True,blank=True)
+    
+    results=models.CharField(max_length=50,blank=True,null=True,default='Results')
+    description=models.CharField(max_length=50,blank=True,null=True,default='Results')
+    date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient admission.")
+  
+    medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.SET_NULL, related_name="medical_file_lab_test_requests_results", blank=True, null=True,)
+   
+    test_request=models.ForeignKey(LabTestRequestsModel, on_delete=models.SET_NULL, related_name="test_lab_test_requests_results", blank=True, null=True,)
+    
+    lab_name=models.ForeignKey(CommonSpacesModel, on_delete=models.SET_NULL, related_name="lab_name_lab_test_requests_results", blank=True, null=True,)
+   
+    comments = models.TextField(blank=True, null=True,help_text="Additional instructions or clinical notes for the laboratory.")
+
+
+    def __str__(self):
+        return str(self.results)
+      
+       
 class MedicationsModel(models.Model):# prescriptions...
     """
     Represents an actual prescription of medication  and otherprescriptions issued by a doctor for a patient.

@@ -34,6 +34,47 @@ PROPERTY_UNIT_TYPES = [
     ]
 
 
+# Lab Test Statuses
+LAB_TEST_STATUSES = [
+    ('Ordered', 'Ordered'),
+    ('Collected', 'Sample Collected'),
+    ('Processing', 'Under Processing'),
+    ('Completed', 'Completed'),
+    ('Validated', 'Validated'),
+    ('Resulted', 'Results Available'),
+    ('Pending', 'Pending Collection'),
+    ('Cancelled', 'Cancelled'),
+    ('Lost', 'Lost'),
+  
+]
+PRIORITY_LEVELS = [
+    ('High', 'High'),
+    ('Medium', 'Medium'),
+    ('Low', 'Low'),
+     ('Urgent', 'Urgent')
+]
+
+SPECIMEN_TYPE = [
+    ('Blood', 'Blood'),
+    ('Urine', 'Urine'),
+    ('Tissue', 'Tissue'),
+    ('Saliva', 'Saliva'),
+    ('Stool', 'Stool'),
+    ('Other', 'Other'),
+]
+
+
+
+
+
+
+
+
+
+
+
+###########################################################
+
 item_state = [
     ('Tablet','Tablet'),
     ('Syrub', 'Syrub'),
@@ -171,15 +212,6 @@ REFERRAL_STATUSES = [
     ('COMP', 'Completed'),
 ]
 
-# Lab Test Statuses
-LAB_TEST_STATUSES = [
-    ('ORD', 'Ordered'),
-    ('SCOL', 'Sample Collected'),
-    ('SPROC', 'Sample Processing'),
-    ('COMP', 'Completed'),
-    ('VALID', 'Validated'),
-    ('CANC', 'Cancelled'),
-]
 
 # Imaging Test Statuses
 IMAGING_TEST_STATUSES = [
@@ -388,10 +420,7 @@ PROPERTY_STATUS_TYPES = [
     ('RENTED', 'Rented'), ('OFFMKT', 'Off Market'), ('CANC', 'Cancelled')
                          ]
 
-PRIORITY_TYPES = [
-    ('HIGH', 'High'), ('MEDIUM', 'Medium'), ('LOW', 'Low'),
-     ('URGENT', 'Urgent')
-]
+
 
 ###############3 vehicles ################
 

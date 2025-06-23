@@ -6,6 +6,51 @@ urlpatterns = [
 path('Healthcare/Home/<str:allifusr>/<str:allifslug>/', views.shaafiHome, name="shaafiHome"),
 path('Healthcare/Dashboard/<str:allifusr>/<str:allifslug>/', views.shaafiDashboard, name="shaafiDashboard"),
 
+################################3 triage data ###########################3
+path('Triage/Data/Recorded/Patient/Informations/<str:allifusr>/<str:allifslug>/', views.triageData, name="triageData"),
+path('Add/New/Triage/Data/Details/information/Records/<str:pk>/<str:allifusr>/<str:allifslug>/', views.AddTriageData, name="AddTriageData"),
+path('Edit/Update/Triage/Data/information/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editTriageData, name="editTriageData"),
+path('Search/For/Triage/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.triageDataSearch, name="triageDataSearch"),
+path('Triage/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.triageDataDetails, name="triageDataDetails"),
+path('Do/You/u/Really/Want/to/Delete/This/Triage/s/data/record/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteTriageData, name="wantToDeleteTriageData"),
+path('Delete/This/Triage/s/Data/Record/s/info/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteTriageData, name="deleteTriageData"),
+
+path('Triage/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.triageDataAdvancedSearch, name="triageDataAdvancedSearch"),
+
+###################### doctor assessments ##############3
+path('Doctor/Assessment/s/Observation/s/<str:allifusr>/<str:allifslug>/', views.doctorAssessments, name="doctorAssessments"),
+path('Add/New/Doctor/Assessment/s/Observations//Records/<str:allifusr>/<str:allifslug>/', views.addDoctorAssessment, name="addDoctorAssessment"),
+path('Edit/Update/Doctor/assessment/s/observations/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editDoctorAssessment, name="editDoctorAssessment"),
+path('Search/For/Doctor/Assessment/s/observation/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.doctorAssessmentSearch, name="doctorAssessmentSearch"),
+path('Doctor/Assessment/s/Observation/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.doctorAssessmentDetails, name="doctorAssessmentDetails"),
+path('Do/You/u/Really/Want/to/Delete/This/Doctor/assessment/s/observation/s/data/record/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteDoctorAssessment, name="wantToDeleteDoctorAssessment"),
+path('Delete/This/Doctor/assessment/s/observations/s/Data/Record/s/info/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteDoctorAssessment, name="deleteDoctorAssessment"),
+
+path('Doctor/assessment/observations/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.doctorAssessmentAdvancedSearch, name="doctorAssessmentAdvancedSearch"),
+
+#############################3 lab test requests ################
+path('Laboratory/test/s/request/s/<str:allifusr>/<str:allifslug>/', views.labTestRequests, name="labTestRequests"),
+path('Add/New/Lab/s/Test/s/request/s/<str:allifusr>/<str:allifslug>/', views.addLabTestRequest, name="addLabTestRequest"),
+path('Edit/Update/Lab/test/request/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editLabTestRequest, name="editLabTestRequest"),
+path('Search/For/lab/test/request/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.labTestRequestSearch, name="labTestRequestSearch"),
+path('Lab/test/request/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.labTestRequestDetails, name="labTestRequestDetails"),
+path('Do/You/u/Really/Want/to/Delete/This/lab/test/request/s/data/record/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteLabTestRequest, name="wantToDeleteLabTestRequest"),
+path('Delete/This/lab/test/request/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteLabTestRequest, name="deleteLabTestRequest"),
+
+path('Lab/Test/s/Request/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.labTestRequestAdvancedSearch, name="labTestRequestAdvancedSearch"),
+
+#####################33 lab test request results #################3
+path('Laboratory/test/s/results/s/<str:allifusr>/<str:allifslug>/', views.labTestResults, name="labTestResults"),
+path('Add/New/Lab/s/Test/s/results/s/<str:allifusr>/<str:allifslug>/', views.addLabTestResult, name="addLabTestResult"),
+path('Edit/Update/Lab/test/results/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editLabTestResult, name="editLabTestResult"),
+path('Search/For/lab/test/results/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.labTestResultSearch, name="labTestResultSearch"),
+path('Lab/test/results/info/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.labTestResultDetails, name="labTestResultDetails"),
+path('Do/You/u/Really/Want/to/Delete/This/lab/test/results/s/data/record/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteLabTestResult, name="wantToDeleteLabTestResult"),
+path('Delete/This/lab/test/result/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteLabTestResult, name="deleteLabTestResult"),
+
+path('Lab/Test/s/Result/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.labTestResultAdvancedSearch, name="labTestResultAdvancedSearch"),
+
+
 ################# prescriptions #####################
 path('Prescriptions/<str:allifusr>/<str:allifslug>/', views.prescriptions, name="prescriptions"),
 path('Add/New/Prescriptions/<str:allifusr>/<str:allifslug>/', views.AddPrescription, name="AddPrescription"),
