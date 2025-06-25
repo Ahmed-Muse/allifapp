@@ -1,3 +1,7 @@
+{# your_app_name/templates/base.html #}
+
+{% load navigation_tags %} {# Load your custom tag library #}
+{% load nav_tags %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -24,6 +28,13 @@
 
 {% endblock %}
 
+<nav>
+            {# Call your custom inclusion tag here. Pass the dynamic variables. #}
+            {% render_sector_navigation user_var glblslug %}
+        </nav>
+
+       
+        
 </head>
 <body class="allifmaal-ui-body">
 <!--below includes the side and top nav bars and their styles...-->
@@ -39,7 +50,12 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+<header>
+    <nav>
+            {# Call your custom inclusion tag here. Pass the dynamic variables. #}
+            {% render_sector_navigation_two user_var glblslug %}
+        </nav>
+    </header>
 {% block body %}
 
 <!--the page content will come here....-->

@@ -1,5 +1,6 @@
 {% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
 {% load humanize %}
+
 {% block title %}
 {{title}}
 {% endblock %}
@@ -32,6 +33,9 @@
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
 <a href="{% url 'allifmaalcommonapp:commonAddBank' user_var glblslug %}">New Bank</a>
+
+
+
 
 
 </div>
@@ -153,7 +157,20 @@
 
 </div><!--end of main container of the page....-->
 
+
 <hr>
+<p>loaded here</p>
+{% load contextual_action_tags %} {# IMPORTANT: Load your new custom tag library #}
+
+{# --- HERE IS WHERE YOU USE THE NEW TAG --- #}
+    <div class="contextual-actions">
+        <h3>Actions for this Transaction:</h3>
+        {# Pass the specific transaction object (transaction_obj) #}
+        {% render_contextual_actions transaction_obj user_var glblslug %}
+    </div>
+<hr>
+
+
 <div class="row mt-12"> <!--start....table row-->
   <div class="row">
   <div class="col-md-6"> <!--start....table column-->

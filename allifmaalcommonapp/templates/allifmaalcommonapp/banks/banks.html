@@ -40,6 +40,21 @@
   <a href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a>
 
 
+
+  
+<hr>
+<p>loaded here</p>
+{% load contextual_action_tags %} {# IMPORTANT: Load your new custom tag library #}
+
+{# --- HERE IS WHERE YOU USE THE NEW TAG --- #}
+    <div class="contextual-actions">
+        <h3>Actions for this Transaction:</h3>
+        {# Pass the specific transaction object (transaction_obj) #}
+        {% render_contextual_actions transaction_obj user_var glblslug %}
+    </div>
+<hr>
+
+
   </div>
     </div><!--end....header column-->
     </div><!--end....header row-->
@@ -88,6 +103,11 @@
           {{item.balance|intcomma}}
           </a>
          </td>
+
+          <td>
+                    {# Render contextual actions for EACH transaction in the loop #}
+                    {% render_contextual_actions trans user_var glblslug %}
+                </td>
         
         <td>
           <div class="dropdown allifmaal-content-dropdown">

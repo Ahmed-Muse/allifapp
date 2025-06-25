@@ -1,0 +1,65 @@
+{# myerpapp/templates/includes/sector_navigation.html #}
+
+{# nav_links contains the combined list of general and sector-specific links #}
+{% for link in allif_custom_links %}
+    <a href="{{ link.url }}" style="margin-right: 15px; text-decoration: none; color: blue;">{{ link.name }}</a>
+{% endfor %}
+
+
+
+
+
+{# This template now receives: #}
+{# - general_links_map: A dictionary of general links (e.g., {'Home': {'name': 'Home', 'url': '...'}, ...}) #}
+{# - sector_links_map: A dictionary of sector-specific links (e.g., {'Triage': {'name': 'Triage', 'url': '...'}, ...}) #}
+
+{# --- Example: Explicitly rendering individual general links --- #}
+<div class="general-navigation-fixed-order">
+    {% if general_links_map.commonHome %}
+        <a href="{{ general_links_map.commonHome.url }}">Home</a>
+    {% endif %}
+
+    {% if general_links_map.commonTransactions %}
+        <a href="{{ general_links_map.commonTransactions.url }}">Transactions</a>
+    {% endif %}
+
+    {# Add more general links as needed, explicitly #}
+    {% if general_links_map.commonCodes %}
+        <a href="{{ general_links_map.commonCodes.url }}">Codes</a>
+    {% endif %}
+   
+</div>
+
+{# --- Example: Explicitly rendering individual sector-specific links --- #}
+<div class="sector-navigation-fixed-order">
+    {# Example for Healthcare Sector (Triage, Prescriptions, Pharmacy, Lab Orders) #}
+    {# These links will ONLY be present in sector_links_map if the current company's sector matches #}
+
+    {% if sector_links_map.triageData %}
+        <a href="{{ sector_links_map.triageData.url }}">Triage</a>
+    {% endif %}
+
+    {% if sector_links_map.ShaafiHome %}
+        <a href="{{ sector_links_map.ShaafiHome.url }}">Shaafi Home</a>
+    {% endif %}
+
+    {% if sector_links_map.Pharmacy %}
+        <a href="{{ sector_links_map.Pharmacy.url }}">Pharmacy</a>
+    {% endif %}
+
+    {% if sector_links_map.Lab_Orders %} {# Make sure the key matches the 'name' in navigation_links.py #}
+        <a href="{{ sector_links_map.Lab_Orders.url }}">Lab Orders</a>
+    {% endif %}
+
+    {# Example for Education Sector (Classes, Faculties) - these would only render if sector is Education #}
+    {% if sector_links_map.Classes %}
+        <a href="{{ sector_links_map.Classes.url }}">Classes</a>
+    {% endif %}
+
+    {% if sector_links_map.Faculties %}
+        <a href="{{ sector_links_map.Faculties.url }}">Faculties</a>
+    {% endif %}
+
+    {# Continue with explicit checks for all other sector-specific links you might need #}
+
+</div>

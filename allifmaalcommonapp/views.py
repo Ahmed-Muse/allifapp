@@ -6872,9 +6872,13 @@ from allifmaalshaafiapp.models import *
 @logged_in_user_can_view
 def commonAddTransactionDetails(request,pk,*allifargs,**allifkwargs):
     try:
-        title="Transaction Details"
-        allif_data=common_shared_data(request)
        
+        title="Transaction Details"
+        
+        allif_data=common_shared_data(request)
+    
+        #cmpnysctr=main_sbscrbr_entity.sector
+        #print(cmpnysctr,'kkkkkkkkkkk')
         allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
         triages=TriagesModel.objects.filter(medical_file=allifquery)
         form=CommonAddTransactionDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
@@ -6896,6 +6900,8 @@ def commonAddTransactionDetails(request,pk,*allifargs,**allifkwargs):
             "allifquery":allifquery,
             "title":title,
             "triages":triages,
+            #"transaction_obj":allifquery, # <--- PASS THE CORRECT OBJECT HERE
+           
         }
         return render(request,'allifmaalcommonapp/transactions/transaction_details.html',context)
     except Exception as ex:

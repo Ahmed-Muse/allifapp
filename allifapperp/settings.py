@@ -135,6 +135,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'allifmaalcommonapp.preprocessor.allifmaalcommonappglobalVariables',
                 'allifmaalcommonapp.preprocessor.allifUserSessions',
+                #'allifmaalcommonapp.context_processors.your_company_context', # <--- Make sure this is here
             ],
         },
     },
