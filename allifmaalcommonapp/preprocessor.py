@@ -3,6 +3,7 @@ from .sessions import Allifsessions
 
 def allifmaalcommonappglobalVariables(request):
         user_var=0
+        amd="+"
         cmpnysctr="Healthcare"
         glbl_place_holder="This module is not yet configured"
         glblslug= "allifmaalfsjdfljengineeringjdjrwosdflimitedjfljj"
@@ -27,6 +28,7 @@ def allifmaalcommonappglobalVariables(request):
                 "main_sbscrbr_entity":main_sbscrbr_entity,
                 "open_link":open_link,
                 "glbl_place_holder":glbl_place_holder,
+                "amd":amd,
                 }
             else:
                 return {
@@ -41,7 +43,7 @@ def allifmaalcommonappglobalVariables(request):
             "cmpnysctr":cmpnysctr,
             }
 
-
+"""
 def allifmaalcommonappglobalVariables(request):
     # Initialize all variables with their absolute default/fallback values
     # These will be used if no specific logic overrides them.
@@ -98,7 +100,7 @@ def allifmaalcommonappglobalVariables(request):
         "open_link": open_link,
         "glbl_place_holder": glbl_place_holder,
     }
-
+"""
 # create context process so that user sessions can be available on all pages
 def allifUserSessions(request):
      

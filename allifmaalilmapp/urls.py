@@ -7,7 +7,7 @@ path('Education/Home/<str:allifusr>/<str:allifslug>/', views.ilmHome, name="ilmH
 path('Education/Dashboard/<str:allifusr>/<str:allifslug>/', views.ilmDashboard, name="ilmDashboard"),
 
 path('Examination/s/Test/s/Quiz/es/Cat/s/<str:allifusr>/<str:allifslug>/', views.examinations, name="examinations"),
-path('Add/New/examination/s/Test/Quiz/Cat/<str:allifusr>/<str:allifslug>/', views.addExamDetails, name="addExamDetails"),
+path('Add/New/examination/s/Test/Quiz/Cat/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addExamDetails, name="addExamDetails"),
 path('Edit/Exam/detail/s/quiz/cat/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editExamDetails, name="editExamDetails"),
 path('Delete/This/Exam/Cat/Quiz/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteExam, name="deleteExam"),
 path('View/Examination/Cat/Quiz/Test/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.examDetails, name="examDetails"),

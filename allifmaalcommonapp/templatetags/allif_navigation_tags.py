@@ -2,17 +2,16 @@
 
 from django import template
 from django.urls import reverse
-from ..navigation_links import allifmaal_general_links, allifmaal_sector_specific_links
-
+from ..allif_navigation_links import allifmaal_general_links, allifmaal_sector_specific_links
 register = template.Library()
 
-@register.inclusion_tag('includes/sector_navigation.html', takes_context=True)
-def render_sector_navigation(context, user_var, glblslug):
+@register.inclusion_tag('includes/allifapp_navigation_links.html', takes_context=True)
+def allifapp_render_navigation_links(context, user_var, glblslug):
     """
     Renders navigation links based on the company's sector.
     """
-    cmpnysctr = context.get('cmpnysctr', 'Healthcare') # Get sector from context, default to 'General'
-
+    cmpnysctr = context.get('cmpnysctr', 'General') # Get sector from context, default to 'General'
+    
     # Start with general links
     allifmaal_custom_links = []
     for link in allifmaal_general_links:

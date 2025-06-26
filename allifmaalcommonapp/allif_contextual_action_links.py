@@ -1,15 +1,13 @@
 # myerpapp/configs/contextual_actions.py
 
-SECTOR_CONTEXTUAL_ACTIONS = {
+allif_sector_contextual_action_require_pk_links= {
     'Healthcare': [
         {'name': 'AddTriageData', 'url_name': 'allifmaalshaafiapp:AddTriageData', 'requires_pk': True},
-        {'name': 'commonAddTransactionDetails', 'url_name': 'allifmaalcommonapp:commonAddTransactionDetails', 'requires_pk': True},
-        {'name': 'commonSpaceBookings', 'url_name': 'allifmaalcommonapp:commonSpaceBookings', 'requires_pk': True},
-        
-        
+        {'name': 'addDoctorAssessment', 'url_name': 'allifmaalshaafiapp:addDoctorAssessment', 'requires_pk': True},
+     
     ],
     'Education': [
-         {'name': 'AddExam', 'url_name': 'allifmaalilmapp:AddExam', 'requires_pk': True},
+         {'name': 'addExamDetails', 'url_name': 'allifmaalilmapp:addExamDetails', 'requires_pk': True},
     ],
     'Real Estate': [
     ],

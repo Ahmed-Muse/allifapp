@@ -1,8 +1,8 @@
 
+{% load allif_navigation_tags %} {# Very import...Loads the custom tag library linnks #}
 <div>
     <nav class="navbar navbar-expand-lg navbar-light allifmaal-top-nav-bar">
-    
- 
+   
     <!--start of top nav bar section-->
     <div class="container-fluid">
 <!--start......side nav bar section....-->
@@ -18,72 +18,13 @@
 
       {% if user_is_supper %}
       <li><a class="dropdown-item" href="{% url 'allifmaaladminapp:adminappHome' user_var glblslug %}">Admin</a></li>
-
-      
-     
       {% endif %}
-      
-      
+     
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a></li>
-      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpecificDashboard' user_var glblslug %}">Dashboard</a></li>
-      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a></li>
-     
-    <li><a  class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a></li>
-
-     
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBanks' user_var glblslug %}">Banks</a></li>
-
-      
-     
-      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSuppliers' user_var glblslug %}">Suppliers</a></li>
-      
-     
-      {% if sctr == 'Education' %}
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Students</a></li>
-      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Lecturers</a></li>
-     
-      {% elif sctr == 'Healthcare' %}
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Patients</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}" >Doctors</a></li>
-      {% else %}
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomers' user_var glblslug %}">Customers</a></li>
-      
-      {% endif %}
-       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAssets' user_var glblslug %}">Assets</a></li>
-           
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Expenses</a></li>
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonStocks' user_var glblslug %}">Inventory</a></li>
-      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Transactions</a></li>
-      
-      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransits' user_var glblslug %}">Transport</a></li>
-
-     
-     
-
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPurchaseOrders' user_var glblslug %}">Procurement</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonQuotes' user_var glblslug %}">Quotes</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonInvoices' user_var glblslug %}">Invoices</a></li>
-      
-
-
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonLedgerEntries' user_var glblslug %}">Ledgers</a></li>
-      
-      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCustomerPayments' user_var glblslug %}">Payments</a></li>
-     
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonJobs' user_var glblslug %}">Jobs</a></li>
-   
-
+      <li>{% allifapp_render_navigation_links user_var glblslug %}</li>{# this loads the links stored in allif_navigation_links python file #}
+    
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Tasks</a></li>
 
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonProfitAndLoss' user_var glblslug %}">P&L</a></li>
-     
       <div class="btn-group">
         <button class="side-nav-dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
           Stocks
@@ -114,6 +55,13 @@
       </div>
 
       </div>
+
+
+
+      
+
+           
+      
     
         </ul>
       </div>

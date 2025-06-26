@@ -72,10 +72,11 @@ def examinations(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
-def addExamDetails(request,*allifargs,**allifkwargs):
+def addExamDetails(request,pk,*allifargs,**allifkwargs):
     title="Forms, Faculties Registration"
     try:
         allif_data=common_shared_data(request)
+        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
         form=AddExamDetailsForm(allif_data.get("main_sbscrbr_entity"))
         if request.method=='POST':
             form=AddExamDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST)
@@ -96,7 +97,10 @@ def addExamDetails(request,*allifargs,**allifkwargs):
             form=AddExamDetailsForm(allif_data.get("main_sbscrbr_entity"))
        
         context={
-            "form":form,"title":title,}
+            "form":form,"title":title,
+            "allifquery":allifquery,
+            
+            }
         return render(request,'allifmaalilmapp/exams/add_exam.html',context)
        
     except Exception as ex:

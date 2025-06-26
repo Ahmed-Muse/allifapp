@@ -39,6 +39,60 @@ class TriagesModel(models.Model):# very important model
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_triage",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_triage",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_triage",on_delete=models.SET_NULL,null=True,blank=True)
+    
+    pain_level = models.IntegerField(blank=True, null=True,choices=[(i, str(i)) for i in range(0, 11)],help_text="Patient's reported pain level (0-10, 0=no pain, 10=worst pain).")
+    allergies_reported=models.TextField(blank=True, null=True,help_text="Patient's reported allergies (e.g., medications, food, environmental).")
+    TRIAGE_DISPOSITION_CHOICES = [
+    ('EMERGENCY', 'Emergency/Critical Care'),
+    ('URGENT', 'Urgent Care'),
+    ('NON_URGENT', 'Non-Urgent/Primary Care'),
+    ('REFERRAL', 'Referral to Specialist'),
+    ('DISCHARGE', 'Discharge (after minor first aid)'),
+    ('ADMIT', 'Admit for Observation/Inpatient'),
+        ]
+    triage_disposition = models.CharField(
+    max_length=50, blank=True, null=True,
+    choices=TRIAGE_DISPOSITION_CHOICES,
+    help_text="Triage decision or immediate disposition of the patient."
+    )
+# Add a field for free-text comments about the disposition:
+    disposition_notes = models.TextField(
+    blank=True, null=True,
+    help_text="Detailed notes on the triage disposition.")
+    TRIAGE_LEVEL_CHOICES = [
+    (1, 'Resuscitation (Immediate)'),
+    (2, 'Emergency (High Risk)'),
+    (3, 'Urgent'),
+    (4, 'Less Urgent (Non-Emergency)'),
+    (5, 'Non-Urgent'),
+]
+    triage_level = models.IntegerField(
+    blank=True, null=True,
+    choices=TRIAGE_LEVEL_CHOICES,
+    help_text="Assigned triage urgency level (e.g., ESI level 1-5)."
+)
+    MODE_OF_ARRIVAL_CHOICES = [
+    ('AMBULANCE', 'Ambulance'),
+    ('WALK_IN', 'Walk-in'),
+    ('PRIVATE_VEHICLE', 'Private Vehicle'),
+    ('OTHER', 'Other'),
+]
+    mode_of_arrival = models.CharField(max_length=50, blank=True, null=True, choices=MODE_OF_ARRIVAL_CHOICES)
+    symptoms_onset_date = models.DateField(blank=True, null=True, help_text="Date when patient's current symptoms began.")
+    MOBILITY_CHOICES = [
+    ('AMBULATORY', 'Ambulatory (Walks independently)'),
+    ('ASSISTED', 'Assisted (Uses crutches, cane, etc.)'),
+    ('WHEELCHAIR', 'Wheelchair Bound'),
+    ('STRETCHER', 'Stretcher/Bedridden'),
+]
+    mobility_status = models.CharField(max_length=50, blank=True, null=True, choices=MOBILITY_CHOICES)
+    MENTAL_STATUS_CHOICES = [
+    ('ALERT', 'Alert'),
+    ('VERBAL', 'Responds to Verbal Stimuli'),
+    ('PAIN', 'Responds to Painful Stimuli'),
+    ('UNRESPONSIVE', 'Unresponsive'),
+]
+    mental_status = models.CharField(max_length=50, blank=True, null=True, choices=MENTAL_STATUS_CHOICES)
     def __str__(self):
         return str(self.medical_file)
 

@@ -6877,8 +6877,6 @@ def commonAddTransactionDetails(request,pk,*allifargs,**allifkwargs):
         
         allif_data=common_shared_data(request)
     
-        #cmpnysctr=main_sbscrbr_entity.sector
-        #print(cmpnysctr,'kkkkkkkkkkk')
         allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
         triages=TriagesModel.objects.filter(medical_file=allifquery)
         form=CommonAddTransactionDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
@@ -13127,7 +13125,7 @@ def commonProfitAndLoss(request,*allifargs,**allifkwargs):
         totalsales=CommonInvoicesModel.objects.filter(posting_inv_status='posted').order_by('-invoice_total').aggregate(Sum('invoice_total'))['invoice_total__sum']
         totalrevenue=CommonChartofAccountsModel.objects.filter(code__lt=49999,code__gt=39999).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
         totalgoodscost=CommonInvoicesModel.objects.filter(posting_inv_status='posted').order_by('-invoice_items_total_cost').aggregate(Sum('invoice_items_total_cost'))['invoice_items_total_cost__sum']
-        grossprofitorloss=totalsales-totalgoodscost
+        grossprofitorloss=(totalsales or 0)-(totalgoodscost or 0)
         #totalexpenses=totalgoodscost=AllifmaalExpensesModel.objects.all().order_by('-amount').aggregate(Sum('amount'))['amount__sum']
         totexpenses=CommonChartofAccountsModel.objects.filter(code__lt=59999,code__gt=49999).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
         netprofitorloss=grossprofitorloss-(totexpenses or 0)

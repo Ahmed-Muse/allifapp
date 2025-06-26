@@ -377,6 +377,7 @@ def addDoctorAssessment(request,pk,*allifargs,**allifkwargs):
         context = {
             "title":title,
             "form":form,
+            "allifquery":allifquery,
         }
         return render(request,'allifmaalshaafiapp/assessments/doctor_assessments.html',context)
     

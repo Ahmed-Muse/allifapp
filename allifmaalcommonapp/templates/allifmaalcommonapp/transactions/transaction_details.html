@@ -1,8 +1,4 @@
 {% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-
-{% load allif_contextual_action_tags %} {# this helps to put the links where you want and it loads them #}
-
-{% load contextual_action_tags %}
 {% load humanize %}
 {% block title %}
 {{title}}
@@ -11,17 +7,11 @@
 {%endblock%}
 {% block body %}
 
-
-
-{# ...START.... this helps to get the contextual map #}
-  {% if allifquery %}
-  {% get_contextual_actions_map allifquery user_var glblslug as action_links %}
-  {# 'action_links' now holds the dictionary returned by the tag #}
-  {% else %}
-    <p></p>
-  {% endif %}
-{# ...END.... #}
-
+<!-- START... below is for loading contextual dynamic tags and links... used for only contextual links -->
+{% load allif_contextual_action_tags %} {# this helps to put the links where you want and it loads them #}
+{% allif_get_contextual_actions_map allifquery user_var glblslug as allif_contextual_action_links %}
+<!--'allif_contextual_action_links' now holds the dictionary returned by the tag-->
+<!-- END.. -->
 <div class="allifmaal-main-container">
 
 
@@ -46,17 +36,7 @@
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonProgress' allifquery.id user_var glblslug %}">Progress Records</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactionToPdf' allifquery.id user_var glblslug %}">Download</a></li>
       <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteTransaction' allifquery.id user_var glblslug %}">Delete Item</a></li>
-        
-      
-
-
-{% if allifquery %} {# Only try to render if allifquery exists #}
-    {% render_contextual_actions allifquery user_var glblslug %}
-  
-{% else %}
-    <p>No transaction object provided to render specific actions.</p>
-{% endif %}
-
+       
    </div>
   </ul>
 </div>
@@ -64,17 +44,28 @@
 
 <a href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Transactions</a>
 
-<a href="{% url 'allifmaalshaafiapp:AddTriageData' allifquery.id user_var glblslug %}">Add Triage Details</a>
-
-    {# this is for the individual link rendering... add the link to wherever you want it to appear #}
-    {% if 'commonAddTransactionDetails' in action_links %} {# Example for a new action name #}
-      <a href="{{ action_links.commonAddTransactionDetails.url }}">Transaction Details</a>
-    {% endif %}
-
+{% if 'commonAddTransactionDetails' in allif_contextual_action_links %} {# Example for a new action name #}
+    <a href="{{ allif_contextual_action_links.commonAddTransactionDetails.url }}">Transaction Details</a>
+  {% else %}
+    <a href="">Transaction Details</a>
+{% endif %}
 
 
 
+{% if 'AddTriageData' in allif_contextual_action_links %} {# Example for a new action name #}
 
+  <a class="action-button" href="{{ allif_contextual_action_links.AddTriageData.url }}">Add Triage</a>
+  <a class="action-button" href="{{ allif_contextual_action_links.addDoctorAssessment.url }}"> Add Doctor Assessment</a>
+{% else %}
+{% endif %}
+
+
+{% if 'addExamDetails' in allif_contextual_action_links %} {# Example for a new action name #}
+
+  <a class="action-button" href="{{ allif_contextual_action_links.addExamDetails.url }}">New Examination</a>
+ 
+{% else %}
+{% endif %}
 
 </div>
 
@@ -83,24 +74,10 @@
   </div><!--end....header row-->
 
 </div><!--end....main headere-->
-{{cmpnysctr}}
+
   <div class="allifmaincontainer">
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">{{allifquery}} Details | 
-    
-
-  {% if 'AddTriageData' in action_links %}
-    <a class="action-button" href="{{ action_links.AddTriageData.url }}">Add Triage Data</a>
-    {% endif %}
-
-
-  </div>
-
-
-  
-
-
-
+  <div class="table-details-content-description">{{allifquery}} Details </div>
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
     <div class="allif-info-tables">
@@ -226,23 +203,6 @@
   </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div><!--end of row div --->
       
         </div>
@@ -297,9 +257,7 @@
             <td>{{form.description}}</td>
         
             </tr>
-          
-            
-          
+     
         </tbody>
         </table>
       </div>
@@ -388,34 +346,12 @@
           
   </div>
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
     </div>
   
     </div><!--end of row div --->
       
         </div>
-{{triages}}
+
 </div><!--end....table row-->
 </div>
 </form>
@@ -424,7 +360,7 @@
 </div><!--end of main container of the page....-->
 
 <hr>
-
+<br>
 </div>
 </div>
   {% block scripts %}
