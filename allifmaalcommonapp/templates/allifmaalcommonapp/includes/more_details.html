@@ -1,0 +1,99 @@
+   <div class="toggle-section">
+    <div class="toggle-button-container">
+    <button id="toggleButton" class="btn btn-success allifmaal-submit-btn">Show More Details</button>
+    </div>
+    <div id="tableContainer" class="collapse">
+    <div class="row mt-12"> <!--start....table row-->
+    <div class="table-details-content-description">{{allifquery}} Details</div>
+    <div class="col-md-12"> <!--start....table column-->
+    <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+    <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+        <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{allifquery.company}}</td>
+          </tr>
+     
+   
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">City</td>
+            <td>{{allifquery.city}}</td>
+            </tr>
+        
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Date</td>
+            <td>{{allifquery.date|date:'d/m/Y'}}</td>
+            </tr>
+           
+          </tbody>
+          </table>
+        </div>
+        </div>
+        </div><!--end of row div --->
+      
+        </div>
+
+        </div><!--end....table row-->
+        </div>
+        <!--end of table-->
+
+        </div><!--end of main container of the page............-->
+
+
+
+        </div>
+    </div>
+
+    
+
+<script>
+    // JavaScript for the single-page toggle (the Product Inventory table within 'Additional Information' tab)
+    const toggleButton = document.getElementById('toggleButton');
+    const tableContainer = document.getElementById('tableContainer');
+
+    if (toggleButton && tableContainer) { // Ensure elements exist before adding listener
+        toggleButton.addEventListener('click', () => {
+            tableContainer.classList.toggle('show');
+
+            const isHidden = !tableContainer.classList.contains('show');
+
+            if (isHidden) {
+                toggleButton.textContent = 'Show Details';
+            } else {
+                toggleButton.textContent = 'Hide Details';
+            }
+        });
+    }
+
+</script>

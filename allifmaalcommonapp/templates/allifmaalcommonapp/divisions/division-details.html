@@ -31,9 +31,20 @@
 </div>
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
-<a href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a>
-<a href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a>
-<a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
+
+<div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Company Levels
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a></li>
+     
+    </div>
+    </ul>
+  </div>
 
 </div>
 
@@ -152,7 +163,7 @@
 </div>
 <!--end of table-->
 
-</div><!--end of main container of the page....-->
+</div><!--end of main container of the page............-->
 
 
 
@@ -266,6 +277,13 @@
 </div><!--end....table column-->
 
 </div><!--end....table row-->
+
+
+
+<hr>
+ 
+{% include 'allifmaalcommonapp/includes/more_details.html' %}
+<hr>
 
 
 
@@ -446,51 +464,7 @@
                         aria-labelledby="additional-info-tab">
                         <h4>Product Inventory</h4>
                         <p>This section can hold other details, like a list of products or assets.</p>
-                        <div class="toggle-section">
-                            <div class="toggle-button-container">
-                                <button id="toggleButton" class="btn btn-primary btn-lg">Show Product Inventory</button>
-                            </div>
-                            <div id="tableContainer" class="collapse">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th scope="col">Product Name</th>
-                                                <th scope="col">Category</th>
-                                                <th scope="col">Stock</th>
-                                                <th scope="col">Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">Smart Watch Pro</th>
-                                                <td>Electronics</td>
-                                                <td>250</td>
-                                                <td>$299.99</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Ergonomic Keyboard</th>
-                                                <td>Computer Accessories</td>
-                                                <td>150</td>
-                                                <td>$89.99</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Wireless Mouse</th>
-                                                <td>Computer Accessories</td>
-                                                <td>400</td>
-                                                <td>$49.99</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">HD Webcam</th>
-                                                <td>Electronics</td>
-                                                <td>180</td>
-                                                <td>$129.99</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                    
                     </div>
 
                     <div class="tab-pane fade" id="audit-log" role="tabpanel" aria-labelledby="audit-log-tab">
@@ -510,6 +484,144 @@
 
 
 
+
+
+
+
+
+
+    <div class="row mt-12">
+        <div class="col-md-12">
+            <div class="table-details-content-description">
+                <h2>{{allifquery}} Details</h2>
+                {# Buttons to toggle the content below #}
+                <div class="ms-3">
+                    <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleSection1" aria-expanded="false" aria-controls="collapsibleSection1">
+                        Toggle Core Info
+                    </button>
+                    <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleSection2" aria-expanded="false" aria-controls="collapsibleSection2">
+                        Toggle Other Info
+                    </button>
+                    <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleSection3" aria-expanded="false" aria-controls="collapsibleSection3">
+                        Toggle Audit Info
+                    </button>
+                </div>
+            </div>
+
+            {# This is the main collapsible container for the three tables #}
+            {# It has class="collapse" to be hidden by default #}
+            <div class="collapse" id="collapsibleSection1">
+                <div class="row"> {# Your existing row for the three columns #}
+                    <div class="col-md-4">
+                        <div class="table-responsive">
+                            <table class="table table-layout">
+                                <tbody>
+                                    <tr>
+                                        <td class="allif-fix-table-col">Company</td>
+                                        <td>{{allifquery.company}}</td>
+                                    </tr>
+                                    {# Add other rows that belong to this section and should be part of this toggle group #}
+                                    <tr>
+                                        <td class="allif-fix-table-col">Division</td>
+                                        <td>{{allifquery.division}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="allif-details-card table-responsive">
+                            <table class="table table-layout">
+                                <tbody>
+                                    <tr>
+                                        <td class="allif-fix-table-col">Email</td>
+                                        <td>{{allifquery.email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="allif-fix-table-col">Phone</td>
+                                        <td>{{allifquery.phone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="allif-fix-table-col">City</td>
+                                        <td>{{allifquery.city}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="allif-details-card table-responsive">
+                            <table class="table table-layout">
+                                <tbody>
+                                    <tr>
+                                        <td class="allif-fix-table-col">P.O.Box</td>
+                                        <td>{{allifquery.pobox}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="allif-fix-table-col">Address</td>
+                                        <td>{{allifquery.address}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> {# End of the row containing three columns #}
+            </div> {# End of collapsibleSection1 #}
+            
+            {# Example for a second independent collapsible section on the same page #}
+            {# This section might contain "audit information" #}
+            <div class="collapse mt-3" id="collapsibleSection2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-layout">
+                                <tbody>
+                                    <tr>
+                                        <td class="allif-fix-table-col">Created By</td>
+                                        <td>{{allifquery.owner}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="allif-fix-table-col">Date</td>
+                                        <td>{{allifquery.date|date:'d/m/Y'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="allif-fix-table-col">Last Update</td>
+                                        <td>{{allifquery.updatedon|date:'d/m/Y'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> {# End of collapsibleSection2 #}
+
+            {# Example for a third independent collapsible section #}
+            {# This section might contain "technical info" #}
+            <div class="collapse mt-3" id="collapsibleSection3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-layout">
+                                <tbody>
+                                    <tr>
+                                        <td class="allif-fix-table-col">UID</td>
+                                        <td>{{allifquery.divisionuid}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="allif-fix-table-col">Slugeeeeeeeeeee</td>
+                                        <td>{{allifquery.divisionslug}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+        </div> 
+        </div>
+
+    
 
 
 
@@ -538,35 +650,10 @@
 </div>
   {% block scripts %}
 
-<script>
-    // JavaScript for the single-page toggle (the Product Inventory table within 'Additional Information' tab)
-    const toggleButton = document.getElementById('toggleButton');
-    const tableContainer = document.getElementById('tableContainer');
-
-    if (toggleButton && tableContainer) { // Ensure elements exist before adding listener
-        toggleButton.addEventListener('click', () => {
-            tableContainer.classList.toggle('show');
-
-            const isHidden = !tableContainer.classList.contains('show');
-
-            if (isHidden) {
-                toggleButton.textContent = 'Show Product Inventory';
-            } else {
-                toggleButton.textContent = 'Hide Product Inventory';
-            }
-        });
-    }
-
-    // You don't need additional JavaScript for Bootstrap tabs if you're using data-bs-toggle="tab"
-    // Bootstrap handles the tab switching automatically.
-
-    // Optional: If you have custom dropdowns (like your 'Navigate' column dropdowns),
-    // ensure they are properly initialized if not handled by Bootstrap's data attributes.
-    // The showDropdown and confirmDelete functions seem custom, make sure they are defined globally
-    // or within a script that is loaded before this one.
-    // If you want to use Bootstrap's dropdowns, remove showDropdown and use data-bs-toggle="dropdown"
-    // directly on the <a> tag as demonstrated in the header dropdown.
-</script>
+  
   {% endblock %}
    {% endblock %}
+   
+
+
    
