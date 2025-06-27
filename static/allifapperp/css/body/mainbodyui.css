@@ -738,3 +738,63 @@ textarea.form-control {
     white-space: pre-wrap;
 }
 */
+
+
+/*....##########################################################*/
+/*.........START.. STYLING OF SINGPLE PAGE TAB CONTENTS......*/
+  .allif-single-page-tabs-contents-main-wrapper{
+    font-family: inherit;
+   
+  }
+  .allif-single-page-tab-links-wrapper{
+    background-color: aqua;
+    margin: 0.1em;
+    padding: 0.1em;
+   
+  }
+  .allif-single-page-tab-links-wrapper{
+    background-color: bisque;
+
+  }
+  .allif-single-page-tab-links{
+    font-family: inherit;
+  }
+  .allif-single-page-tab-content-wrapper{
+    background-color:rgba(215, 11, 215, 0.4);
+    margin: 0.2em;
+    padding: 0.2em;
+  }
+  .allif-single-page-tab-content-pane{
+    background-color: rgb(250, 204, 219);
+    margin-top: 0.1em;
+    padding: 0.1em;
+
+  }
+  #allif-single-page-tab-content-wrapper-id{
+    font-size: inherit;
+  }
+  /*.............END.... STYLING OF SINGLE PAGE TABS CONTENTS..............*/
+
+
+
+
+  /*........##########################################......................*/
+  /*......START.... STYLING OF COLLAPSIBLE SECTIONS...........*/
+  .allif-collapsible-details-section-links-wrapper {
+    font-family: inherit;
+    
+  }
+  
+  .allif-collapsible-details-section-links{
+    color: blue;
+    text-decoration: none;
+    margin: 0.3em;
+  }
+  .allif-collapsible-details-section-wrapper{
+    background-color: rgb(242, 166, 166);
+    margin: 0.1em;
+    padding: 0.1em;
+  }
+  
+  /*........END......... END OF STYLING TO COLLAPSIBLE SECTIONS....................*/
+
