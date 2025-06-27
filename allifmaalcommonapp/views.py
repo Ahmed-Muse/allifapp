@@ -2410,12 +2410,14 @@ def commonDivisionDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
         title="Division Details"
+        form=CommonAddDivisionForm()
         allifquery=CommonDivisionsModel.objects.filter(id=pk).first()
         relatedqueryset=CommonBranchesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allifquery)
         context={
         "allifquery":allifquery,
         "relatedqueryset": relatedqueryset,
         "title":title,
+        "form":form,
         }
         return render(request,'allifmaalcommonapp/divisions/division-details.html',context)
     except Exception as ex:
