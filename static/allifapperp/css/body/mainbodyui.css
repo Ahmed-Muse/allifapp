@@ -722,3 +722,19 @@ a.body-delete-link-confirm{
 
   /*end... styling of table inline dropdown with delete*/
   
+  /* Custom CSS to fix word breaking in textareas */
+textarea.form-control {
+    word-break: normal; /* Ensures words break only at normal word boundaries (spaces, hyphens) */
+    overflow-wrap: break-word; /* Prevents long words from overflowing the container entirely */
+    white-space: pre-wrap; /* Ensures that wrapping behaves as expected for pre-formatted text */
+}
+
+/* If you are using Bootstrap's form-control specifically for textareas,
+   you might also target it more specifically if needed: */
+/*
+.form-control[type="textarea"] {
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+*/

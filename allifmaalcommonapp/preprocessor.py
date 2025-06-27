@@ -20,7 +20,7 @@ def allifmaalcommonappglobalVariables(request):
             if main_sbscrbr_entity!=None:
                 glblslug=main_sbscrbr_entity.companyslug
                 cmpnysctr=str(main_sbscrbr_entity.sector)
-                print(type(cmpnysctr))
+                
                 return {
                 'user_var':user_var,
                 'glblslug':glblslug,

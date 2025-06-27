@@ -41,10 +41,9 @@
   </ul>
 </div>
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-
 <a href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Transactions</a>
 
-{% if 'commonAddTransactionDetails' in allif_contextual_action_links %} {# Example for a new action name #}
+{% if 'commonAddTransactionDetails' in allif_contextual_action_links %}
     <a href="{{ allif_contextual_action_links.commonAddTransactionDetails.url }}">Transaction Details</a>
   {% else %}
     <a href="">Transaction Details</a>
@@ -52,8 +51,9 @@
 
 
 
-{% if 'AddTriageData' in allif_contextual_action_links %} {# Example for a new action name #}
+{% if 'AddTriageData' in allif_contextual_action_links %}
 
+<a href="{% url 'allifmaalshaafiapp:triageData' user_var glblslug %}">Triage Records</a>
   <a class="action-button" href="{{ allif_contextual_action_links.AddTriageData.url }}">Add Triage</a>
   <a class="action-button" href="{{ allif_contextual_action_links.addDoctorAssessment.url }}"> Add Doctor Assessment</a>
 {% else %}

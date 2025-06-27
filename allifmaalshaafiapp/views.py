@@ -32,7 +32,7 @@ def shaafiHome(request,*allifargs,**allifkwargs):
    
 def shaafiDashboard(request,*allifargs,**allifkwargs):
     try:
-        title="Dashboard : Hospitality"
+        title="Dashboard : Healthcare"
         user_var=request.user
         user_role=user_var.allifmaal_admin
         user_is_supper=request.user.is_superuser
@@ -54,17 +54,17 @@ def shaafiDashboard(request,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 @logged_in_user_is_admin
 def triageData(request,*allifargs,**allifkwargs):
-    title="Triage Data"
+    title="Triage Records"
     try:
         allif_data=common_shared_data(request)
         if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonTransactionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+            allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonTransactionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
+            allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
         elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonTransactionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
+            allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
         elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonTransactionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+            allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
             allifqueryset=[]
         context={"title":title,"allifqueryset":allifqueryset,}
@@ -106,6 +106,7 @@ def AddTriageData(request,pk,*allifargs,**allifkwargs):
         context = {
             "title":title,
             "form":form,
+            "allifquery":allifquery,
         }
         return render(request,'allifmaalshaafiapp/triage/add_triage_data.html',context)
     
@@ -269,15 +270,30 @@ def triageDataAdvancedSearch(request,*allifargs,**allifkwargs):
 def triageDataDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        title="Prescription Details"
+        title="Triage Details"
         allifquery=TriagesModel.objects.filter(id=pk).first()
-      
+        form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
+        if request.method=='POST':
+            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery)
+            if form.is_valid():
+                obj=form.save(commit=False)
+                obj.owner=allif_data.get("usernmeslg")
+                obj.save()
+                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+        else:
+            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
+        
         context={
             "allifquery":allifquery,
             "title":title,
+            "form":form,
           
         }
-        return render(request,'allifmaalshaafiapp/triages/triage_data_details.html',context)
+        return render(request,'allifmaalshaafiapp/triage/triage_data_details.html',context)
     
       
     except Exception as ex:

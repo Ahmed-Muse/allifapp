@@ -1,5 +1,5 @@
 from django.db import models
-from allifmaalcommonapp.constants import BED_TYPES,SPECIMEN_TYPE,PRIORITY_LEVELS, PRESCRIPTION_FORMULATIONS, ADMINISTRATION_ROUTES, DOSAGE_UNITS, OCCUPANCY_STATUSES, APPOINTMENT_STATUSES, ADMISSION_STATUSES, REFERRAL_TYPES, REFERRAL_STATUSES, LAB_TEST_STATUSES, IMAGING_TEST_STATUSES, PATIENT_GENDERS, BLOOD_GROUPS, ENCOUNTER_TYPES, MEDICAL_SERVICE_TYPES
+from allifmaalcommonapp.constants import TRIAGE_DISPOSITION_CHOICES,MENTAL_STATUS_CHOICES, MOBILITY_CHOICES,BED_TYPES,MODE_OF_ARRIVAL_CHOICES,TRIAGE_LEVEL_CHOICES,SPECIMEN_TYPE,PRIORITY_LEVELS, PRESCRIPTION_FORMULATIONS, ADMINISTRATION_ROUTES, DOSAGE_UNITS, OCCUPANCY_STATUSES, APPOINTMENT_STATUSES, ADMISSION_STATUSES, REFERRAL_TYPES, REFERRAL_STATUSES, LAB_TEST_STATUSES, IMAGING_TEST_STATUSES, PATIENT_GENDERS, BLOOD_GROUPS, ENCOUNTER_TYPES, MEDICAL_SERVICE_TYPES
 
 from allifmaalusersapp.models import User
 from allifmaalcommonapp.models import CommonTransactionsModel,CommonSpacesModel,CommonSpaceUnitsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
@@ -33,7 +33,7 @@ class TriagesModel(models.Model):# very important model
     current_medication = models.TextField(blank=True, null=True,help_text="Medications patient is currently taking, reported at triage.")
 
     treatment_plan=models.TextField(blank=True, null=True,help_text="Treatment plan (medications, tests, referrals, follow-up).")
-
+    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     owner=models.ForeignKey(User, related_name="ownr_triage",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_triage",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_triage",on_delete=models.SET_NULL,null=True,blank=True)
@@ -41,57 +41,21 @@ class TriagesModel(models.Model):# very important model
     department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_triage",on_delete=models.SET_NULL,null=True,blank=True)
     
     pain_level = models.IntegerField(blank=True, null=True,choices=[(i, str(i)) for i in range(0, 11)],help_text="Patient's reported pain level (0-10, 0=no pain, 10=worst pain).")
-    allergies_reported=models.TextField(blank=True, null=True,help_text="Patient's reported allergies (e.g., medications, food, environmental).")
-    TRIAGE_DISPOSITION_CHOICES = [
-    ('EMERGENCY', 'Emergency/Critical Care'),
-    ('URGENT', 'Urgent Care'),
-    ('NON_URGENT', 'Non-Urgent/Primary Care'),
-    ('REFERRAL', 'Referral to Specialist'),
-    ('DISCHARGE', 'Discharge (after minor first aid)'),
-    ('ADMIT', 'Admit for Observation/Inpatient'),
-        ]
-    triage_disposition = models.CharField(
-    max_length=50, blank=True, null=True,
-    choices=TRIAGE_DISPOSITION_CHOICES,
+    allergies=models.TextField(blank=True, null=True,help_text="Patient's reported allergies (e.g., medications, food, environmental).")
+   
+    triage_disposition = models.CharField(max_length=50, blank=True, null=True,choices=TRIAGE_DISPOSITION_CHOICES,
     help_text="Triage decision or immediate disposition of the patient."
     )
 # Add a field for free-text comments about the disposition:
-    disposition_notes = models.TextField(
-    blank=True, null=True,
-    help_text="Detailed notes on the triage disposition.")
-    TRIAGE_LEVEL_CHOICES = [
-    (1, 'Resuscitation (Immediate)'),
-    (2, 'Emergency (High Risk)'),
-    (3, 'Urgent'),
-    (4, 'Less Urgent (Non-Emergency)'),
-    (5, 'Non-Urgent'),
-]
-    triage_level = models.IntegerField(
-    blank=True, null=True,
-    choices=TRIAGE_LEVEL_CHOICES,
-    help_text="Assigned triage urgency level (e.g., ESI level 1-5)."
-)
-    MODE_OF_ARRIVAL_CHOICES = [
-    ('AMBULANCE', 'Ambulance'),
-    ('WALK_IN', 'Walk-in'),
-    ('PRIVATE_VEHICLE', 'Private Vehicle'),
-    ('OTHER', 'Other'),
-]
+    disposition_notes = models.TextField(blank=True, null=True,help_text="Detailed notes on the triage disposition.")
+   
+    
+    triage_level = models.IntegerField(blank=True, null=True,choices=TRIAGE_LEVEL_CHOICES,help_text="Assigned triage urgency level (e.g., ESI level 1-5).")
+    
     mode_of_arrival = models.CharField(max_length=50, blank=True, null=True, choices=MODE_OF_ARRIVAL_CHOICES)
-    symptoms_onset_date = models.DateField(blank=True, null=True, help_text="Date when patient's current symptoms began.")
-    MOBILITY_CHOICES = [
-    ('AMBULATORY', 'Ambulatory (Walks independently)'),
-    ('ASSISTED', 'Assisted (Uses crutches, cane, etc.)'),
-    ('WHEELCHAIR', 'Wheelchair Bound'),
-    ('STRETCHER', 'Stretcher/Bedridden'),
-]
+    
     mobility_status = models.CharField(max_length=50, blank=True, null=True, choices=MOBILITY_CHOICES)
-    MENTAL_STATUS_CHOICES = [
-    ('ALERT', 'Alert'),
-    ('VERBAL', 'Responds to Verbal Stimuli'),
-    ('PAIN', 'Responds to Painful Stimuli'),
-    ('UNRESPONSIVE', 'Unresponsive'),
-]
+   
     mental_status = models.CharField(max_length=50, blank=True, null=True, choices=MENTAL_STATUS_CHOICES)
     def __str__(self):
         return str(self.medical_file)

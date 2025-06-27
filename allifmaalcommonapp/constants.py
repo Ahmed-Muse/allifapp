@@ -63,8 +63,51 @@ SPECIMEN_TYPE = [
     ('Other', 'Other'),
 ]
 
+TRIAGE_LEVEL_CHOICES = [
+    (1, 'Resuscitation'),
+    (2, 'Emergency'),
+    (3, 'Urgent'),
+    (4, 'Normal'),]
+
+MODE_OF_ARRIVAL_CHOICES = [
+    ('Ambulance', 'Ambulance'),
+    ('Walk-in', 'Walk-in'),
+    ('Vehicle', 'Vehicle'),
+    ('Aeroplane', 'Aeroplane'),
+    ('Wheelchair', 'Wheelchair'),
+    ('Police', 'Police'),
+    ('Stretcher', 'Stretcher'),
+    ('Other', 'Other'),
+]
 
 
+MOBILITY_CHOICES = [
+    ('Walking', 'Walking'),
+    ('Assisted', 'Assisted'),
+    ('Wheelchair', 'Wheelchaired'),
+    ('Stretcher', 'Stretcher'),
+]
+
+MENTAL_STATUS_CHOICES = [
+    ('Alert', 'Alert and Aware'),
+    ('Disoriented', 'Disoriented'),
+    ('Drowsy', 'Drowsy'),
+    ('Responds_to_voice', 'Responds to Voice'), # From AVPU
+    ('Responds_to_pain', 'Responds to Pain'),     # From AVPU
+    ('Agitated', 'Agitated / Restless'),
+    ('Combative', 'Combative / Aggressive'),
+    ('Withdrawn', 'Withdrawn / Very Quiet'),
+    ('Unresponsive', 'Completely Unresponsive'), # From AVPU
+    ('Other', 'Other'), # Always a good fallback
+]
+TRIAGE_DISPOSITION_CHOICES = [
+    ('Emergency', 'Emergency/Critical Care'),
+    ('Urgent', 'Urgent Care'),
+    ('Normal', 'Normal'),
+    ('Referral', 'Referral to Specialist'),
+    ('Discharge', 'Discharge'),
+    ('Admit', 'Admission'),
+        ]
 
 
 

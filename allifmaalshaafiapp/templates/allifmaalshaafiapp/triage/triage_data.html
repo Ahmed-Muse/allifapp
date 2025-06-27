@@ -94,7 +94,7 @@
     <a class="amel-table-list-identifier">Prescriptions:</a>
    
     <a href="{% url 'allifmaalshaafiapp:shaafiHome' user_var glblslug %}">Home</a>
-   
+   <a href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Transactions</a>
    
   </div>
   
@@ -113,13 +113,13 @@
     <table class="table table-layout">
       <thead>
         <tr class="allif-table-header-row">
-        <td class="allif-fix-table-col">Quote No.</td>
-        <td>Customer</td>
-        <td>Value</td>
-        <td>Stage</td>
-        <td>Date</td>
-        <td>Owner</td>
-      
+        <td class="allif-fix-table-col">Patient</td>
+        <td>Reference No.</td>
+        <td>Blood Pressure</td>
+        <td>Temperature D.C</td>
+        <td>Recorded On</td>
+        <td>Recorded By</td>
+       
         <td>Navigate</td>
         
         <td> . . . </td>
@@ -131,30 +131,34 @@
         
         {% for item in allifqueryset %} 
         <tr data-id="{{item.id}}">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:AddTriageData' item.id user_var glblslug %}">New Triage</a></td>
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.medical_file.customer.id user_var glblslug %}">{{item.medical_file.customer}}</a></td>
        
             <td>
-            {{item.customer}}
+              <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.medical_file.id user_var glblslug %}">{{item.medical_file.trans_number}}</a>
+           
           </td>
+          
+           
           <td>
-            <a href="" class="body-delete-link">{{item.total|floatformat:2|intcomma}}</a>
+            <a class="allif-table-links" href="{% url 'allifmaalshaafiapp:triageDataDetails' item.id user_var glblslug %}"> {{item.blood_pressure_systolic}}/{{item.blood_pressure_diastolic}}</a>
+           
           </td>
-          <td>
-            {{item.prospect}}
+            <td>
+            {{item.temperature}}
           </td>
-        
           <td>
             {{item.date|date:'d/m/Y'}}
           </td>
           <td>
             {{item.owner}}
           </td>
-    
+         
          <td>
           <div class="dropdown allifmaal-content-dropdown">
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
             <div class="dropdown-content">
-              <a href="{% url 'allifmaalshaafiapp:EditPrescription' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="{% url 'allifmaalshaafiapp:editTriageData' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+             <a href="{% url 'allifmaalshaafiapp:AddTriageData' item.medical_file.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Add Triage</a>
              
               
               <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>

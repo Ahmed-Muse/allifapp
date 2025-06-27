@@ -8,18 +8,22 @@ class TimePickerInput(forms.TimeInput):#use this wherever you have time input
     input_type='time'
 class DateTimePickerInput(forms.DateTimeInput):#use this wherever you have datetime input
     input_type='datetime'
-    ################################# end of datepicker customization ################################
 
 class AddTriageDetailsForm(forms.ModelForm):
     class Meta:
         model = TriagesModel
-        fields = ['medical_file','record_date','staff','description','complaints','weight','height','division','branch','department',
+        fields = ['record_date','staff','description','complaints','weight','height','division','branch','department',
                   'blood_pressure_systolic','blood_pressure_diastolic','temperature','pulse_rate',
                   'respiration_rate','oxygen_saturation','past_medical_history','known_chronic_conditions',
-                  'current_medication',
-                  'treatment_plan']
+                  'current_medication','treatment_plan',
+                  'pain_level','allergies','triage_disposition','disposition_notes','triage_level','mode_of_arrival',
+                  'mobility_status','mental_status'
+                  
+                  ]
         widgets={
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'allergies':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            'disposition_notes':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'blood_pressure_diastolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'current_medication':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'oxygen_saturation':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -30,13 +34,19 @@ class AddTriageDetailsForm(forms.ModelForm):
             'record_date' : DatePickerInput(attrs={'class':'form-control'}),
             'treatment_plan':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
             'staff':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-          
+
+            
+            'pain_level':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'triage_disposition':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'triage_level':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'mode_of_arrival':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'mobility_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'mental_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+
             'complaints':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
             'weight':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'height':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-           
-         
+            
             'blood_pressure_systolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'past_medical_history':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
            
@@ -50,8 +60,7 @@ class AddTriageDetailsForm(forms.ModelForm):
         self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
         self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
-       
+      
         self.fields['staff'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
       
 
