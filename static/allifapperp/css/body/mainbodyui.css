@@ -747,25 +747,26 @@ textarea.form-control {
    
   }
   .allif-single-page-tab-links-wrapper{
-    background-color: aqua;
+   
     margin: 0.1em;
     padding: 0.1em;
    
   }
   .allif-single-page-tab-links-wrapper{
-    background-color: bisque;
+   
+    font-family: inherit;
 
   }
   .allif-single-page-tab-links{
     font-family: inherit;
   }
   .allif-single-page-tab-content-wrapper{
-    background-color:rgba(215, 11, 215, 0.4);
+   
     margin: 0.2em;
     padding: 0.2em;
   }
   .allif-single-page-tab-content-pane{
-    background-color: rgb(250, 204, 219);
+    
     margin-top: 0.1em;
     padding: 0.1em;
 
@@ -786,15 +787,38 @@ textarea.form-control {
   }
   
   .allif-collapsible-details-section-links{
-    color: blue;
+    color: #0314f8;
     text-decoration: none;
     margin: 0.3em;
   }
   .allif-collapsible-details-section-wrapper{
-    background-color: rgb(242, 166, 166);
+    
     margin: 0.1em;
     padding: 0.1em;
   }
   
   /*........END......... END OF STYLING TO COLLAPSIBLE SECTIONS....................*/
 
+
+  /* Add this to your <style> block in the HTML */
+.table-layout .select2-container {
+    width: 100% !important; /* Use !important to override any conflicting inline or other rules */
+}
+
+/* Also, ensure your form-control class from Bootstrap doesn't interfere */
+.form-control {
+    width: 100%; /* Bootstrap's default, but double-check */
+}
+
+/* If you find the text input part of select2 is narrow, target that too */
+.select2-container .select2-selection--single {
+    height: calc(2.25rem + 2px); /* Standard Bootstrap form-control height */
+    padding: 0.0rem 0.75rem; /* Standard Bootstrap form-control padding */
+    border-radius: .25rem; /* Standard Bootstrap form-control border-radius */
+    border: 1px solid #ced4da; /* Standard Bootstrap form-control border color */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.075); /* Optional: Bootstrap's default box-shadow */
+}
+/* Adjust placeholder color if needed for better visibility */
+.select2-container .select2-selection__placeholder {
+    color: #6c757d; /* Bootstrap's muted text color */
+}

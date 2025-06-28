@@ -11,7 +11,7 @@ from django.utils import timezone # Make sure to import timezone
 from .constants import *
 from decimal import Decimal
 from django.http.response import HttpResponse, JsonResponse
-
+import uuid 
 #################################################### NOTES ###################################
 # This database should serve the following sectors
 # 1. Healthcare
@@ -159,9 +159,9 @@ class CommonBranchesModel(models.Model):# this is the company
     updatedon=models.DateTimeField(blank=True, null=True)
     created_date=models.DateField(null=True, blank=True)
     edit_date=models.DateField(null=True, blank=True)
-    class Meta:
+    #class Meta:
         # ensures that the same value is not repeated in the same company
-        unique_together = ('branch', 'division','company')
+        #unique_together = ('branch', 'division','company')
 
     def __str__(self):
         return str(self.branch)
@@ -191,9 +191,9 @@ class CommonDepartmentsModel(models.Model):
     departmentuid=models.CharField(null=True, blank=True, max_length=100,unique=True)
     departmentslug=models.SlugField(max_length=250, unique=True, blank=True, null=True)
     updatedon=models.DateTimeField(blank=True, null=True)
-    class Meta:
+    #class Meta:
         # ensures that the same value is not repeated in the same company
-        unique_together = ('company', 'division','branch')
+        #unique_together = ('company', 'division','branch')
     def __str__(self):
         return str(self.department)
     
@@ -205,34 +205,58 @@ class CommonDepartmentsModel(models.Model):
         self.updatedon=timezone.localtime(timezone.now())
         super(CommonDepartmentsModel, self).save(*args, **kwargs)
 
-# this database serves all types of employees for various industries like doctors, teachers, sales people, etc. 
-class CommonCompanyScopeModel(models.Model):# this is the company  hospitality logistics
-    name=models.CharField(max_length=30,blank=False,null=False,unique=False,default="Your Scope")
-    comments=models.CharField(max_length=30,blank=False,null=False,unique=False,default="scope comments")
-    owner=models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="usrcmpscop")
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="compscopesconn",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvscpe",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="scopebrcnh",on_delete=models.SET_NULL,null=True,blank=True)
-    department= models.ForeignKey(CommonDepartmentsModel,related_name="scopdptm",on_delete=models.SET_NULL,null=True,blank=True)
-  
+#############################################################
+# Abstract Base Class for Common Organizational Fields
+#############################################################
+class CommonBaseModel(models.Model):
+    """
+    An abstract base class that provides common organizational fields
+    like company, division, branch, department, owner, and creation date.
+    Models inheriting from this will get these fields directly in their table.
+    Also Use '+' for related_name in abstract base classes to prevent reverse accessor clashes --- The related name will not be created on the related object.
+    """
+    owner=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
+    company=models.ForeignKey(CommonCompanyDetailsModel,on_delete=models.CASCADE,null=True,blank=True,related_name='+')
+    division=models.ForeignKey(CommonDivisionsModel,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
+    branch=models.ForeignKey(CommonBranchesModel,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
+    department=models.ForeignKey(CommonDepartmentsModel,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
+    name=models.CharField(max_length=30,blank=True,null=True,default="Name")
+    date=models.DateField(auto_now_add=True,blank=True,null=True)
+    description= models.TextField(null=True, blank=True,default='Description')
+    comments=models.TextField(blank=True,null=True, default='Comments')
+    starts=models.DateTimeField(blank=True,null=True,default=timezone.now)
+    ends=models.DateTimeField(blank=True,null=True,default=timezone.now)
+    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
+    updated_by=models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
+   
+    status=models.CharField(max_length=50, choices=BASE_MODEL_STATUS_CHOICES, default='Draft',null=True,blank=True)
+    priority=models.CharField(max_length=50, choices=PRIORITY_LEVELS, default='Normal',null=True,blank=True)
+    delete_status=models.CharField(choices=delete_status, blank=True, null=True,max_length=30,default="Deletable")
+    #universally unique identifier. Excellent for public-facing IDs, preventing enumeration attacks, and multi-database syncing. You often don't want this to be editable by users.
+    #If your uniqueId is intended to be a UUID, consider switching its type to models.UUIDField.
+    uuid=models.UUIDField(default=uuid.uuid4, editable=False, unique=True, db_index=True,null=True,blank=True)
+    reference=models.CharField(max_length=100, default='reference',blank=True, null=True, db_index=True, help_text="An optional identifier from an external system or an internal reference code.")
+    class Meta:
+        abstract = True # This is the crucial line that makes it an abstract base class
+
+class CommonCompanyScopeModel(CommonBaseModel):# this is the company  hospitality logistics
+    scope_type=models.CharField(max_length=30,choices=SCOPE_TYPES,blank=True,null=True,)
+    scope_resources=models.TextField(blank=True,null=True,help_text="Resources required by this particular scope")
+    scope_constraints=models.TextField(blank=True,null=True,)
+    scope_assumptions=models.TextField(blank=True,null=True)
+    scope_exclusions = models.TextField(blank=True,null=True,help_text="Specific items, features, or activities that are explicitly excluded from this scope.")
+    scope_stakeholders = models.TextField(blank=True,null=True,help_text="Key individuals or groups affected by or having an interest in this scope.")
+    scope_risks=models.TextField(blank=True,null=True,help_text="A summary of identified risks associated with this scope.")
+
     def __str__(self):
         return self.name
     
-class CommonTaxParametersModel(models.Model):
-    taxname=models.CharField(null=True, blank=True, max_length=30,unique=False)
-    taxdescription= models.CharField(null=True, blank=True, max_length=30)
+class CommonTaxParametersModel(CommonBaseModel):
     taxtype=models.CharField(choices=taxoptions, blank=True, max_length=30)
     taxrate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    owner=models.ForeignKey(User, related_name="cmnowntax",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmntaxcmp",on_delete=models.CASCADE,null=True,blank=True)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvstxprm",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="txpbrcnh",on_delete=models.SET_NULL,null=True,blank=True)
-    department= models.ForeignKey(CommonDepartmentsModel,related_name="txprdptm",on_delete=models.SET_NULL,null=True,blank=True)
     
     def __str__(self):
-        return str(self.taxname)
+        return str(self.name)
         #return self.taxname +"   "+str(self.taxrate)+str('%')
     def clean(self):
         if self.taxrate<0:

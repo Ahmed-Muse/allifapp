@@ -21,7 +21,10 @@ CURRENT_STATUS_CHOICES = [
     ('Rented', 'Rented'), ('Cancelled', 'Cancelled')
     ]
 
-
+delete_status= [
+    ('Undeletable','Undeletable'),
+    ('Deletable', 'Deletable'),
+    ]
 
 PROPERTY_UNIT_TYPES = [
         ('Apartment', 'Apartment'),
@@ -48,10 +51,11 @@ LAB_TEST_STATUSES = [
   
 ]
 PRIORITY_LEVELS = [
+    ('Normal', 'Normal'),
     ('High', 'High'),
     ('Medium', 'Medium'),
     ('Low', 'Low'),
-     ('Urgent', 'Urgent')
+    ('Urgent', 'Urgent')
 ]
 
 SPECIMEN_TYPE = [
@@ -110,7 +114,25 @@ TRIAGE_DISPOSITION_CHOICES = [
         ]
 
 
+BASE_MODEL_STATUS_CHOICES= [
+    ('Draft', 'Draft'),
+    ('Active', 'Active'),
+    ('Pending', 'Pending'),
+    ('Approved', 'Approved'),
+    ('Archived', 'Archived'),
+    ]
 
+ # 1. Scope Type
+SCOPE_TYPES = [
+        ('Project', 'Project Scope'),
+        ('Product', 'Product Scope'),
+        ('Service', 'Service Scope'),
+        ('Departmental', 'Departmental Scope'),
+        ('Organizational', 'Organizational Scope'),
+        ('Other', 'Other')
+    ]
+    
+        
 
 
 
@@ -321,10 +343,7 @@ posting_status = [
     ('waiting','waiting'),
     ('posted', 'posted'),
     ]
-delete_status= [
-    ('undeletable','undeletable'),
-    ('deletable', 'deletable'),
-    ]
+
 asset_current_status = [
      ('In Procurement', 'In Procurement'),
      ('In Storage', 'In Storage'),

@@ -1,6 +1,145 @@
 from django import forms
 from .models import *
 
+
+
+# forms.py
+
+from django import forms
+from django.forms.widgets import DateInput # Or your specific DatePickerInput import
+# from some_app.widgets import DatePickerInput # Example if DatePickerInput is custom
+
+
+# Placeholder for DatePickerInput if not explicitly provided
+class DatePickerInput(DateInput):
+    input_type = 'date' # This makes it an HTML5 date input
+
+# --- 1. Create the Common Base Form ---
+class CommonBaseForm(forms.ModelForm):
+    """
+    An abstract base form that provides common fields and their widgets
+    for models inheriting from CommonBaseModel.
+    """
+    class Meta:
+        # Link to the abstract CommonBaseModel
+        # This tells Django what fields are available from the base model
+        model = CommonBaseModel
+        
+        # Specify all common fields you want to include in the form
+        # Note: 'owner', 'updated_by', 'last_updated', 'uuid' are usually
+        # populated in the view, not by the user in the form, so we exclude them.
+        fields = [
+            'name',
+            'description',
+            'comments',
+            'starts',
+            'ends',
+            'status',
+            'priority',
+            'delete_status',
+            'reference',
+            # Organizational fields - will often be overridden/filtered in __init__
+            'company',
+            'division',
+            'branch',
+            'department',
+            # 'date' is auto_now_add, so it's usually excluded from forms
+        ]
+        
+        # Define common widgets for these fields
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter name'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter description', 'rows': 3}), # Changed to Textarea for TextField
+            'comments': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Add comments', 'rows': 2}), # Changed to Textarea for TextField
+            'starts': DatePickerInput(attrs={'class': 'form-control'}),
+            'ends': DatePickerInput(attrs={'class': 'form-control'}),
+            
+            # Select/ForeignKey fields will use your custom Select2 class
+            'status': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Status'}),
+            'priority': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Priority'}),
+            'delete_status': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Delete Status'}),
+            'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'External Reference ID'}),
+            
+            # Foreign Key fields (organizational) will also use Select2
+            'company': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Company'}),
+            'division': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Division'}),
+            'branch': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Branch'}),
+            'department': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Department'}),
+        }
+    
+    # You might also add common validation or clean methods here
+    def clean_starts(self):
+        starts = self.cleaned_data.get('starts')
+        # Example validation: ensure starts is not in the future if it's for past events
+        # if starts and starts > timezone.now():
+        #     raise forms.ValidationError("Start date cannot be in the future.")
+        return starts
+
+    def clean_ends(self):
+        starts = self.cleaned_data.get('starts')
+        ends = self.cleaned_data.get('ends')
+        if starts and ends and ends < starts:
+            raise forms.ValidationError("End date cannot be before start date.")
+        return ends
+
+# --- 2. Inherit from the Common Base Form ---
+class CommonAddCompanyScopeFormOne(CommonBaseForm):
+    """
+    Form for adding a CommonCompanyScopeModel instance,
+    inheriting common fields from CommonBaseForm.
+    """
+    class Meta(CommonBaseForm.Meta): # Inherit Meta from CommonBaseForm
+        model = CommonCompanyScopeModel # Specify the concrete model for this form
+        
+        # Define fields specific to CommonCompanyScopeModel
+        # Use a tuple or list to explicitly include fields.
+        # If you want ALL fields from CommonBaseForm.Meta.fields PLUS new ones:
+        # fields = CommonBaseForm.Meta.fields + [
+        #     'scope_type', 'objectives', 'key_deliverables',
+        #     'success_metrics', 'budget', 'sponsor', 'related_scopes'
+        # ]
+        # OR, if you want full control and re-list:
+        fields = [
+            'name', 'description', 'comments', 'starts', 'ends',
+            'status', 'priority', 'delete_status', 'reference',
+            'company', 'division', 'branch', 'department', # These are now inherited
+            'scope_type', 
+           
+        ]
+        
+        # Override or add specific widgets for new fields
+        widgets = {
+            **CommonBaseForm.Meta.widgets, # Include all widgets from the base form
+            'scope_type': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Scope Type'}),
+            'objectives': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Define objectives', 'rows': 4}),
+            'key_deliverables': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'List key deliverables', 'rows': 4}),
+            'success_metrics': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Specify success metrics', 'rows': 4}),
+            'budget': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter budget'}),
+            'sponsor': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Sponsor'}),
+            'related_scopes': forms.SelectMultiple(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Related Scopes'}),
+        }
+    
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super().__init__(*args, **kwargs) # Call the __init__ of CommonBaseForm
+        
+        # Now, you can apply specific queryset filtering for this form
+        # These fields are inherited, but their querysets can be narrowed down
+        # based on the 'allifmaalparameter' (e.g., company ID).
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        
+        # For the new 'sponsor' field, you might want to filter users
+        self.fields['sponsor'].queryset = User.objects.filter(is_active=True).order_by('first_name')
+        
+        # For 'related_scopes', exclude the current instance if it's an update form
+        if self.instance and self.instance.pk:
+            self.fields['related_scopes'].queryset = CommonCompanyScopeModel.objects.exclude(pk=self.instance.pk).filter(company=allifmaalparameter)
+        else:
+            self.fields['related_scopes'].queryset = CommonCompanyScopeModel.objects.filter(company=allifmaalparameter)
+
+
+
 ############################# start of datepicker customization ##############################
 class DatePickerInput(forms.DateInput):#use this class whereever you have a date and it will give you the calender
     input_type='date'#
@@ -114,16 +253,37 @@ class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
         
         }
 
+    
 class CommonAddCompanyScopeForm(forms.ModelForm):
     class Meta:
         model = CommonCompanyScopeModel
-        fields = ['name','comments','division','branch','department']
+        fields = ['name','comments','division','reference','branch','department','starts','ends','delete_status','description','status','priority',
+                  'scope_type','scope_resources','scope_constraints','scope_assumptions','scope_exclusions',
+                  'scope_stakeholders','scope_risks'
+                  ]
         widgets={
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'scope_resources':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'scope_constraints':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'scope_assumptions':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'scope_exclusions':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'scope_stakeholders':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'scope_risks':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
+            
+            
+            'reference':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'starts' : DatePickerInput(attrs={'class':'form-control'}),
+            'ends' : DatePickerInput(attrs={'class':'form-control'}),
+            'delete_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'priority':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'scope_type':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
 
         } 
     def __init__(self,allifmaalparameter,*args,**kwargs):
@@ -225,13 +385,13 @@ class CommonAddTaxParameterForm(forms.ModelForm):
     class Meta:
         #mydefault=TaxParametersModel.objects.all().first().taxname
         model = CommonTaxParametersModel
-        fields = ['taxname','taxtype','taxrate', 'taxdescription','division','branch','department']
+        fields = ['name','taxtype','taxrate', 'description','division','branch','department']
         widgets={
-            'taxname':forms.TextInput(attrs={'class':'form-control'}),
+            'name':forms.TextInput(attrs={'class':'form-control'}),
              #'taxname':forms.TextInput(attrs={'class':'form-control','value':mydefault}),
             'taxrate':forms.TextInput(attrs={'class':'form-control'}),
              'taxtype':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
-             'taxdescription':forms.TextInput(attrs={'class':'form-control'}),
+             'description':forms.TextInput(attrs={'class':'form-control'}),
               'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),

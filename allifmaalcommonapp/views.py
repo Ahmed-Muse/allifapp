@@ -2231,20 +2231,27 @@ def commonAddCompanyScope(request,*allifargs,**allifkwargs):
     title="Scopes"
     try:
         allif_data=common_shared_data(request)
+        print(allif_data.get("usernmeslg"))
+        print(allif_data.get("logged_user_division"))
         form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"))
         allifqueryset=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         if request.method == 'POST':
             form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
                 obj=form.save(commit=False)
-
                 obj.company=allif_data.get("main_sbscrbr_entity")
                 obj.division=allif_data.get("logged_user_division")
                 obj.branch=allif_data.get("logged_user_branch")
                 obj.department=allif_data.get("logged_user_department")
                 obj.owner=allif_data.get("usernmeslg")
+                obj.updated_by=allif_data.get("usernmeslg")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+            else:
+                error_message=form.errors
+                allifcontext={"error_message":error_message,"title":title,}
+                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+              
         else:
             form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"))
         context={
@@ -2261,23 +2268,25 @@ def commonAddCompanyScope(request,*allifargs,**allifkwargs):
 @logged_in_user_can_edit 
 @subscriber_company_status
 def commonEditCompanyScope(request,pk,*allifargs,**allifkwargs):
-    title="Update Scope"
+    title="Update Scope Details"
     try:
         allif_data=common_shared_data(request)
-        user_var_update=CommonCompanyScopeModel.objects.filter(pk=pk).first()
-        form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),instance=user_var_update)
+        allifquery=CommonCompanyScopeModel.objects.filter(pk=pk).first()
+        form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
         if request.method=='POST':
-            form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None,request.FILES, instance=user_var_update)
+            form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None,request.FILES, instance=allifquery)
             if form.is_valid():
-                obj = form.save(commit=False)
+                obj=form.save(commit=False)
+                obj.updated_by=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalcommonapp:commonAddCompanyScope',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalcommonapp:commonEditCompanyScope',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
-                form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=user_var_update)
+                form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery)
         else:
-            form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=user_var_update)
-        context={"title":title,"form":form,}
-        return render(request,'allifmaalcommonapp/scopes/scopes.html',context)
+            form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery)
+        context={"title":title,"form":form,
+                 "allifquery":allifquery,}
+        return render(request,'allifmaalcommonapp/scopes/scope_details.html',context)
        
     except Exception as ex:
         error_context={'error_message': ex,}
@@ -2475,7 +2484,7 @@ def commonBranches(request,*allifargs,**allifkwargs):
 
         else:
             allifqueryset=[]
-        
+        #allifqueryset=CommonBranchesModel.objects.all()
         context={
             "title":title,
             "allifqueryset":allifqueryset,

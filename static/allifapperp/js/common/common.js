@@ -5,10 +5,16 @@
         $('.custom-field-class-for-seclect2').select2({
             placeholder: "Select The Correct Value Here",
             theme: "classic",
-            width: 'resolve', // 'resolve' is often better for responsive design
+             width: '100%', // <--- CHANGE THIS TO '100%'
+            //width: 'resolve', // 'resolve' is often better for responsive design
             closeOnSelect: true,
             disabled: false,
             dropdownCssClass: "form-control", // Use dropdownCssClass instead of customClass
+
+
+
+           
+        
         });
     });
 

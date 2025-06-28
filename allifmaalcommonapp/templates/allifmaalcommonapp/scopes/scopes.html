@@ -16,7 +16,7 @@
     <a class="amel-table-list-identifier">Scopes:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
    
-  
+   <a href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}">Scopes</a>
   </div>
     </div><!--end....header column-->
     </div><!--end....header row-->
@@ -32,6 +32,7 @@
         <tr class="allif-table-header-row">
         <td class="allif-fix-table-col">Scope</td>
         <td>Comments</td>
+       
         <td>Created By</td>
         <td>Date</td>
         <td>Navigate</td>
@@ -45,8 +46,9 @@
         
         {% for item in allifqueryset %} 
         <tr data-id="{{item.id}}">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="">{{item.name}}</a></td>
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCompanyScope' item.id user_var glblslug %}">{{item.name}}</a></td>
         <td>{{item.comments}}</td>
+       
         <td>{{item.owner}}</td>
         <td>{{item.date|date:'d/m/Y'}}</td>
        
@@ -90,9 +92,9 @@
     <tbody class="allif-table-body">
     <tr>
       <form method='POST' action=''>{% csrf_token %}
-      <td>{{form.name}}</td>
+      <td>{{form.scope_name}}</td>
       <td>{{form.comments}}</td>
-      
+     
        <td><input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
       </form>
     </tr>

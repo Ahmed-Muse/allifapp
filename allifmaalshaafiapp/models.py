@@ -4,7 +4,6 @@ from allifmaalcommonapp.constants import TRIAGE_DISPOSITION_CHOICES,MENTAL_STATU
 from allifmaalusersapp.models import User
 from allifmaalcommonapp.models import CommonTransactionsModel,CommonSpacesModel,CommonSpaceUnitsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
 
-
 class TriagesModel(models.Model):# very important model
     """
     these are used to record patient assessments like triage records, doctor observations...
@@ -90,7 +89,7 @@ class AssessmentsModel(models.Model):# very important model
     current_medication= models.TextField(blank=True, null=True,help_text="Medications patient is currently taking, reported at triage.")
 
     treatment_plan=models.TextField(blank=True, null=True,help_text="Treatment plan (medications, tests, referrals, follow-up).")
-
+    
     owner=models.ForeignKey(User, related_name="ownr_assessments",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_assessment",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_assessment",on_delete=models.SET_NULL,null=True,blank=True)

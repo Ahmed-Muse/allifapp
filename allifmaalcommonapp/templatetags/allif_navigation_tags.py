@@ -5,7 +5,7 @@ from django.urls import reverse
 from ..allif_navigation_links import allifmaal_general_links, allifmaal_sector_specific_links
 register = template.Library()
 
-@register.inclusion_tag('includes/allifapp_navigation_links.html', takes_context=True)
+@register.inclusion_tag('allifmaalcommonapp/includes/allifapp_navigation_links.html', takes_context=True)
 def allifapp_render_navigation_links(context, user_var, glblslug):
     """
     Renders navigation links based on the company's sector.
