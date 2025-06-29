@@ -1,0 +1,450 @@
+{# allifmaalcommonapp/templates/company_scope_detail.html #}
+{% extends 'allifmaalcommonapp/base/entity_detail_base.html' %}
+{% load humanize %} {# Humanize is often loaded in base, but can be here too if needed #}
+
+{% block title %}
+{{ title }} {# This title should be passed from your view context #}
+{% endblock %}
+
+{% block header_actions %}
+{# Override to provide actions specific to Company Scope #}
+<li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}">Add Scope</a></li>
+{# Ensure allifquery.id exists for edit/delete actions, perhaps conditionally if it's an add form #}
+{% if allifquery %}
+<li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditCompanyScope' allifquery.id user_var glblslug %}">Edit Scope</a></li>
+<li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteScope' allifquery.id user_var glblslug %}">Delete Scope</a></li>
+{% endif %}
+{% endblock %}
+
+{% block header_nav_links %}
+{# Keep the Home link from parent, then add specific navigation #}
+{{ block.super }} {# This will include <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a> #}
+<a href="{% url 'allifmaalcommonapp:commonAddCompanyScope' user_var glblslug %}">Scopes</a>
+{% endblock %}
+
+{% block main_details_title %}
+{# Override the main title to show the specific object's name #}
+{{ allifquery.name|default:"New Scope" }} Details
+{% endblock %}
+
+{% block main_details_tables %}
+{# Inject the display tables for allifquery's properties #}
+<div class="col-md-4">
+    <div class="table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td class="allif-fix-table-col">Scope Name</td>
+                    <td>{{ allifquery.name }}</td>
+                </tr>
+                <tr>
+                    <td class="allif-fix-table-col">Required Resources</td>
+                    <td>{{ allifquery.scope_resources }}</td>
+                </tr>
+                <tr>
+                    <td class="allif-fix-table-col">Scope Type</td>
+                    <td>{{ allifquery.scope_type }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td class="allif-fix-table-col">Scope Constraints</td>
+                    <td>{{ allifquery.scope_constraints }}</td>
+                </tr>
+                <tr>
+                    <td class="allif-fix-table-col">Scope Assumptions</td>
+                    <td>{{ allifquery.scope_assumptions }}</td>
+                </tr>
+                <tr>
+                    <td class="allif-fix-table-col">Scope Exclusions</td>
+                    <td>{{ allifquery.scope_exclusions }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td class="allif-fix-table-col">Scope Stakeholders</td>
+                    <td>{{ allifquery.scope_stakeholders }}</td>
+                </tr>
+                <tr>
+                    <td class="allif-fix-table-col">Scope Risks</td>
+                    <td>{{ allifquery.scope_risks }}</td>
+                </tr>
+                <tr>
+                    <td class="allif-fix-table-col">Date Created</td> {# Changed from "Scope Date" to be more general #}
+                    <td>{{ allifquery.date|date:'d/m/Y' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block collapsible_toggle_links %}
+{# Override to provide specific toggle links for Scope-related collapsible sections #}
+<a class="dropdown-toggle allif-collapsible-details-section-links" type="button" data-bs-toggle="collapse"
+  data-bs-target="#allif-collapsible-details-section-one" aria-expanded="false"
+   aria-controls="allif-collapsible-details-section-one">General Info</a>
+
+<a class="dropdown-toggle allif-collapsible-details-section-links" type="button" data-bs-toggle="collapse"
+  data-bs-target="#allif-collapsible-details-section-two" aria-expanded="false"
+   aria-controls="allif-collapsible-details-section-two">Organizational Data</a>
+
+<a class="dropdown-toggle allif-collapsible-details-section-links" type="button" data-bs-toggle="collapse"
+  data-bs-target="#allif-collapsible-details-section-three" aria-expanded="false"
+   aria-controls="allif-collapsible-details-section-three">Timelines & Audit</a>
+{% endblock %}
+
+{% block collapsible_content_one %}
+{# Content for the first collapsible section (General Info) #}
+<div class="row mt-12">
+    <div class="col-md-6"> {# Example: using two columns within a collapsible section #}
+        <div class="table-responsive">
+            <table class="table table-layout">
+                <tbody>
+                    <tr>
+                        <td class="allif-fix-table-col">Description</td>
+                        <td>{{ allifquery.description }}</td>
+                    </tr>
+                    <tr>
+                        <td class="allif-fix-table-col">Comments</td>
+                        <td>{{ allifquery.comments }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table table-layout">
+                <tbody>
+                    <tr>
+                        <td class="allif-fix-table-col">Reference ID</td>
+                        <td>{{ allifquery.reference }}</td>
+                    </tr>
+                    <tr>
+                        <td class="allif-fix-table-col">Priority</td>
+                        <td>{{ allifquery.priority }}</td>
+                    </tr>
+                    <tr>
+                        <td class="allif-fix-table-col">Status</td>
+                        <td>{{ allifquery.status }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block collapsible_content_two %}
+{# Content for the second collapsible section (Organizational Data) #}
+<div class="row mt-12">
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table table-layout">
+                <tbody>
+                    <tr>
+                        <td class="allif-fix-table-col">Company</td>
+                        <td>{{ allifquery.company }}</td>
+                    </tr>
+                    <tr>
+                        <td class="allif-fix-table-col">Division</td>
+                        <td>{{ allifquery.division }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table table-layout">
+                <tbody>
+                    <tr>
+                        <td class="allif-fix-table-col">Branch</td>
+                        <td>{{ allifquery.branch }}</td>
+                    </tr>
+                    <tr>
+                        <td class="allif-fix-table-col">Department</td>
+                        <td>{{ allifquery.department }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block collapsible_content_three %}
+{# Content for the third collapsible section (Timelines & Audit) #}
+<div class="row mt-12">
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table table-layout">
+                <tbody>
+                    <tr>
+                        <td class="allif-fix-table-col">Start Date</td>
+                        <td>{{ allifquery.starts|date:'d/m/Y H:i' }}</td> {# Showing time for DateTimeField #}
+                    </tr>
+                    <tr>
+                        <td class="allif-fix-table-col">End Date</td>
+                        <td>{{ allifquery.ends|date:'d/m/Y H:i' }}</td> {# Showing time for DateTimeField #}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table table-layout">
+                <tbody>
+                    <tr>
+                        <td class="allif-fix-table-col">Last Updated</td>
+                        <td>{{ allifquery.last_updated|date:'d/m/Y H:i' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="allif-fix-table-col">Updated By</td>
+                        <td>{{ allifquery.updated_by }}</td>
+                    </tr>
+                    <tr>
+                        <td class="allif-fix-table-col">Owner</td>
+                        <td>{{ allifquery.owner }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block tab_nav_links %}
+{# Override to provide specific tab links for Scope #}
+<a class="nav-link active allif-single-page-tab-links" id="allif-single-page-tab-one-content-link-one-id" data-bs-toggle="tab"
+   data-bs-target="#allif-single-page-tab-one-content-link" type="button" role="tab" aria-controls="details" aria-selected="true">
+    Core Scope Details
+</a>
+
+<a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-two-content-link-two-id" data-bs-toggle="tab"
+   data-bs-target="#allif-single-page-tab-two-content-link" type="button" role="tab" aria-controls="branches" aria-selected="false">
+    Scope Boundaries
+</a>
+
+<a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-three-content-link-three-id" data-bs-toggle="tab"
+   data-bs-target="#allif-single-page-tab-three-content-link" type="button" role="tab" aria-controls="additional-info" aria-selected="false">
+    Governance & Audit
+</a>
+{% endblock %}
+
+{% block tab_form_content_one %}
+{# Form fields for 'Core Scope Details' tab #}
+<div class="col-md-4">
+    <div class="table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ form.name }}</td>
+                </tr>
+                <tr>
+                    <td>Scope Type</td>
+                    <td>{{ form.scope_type }}</td>
+                </tr>
+                <tr>
+                    <td>Budget</td>
+                    <td>{{ form.budget }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td>Objectives</td>
+                    <td>{{ form.objectives }}</td>
+                </tr>
+                <tr>
+                    <td>Key Deliverables</td>
+                    <td>{{ form.key_deliverables }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td>Success Metrics</td>
+                    <td>{{ form.success_metrics }}</td>
+                </tr>
+                <tr>
+                    <td>Sponsor</td>
+                    <td>{{ form.sponsor }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block tab_form_content_two %}
+{# Form fields for 'Scope Boundaries' tab #}
+<div class="col-md-4">
+    <div class="table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td>Required Resources</td>
+                    <td>{{ form.required_resources }}</td>
+                </tr>
+                <tr>
+                    <td>Constraints</td>
+                    <td>{{ form.constraints }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td>Assumptions</td>
+                    <td>{{ form.assumptions }}</td>
+                </tr>
+                <tr>
+                    <td>Exclusions</td>
+                    <td>{{ form.exclusions }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td>Related Scopes</td>
+                    <td>{{ form.related_scopes }}</td>
+                </tr>
+                <tr>
+                    <td>Version</td>
+                    <td>{{ form.version }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block tab_form_content_three %}
+{# Form fields for 'Governance & Audit' tab #}
+<div class="col-md-4">
+    <div class="table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td>Description</td>
+                    <td>{{ form.description }}</td>
+                </tr>
+                <tr>
+                    <td>Comments</td>
+                    <td>{{ form.comments }}</td>
+                </tr>
+                <tr>
+                    <td>Reference ID</td>
+                    <td>{{ form.reference }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td>Status</td>
+                    <td>{{ form.status }}</td>
+                </tr>
+                <tr>
+                    <td>Priority</td>
+                    <td>{{ form.priority }}</td>
+                </tr>
+                <tr>
+                    <td>Delete Status</td>
+                    <td>{{ form.delete_status }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+            <tbody>
+                <tr>
+                    <td>Start Date</td>
+                    <td>{{ form.starts }}</td>
+                </tr>
+                <tr>
+                    <td>End Date</td>
+                    <td>{{ form.ends }}</td>
+                </tr>
+                <tr>
+                    <td>Stakeholders</td>
+                    <td>{{ form.stakeholders }}</td>
+                </tr>
+                <tr>
+                    <td>Risk Assessment</td>
+                    <td>{{ form.risk_assessment }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block form_submit_button_tab_two %}
+{# Adding submit button for tab two, inheriting from parent's default tab one button #}
+{{ block.super }}
+{% endblock %}
+
+{% block form_submit_button_tab_three %}
+{# Adding submit button for tab three #}
+{{ block.super }}
+{% endblock %}
+
+{% block extra_js %}
+{# Your Select2 initialization script (if not already in uimainbase.html) #}
+<script>
+    $(function () {
+        $('.custom-field-class-for-seclect2').select2({
+            placeholder: "Select The Correct Value Here",
+            theme: "classic",
+            width: '100%',
+            closeOnSelect: true,
+            disabled: false,
+            dropdownCssClass: "form-control",
+        });
+    });
+</script>
+{% endblock %}

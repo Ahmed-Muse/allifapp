@@ -38,6 +38,40 @@ from decimal import Decimal
 from django.db.models import Count,Min,Max,Avg,Sum
 
 from .resources import *
+   
+def commonForTesting(request,*allifargs,**allifkwargs):
+    title="Update Scope Details"
+   
+    allif_data=common_shared_data(request)
+    allifquery=CommonCompanyScopeModel.objects.get(pk=2)
+    form=CommonAddCompanyScopeForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
+    #allifquery = get_object_or_404(CommonCompanyScopeModel, id=allifquery)
+    
+    # Initialize the form
+    # Assuming glblslug can be used as allifmaalparameter (company_id)
+    company_instance = CommonCompanyDetailsModel.objects.get(pk=1)
+    
+    if request.method == 'POST':
+        form = CommonAddCompanyScopeForm(company_instance.id, request.POST, instance=allifquery)
+        if form.is_valid():
+            scope_instance = form.save(commit=False)
+            # These are handled by auto_now_add/auto_now or set in view's save() hook
+            # scope_instance.owner = request.user
+            # scope_instance.updated_by = request.user
+            scope_instance.save()
+            return redirect('success_url_for_scope') # Replace with actual URL
+    else:
+        form = CommonAddCompanyScopeForm(company_instance.id, instance=allifquery)
+
+    context = {
+        'title': f'Scope: {allifquery.name}',
+        'allifquery': allifquery, # The model instance itself is enough for display tags
+        'form': form, # The form instance itself is enough for form tags
+       
+    }
+    return render(request,'allifmaalcommonapp/base/company_scope_detail.html',context)
+      
+    
 def commonWebsite(request):
     try:
         title="Allifmaal ERP"
@@ -3805,7 +3839,11 @@ def commonTaxParameters(request,*allifargs,**allifkwargs):
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.company=allif_data.get("main_sbscrbr_entity")
+                obj.division=allif_data.get("logged_user_division")
+                obj.branch=allif_data.get("logged_user_branch")
+                obj.department=allif_data.get("logged_user_department")
                 obj.owner=allif_data.get("usernmeslg")
+               
                 obj.save()
                 return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
@@ -3833,13 +3871,12 @@ def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
         allifqueryset=CommonTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        update=CommonTaxParametersModel.objects.get(id=pk)
-        form =CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),instance=update)
+        allifquery=CommonTaxParametersModel.objects.filter(id=pk).first()
+        form =CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
         if request.method == 'POST':
-            form = CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST,instance=update)
+            form = CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST,instance=allifquery)
             if form.is_valid():
                 obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
@@ -3849,15 +3886,15 @@ def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
                 allifcontext={"error_message":error_message,"title":title,}
                 return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
         else:
-            form =CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),instance=update)
+            form =CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
         context = {
             'form':form,
-            "update":update,
+            "allifquery":allifquery,
             "title":title,
             "allifqueryset":allifqueryset,
         }
         
-        return render(request,'allifmaalcommonapp/taxes/taxes.html',context)
+        return render(request,'allifmaalcommonapp/taxes/add-update-tax.html',context)
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)

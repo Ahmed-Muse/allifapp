@@ -9,135 +9,12 @@ from django import forms
 from django.forms.widgets import DateInput # Or your specific DatePickerInput import
 # from some_app.widgets import DatePickerInput # Example if DatePickerInput is custom
 
-
-# Placeholder for DatePickerInput if not explicitly provided
+# --- Custom Widget (assuming this is how your DatePickerInput works) ---
 class DatePickerInput(DateInput):
-    input_type = 'date' # This makes it an HTML5 date input
+    input_type = 'date' # Renders as an HTML5 date input
 
-# --- 1. Create the Common Base Form ---
-class CommonBaseForm(forms.ModelForm):
-    """
-    An abstract base form that provides common fields and their widgets
-    for models inheriting from CommonBaseModel.
-    """
-    class Meta:
-        # Link to the abstract CommonBaseModel
-        # This tells Django what fields are available from the base model
-        model = CommonBaseModel
-        
-        # Specify all common fields you want to include in the form
-        # Note: 'owner', 'updated_by', 'last_updated', 'uuid' are usually
-        # populated in the view, not by the user in the form, so we exclude them.
-        fields = [
-            'name',
-            'description',
-            'comments',
-            'starts',
-            'ends',
-            'status',
-            'priority',
-            'delete_status',
-            'reference',
-            # Organizational fields - will often be overridden/filtered in __init__
-            'company',
-            'division',
-            'branch',
-            'department',
-            # 'date' is auto_now_add, so it's usually excluded from forms
-        ]
-        
-        # Define common widgets for these fields
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter name'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter description', 'rows': 3}), # Changed to Textarea for TextField
-            'comments': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Add comments', 'rows': 2}), # Changed to Textarea for TextField
-            'starts': DatePickerInput(attrs={'class': 'form-control'}),
-            'ends': DatePickerInput(attrs={'class': 'form-control'}),
-            
-            # Select/ForeignKey fields will use your custom Select2 class
-            'status': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Status'}),
-            'priority': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Priority'}),
-            'delete_status': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Delete Status'}),
-            'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'External Reference ID'}),
-            
-            # Foreign Key fields (organizational) will also use Select2
-            'company': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Company'}),
-            'division': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Division'}),
-            'branch': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Branch'}),
-            'department': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Department'}),
-        }
-    
-    # You might also add common validation or clean methods here
-    def clean_starts(self):
-        starts = self.cleaned_data.get('starts')
-        # Example validation: ensure starts is not in the future if it's for past events
-        # if starts and starts > timezone.now():
-        #     raise forms.ValidationError("Start date cannot be in the future.")
-        return starts
-
-    def clean_ends(self):
-        starts = self.cleaned_data.get('starts')
-        ends = self.cleaned_data.get('ends')
-        if starts and ends and ends < starts:
-            raise forms.ValidationError("End date cannot be before start date.")
-        return ends
-
-# --- 2. Inherit from the Common Base Form ---
-class CommonAddCompanyScopeFormOne(CommonBaseForm):
-    """
-    Form for adding a CommonCompanyScopeModel instance,
-    inheriting common fields from CommonBaseForm.
-    """
-    class Meta(CommonBaseForm.Meta): # Inherit Meta from CommonBaseForm
-        model = CommonCompanyScopeModel # Specify the concrete model for this form
-        
-        # Define fields specific to CommonCompanyScopeModel
-        # Use a tuple or list to explicitly include fields.
-        # If you want ALL fields from CommonBaseForm.Meta.fields PLUS new ones:
-        # fields = CommonBaseForm.Meta.fields + [
-        #     'scope_type', 'objectives', 'key_deliverables',
-        #     'success_metrics', 'budget', 'sponsor', 'related_scopes'
-        # ]
-        # OR, if you want full control and re-list:
-        fields = [
-            'name', 'description', 'comments', 'starts', 'ends',
-            'status', 'priority', 'delete_status', 'reference',
-            'company', 'division', 'branch', 'department', # These are now inherited
-            'scope_type', 
-           
-        ]
-        
-        # Override or add specific widgets for new fields
-        widgets = {
-            **CommonBaseForm.Meta.widgets, # Include all widgets from the base form
-            'scope_type': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Scope Type'}),
-            'objectives': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Define objectives', 'rows': 4}),
-            'key_deliverables': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'List key deliverables', 'rows': 4}),
-            'success_metrics': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Specify success metrics', 'rows': 4}),
-            'budget': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter budget'}),
-            'sponsor': forms.Select(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Sponsor'}),
-            'related_scopes': forms.SelectMultiple(attrs={'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select Related Scopes'}),
-        }
-    
-    def __init__(self, allifmaalparameter, *args, **kwargs):
-        super().__init__(*args, **kwargs) # Call the __init__ of CommonBaseForm
-        
-        # Now, you can apply specific queryset filtering for this form
-        # These fields are inherited, but their querysets can be narrowed down
-        # based on the 'allifmaalparameter' (e.g., company ID).
-        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        
-        # For the new 'sponsor' field, you might want to filter users
-        self.fields['sponsor'].queryset = User.objects.filter(is_active=True).order_by('first_name')
-        
-        # For 'related_scopes', exclude the current instance if it's an update form
-        if self.instance and self.instance.pk:
-            self.fields['related_scopes'].queryset = CommonCompanyScopeModel.objects.exclude(pk=self.instance.pk).filter(company=allifmaalparameter)
-        else:
-            self.fields['related_scopes'].queryset = CommonCompanyScopeModel.objects.filter(company=allifmaalparameter)
-
+# --- Select2 specific attrs ---
+SELECT2_ATTRS = {'class': 'form-control custom-field-class-for-seclect2', 'placeholder': 'Select value'}
 
 
 ############################# start of datepicker customization ##############################
@@ -253,8 +130,211 @@ class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
         
         }
 
+# forms.py
+
+# --- 1. CommonBaseForm: Encapsulates shared fields and widgets ---
+class CommonBaseForm(forms.ModelForm):
+    """
+    An abstract base form for models inheriting CommonBaseModel.
+    Includes common fields and their default widgets.
+    """
+    class Meta:
+        model=CommonBaseModel
+        fields=['name','description','comments','starts','ends','status','priority','delete_status','reference','division','branch','department',]
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
+            'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Comments', 'rows': 2}),
+            'starts': DatePickerInput(attrs={'class': 'form-control'}),
+            'ends': DatePickerInput(attrs={'class': 'form-control'}),
+            'status': forms.Select(attrs=SELECT2_ATTRS),
+            'priority': forms.Select(attrs=SELECT2_ATTRS),
+            'delete_status': forms.Select(attrs=SELECT2_ATTRS),
+            'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}),
+            
+            # Organizational Foreign Key fields also use Select2
+            'company': forms.Select(attrs=SELECT2_ATTRS),
+            'division': forms.Select(attrs=SELECT2_ATTRS),
+            'branch': forms.Select(attrs=SELECT2_ATTRS),
+            'department': forms.Select(attrs=SELECT2_ATTRS),
+        }
     
-class CommonAddCompanyScopeForm(forms.ModelForm):
+    def clean(self):
+        cleaned_data = super().clean()
+        starts = cleaned_data.get('starts')
+        ends = cleaned_data.get('ends')
+
+        # Example common validation: Ensure end date is not before start date
+        if starts and ends and ends < starts:
+            self.add_error('ends', "End date cannot be before start date.")
+        
+        return cleaned_data
+
+    def __init__(self, allifmaalparameter=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Apply queryset filtering for organizational fields if a company_id is provided
+        # This allows child forms to pass their allifmaalparameter (which seems to be a company ID)
+        if allifmaalparameter:
+            # Filter division, branch, department by the provided company ID
+            self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company_id=allifmaalparameter)
+            self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company_id=allifmaalparameter)
+            self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company_id=allifmaalparameter)
+            
+            # Optionally, you might also want to set the initial company field, or restrict its queryset
+            # For instance, if the form is always for a specific company, you might hide the 'company' field
+            # or pre-select it:
+            # self.fields['company'].queryset = CommonCompanyDetailsModel.objects.filter(id=company_id_for_queryset_filter)
+            # if 'company' in self.fields and not self.initial.get('company'):
+            #     self.initial['company'] = company_id_for_queryset_filter
+            #     self.fields['company'].widget = forms.HiddenInput() # Or make it read-only
+        else:
+            # If no company_id is provided, you might want to show an empty queryset or all
+            # Showing none is safer to prevent accidental selection of wrong org units
+            self.fields['division'].queryset = CommonDivisionsModel.objects.none()
+            self.fields['branch'].queryset = CommonBranchesModel.objects.none()
+            self.fields['department'].queryset = CommonDepartmentsModel.objects.none()
+            # The 'company' field itself should probably show all companies if no specific filter
+            # self.fields['company'].queryset = CommonCompanyDetailsModel.objects.all()
+
+
+# --- 2. CommonAddCompanyScopeForm: Inherits from CommonBaseForm ---
+class CommonAddCompanyScopeForm(CommonBaseForm):
+    """
+    Form for CommonCompanyScopeModel, inheriting common fields from CommonBaseForm.
+    """
+    class Meta(CommonBaseForm.Meta): # Inherit Meta options from CommonBaseForm
+        model = CommonCompanyScopeModel # Specify the concrete model for this form
+        
+        # Define fields specific to CommonCompanyScopeModel.
+        # Use CommonBaseForm.Meta.fields to get all inherited fields, then add specific ones.
+        # If you were to completely re-list, it would be:
+        # fields = ['name', 'description', ..., 'scope_type', 'scope_resources', ...]
+        fields = CommonBaseForm.Meta.fields + ['scope_type','scope_resources','scope_constraints','scope_assumptions','scope_exclusions','scope_stakeholders','scope_risks',
+            # If you had new ForeignKey/ManyToManyField specific to ScopeModel, list them here too
+            # e.g., 'sponsor', 'related_scopes' if you had them in your latest model
+        ]
+        
+        # Override or add specific widgets for CommonCompanyScopeModel's own fields.
+        # Use **CommonBaseForm.Meta.widgets to bring in all parent widgets.
+        widgets = {
+            **CommonBaseForm.Meta.widgets, # Bring in all common widgets
+            'scope_type': forms.Select(attrs=SELECT2_ATTRS),
+            # Use Textarea for TextField model fields
+            'scope_resources': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'scope_constraints': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'scope_assumptions': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'scope_exclusions': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'scope_stakeholders': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'scope_risks': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            # Add widgets for 'sponsor' and 'related_scopes' if you added them to the model
+            # 'sponsor': forms.Select(attrs=SELECT2_ATTRS),
+            # 'related_scopes': forms.SelectMultiple(attrs=SELECT2_ATTRS),
+             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}),
+        }
+    
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super().__init__(allifmaalparameter, *args, **kwargs)
+        
+
+        # If 'sponsor' or 'related_scopes' were added to CommonCompanyScopeModel
+        # self.fields['sponsor'].queryset = User.objects.filter(is_staff=True) # Example filter
+        # if self.instance and self.instance.pk:
+        #     self.fields['related_scopes'].queryset = CommonCompanyScopeModel.objects.exclude(pk=self.instance.pk)
+
+
+# --- 3. Example: CommonAddTaxParametersForm inheriting from CommonBaseForm ---
+class CommonAddTaxParameterForm(CommonBaseForm):
+    """
+    Form for CommonTaxParametersModel, inheriting common fields from CommonBaseForm.
+    """
+    class Meta(CommonBaseForm.Meta): # Inherit Meta options from CommonBaseForm
+        model = CommonTaxParametersModel # Specify the concrete model for this form
+        
+        # Define fields specific to CommonTaxParametersModel
+        fields = CommonBaseForm.Meta.fields + ['taxtype','taxrate',]
+        
+        # Override or add specific widgets for new fields
+        widgets = {
+            **CommonBaseForm.Meta.widgets, # Bring in all common widgets
+            'taxtype': forms.Select(attrs=SELECT2_ATTRS),
+            'taxrate': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Tax Rate'}),
+        }
+
+    # Keep your specific clean method for taxrate
+    def clean_taxrate(self):
+        taxrate = self.cleaned_data.get('taxrate')
+        if taxrate is not None and taxrate < 0: # Check for None explicitly
+            raise ValidationError("Tax Rate cannot be negative")
+        return taxrate
+ 
+    def __init__(self, allifmaalparameter, *args, **kwargs): # Assuming this form also needs the company parameter
+        super().__init__(allifmaalparameter, *args, **kwargs)
+        # Add specific queryset filtering for this form if needed, e.g., for taxtype
+        pass
+    
+
+
+
+# --- 2. CommonAddOperationYearTermForm: Inherits from CommonBaseForm ---
+class CommonAddOperationYearTermForm(CommonBaseForm):
+    """
+    Form for CommonOperationYearTermsModel, inheriting common fields from CommonBaseForm.
+    """
+    class Meta(CommonBaseForm.Meta): # Inherit Meta options from CommonBaseForm
+        model = CommonOperationYearTermsModel # Specify the concrete model for this form
+        
+        # Define fields specific to CommonOperationYearTermsModel.
+        # Use CommonBaseForm.Meta.fields to get all inherited fields, then add specific ones.
+        fields = CommonBaseForm.Meta.fields + ['operation_year', 'is_current']
+        
+        # Override or add specific widgets for new fields.
+        # Use **CommonBaseForm.Meta.widgets to bring in all parent widgets.
+        widgets = {
+            **CommonBaseForm.Meta.widgets,
+            'is_current': forms.Select(attrs=SELECT2_ATTRS), # Assuming is_current is a BooleanField or CharField with choices
+            'operation_year': forms.Select(attrs=SELECT2_ATTRS), # Assuming operation_year is a ForeignKey
+        }
+
+    # If CommonOperationYearTermsModel has specific validation, add it here.
+    
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        # Pass the allifmaalparameter to the parent form's __init__
+        super().__init__(allifmaalparameter, *args, **kwargs)
+        
+        # Now, apply specific queryset filtering for this form's unique fields
+        # This assumes operation_year is related to the company
+        if allifmaalparameter:
+            self.fields['operation_year'].queryset = CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
+        else:
+            self.fields['operation_year'].queryset = CommonOperationYearsModel.objects.none()
+             
+"""
+class CommonAddOperationYearTermForm(forms.ModelForm):
+    class Meta:
+        model=CommonOperationYearTermsModel
+        fields = ['operation_year','name','is_active','comments','department','is_current','branch','division']
+        widgets={
+            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'end_date':DatePickerInput(attrs={'class':'form-control'}),
+            'start_date':DatePickerInput(attrs={'class':'form-control'}),
+            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+        }
+    def __init__(self,allifmaalparameter, *args, **kwargs):
+        super(CommonAddOperationYearTermForm, self).__init__(*args, **kwargs)
+        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['operation_year'].queryset =CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
+"""
+ 
+"""
+class CommonAddCompanyScopeForm(models.Model):
     class Meta:
         model = CommonCompanyScopeModel
         fields = ['name','comments','division','reference','branch','department','starts','ends','delete_status','description','status','priority',
@@ -291,6 +371,7 @@ class CommonAddCompanyScopeForm(forms.ModelForm):
         self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
         self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
+"""
 
 class CommonAddDivisionForm(forms.ModelForm):
     class Meta:
@@ -381,6 +462,7 @@ class CommonAddStaffProfileForm(forms.ModelForm):
         self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
 
 #################### taxes #####################3
+"""
 class CommonAddTaxParameterForm(forms.ModelForm):
     class Meta:
         #mydefault=TaxParametersModel.objects.all().first().taxname
@@ -402,9 +484,10 @@ class CommonAddTaxParameterForm(forms.ModelForm):
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter or 1)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter or 1)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter or 1)
-
+"""
 
 #################### taxes #####################3
+
 class CommonSupplierAddTaxParameterForm(forms.ModelForm):
     class Meta:
         #mydefault=TaxParametersModel.objects.all().first().taxname
@@ -729,29 +812,6 @@ class CommonAddOperationYearForm(forms.ModelForm):
         self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
         self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
         self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-
-
-class CommonAddOperationYearTermForm(forms.ModelForm):
-    class Meta:
-        model=CommonOperationYearTermsModel
-        fields = ['operation_year','name','is_active','comments','start_date','end_date','department','is_current','branch','division']
-        widgets={
-            'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'end_date':DatePickerInput(attrs={'class':'form-control'}),
-            'start_date':DatePickerInput(attrs={'class':'form-control'}),
-            'is_current':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-        }
-    def __init__(self,allifmaalparameter, *args, **kwargs):
-        super(CommonAddOperationYearTermForm, self).__init__(*args, **kwargs)
-        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['operation_year'].queryset =CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
 
 
     

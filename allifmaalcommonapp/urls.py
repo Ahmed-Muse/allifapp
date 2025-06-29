@@ -4,6 +4,8 @@ app_name='allifmaalcommonapp'
 urlpatterns = [
 
 ############################ The decision maker ##################################3
+
+path('For/Testing/Purposes/<str:allifusr>/<str:allifslug>/', views.commonForTesting, name="commonForTesting"),
 path('', views.commonWebsite, name="commonWebsite"),
 path('Engineering/', views.commonEngineering, name="commonEngineering"),
 path('Decision/Making/Point/', views.CommonDecisionPoint, name="CommonDecisionPoint"),

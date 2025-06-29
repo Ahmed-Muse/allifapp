@@ -1,0 +1,94 @@
+
+  <div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">{{allifquery}} Details</div>
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+        <tr>
+          <td class="allif-fix-table-col">{% block rowname%} {% endblock %}</td>
+          <td>{% block formname%} {% endblock %}</td>
+          </tr>
+      <tr>
+        <td class="allif-fix-table-col">Required Resources</td>
+        <td>{{allifquery.scope_resources}}</td>
+        </tr>
+      <tr>
+        <td class="allif-fix-table-col">Scope Type</td>
+        <td>{{allifquery.scope_type}}</td>
+        </tr>
+     
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+         
+          <tr>
+        <td class="allif-fix-table-col">Scope Constraints</td>
+        <td>{{allifquery.scope_constraints}}</td>
+        </tr>
+    
+          <tr>
+            <td class="allif-fix-table-col">Scope Assumptions</td>
+            <td>{{allifquery.scope_assumptions}}</td>
+            </tr>
+            <tr>
+            <td class="allif-fix-table-col">Scope Exclusions</td>
+            <td>{{allifquery.scope_exclusions}}</td>
+            </tr>
+
+           
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Scope Stakeholders</td>
+            <td>{{allifquery.scope_stakeholders}}</td>
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Scope Risks</td>
+              <td>{{allifquery.scope_risks}}</td>
+          
+              </tr>
+            <tr>
+              <td class="allif-fix-table-col">Scope Date</td>
+              <td>{{allifquery.date|date:'d/m/Y'}}</td>
+          
+              </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
+</div><!--end....table row-->
+</div>
+<!--end of table-->
+
+</div><!--end of main container of the page............-->

@@ -1,0 +1,244 @@
+
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %} {# Humanize is loaded here, as it's often common #}
+
+{% block title %}
+{# This block defines the page title. Child templates will fill this. #}
+{{ title|default:"Entity Details" }}
+{% endblock %}
+
+{% block style %}
+{# This block can be used for common CSS, or for child templates to add specific styles. #}
+{# Example common styles (you might already have these in uimainbase.html) #}
+
+{% endblock %}
+
+{% block body %}
+<div class="allifmaal-main-container">
+
+    <!-- Main Header Section (common across all detail/edit pages) -->
+    <div class="card-header">
+        <div class="row mt-12">
+            <div class="col-md-12">
+                <div class="container-fluid amel-content-header">
+                    <div class="dropdown allifmaal-content-dropdown">
+                        <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <div class="content-dropdown-menu">
+                                {# Block for actions specific to the entity being viewed/edited #}
+                                {% block header_actions %}
+                                {% comment %} Default actions for example. Child templates will override. {% endcomment %}
+                                <li><a class="dropdown-item" href="#">Default Add</a></li>
+                                <li><a class="dropdown-item" href="#">Default Edit</a></li>
+                                <li><a class="dropdown-item" href="#">Default Delete</a></li>
+                                {% endblock %}
+                            </div>
+                        </ul>
+                    </div>
+                    {# Block for general navigation links in the header #}
+                    {% block header_nav_links %}
+                    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div><!--end....main header-->
+
+    <div class="allifmaincontainer">
+        <!-- Main Details Display Section (tables for quick overview) -->
+        <div class="row mt-12">
+            <div class="table-details-content-description">
+                {# Block for the main title of the details section #}
+                <h2>{% block main_details_title %}{{ allifquery }} Details{% endblock %}</h2>
+            </div>
+            <div class="col-md-12">
+                <div class="allif-scroll-table">
+                    <div class="allif-info-tables">
+                        <div class="row">
+                            {# Block for the actual tables displaying the entity's core details #}
+                            {% block main_details_tables %}
+                            {% comment %} Example default table structure. Child templates will provide actual data. {% endcomment %}
+                            <div class="col-md-4">
+                                <div class="table-responsive">
+                                    <table class="table table-layout">
+                                        <tbody>
+                                            <tr>
+                                                <td class="allif-fix-table-col">Common Field 1</td>
+                                                <td>{{ allifquery.common_field_1 }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="allif-fix-table-col">Common Field 2</td>
+                                                <td>{{ allifquery.common_field_2 }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end....table row-->
+        <!--end of table-->
+
+        <!-- START......... Collapsible Sections Block..........-->
+        <div class="container-fluid allif-collapsible-details-section-links-wrapper">
+            {# Block for the toggle links of the collapsible sections #}
+            {% block collapsible_toggle_links %}
+            <a class="dropdown-toggle allif-collapsible-details-section-links" type="button" data-bs-toggle="collapse"
+              data-bs-target="#allif-collapsible-details-section-one" aria-expanded="false"
+               aria-controls="allif-collapsible-details-section-one">Section One</a>
+
+            <a class="dropdown-toggle allif-collapsible-details-section-links" type="button" data-bs-toggle="collapse"
+              data-bs-target="#allif-collapsible-details-section-two" aria-expanded="false"
+               aria-controls="allif-collapsible-details-section-two">Section Two</a>
+
+            <a class="dropdown-toggle allif-collapsible-details-section-links" type="button" data-bs-toggle="collapse"
+              data-bs-target="#allif-collapsible-details-section-three" aria-expanded="false"
+               aria-controls="allif-collapsible-details-section-three">Section Three</a>
+            {% endblock %}
+        </div>
+
+        {# Content for each collapsible section #}
+        <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-one">
+            {% block collapsible_content_one %}
+            {# Default content for section one. Child template will include specific content. #}
+            <p>Content for collapsible section one.</p>
+            {% endblock %}
+        </div>
+
+        <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-two">
+            {% block collapsible_content_two %}
+            {# Default content for section two. #}
+            <p>Content for collapsible section two.</p>
+            {% endblock %}
+        </div>
+
+        <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-three">
+            {% block collapsible_content_three %}
+            {# Default content for section three. #}
+            <p>Content for collapsible section three.</p>
+            {% endblock %}
+        </div>
+        <!-- END......... End of collapsible section..........-->
+        <hr>
+
+        <!--START.... start of single pages content and its links section (Tabs)-->
+        <div class="allif-single-page-tabs-contents-main-wrapper">
+            <div class="allif-single-page-tab-links-wrapper">
+                <ul class="nav nav-tabs allif-single-page-tab-links-wrapper" >
+                    {# Block for the tab navigation links #}
+                    {% block tab_nav_links %}
+                    <a class="nav-link active allif-single-page-tab-links" id="tab-link-one-id" data-bs-toggle="tab"
+                       data-bs-target="#tab-content-one" type="button" role="tab" aria-controls="tab-content-one" aria-selected="true">
+                        Tab One
+                    </a>
+                    <a class="nav-link allif-single-page-tab-links" id="tab-link-two-id" data-bs-toggle="tab"
+                       data-bs-target="#tab-content-two" type="button" role="tab" aria-controls="tab-content-two" aria-selected="false">
+                        Tab Two
+                    </a>
+                    <a class="nav-link allif-single-page-tab-links" id="tab-link-three-id" data-bs-toggle="tab"
+                       data-bs-target="#tab-content-three" type="button" role="tab" aria-controls="tab-content-three" aria-selected="false">
+                        Tab Three
+                    </a>
+                    {% endblock %}
+                </ul>
+            </div>
+
+            <!--start of single page contents (Tab Panes)-->
+            <div class="tab-content allif-single-page-tab-content-wrapper" id="allif-single-page-tab-content-wrapper-id">
+
+                {# Form within Tab Pane One #}
+                <div class="tab-pane allif-single-page-tab-content-pane show active" id="tab-content-one" role="tabpanel" aria-labelledby="tab-link-one-id">
+                    <form method='POST' action=''>{% csrf_token %}
+                        <div class="row mt-12">
+                            <div class="col-md-12">
+                                <div class="allif-scroll-table">
+                                    <div class="allif-info-tables">
+                                        <div class="row">
+                                            {# Block for form fields within Tab One #}
+                                            {% block tab_form_content_one %}
+                                            {% comment %} Default form fields. Child templates will define specific fields. {% endcomment %}
+                                            <div class="col-md-4">
+                                                <div class="table-responsive">
+                                                    <table class="table table-layout">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Common Form Field</td>
+                                                                <td>{{ form.common_field_form_1 }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            {% endblock %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# Block for the submit button. Can be overridden if a tab doesn't need it. #}
+                        {% block form_submit_button_tab_one %}
+                        <div class="allifmaal-submit-button-row">
+                            <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn">
+                        </div>
+                        {% endblock %}
+                    </form>
+                </div>
+
+                {# Form within Tab Pane Two #}
+                <div class="tab-pane allif-single-page-tab-content-pane fade" id="tab-content-two" role="tabpanel" aria-labelledby="tab-link-two-id">
+                    <form method='POST' action=''>{% csrf_token %}
+                        <div class="row mt-12">
+                            <div class="col-md-12">
+                                <div class="allif-scroll-table">
+                                    <div class="allif-info-tables">
+                                        <div class="row">
+                                            {% block tab_form_content_two %}
+                                            <p>Form content for Tab Two.</p>
+                                            {% endblock %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% block form_submit_button_tab_two %}{% endblock %}
+                    </form>
+                </div>
+
+                {# Form within Tab Pane Three #}
+                <div class="tab-pane allif-single-page-tab-content-pane fade" id="tab-content-three" role="tabpanel" aria-labelledby="tab-link-three-id">
+                    <form method='POST' action=''>{% csrf_token %}
+                        <div class="row mt-12">
+                            <div class="col-md-12">
+                                <div class="allif-scroll-table">
+                                    <div class="allif-info-tables">
+                                        <div class="row">
+                                            {% block tab_form_content_three %}
+                                            <p>Form content for Tab Three.</p>
+                                            {% endblock %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% block form_submit_button_tab_three %}{% endblock %}
+                    </form>
+                </div>
+
+            </div>
+            <!--END.... END of single pages content and its links section-->
+            <hr>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+{# Bootstrap's JavaScript bundle is essential for collapse and tab components #}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+{% block extra_js %}{% endblock %} {# Child templates can add specific JavaScript here #}
+{% endblock %}
+{% endblock %}

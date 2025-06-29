@@ -250,7 +250,8 @@ class CommonCompanyScopeModel(CommonBaseModel):# this is the company  hospitalit
 
     def __str__(self):
         return self.name
-    
+
+# taxes...
 class CommonTaxParametersModel(CommonBaseModel):
     taxtype=models.CharField(choices=taxoptions, blank=True, max_length=30)
     taxrate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
@@ -342,24 +343,15 @@ class CommonOperationYearsModel(models.Model):
     def __str__(self):
         return str(self.year)
     
-class CommonOperationYearTermsModel(models.Model):
+class CommonOperationYearTermsModel(CommonBaseModel):
     """
     this model captures operational year sections like terms, semisters, quarters ...etc
     """
-    name=models.CharField(max_length=100, help_text="e.g., Term 1, Semester A",blank=True,null=True)
-    owner=models.ForeignKey(User, on_delete=models.SET_NULL,related_name="owner_operation_year_terms",blank=True,null=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmppy_operation_year_terms",on_delete=models.CASCADE,null=True,blank=True)
-    comments=models.CharField(blank=True,null=True, max_length=50)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_operation_year_term",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_operation_year_terms",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="paym_operation_year_term",on_delete=models.SET_NULL,null=True,blank=True)
-    
+   
     is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
    
     operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='termsyear')
-    start_date=models.DateField(blank=True,null=True,default=timezone.localdate)
-    end_date=models.DateField(blank=True,null=True,default=timezone.localdate)
+   
     is_active=models.BooleanField(default=False,blank=True,null=True)
    
     def __str__(self):

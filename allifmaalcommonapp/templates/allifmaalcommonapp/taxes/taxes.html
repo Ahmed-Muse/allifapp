@@ -87,9 +87,9 @@
         
         {% for item in allifqueryset %} 
         <tr data-id="{{item.id}}">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="">{{item.taxname}}</a></td>
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:CommonUpdateTaxDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
        
-       <td> {{item.taxdescription}}</td>
+       <td> {{item.description}}</td>
       
        <td> {{item.taxrate}}</td>
        <td> {{item.taxtype}}</td>
@@ -98,7 +98,7 @@
           <div class="dropdown allifmaal-content-dropdown">
             <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
             <div class="dropdown-content">
-              <a href="{% url 'allifmaalcommonapp:CommonUpdateTaxDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
               <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item </a>
               
             </div>
