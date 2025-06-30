@@ -802,6 +802,7 @@ def commonAddOperationYear(request,*allifargs,**allifkwargs):
                 obj.branch=allif_data.get("logged_user_branch")
                 obj.department=allif_data.get("logged_user_department")
                 obj.owner=allif_data.get("usernmeslg")
+                obj.updated_by=allif_data.get("usernmeslg")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonOperationYears',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
@@ -834,8 +835,8 @@ def commonEditOperationYear(request,pk,*allifargs,**allifkwargs):
             form=CommonAddOperationYearForm(allif_data.get("main_sbscrbr_entity"),request.POST, instance=allifquery_update)
             if form.is_valid():
                 obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.owner=allif_data.get("usernmeslg")
+                
+                obj.updated_by=allif_data.get("usernmeslg")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonOperationYears',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:

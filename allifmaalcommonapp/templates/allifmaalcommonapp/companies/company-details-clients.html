@@ -36,14 +36,16 @@
 
 <div class="dropdown allifmaal-content-dropdown">
     <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Company Levels
+    Company Setup
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <div class="content-dropdown-menu">
         <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a></li>
-     
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonOperationYears' user_var glblslug %}">Operation Years</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonOperationYearTerms' user_var glblslug %}">Operation Terms</a></li>
+      
     </div>
     </ul>
   </div>
@@ -61,9 +63,7 @@
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Taxes</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonUnits' user_var glblslug %}">Measurements</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonOperationYears' user_var glblslug %}">Operation Years</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonOperationYearTerms' user_var glblslug %}">Operation Terms</a></li>
-      
+
        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCategories' user_var glblslug %}">Categories</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCodes' user_var glblslug %}">Codes</a></li>
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">Accounts</a></li>

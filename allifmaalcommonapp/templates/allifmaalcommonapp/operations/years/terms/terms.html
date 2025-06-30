@@ -40,7 +40,7 @@
         <td>Term/Quarter</td>
         <td>Starts On</td>
         <td>Ends On</td>
-        <td>Status</td>
+       
         <td>Created On</td>
      
         <td>Navigate</td>
@@ -60,14 +60,12 @@
          </td>
         
           <td>
-          {{item.start_date|date:'d/m/Y'}}
+          {{item.starts|date:'d/m/Y'}}
          </td>
          <td>
-          {{item.end_date|date:'d/m/Y'}}
+          {{item.ends|date:'d/m/Y'}}
          </td>
-          <td>
-          {{item.is_current}}
-         </td>
+        
          <td>
           {{item.date|date:'d/m/Y'}}
          </td>

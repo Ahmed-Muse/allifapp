@@ -18,11 +18,10 @@
 <div class="container-fluid amel-content-header">
 
   <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-  <a href="{% url 'allifmaalcommonapp:commonOperationYearTerms' user_var glblslug %}">Operateration Year Terms</a>
-  <a href="{% url 'allifmaalcommonapp:commonAddOperationYearTerm' user_var glblslug %}">Add New Term</a>
+  <a href="{% url 'allifmaalcommonapp:commonOperationYears' user_var glblslug %}">Operation Years</a>
+  <a href="{% url 'allifmaalcommonapp:commonAddOperationYear' user_var glblslug %}">Add New Year</a>
    
- <a href="{% url 'allifmaalcommonapp:commonOperationYears' user_var glblslug %}">Operation Years</a>
-   
+
 </div>
 
     </div><!--end....header column-->
@@ -35,7 +34,7 @@
   <div class="allifmaincontainer">
 {% if allifquery_update %}
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Edit {{allifquery_update}} Operation Year Term</div>
+  <div class="table-details-content-description">Edit {{allifquery_update}} Operation Year</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -66,11 +65,6 @@
             <td>{{form.department}}</td>
         
             </tr>
-             <tr>
-        <td class="allif-fix-table-col">Term</td>
-        <td>{{form.name}}</td>
-    
-        </tr>
         </tbody>
         </table>
       </div>
@@ -83,21 +77,30 @@
        <div class="allif-details-card table-responsive">
        <table class="table table-layout">
         <tbody>
-        <tr>
-        <td class="allif-fix-table-col"> Operation Year</td>
+           <tr>
+        <td class="allif-fix-table-col">Term Name</td>
+        <td>{{form.name}}</td>
+    
+        </tr>
+          <tr>
+        <td class="allif-fix-table-col">Operation Year</td>
         <td>{{form.operation_year}}</td>
     
         </tr>
-        
+      <tr>
+        <td class="allif-fix-table-col">Term Description</td>
+        <td>{{form.description}}</td>
+    
+        </tr>
       <tr>
         <td class="allif-fix-table-col">Start Date</td>
-        <td>{{form.start_date}}</td>
+        <td>{{form.starts}}</td>
     
         </tr>
 
          <tr>
         <td class="allif-fix-table-col">End Date</td>
-        <td>{{form.end_date}}</td>
+        <td>{{form.ends}}</td>
     
         </tr>
           </tbody>
@@ -118,11 +121,7 @@
                 <td>{{form.comments}}</td>
             
                 </tr>
-                 <tr>
-                <td class="allif-fix-table-col">Term Status</td>
-                <td>{{form.is_current}}</td>
-            
-                </tr>
+               
             <tr>
               <td class="allif-fix-table-col">Action</td>
               <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
@@ -144,7 +143,7 @@
 </div><!--end of main container of the page....-->
 {% else %}
 <div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add New Operation Year Term</div>
+  <div class="table-details-content-description">Add New Operation Year</div>
   <form method='POST' action=''>{% csrf_token %}
   <div class="col-md-12"> <!--start....table column-->
   <div class="allif-scroll-table">
@@ -158,23 +157,21 @@
       <table class="table table-layout">
       <tbody>
          <tr>
+        <td class="allif-fix-table-col">Term Name</td>
+        <td>{{form.name}}</td>
+    
+        </tr>
+        <tr>
         <td class="allif-fix-table-col">Operation Year</td>
         <td>{{form.operation_year}}</td>
     
         </tr>
-          <tr>
-          <td class="allif-fix-table-col">Term Type</td>
-          <td>{{form.is_current}}</td>
-      
-          </tr>
-         <tr>
-        <td class="allif-fix-table-col">Operation Year Term</td>
-        <td>{{form.name}}</td>
+      <tr>
+        <td class="allif-fix-table-col">Term Description</td>
+        <td>{{form.description}}</td>
     
         </tr>
-     
        
-     
         </tbody>
         </table>
       </div>
@@ -189,13 +186,13 @@
         <tbody>
          <tr>
         <td class="allif-fix-table-col">Start Date</td>
-        <td>{{form.start_date}}</td>
+        <td>{{form.starts}}</td>
     
         </tr>
 
          <tr>
         <td class="allif-fix-table-col">End Date</td>
-        <td>{{form.end_date}}</td>
+        <td>{{form.ends}}</td>
     
         </tr>
        
@@ -212,6 +209,7 @@
        <!--start of the table here-->
        <table class="table table-layout">
         <tbody>
+
          
           <tr>
           <td class="allif-fix-table-col">Comments</td>
@@ -231,7 +229,6 @@
       
         </div>
 
-        {% include 'allifmaalcommonapp/includes/forms/base-form.html' %}
 </div><!--end....table row-->
 </div>
 </form>
