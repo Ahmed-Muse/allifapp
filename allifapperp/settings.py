@@ -103,6 +103,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'allifmaalcommonapp.signals.CurrentUserMiddleware', # Add your custom middleware here
    
     
 ]
@@ -222,7 +224,68 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# --- IMPORTANT: Custom User Model ---
+# This tells Django to use your User model instead of the default.
+# MUST be set before running migrations for the first time.
+AUTH_USER_MODEL = 'allifmaalusersapp.User' # Using your User model name
+############3 START... THIS SECTION WAS ADDED BECAUSE OF SIGNALS....################3
+# your_project/settings.py
 
+
+# --- Caching Configuration (Example using local-memory cache) ---
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'erp-unique-cache-key', # Unique string for this cache instance
+    }
+}
+
+# --- Logging Configuration ---
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file': { # Add a file handler for more persistent logs... add logs folder in same level as manage.py
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'allifapp_erp_logs.log'),
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter': 'verbose',
+        },
+    },
+    'root': { # Default logger for anything not caught by specific loggers
+        'handlers': ['console', 'file'],
+        'level': 'WARNING',
+    },
+    #'loggers': {
+        #'django': { # Django's internal logger
+            #'handlers': ['console', 'file'],
+            #'level': 'ERROR',
+            #'propagate': False,
+        #},
+        #'allifmaalcommonapp': { # Specific logger for your app's messages
+            #'handlers': ['console', 'file'],
+            #'level': 'DEBUG', # Set to DEBUG during development for more detail
+            #'propagate': False,
+        #},
+    #},
+}
+
+############ END.... THIS SECTION WAS ADDED BECAUSE OF SIGNALS ########################
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -247,7 +310,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
 MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
 MEDIA_URL='/media/'#fetch images/media using this path when viewing through the browser...this folder will be created automatically when we upload the first image
-AUTH_USER_MODEL = 'allifmaalusersapp.User'
+
 #SENDSMS_BACKEND = 'allifmaalusersapp.mysmsbackend.SmsBackend'
 
 LANGUAGE_CODE = 'en-us'
@@ -293,8 +356,5 @@ STATICFILES_DIRS=[
 MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
 #PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
 MEDIA_URL='/media/'#fetch images/media using this path when viewing through the browser...this folder will be created automatically when we upload the first image
-
-
-AUTH_USER_MODEL = 'allifmaalusersapp.User'
 
 

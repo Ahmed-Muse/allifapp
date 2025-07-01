@@ -12,6 +12,10 @@ from .constants import *
 from decimal import Decimal
 from django.http.response import HttpResponse, JsonResponse
 import uuid 
+# --- AuditLog Model (for Signals & Logging Examples) ---
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+
 #################################################### NOTES ###################################
 # This database should serve the following sectors
 # 1. Healthcare
@@ -325,18 +329,55 @@ class CommonCompanyScopeModel(CommonBaseModel):# this is the company  hospitalit
 
 
 
-
 # taxes...
 class CommonTaxParametersModel(CommonBaseModel):
     taxtype=models.CharField(choices=taxoptions, blank=True, max_length=30,default='Default')
-    taxrate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    
+    taxrate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,default=0)
     def __str__(self):
-        return str(self.name)
-        #return self.taxname +"   "+str(self.taxrate)+str('%')
+        return f"{self.name} ({self.taxrate}%)"
+
     def clean(self):
-        if self.taxrate<0:
+        super().clean() # Call parent clean method
+        if self.taxrate is not None and self.taxrate < 0:
             raise ValidationError("Tax Rate cannot be negative")
+
+    class Meta:
+        # Principle 3: Fine-Grained Permissions (added here for model-level permission)
+        permissions = [
+            ("view_tax_parameter", "Can view tax parameter"),
+            ("add_tax_parameter", "Can add tax parameter"),
+            ("change_tax_parameter", "Can change tax parameter"),
+            ("delete_tax_parameter", "Can delete tax parameter"),
+        ]
+
+
+
+class CommonAuditLogsModel(CommonBaseModel):
+    action_time = models.DateTimeField(default=timezone.now)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    action_type = models.CharField(max_length=50) # e.g., 'CREATED', 'UPDATED', 'DELETED', 'LOGIN'
+    
+    # Generic Foreign Key to link to any model instance
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+    object_id = models.CharField(max_length=255, null=True, blank=True) # Store PK as string
+    content_object = GenericForeignKey('content_type', 'object_id') # The actual object
+
+    object_repr = models.CharField(max_length=200, null=True, blank=True) # __str__ representation
+    change_message = models.TextField(blank=True, null=True) # Details of the change
+
+    class Meta:
+        ordering = ['-action_time']
+        verbose_name = 'Audit Log'
+        verbose_name_plural = 'Audit Logs'
+        # Principle 3: Fine-Grained Permissions
+        permissions = [
+            ("view_audit_log", "Can view audit log entries"),
+        ]
+
+    def __str__(self):
+        return f"{self.action_type} on {self.object_repr} by {self.user.first_name if self.user else 'System'} at {self.action_time.strftime('%Y-%m-%d %H:%M')}"
+
+
 
 class CommonSupplierTaxParametersModel(CommonBaseModel):
     taxtype=models.CharField(choices=taxoptions, blank=True, max_length=30)

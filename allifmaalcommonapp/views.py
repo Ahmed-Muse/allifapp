@@ -5,6 +5,10 @@ from django.core.mail import send_mail
 from .allifutils import common_shared_data
 from django.db import IntegrityError, transaction # Import transaction for atomicity
 
+from django.db import transaction # For transactions
+from django.core.cache import cache # For caching
+from django.forms import modelformset_factory # For formsets
+
 # --- Import the default data lists ---
 import logging
 logger=logging.getLogger(__name__)
@@ -38,7 +42,143 @@ from decimal import Decimal
 from django.db.models import Count,Min,Max,Avg,Sum
 
 from .resources import *
+from django.contrib.auth.decorators import login_required, permission_required 
+
+def audit_log_list_view(request, *allifargs, **allifkwargs):
+    title = "System Audit Logs"
+    current_company = None # Initialize to None to be safe
+    allifqueryset=CommonAuditLogsModel.objects.all()
    
+    try:
+        allif_data = common_shared_data(request)
+        # CRITICAL: Ensure 'main_sbscrbr_entity' is the CommonCompanyDetailsModel instance
+        # The previous error "Cannot query 'Barasho International Ltd': Must be 'User' instance"
+        # was misleading. The main issue was the lookup name 'company_profile'.
+        # However, it's still vital that current_company is the actual object, not just its string.
+        current_company = allif_data.get("main_sbscrbr_entity")
+
+        logger.debug(f"Audit Log View: User: {request.user.email}")
+        if current_company:
+            logger.debug(f"Audit Log View: Current Company Type: {type(current_company)}, ID: {current_company.pk}, Name: {current_company.company}")
+        else:
+            logger.debug(f"Audit Log View: current_company is None.")
+
+        base_query = CommonAuditLogsModel.objects.select_related('user', 'content_type')
+
+        if current_company:
+            # --- THE FIX: Use 'user__usercompany' (your CharField) and compare to current_company.company (string) ---
+            # This directly compares the 'usercompany' CharField on the User model
+            # with the 'company' CharField on the CommonCompanyDetailsModel instance.
+            audit_logs = base_query.filter(
+                Q(user__usercompany=current_company.company) | Q(user__isnull=True)
+            ).order_by('-action_time')[:100]
+            logger.debug(f"Audit logs filtered by user's usercompany (CharField) for {current_company.company}. Count: {audit_logs.count()}")
+        else:
+            # If no current_company is identified, show only logs where the user is NULL (system actions).
+            audit_logs = base_query.filter(user__isnull=True).order_by('-action_time')[:100]
+            logger.warning(f"No current company found for user {request.user.email} in audit log view. Showing only system logs.")
+
+        context = {
+            "title": title,
+            "audit_logs": audit_logs,
+            "user_var": allif_data.get("usrslg"),
+            "glblslug": allif_data.get("compslg"),
+            "allifqueryset":allifqueryset,
+        }
+        return render(request, 'allifmaalcommonapp/logs/audit_log_list.html', context)
+
+    except Exception as ex:
+        # --- CRITICAL DEBUGGING STEP: Log the actual exception with traceback ---
+        logger.exception(f"Error viewing audit logs for user {request.user.email} (Company: {current_company}): {ex}")
+        # Provide a user-friendly error message, but the detailed error is in logs
+        error_context = {'error_message': "Could not retrieve audit logs. An unexpected error occurred. Please check the server logs for more details."}
+        return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+
+
+# ... (existing imports) ...
+from django.http import JsonResponse
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
+# Import your navigation links configuration
+from .searchable_links import allifmaal_general_links, allifmaal_sector_specific_links 
+
+import logging
+logger = logging.getLogger('allifmaalcommonapp')
+
+# ... (your existing views) ...
+
+@login_required
+def search_erp_features(request, allifusr, allifslug):
+    """
+    API endpoint to search for ERP features/links, filtered by company sector.
+    """
+    query = request.GET.get('q', '').lower().strip()
+    
+    # Get current company and its sector
+    current_company = None
+    try:
+        # Assuming allif_data.get("main_sbscrbr_entity") provides the CommonCompanyDetailsModel instance
+        # If not, you might need to fetch it using allifslug:
+        # current_company = CommonCompanyDetailsModel.objects.get(companyslug=allifslug)
+        allif_data = common_shared_data(request) # You need to ensure this function is accessible and works
+        current_company = allif_data.get("main_sbscrbr_entity")
+
+    except Exception as e:
+        logger.error(f"Could not retrieve current company for feature search: {e}")
+        # Fallback if company data is missing, maybe return only general links
+        current_company = None
+    
+    # Determine the company's sector name
+    company_sector_name = None
+    if current_company and current_company.sector:
+        company_sector_name = current_company.sector.name # Assuming sector.name is the string key in your dict
+    
+    # --- Combine General and Sector-Specific Links ---
+    available_features = list(allifmaal_general_links) # Start with all general links
+
+    if company_sector_name and company_sector_name in allifmaal_sector_specific_links:
+        # Add links specific to the company's sector
+        available_features.extend(allifmaal_sector_specific_links[company_sector_name])
+        logger.debug(f"Including sector-specific links for: {company_sector_name}")
+    else:
+        logger.info(f"No specific sector links found for sector: {company_sector_name}. Only general links will be available.")
+
+    results = []
+    if query:
+        for feature in available_features:
+            # Check if query matches name, description, or category
+            # Add 'category' to ERP_FEATURES in navigation_links.py if you want to search by it
+            search_text = f"{feature.get('name', '')} {feature.get('description', '')} {feature.get('category', '')}".lower()
+            
+            if query in search_text:
+                # --- Generate the full URL here in Python ---
+                try:
+                    if feature['url_name'] == 'allifmaalcommonapp:commonWebsite':
+                        full_url = reverse(feature['url_name'])
+                    else:
+                        # For all other URLs, pass allifusr and allifslug
+                        # Ensure all features in ERP_FEATURES are resolvable with these two args
+                        full_url = reverse(feature['url_name'], args=[allifusr, allifslug])
+                except Exception as e:
+                    logger.warning(f"Could not reverse URL for feature '{feature['name']}' ({feature['url_name']}): {e}")
+                    full_url = "#" # Fallback to a non-functional link if URL cannot be resolved
+
+                feature_data = {
+                    'name': feature['name'],
+                    'description': feature.get('description', ''), # Ensure description is always present
+                    'category': feature.get('category', 'General'), # Ensure category is always present
+                    'url': full_url,
+                }
+                results.append(feature_data)
+                
+                if len(results) >= 10: # Max 10 suggestions
+                    break
+    
+    logger.debug(f"Feature search by {request.user.email} for '{query}' (Sector: {company_sector_name}): found {len(results)} results.")
+    return JsonResponse({'features': results})
+
+
 def commonForTesting(request,*allifargs,**allifkwargs):
     title="Update Scope Details"
    
@@ -3824,7 +3964,86 @@ def commonDeleteApprover(request,pk,*allifargs,**allifkwargs):
 
 
 ###################333 tax parameters settings ###############
+@permission_required('allifmaalcommonapp.add_tax_parameter', raise_exception=True)
+@login_required
+# @logged_in_user_must_have_profile # Your custom decorators (keep if needed)
+# @subscriber_company_status
+# @logged_in_user_can_add
+def commonTaxParameters(request, *allifargs, **allifkwargs):
+    title = "Applicable Tax Details"
+    try:
+        allif_data = common_shared_data(request)
+        current_company = allif_data.get("main_sbscrbr_entity")
 
+        # --- Principle 4: QuerySet Optimization (select_related, prefetch_related) ---
+        # Analogy: Fetching all related ingredients for a recipe in one trip to the pantry.
+        # We're using .objects.filter() directly as per your request to avoid custom managers for now.
+        allifqueryset = CommonTaxParametersModel.objects.filter(company=current_company).select_related(
+            'company', 'division', 'branch', 'department', 'owner', 'operation_year', 'operation_term', 'updated_by'
+        ).order_by('-date')
+
+        # --- Principle 7: Caching Strategy (Example: Caching latest taxes) ---
+        # Analogy: Keeping frequently used documents on your desk instead of retrieving from archive.
+        cache_key = f'latest_taxes_company_{current_company.pk}'
+        latest = cache.get(cache_key)
+        if not latest:
+            latest = allifqueryset[:3] # Use the optimized queryset
+            cache.set(cache_key, latest, 60 * 5) # Cache for 5 minutes
+            logger.info(f"Cache MISS for {cache_key}, data fetched from DB.")
+        else:
+            logger.info(f"Cache HIT for {cache_key}.")
+
+        operation_year = CommonOperationYearsModel.objects.filter(company=current_company).first()
+        operation_term = CommonOperationYearTermsModel.objects.filter(company=current_company).first()
+
+        if request.method == 'POST':
+            form = CommonAddTaxParameterForm(current_company.id, request.POST)
+            if form.is_valid():
+                # --- Principle 5: Database Transactions ---
+                # Analogy: A bank transfer - either all steps complete, or all fail together.
+                with transaction.atomic():
+                    obj = form.save(commit=False)
+                    obj.company = current_company
+                    obj.division = allif_data.get("logged_user_division")
+                    obj.branch = allif_data.get("logged_user_branch")
+                    obj.department = allif_data.get("logged_user_department")
+                    obj.owner = allif_data.get("usernmeslg") # Assuming this is the User object
+                    obj.operation_year = operation_year
+                    obj.operation_term = operation_term
+                    obj.updated_by = request.user # Set updated_by to current user
+
+                    obj.save() # This triggers the post_save signal for AuditLog
+
+                    # Example: Hypothetical related action within the same transaction
+                    # If this fails, obj.save() above will be rolled back too.
+                    # TaxApprovalHistory.objects.create(tax_parameter=obj, approved_by=request.user, status='Pending')
+
+                logger.info(f"Tax parameter '{obj.name}' saved successfully by {request.user.first_name}.")
+                return redirect('allifmaalcommonapp:commonTaxParameters', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+            else:
+                # --- Principle 6: Robust Logging (Error Logging) ---
+                logger.error(f"Form validation failed for tax parameter creation for user {request.user.email}: {form.errors}")
+                error_message = form.errors
+                allifcontext = {"error_message": error_message, "title": title}
+                return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
+        else:
+            form = CommonAddTaxParameterForm(current_company.id)
+
+        context = {
+            "title": title,
+            "form": form,
+            "allifqueryset": allifqueryset,
+            "latest": latest,
+            "user_var": allif_data.get("usrslg"),
+            "glblslug": allif_data.get("compslg"),
+        }
+        return render(request, 'allifmaalcommonapp/taxes/taxes.html', context)
+    except Exception as ex:
+        # --- Principle 6: Robust Logging (Exception Logging) ---
+        logger.exception(f"An unexpected error occurred in commonTaxParameters view for user {request.user.email}: {ex}")
+        error_context = {'error_message': "An unexpected error occurred. Please try again later or contact support."}
+        return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+"""
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
@@ -3834,6 +4053,8 @@ def commonTaxParameters(request,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
         allifqueryset=CommonTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         latest=CommonTaxParametersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:3]
+        operation_year=CommonOperationYearsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
+        operation_term=CommonOperationYearTermsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
         form=CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST)
         if request.method == 'POST':
             form=CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST)
@@ -3844,6 +4065,8 @@ def commonTaxParameters(request,*allifargs,**allifkwargs):
                 obj.branch=allif_data.get("logged_user_branch")
                 obj.department=allif_data.get("logged_user_department")
                 obj.owner=allif_data.get("usernmeslg")
+                obj.operation_year=operation_year
+                obj.operation_term=operation_term
                
                 obj.save()
                 return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
@@ -3863,10 +4086,11 @@ def commonTaxParameters(request,*allifargs,**allifkwargs):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
+"""
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_edit
+@transaction.atomic
 def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
     title="Update Tax Details"
     try:
@@ -3878,7 +4102,7 @@ def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
             form = CommonAddTaxParameterForm(allif_data.get("main_sbscrbr_entity"),request.POST,instance=allifquery)
             if form.is_valid():
                 obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
+                obj.updated_by=allif_data.get("usernmeslg")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonTaxParameters',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -3893,6 +4117,8 @@ def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
             "allifquery":allifquery,
             "title":title,
             "allifqueryset":allifqueryset,
+            "user_var": allif_data.get("usrslg"), # Ensure this is passed
+        "glblslug": allif_data.get("compslg"), # Ensure this is passed
         }
         
         return render(request,'allifmaalcommonapp/taxes/add-update-tax.html',context)

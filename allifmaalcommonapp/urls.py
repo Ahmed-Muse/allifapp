@@ -4,8 +4,15 @@ app_name='allifmaalcommonapp'
 urlpatterns = [
 
 ############################ The decision maker ##################################3
-
+path('common/logs/audit/log/s/list/<str:allifusr>/<str:allifslug>/', views.audit_log_list_view, name="audit_log_list_view"),
 path('For/Testing/Purposes/<str:allifusr>/<str:allifslug>/', views.commonForTesting, name="commonForTesting"),
+
+ # Audit Logs
+
+
+# --- NEW: API endpoint for feature search ---
+path('api/search-features/<str:allifusr>/<str:allifslug>/', views.search_erp_features, name="search_erp_features"),
+
 path('', views.commonWebsite, name="commonWebsite"),
 path('Engineering/', views.commonEngineering, name="commonEngineering"),
 path('Decision/Making/Point/', views.CommonDecisionPoint, name="CommonDecisionPoint"),

@@ -2,8 +2,23 @@ from django.db import models
 from allifmaalcommonapp.constants import TRIAGE_DISPOSITION_CHOICES,MENTAL_STATUS_CHOICES, MOBILITY_CHOICES,BED_TYPES,MODE_OF_ARRIVAL_CHOICES,TRIAGE_LEVEL_CHOICES,SPECIMEN_TYPE,PRIORITY_LEVELS, PRESCRIPTION_FORMULATIONS, ADMINISTRATION_ROUTES, DOSAGE_UNITS, OCCUPANCY_STATUSES, APPOINTMENT_STATUSES, ADMISSION_STATUSES, REFERRAL_TYPES, REFERRAL_STATUSES, LAB_TEST_STATUSES, IMAGING_TEST_STATUSES, PATIENT_GENDERS, BLOOD_GROUPS, ENCOUNTER_TYPES, MEDICAL_SERVICE_TYPES
 
 from allifmaalusersapp.models import User
-from allifmaalcommonapp.models import CommonTransactionsModel,CommonSpacesModel,CommonSpaceUnitsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
+from allifmaalcommonapp.models import CommonBaseModel,CommonTransactionsModel,CommonSpacesModel,CommonSpaceUnitsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
 
+class ActiveCompanyScopeManager(models.Manager):
+    def get_queryset(self):
+        # This is the core of the custom manager's default behavior
+        return super().get_queryset().filter(status='Approved', delete_status='Deletable')
+
+    def for_company(self, company_id):
+        # This is a custom method added to the manager
+        return self.get_queryset().filter(company_id=company_id)
+
+class CommonTestModel(CommonBaseModel):
+    # ...
+    objects = models.Manager() # The default "all-inclusive" manager
+    active_scopes = ActiveCompanyScopeManager() # Your specialized manager
+    
+# Usage: CommonCompanyScopeModel.active_scopes.for_company(company_id)
 class TriagesModel(models.Model):# very important model
     """
     these are used to record patient assessments like triage records, doctor observations...

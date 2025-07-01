@@ -104,3 +104,88 @@ $(function() {
  
 ////end...... this code is for opening the dropdown in the tables for delete inside the table///////
 
+
+// below is for global search #######3 ... added on 1st July 2025....///
+
+  $(document).ready(function() {
+      const searchInput = $('#globalSearchInput');
+      const searchResultsContainer = $('#globalSearchResults');
+      const globalSearchModal = $('#globalSearchModal');
+
+      // Use the globally defined variables
+      const userVar = GLOBAL_USER_VAR;
+      const glblSlug = GLOBAL_GLBL_SLUG;
+
+      // Debugging check (will now show the values or empty strings if not passed from Django)
+      console.log("User Var in JS:", userVar);
+      console.log("Global Slug in JS:", glblSlug);
+
+      let searchTimeout;
+
+      // Clear search input and results when modal is hidden
+      globalSearchModal.on('hidden.bs.modal', function () {
+          searchInput.val('');
+          searchResultsContainer.html('<p class="text-muted text-center">Start typing to find ERP features...</p>');
+      });
+
+      // Focus input when modal is shown
+      globalSearchModal.on('shown.bs.modal', function () {
+          searchInput.focus();
+      });
+
+      // Listen for input changes with debouncing
+      searchInput.on('keyup', function() {
+          const query = $(this).val().trim(); // Get trimmed query
+
+          clearTimeout(searchTimeout); // Clear previous timeout
+
+          if (query.length === 0) {
+              searchResultsContainer.html('<p class="text-muted text-center">Start typing to find ERP features...</p>');
+              return;
+          }
+
+          // Debounce the search request to avoid too many API calls
+          searchTimeout = setTimeout(() => {
+              performSearch(query);
+          }, 300); // Wait 300ms after last keystroke
+      });
+
+      function performSearch(query) {
+          // Check if slugs are valid before making API call
+          if (!userVar || userVar === 'None' || !glblSlug || glblSlug === 'None') {
+              searchResultsContainer.html('<p class="text-danger text-center">User or Company context missing. Cannot search.</p>');
+              console.error("Cannot perform search: userVar or glblSlug is invalid.");
+              return;
+          }
+
+          // Construct the API URL using the current user and company slugs
+          const apiUrl = `/api/search-features/${userVar}/${glblSlug}/?q=${encodeURIComponent(query)}`;
+
+          $.ajax({
+              url: apiUrl,
+              method: 'GET',
+              success: function(data) {
+                  searchResultsContainer.empty(); // Clear previous results
+
+                  if (data.features && data.features.length > 0) {
+                      data.features.forEach(feature => {
+                          const resultItem = `
+                              <a href="${feature.url}" class="list-group-item list-group-item-action search-result-item">
+                                  <h5 class="mb-1">${feature.name} <small class="text-muted">(${feature.category})</small></h5>
+                                  <p class="mb-1">${feature.description}</p>
+                              </a>
+                          `;
+                          searchResultsContainer.append(resultItem);
+                      });
+                  } else {
+                      searchResultsContainer.html('<p class="text-muted text-center">No features found matching your search.</p>');
+                  }
+              },
+              error: function(xhr, status, error) {
+                  console.error("Error searching features:", error);
+                  searchResultsContainer.html('<p class="text-danger text-center">Error loading search results. Please try again.</p>');
+              }
+          });
+      }
+  });
+

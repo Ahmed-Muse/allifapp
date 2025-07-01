@@ -386,7 +386,7 @@ class CommonAddCompanyScopeForm(CommonBaseForm):
         #     self.fields['related_scopes'].queryset = CommonCompanyScopeModel.objects.exclude(pk=self.instance.pk)
 
 
-# --- 3. Example: CommonAddTaxParametersForm inheriting from CommonBaseForm ---
+# --- 3. Example: CommonAddTaxParametersForm inheriting from CommonBaseForm.. ---
 class CommonAddTaxParameterForm(CommonBaseForm):
     """
     Form for CommonTaxParametersModel, inheriting common fields from CommonBaseForm.

@@ -16,17 +16,6 @@
 <div class="col-md-12"><!--start....header column-->
 
 <div class="container-fluid amel-content-header">
-<div class="dropdown allifmaal-content-dropdown">
-  <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  Actions
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <div class="content-dropdown-menu">
-        <li><a class="dropdown-item" href="">Scopes</a></li>
-
-   </div>
-  </ul>
-</div>
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Taxes</a>
 
@@ -109,14 +98,26 @@
 
 </div><!--end of main container of the page............-->
 
- {% include 'allifmaalcommonapp/includes/links/collapse-links.html' %}
+ {% include 'allifmaalcommonapp/includes/links/collapse-links.html' with allifquery=allifquery %}
 
   <!--start....content of first dropdown/collapsible section-->
   <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-one">
    {% include 'allifmaalcommonapp/includes/details/base-details.html' %}
       </div> 
     <!--end....content of first dropdown/collapsible section-->
- 
+
+    <!--start....content of second dropdown/collapsible section-->
+    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-two">
+    {% include 'allifmaalcommonapp/includes/details/static-base-details.html' %}
+
+      </div>
+       <!--end....content of second dropdown/collapsible section-->
+
+    <!--start....content of second dropdown/collapsible section-->
+    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-three">
+    <h1>Static Details Here</h1>
+      </div>
+       <!--end....content of second dropdown/collapsible section-->
       <hr>
 
  <!--START.... start of single pages content and its links section-->
