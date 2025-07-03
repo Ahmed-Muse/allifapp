@@ -61,7 +61,7 @@ class TriagesModel(CommonBaseModel):# very important model
 
     treatment_plan=models.TextField(blank=True, null=True,help_text="Treatment plan (medications, tests, referrals, follow-up).")
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    owner=models.ForeignKey(User, related_name="ownr_triage",on_delete=models.SET_NULL,null=True,blank=True)
+    owner=models.ForeignKey(User, related_name="ownr_triages",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_triage",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_triage",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_triage",on_delete=models.SET_NULL,null=True,blank=True)
@@ -87,9 +87,9 @@ class TriagesModel(CommonBaseModel):# very important model
     
      # --- Assign the custom manager ---
     # 'objects' is the default manager (accesses all records without default filtering)
-    objects = models.Manager() 
+    #objects = models.Manager() 
     # 'active_triage' is your custom manager (accesses only active records by default)
-    active_triage = ActiveManager() 
+    #active_triage = ActiveManager() 
 
     def __str__(self):
         return str(self.medical_file)
