@@ -139,11 +139,19 @@ TEMPLATES = [
                 'allifmaalcommonapp.preprocessor.allifUserSessions',
                 #'allifmaalcommonapp.context_processors.your_company_context', # <--- Make sure this is here
             ],
+             'libraries': {
+                # --- NEW: Register your custom UI template tags ---
+                #'erp_ui_tags': 'allifmaalcommonapp.templatetags.erp_ui_tags',
+                # --- END NEW ---
+                # Keep any other libraries you've registered (e.g., 'config_tags')
+                # 'config_tags': 'allifmaalcommonapp.templatetags.config_tags',
+            },
         },
     },
 ]
 
 WSGI_APPLICATION = 'allifapperp.wsgi.application'
+
 
 
 # Database

@@ -4,22 +4,35 @@ from allifmaalcommonapp.constants import TRIAGE_DISPOSITION_CHOICES,MENTAL_STATU
 from allifmaalusersapp.models import User
 from allifmaalcommonapp.models import CommonBaseModel,CommonTransactionsModel,CommonSpacesModel,CommonSpaceUnitsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
 
-class ActiveCompanyScopeManager(models.Manager):
+
+# --- Define Your Custom Manager for Active Objects ---
+class ActiveManager(models.Manager):
+    """
+    A custom manager that returns only objects with status='Approved'
+    and delete_status='Deletable' by default.
+    """
     def get_queryset(self):
-        # This is the core of the custom manager's default behavior
         return super().get_queryset().filter(status='Approved', delete_status='Deletable')
 
     def for_company(self, company_id):
-        # This is a custom method added to the manager
+        """
+        Returns active objects specifically for a given company ID.
+        """
         return self.get_queryset().filter(company_id=company_id)
 
-class CommonTestModel(CommonBaseModel):
-    # ...
-    objects = models.Manager() # The default "all-inclusive" manager
-    active_scopes = ActiveCompanyScopeManager() # Your specialized manager
-    
+    def archived(self):
+        """Returns only archived (soft-deleted) objects."""
+        return super().get_queryset().filter(delete_status='Archived')
+
+    def all_with_archived(self):
+        """Returns all objects, including active and archived."""
+        return super().get_queryset()
+
+# ... (Your other models like CommonUnitsModel, CommonCompanyDetailsModel, etc.) ...
+
+
 # Usage: CommonCompanyScopeModel.active_scopes.for_company(company_id)
-class TriagesModel(models.Model):# very important model
+class TriagesModel(CommonBaseModel):# very important model
     """
     these are used to record patient assessments like triage records, doctor observations...
     """
@@ -71,6 +84,13 @@ class TriagesModel(models.Model):# very important model
     mobility_status = models.CharField(max_length=50, blank=True, null=True, choices=MOBILITY_CHOICES)
    
     mental_status = models.CharField(max_length=50, blank=True, null=True, choices=MENTAL_STATUS_CHOICES)
+    
+     # --- Assign the custom manager ---
+    # 'objects' is the default manager (accesses all records without default filtering)
+    objects = models.Manager() 
+    # 'active_triage' is your custom manager (accesses only active records by default)
+    active_triage = ActiveManager() 
+
     def __str__(self):
         return str(self.medical_file)
 

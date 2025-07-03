@@ -1,4 +1,5 @@
 {% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+
 {% load humanize %}
 {% block title %}
 {{title}}
@@ -23,19 +24,14 @@
     </div><!--end....header column-->
     </div><!--end....header row-->
   </div><!--end....main headere-->
-
-  <div class="allif-content-spacer"></div>
-
+<div class="allifmaincontainer">
+  
 <div class="row mt-12"> <!--start....table row-->
   <div class="col-md-4"> <!--start....table column-->
         <div class="card-header">
-          <div class="container-fluid amel-content-header">
-            <a class="amel-table-list-identifier">Latest Tax Additions:</a>
-          </div>
+      
           </div><!--end....main headere-->
 
-    
-    <div class="allif-content-spacer"></div>
     <div class="allif-scroll-table">
       <div class="table-responsive allif-full-table">
       <table class="table table-layout">
@@ -161,7 +157,10 @@
   </div><!--end of row div --->
   </div>
   </div>
+
+
  
+</div>
 </div>
 
   {% block scripts %}

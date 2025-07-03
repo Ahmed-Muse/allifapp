@@ -3,7 +3,8 @@ from .sessions import Allifsessions
 
 def allifmaalcommonappglobalVariables(request):
         user_var=0
-        amd="+"
+        
+        allifapp_logged_user_category=''
         cmpnysctr="Healthcare"
         glbl_place_holder="This module is not yet configured"
         glblslug= "allifmaalfsjdfljengineeringjdjrwosdflimitedjfljj"
@@ -13,7 +14,9 @@ def allifmaalcommonappglobalVariables(request):
         is_authenticated = user is not None and user.is_authenticated
         
         if is_authenticated:
+            allifapp_logged_user_category=request.user.user_category
             user_var=request.user.customurlslug
+           
             compslg=request.user.usercompany
             main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
             
@@ -28,7 +31,7 @@ def allifmaalcommonappglobalVariables(request):
                 "main_sbscrbr_entity":main_sbscrbr_entity,
                 "open_link":open_link,
                 "glbl_place_holder":glbl_place_holder,
-                "amd":amd,
+                "allifapp_logged_user_category":allifapp_logged_user_category,
                 }
             else:
                 return {
@@ -41,6 +44,7 @@ def allifmaalcommonappglobalVariables(request):
             "open_link":open_link,
             "glbl_place_holder":glbl_place_holder,
             "cmpnysctr":cmpnysctr,
+            "allifapp_logged_user_category":allifapp_logged_user_category,
             }
 
 """

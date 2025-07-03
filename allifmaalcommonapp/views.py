@@ -9,6 +9,19 @@ from django.db import transaction # For transactions
 from django.core.cache import cache # For caching
 from django.forms import modelformset_factory # For formsets
 
+
+# ... (existing imports) ...
+from django.http import JsonResponse
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
+# Import your navigation links configuration
+from .searchable_links import allifmaal_general_links, allifmaal_sector_specific_links 
+
+import logging
+logger = logging.getLogger('allifmaalcommonapp')
+
+# ... (your existing views) ...
 # --- Import the default data lists ---
 import logging
 logger=logging.getLogger(__name__)
@@ -94,19 +107,6 @@ def audit_log_list_view(request, *allifargs, **allifkwargs):
         error_context = {'error_message': "Could not retrieve audit logs. An unexpected error occurred. Please check the server logs for more details."}
         return render(request, 'allifmaalcommonapp/error/error.html', error_context)
 
-
-# ... (existing imports) ...
-from django.http import JsonResponse
-from django.urls import reverse
-from django.contrib.auth.decorators import login_required
-
-# Import your navigation links configuration
-from .searchable_links import allifmaal_general_links, allifmaal_sector_specific_links 
-
-import logging
-logger = logging.getLogger('allifmaalcommonapp')
-
-# ... (your existing views) ...
 
 @login_required
 def search_erp_features(request, allifusr, allifslug):
@@ -3974,6 +3974,10 @@ def commonTaxParameters(request, *allifargs, **allifkwargs):
     try:
         allif_data = common_shared_data(request)
         current_company = allif_data.get("main_sbscrbr_entity")
+        operation_year = CommonOperationYearsModel.objects.filter(company=current_company).first()
+        operation_term = CommonOperationYearTermsModel.objects.filter(company=current_company).first()
+        
+        allifquery=CommonTaxParametersModel.objects.get(pk=3)
 
         # --- Principle 4: QuerySet Optimization (select_related, prefetch_related) ---
         # Analogy: Fetching all related ingredients for a recipe in one trip to the pantry.
@@ -3992,9 +3996,6 @@ def commonTaxParameters(request, *allifargs, **allifkwargs):
             logger.info(f"Cache MISS for {cache_key}, data fetched from DB.")
         else:
             logger.info(f"Cache HIT for {cache_key}.")
-
-        operation_year = CommonOperationYearsModel.objects.filter(company=current_company).first()
-        operation_term = CommonOperationYearTermsModel.objects.filter(company=current_company).first()
 
         if request.method == 'POST':
             form = CommonAddTaxParameterForm(current_company.id, request.POST)
@@ -4036,6 +4037,7 @@ def commonTaxParameters(request, *allifargs, **allifkwargs):
             "latest": latest,
             "user_var": allif_data.get("usrslg"),
             "glblslug": allif_data.get("compslg"),
+            "allifquery":allifquery,
         }
         return render(request, 'allifmaalcommonapp/taxes/taxes.html', context)
     except Exception as ex:
@@ -4117,8 +4119,8 @@ def CommonUpdateTaxDetails(request,pk,*allifargs,**allifkwargs):
             "allifquery":allifquery,
             "title":title,
             "allifqueryset":allifqueryset,
-            "user_var": allif_data.get("usrslg"), # Ensure this is passed
-        "glblslug": allif_data.get("compslg"), # Ensure this is passed
+            #"user_var": allif_data.get("usrslg"), # Ensure this is passed
+        #"glblslug": allif_data.get("compslg"), # Ensure this is passed
         }
         
         return render(request,'allifmaalcommonapp/taxes/add-update-tax.html',context)

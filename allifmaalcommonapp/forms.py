@@ -275,14 +275,15 @@ class CommonBaseForm(forms.ModelForm):
         fields=['name','description','code','balance','quantity','operation_year','operation_term','comments','number',
                 'starts','ends','status','priority','delete_status','reference','division','branch','department',]
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
-            'balance': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
-            'number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
-            'quantity': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}),
+            'balance': forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}),
+            'number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}),
+            'quantity': forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}),
             'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
-            'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Comments', 'rows': 2}),
+            'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
             'starts': DatePickerInput(attrs={'class': 'form-control'}),
             'ends': DatePickerInput(attrs={'class': 'form-control'}),
+            'code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}),
             'status': forms.Select(attrs=SELECT2_ATTRS),
             'operation_year': forms.Select(attrs=SELECT2_ATTRS),
             'operation_term': forms.Select(attrs=SELECT2_ATTRS),
@@ -395,13 +396,19 @@ class CommonAddTaxParameterForm(CommonBaseForm):
         model = CommonTaxParametersModel # Specify the concrete model for this form
         
         # Define fields specific to CommonTaxParametersModel
-        fields = CommonBaseForm.Meta.fields + ['taxtype','taxrate',]
+        fields = CommonBaseForm.Meta.fields + ['taxtype','taxrate','tax_resources','tax_constraints','tax_assumptions','tax_exclusions','tax_stakeholders','tax_risks',]
         
         # Override or add specific widgets for new fields
         widgets = {
             **CommonBaseForm.Meta.widgets, # Bring in all common widgets
             'taxtype': forms.Select(attrs=SELECT2_ATTRS),
             'taxrate': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Tax Rate'}),
+             'tax_resources': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'tax_constraints': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'tax_assumptions': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'tax_exclusions': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'tax_stakeholders': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
+            'tax_risks': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 3}),
         }
 
     # Keep your specific clean method for taxrate
