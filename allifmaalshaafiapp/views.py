@@ -57,6 +57,8 @@ def triageData(request,*allifargs,**allifkwargs):
     title="Triage Records"
     try:
         allif_data=common_shared_data(request)
+        #allifqueryset=TriagesModel.active_triage.filter(company=allif_data.get("main_sbscrbr_entity"))
+      
         if allif_data.get("logged_in_user_has_universal_access")==True:
             allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
         elif allif_data.get("logged_in_user_has_divisional_access")==True:
@@ -67,6 +69,10 @@ def triageData(request,*allifargs,**allifkwargs):
             allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
             allifqueryset=[]
+        #allifqueryset=TriagesModel.active_triage.all()
+        #allifqueryset = TriagesModel.active_triage.filter(company=allif_data.get("main_sbscrbr_entity"))
+        allifqueryset = TriagesModel.active_triage.for_company(allif_data.get("main_sbscrbr_entity"))
+        #allifqueryset=TriagesModel.objects.all()
         context={"title":title,"allifqueryset":allifqueryset,}
         return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
     
@@ -79,7 +85,7 @@ def triageData(request,*allifargs,**allifkwargs):
 @logged_in_user_can_add
 @logged_in_user_is_admin
 def AddTriageData(request,pk,*allifargs,**allifkwargs):
-    title="Add New Triage Data"
+    title="Add Triage"
     try:
         allif_data=common_shared_data(request)
         allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
@@ -119,18 +125,21 @@ def AddTriageData(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_edit
 @logged_in_user_is_admin
 def editTriageData(request,pk,*allifargs,**allifkwargs):
-    title="Update Triage Data Details"
+    title="Edit Triage"
     try:
         allif_data=common_shared_data(request)
         allifquery_update=TriagesModel.objects.filter(id=pk).first()
-        form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
+        print(allifquery_update)
+        allifquery=allifquery_update.medical_file
+        print(allifquery)
         if request.method=='POST':
             form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
             if form.is_valid():
                 obj=form.save(commit=False)
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalshaafiapp:editTriageData',pk=allifquery_update.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}
@@ -279,7 +288,7 @@ def triageDataDetails(request,pk,*allifargs,**allifkwargs):
                 obj=form.save(commit=False)
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalshaafiapp:triageDataDetails',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
                 error_message=form.errors
                 allifcontext={"error_message":error_message,"title":title,}

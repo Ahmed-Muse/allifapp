@@ -314,22 +314,6 @@ class CommonCompanyScopeModel(CommonBaseModel):# this is the company  hospitalit
         return self.name
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # taxes...
 class CommonTaxParametersModel(CommonBaseModel):
     taxtype=models.CharField(choices=taxoptions, blank=True, max_length=30,default='Default')
@@ -359,7 +343,6 @@ class CommonTaxParametersModel(CommonBaseModel):
         ]
 
 
-
 class CommonAuditLogsModel(CommonBaseModel):
     action_time = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -386,7 +369,6 @@ class CommonAuditLogsModel(CommonBaseModel):
         return f"{self.action_type} on {self.object_repr} by {self.user.first_name if self.user else 'System'} at {self.action_time.strftime('%Y-%m-%d %H:%M')}"
 
 
-
 class CommonSupplierTaxParametersModel(CommonBaseModel):
     taxtype=models.CharField(choices=taxoptions, blank=True, max_length=30)
     taxrate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
@@ -397,6 +379,7 @@ class CommonSupplierTaxParametersModel(CommonBaseModel):
     def clean(self):
         if self.taxrate<0:
             raise ValidationError("Tax Rate cannot be negative")
+      
         
 class CommonCurrenciesModel(CommonBaseModel):
     def __str__(self):
@@ -651,9 +634,9 @@ class CommonCustomersModel(CommonBaseModel):
     def save(self, *args, **kwargs):
         if self.uniqueId is None:
             self.uniqueId = str(uuid4()).split('-')[4]
-            self.customerslug = slugify('{} {}'.format(self.fullName, self.uniqueId))
+            self.customerslug = slugify('{} {}'.format(self.name, self.uniqueId))
 
-        self.customerslug = slugify('{} {}'.format(self.fullName, self.uniqueId))#this is what generates the slug
+        self.customerslug = slugify('{} {}'.format(self.name, self.uniqueId))#this is what generates the slug
         super(CommonCustomersModel, self).save(*args, **kwargs)
    
 class CommonCustomerPaymentsModel(CommonBaseModel):

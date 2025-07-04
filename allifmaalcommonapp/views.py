@@ -662,7 +662,7 @@ def commonAddCurrency(request,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @logged_in_user_can_edit
 def commonEditCurrency(request,pk,*allifargs,**allifkwargs):
-    title="Update Currency Details"
+    title="Edit Currency"
     try:
         allif_data=common_shared_data(request)
         allifquery_update=CommonCurrenciesModel.objects.filter(id=pk).first()
@@ -671,8 +671,7 @@ def commonEditCurrency(request,pk,*allifargs,**allifkwargs):
             form=CommonAddCurrencyForm(allif_data.get("main_sbscrbr_entity"),request.POST, instance=allifquery_update)
             if form.is_valid():
                 obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.owner=allif_data.get("usernmeslg")
+                obj.updated_by=allif_data.get("usernmeslg")
                 obj.save()
                 return redirect('allifmaalcommonapp:commonCurrencies',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             else:
@@ -3977,7 +3976,7 @@ def commonTaxParameters(request, *allifargs, **allifkwargs):
         operation_year = CommonOperationYearsModel.objects.filter(company=current_company).first()
         operation_term = CommonOperationYearTermsModel.objects.filter(company=current_company).first()
         
-        allifquery=CommonTaxParametersModel.objects.get(pk=3)
+        #allifquery=CommonTaxParametersModel.objects.get(pk=3)
 
         # --- Principle 4: QuerySet Optimization (select_related, prefetch_related) ---
         # Analogy: Fetching all related ingredients for a recipe in one trip to the pantry.
@@ -4037,7 +4036,7 @@ def commonTaxParameters(request, *allifargs, **allifkwargs):
             "latest": latest,
             "user_var": allif_data.get("usrslg"),
             "glblslug": allif_data.get("compslg"),
-            "allifquery":allifquery,
+           
         }
         return render(request, 'allifmaalcommonapp/taxes/taxes.html', context)
     except Exception as ex:
@@ -7106,7 +7105,7 @@ def commonNewTransaction(request,*allifargs,**allifkwargs):
         else:
             nmbr= 'TRANS/1'+"/"+str(uuid4()).split('-')[2]
 
-        number=CommonTransactionsModel.objects.create(trans_number=nmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        number=CommonTransactionsModel.objects.create(number=nmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         number.save()
         return redirect('allifmaalcommonapp:commonTransactions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -8297,7 +8296,7 @@ def commonNewPurchaseOrder(request,*allifargs,**allifkwargs):
         else:
             purchaseNumber= 'PO/1'+"/"+str(currntyear)+"/"+str(uuid4()).split('-')[2]
 
-        newPurchaseOrder= CommonPurchaseOrdersModel.objects.create(po_number=purchaseNumber,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        newPurchaseOrder= CommonPurchaseOrdersModel.objects.create(number=purchaseNumber,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         newPurchaseOrder.save()
         return redirect('allifmaalcommonapp:commonPurchaseOrders',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -12716,7 +12715,7 @@ def commonNewJobs(request,*allifargs,**allifkwargs):
             jobNo= 'Job/'+str(uuid4()).split('-')[1]+'/'+str(last_obj_incremented)+'/'+str(job_year)
         else:
             jobNo= 'First/Job/'+str(uuid4()).split('-')[1]
-        newJobRef=CommonJobsModel.objects.create(job_number=jobNo,description="Job Description",company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg") or None,
+        newJobRef=CommonJobsModel.objects.create(number=jobNo,description="Job Description",company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg") or None,
                     division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         newJobRef.save()
         return redirect('allifmaalcommonapp:commonJobs',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
@@ -13144,19 +13143,23 @@ def commonTasks(request,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
         formats=CommonDocsFormatModel.objects.all()
         datasorts=CommonDataSortsModel.objects.all()
+        for item in CommonTasksModel.objects.all():
+            print(item.task_status)
     
         form =CommonAddTasksForm(allif_data.get("main_sbscrbr_entity"))
        
         if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonTasksModel.objects.filter(status="incomplete",company=allif_data.get("main_sbscrbr_entity")).order_by('date')
+            allifqueryset=CommonTasksModel.objects.filter(task_status="incomplete",company=allif_data.get("main_sbscrbr_entity")).order_by('date')
         elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonTasksModel.objects.filter(status="incomplete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
+            allifqueryset=CommonTasksModel.objects.filter(task_status="incomplete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
         elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonTasksModel.objects.filter(status="incomplete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
+            allifqueryset=CommonTasksModel.objects.filter(task_status="incomplete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
         elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonTasksModel.objects.filter(status="incomplete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
+            allifqueryset=CommonTasksModel.objects.filter(task_status="incomplete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
         else:
             allifqueryset=[]
+        
+        #allifqueryset=CommonTasksModel.objects.filter(task_status="incomplete",company=allif_data.get("main_sbscrbr_entity")).order_by('date')
         if request.method=='POST':
             form=CommonAddTasksForm(allif_data.get("main_sbscrbr_entity"),request.POST)
             if form.is_valid():
@@ -13306,15 +13309,15 @@ def commonCompletedTasks(request,*allifargs,**allifkwargs):
         title="Completed Tasks"
         allif_data=common_shared_data(request)
     
-        allifqueryset=CommonTasksModel.objects.filter(status="complete",company=allif_data.get("main_sbscrbr_entity"))
+        allifqueryset=CommonTasksModel.objects.filter(task_status="complete",company=allif_data.get("main_sbscrbr_entity"))
         if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonTasksModel.objects.filter(status="complete",company=allif_data.get("main_sbscrbr_entity")).order_by('date')
+            allifqueryset=CommonTasksModel.objects.filter(task_status="complete",company=allif_data.get("main_sbscrbr_entity")).order_by('date')
         elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonTasksModel.objects.filter(status="complete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
+            allifqueryset=CommonTasksModel.objects.filter(task_status="complete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
         elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonTasksModel.objects.filter(status="complete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
+            allifqueryset=CommonTasksModel.objects.filter(task_status="complete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
         elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonTasksModel.objects.filter(status="complete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
+            allifqueryset=CommonTasksModel.objects.filter(task_status="complete",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
         else:
             allifqueryset=[]
         
@@ -13674,7 +13677,7 @@ def commonNewTransit(request,*allifargs,**allifkwargs):
         else:
             sqnmbr= 'SHP/1'+"/"+str(uuid4()).split('-')[2]
 
-        newQuoteNumber=CommonTransitModel.objects.create(shipment_number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        newQuoteNumber=CommonTransitModel.objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         newQuoteNumber.save()
         return redirect('allifmaalcommonapp:commonTransits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 

@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from allifmaalcommonapp.forms import CommonBaseForm
 
 ############################# start of datepicker customization ##############################
 class DatePickerInput(forms.DateInput):#use this class whereever you have a date and it will give you the calender
@@ -9,30 +10,29 @@ class TimePickerInput(forms.TimeInput):#use this wherever you have time input
 class DateTimePickerInput(forms.DateTimeInput):#use this wherever you have datetime input
     input_type='datetime'
 
-class AddTriageDetailsForm(forms.ModelForm):
-    class Meta:
-        model = TriagesModel
-        fields = ['record_date','staff','description','complaints','weight','height','division','branch','department',
+class AddTriageDetailsForm(CommonBaseForm):
+    class Meta(CommonBaseForm.Meta):
+        model=TriagesModel
+        fields=CommonBaseForm.Meta.fields + ['staff','description','complaints','weight','height','division','branch','department',
                   'blood_pressure_systolic','blood_pressure_diastolic','temperature','pulse_rate',
                   'respiration_rate','oxygen_saturation','past_medical_history','known_chronic_conditions',
                   'current_medication','treatment_plan',
                   'pain_level','allergies','triage_disposition','disposition_notes','triage_level','mode_of_arrival',
-                  'mobility_status','mental_status'
-                  
-                  ]
-        widgets={
-            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'allergies':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+                  'mobility_status','mental_status']
+        widgets = {
+        **CommonBaseForm.Meta.widgets,
+       'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'allergies':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'disposition_notes':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'blood_pressure_diastolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'blood_pressure_diastolic':forms.TextInput(attrs={'class':'form-control','placeholder':'in mmHg'}),
             'current_medication':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'oxygen_saturation':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'temperature':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'temperature':forms.TextInput(attrs={'class':'form-control','placeholder':'in Degrees Celcious'}),
             'respiration_rate':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'known_chronic_conditions':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'pulse_rate':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'record_date' : DatePickerInput(attrs={'class':'form-control'}),
-            'treatment_plan':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+            'treatment_plan':forms.Textarea(attrs={'class':'form-control allif-form-control-textarea','placeholder':''}),
             'staff':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
 
             
@@ -43,28 +43,21 @@ class AddTriageDetailsForm(forms.ModelForm):
             'mobility_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'mental_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
 
-            'complaints':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
-            'weight':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'height':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'complaints':forms.Textarea(attrs={'class':'form-control allif-form-control-textarea','placeholder':''}),
+            'weight':forms.TextInput(attrs={'class':'form-control','placeholder':'in KGs'}),
+            'height':forms.TextInput(attrs={'class':'form-control','placeholder':'in cm'}),
             
-            'blood_pressure_systolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'blood_pressure_systolic':forms.TextInput(attrs={'class':'form-control','placeholder':'in mmHg'}),
             'past_medical_history':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-           
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-
-        } 
-    def __init__(self,allifmaalparameter,*args,**kwargs):
-        super (AddTriageDetailsForm,self).__init__(*args,**kwargs) # populates the post
-        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        }
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super().__init__(allifmaalparameter, *args, **kwargs)
+        if allifmaalparameter:
+            self.fields['staff'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
       
-        self.fields['staff'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
+        else:
+            self.fields['staff'].queryset=CommonEmployeesModel.objects.none()
       
-
-
 class AddAssessmentDetailsForm(forms.ModelForm):
     class Meta:
         model = AssessmentsModel

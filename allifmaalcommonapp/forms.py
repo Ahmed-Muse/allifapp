@@ -1387,7 +1387,7 @@ class CommonAddCustomerPaymentForm(CommonBaseForm):
         widgets = {
         **CommonBaseForm.Meta.widgets,
         'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-       
+       'amount':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
         'mode':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         'account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
        
@@ -1396,10 +1396,10 @@ class CommonAddCustomerPaymentForm(CommonBaseForm):
         super().__init__(allifmaalparameter, *args, **kwargs)
         if allifmaalparameter:
             self.fields['customer'].queryset =CommonCustomersModel.objects.filter(company=allifmaalparameter)
-            self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=19999)
+            #self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=19999)
         else:
             self.fields['customer'].queryset =CommonCustomersModel.objects.none()
-            self.fields['account'].queryset =CommonChartofAccountsModel.objects.none()
+            #self.fields['account'].queryset =CommonChartofAccountsModel.objects.none()
 
 
 class CommonAddSalaryForm(CommonBaseForm):

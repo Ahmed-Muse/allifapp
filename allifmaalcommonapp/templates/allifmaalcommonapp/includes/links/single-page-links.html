@@ -1,24 +1,47 @@
 <div class="allif-single-page-tab-links-wrapper">
     <ul class="nav nav-tabs allif-single-page-tab-links-wrapper" >
 
-      <a class="nav-link active allif-single-page-tab-links" id="allif-single-page-tab-one-content-link-one-id" data-bs-toggle="tab"
-       data-bs-target="#allif-single-page-tab-one-content-link" type="button" role="tab" aria-controls="details" aria-selected="true">
-       Core Details
+      <a class="nav-link active allif-single-page-tab-links" id="allif-single-page-tab-core-details-id" data-bs-toggle="tab"
+       data-bs-target="#allif-single-page-tab-core-details" type="button" role="tab" aria-controls="details" aria-selected="true">
+       {% if title %}
+       {{title}} Core Details
+       {% else %}
+       Add/Edit Core Details
+       {% endif %}
+       
       </a>
     
-      <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-two-content-link-two-id" data-bs-toggle="tab"
-        data-bs-target="#allif-single-page-tab-two-content-link" type="button" role="tab" aria-controls="branches" aria-selected="false">
-          Standard Details
+      <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-standard-details-id" data-bs-toggle="tab"
+        data-bs-target="#allif-single-page-tab-standard-details" type="button" role="tab" aria-controls="branches" aria-selected="false">
+          
+        {% if title %}
+       {{title}} Standard Details
+       {% else %}
+       Add/Edit Standard Details
+       {% endif %}
       </a>
        
-      <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-three-content-link-three-id" data-bs-toggle="tab" 
-        data-bs-target="#allif-single-page-tab-three-content-link" type="button" role="tab" aria-controls="additional-info" aria-selected="false">
-          General Details
+      <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-general-details-id" data-bs-toggle="tab" 
+        data-bs-target="#allif-single-page-tab-general-details" type="button" role="tab" aria-controls="additional-info" aria-selected="false">
+       
+        {% if title %}
+       {{title}} General Details
+       {% else %}
+       Add/Edit General Details
+       {% endif %}
+       
         </a>
         {% if allifapp_logged_user_category == 'admin' %}
-        <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-four-content-link-four-id" data-bs-toggle="tab" 
-        data-bs-target="#allif-single-page-tab-four-content-link" type="button" role="tab" aria-controls="additional-info" aria-selected="false">
-          Static Details
+        <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-static-details-id" data-bs-toggle="tab" 
+        data-bs-target="#allif-single-page-tab-static-details" type="button" role="tab" aria-controls="additional-info" aria-selected="false">
+      
+        {% if title %}
+       {{title}} Static Details
+       {% else %}
+       Add/Edit Static Details
+       {% endif %}
+       
+
         </a>
         {% endif %}
         

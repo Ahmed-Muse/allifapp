@@ -134,7 +134,7 @@
         <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.medical_file.customer.id user_var glblslug %}">{{item.medical_file.customer}}</a></td>
        
             <td>
-              <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.medical_file.id user_var glblslug %}">{{item.medical_file.trans_number}}</a>
+              <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.medical_file.id user_var glblslug %}">{{item.medical_file.number}}</a>
            
           </td>
           
@@ -168,7 +168,7 @@
           <div class="dropdown allif-confirm-action">
             
             <a href="{% url 'allifmaalshaafiapp:prescriptions' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalshaafiapp:deletePrescription' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+            <a href="{% url 'allifmaalshaafiapp:deleteTriageData' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
           </div>
 
          

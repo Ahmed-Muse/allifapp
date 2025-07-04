@@ -1,0 +1,435 @@
+
+{% extends 'allifmaalshaafiapp/base/uimainbase/shaafibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<div class="allifmaal-main-container">
+ 
+<!--start....main headere-->
+<div class="card-header">
+
+<div class="row mt-12" ><!--start....header row-->
+
+<div class="col-md-12"><!--start....header column-->
+
+<div class="container-fluid amel-content-header">
+<a href="{% url 'allifmaalshaafiapp:triageData' user_var glblslug %}">Triage Records</a>
+<a href="{% url 'allifmaalshaafiapp:prescriptions' user_var glblslug %}">Prescriptions</a>
+
+</div>
+
+    </div><!--end....header column-->
+  
+  </div><!--end....header row-->
+
+</div><!--end....main headere-->
+
+
+  <div class="allifmaincontainer">
+{% if allifquery_update %}
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">Edit {{allifquery}} Warehouse Details</div>
+  <form method='POST' action=''>{% csrf_token %}
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+
+      <tr>
+        <td class="allif-fix-table-col">Division</td>
+        <td>{{form.division}}</td>
+    
+        </tr>
+        
+        <tr>
+          <td class="allif-fix-table-col">Branch</td>
+          <td>{{form.branch}}</td>
+      
+          </tr>
+            <tr>
+            <td class="allif-fix-table-col">Department</td>
+            <td>{{form.department}}</td>
+        
+            </tr>
+       <tr>
+        <td class="allif-fix-table-col">Systolic Pressure</td>
+        <td>{{form.blood_pressure_systolic}}</td>
+    
+        </tr>
+        <tr>
+            <td class="allif-fix-table-col">Diastolic Pressure</td>
+            <td>{{form.blood_pressure_diastolic}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Temperature</td>
+            <td>{{form.temperature}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Weight</td>
+            <td>{{form.weight}}</td>
+        
+            </tr>
+            
+            <tr>
+            <td class="allif-fix-table-col">Height</td>
+            <td>{{form.height}}</td>
+        
+            </tr>
+          
+             <tr>
+            <td class="allif-fix-table-col">Complaints</td>
+            <td>{{form.complaints}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Medical History</td>
+            <td>{{form.past_medical_history}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Chronic Conditions</td>
+            <td>{{form.known_chronic_conditions}}</td>
+        
+            </tr>
+
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+            
+         <tr>
+            <td class="allif-fix-table-col">Oxygen Saturation</td>
+            <td>{{form.oxygen_saturation}}</td>
+        
+            </tr>
+            <tr>
+            <td class="allif-fix-table-col">Resipration Rate</td>
+            <td>{{form.respiration_rate}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Pulse Rate</td>
+            <td>{{form.pulse_rate}}</td>
+        
+            </tr>
+          
+             <tr>
+            <td class="allif-fix-table-col">Allergies</td>
+            <td>{{form.allergies}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Current Medication</td>
+            <td>{{form.current_medication}}</td>
+        
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">Comments</td>
+            <td>{{form.description}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Triage Date</td>
+            <td>{{form.record_date}}</td>
+        
+            </tr>
+        
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+            
+          <tr>
+        <td class="allif-fix-table-col">Recorded By</td>
+        <td>{{form.staff}}</td>
+  
+      </tr>
+          <tr>
+          <td class="allif-fix-table-col">Pain Level</td>
+          <td>{{form.pain_level}}</td>
+        </tr>
+          
+          <tr>
+          <td class="allif-fix-table-col">Triage Level</td>
+          <td>{{form.triage_level}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Arrival Mode</td>
+          <td>{{form.mode_of_arrival}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Mobility</td>
+          <td>{{form.mobility_status}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Mental Status</td>
+          <td>{{form.mental_status}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Triage Disposition</td>
+          <td>{{form.triage_disposition}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Disposition Notes</td>
+          <td>{{form.disposition_notes}}</td>
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Treatment Plan</td>
+          <td>{{form.treatment_plan}}</td>
+        </tr>
+         
+        <tr>
+          <td class="allif-fix-table-col">Action</td>
+          <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+      
+          </tr>
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
+</div><!--end....table row-->
+</div>
+
+<div class="error-body">
+  <p>{{error_message}}</p>
+  </div>
+</form>
+<!--end of table-->
+
+</div><!--end of main container of the page....-->
+{% else %}
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">
+    Add Triage Data
+    <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' allifquery.customer.id user_var glblslug %}">{{allifquery.customer}}</a></td>
+    
+    <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' allifquery.id user_var glblslug %}">  {{allifquery.trans_number}}</a>
+  
+  </div>
+  <form method='POST' action=''>{% csrf_token %}
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+  
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+      <tr>
+        <td class="allif-fix-table-col">Systolic Pressure</td>
+        <td>{{form.blood_pressure_systolic}}</td>
+    
+        </tr>
+        <tr>
+            <td class="allif-fix-table-col">Diastolic Pressure</td>
+            <td>{{form.blood_pressure_diastolic}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Temperature</td>
+            <td>{{form.temperature}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Weight</td>
+            <td>{{form.weight}}</td>
+        
+            </tr>
+            
+            <tr>
+            <td class="allif-fix-table-col">Height</td>
+            <td>{{form.height}}</td>
+        
+            </tr>
+          
+             <tr>
+            <td class="allif-fix-table-col">Complaints</td>
+            <td>{{form.complaints}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Medical History</td>
+            <td>{{form.past_medical_history}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Chronic Conditions</td>
+            <td>{{form.known_chronic_conditions}}</td>
+        
+            </tr>
+
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+           <tr>
+            <td class="allif-fix-table-col">Oxygen Saturation</td>
+            <td>{{form.oxygen_saturation}}</td>
+        
+            </tr>
+            <tr>
+            <td class="allif-fix-table-col">Resipration Rate</td>
+            <td>{{form.respiration_rate}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Pulse Rate</td>
+            <td>{{form.pulse_rate}}</td>
+        
+            </tr>
+          
+             <tr>
+            <td class="allif-fix-table-col">Allergies</td>
+            <td>{{form.allergies}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Current Medication</td>
+            <td>{{form.current_medication}}</td>
+        
+            </tr>
+              <tr>
+            <td class="allif-fix-table-col">Comments</td>
+            <td>{{form.description}}</td>
+        
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Triage Date</td>
+            <td>{{form.record_date}}</td>
+        
+            </tr>
+        
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+       
+        <tr>
+        <td class="allif-fix-table-col">Recorded By</td>
+        <td>{{form.staff}}</td>
+  
+      </tr>
+          <tr>
+          <td class="allif-fix-table-col">Pain Level</td>
+          <td>{{form.pain_level}}</td>
+        </tr>
+          
+          <tr>
+          <td class="allif-fix-table-col">Triage Level</td>
+          <td>{{form.triage_level}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Arrival Mode</td>
+          <td>{{form.mode_of_arrival}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Mobility</td>
+          <td>{{form.mobility_status}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Mental Status</td>
+          <td>{{form.mental_status}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Triage Disposition</td>
+          <td>{{form.triage_disposition}}</td>
+        </tr>
+          <tr>
+          <td class="allif-fix-table-col">Disposition Notes</td>
+          <td>{{form.disposition_notes}}</td>
+        </tr>
+        <tr>
+          <td class="allif-fix-table-col">Treatment Plan</td>
+          <td>{{form.treatment_plan}}</td>
+        </tr>
+         
+        <tr>
+          <td class="allif-fix-table-col">Action</td>
+          <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
+      
+          </tr>
+      </tbody>
+      </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
+</div><!--end....table row-->
+</div>
+
+<div class="error-body">
+  <p>{{error_message}}</p>
+  </div>
+</form>
+<!--end of table-->
+
+
+
+</div><!--end of main container of the page....-->
+
+{% endif %}
+
+
+</div>
+
+</div>
+  {% block scripts %}
+
+  {% endblock %}
+   {% endblock %}
+   

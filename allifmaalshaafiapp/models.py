@@ -12,13 +12,11 @@ class ActiveManager(models.Manager):
     and delete_status='Deletable' by default.
     """
     def get_queryset(self):
-        return super().get_queryset().filter(status='Approved', delete_status='Deletable')
-
+        return super().get_queryset().filter(status='Active')
+    
     def for_company(self, company_id):
-        """
-        Returns active objects specifically for a given company ID.
-        """
-        return self.get_queryset().filter(company_id=company_id)
+        # Assuming your model (or its CommonBaseModel) has a 'company' field
+        return self.get_queryset().filter(company=company_id)
 
     def archived(self):
         """Returns only archived (soft-deleted) objects."""
@@ -39,10 +37,9 @@ class TriagesModel(CommonBaseModel):# very important model
     staff=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="en_triage",help_text="The main employee attending this encounter.")
     medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE,blank=True,null=True, related_name="filetranige",help_text="The customer associated with this encounter.")
     
-    record_date=models.DateField(blank=True,null=True)
     description=models.CharField(max_length=255,blank=True,null=True)
     complaints=models.TextField(null=True, blank=True,help_text="Patient's main symptoms or reason for visit.")
-    weight=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1,default=0)
+    weight=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1)
     # Added height for BMI calculation max_digits=5, decimal_places=2, blank=True, null=True,
     height=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=2,help_text="Patient's height in centimeters.")# normally in cm
     # Blood pressure separated for better data handling
@@ -60,13 +57,7 @@ class TriagesModel(CommonBaseModel):# very important model
     current_medication = models.TextField(blank=True, null=True,help_text="Medications patient is currently taking, reported at triage.")
 
     treatment_plan=models.TextField(blank=True, null=True,help_text="Treatment plan (medications, tests, referrals, follow-up).")
-    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    owner=models.ForeignKey(User, related_name="ownr_triages",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_triage",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_triage",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_triage",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_triage",on_delete=models.SET_NULL,null=True,blank=True)
-    
+   
     pain_level = models.IntegerField(blank=True, null=True,choices=[(i, str(i)) for i in range(0, 11)],help_text="Patient's reported pain level (0-10, 0=no pain, 10=worst pain).")
     allergies=models.TextField(blank=True, null=True,help_text="Patient's reported allergies (e.g., medications, food, environmental).")
    
@@ -87,9 +78,9 @@ class TriagesModel(CommonBaseModel):# very important model
     
      # --- Assign the custom manager ---
     # 'objects' is the default manager (accesses all records without default filtering)
-    #objects = models.Manager() 
+    objects = models.Manager() 
     # 'active_triage' is your custom manager (accesses only active records by default)
-    #active_triage = ActiveManager() 
+    active_triage = ActiveManager() 
 
     def __str__(self):
         return str(self.medical_file)

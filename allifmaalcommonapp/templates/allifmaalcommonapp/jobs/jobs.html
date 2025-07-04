@@ -136,7 +136,7 @@
         
         {% for item in allifqueryset %} 
         <tr data-id="{{item.id}}">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddJobDetails' item.id user_var glblslug %}">{{item.job_number}}</a></td>
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddJobDetails' item.id user_var glblslug %}">{{item.number}}</a></td>
     
     <td>
     {{item.customer}}

@@ -89,8 +89,8 @@
       <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddSeeTaskDetails' item.id user_var glblslug %}">{{item.task}}</a></td>
      
       
-      <td>{{item.dueDate|date:'d/m/Y'}}</td>
-      <td>{{item.dueDate|timeuntil}}</td>
+      <td>{{item.ends|date:'d/m/Y'}}</td>
+      <td>{{item.ends|timeuntil}}</td>
       <td>{{item.assignedto}}</td>
          
       {% if item.taskDay == 'Monday' %}

@@ -62,6 +62,9 @@ text-align: center;
  
   }
 
+.allif-header-main-wrapper{
+  font-family: inherit;
+}
 .amel-content-header{
   background-color:var(--main-background-color);
   padding: 0.1em;
@@ -239,7 +242,14 @@ table.allifmaincontainer {
 
   }
 
-
+.allif-details-table-main-wrapper{
+  font-family: inherit;
+  
+}
+.allif-forms-table-main-wrapper{
+  font-family: inherit;
+ 
+}
 /*style the table in the search side nav module...*/
 table.allif-search-table a {
   color: var(--main-blue-color);
@@ -431,7 +441,18 @@ overflow-y: auto;
   
   
 }
+.allif-fix-table-col-forms{
+  position:sticky;
+width: auto;
 
+}
+.allif-fix-table-col-forms:first-child{
+  left:0;
+width:auto;
+min-width:auto;
+background-color: var(--main-fixed-col-bg-clr);
+
+}
   /* start --- below is for changing the color of the clicked row in the tables 037262......*/
 .table-layout .clickedrow td, .table-layout .clickedrow a {
   background-color:  var(--main-background-color);
@@ -787,6 +808,9 @@ textarea.form-control {
 
   /*........##########################################......................*/
   /*......START.... STYLING OF COLLAPSIBLE SECTIONS...........*/
+  .allif-collapsible-sections-main-wrapper{
+    font-family: inherit;
+  }
   .allif-collapsible-details-section-links-wrapper {
     font-family: inherit;
     
@@ -814,6 +838,7 @@ textarea.form-control {
 /* Also, ensure your form-control class from Bootstrap doesn't interfere */
 .form-control {
     width: 100%; /* Bootstrap's default, but double-check */
+   
 }
 
 /* If you find the text input part of select2 is narrow, target that too */
@@ -827,4 +852,13 @@ textarea.form-control {
 /* Adjust placeholder color if needed for better visibility */
 .select2-container .select2-selection__placeholder {
     color: #6c757d; /* Bootstrap's muted text color */
+}
+
+.allif-form-control-textarea{
+    /* Add or modify these lines for height and width */
+    height: 7em; /* Example: set a fixed height */
+    width: 100%;   /* Example: make it take full available width */
+    
+    resize: vertical; /* Optional: allows vertical resizing by user */
+    text-align: left;
 }

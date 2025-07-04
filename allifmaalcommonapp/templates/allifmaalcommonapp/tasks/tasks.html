@@ -55,9 +55,9 @@
           <form method='POST' action=''>{% csrf_token %}
            
             <td id="allif-table-inline-form">{{form.task}}</td>
-            <td id="allif-table-inline-form">{{form.status}}</td>
+            <td id="allif-table-inline-form">{{form.task_status}}</td>
             <td id="allif-table-inline-form">{{form.assignedto}}</td>
-            <td id="allif-table-inline-form">{{form.dueDate}}</td>
+            <td id="allif-table-inline-form">{{form.ends}}</td>
             <td id="allif-table-inline-form">{{form.taskDay}}</td>
            
             <td id="allif-table-inline-form"> <input type="submit" value='Add Item' class="btn btn-success allifmaal-submit-btn"></td>
@@ -110,8 +110,8 @@
       <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddSeeTaskDetails' item.id user_var glblslug %}">{{item.task}}</a></td>
      
       
-      <td>{{item.dueDate|date:'d/m/Y'}}</td>
-      <td>{{item.dueDate|timeuntil}}</td>
+      <td>{{item.starts|date:'d/m/Y'}}</td>
+      <td>{{item.ends|timeuntil}}</td>
       <td>{{item.assignedto}}</td>
          
       {% if item.taskDay == 'Monday' %}
@@ -371,6 +371,9 @@
   </div>
  </div>
 
+<div class="error-body">
+  <p>{{error_message}}</p>
+  </div>
 <hr>
 
   </div></div>

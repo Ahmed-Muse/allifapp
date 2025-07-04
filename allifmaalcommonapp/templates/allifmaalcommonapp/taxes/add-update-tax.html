@@ -9,13 +9,16 @@
 
 <div class="allifmaal-main-container">
 
+<div class="allif-header-main-wrapper">
  <!--... START OF HEADER.... -->
 {% include 'allifmaalcommonapp/includes/headers/header-upper-section.html' %}
 <a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Taxes</a>
 {% include 'allifmaalcommonapp/includes/headers/header-lower-section.html' %}
  <!--... ENDT OF HEADER.... -->
-
+</div>
   <div class="allifmaincontainer">
+
+  <div class="allif-details-table-main-wrapper">
   <!--... START OF TABLE.... -->
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
       <tr>
@@ -40,13 +43,16 @@
         
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
      <!--... END OF TABLE.... -->
-
+      </div>
+  <!--... START OF COLLAPSIBLE SECTIONS.... -->
+  <div class="allif-collapsible-sections-main-wrapper">
 <!--START......... Start of collapsible sectioon links..........-->
   {% include 'allifmaalcommonapp/includes/links/collapse-links.html' %}
     
   <!--start....content of first dropdown/collapsible section-->
-  <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-one">
+  <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-core-details">
   
+    <div class="allif-details-table-main-wrapper">
      <!--... START OF TABLE.... -->
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
       <tr>
@@ -61,11 +67,13 @@
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
        <!--... END OF TABLE.... -->
       </div> 
+      </div>
     <!--end....content of first dropdown/collapsible section-->
 
     <!--start....content of second dropdown/collapsible section-->
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-two">
+    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-standard-details">
      <!--... START OF TABLE.... -->
+    <div class="allif-details-table-main-wrapper">
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
       <tr>
         <td class="allif-fix-table-col">Involved Risks</td>
@@ -78,31 +86,42 @@
       </tr>
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
        <!--... END OF TABLE.... -->
+       </div>
     </div>
        <!--end....content of second dropdown/collapsible section-->
 
     <!--start....content of second dropdown/collapsible section-->
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-three">
+    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-general-details">
+      <div class="allif-details-table-main-wrapper">
     {% include 'allifmaalcommonapp/includes/details/standard-base-details.html' %}
-      </div>
+    </div>
+    </div>
        <!--end....content of second dropdown/collapsible section-->
      
         <!--start....content of second dropdown/collapsible section-->
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-four">
+    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-static-details">
+      <div class="allif-details-table-main-wrapper">
     {% include 'allifmaalcommonapp/includes/details/general-base-details.html' %}
-      </div>
+    </div>
+    </div>
        <!--end....content of second dropdown/collapsible section-->
-      <div class="allif-content-spacer"></div>
+       </div>
+    <!--... END OF COLLAPSIBLE SECTIONS.... -->
+
+
+    <div class="allif-content-spacer"></div>
 
  <!--START.... start of single pages content and its links section-->
-<div class="allif-single-page-tabs-contents-main-wrapper">
+<div class="allif-single-page-tabs-contents-main-wrapper" >
  {% include 'allifmaalcommonapp/includes/links/single-page-links.html' %}
     <!--start of singple page contents-->
     <div class="tab-content allif-single-page-tab-content-wrapper" id="allif-single-page-tab-content-wrapper-id">
 
        <!--START.. Start of show/hide table section one-->
-      <div class="tab-pane allif-single-page-tab-content-pane show active" id="allif-single-page-tab-one-content-link" role="tabpanel" aria-labelledby="allif-single-page-tab-one-content-link-one-id">
+      <div class="tab-pane allif-single-page-tab-content-pane show active" id="allif-single-page-tab-core-details" role="tabpanel" aria-labelledby="allif-single-page-tab-core-details-id">
         <form method='POST' action=''>{% csrf_token %}
+
+        <div class="allif-forms-table-main-wrapper">
        {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-one-section.html' %}
           <tr>
             <td>Name</td>
@@ -123,14 +142,14 @@
           </tr>
                 
       {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-last-section.html' %}
-
     </div>
+  </div>
        <!--END... End of show/hide table more details section one..ok...hree....-->
 
 
  <!--START.. Start of show/hide table section one-->
-    <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-two-content-link" role="tabpanel" aria-labelledby="allif-single-page-tab-two-content-link-two-id">
-       
+    <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-standard-details" role="tabpanel" aria-labelledby="allif-single-page-tab-standard-details-id">
+      <div class="allif-forms-table-main-wrapper">
       {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
       <tr>
         <td>Exclusions</td>
@@ -147,12 +166,12 @@
       {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
       
      {% include 'allifmaalcommonapp/includes/forms/standard-form-fields.html' %}
-     
+     </div>
     </div>
        <!--END... End of show/hide table more details section one-->
 
-  <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-three-content-link" role="tabpanel" aria-labelledby="allif-single-page-tab-three-content-link-two-id">
-    
+  <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-general-details" role="tabpanel" aria-labelledby="allif-single-page-tab-general-details-id">
+    <div class="allif-forms-table-main-wrapper">
     {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
 
     <tr>
@@ -178,19 +197,20 @@
     </tr>
 
     {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
-    {% include 'allifmaalcommonapp/includes/forms/standard-form-fields.html' %}
+    
     {% include 'allifmaalcommonapp/includes/forms/general-form-fields.html' %}
-     
+     </div>
     </div>
        <!--END... End of show/hide table more details section one-->
-    <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-four-content-link" role="tabpanel" aria-labelledby="allif-single-page-tab-four-content-link-two-id">
-    
+
+    <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-static-details" role="tabpanel" aria-labelledby="allif-single-page-tab-static-id">
+     <div class="allif-forms-table-main-wrapper">
     {% include 'allifmaalcommonapp/includes/forms/static-form-fields.html' %}
-     
+     </div>
     </div>
        <!--END... End of show/hide table more details section one-->
   
-
+    <div class="allif-forms-table-main-wrapper">
     {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-one-section.html' %}
           <tr>
             <td>Tax Description</td>
@@ -204,20 +224,17 @@
           </tr>
 
       {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-section.html' %}
-                 
-        <tr>
-          <td>Action</td>
-          <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-        </tr>
-                
+      {% include 'allifmaalcommonapp/includes/forms/forms-save-button.html' %}  
       {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-last-section.html' %}
-
+      </div>
+      
+    
       </form>
         </div>
 
       </div>
       <!--END.... END of single pages content and its links section-->
-    <hr>
+   
 
     </div>
 
