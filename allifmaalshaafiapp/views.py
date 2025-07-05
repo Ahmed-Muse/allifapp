@@ -48,7 +48,7 @@ def shaafiDashboard(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 ##################3 Triage ####################
-
+from allifmaalcommonapp.utils import get_filtered_queryset_by_access # Import the new helper function
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -71,15 +71,99 @@ def triageData(request,*allifargs,**allifkwargs):
             allifqueryset=[]
         #allifqueryset=TriagesModel.active_triage.all()
         #allifqueryset = TriagesModel.active_triage.filter(company=allif_data.get("main_sbscrbr_entity"))
-        allifqueryset = TriagesModel.active_triage.for_company(allif_data.get("main_sbscrbr_entity"))
-        #allifqueryset=TriagesModel.objects.all()
+        #allifqueryset = TriagesModel.active_triage.for_company(allif_data.get("main_sbscrbr_entity"))
+        allifqueryset=TriagesModel.objects.all()
+        
+       
+        # Query: Get active, deletable triage records for the company
+        allifqueryset = get_filtered_queryset_by_access(
+            request, 
+            TriagesModel, 
+            allif_data # No extra_filters needed here for basic triage data
+        )
+        allifqueryset=TriagesModel.all_objects.all()
+        for item in TriagesModel.objects.all():
+            print(item)
+        
+         # This will get ACTIVE, DELETABLE triage records for the company
+        allifqueryset = get_filtered_queryset_by_access(
+            request, 
+            TriagesModel, 
+            allif_data,
+            access_scope='active', # Explicitly request active (default)
+            extra_filters={'status': "active"},
+            
+        )
         context={"title":title,"allifqueryset":allifqueryset,}
         return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
     
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
+
+
+# --- NEW EXAMPLE VIEW: To get ALL (active, inactive, archived) tasks ---
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+@logged_in_user_is_admin # Assuming only admins can see all tasks
+def allTriageData(request, *allifargs, **allifkwargs):
+    try:
+        title = "All Triage Data"
+        allif_data = common_shared_data(request)
+        
+        # Query: Get ALL tasks (active, inactive, archived) for the company
+        allifqueryset = get_filtered_queryset_by_access(
+            request, 
+            TriagesModel, 
+            allif_data, 
+            access_scope='all' # Crucial: Request all records
+        )
+        
+        context = {
+            "title": title,
+            "allifqueryset": allifqueryset,
+            "user_var": allif_data.get("usrslg"), 
+            "glblslug": allif_data.get("compslg"),
+        }
+        # You might render a different template or pass a flag to the same template
+        return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
+       
+    except Exception as ex:
+        error_context = {'error_message': ex,}
+        return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+
+# --- NEW EXAMPLE VIEW: To get ARCHIVED tasks ---
+@logged_in_user_must_have_profile
+@subscriber_company_status
+@logged_in_user_can_view
+@logged_in_user_is_admin # Assuming only admins can see archived tasks
+def commonArchivedTasks(request, *allifargs, **allifkwargs):
+    try:
+        title = "Archived Tasks"
+        allif_data = common_shared_data(request)
+        
+        # Query: Get only ARCHIVED tasks for the company
+        allifqueryset = get_filtered_queryset_by_access(
+            request, 
+            TriagesModel, 
+            allif_data, 
+            access_scope='archived' # Crucial: Request only archived records
+        )
+        
+        context = {
+            "title": title,
+            "allifqueryset": allifqueryset,
+            "user_var": allif_data.get("usrslg"), 
+            "glblslug": allif_data.get("compslg"),
+        }
+        # You might render a different template or pass a flag to the same template
+        return render(request, 'allifmaalcommonapp/tasks/archived-tasks.html', context)
+    except Exception as ex:
+        error_context = {'error_message': ex,}
+        return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+
+
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_add
@@ -101,7 +185,7 @@ def AddTriageData(request,pk,*allifargs,**allifkwargs):
                 obj.department=allif_data.get("logged_user_department")
                 obj.owner=allif_data.get("usernmeslg")
                 obj.save()
-                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+                return redirect('allifmaalshaafiapp:AddTriageData',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
                
             else:
                 error_message=form.errors
@@ -130,9 +214,6 @@ def editTriageData(request,pk,*allifargs,**allifkwargs):
         allif_data=common_shared_data(request)
         allifquery_update=TriagesModel.objects.filter(id=pk).first()
         form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        print(allifquery_update)
-        allifquery=allifquery_update.medical_file
-        print(allifquery)
         if request.method=='POST':
             form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
             if form.is_valid():

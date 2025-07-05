@@ -78,9 +78,9 @@ class TriagesModel(CommonBaseModel):# very important model
     
      # --- Assign the custom manager ---
     # 'objects' is the default manager (accesses all records without default filtering)
-    objects = models.Manager() 
+    #objects = models.Manager() 
     # 'active_triage' is your custom manager (accesses only active records by default)
-    active_triage = ActiveManager() 
+    #active_triage = ActiveManager() 
 
     def __str__(self):
         return str(self.medical_file)

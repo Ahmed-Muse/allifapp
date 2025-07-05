@@ -5869,6 +5869,7 @@ def commonCustomers(request,*allifargs,**allifkwargs):
             allifqueryset=CommonCustomersModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         else:
             allifqueryset=[]
+        #allifqueryset=CommonCustomersModel.all_objects.all()
 
         context={
             "title":title,

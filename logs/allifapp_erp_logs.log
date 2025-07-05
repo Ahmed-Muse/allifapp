@@ -1739,3 +1739,662 @@ INFO 2025-07-04 22:37:37,678 autoreload 24596 22584 C:\am\allifapp\allifapperp\a
 INFO 2025-07-04 22:37:38,570 autoreload 22244 33556 Watching for file changes with StatReloader
 INFO 2025-07-04 22:39:51,460 autoreload 22244 33556 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
 INFO 2025-07-04 22:39:52,422 autoreload 32976 32392 Watching for file changes with StatReloader
+INFO 2025-07-05 17:31:27,715 autoreload 20652 19092 Watching for file changes with StatReloader
+INFO 2025-07-05 17:39:08,744 autoreload 20652 19092 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 17:39:10,219 autoreload 28052 16520 Watching for file changes with StatReloader
+INFO 2025-07-05 19:24:33,582 autoreload 28052 16520 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-07-05 19:24:35,557 autoreload 3872 30576 Watching for file changes with StatReloader
+INFO 2025-07-05 19:25:01,636 autoreload 3872 30576 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-07-05 19:25:02,775 autoreload 13764 35888 Watching for file changes with StatReloader
+INFO 2025-07-05 20:19:24,940 autoreload 13764 35888 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 20:19:25,914 autoreload 8160 20584 Watching for file changes with StatReloader
+INFO 2025-07-05 20:20:21,059 autoreload 8160 20584 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-05 20:20:22,012 autoreload 29772 19080 Watching for file changes with StatReloader
+INFO 2025-07-05 20:20:47,469 autoreload 29772 19080 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 20:20:48,544 autoreload 14280 20572 Watching for file changes with StatReloader
+INFO 2025-07-05 20:29:29,711 autoreload 14280 20572 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 20:29:30,741 autoreload 36216 33272 Watching for file changes with StatReloader
+INFO 2025-07-05 20:52:02,554 autoreload 36216 33272 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 20:52:03,557 autoreload 18800 32204 Watching for file changes with StatReloader
+INFO 2025-07-05 20:53:17,055 autoreload 18800 32204 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 20:53:18,097 autoreload 36496 34632 Watching for file changes with StatReloader
+INFO 2025-07-05 21:14:22,402 autoreload 36496 34632 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:14:23,388 autoreload 22624 11016 Watching for file changes with StatReloader
+INFO 2025-07-05 21:14:54,312 autoreload 22624 11016 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:14:55,294 autoreload 28316 3504 Watching for file changes with StatReloader
+INFO 2025-07-05 21:15:26,843 autoreload 36788 26960 Watching for file changes with StatReloader
+WARNING 2025-07-05 21:15:31,573 log 36788 30460 Not Found: /favicon.ico
+INFO 2025-07-05 21:17:06,822 autoreload 36788 26960 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:17:08,046 autoreload 9412 28964 Watching for file changes with StatReloader
+INFO 2025-07-05 21:18:57,198 autoreload 9412 28964 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-07-05 21:18:58,141 autoreload 32004 22300 Watching for file changes with StatReloader
+INFO 2025-07-05 21:23:23,126 autoreload 32004 22300 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 21:23:24,096 autoreload 15732 31376 Watching for file changes with StatReloader
+INFO 2025-07-05 21:24:03,050 autoreload 15732 31376 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-07-05 21:24:03,981 autoreload 33900 15492 Watching for file changes with StatReloader
+INFO 2025-07-05 21:24:14,192 autoreload 33900 15492 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-07-05 21:24:15,145 autoreload 30632 14892 Watching for file changes with StatReloader
+INFO 2025-07-05 21:24:32,431 autoreload 30632 14892 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:24:33,477 autoreload 8148 22444 Watching for file changes with StatReloader
+INFO 2025-07-05 21:24:49,787 autoreload 11248 3772 Watching for file changes with StatReloader
+ERROR 2025-07-05 21:26:48,738 views 11248 13372 Unexpected error for Tax 'Sales Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1959, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-05 21:26:48,777 views 11248 13372 Unexpected error for Supplier Tax 'Sales Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1985, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-05 21:26:48,784 views 11248 13372 Unexpected error for Tax 'VAT'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1959, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-05 21:26:48,790 views 11248 13372 Unexpected error for Supplier Tax 'VAT'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1985, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-05 21:26:48,795 views 11248 13372 Unexpected error for Tax 'Withholding Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1959, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-05 21:26:48,800 views 11248 13372 Unexpected error for Supplier Tax 'Withholding Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1985, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-05 21:26:48,898 views 11248 13372 Unexpected error for Operation Year 'Operation Year One'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonOperationYearsModel.DoesNotExist: CommonOperationYearsModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2091, in commonCreateDefaultValues
+    year_instance, created = CommonOperationYearsModel.objects.get_or_create(
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        year=year_data['year'], # Assuming 'year' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.
+ERROR 2025-07-05 21:26:48,904 views 11248 13372 Unexpected error for Operation Year 'Current Year'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonOperationYearsModel.DoesNotExist: CommonOperationYearsModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2091, in commonCreateDefaultValues
+    year_instance, created = CommonOperationYearsModel.objects.get_or_create(
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        year=year_data['year'], # Assuming 'year' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.
+ERROR 2025-07-05 21:26:48,906 views 11248 13372 Skipping term 'Term One' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-05 21:26:48,906 views 11248 13372 Skipping term 'Term Two' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-05 21:26:48,906 views 11248 13372 Skipping term 'Term Three' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-05 21:26:48,906 views 11248 13372 Skipping term 'Term Four' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-05 21:26:48,906 views 11248 13372 Skipping term 'Q1' due to missing parent year 'Current Year'.
+ERROR 2025-07-05 21:26:48,906 views 11248 13372 Skipping term 'Q2' due to missing parent year 'Current Year'.
+ERROR 2025-07-05 21:26:48,907 views 11248 13372 Skipping term 'Q3' due to missing parent year 'Current Year'.
+ERROR 2025-07-05 21:26:48,907 views 11248 13372 Skipping term 'Q4' due to missing parent year 'Current Year'.
+WARNING 2025-07-05 21:26:48,916 views 11248 13372 IntegrityError for Code '0001': (1062, "Duplicate entry '1-0001-Standard Code 0001' for key 'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq'")
+WARNING 2025-07-05 21:26:48,922 views 11248 13372 IntegrityError for Code '0002': (1062, "Duplicate entry '1-0002-Standard Code 0002' for key 'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq'")
+WARNING 2025-07-05 21:26:48,930 views 11248 13372 IntegrityError for Code '0003': (1062, "Duplicate entry '1-0003-Item Type - Physical' for key 'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq'")
+WARNING 2025-07-05 21:26:48,935 views 11248 13372 IntegrityError for Code '0004': (1062, "Duplicate entry '1-0004-Item Type - Service' for key 'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq'")
+WARNING 2025-07-05 21:26:48,940 views 11248 13372 IntegrityError for Code '0005': (1062, "Duplicate entry '1-0005-Customer Category - Retail' for key 'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq'")
+ERROR 2025-07-05 21:26:48,942 views 11248 13372 Unexpected error for Category 'General Category 1'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2189, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-05 21:26:48,946 views 11248 13372 Unexpected error for Category 'General Category 2'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2189, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-05 21:26:48,950 views 11248 13372 Unexpected error for Category 'Product Category - Electronics'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2189, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-05 21:26:48,956 views 11248 13372 Unexpected error for Category 'Service Category - Consulting'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2189, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-05 21:26:49,179 views 11248 13372 Default setup for Naciim Saloon completed with errors. Results: {'company_scopes': {'created': 5, 'skipped': 0, 'errors': []}, 'taxes': {'created': 0, 'skipped': 3, 'errors': ["Error creating tax 'Sales Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid", "Error creating tax 'VAT': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid", "Error creating tax 'Withholding Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid"]}, 'supplier_taxes': {'created': 0, 'skipped': 3, 'errors': ["Error creating supplier tax 'Sales Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid", "Error creating supplier tax 'VAT': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid", "Error creating supplier tax 'Withholding Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid"]}, 'currencies': {'created': 5, 'skipped': 0, 'errors': []}, 'payment_terms': {'created': 6, 'skipped': 0, 'errors': []}, 'units': {'created': 12, 'skipped': 0, 'errors': []}, 'operation_years': {'created': 0, 'skipped': 2, 'errors': ["Error creating year 'Operation Year One': Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.", "Error creating year 'Current Year': Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'."]}, 'operation_year_terms': {'created': 0, 'skipped': 8, 'errors': ["Missing parent year 'Operation Year One' for term 'Term One'.", "Missing parent year 'Operation Year One' for term 'Term Two'.", "Missing parent year 'Operation Year One' for term 'Term Three'.", "Missing parent year 'Operation Year One' for term 'Term Four'.", "Missing parent year 'Current Year' for term 'Q1'.", "Missing parent year 'Current Year' for term 'Q2'.", "Missing parent year 'Current Year' for term 'Q3'.", "Missing parent year 'Current Year' for term 'Q4'."]}, 'codes': {'created': 0, 'skipped': 5, 'errors': ['Duplicate code \'0001\': (1062, "Duplicate entry \'1-0001-Standard Code 0001\' for key \'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq\'")', 'Duplicate code \'0002\': (1062, "Duplicate entry \'1-0002-Standard Code 0002\' for key \'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq\'")', 'Duplicate code \'0003\': (1062, "Duplicate entry \'1-0003-Item Type - Physical\' for key \'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq\'")', 'Duplicate code \'0004\': (1062, "Duplicate entry \'1-0004-Item Type - Service\' for key \'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq\'")', 'Duplicate code \'0005\': (1062, "Duplicate entry \'1-0005-Customer Category - Retail\' for key \'allifmaalcommonapp_commoncodesmodel.allifmaalcommonapp_commo_company_id_code_name_0135abef_uniq\'")']}, 'categories': {'created': 0, 'skipped': 4, 'errors': ["Error creating category 'General Category 1': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'General Category 2': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'Product Category - Electronics': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'Service Category - Consulting': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'."]}, 'gl_categories': {'created': 5, 'skipped': 0, 'errors': []}, 'chart_of_accounts': {'created': 47, 'skipped': 0, 'errors': []}, 'overall_error': False}
+INFO 2025-07-05 21:28:04,855 autoreload 11248 3772 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:28:05,822 autoreload 33140 35816 Watching for file changes with StatReloader
+INFO 2025-07-05 21:28:31,552 autoreload 33140 35816 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:28:32,339 autoreload 6832 32060 Watching for file changes with StatReloader
+INFO 2025-07-05 21:34:09,322 autoreload 6832 32060 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 21:34:10,096 autoreload 22928 24876 Watching for file changes with StatReloader
+INFO 2025-07-05 21:46:50,979 autoreload 22928 24876 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:46:51,770 autoreload 11524 26680 Watching for file changes with StatReloader
+INFO 2025-07-05 21:48:05,128 autoreload 11524 26680 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-05 21:48:05,899 autoreload 33616 12888 Watching for file changes with StatReloader
+INFO 2025-07-05 21:48:56,336 autoreload 33616 12888 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-05 21:48:57,168 autoreload 19500 23296 Watching for file changes with StatReloader
+INFO 2025-07-05 21:49:24,544 autoreload 19500 23296 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 21:49:25,508 autoreload 23556 24864 Watching for file changes with StatReloader
+INFO 2025-07-05 21:49:58,750 autoreload 23556 24864 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 21:49:59,445 autoreload 20832 30604 Watching for file changes with StatReloader
+INFO 2025-07-05 21:50:26,089 autoreload 20832 30604 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 21:50:26,863 autoreload 29056 8484 Watching for file changes with StatReloader
+INFO 2025-07-05 21:50:37,055 autoreload 29056 8484 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 21:50:37,908 autoreload 11468 11260 Watching for file changes with StatReloader
+INFO 2025-07-05 21:51:33,237 autoreload 11468 11260 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 21:51:33,991 autoreload 13380 34236 Watching for file changes with StatReloader
+INFO 2025-07-05 21:51:52,210 autoreload 15156 35728 Watching for file changes with StatReloader
+INFO 2025-07-05 21:53:58,265 autoreload 15156 35728 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:53:59,241 autoreload 24500 5096 Watching for file changes with StatReloader
+INFO 2025-07-05 21:54:45,236 autoreload 24500 5096 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:54:46,201 autoreload 12752 13912 Watching for file changes with StatReloader
+INFO 2025-07-05 21:55:25,509 autoreload 12752 13912 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:55:26,470 autoreload 31176 2156 Watching for file changes with StatReloader
+INFO 2025-07-05 21:57:21,195 autoreload 31176 2156 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:57:22,284 autoreload 19116 11776 Watching for file changes with StatReloader
+INFO 2025-07-05 21:57:47,499 autoreload 19116 11776 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-05 21:57:48,438 autoreload 12292 29868 Watching for file changes with StatReloader
+INFO 2025-07-05 21:59:52,447 autoreload 12292 29868 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-05 21:59:53,382 autoreload 20988 1764 Watching for file changes with StatReloader
+INFO 2025-07-05 22:01:38,438 autoreload 20988 1764 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-05 22:01:39,564 autoreload 6396 28908 Watching for file changes with StatReloader
+INFO 2025-07-05 22:03:51,291 autoreload 6396 28908 C:\am\allifapp\allifapperp\allifmaalcommonapp\allifutils.py changed, reloading.
+INFO 2025-07-05 22:03:52,151 autoreload 27556 10024 Watching for file changes with StatReloader
+INFO 2025-07-05 22:04:34,334 autoreload 27556 10024 C:\am\allifapp\allifapperp\allifmaalcommonapp\allifutils.py changed, reloading.
+INFO 2025-07-05 22:04:35,248 autoreload 14420 34880 Watching for file changes with StatReloader
+INFO 2025-07-05 22:13:01,621 autoreload 14420 34880 C:\am\allifapp\allifapperp\allifmaalcommonapp\allifutils.py changed, reloading.
+INFO 2025-07-05 22:13:02,508 autoreload 11160 6044 Watching for file changes with StatReloader
+INFO 2025-07-05 22:17:04,362 autoreload 11160 6044 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 22:17:05,319 autoreload 32008 9420 Watching for file changes with StatReloader
+INFO 2025-07-05 22:17:20,762 autoreload 32008 9420 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 22:17:21,698 autoreload 11952 31444 Watching for file changes with StatReloader
+INFO 2025-07-05 22:17:25,465 autoreload 11952 31444 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 22:17:26,175 autoreload 28120 16196 Watching for file changes with StatReloader
+INFO 2025-07-05 22:23:28,967 autoreload 28120 16196 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 22:23:30,126 autoreload 23580 30624 Watching for file changes with StatReloader
+INFO 2025-07-05 22:23:39,367 autoreload 23580 30624 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 22:23:40,466 autoreload 29300 23852 Watching for file changes with StatReloader
+INFO 2025-07-05 22:23:46,326 autoreload 29300 23852 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 22:23:47,063 autoreload 26676 6832 Watching for file changes with StatReloader
+INFO 2025-07-05 22:28:58,755 autoreload 26676 6832 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-05 22:28:59,690 autoreload 25844 10984 Watching for file changes with StatReloader
+INFO 2025-07-05 22:45:17,505 autoreload 25844 10984 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-05 22:45:18,626 autoreload 34100 32984 Watching for file changes with StatReloader
+INFO 2025-07-05 22:46:42,031 autoreload 34100 32984 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-05 22:46:43,090 autoreload 28772 24136 Watching for file changes with StatReloader
+INFO 2025-07-05 22:50:13,041 autoreload 28772 24136 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 22:50:13,944 autoreload 33204 21692 Watching for file changes with StatReloader
+INFO 2025-07-05 22:50:45,586 autoreload 33204 21692 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 22:50:46,555 autoreload 36228 11720 Watching for file changes with StatReloader
+INFO 2025-07-05 22:51:15,562 autoreload 36228 11720 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 22:51:16,448 autoreload 5096 18596 Watching for file changes with StatReloader
+INFO 2025-07-05 23:02:11,267 autoreload 5096 18596 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 23:02:12,192 autoreload 33572 14456 Watching for file changes with StatReloader
+INFO 2025-07-05 23:02:18,145 autoreload 33572 14456 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 23:02:18,918 autoreload 23284 30344 Watching for file changes with StatReloader
+INFO 2025-07-05 23:02:33,863 autoreload 23284 30344 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 23:02:34,741 autoreload 17872 25160 Watching for file changes with StatReloader
+INFO 2025-07-05 23:03:17,888 autoreload 17872 25160 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-07-05 23:03:18,830 autoreload 9444 10088 Watching for file changes with StatReloader
+INFO 2025-07-05 23:08:27,898 autoreload 9444 10088 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 23:08:29,065 autoreload 2420 2524 Watching for file changes with StatReloader
+INFO 2025-07-05 23:08:34,114 autoreload 2420 2524 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-05 23:08:35,354 autoreload 29344 33376 Watching for file changes with StatReloader

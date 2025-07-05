@@ -536,6 +536,11 @@ color: var(--main-red-color);
   color: var(--main-black-color);
 }
   
+.allif-form-main-wrapper{
+ font-family: inherit;
+ 
+
+}
   
   /*....#F6F7F8..start.....styling the dashboard page.....*/
   .allif-dashboard-card-header{
@@ -856,7 +861,7 @@ textarea.form-control {
 
 .allif-form-control-textarea{
     /* Add or modify these lines for height and width */
-    height: 7em; /* Example: set a fixed height */
+    height: 9em; /* Example: set a fixed height */
     width: 100%;   /* Example: make it take full available width */
     
     resize: vertical; /* Optional: allows vertical resizing by user */

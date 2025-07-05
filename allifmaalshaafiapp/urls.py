@@ -8,6 +8,10 @@ path('Healthcare/Dashboard/<str:allifusr>/<str:allifslug>/', views.shaafiDashboa
 
 ################################3 triage data ###########################3
 path('Triage/Data/Recorded/Patient/Informations/<str:allifusr>/<str:allifslug>/', views.triageData, name="triageData"),
+path('All/Triage/s/Data/Recorded/Patient/Informations/<str:allifusr>/<str:allifslug>/', views.allTriageData, name="allTriageData"),
+
+
+
 path('Add/New/Triage/Data/Details/information/Records/<str:pk>/<str:allifusr>/<str:allifslug>/', views.AddTriageData, name="AddTriageData"),
 path('Edit/Update/Triage/Data/information/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editTriageData, name="editTriageData"),
 path('Search/For/Triage/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.triageDataSearch, name="triageDataSearch"),

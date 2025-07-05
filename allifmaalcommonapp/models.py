@@ -260,6 +260,34 @@ class CommonOperationYearTermsModel(models.Model):
     def __str__(self):
         return str(self.name)
 
+# This manager will now be the default for CommonBaseModel and its inheritors
+class ActiveManager(models.Manager):
+    """
+    A custom manager that returns only objects with status='Active'
+    and delete_status='Deletable' by default.
+    YourModel.objects.all() will always mean "get me the active, non-archived records for this model within the current company context (if for_company is used)".
+    This establishes a clear convention.
+    """
+    def get_queryset(self):
+        # Assuming your models have 'status' and 'delete_status' fields
+        return super().get_queryset().filter(status='Active', delete_status='Deletable')
+    
+    def for_company(self, company_id):
+        """Filters the queryset for a specific company.
+        The for_company method on the default manager makes tenant-specific queries very straightforward and performant.
+        All filtering (active status, company, division, etc.) happens at the database level in a single, optimized SQL query.
+        Django's ORM is highly efficient for chained queries.
+        """
+        # This assumes your model (or its CommonBaseModel) has a 'company' field
+        return self.get_queryset().filter(company=company_id)
+
+    def archived(self):
+        """Returns only archived (soft-deleted) objects."""
+        return super().get_queryset().filter(delete_status='Archived')
+
+    def all_with_archived(self):
+        """Returns all objects, including active and archived, without status/delete_status filtering."""
+        return super().get_queryset()
 
 #############################################################
 # Abstract Base Class for Common Organizational Fields
@@ -291,13 +319,23 @@ class CommonBaseModel(models.Model):
     #is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
     code=models.CharField(max_length=50,blank=True,null=True,default='Code', unique=False, help_text="Unique code for the program, e.g., BSCIT")
     balance=models.DecimalField(max_digits=30,decimal_places=2,blank=True,null=True,default=0.00)
-    status=models.CharField(max_length=50, choices=BASE_MODEL_STATUS_CHOICES, default='Draft',null=True,blank=True)
+    status=models.CharField(max_length=50, choices=BASE_MODEL_STATUS_CHOICES, default='Active',null=True,blank=True)
     priority=models.CharField(max_length=50, choices=PRIORITY_LEVELS, default='Normal',null=True,blank=True)
     delete_status=models.CharField(choices=delete_status, blank=True, null=True,max_length=30,default="Deletable")
     #universally unique identifier. Excellent for public-facing IDs, preventing enumeration attacks, and multi-database syncing. You often don't want this to be editable by users.
     #If your uniqueId is intended to be a UUID, consider switching its type to models.UUIDField.
     uuid=models.UUIDField(default=uuid.uuid4, editable=False, unique=True, db_index=True,null=True,blank=True)
     reference=models.CharField(max_length=100, default='reference',blank=True, null=True, db_index=True, help_text="An optional identifier from an external system or an internal reference code.")
+    
+    
+    # Assign the custom manager as the default manager
+    #objects = ActiveManager(): This is the most crucial change. It makes ActiveManager the default manager for CommonBaseModel and all models that inherit from it.
+    objects = ActiveManager() 
+    
+    # Provide a manager to access ALL objects, including inactive/archived
+    #all_objects = models.Manager(): This provides a fallback. If you ever need to query all records (including inactive or archived ones), you'd use YourModel.all_objects.all().
+    all_objects = models.Manager() 
+
     class Meta:
         abstract = True # This is the crucial line that makes it an abstract base class
 
