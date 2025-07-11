@@ -1,0 +1,28 @@
+
+        {# --- Sorting Form (POST-based) --- #}
+        {#--- The action of the form includes ?scope={{ current_scope }} to preserve the current scope when sorting. --- #}
+        <div class="sort-form-wrapper">
+            <form method="POST" action=""> {% csrf_token %}
+              
+                <select name="sort_option" id="sort_option" style="height: 2em; background-color: #c6c8f1">
+                    {% for ui_label, field_name in sort_options %}
+                    
+                    <option value="{{ ui_label }}" {% if current_sort_ui_label == ui_label %} selected {% endif %} class="allif-sort-form-dropdown-content-wrapper">
+                     
+                        {{ ui_label }}
+                            
+                    </option>
+                        
+                    {% endfor %}
+                </select>
+             
+
+                <button type="submit" class="btn btn-success">Apply Sorting</button>
+
+                
+                {# --- CRUCIAL: Hidden inputs to preserve GET parameters on POST --- #}
+                <input type="hidden" name="scope" value="{{ current_scope }}">
+                <input type="hidden" name="user_var" value="{{ user_var }}">
+                <input type="hidden" name="glblslug" value="{{ glblslug }}">
+            </form>
+        </div>

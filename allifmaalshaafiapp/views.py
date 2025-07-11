@@ -1,8 +1,8 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from allifmaalcommonapp.allifutils import common_shared_data
 from allifmaalcommonapp.decorators import subscriber_company_status,logged_in_user_must_have_profile
 from allifmaalcommonapp.decorators import *
-from allifmaalcommonapp.models import CommonCompanyScopeModel
+from allifmaalcommonapp.models import CommonCompanyScopeModel,CommonDataSortsModel
 # Create your views here.
 from .models import *
 from django.template.loader import get_template
@@ -12,6 +12,8 @@ from django.utils import timezone
 from django.shortcuts import render
 from .forms import *
 from django.db.models import Q
+from allifmaalcommonapp.utils import get_filtered_queryset_by_access,apply_sorting,allif_filtered_and_sorted_queryset # Import the new helper function
+
 # Create your views here.
 #@logged_in_user_must_have_profile
 #@subscriber_company_status
@@ -48,7 +50,7 @@ def shaafiDashboard(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 ##################3 Triage ####################
-from allifmaalcommonapp.utils import get_filtered_queryset_by_access # Import the new helper function
+
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
@@ -74,7 +76,8 @@ def triageData(request,*allifargs,**allifkwargs):
         #allifqueryset = TriagesModel.active_triage.for_company(allif_data.get("main_sbscrbr_entity"))
         allifqueryset=TriagesModel.objects.all()
         
-       
+        allifqueryset=CommonCompanyDetailsModel.objects.all()
+        
         # Query: Get active, deletable triage records for the company
         allifqueryset = get_filtered_queryset_by_access(
             request, 
@@ -82,9 +85,7 @@ def triageData(request,*allifargs,**allifkwargs):
             allif_data # No extra_filters needed here for basic triage data
         )
         allifqueryset=TriagesModel.all_objects.all()
-        for item in TriagesModel.objects.all():
-            print(item)
-        
+       
          # This will get ACTIVE, DELETABLE triage records for the company
         allifqueryset = get_filtered_queryset_by_access(
             request, 
@@ -94,7 +95,55 @@ def triageData(request,*allifargs,**allifkwargs):
             extra_filters={'status': "active"},
             
         )
-        context={"title":title,"allifqueryset":allifqueryset,}
+        
+        
+        
+        
+        
+        
+        title = "Triage Records"
+        allif_data = common_shared_data(request)
+
+        # Call the universal utility function for TriagesModel
+        allifqueryset = allif_filtered_and_sorted_queryset(request, TriagesModel,allif_data)#gives all
+        
+        #print(f"DEBUG: Final Queryset for Triage: {allifqueryset.query}")
+
+        allifqueryset = allif_filtered_and_sorted_queryset(request,TriagesModel,allif_data,# these only show all records...
+            
+            #we can also add the extra filtering parameter as below
+            #explicit_scope='Archived' # <-- Explicitly set scope to 'archived'
+            explicit_scope='all',# shows all records
+            #explicit_scope='active', # shows only active records....
+            #explicit_scope='archived'# shows only archived data
+        )
+        
+        
+        context = {
+            "title": title,
+            "allifqueryset": allifqueryset, 
+            "current_scope": allifqueryset.current_scope, 
+            "current_sort_ui_label": allifqueryset.current_sort_ui_label, 
+            "user_var": allif_data.get("usrslg"), 
+            "glblslug": allif_data.get("compslg"),
+            "base_url_name": request.resolver_match.view_name, 
+            #"sort_options": allifqueryset.sort_options, 
+            
+            "allifqueryset": allifqueryset, 
+            "current_scope": allifqueryset.current_scope, 
+            "current_sort_ui_label": allifqueryset.current_sort_ui_label, 
+            "user_var": allif_data.get("usrslg"), 
+            "glblslug": allif_data.get("compslg"),
+            "base_url_name": request.resolver_match.view_name, # This should be 'triageData'
+            "sort_options": allifqueryset.sort_options, 
+        }
+        #print(f"DEBUG: Context for template: {context.keys()}")
+        #print(f"DEBUG: Final Queryset for Triage: {allifqueryset.query}")
+        #print(f"DEBUG: Context for Triage: base_url_name={request.resolver_match.view_name}, user_var={allif_data.get('usrslg')}, glblslug={allif_data.get('compslg')}, current_scope={allifqueryset.current_scope}")
+
+        
+        
+        #context={"title":title,"allifqueryset":allifqueryset,}
         return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
     
     except Exception as ex:
@@ -150,6 +199,7 @@ def commonArchivedTasks(request, *allifargs, **allifkwargs):
             allif_data, 
             access_scope='archived' # Crucial: Request only archived records
         )
+        
         
         context = {
             "title": title,
@@ -212,7 +262,7 @@ def editTriageData(request,pk,*allifargs,**allifkwargs):
     title="Edit Triage"
     try:
         allif_data=common_shared_data(request)
-        allifquery_update=TriagesModel.objects.filter(id=pk).first()
+        allifquery_update=get_object_or_404(TriagesModel.all_objects, id=pk)
         form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
         if request.method=='POST':
             form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
@@ -361,7 +411,7 @@ def triageDataDetails(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
         title="Triage Details"
-        allifquery=TriagesModel.objects.filter(id=pk).first()
+        allifquery=get_object_or_404(TriagesModel.all_objects, id=pk)
         form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
         if request.method=='POST':
             form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery)
@@ -397,7 +447,7 @@ def triageDataDetails(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_delete
 def wantToDeleteTriageData(request,pk,*allifargs,**allifkwargs):
     try:
-        allifquery=TriagesModel.objects.filter(id=pk).first()
+        allifquery=get_object_or_404(TriagesModel.all_objects, id=pk)
         title="Are you sure to delete?"
         context={
         "allifquery":allifquery,
@@ -417,7 +467,7 @@ def wantToDeleteTriageData(request,pk,*allifargs,**allifkwargs):
 def deleteTriageData(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        TriagesModel.objects.filter(id=pk).first().delete()
+        get_object_or_404(TriagesModel.all_objects, id=pk).delete()
         return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
     except Exception as ex:
         error_context={'error_message': ex,}

@@ -270,7 +270,7 @@ class ActiveManager(models.Manager):
     """
     def get_queryset(self):
         # Assuming your models have 'status' and 'delete_status' fields
-        return super().get_queryset().filter(status='Active', delete_status='Deletable')
+        return super().get_queryset().filter(status='Active')
     
     def for_company(self, company_id):
         """Filters the queryset for a specific company.
@@ -283,7 +283,7 @@ class ActiveManager(models.Manager):
 
     def archived(self):
         """Returns only archived (soft-deleted) objects."""
-        return super().get_queryset().filter(delete_status='Archived')
+        return super().get_queryset().filter(status='Archived')
 
     def all_with_archived(self):
         """Returns all objects, including active and archived, without status/delete_status filtering."""
@@ -303,9 +303,9 @@ class CommonBaseModel(models.Model):
     division=models.ForeignKey(CommonDivisionsModel,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
     branch=models.ForeignKey(CommonBranchesModel,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
     department=models.ForeignKey(CommonDepartmentsModel,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
-    name=models.CharField(max_length=30,blank=True,null=True,default="Name")
+    name=models.CharField(max_length=50,blank=True,null=True,default="Name")
     number=models.CharField(max_length=50,blank=True,null=True,default='#No', unique=False, help_text="Unique code for the program, e.g., BSCIT")
-    date=models.DateField(auto_now_add=True,blank=True,null=True)
+    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     description= models.TextField(null=True, blank=True,default='Description')
     quantity=models.DecimalField(max_digits=10, decimal_places=2,blank=True,null=True)
     comments=models.TextField(blank=True,null=True, default='Comments')
@@ -338,6 +338,9 @@ class CommonBaseModel(models.Model):
 
     class Meta:
         abstract = True # This is the crucial line that makes it an abstract base class
+        ordering = ['-date'] # Your ordering is also here
+    #class Meta:
+        #ordering = ['-date']
 
 class CommonCompanyScopeModel(CommonBaseModel):# this is the company  hospitality logistics
     scope_type=models.CharField(max_length=30,choices=SCOPE_TYPES,blank=True,null=True,)
@@ -475,9 +478,9 @@ class CommonCodesModel(CommonBaseModel):
     
     """
    
-    class Meta:
+    #class Meta:
         # ensures that the same value is not repeated in the same company
-        unique_together = ('company', 'code','name')
+        #unique_together = ('company', 'code','name')
     
     def __str__(self):
         return f"{self.code}: {self.name}:"
@@ -548,10 +551,10 @@ class CommonShareholderBankDepositsModel(CommonBaseModel):
     bank=models.ForeignKey(CommonBanksModel,related_name="depositbankrelnefds",on_delete=models.SET_NULL,blank=False,null=True)
     amount=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
    
-    equity=models.ForeignKey(CommonChartofAccountsModel,related_name="dpscustrlnmdfd",on_delete=models.SET_NULL,blank=False,null=True)
+    equity=models.ForeignKey(CommonChartofAccountsModel,related_name="dpscustrlnmdfd",on_delete=models.SET_NULL,blank=True,null=True)
     asset=models.ForeignKey(CommonChartofAccountsModel, blank=True,null=True,on_delete=models.SET_NULL,related_name='coabnkdpasset')
     
-    status=models.CharField(choices=posting_status, default='waiting', max_length=20,blank=True,null=True)
+    posting_status=models.CharField(choices=posting_status, default='waiting', max_length=20,blank=True,null=True)
     def __str__(self):
         return '{}'.format(self.description)
 
@@ -638,7 +641,7 @@ class CommonCustomersModel(CommonBaseModel):
     #form=models.ForeignKey(CommonFormsModel,on_delete=models.SET_NULL,blank=True,null=True)
     #className=models.ForeignKey(CommonClassesModel,on_delete=models.SET_NULL,blank=True,null=True)
     course_category=models.ForeignKey(CommonCategoriesModel,blank=True,null=True, on_delete=models.CASCADE, related_name='course_enrollments')
-    operation_year=models.ForeignKey(CommonOperationYearsModel, on_delete=models.CASCADE, related_name='year_enrollments',null=True,blank=True)
+    #operation_year=models.ForeignKey(CommonOperationYearsModel, on_delete=models.CASCADE, related_name='year_enrollments',null=True,blank=True)
     term=models.ForeignKey(CommonOperationYearTermsModel, on_delete=models.CASCADE, related_name='term_enrollments',blank=True,null=True)
     enrollment_date=models.DateField(auto_now_add=True,blank=True,null=True)
     client_status=models.CharField(max_length=4, choices=student_status_choices, default='ENR',blank=True,null=True)
@@ -725,9 +728,9 @@ class CommonAssetsModel(CommonBaseModel):
     asset_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='cmassetrl')
     cost_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='cstasschac')
     equipment_name=models.CharField(max_length=50, blank=True, null=True)
-    description=models.CharField(max_length=50,blank=False,null=True)
+    #description=models.CharField(max_length=50,blank=False,null=True)
     years_depreciated=models.CharField(max_length=30,blank=False,null=True)
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     value=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     sum_years_digits=models.IntegerField(blank=True,null=True,default=0)
     asset_life=models.IntegerField(blank=True,null=True,default=0)
@@ -749,7 +752,7 @@ class CommonAssetsModel(CommonBaseModel):
     depreciated_by=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     
     category=models.ForeignKey(CommonCategoriesModel, related_name="assetcat",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel, blank=True, null=True,on_delete=models.SET_NULL,related_name='asstdprmtn')
+    #department=models.ForeignKey(CommonDepartmentsModel, blank=True, null=True,on_delete=models.SET_NULL,related_name='asstdprmtn')
     employee_in_charge=models.ForeignKey(CommonEmployeesModel, blank=True, null=True,on_delete=models.SET_NULL,related_name='asstemply')
    
     maker_name=models.CharField(max_length=50, blank=True, null=True)
@@ -838,7 +841,7 @@ class CommonSpaceUnitsModel(CommonBaseModel):
     max_occupancy=models.CharField(max_length=100,blank=True,null=True)
     amenities=models.CharField(max_length=100,blank=True,null=True)
    
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
+    #last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
     
     capacity=models.CharField(max_length=100,blank=True,null=True)
     emplyee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='speces_units_staff')
@@ -879,7 +882,7 @@ class CommonStocksModel(CommonBaseModel):
     """
     category=models.ForeignKey(CommonCategoriesModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='catinvtconrlnm')
     
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     buyingPrice=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     standardUnitCost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
@@ -907,9 +910,9 @@ class CommonStocksModel(CommonBaseModel):
     normal_range=models.CharField(max_length=250, blank=True, null=True,help_text="General normal range information for this test (e.g., '70-110 mg/dL').")
     units=models.ForeignKey(CommonUnitsModel,related_name="unit_of_measure_stocks",on_delete=models.SET_NULL,null=True,blank=True)
     
-    class Meta:
+    #class Meta:
         # THIS IS THE CRUCIAL ADDITION/CONFIRMATION
-        unique_together = ('company', 'number', 'warehouse')
+        #unique_together = ('company', 'number', 'warehouse')
         
     def __str__(self):
     		return str(self.description) # this will show up in the admin area
@@ -917,7 +920,7 @@ class CommonStocksModel(CommonBaseModel):
 class CommonSpaceItemsModel(CommonBaseModel):
     space=models.ForeignKey(CommonSpacesModel, blank=True, null=True, on_delete=models.CASCADE,related_name='wrhseitms')
     items=models.ForeignKey(CommonStocksModel,blank=False,null=False, on_delete=models.CASCADE,related_name='wrhseitemsstck')
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     class Meta:
         # THIS IS THE CRUCIAL ADDITION/CONFIRMATION
         unique_together = ('items', 'space')
@@ -934,7 +937,7 @@ class CommonStockTransferOrdersModel(CommonBaseModel):
 
 class CommonStockTransferOrderItemsModel(CommonBaseModel):
     items=models.ForeignKey(CommonStocksModel,related_name="stcktrnsfordrlns",on_delete=models.CASCADE)
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
    
     trans_ord_items_con=models.ForeignKey(CommonStockTransferOrdersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='poitrelname')
   
@@ -991,7 +994,7 @@ class CommonTransactionItemsModel(CommonBaseModel):
     # general fields......
     trans_number=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="mdclrcdobsv", blank=True, null=True,help_text="The encounter this triage record belongs to.")
     items=models.ForeignKey(CommonStocksModel,blank=True,null=True, on_delete=models.CASCADE, related_name="patient_orders",help_text="The type of lab test ordered.")
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     #unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     #unitprice=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
    
@@ -1016,7 +1019,7 @@ class CommonSpaceBookingItemsModel(CommonBaseModel):
     trans_number=models.ForeignKey(CommonTransactionsModel, related_name="trans_bookings_items", on_delete=models.CASCADE, null=True, blank=True)
     space=models.ForeignKey(CommonSpacesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='bookings') # Nullable if room not assigned yet
     space_unit=models.ForeignKey(CommonSpaceUnitsModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='bookings_space_unit') # Nullable if room not assigned yet
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     
     def __str__(self):
         return str(self.space_unit)
@@ -1081,7 +1084,7 @@ class CommonPurchaseOrdersModel(CommonBaseModel):
 
 class CommonPurchaseOrderItemsModel(CommonBaseModel):
     items=models.ForeignKey(CommonStocksModel,related_name="poitemrallirelnm",on_delete=models.CASCADE)
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     po_item_con= models.ForeignKey(CommonPurchaseOrdersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='poitrelname')
     taxRate=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
@@ -1103,7 +1106,7 @@ class CommonPurchaseOrderMiscCostsModel(CommonBaseModel):
     supplier=models.ForeignKey(CommonSuppliersModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='suppmiscrlnme')
     
     unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     po_misc_cost_con= models.ForeignKey(CommonPurchaseOrdersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='pomiscrlnm')
     
     def __str__(self):
@@ -1140,7 +1143,7 @@ class CommonQuotesModel(CommonBaseModel):
  
 class CommonQuoteItemsModel(CommonBaseModel):
     items=models.ForeignKey('CommonStocksModel',related_name="allifquoteitemdescrelatednm",on_delete=models.SET_NULL,blank=True,null=True)
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     discount=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     allifquoteitemconnector= models.ForeignKey(CommonQuotesModel, blank=True, null=True, on_delete=models.CASCADE,related_name='allifquoteitemrelated')
     
@@ -1185,7 +1188,7 @@ class CommonInvoicesModel(CommonBaseModel):
     invoice_status=models.CharField(choices=invoiceStatus, default='Current', max_length=20)
     invoice_currency=models.ForeignKey(CommonCurrenciesModel, related_name="crrncinvoice",on_delete=models.SET_NULL,null=True,blank=True)
     invoice_comments=models.CharField(blank=True,null=True,default='invoice',max_length=20)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
+    #date=models.DateField(blank=True,null=True,auto_now_add=True)
     invoice_total=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     posting_inv_status=models.CharField(choices=posting_status, default='waiting', max_length=100,blank=True,null=True)
     invoice_items_total_cost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
@@ -1247,7 +1250,7 @@ class CommonInvoicesModel(CommonBaseModel):
  
 class CommonInvoiceItemsModel(CommonBaseModel):
     items=models.ForeignKey(CommonStocksModel,related_name="invitmstckrlnm",on_delete=models.SET_NULL,blank=True,null=True)
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     discount=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     allifinvitemconnector= models.ForeignKey(CommonInvoicesModel, blank=True, null=True, on_delete=models.CASCADE,related_name='invitmsrelnm')
     
@@ -1294,7 +1297,7 @@ class CommonCreditNotesModel(CommonBaseModel):
 class CommonCreditNoteItemsModel(CommonBaseModel):
     credit_note=models.ForeignKey(CommonCreditNotesModel, on_delete=models.CASCADE, related_name='crdntitems',null=True,blank=True)
     items=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL,blank=True,null=True)
-    quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
    
     def __str__(self):
         return str(self.credit_note)
@@ -1337,7 +1340,7 @@ class CommonJobsModel(CommonBaseModel):
 
 class CommonJobItemsModel(CommonBaseModel):
     item=models.ForeignKey(CommonStocksModel, blank=True, null=True, on_delete=models.CASCADE,related_name='itemjobcon')
-    quantity=models.FloatField(max_length=20,blank=True,null=True,default=0)
+    #quantity=models.FloatField(max_length=20,blank=True,null=True,default=0)
     jobitemconnector= models.ForeignKey(CommonJobsModel, blank=True, null=True, on_delete=models.CASCADE,related_name='itemjobconrelnme')
     def __str__(self):
         return str(self.item)
@@ -1484,7 +1487,7 @@ class CommonServicesModel(CommonBaseModel):# not used for now...may be deleted l
     is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
    
     unitprice=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    quantity=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
+    #quantity=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     unitcost=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     
     normal_range_info=models.CharField(max_length=250, blank=True, null=True,help_text="General normal range information for this test (e.g., '70-110 mg/dL').")

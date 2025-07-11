@@ -6,9 +6,20 @@ from allifmaalcommonapp.models import *
 from django.db.models import Sum
 from allifmaalcommonapp.decorators import allifmaal_admin, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
 # Create your views here.
+
 from allifmaalcommonapp.forms import CommonAddSectorForm
 def holdingFunction(request):
     chartaccs_values_list=CommonChartofAccountsModel.objects.all().values_list('description', flat=True)
+    
+    #allifqueryset = get_filtered_and_sorted_queryset(request,CommonCurrenciesModel,allif_data,# these only show all records...
+            
+            #we can also add the extra filtering parameter as below
+            #explicit_scope='Archived' # <-- Explicitly set scope to 'archived'
+            #explicit_scope='all',# shows all records
+            #explicit_scope='active', # shows only active records....
+            #explicit_scope='archived'# shows only archived data
+        #)
+    #allifqueryset=CommonCurrenciesModel.all_objects.all()
     for items in chartaccs_values_list:
         if all([items.quantity<=items.item.drugQuantity]):
             pass

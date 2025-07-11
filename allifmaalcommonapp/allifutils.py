@@ -19,12 +19,19 @@ def common_shared_data(request):
     
     logged_user_branch=None
     logged_user_department=None
+    logged_user_operation_year=None
+    logged_user_operation_term=None
+    
     logged_user_profile_staffslg=None
     if logged_in_user_profile:
         logged_user_division=logged_in_user_profile.division
         logged_user_branch=logged_in_user_profile.branch
         logged_user_department=logged_in_user_profile.department
         logged_user_profile_staffslg=logged_in_user_profile.stffslug
+        
+        logged_user_operation_year=logged_in_user_profile.operation_year
+        logged_user_operation_term=logged_in_user_profile.operation_term
+    
     else:
         pass
       
@@ -59,5 +66,7 @@ def common_shared_data(request):
         "logged_in_user_has_branches_delete":logged_in_user_has_branches_delete,
         "logged_in_user_has_departmental_delete":logged_in_user_has_departmental_delete,
         "logged_user_profile_staffslg":logged_user_profile_staffslg,
+        "logged_user_operation_year":logged_user_operation_year,
+        "logged_user_operation_term":logged_user_operation_term,
     }
 

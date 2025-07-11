@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-
+from allifmaalcommonapp.utils import initialize_form_select_querysets 
 
 
 # forms.py
@@ -527,7 +527,8 @@ class CommonAddStaffProfileForm(CommonBaseForm):
             
         else:
             self.fields['username'].queryset =User.objects.none()
-             
+    
+    
       
 #################### taxes #####################3
 
@@ -641,7 +642,18 @@ class CommonBankDepositAddForm(CommonBaseForm):
             self.fields['bank'].queryset = CommonBanksModel.objects.none()
             self.fields['asset'].queryset = CommonChartofAccountsModel.objects.none()
             self.fields['equity'].queryset = CommonChartofAccountsModel.objects.none()
-          
+    
+    
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super().__init__(allifmaalparameter, *args, **kwargs)
+        # Define the map for this specific form's fields and their models
+        field_model_map = {
+            'items': CommonStocksModel,
+            'trans_number': CommonTransactionsModel,
+        }
+        # Call the utility function
+        initialize_form_select_querysets(self, allifmaalparameter, field_model_map)
+
        
        
 
@@ -828,6 +840,7 @@ class CommonExpensesAddForm(CommonBaseForm):
             'expense_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
           
         }
+        
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super().__init__(allifmaalparameter, *args, **kwargs)
         if allifmaalparameter:
@@ -838,8 +851,19 @@ class CommonExpensesAddForm(CommonBaseForm):
             self.fields['expense_account'].queryset = CommonChartofAccountsModel.objects.none()
             self.fields['supplier'].queryset = CommonSuppliersModel.objects.none()
          
-           
-          
+    
+    """
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super().__init__(allifmaalparameter, *args, **kwargs)
+        # Define the map for this specific form's fields and their models
+        field_model_map = {
+            'expense_account': CommonChartofAccountsModel,
+            'supplier': CommonSuppliersModel,
+        }
+        # Call the utility function
+        initialize_form_select_querysets(self, allifmaalparameter, field_model_map)
+
+        """
 
 
 class CommonAddSpaceItemForm(CommonBaseForm):
@@ -1444,9 +1468,12 @@ class CommonAddTransactionDetailsForm(CommonBaseForm):
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super().__init__(allifmaalparameter, *args, **kwargs)
         if allifmaalparameter:
+            self.fields['customer'].queryset = CommonCustomersModel.objects.filter(company=allifmaalparameter)
+        
             self.fields['payment_mode'].queryset = CommonPaymentTermsModel.objects.filter(company=allifmaalparameter)
         
         else:
+            self.fields['customer'].queryset = CommonCustomersModel.objects.none()
             self.fields['payment_mode'].queryset = CommonPaymentTermsModel.objects.none()
         
 ####################################3 Transactions ##############################33

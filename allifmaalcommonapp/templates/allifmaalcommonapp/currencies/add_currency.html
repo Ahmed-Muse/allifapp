@@ -6,132 +6,94 @@
 {% block style %}
 {%endblock%}
 {% block body %}
-
 <div class="allifmaal-main-container">
-
 <div class="allif-header-main-wrapper">
  <!--... START OF HEADER.... -->
 {% include 'allifmaalcommonapp/includes/headers/header-upper-section.html' %}
+ <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}" >New Currency </a>
   <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
-  <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}">New Currency</a>
-   
 {% include 'allifmaalcommonapp/includes/headers/header-lower-section.html' %}
  <!--... ENDT OF HEADER.... -->
 </div>
-
   <div class="allifmaincontainer">
-
- <!--START.... start of single pages content and its links section-->
-<div class="allif-single-page-tabs-contents-main-wrapper" >
- {% include 'allifmaalcommonapp/includes/links/single-page-links.html' %}
+  <div class="allif-form-main-wrapper">
+    <div class="table-details-content-description">{{title}}</div>
+    <form method='POST' action=''>{% csrf_token %}
+    <!--START.... start of single pages content and its links section-->
+    <div class="allif-single-page-tabs-contents-main-wrapper" >
+    {% include 'allifmaalcommonapp/includes/links/single-page-links.html' %}
     <!--start of singple page contents-->
     <div class="tab-content allif-single-page-tab-content-wrapper" id="allif-single-page-tab-content-wrapper-id">
-
        <!--START.. Start of show/hide table section one-->
       <div class="tab-pane allif-single-page-tab-content-pane show active" id="allif-single-page-tab-core-details" role="tabpanel" aria-labelledby="allif-single-page-tab-core-details-id">
-        <form method='POST' action=''>{% csrf_token %}
-
+     
         <div class="allif-forms-table-main-wrapper">
-         {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
-
+        {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
+          <tr>
+            <td class="allif-fix-table-col-forms">Name</td>
+            <td>{{form.name}}</td>
+          </tr>
+        {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
         <tr>
-        <td>Currency Name</td>
-        <td>{{form.name}}</td>
-      </tr>
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
-
-    <tr>
-      <td>Currency Description</td>
-      <td>{{form.description}}</td>
-    </tr>
-
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
-    
+          <td class="allif-fix-table-col-forms">Description</td>
+          <td>{{form.description}}</td>
+        </tr>
+        {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
     </div>
   </div>
        <!--END... End of show/hide table more details section one..ok...hree....-->
-
-
  <!--START.. Start of show/hide table section one-->
     <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-standard-details" role="tabpanel" aria-labelledby="allif-single-page-tab-standard-details-id">
       <div class="allif-forms-table-main-wrapper">
-      {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
-      <tr>
-        <td>Comments</td>
-        <td>{{form.comments}}</td>
-      </tr>
-
-      {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
-
-      <tr>
-        <td>Description</td>
-        <td>{{form.description}}</td>
-      </tr>
-
-      {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
-      
      {% include 'allifmaalcommonapp/includes/forms/standard-form-fields.html' %}
      </div>
     </div>
        <!--END... End of show/hide table more details section one-->
-
   <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-general-details" role="tabpanel" aria-labelledby="allif-single-page-tab-general-details-id">
     <div class="allif-forms-table-main-wrapper">
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
-
-    <tr>
-      <td>Desccription</td>
-      <td>{{form.description}}</td>
-    </tr>
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
-
-    <tr>
-      <td>Comments</td>
-      <td>{{form.comments}}</td>
-    </tr>
-
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
-    
-    {% include 'allifmaalcommonapp/includes/forms/general-form-fields.html' %}
+      {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
+      <tr>
+        <td class="allif-fix-table-col-forms">Balance</td>
+        <td>{{form.balance}}</td>
+      </tr>
+      {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
+      <tr>
+        <td class="allif-fix-table-col-forms">Quantity</td>
+        <td>{{form.quantity}}</td>
+      </tr>
+      {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
      </div>
     </div>
        <!--END... End of show/hide table more details section one-->
-
     <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-static-details" role="tabpanel" aria-labelledby="allif-single-page-tab-static-id">
      <div class="allif-forms-table-main-wrapper">
     {% include 'allifmaalcommonapp/includes/forms/static-form-fields.html' %}
      </div>
     </div>
        <!--END... End of show/hide table more details section one-->
-  
     <div class="allif-forms-table-main-wrapper">
-      
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
+    {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-one-section.html' %}
       <tr>
-        <td>Currency Name</td>
-        <td>{{form.name}}</td>
+        <td class="allif-fix-table-col-forms">Code</td>
+        <td>{{form.code}}</td>
       </tr>
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
-
-      
-    {% include 'allifmaalcommonapp/includes/forms/forms-save-button.html' %}  
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
-
+      {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-two-section.html' %}
+      <tr>
+        <td class="allif-fix-table-col-forms">Number</td>
+        <td>{{form.number}}</td>
+      </tr>
+      {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-section.html' %}
+      {% include 'allifmaalcommonapp/includes/forms/forms-save-button.html' %}  
+      {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-last-section.html' %}
       </div>
-      
-      </form>
         </div>
-
+         </form>
+  </div>
+ 
       </div>
       <!--END.... END of single pages content and its links section-->
-   
-
     </div>
 
-</div>
   {% block scripts %}
-
-  
   {% endblock %}
    {% endblock %}
-   

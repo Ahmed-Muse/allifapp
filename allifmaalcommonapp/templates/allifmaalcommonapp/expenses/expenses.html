@@ -6,6 +6,20 @@
 {% block style %}
 {%endblock%}
 {% block body %}
+
+
+  <style>
+   
+    #sortable-table td {
+     
+      cursor: pointer;
+    }
+
+  </style>
+
+
+
+
 <div class="allifmaal-main-container">
 <!--start....main headere-->
 <div class="card-header">
@@ -15,16 +29,16 @@
   <div class="col-md-12"><!--start....header column-->
   
   <div class="container-fluid amel-content-header">
-    <div class="dropdown allifmaal-content-dropdown">
+      <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
       Open Filters
-      </a>
+      </a>  
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
-  
+         
         <li><a class="dropdown-item">Looking for something?</a></li>
-        <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Clear Search</a></li>
-       
+        <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonExpenses' user_var glblslug %}">Clear Search</a>
+          
         <form method='POST' action="{% url 'allifmaalcommonapp:commonExpenseSearch' user_var glblslug %}">{% csrf_token %}
         
           <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
@@ -32,11 +46,57 @@
         
           <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
           </form>
+          <hr>
+          <li><a class="dropdown-item">Select Ordering Option</a></li>
+       {% include 'allifmaalcommonapp/includes/forms/sorting/allif-sorting-form.html' %}
+      <hr>
+      <li><a class="dropdown-item">Advanced Searching</a></li>
+      <form method='POST' action="" enctype="multipart/form-data">{% csrf_token %}
         
-      
+        <div>
+          <label>Start Date</label>
+          <input type="date" class="form-control" name="startdate" placeholder="Starting Balance">
+        </div>
+        <div>
+          <label>End Date</label>
+          <input type="date" class="form-control" name="enddate" placeholder="Ending Balance">
+        </div>
+
+        <div>
+          <label>Start Value</label>
+          <input type="text" class="form-control" name="startvalue" placeholder="">
+        </div>
+        <div>
+          <label>End Value</label>
+          <input type="text" class="form-control" name="endvalue" placeholder="">
+        </div>
+        
+        
+        <div>
+          <label >Select Option</label>
+          <select name="requiredformat" class="form-control">
+            {% for item in formats %}
+            <option>{{item.name}}</option>
+            
+         {% endfor %}
+         
+        </select>
+        </div>
+  
+        
+        <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
+    
+    </form>
+    
+   
       </div>
+      
       </ul>
+
+      
     </div>
+
+
     <a class="amel-table-list-identifier">Expenses:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 
@@ -53,19 +113,23 @@
   </div><!--end....main headere-->
 <div class="allifmaincontainer">
 <div class="row mt-12"> <!--start....table row-->
+   
+      
   <div class="col-md-12"> <!--start....table column-->
     <div class="allif-scroll-table">
       <div class="table-responsive allif-full-table">
-      <table class="table table-layout">
+      <table class="table table-layout" id="sortable-table">
         <thead>
           <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Expense</td>
+          <td class="allif-fix-table-col">Expense Name</td>
           
+           
+
           <td>Supplier</td>
           <td>Quantity</td>
           <td>Amount</td>
           
-          <td>Posting</td>
+          <td >Posting</td>
        
           <td>Navigate</td>
           
@@ -78,9 +142,9 @@
           
           {% for item in allifqueryset %} 
           <tr data-id="{{item.id}}">
-          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonExpenseDetails' item.id user_var glblslug %}">{{item.description}}</a></td>
+          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonExpenseDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
          
-            <td>
+            <td >
             {{item.supplier}}
            </td>
            <td>
@@ -180,7 +244,19 @@
       </div>
      </div>
 
-      
+
+     
+
+
+
+
+
+
+
+
+
+
+     
       </div><!--end....table column-->
   </div>
 

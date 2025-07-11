@@ -189,3 +189,46 @@ $(function() {
       }
   });
 
+
+    function sortTable(columnIndex) {
+      const table = document.getElementById("sortable-table");
+      const tbody = table.getElementsByTagName("tbody")[0];
+      const rows = Array.from(tbody.rows);
+      let sortDirection = table.getAttribute("data-sort-direction") || "asc";
+
+      const compare = (rowA, rowB) => {
+        const cellA = rowA.cells[columnIndex].textContent.trim();
+        const cellB = rowB.cells[columnIndex].textContent.trim();
+        const dataTypeA = rowA.cells[columnIndex].dataset.type;
+        const dataTypeB = rowB.cells[columnIndex].dataset.type;
+
+        let valueA = cellA;
+        let valueB = cellB;
+
+        if (dataTypeA === "number" && dataTypeB === "number") {
+          valueA = parseFloat(valueA);
+          valueB = parseFloat(valueB);
+        }
+
+        if (sortDirection === "asc") {
+          if (valueA < valueB) return -1;
+          if (valueA > valueB) return 1;
+          return 0;
+        } else {
+          if (valueA > valueB) return -1;
+          if (valueA < valueB) return 1;
+          return 0;
+        }
+      };
+
+      rows.sort(compare);
+
+      while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+      }
+
+      rows.forEach(row => tbody.appendChild(row));
+
+      table.setAttribute("data-sort-direction", sortDirection === "asc" ? "desc" : "asc");
+    }
+

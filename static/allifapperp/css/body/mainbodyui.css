@@ -275,7 +275,9 @@ color:var(--links-on-hover-text-color);
 background-color: var(--main-background-color);
 }
 
-
+.allif-full-table-content-main-wrapper{
+  font-family: inherit;
+}
   /* ...END....module menu drop down content styling */
 /*....Start.....style table content describer....*/
 .table-content-description{
@@ -867,3 +869,7 @@ textarea.form-control {
     resize: vertical; /* Optional: allows vertical resizing by user */
     text-align: left;
 }
+ #sortable-table td {
+     
+      cursor: pointer;
+    }

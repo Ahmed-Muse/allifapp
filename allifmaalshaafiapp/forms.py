@@ -1,7 +1,7 @@
 from django import forms
 from .models import *
 from allifmaalcommonapp.forms import CommonBaseForm
-
+from allifmaalcommonapp.utils import initialize_form_select_querysets 
 ############################# start of datepicker customization ##############################
 class DatePickerInput(forms.DateInput):#use this class whereever you have a date and it will give you the calender
     input_type='date'#
@@ -50,6 +50,7 @@ class AddTriageDetailsForm(CommonBaseForm):
             'blood_pressure_systolic':forms.TextInput(attrs={'class':'form-control','placeholder':'in mmHg'}),
             'past_medical_history':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
         }
+        """
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super().__init__(allifmaalparameter, *args, **kwargs)
         if allifmaalparameter:
@@ -57,6 +58,16 @@ class AddTriageDetailsForm(CommonBaseForm):
       
         else:
             self.fields['staff'].queryset=CommonEmployeesModel.objects.none()
+    """
+    def __init__(self, allifmaalparameter, *args, **kwargs):
+        super().__init__(allifmaalparameter, *args, **kwargs)
+        # Define the map for this specific form's fields and their models
+        field_model_map = {
+            'staff':CommonEmployeesModel,
+            #'supplier': CommonSuppliersModel,
+        }
+        # Call the utility function
+        initialize_form_select_querysets(self, allifmaalparameter, field_model_map)
       
 class AddAssessmentDetailsForm(forms.ModelForm):
     class Meta:

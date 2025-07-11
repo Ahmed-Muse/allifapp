@@ -37,7 +37,7 @@ class TriagesModel(CommonBaseModel):# very important model
     staff=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="en_triage",help_text="The main employee attending this encounter.")
     medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE,blank=True,null=True, related_name="filetranige",help_text="The customer associated with this encounter.")
     
-    description=models.CharField(max_length=255,blank=True,null=True)
+    #description=models.CharField(max_length=255,blank=True,null=True)
     complaints=models.TextField(null=True, blank=True,help_text="Patient's main symptoms or reason for visit.")
     weight=models.DecimalField(max_digits=10,blank=True,null=True,decimal_places=1)
     # Added height for BMI calculation max_digits=5, decimal_places=2, blank=True, null=True,
@@ -81,7 +81,9 @@ class TriagesModel(CommonBaseModel):# very important model
     #objects = models.Manager() 
     # 'active_triage' is your custom manager (accesses only active records by default)
     #active_triage = ActiveManager() 
-
+    class Meta:
+       
+        ordering = ['-temperature'] # Your ordering is also here
     def __str__(self):
         return str(self.medical_file)
 
