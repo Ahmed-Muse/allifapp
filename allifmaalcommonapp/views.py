@@ -10,7 +10,7 @@ from django.db import transaction # For transactions
 from django.core.cache import cache # For caching
 from django.forms import modelformset_factory # For formsets
 
-from allifmaalcommonapp.utils import allif_filtered_and_sorted_queryset# <-- Import the new utility
+from allifmaalcommonapp.utils import allif_filtered_and_sorted_queryset,allif_delete_hanlder,allif_common_form_submission_and_save,common_form_edit_and_save
 # ... (existing imports) ...
 from django.http import JsonResponse
 from django.urls import reverse
@@ -37,7 +37,7 @@ from .defaults_data import (
 
 from twilio.rest import Client
 from.forms import *
-from .decorators import logged_in_user_can_approve, subscriber_company_status, logged_in_user_must_have_profile,logged_in_user_has_universal_delete,logged_in_user_has_divisional_delete,logged_in_user_has_branches_delete,logged_in_user_has_departmental_delete,logged_in_user_has_universal_access,logged_in_user_has_divisional_access,logged_in_user_has_branches_access,logged_in_user_has_departmental_access,allifmaal_admin,allifmaal_admin_supperuser, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add_view_edit_delete,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
+from .decorators import logged_in_user_can_approve,allif_view_exception_handler,allif_base_view_wrapper, subscriber_company_status, logged_in_user_must_have_profile,logged_in_user_has_universal_delete,logged_in_user_has_divisional_delete,logged_in_user_has_branches_delete,logged_in_user_has_departmental_delete,logged_in_user_has_universal_access,logged_in_user_has_divisional_access,logged_in_user_has_branches_access,logged_in_user_has_departmental_access,allifmaal_admin,allifmaal_admin_supperuser, unauthenticated_user,allowed_users,logged_in_user_is_owner_ceo,logged_in_user_can_add,logged_in_user_can_view,logged_in_user_can_edit,logged_in_user_can_delete,logged_in_user_is_admin
 from django.utils import timezone
 from django.core.serializers import serialize
 import json
@@ -604,675 +604,76 @@ def commonDeleteDataSort(request,pk):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ########################3 currencies ######################
-
-@logged_in_user_must_have_profile
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def commonCurrencies(request,*allifargs,**allifkwargs):
     title="Currencies"
-    try:
-        allif_data=common_shared_data(request)
-        allifqueryset=CommonCurrenciesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        allifqueryset =allif_filtered_and_sorted_queryset(request,CommonCurrenciesModel,allif_data,# these only show all records...
-            
-            #we can also add the extra filtering parameter as below
-            #explicit_scope='Archived' # <-- Explicitly set scope to 'archived'
-            explicit_scope='all',# shows all records
-            #explicit_scope='active', # shows only active records....
-            #explicit_scope='archived'# shows only archived data
-        )
-        allifqueryset=CommonCurrenciesModel.all_objects.all()
-        context = {
-            "title":title,
-            "allifqueryset":allifqueryset,
-        }
-        return render(request,'allifmaalcommonapp/currencies/currencies.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allif_data=common_shared_data(request)
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonCurrenciesModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,}
+    return render(request,'allifmaalcommonapp/currencies/currencies.html',context)
 
-
-
-
-
-
-
-
-
-# --- NEW: Generic Form Submission and Save Logic Function ---
-def common_form_submission_and_save(request,form_class: type[forms.ModelForm],title_text: str, 
-    success_redirect_url_name: str, # for the redirection url
-    template_path: str,# function specific template
-    
-    # New optional parameter for custom pre-save logic
-    pre_save_callback: Optional[callable] = None, # argument. This callback will be a function that
-    # the calling view provides to perform any model-specific assignments before the object is saved.
-    
-    
-    # New optional parameter for initial data (for GET request forms)
-    initial_data: Optional[dict] = None,
-    # New optional parameter for extra form arguments (for form __init__)
-    extra_form_args: Optional[list] = None
-    ):
-    
-    """
-    Helper function to encapsulate the common logic for processing form submissions
-    and saving new items, including custom pre-save assignments.
-
-    Args:
-        request (HttpRequest): The HttpRequest object.
-        form_class (type[forms.ModelForm]): The specific ModelForm class to use.
-        title_text (str): The title for the page.
-        success_redirect_url_name (str): The Django URL name to redirect to on successful form submission.
-        template_path (str): The path to the template to render.
-        pre_save_callback (callable, optional): A function (obj, request, allif_data) -> None
-                                                that performs model-specific assignments before obj.save().
-        initial_data (dict, optional): Initial data for the form on GET request.
-        extra_form_args (list, optional): Additional positional arguments to pass to form_class.__init__.
-    """
-    allif_data = common_shared_data(request)
-    company_id = allif_data.get("main_sbscrbr_entity").id
-
-    # Prepare form arguments for __init__
-    form_args = [company_id] # Default first argument for your forms
-    if extra_form_args:
-        form_args.extend(extra_form_args)
-
-    if request.method == 'POST':
-        form = form_class(*form_args, request.POST) 
-        if form.is_valid():
-            obj = form.save(commit=False)
-            
-            # --- Assign common fields from allif_data (fetching FK instances) ---
-            # These fields are expected to be on CommonBaseModel and inherited by 'obj'
-            
-            # Company
-            if hasattr(obj, 'company') and company_id:
-                try:
-                    obj.company = get_object_or_404(CommonCompanyDetailsModel, pk=company_id)
-                except Http404: # More specific exception for get_object_or_404
-                    print(f"WARNING: Company with ID {company_id} not found for {obj.__class__.__name__}.")
-                    obj.company = None 
-                except Exception as e:
-                    print(f"ERROR: Failed to retrieve company with ID {company_id}: {e}")
-                    obj.company = None
-            else:
-                pass
-            # Division
-            if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
-                try:
-                    obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id)
-                except Http404:
-                    print(f"WARNING: Division with ID {allif_data.get('logged_user_division').id} not found for {obj.__class__.__name__}.")
-                    obj.division = None
-                except Exception as e:
-                    print(f"ERROR: Failed to retrieve division with ID {allif_data.get('logged_user_division').id}: {e}")
-                    obj.division = None
-            else:
-                pass
-            # Branch
-            if hasattr(obj, 'branch') and allif_data.get("logged_user_branch").id:
-                try:
-                    obj.branch = get_object_or_404(CommonBranchesModel, pk=allif_data.get("logged_user_branch").id)
-                except Http404:
-                    print(f"WARNING: Branch with ID {allif_data.get('logged_user_branch').id} not found for {obj.__class__.__name__}.")
-                    obj.branch = None
-                except Exception as e:
-                    print(f"ERROR: Failed to retrieve branch with ID {allif_data.get('logged_user_branch').id}: {e}")
-                    obj.branch = None
-            else:
-                pass
-            # Department
-            if hasattr(obj, 'department') and allif_data.get("logged_user_department").id:
-                try:
-                    obj.department = get_object_or_404(CommonDepartmentsModel, pk=allif_data.get("logged_user_department").id)
-                except Http404:
-                    print(f"WARNING: Department with ID {allif_data.get('logged_user_department').id} not found for {obj.__class__.__name__}.")
-                    obj.department = None
-                except Exception as e:
-                    print(f"ERROR: Failed to retrieve department with ID {allif_data.get('logged_user_department').id}: {e}")
-                    obj.department = None
-            
-            if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
-                try:
-                    obj.operation_year = get_object_or_404(CommonOperationYearsModel, pk=allif_data.get("logged_user_operation_year").id)
-                except Http404:
-                    print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
-                    obj.operation_year = None
-                except Exception as e:
-                    print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
-                    obj.operation_year = None
-                    
-            if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
-                try:
-                    obj.operation_term = get_object_or_404(CommonOperationYearTermsModel, pk=allif_data.get("logged_user_operation_term").id)
-                except Http404:
-                    print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
-                    obj.operation_term = None
-                except Exception as e:
-                    print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
-                    obj.operation_term = None
-                    
-                    
-            # Owner (assuming 'usernmeslg' in allif_data is the User object)
-            if hasattr(obj, 'owner') and allif_data.get("usernmeslg"):
-                try:
-                    obj.owner=allif_data.get("usernmeslg") # This should be the User object
-                except Http404:
-                    print(f"WARNING: User {allif_data.get("usernmeslg")} not found for {obj.__class__.__name__}.")
-                    obj.owner = None
-                except Exception as e:
-                    print(f"ERROR: Failed to retrieve User {allif_data.get("usernmeslg")}: {e}")
-                    obj.owner = None
-            else:
-                pass
-            # --- Execute custom pre-save callback if provided ---
-            if pre_save_callback:
-                try:
-                    pre_save_callback(obj, request, allif_data)
-                except Exception as e:
-                    print(f"ERROR: Pre-save callback failed for {obj.__class__.__name__}: {e}")
-                    # You might want to add a user-facing error message here
-                    form.add_error(None, f"An internal error occurred during custom processing: {e}")
-                    # Re-render the form with errors
-                    context = {
-                        "form": form,
-                        "title": title_text,
-                        "user_var": allif_data.get("usrslg"),
-                        "glblslug": allif_data.get("compslg"),
-                        "error_message": form.errors, # Pass form errors
-                    }
-                    return render(request, template_path, context)
-
-            else:
-                pass
-            obj.save() # Finally save the object after all assignments
-            
-            # Redirect to the specified list URL with user and company slugs
-            return redirect(
-                reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
-                        kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")})
-            )
-        else:
-            # Form is invalid, render with errors
-            error_message = form.errors
-            allifcontext = {"error_message": error_message, "title": title_text}
-            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
-    else:
-        # GET request, initialize empty form
-        form = form_class(*form_args, initial=initial_data)
-
-    context = {
-        "form": form,
-        "title": title_text,
-        "user_var": allif_data.get("usrslg"), 
-        "glblslug": allif_data.get("compslg"), 
-    }
-    return render(request, template_path, context)
-
-
-# --- Refactored Specific Add Views (using the generic logic function) ---
-
+@allif_base_view_wrapper
 def commonAddCurrency(request, *allifargs, **allifkwargs):
-    try:
-        return common_form_submission_and_save(
-            request,
-            CommonAddCurrencyForm,
-            "Add New Currency",
-            "commonCurrencies", # The URL name for the currency list view
-            'allifmaalcommonapp/currencies/add_currency.html'
-        )
-    except Exception as ex:
-        print(f"ERROR: commonAddCurrency view failed: {ex}")
-        error_context={'error_message': ex, 'title': "Error Adding Currency"}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-
-def commonPaySupplierDirect(request,*allifargs,**allifkwargs):
-    """
-    Uses extra_form_args to pass logged_user_department to CommonAddSupplierPaymentForm.
-    It also has a pre_save_callback defined, though it's empty in this case as your original code didn't
-    have custom assignments here.
-    """
-    try:
-        allif_data = common_shared_data(request)
-        # Define a pre_save_callback for specific assignments
-        def supplier_payment_pre_save(obj, request, allif_data):
-            # No custom assignments needed here beyond common fields,
-            # as your original code didn't have obj.supplier = ...
-            # If CommonAddSupplierPaymentForm handles 'supplier' field directly,
-            # no custom logic is needed here.
-            pass
-
-        return common_form_submission_and_save(
-            request,
-            CommonAddSupplierPaymentForm,
-            "Direct Pay Supplier",
-            "commonSupplierPayments", # The URL name for supplier payments list
-            'allifmaalcommonapp/payments/suppliers/pay-supplier-directly.html',
-            pre_save_callback=supplier_payment_pre_save,
-            extra_form_args=[allif_data.get("logged_user_department")] # Pass department ID as a form arg
-        )
-    except Exception as ex:
-        print(f"ERROR: commonPaySupplierDirect view failed: {ex}")
-        error_context={'error_message': ex, 'title': "Error Paying Supplier"}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-
-
-def commonAddPaymentTerm(request,*allifargs,**allifkwargs):
-    try:
-        return common_form_submission_and_save(
-            request,
-            CommonAddPaymentTermForm,
-            "Add New Payment Terms",
-            "commonPaymentTerms", # The URL name for payment terms list
-            'allifmaalcommonapp/payments/terms/add_payment_term.html'
-        )
-    except Exception as ex:
-        print(f"ERROR: commonAddPaymentTerm view failed: {ex}")
-        error_context={'error_message': ex, 'title': "Error Adding Payment Term"}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-# --- Keep your other existing views (commonExpenses, triageData, generic_confirm_delete, generic_delete_item) ---
-# ...
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonAddCurrency(request,*allifargs,**allifkwargs):
-    try:
-        title="Add New Currency"
-        allif_data=common_shared_data(request)
-        form=CommonAddCurrencyForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=CommonAddCurrencyForm(allif_data.get("main_sbscrbr_entity"),request.POST or None)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonCurrencies',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddCurrencyForm(allif_data.get("main_sbscrbr_entity"))
-
-        context={
-            "form":form,
-            "title":title,
-            
-            }
-        return render(request,'allifmaalcommonapp/currencies/add_currency.html',context)
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    """
-
-"""
-@logged_in_user_must_have_profile
-@logged_in_user_can_edit
-def commonEditCurrency(request,pk,*allifargs,**allifkwargs):
-    title="Edit Currency"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=CommonCurrenciesModel.objects.filter(id=pk).first()
-        form=CommonAddCurrencyForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=CommonAddCurrencyForm(allif_data.get("main_sbscrbr_entity"),request.POST, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.updated_by=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonCurrencies',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddCurrencyForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context = {
-            'form':form,
-            "allifquery_update":allifquery_update,
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/currencies/add_currency.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    """
-@logged_in_user_must_have_profile 
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def commonDeleteCurrency(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonCurrenciesModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonCurrencies',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-
-
-
-
-
-
-# --- NEW: Generic Edit Item LOGIC Function ---
-def common_form_edit_and_save(request, 
-    pk: int, # Primary key of the object to edit
-    form_class: type[forms.ModelForm], 
-    title_text: str, 
-    success_redirect_url_name: str, 
-    template_path: str,
-    pre_save_callback: Optional[callable] = None,
-    extra_form_args: Optional[list] = None,
-    extra_context: Optional[dict] = None # For passing additional context to template
-):
-    """
-    Helper function to encapsulate the common logic for processing form submissions
-    and saving updates to existing items.
-
-    Args:
-        request (HttpRequest): The HttpRequest object.
-        pk (int): Primary key of the object to be edited.
-        form_class (type[forms.ModelForm]): The specific ModelForm class to use.
-        title_text (str): The title for the page.
-        success_redirect_url_name (str): The Django URL name to redirect to on successful form submission.
-        template_path (str): The path to the template to render.
-        pre_save_callback (callable, optional): A function (obj, request, allif_data) -> None
-                                                that performs model-specific assignments before obj.save().
-        extra_form_args (list, optional): Additional positional arguments to pass to form_class.__init__.
-        extra_context (dict, optional): Additional context variables to pass to the template.
-    """
-    allif_data = common_shared_data(request)
-    company_id = allif_data.get("main_sbscrbr_entity").id
-
-    # Determine the model class from the form's Meta
-    model_class = form_class.Meta.model
-    if not model_class:
-        raise ValueError(f"Form {form_class.__name__} does not have a model defined in its Meta class.")
-
-    # Retrieve the object to be updated using all_objects to bypass default managers
-    # and get_object_or_404 for robust error handling.
-    allifquery = get_object_or_404(model_class.all_objects, pk=pk)
-   
-    # --- Authorization Check (Crucial for multi-tenant/access control) ---
-    # This is a placeholder. Implement your actual granular authorization logic here.
-    if hasattr(allifquery, 'company')==100000:# you can remove this condition... just place  holder...
-        raise Http404("Unauthorized: Item does not belong to your company or access denied.")
-   
-    # Add more granular checks (division, branch, department) if necessary,
-    # similar to what you have in get_filtered_and_sorted_queryset.
-   
-    # Prepare form arguments for __init__ (company_id is typically the first)
-    form_args = [company_id] 
-    if extra_form_args:
-        form_args.extend(extra_form_args)
-
-    if request.method == 'POST':
-        form = form_class(*form_args, request.POST, instance=allifquery) 
-        if form.is_valid():
-            obj = form.save(commit=False) # obj is now item_instance with updated data
-
-            # --- Assign common 'updated_by' field ---
-            if hasattr(obj, 'updated_by') and allif_data.get("usernmeslg"):
-                obj.updated_by = allif_data.get("usernmeslg") # This should be the User object
-
-            # --- Execute custom pre-save callback if provided ---
-            if pre_save_callback:
-                try:
-                    pre_save_callback(obj, request, allif_data)
-                except Exception as e:
-                    print(f"ERROR: Pre-save callback failed for {obj.__class__.__name__} (edit): {e}")
-                    form.add_error(None, f"An internal error occurred during custom processing: {e}")
-                    context = {
-                        "form": form, "title": title_text, "allifquery": allifquery,
-                        "user_var": allif_data.get("usrslg"), "glblslug": allif_data.get("compslg"),
-                        "error_message": form.errors,
-                        **(extra_context or {})
-                    }
-                    return render(request, template_path, context)
-
-            obj.save() # Save the updated object
-            
-            return redirect(
-                reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
-                        kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")})
-            )
-        else:
-            # Form is invalid, render with errors
-            error_message = form.errors
-            allifcontext = {
-                "error_message": error_message, 
-                "title": title_text, 
-                "allifquery": allifquery, # Pass instance back for error rendering
-                "user_var": allif_data.get("usrslg"), 
-                "glblslug": allif_data.get("compslg"),
-            }
-            allifcontext.update(extra_context or {})
-            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
-    else:
-        # GET request, initialize form with instance data
-        form = form_class(*form_args, instance=allifquery)
-
-    context = {
-        "form": form,
-        "title": title_text,
-        "allifquery":allifquery, # Pass the instance to the template for display
-        "user_var": allif_data.get("usrslg"), 
-        "glblslug": allif_data.get("compslg"), 
-        **(extra_context or {})
-    }
-    return render(request, template_path, context)
-
-
-# --- Refactored Specific Edit Views (using the generic logic function) ---
-
+     return allif_delete_hanlder(request,model_name='CommonCurrenciesModel',pk=pk,success_redirect_url_name='commonCurrencies')
+ 
+@allif_base_view_wrapper
 def commonEditCurrency(request, pk, *allifargs, **allifkwargs):
-    try:
-        return common_form_edit_and_save(
-            request,
-            pk, # Pass the primary key
-            CommonAddCurrencyForm, # Use the same form for add/edit if applicable
-            "Edit Currency",
-            "commonCurrencies", # The URL name for the currency list view
-            'allifmaalcommonapp/currencies/add_currency.html' # Assuming same template as add
-        )
-    except Exception as ex:
-        print(f"ERROR: commonEditCurrency view failed: {ex}")
-        error_context={'error_message': ex, 'title': "Error Editing Currency"}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-# --- Example of another edit view (e.g., for CommonTaxParametersModel) ---
-# Assuming you have a CommonAddTaxParameterForm for it
-# def commonEditTaxParameter(request, pk, *allifargs, **allifkwargs):
-#     try:
-#         # Example of a pre_save_callback for custom logic (if needed for TaxParameter)
-#         def tax_param_pre_save_callback(obj, request, allif_data):
-#             # Example: if you need to recalculate something based on taxrate change
-#             # obj.some_calculated_field = obj.taxrate * 0.1 
-#             pass
-            
-#         return _handle_form_edit_and_save(
-#             request,
-#             pk,
-#             CommonAddTaxParameterForm, # Assuming this form exists
-#             "Edit Tax Parameter",
-#             "commonTaxParameters", # Assuming this is the list URL name
-#             'allifmaalcommonapp/taxes/edit_tax_parameter.html', # Example template path
-#             pre_save_callback=tax_param_pre_save_callback
-#         )
-#     except Exception as ex:
-#         print(f"ERROR: commonEditTaxParameter view failed: {ex}")
-#         error_context={'error_message': ex, 'title': "Error Editing Tax Parameter"}
-#         return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-
-# --- Keep your other existing views (add, list, delete) ---
-# ...
-
-
+    return common_form_edit_and_save(request,pk,CommonAddCurrencyForm,"Edit Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  
 
 ########################3 Payment terms ######################
-
-@logged_in_user_must_have_profile
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def commonPaymentTerms(request,*allifargs,**allifkwargs):
     title="Payment Terms"
-    try:
-        allif_data=common_shared_data(request)
-        allifqueryset=CommonPaymentTermsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "allifqueryset":allifqueryset,
-        }
-        return render(request,'allifmaalcommonapp/payments/terms/payment_terms.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allif_data=common_shared_data(request)
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonPaymentTermsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,}
+    return render(request,'allifmaalcommonapp/payments/terms/payment_terms.html',context)
 
-
+@allif_base_view_wrapper
 def commonAddPaymentTerm(request, *allifargs, **allifkwargs):
-    try:
-        return common_form_submission_and_save(
-            request,
-            CommonAddPaymentTermForm,
-            "Add New Payment Terms",
-            "commonPaymentTerms", # The URL name for the currency list view
-            'allifmaalcommonapp/payments/terms/add_payment_term.html'
-        )
-    except Exception as ex:
-        print(f"ERROR: commonAddCurrency view failed: {ex}")
-        error_context={'error_message': ex, 'title': "Error Adding Currency"}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-"""
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonAddPaymentTerm(request,*allifargs,**allifkwargs):
-    try:
-        title="Add New Payment Terms"
-        allif_data=common_shared_data(request)
-        form=CommonAddPaymentTermForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=CommonAddPaymentTermForm(allif_data.get("main_sbscrbr_entity"),request.POST or None)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonPaymentTerms',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddPaymentTermForm(allif_data.get("main_sbscrbr_entity"))
+    return allif_common_form_submission_and_save(request,CommonAddPaymentTermForm,"Add New Payment Terms","commonPaymentTerms",'allifmaalcommonapp/payments/terms/add_payment_term.html')
 
-        context={
-            "form":form,
-            "title":title,
-            
-            }
-        return render(request,'allifmaalcommonapp/payments/terms/add_payment_term.html',context)
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    """
-@logged_in_user_must_have_profile
-@logged_in_user_can_edit
+@allif_base_view_wrapper
 def commonEditPaymentTerm(request,pk,*allifargs,**allifkwargs):
-    title="Update Payment Term Details"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=CommonPaymentTermsModel.objects.filter(id=pk).first()
-        form=CommonAddPaymentTermForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=CommonAddPaymentTermForm(allif_data.get("main_sbscrbr_entity"),request.POST, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonPaymentTerms',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddPaymentTermForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context = {
-            'form':form,
-            "allifquery_update":allifquery_update,
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/currencies/add_currency.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile  
-@logged_in_user_can_delete
+    return common_form_edit_and_save(request,pk,CommonAddPaymentTermForm,"Update Payment Term","commonPaymentTerms",'allifmaalcommonapp/payments/terms/add_payment_term.html')
+
+@allif_base_view_wrapper
 def commonDeletePaymentTerm(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonPaymentTermsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonPaymentTerms',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-
+    return allif_delete_hanlder(request,model_name='CommonPaymentTermsModel',pk=pk,success_redirect_url_name='commonPaymentTerms')
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 ############################ units of measure section #########
 
 @logged_in_user_must_have_profile
@@ -12482,7 +11883,7 @@ def commonTopUpCustomerAccount(request,pk,*allifargs,**allifkwargs):
             "topups": topups_queryset,
         }
 
-        return common_form_submission_and_save(
+        return allif_common_form_submission_and_save(
             request,
             CommonAddCustomerPaymentForm,
             f"Receive Payment From {customer_instance}", # Dynamic title

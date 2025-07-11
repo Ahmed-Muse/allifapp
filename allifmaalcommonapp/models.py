@@ -270,8 +270,8 @@ class ActiveManager(models.Manager):
     """
     def get_queryset(self):
         # Assuming your models have 'status' and 'delete_status' fields
-        return super().get_queryset().filter(status='Active')
-    
+        return super().get_queryset().filter(status__in=['Active','Approved','Draft'],delete_status='Deletable')
+   
     def for_company(self, company_id):
         """Filters the queryset for a specific company.
         The for_company method on the default manager makes tenant-specific queries very straightforward and performant.

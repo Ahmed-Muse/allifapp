@@ -12,7 +12,7 @@ from django.utils import timezone
 from django.shortcuts import render
 from .forms import *
 from django.db.models import Q
-from allifmaalcommonapp.utils import get_filtered_queryset_by_access,apply_sorting,allif_filtered_and_sorted_queryset # Import the new helper function
+from allifmaalcommonapp.utils import allif_filtered_and_sorted_queryset # Import the new helper function
 
 # Create your views here.
 #@logged_in_user_must_have_profile
@@ -51,10 +51,7 @@ def shaafiDashboard(request,*allifargs,**allifkwargs):
 
 ##################3 Triage ####################
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin
+
 def triageData(request,*allifargs,**allifkwargs):
     title="Triage Records"
     try:
@@ -79,7 +76,7 @@ def triageData(request,*allifargs,**allifkwargs):
         allifqueryset=CommonCompanyDetailsModel.objects.all()
         
         # Query: Get active, deletable triage records for the company
-        allifqueryset = get_filtered_queryset_by_access(
+        allifqueryset = allif_filtered_and_sorted_queryset(
             request, 
             TriagesModel, 
             allif_data # No extra_filters needed here for basic triage data
@@ -87,12 +84,12 @@ def triageData(request,*allifargs,**allifkwargs):
         allifqueryset=TriagesModel.all_objects.all()
        
          # This will get ACTIVE, DELETABLE triage records for the company
-        allifqueryset = get_filtered_queryset_by_access(
+        allifqueryset = allif_filtered_and_sorted_queryset(
             request, 
             TriagesModel, 
             allif_data,
-            access_scope='active', # Explicitly request active (default)
-            extra_filters={'status': "active"},
+            #access_scope='active', # Explicitly request active (default)
+            #extra_filters={'status': "active"},
             
         )
         
@@ -162,7 +159,7 @@ def allTriageData(request, *allifargs, **allifkwargs):
         allif_data = common_shared_data(request)
         
         # Query: Get ALL tasks (active, inactive, archived) for the company
-        allifqueryset = get_filtered_queryset_by_access(
+        allifqueryset = allif_filtered_and_sorted_queryset(
             request, 
             TriagesModel, 
             allif_data, 
@@ -193,7 +190,7 @@ def commonArchivedTasks(request, *allifargs, **allifkwargs):
         allif_data = common_shared_data(request)
         
         # Query: Get only ARCHIVED tasks for the company
-        allifqueryset = get_filtered_queryset_by_access(
+        allifqueryset = allif_filtered_and_sorted_queryset(
             request, 
             TriagesModel, 
             allif_data, 
@@ -254,10 +251,6 @@ def AddTriageData(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_is_admin
 def editTriageData(request,pk,*allifargs,**allifkwargs):
     title="Edit Triage"
     try:

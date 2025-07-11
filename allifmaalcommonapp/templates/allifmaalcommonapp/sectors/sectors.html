@@ -26,6 +26,29 @@
     </div><!--end....header row-->
   </div><!--end....main headere-->
   <div class="allifmaincontainer">
+    
+<div class="filter-options mt-3 mb-3">
+   
+    <div class="btn-group" role="group" aria-label="Record Scope">
+       
+        <a href="" 
+           class="btn btn-outline-primary {% if current_scope == 'active' %}active{% endif %}">
+            Active
+        </a>
+        {# Link for All Records #}
+        <a href="" 
+           class="btn btn-outline-primary {% if current_scope == 'all' %}active{% endif %}">
+            All
+        </a>
+        {# Link for Archived Records #}
+        <a href="" 
+           class="btn btn-outline-primary {% if current_scope == 'archived' %}active{% endif %}">
+            Archived
+        </a>
+    </div>
+</div>
+
+
   <div class="allif-content-spacer"></div>
   
 <div class="row mt-12"> <!--start....table row-->

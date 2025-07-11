@@ -6827,3 +6827,379 @@ INFO 2025-07-11 17:01:01,497 autoreload 24352 12464 C:\am\allifapp\allifapperp\a
 INFO 2025-07-11 17:01:02,392 autoreload 20548 20252 Watching for file changes with StatReloader
 INFO 2025-07-11 17:01:28,790 autoreload 20548 20252 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
 INFO 2025-07-11 17:01:29,894 autoreload 13220 23172 Watching for file changes with StatReloader
+INFO 2025-07-11 17:02:44,865 autoreload 20344 4276 Watching for file changes with StatReloader
+INFO 2025-07-11 17:03:25,152 autoreload 20344 4276 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:03:26,179 autoreload 16120 20332 Watching for file changes with StatReloader
+INFO 2025-07-11 17:04:02,708 autoreload 16120 20332 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:04:03,630 autoreload 17524 9924 Watching for file changes with StatReloader
+INFO 2025-07-11 17:04:21,282 autoreload 17524 9924 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:04:22,395 autoreload 18888 2272 Watching for file changes with StatReloader
+INFO 2025-07-11 17:04:35,486 autoreload 18888 2272 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:04:36,371 autoreload 18448 24056 Watching for file changes with StatReloader
+INFO 2025-07-11 17:04:56,054 autoreload 18448 24056 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:04:57,029 autoreload 27540 2052 Watching for file changes with StatReloader
+INFO 2025-07-11 17:05:11,494 autoreload 27540 2052 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:05:12,658 autoreload 28868 2784 Watching for file changes with StatReloader
+INFO 2025-07-11 17:06:05,880 autoreload 28868 2784 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:06:07,105 autoreload 24964 3824 Watching for file changes with StatReloader
+INFO 2025-07-11 17:07:10,487 autoreload 24964 3824 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:07:11,627 autoreload 18256 24752 Watching for file changes with StatReloader
+INFO 2025-07-11 17:10:43,090 autoreload 18256 24752 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:10:43,982 autoreload 21184 4268 Watching for file changes with StatReloader
+INFO 2025-07-11 17:11:19,297 autoreload 21184 4268 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:11:20,242 autoreload 22408 28216 Watching for file changes with StatReloader
+INFO 2025-07-11 17:11:29,960 autoreload 22408 28216 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:11:30,857 autoreload 13288 28260 Watching for file changes with StatReloader
+INFO 2025-07-11 17:11:37,990 autoreload 13288 28260 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 17:11:39,077 autoreload 13852 18700 Watching for file changes with StatReloader
+INFO 2025-07-11 17:43:56,995 autoreload 13852 18700 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:43:57,941 autoreload 17652 18772 Watching for file changes with StatReloader
+INFO 2025-07-11 17:45:19,686 autoreload 17652 18772 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:45:20,630 autoreload 11836 12360 Watching for file changes with StatReloader
+INFO 2025-07-11 17:45:32,104 autoreload 11836 12360 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:45:33,083 autoreload 29288 2812 Watching for file changes with StatReloader
+INFO 2025-07-11 17:46:03,817 autoreload 29288 2812 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:46:04,805 autoreload 17664 11612 Watching for file changes with StatReloader
+INFO 2025-07-11 17:46:26,413 autoreload 17664 11612 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:46:27,429 autoreload 15808 22608 Watching for file changes with StatReloader
+INFO 2025-07-11 17:46:38,835 autoreload 15808 22608 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:46:39,780 autoreload 9544 21964 Watching for file changes with StatReloader
+INFO 2025-07-11 17:47:25,600 autoreload 9544 21964 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:47:26,534 autoreload 3140 29504 Watching for file changes with StatReloader
+INFO 2025-07-11 17:48:14,388 autoreload 3140 29504 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:48:15,614 autoreload 14968 17464 Watching for file changes with StatReloader
+INFO 2025-07-11 17:48:22,758 autoreload 14968 17464 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:48:23,664 autoreload 12000 27028 Watching for file changes with StatReloader
+INFO 2025-07-11 17:48:48,804 autoreload 12000 27028 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:48:49,839 autoreload 20424 18388 Watching for file changes with StatReloader
+INFO 2025-07-11 17:49:15,902 autoreload 20424 18388 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:49:16,819 autoreload 21220 29360 Watching for file changes with StatReloader
+INFO 2025-07-11 17:49:51,580 autoreload 21220 29360 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:49:52,290 autoreload 26860 28380 Watching for file changes with StatReloader
+INFO 2025-07-11 17:49:56,078 autoreload 26860 28380 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:49:56,964 autoreload 13144 8860 Watching for file changes with StatReloader
+INFO 2025-07-11 17:50:47,446 autoreload 13144 8860 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:50:48,375 autoreload 6492 2956 Watching for file changes with StatReloader
+INFO 2025-07-11 17:51:13,910 autoreload 6492 2956 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:51:14,867 autoreload 19108 9536 Watching for file changes with StatReloader
+INFO 2025-07-11 17:59:43,433 autoreload 19108 9536 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 17:59:44,367 autoreload 24004 6712 Watching for file changes with StatReloader
+INFO 2025-07-11 18:03:27,097 autoreload 24004 6712 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 18:03:28,203 autoreload 26572 1088 Watching for file changes with StatReloader
+INFO 2025-07-11 18:03:38,892 autoreload 26572 1088 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 18:03:39,616 autoreload 25116 29148 Watching for file changes with StatReloader
+INFO 2025-07-11 18:03:51,906 autoreload 25116 29148 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 18:03:52,507 autoreload 556 12680 Watching for file changes with StatReloader
+INFO 2025-07-11 18:04:17,031 autoreload 556 12680 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 18:04:17,695 autoreload 12212 23220 Watching for file changes with StatReloader
+INFO 2025-07-11 18:04:49,020 autoreload 12212 23220 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 18:04:49,898 autoreload 28752 27608 Watching for file changes with StatReloader
+INFO 2025-07-11 18:06:56,085 autoreload 28752 27608 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 18:06:57,117 autoreload 18936 29504 Watching for file changes with StatReloader
+INFO 2025-07-11 18:14:07,499 autoreload 18936 29504 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 18:14:08,277 autoreload 7616 26544 Watching for file changes with StatReloader
+INFO 2025-07-11 18:14:38,879 autoreload 25208 12924 Watching for file changes with StatReloader
+INFO 2025-07-11 18:34:51,986 autoreload 27952 30140 Watching for file changes with StatReloader
+INFO 2025-07-11 18:35:51,240 autoreload 27952 30140 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-11 18:35:52,246 autoreload 26548 16908 Watching for file changes with StatReloader
+INFO 2025-07-11 18:42:59,758 autoreload 26548 16908 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 18:43:00,711 autoreload 29728 24176 Watching for file changes with StatReloader
+INFO 2025-07-11 18:47:45,505 autoreload 29728 24176 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 18:47:46,559 autoreload 16928 25692 Watching for file changes with StatReloader
+INFO 2025-07-11 18:48:20,853 autoreload 16928 25692 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 18:48:21,804 autoreload 9724 30056 Watching for file changes with StatReloader
+INFO 2025-07-11 18:50:22,724 autoreload 9724 30056 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 18:50:23,854 autoreload 24144 29724 Watching for file changes with StatReloader
+INFO 2025-07-11 18:51:00,914 autoreload 24144 29724 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 18:51:01,730 autoreload 26408 25892 Watching for file changes with StatReloader
+INFO 2025-07-11 19:02:31,585 autoreload 26408 25892 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:02:32,701 autoreload 13136 26572 Watching for file changes with StatReloader
+INFO 2025-07-11 19:05:46,710 autoreload 13136 26572 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:05:47,658 autoreload 23416 8752 Watching for file changes with StatReloader
+INFO 2025-07-11 19:05:57,534 autoreload 23416 8752 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:05:58,568 autoreload 2540 30592 Watching for file changes with StatReloader
+INFO 2025-07-11 19:06:06,017 autoreload 2540 30592 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:06:06,872 autoreload 24716 4376 Watching for file changes with StatReloader
+INFO 2025-07-11 19:08:07,164 autoreload 24716 4376 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-11 19:08:08,006 autoreload 20528 20860 Watching for file changes with StatReloader
+INFO 2025-07-11 19:09:28,434 autoreload 20528 20860 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:09:29,573 autoreload 21248 27888 Watching for file changes with StatReloader
+INFO 2025-07-11 19:10:23,561 autoreload 21248 27888 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-11 19:10:24,370 autoreload 23212 11536 Watching for file changes with StatReloader
+INFO 2025-07-11 19:13:17,137 autoreload 23212 11536 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:13:18,175 autoreload 22568 17176 Watching for file changes with StatReloader
+INFO 2025-07-11 19:14:26,441 autoreload 22568 17176 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:14:27,360 autoreload 1184 18164 Watching for file changes with StatReloader
+INFO 2025-07-11 19:16:10,707 autoreload 1184 18164 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:16:11,465 autoreload 25296 18036 Watching for file changes with StatReloader
+INFO 2025-07-11 19:16:46,954 autoreload 25296 18036 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:16:47,910 autoreload 16612 13208 Watching for file changes with StatReloader
+INFO 2025-07-11 19:18:39,982 autoreload 16612 13208 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:18:41,009 autoreload 8740 19864 Watching for file changes with StatReloader
+INFO 2025-07-11 19:19:39,007 autoreload 8740 19864 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 19:19:39,822 autoreload 20704 24956 Watching for file changes with StatReloader
+INFO 2025-07-11 19:20:19,188 autoreload 20704 24956 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:20:19,910 autoreload 30648 24588 Watching for file changes with StatReloader
+INFO 2025-07-11 19:21:15,103 autoreload 30648 24588 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:21:15,974 autoreload 26756 14200 Watching for file changes with StatReloader
+INFO 2025-07-11 19:23:07,286 autoreload 26756 14200 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:23:08,286 autoreload 20564 25584 Watching for file changes with StatReloader
+INFO 2025-07-11 19:23:16,608 autoreload 20564 25584 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 19:23:17,407 autoreload 20376 29720 Watching for file changes with StatReloader
+INFO 2025-07-11 19:24:21,665 autoreload 20376 29720 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:24:22,632 autoreload 13720 964 Watching for file changes with StatReloader
+INFO 2025-07-11 19:24:46,037 autoreload 13720 964 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 19:24:46,763 autoreload 22696 27472 Watching for file changes with StatReloader
+INFO 2025-07-11 19:25:11,292 autoreload 22696 27472 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:25:12,052 autoreload 30692 22324 Watching for file changes with StatReloader
+INFO 2025-07-11 19:26:34,709 autoreload 30692 22324 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:26:35,494 autoreload 29784 29100 Watching for file changes with StatReloader
+INFO 2025-07-11 19:26:45,878 autoreload 29784 29100 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:26:46,642 autoreload 30328 24888 Watching for file changes with StatReloader
+INFO 2025-07-11 19:27:15,769 autoreload 30328 24888 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:27:16,548 autoreload 17196 16600 Watching for file changes with StatReloader
+INFO 2025-07-11 19:27:41,410 autoreload 17196 16600 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:27:42,211 autoreload 30080 25596 Watching for file changes with StatReloader
+INFO 2025-07-11 19:31:25,906 autoreload 30080 25596 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 19:31:26,766 autoreload 28792 25964 Watching for file changes with StatReloader
+INFO 2025-07-11 19:32:26,166 autoreload 28792 25964 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 19:32:27,299 autoreload 20324 9912 Watching for file changes with StatReloader
+INFO 2025-07-11 19:34:33,724 autoreload 20324 9912 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 19:34:34,467 autoreload 24316 14224 Watching for file changes with StatReloader
+INFO 2025-07-11 19:34:39,309 autoreload 24316 14224 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 19:34:40,075 autoreload 16124 27312 Watching for file changes with StatReloader
+INFO 2025-07-11 19:36:29,620 autoreload 16124 27312 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:36:30,613 autoreload 25304 14412 Watching for file changes with StatReloader
+INFO 2025-07-11 19:36:38,034 autoreload 25304 14412 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:36:38,952 autoreload 16080 13248 Watching for file changes with StatReloader
+INFO 2025-07-11 19:37:05,297 autoreload 16080 13248 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:37:06,479 autoreload 28172 8272 Watching for file changes with StatReloader
+INFO 2025-07-11 19:37:26,460 autoreload 28172 8272 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:37:27,583 autoreload 30196 20848 Watching for file changes with StatReloader
+INFO 2025-07-11 19:37:40,888 autoreload 30196 20848 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:37:41,848 autoreload 11784 24092 Watching for file changes with StatReloader
+INFO 2025-07-11 19:37:45,008 autoreload 11784 24092 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:37:45,772 autoreload 23152 27944 Watching for file changes with StatReloader
+INFO 2025-07-11 19:39:40,886 autoreload 23152 27944 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 19:39:42,059 autoreload 29724 13016 Watching for file changes with StatReloader
+ERROR 2025-07-11 19:39:44,475 log 29724 28928 Internal Server Error: /Archived/Currency/Record/s/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 322, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 635, in commonCurrenciesArchived
+    allifqueryset=CommonCurrenciesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),k=u)
+                                                                                                       ^
+NameError: name 'u' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 207, in allif_wrapper_func
+    return allif_param_func(request,*args,**kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 56, in allif_wrapper_func
+    return allif_param_func(request,*args,**kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 332, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'some_home_page' not found. 'some_home_page' is not a valid view function or pattern name.
+WARNING 2025-07-11 19:39:44,635 log 29724 28928 Not Found: /favicon.ico
+INFO 2025-07-11 20:02:00,017 autoreload 29724 13016 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:02:01,066 autoreload 13420 24340 Watching for file changes with StatReloader
+INFO 2025-07-11 20:03:36,527 autoreload 13420 24340 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:03:37,476 autoreload 18832 26048 Watching for file changes with StatReloader
+INFO 2025-07-11 20:05:03,852 autoreload 18832 26048 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:05:04,553 autoreload 20844 18544 Watching for file changes with StatReloader
+INFO 2025-07-11 20:07:31,501 autoreload 20844 18544 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:07:32,230 autoreload 13204 24380 Watching for file changes with StatReloader
+INFO 2025-07-11 20:08:56,556 autoreload 13204 24380 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:08:57,558 autoreload 26160 30240 Watching for file changes with StatReloader
+INFO 2025-07-11 20:12:29,244 autoreload 26160 30240 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:12:30,087 autoreload 5096 27440 Watching for file changes with StatReloader
+INFO 2025-07-11 20:16:31,961 autoreload 5096 27440 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:16:32,739 autoreload 21108 19008 Watching for file changes with StatReloader
+INFO 2025-07-11 20:16:45,889 autoreload 21108 19008 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:16:46,730 autoreload 27888 26832 Watching for file changes with StatReloader
+INFO 2025-07-11 20:16:51,743 autoreload 27888 26832 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:16:52,521 autoreload 14176 26644 Watching for file changes with StatReloader
+INFO 2025-07-11 20:22:26,116 autoreload 14176 26644 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 20:22:26,814 autoreload 30104 24588 Watching for file changes with StatReloader
+INFO 2025-07-11 20:22:45,985 autoreload 30104 24588 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 20:22:46,819 autoreload 22128 11692 Watching for file changes with StatReloader
+INFO 2025-07-11 20:22:57,917 autoreload 22128 11692 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 20:22:58,680 autoreload 14048 21436 Watching for file changes with StatReloader
+INFO 2025-07-11 20:23:15,528 autoreload 14048 21436 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-11 20:23:16,364 autoreload 26304 11832 Watching for file changes with StatReloader
+INFO 2025-07-11 20:23:49,798 autoreload 26304 11832 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 20:23:50,702 autoreload 24964 27556 Watching for file changes with StatReloader
+INFO 2025-07-11 20:27:49,759 autoreload 24964 27556 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 20:27:50,644 autoreload 16748 26712 Watching for file changes with StatReloader
+INFO 2025-07-11 20:34:56,281 autoreload 16748 26712 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 20:34:57,131 autoreload 4160 30604 Watching for file changes with StatReloader
+INFO 2025-07-11 20:49:52,012 autoreload 4160 30604 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:49:52,832 autoreload 23640 29212 Watching for file changes with StatReloader
+INFO 2025-07-11 20:50:17,545 autoreload 23640 29212 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 20:50:18,404 autoreload 26904 3556 Watching for file changes with StatReloader
+INFO 2025-07-11 20:50:49,921 autoreload 26904 3556 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 20:50:50,577 autoreload 27836 13424 Watching for file changes with StatReloader
+INFO 2025-07-11 20:54:31,732 autoreload 27836 13424 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 20:54:32,446 autoreload 16664 29532 Watching for file changes with StatReloader
+INFO 2025-07-11 21:02:23,992 autoreload 16664 29532 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:02:24,865 autoreload 23532 11308 Watching for file changes with StatReloader
+INFO 2025-07-11 21:03:55,274 autoreload 23532 11308 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:03:55,929 autoreload 25868 8256 Watching for file changes with StatReloader
+INFO 2025-07-11 21:08:57,220 autoreload 25868 8256 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:08:57,855 autoreload 24376 20296 Watching for file changes with StatReloader
+INFO 2025-07-11 21:13:52,226 autoreload 24376 20296 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:13:52,897 autoreload 15596 18492 Watching for file changes with StatReloader
+INFO 2025-07-11 21:13:56,224 autoreload 15596 18492 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:13:56,780 autoreload 12076 18480 Watching for file changes with StatReloader
+INFO 2025-07-11 21:14:47,938 autoreload 12076 18480 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:14:48,491 autoreload 27952 28260 Watching for file changes with StatReloader
+INFO 2025-07-11 21:15:40,596 autoreload 27952 28260 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:15:41,163 autoreload 22144 30184 Watching for file changes with StatReloader
+INFO 2025-07-11 21:55:52,271 autoreload 22144 30184 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:55:52,955 autoreload 29716 24680 Watching for file changes with StatReloader
+INFO 2025-07-11 21:57:32,056 autoreload 29716 24680 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:57:32,636 autoreload 21728 1680 Watching for file changes with StatReloader
+INFO 2025-07-11 21:59:15,873 autoreload 21728 1680 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-07-11 21:59:16,627 autoreload 14492 8812 Watching for file changes with StatReloader
+INFO 2025-07-11 22:01:47,246 autoreload 14684 23940 Watching for file changes with StatReloader
+INFO 2025-07-11 22:02:17,835 autoreload 14684 23940 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-07-11 22:02:18,544 autoreload 9984 13404 Watching for file changes with StatReloader
+INFO 2025-07-11 22:03:14,312 autoreload 9984 13404 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:03:15,389 autoreload 15768 21364 Watching for file changes with StatReloader
+INFO 2025-07-11 22:03:42,989 autoreload 15768 21364 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:03:43,955 autoreload 18568 14224 Watching for file changes with StatReloader
+INFO 2025-07-11 22:03:56,033 autoreload 18568 14224 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:03:57,178 autoreload 16704 26896 Watching for file changes with StatReloader
+INFO 2025-07-11 22:07:02,607 autoreload 16704 26896 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:07:03,591 autoreload 9884 30296 Watching for file changes with StatReloader
+INFO 2025-07-11 22:15:23,354 autoreload 9884 30296 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:15:24,279 autoreload 24252 3924 Watching for file changes with StatReloader
+INFO 2025-07-11 22:15:31,797 autoreload 24252 3924 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:15:32,496 autoreload 8008 11176 Watching for file changes with StatReloader
+INFO 2025-07-11 22:17:19,558 autoreload 8008 11176 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:17:20,239 autoreload 22696 9760 Watching for file changes with StatReloader
+INFO 2025-07-11 22:18:58,492 autoreload 22696 9760 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:18:59,143 autoreload 16164 28168 Watching for file changes with StatReloader
+INFO 2025-07-11 22:19:05,638 autoreload 16164 28168 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:19:06,265 autoreload 18148 19384 Watching for file changes with StatReloader
+INFO 2025-07-11 22:21:43,021 autoreload 18148 19384 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:21:43,823 autoreload 25604 6404 Watching for file changes with StatReloader
+INFO 2025-07-11 22:22:24,983 autoreload 25604 6404 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:22:25,734 autoreload 28056 28452 Watching for file changes with StatReloader
+INFO 2025-07-11 22:22:59,177 autoreload 28056 28452 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:23:00,374 autoreload 19564 9060 Watching for file changes with StatReloader
+INFO 2025-07-11 22:26:22,475 autoreload 19564 9060 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:26:23,663 autoreload 27124 30676 Watching for file changes with StatReloader
+INFO 2025-07-11 22:26:30,649 autoreload 27124 30676 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:26:31,417 autoreload 25168 9924 Watching for file changes with StatReloader
+INFO 2025-07-11 22:26:47,922 autoreload 25168 9924 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:26:49,151 autoreload 26040 25952 Watching for file changes with StatReloader
+INFO 2025-07-11 22:27:35,686 autoreload 26040 25952 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:27:36,670 autoreload 3932 15052 Watching for file changes with StatReloader
+INFO 2025-07-11 22:27:58,849 autoreload 3932 15052 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:27:59,850 autoreload 15796 2932 Watching for file changes with StatReloader
+INFO 2025-07-11 22:28:41,032 autoreload 15796 2932 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:28:41,940 autoreload 21476 24888 Watching for file changes with StatReloader
+INFO 2025-07-11 22:28:55,646 autoreload 21476 24888 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:28:56,570 autoreload 29896 9924 Watching for file changes with StatReloader
+INFO 2025-07-11 22:29:20,666 autoreload 29896 9924 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:29:21,693 autoreload 30304 22240 Watching for file changes with StatReloader
+INFO 2025-07-11 22:31:24,797 autoreload 30304 22240 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:31:25,734 autoreload 23852 19888 Watching for file changes with StatReloader
+INFO 2025-07-11 22:34:56,660 autoreload 23852 19888 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:34:57,541 autoreload 11288 4792 Watching for file changes with StatReloader
+INFO 2025-07-11 22:36:57,260 autoreload 11288 4792 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:36:58,105 autoreload 25812 17472 Watching for file changes with StatReloader
+INFO 2025-07-11 22:38:58,704 autoreload 25812 17472 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:38:59,649 autoreload 26804 10296 Watching for file changes with StatReloader
+INFO 2025-07-11 22:41:23,009 autoreload 26804 10296 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:41:23,941 autoreload 18928 30496 Watching for file changes with StatReloader
+INFO 2025-07-11 22:41:35,656 autoreload 18928 30496 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:41:36,725 autoreload 21556 20564 Watching for file changes with StatReloader
+INFO 2025-07-11 22:42:32,054 autoreload 21556 20564 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:42:33,257 autoreload 21260 28588 Watching for file changes with StatReloader
+INFO 2025-07-11 22:43:39,800 autoreload 21260 28588 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:43:40,737 autoreload 27208 29516 Watching for file changes with StatReloader
+INFO 2025-07-11 22:47:00,941 autoreload 27208 29516 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-11 22:47:01,794 autoreload 10244 14224 Watching for file changes with StatReloader
+INFO 2025-07-11 22:47:36,103 autoreload 10244 14224 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:47:36,805 autoreload 25796 28768 Watching for file changes with StatReloader
+INFO 2025-07-11 22:48:20,678 autoreload 25796 28768 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-11 22:48:21,479 autoreload 26756 27352 Watching for file changes with StatReloader
+INFO 2025-07-11 22:48:45,290 autoreload 26756 27352 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-11 22:48:46,163 autoreload 3924 29188 Watching for file changes with StatReloader
+INFO 2025-07-11 22:50:02,269 autoreload 3924 29188 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:50:03,400 autoreload 4228 22084 Watching for file changes with StatReloader
+INFO 2025-07-11 22:52:52,709 autoreload 4228 22084 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 22:52:53,672 autoreload 2728 13112 Watching for file changes with StatReloader
+INFO 2025-07-11 22:56:11,819 autoreload 2728 13112 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:56:12,940 autoreload 11628 21224 Watching for file changes with StatReloader
+INFO 2025-07-11 22:57:18,878 autoreload 11628 21224 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 22:57:19,875 autoreload 15716 12132 Watching for file changes with StatReloader
+INFO 2025-07-11 23:08:53,002 autoreload 15716 12132 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-11 23:08:54,083 autoreload 30228 14864 Watching for file changes with StatReloader
+INFO 2025-07-11 23:10:29,786 autoreload 27464 21152 Watching for file changes with StatReloader
+INFO 2025-07-11 23:11:38,279 autoreload 27464 21152 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 23:11:39,365 autoreload 14788 26068 Watching for file changes with StatReloader
+INFO 2025-07-11 23:12:04,590 autoreload 14788 26068 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 23:12:05,737 autoreload 2084 21256 Watching for file changes with StatReloader
+INFO 2025-07-11 23:13:01,412 autoreload 2084 21256 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 23:13:02,091 autoreload 19632 8080 Watching for file changes with StatReloader
+INFO 2025-07-11 23:13:59,641 autoreload 19632 8080 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-11 23:14:00,762 autoreload 18576 24208 Watching for file changes with StatReloader
+INFO 2025-07-11 23:14:24,052 autoreload 18576 24208 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 23:14:24,815 autoreload 18196 26540 Watching for file changes with StatReloader
+INFO 2025-07-11 23:14:36,172 autoreload 18196 26540 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 23:14:36,953 autoreload 22380 29704 Watching for file changes with StatReloader
+INFO 2025-07-11 23:15:06,272 autoreload 22380 29704 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-07-11 23:15:07,123 autoreload 20052 21764 Watching for file changes with StatReloader
+INFO 2025-07-11 23:17:04,614 autoreload 20052 21764 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 23:17:05,497 autoreload 29900 22988 Watching for file changes with StatReloader
+INFO 2025-07-11 23:17:26,701 autoreload 29900 22988 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-11 23:17:27,395 autoreload 9500 3568 Watching for file changes with StatReloader
+INFO 2025-07-11 23:17:59,541 autoreload 9500 3568 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 23:18:00,574 autoreload 20788 10252 Watching for file changes with StatReloader
+INFO 2025-07-11 23:18:17,276 autoreload 20788 10252 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 23:18:18,285 autoreload 26476 3544 Watching for file changes with StatReloader
+INFO 2025-07-11 23:23:38,349 autoreload 26476 3544 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 23:23:39,430 autoreload 12808 29160 Watching for file changes with StatReloader
+INFO 2025-07-11 23:24:13,398 autoreload 12808 29160 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 23:24:14,387 autoreload 24984 14432 Watching for file changes with StatReloader
+INFO 2025-07-11 23:24:27,890 autoreload 24984 14432 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 23:24:28,975 autoreload 25952 21364 Watching for file changes with StatReloader
+INFO 2025-07-11 23:26:44,902 autoreload 25952 21364 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 23:26:45,966 autoreload 27972 19932 Watching for file changes with StatReloader
+INFO 2025-07-11 23:27:25,099 autoreload 27972 19932 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-11 23:27:25,994 autoreload 29688 21528 Watching for file changes with StatReloader

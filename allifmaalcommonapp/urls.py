@@ -101,7 +101,6 @@ path('Add/New/Currency/<str:allifusr>/<str:allifslug>/', views.commonAddCurrency
 path('Edit/Currency/Filter/Details/Money/Types/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCurrency, name="commonEditCurrency"),
 path('Delete/Currency/Record/Money/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteCurrency, name="commonDeleteCurrency"),
 
-
 ################################## Payment Terms ##############
 path('Payment/Terms/Payment/Conditions/<str:allifusr>/<str:allifslug>/', views.commonPaymentTerms, name="commonPaymentTerms"),
 path('Add/New/Payment/Term/Payment/Conditions/<str:allifusr>/<str:allifslug>/', views.commonAddPaymentTerm, name="commonAddPaymentTerm"),

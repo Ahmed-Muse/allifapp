@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-from allifmaalcommonapp.utils import initialize_form_select_querysets 
+from allifmaalcommonapp.utils import allif_initialize_form_select_querysets 
 
 
 # forms.py
@@ -652,7 +652,7 @@ class CommonBankDepositAddForm(CommonBaseForm):
             'trans_number': CommonTransactionsModel,
         }
         # Call the utility function
-        initialize_form_select_querysets(self, allifmaalparameter, field_model_map)
+        allif_initialize_form_select_querysets(self, allifmaalparameter, field_model_map)
 
        
        

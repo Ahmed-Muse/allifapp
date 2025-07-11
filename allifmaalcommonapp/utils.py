@@ -8,271 +8,14 @@ from django.db.models import QuerySet, Model # Import Model
 from django.http import HttpRequest
 
 from typing import Optional # Import Optional for type hinting
-def get_filtered_queryset_by_access(request, model_class, allif_data, extra_filters=None, access_scope='active'):
-    """
-Filters a queryset based on the user's access level (universal, divisional, branch, departmental).
-    Assumes model_class inherits from CommonBaseModel, where 'objects' manager
-    already handles 'Active' status and 'Deletable' delete_status, and 'for_company' method.
-    Now that the default manager (objects) already handles "active" status and for_company filtering,
-    the utility function becomes much simpler. It will primarily focus on applying the division, branch, and 
-    department filters based on user access.
-    ...queryset = model_class.objects.for_company(allif_data.get("main_sbscrbr_entity")): This is the core simplification. We directly use the default objects manager (which is ActiveManager) and its for_company method. This means status='Active',
-    delete_status='Deletable', and company=current_company are all applied in the initial query.
-    The if/elif chain now only needs to add division, branch, or department filters, making it much cleaner.
-    The hasattr checks are still important because while CommonBaseModel defines these fields,
-    a specific model might not actually use them or they might be null=True. This ensures the filtering 
-    doesn't break if a field is unexpectedly missing or not populated for a given model.
-    ...
-    access_scope parameter: Introduced with a default of 'active'.
-
-    Conditional Base Queryset: The first part of the function now dynamically selects the starting manager (objects, all_objects, or objects.archived()) based on access_scope.
-
-    Direct company filter: Instead of relying on for_company for all_objects (which doesn't have it), we apply the company filter directly to the queryset after selecting the base manager. This ensures consistency.
-"""
-    """
-    Filters a queryset based on the user's access level (universal, divisional, branch, departmental)
-    and the desired access scope (active, all, archived).
-
-    Assumes model_class inherits from CommonBaseModel, where 'objects' manager
-    handles 'Active' status and 'Deletable' delete_status, and 'for_company' method.
-    Also assumes 'all_objects' and 'objects.archived()' managers are available.
-
-    Args:
-        request: The HttpRequest object.
-        model_class: The Django Model class (e.g., CommonTasksModel, TriagesModel).
-                     Must inherit from CommonBaseModel.
-        allif_data: The dictionary containing user access data from common_shared_data.
-        extra_filters (dict, optional): A dictionary of additional filters to apply
-                                        (e.g., {'task_status': 'complete'}).
-        access_scope (str): Defines which set of records to retrieve:
-                            - 'active' (default): Uses model_class.objects (ActiveManager's default).
-                            - 'all': Uses model_class.all_objects (all records, including inactive/archived).
-                            - 'archived': Uses model_class.objects.archived() (only archived records).
-
-    Returns:
-        QuerySet: The filtered queryset, or an empty queryset if no access or no matching fields.
-    """
-    
-    # 1. Determine the base queryset based on access_scope
-    if access_scope == 'all':
-        # Use the 'all_objects' manager to bypass default active/deletable filtering
-        queryset = model_class.all_objects.all()
-    elif access_scope == 'archived':
-        # Use the 'archived' method from the default manager (ActiveManager)
-        queryset = model_class.objects.archived()
-    else: # Default is 'active'
-        # Use the default 'objects' manager (which is ActiveManager)
-        # This automatically filters by status='Active' and delete_status='Deletable'
-        queryset = model_class.objects.all()
-
-    # 2. Apply company filter (if the model has a 'company' field and company_id is available)
-    company_id = allif_data.get("main_sbscrbr_entity")
-    if hasattr(model_class, 'company') and company_id:
-        # The 'for_company' method is part of ActiveManager, which 'objects' is.
-        # If we started with 'all_objects', we need to filter manually.
-        # So, it's safer to just apply the filter directly here to the base queryset.
-        queryset = queryset.filter(company=company_id)
-    
-    # 3. Apply any additional filters specific to the view
-    if extra_filters:
-        queryset = queryset.filter(**extra_filters)
-
-    # 4. Apply access level filtering for division, branch, department
-    if allif_data.get("logged_in_user_has_universal_access"):
-        # Universal access: company filter (already applied above) and extra_filters are sufficient.
-        pass 
-    elif allif_data.get("logged_in_user_has_divisional_access"):
-        if hasattr(model_class, 'division'): # Check if model has the field
-            queryset = queryset.filter(division=allif_data.get("logged_user_division"))
-        else:
-            queryset = model_class.objects.none() # Return empty if model doesn't support this level of access
-    elif allif_data.get("logged_in_user_has_branches_access"):
-        if hasattr(model_class, 'division') and hasattr(model_class, 'branch'):
-            queryset = queryset.filter(
-                division=allif_data.get("logged_user_division"),
-                branch=allif_data.get("logged_user_branch")
-            )
-        else:
-            queryset = model_class.objects.none()
-    elif allif_data.get("logged_in_user_has_departmental_access"):
-        if hasattr(model_class, 'division') and hasattr(model_class, 'branch') and hasattr(model_class, 'department'):
-            queryset = queryset.filter(
-                division=allif_data.get("logged_user_division"),
-                branch=allif_data.get("logged_user_branch"),
-                department=allif_data.get("logged_user_department")
-            )
-        else:
-            queryset = model_class.objects.none()
-    else:
-        # No specific access level, or access denied
-        queryset = model_class.objects.none() # Return an empty queryset
-
-    # 5. Apply ordering if 'date' field exists (assuming 'date' is a common field in CommonBaseModel or specific models)
-    return queryset.order_by('date') if hasattr(model_class, 'date') else queryset
-
-# C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py
-
-from django.db.models import QuerySet
-
-def apply_sorting(queryset: QuerySet, request, default_sort_field: str, valid_sort_fields: list) -> QuerySet:
-    """
-    Applies ordering to a Django QuerySet based on a 'sort' GET parameter.
-    This is universal and can be used for any model.
-
-    Args:
-        queryset (QuerySet): The base QuerySet to apply sorting to.
-        request (HttpRequest): The HttpRequest object containing GET parameters.
-        default_sort_field (str): The field to sort by if no 'sort' GET param is provided or is invalid.
-                                  Prefix with '-' for descending (e.g., '-created_at').
-        valid_sort_fields (list): A list of allowed field names for sorting (e.g., ['name', '-name', 'price', '-price']).
-                                  Crucial for security to prevent sorting by arbitrary columns.
-
-    Returns:
-        QuerySet: The sorted QuerySet.
-    """
-    sort_by = request.GET.get('sort', default_sort_field)
-    
-    # Validate sort_by field for security and robustness
-    # Check if the requested sort_by is in the list of valid fields.
-    # Also check if the underlying model actually has the field (stripping the '-' for descending).
-    # 'pk' is a universal field, so allow it even if not explicitly in model fields.
-    field_to_check = sort_by.lstrip('-')
-    if sort_by not in valid_sort_fields or not (hasattr(queryset.model, field_to_check) or field_to_check == 'pk'):
-        sort_by = default_sort_field # Fallback to default if invalid or field doesn't exist
-
-    return queryset.order_by(sort_by)
+from .models import *
+from allifmaalshaafiapp.models import *
 
 
-# C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py
-from django.db import models
-from django.db.models import QuerySet, Manager
-from django.http import HttpRequest
-
-def get_filtered_and_sorted_queryset_one_can_deleted_if_not_nneed(
-    request: HttpRequest, 
-    model_class: type[models.Model], # Pass the Model class itself (e.g., CommonExpensesModel)
-    allif_data: dict, 
-    sort_mapping: dict, # Dictionary to map UI choice to actual field name
-    default_sort_field: str = '-date' # Default sort if nothing selected
-) -> QuerySet:
-    """
-    Applies common filtering (company, scope, access levels) and sorting to a queryset.
-    This utility function will take the request, the Model class you want to query, and 
-    your allif_data (which contains access levels and company ID). It will then apply all the 
-    common filtering (company, division, branch, department, and scope) and then apply the sorting based on
-    the user's selection.
-    This function will handle all the common filtering (company, access levels, scope) and the sorting logic.
-    
-    ...EXPLANATIONS....
-    #model_class: You pass the actual Python class (e.g., CommonExpensesModel), not an instance.This allows the utility to work with any model.
-
-    #sort_mapping: This dictionary is crucial. It maps the user-friendly string from your 
-    dropdown (e.g., "Amount Descending") to the actual Django field name (e.g., '-amount'). This makes the if/elif chain for sorting obsolete.
-
-    #Consolidated Filtering: All the if/elif logic for company, scope, division, branch, department is now inside this one function.
-
-    #POST Sorting: It specifically looks for sort_option from request.POST.
-
-    #GET Fallback: It includes a fallback to request.GET.get('sort') if no POST data is present, allowing you
-    to mix and match. This means if you still have scope buttons that use GET, they'll work, and if a user 
-    manually types ?sort=... in the URL, it will also work.
-
-    Args:
-        request (HttpRequest): The HttpRequest object.
-        model_class (models.Model): The Django Model class to query (e.g., CommonExpensesModel).
-        allif_data (dict): Dictionary containing user access levels and company ID.
-        sort_mapping (dict): A dictionary mapping UI selection strings to model field names for sorting.
-                             Example: {"Name": "name", "Amount": "-amount", "Quantity": "-quantity"}
-        default_sort_field (str): The field to sort by if no valid sort option is provided.
-
-    Returns:
-        QuerySet: The filtered and sorted QuerySet.
-    """
-    company_id = allif_data.get("main_sbscrbr_entity")
-
-    # --- 1. Determine the base queryset based on 'scope' GET parameter ---
-    # Scope is usually a navigation filter, so it typically comes from GET
-    scope = request.GET.get('scope', 'active') 
-    
-    base_manager = model_class.objects # Default to ActiveManager
-    if hasattr(model_class, 'all_objects') and scope == 'all':
-        base_manager = model_class.all_objects
-    elif hasattr(model_class.objects, 'archived') and scope == 'archived':
-        base_manager = model_class.objects.archived()
-    else: # 'active' or any other invalid scope defaults to active
-        base_manager = model_class.objects.all() # Ensure it's a queryset, not just the manager
-
-    queryset = base_manager
-
-    # --- 2. Apply company filter ---
-    if hasattr(model_class, 'company') and company_id:
-        queryset = queryset.filter(company=company_id)
-    else:
-        # If model doesn't have 'company' or company_id is missing,
-        # it's safer to return an empty queryset or handle as per business logic.
-        # For now, we'll let it proceed, but filtering by company will be skipped.
-        pass 
-    
-    # --- 3. Apply access level filtering (division, branch, department) ---
-    # This is the repetitive part that gets consolidated here
-    if allif_data.get("logged_in_user_has_universal_access"):
-        pass # Universal access means company filter is enough
-    elif allif_data.get("logged_in_user_has_divisional_access"):
-        if hasattr(model_class, 'division'):
-            queryset = queryset.filter(division=allif_data.get("logged_user_division"))
-        else:
-            queryset = model_class.objects.none() # No division field, so no data
-    elif allif_data.get("logged_in_user_has_branches_access"):
-        if hasattr(model_class, 'division') and hasattr(model_class, 'branch'):
-            queryset = queryset.filter(
-                division=allif_data.get("logged_user_division"),
-                branch=allif_data.get("logged_user_branch")
-            )
-        else:
-            queryset = model_class.objects.none()
-    elif allif_data.get("logged_in_user_has_departmental_access"):
-        if hasattr(model_class, 'division') and hasattr(model_class, 'branch') and hasattr(model_class, 'department'):
-            queryset = queryset.filter(
-                division=allif_data.get("logged_user_division"),
-                branch=allif_data.get("logged_user_branch"),
-                department=allif_data.get("logged_user_department")
-            )
-        else:
-            queryset = model_class.objects.none()
-    else:
-        queryset = model_class.objects.none() # No specific access level, or access denied
-
-    # --- 4. Apply sorting based on POST data (from your form) ---
-    # Get the selected option from the POST request
-    selected_option = request.POST.get('sort_option') # Assuming 'sort_option' is the name of your select field
-
-    sort_field = default_sort_field # Start with default
-    if selected_option and selected_option in sort_mapping:
-        sort_field = sort_mapping[selected_option]
-    elif request.GET.get('sort'): # Fallback to GET 'sort' parameter if POST not used or invalid
-        # This allows the URL-based sorting (from previous solutions) to still work
-        # if the user manually changes the URL or if scope buttons are clicked.
-        # We need to validate this GET 'sort' against the values in sort_mapping
-        # to ensure it's a valid and allowed field.
-        # Find if the GET sort value matches any of the sort_mapping values
-        # This is a bit more complex, so for simplicity, we'll just check if it's
-        # one of the *values* in the sort_mapping.
-        allowed_sort_values = list(sort_mapping.values())
-        if request.GET.get('sort') in allowed_sort_values:
-            sort_field = request.GET.get('sort')
-        else:
-            # If GET sort is invalid, revert to default
-            sort_field = default_sort_field
-
-
-    # Apply the sorting
-    queryset = queryset.order_by(sort_field)
-
-    return queryset
-
-
-
-
+from django.shortcuts import render,redirect,get_object_or_404
+from .allifutils import common_shared_data
+from django.urls import reverse
+from django.http import Http404
 
 
 
@@ -335,115 +78,19 @@ MODEL_SORT_CONFIGS = {
     # Add other model sort configurations here
 }
 
-def get_filtered_and_sorted_queryset____one(request: HttpRequest,model_class: type[Model],allif_data: dict,) -> QuerySet:
-    """
-    Applies common filtering (company, scope, access levels) and sorting to a queryset.
-    Retrieves sort_mapping and default_sort_field from MODEL_SORT_CONFIGS.
-
-    Args:
-        request (HttpRequest): The HttpRequest object.
-        model_class (type[models.Model]): The Django Model class to query (e.g., CommonExpensesModel).
-        allif_data (dict): Dictionary containing user access levels and company ID.
-
-    Returns:
-        QuerySet: The filtered and sorted QuerySet.
-    """
-    company_id = allif_data.get("main_sbscrbr_entity")
-
-    # Get sort configuration for the given model
-    model_identifier = model_class._meta.model_name # Gets the lowercase of the model name
-    
-    sort_config = MODEL_SORT_CONFIGS.get(model_identifier, {}) # gives specific model fields....
-    
-    sort_mapping = sort_config.get('sort_mapping', {}) # this also gives like sort_config
-    
-    default_sort_field = sort_config.get('default_sort_field', '-date') # this two give the default values
-    default_ui_label = sort_config.get('default_ui_label', 'Default Sort')
-   
-    # --- 1. Determine the base queryset based on 'scope' GET parameter ---
-    scope = request.GET.get('archived', 'active') 
-    
-    base_queryset_method = model_class.objects.all 
-    if hasattr(model_class, 'all_objects') and scope == 'all': # not met
-        base_queryset_method = model_class.all_objects.all
-        
-    elif hasattr(model_class.objects, 'archived') and scope == 'archived': # not met
-        base_queryset_method = model_class.objects.archived
-        
-    else: # does this
-        pass
-        
-    queryset = base_queryset_method() 
-
-    # --- 2. Apply company filter ---
-    if hasattr(model_class, 'company') and company_id: # this is met for now....
-        queryset = queryset.filter(company=company_id)
-        
-    else:
-        pass 
-    
-    # --- 3. Apply access level filtering (division, branch, department) ---
-    if allif_data.get("logged_in_user_has_universal_access"):
-        pass 
-    elif allif_data.get("logged_in_user_has_divisional_access"):
-        if hasattr(model_class, 'division'):
-            queryset = queryset.filter(division=allif_data.get("logged_user_division"))
-        else:
-            queryset = model_class.objects.none()
-    elif allif_data.get("logged_in_user_has_branches_access"):
-        if hasattr(model_class, 'division') and hasattr(model_class, 'branch'):
-            queryset = queryset.filter(
-                division=allif_data.get("logged_user_division"),
-                branch=allif_data.get("logged_user_branch")
-            )
-        else:
-            queryset = model_class.objects.none()
-    elif allif_data.get("logged_in_user_has_departmental_access"):
-        if hasattr(model_class, 'division') and hasattr(model_class, 'branch') and hasattr(model_class, 'department'):
-            queryset = queryset.filter(
-                division=allif_data.get("logged_user_division"),
-                branch=allif_data.get("logged_user_branch"),
-                department=allif_data.get("logged_user_department")
-            )
-        else:
-            queryset = model_class.objects.none()
-    else:
-        queryset = model_class.objects.none()
-
-    # --- 4. Determine and apply sorting based on POST data (from your form) ---
-    selected_ui_label = request.POST.get('sort_option') # TAKE NOTICE THAT sort_option COMING FROM templates... BOTH GIVE NONE FIRST, THEN EXPENSE SHOWS THE SELECTED AFTER YOU SLECT FILTER
-   
-    
-    # If no POST, check GET for 'sort_ui_label' (for initial loads/scope changes)
-    if not selected_ui_label and request.GET.get('sort_ui_label'):
-        selected_ui_label = request.GET.get('sort_ui_label')
-       
-    else: # both fire execute this else
-        pass
-        
-    # Resolve the actual sort field from the UI label
-    sort_field = sort_mapping.get(selected_ui_label, default_sort_field) # all gives date field
-   
-    # Ensure selected_ui_label is set to the default if it was initially invalid or missing
-    if not selected_ui_label or selected_ui_label not in sort_mapping:
-        selected_ui_label = default_ui_label
-        
-    else:
-        pass
-      
-    # Apply the sorting
-    queryset = queryset.order_by(sort_field)
-  
-    # Attach the resolved UI label and sort mapping to the queryset for easy access in the view
-    queryset.current_sort_ui_label = selected_ui_label # both give created at ascending
-   
-    queryset.sort_options = sort_mapping.items() 
-   
-    queryset.current_scope = scope 
-   
-    return queryset
-
-
+allif_delete_models_class_map= {
+    'CommonSectorsModel': CommonSectorsModel,
+    'CommonCompanyScopeModel': CommonCompanyScopeModel,
+    'CommonTaxParametersModel': CommonTaxParametersModel,
+    'CommonExpensesModel': CommonExpensesModel,
+    'CommonTasksModel': CommonTasksModel,
+    'CommonBanksModel': CommonBanksModel,
+    'TriagesModel': TriagesModel, 
+    'CommonCurrenciesModel': CommonCurrenciesModel, 
+    'CommonSupplierPaymentsModel': CommonSupplierPaymentsModel,
+    'CommonCustomerPaymentsModel': CommonCustomerPaymentsModel,
+    'CommonPaymentTermsModel': CommonPaymentTermsModel,
+}
 
 def allif_filtered_and_sorted_queryset(request: HttpRequest,model_class: type[Model], allif_data: dict,explicit_scope: Optional[str] = None) -> QuerySet:
     """
@@ -540,10 +187,10 @@ def allif_filtered_and_sorted_queryset(request: HttpRequest,model_class: type[Mo
 
 
 # --- NEW UTILITY FUNCTION FOR FORM QUERYSET INITIALIZATION ---
-def initialize_form_select_querysets(form_instance: forms.Form, allifmaalparameter: str, field_model_map: dict):
+def allif_initialize_form_select_querysets(form_instance: forms.Form, allifmaalparameter: str, field_model_map: dict):
     """
     Initializes querysets for Select/ModelChoiceFields in a form based on a parameter.
-    ...Explanation of initialize_form_select_querysets:
+    ...Explanation of allif_initialize_form_select_querysets:
 
     form_instance: The actual form object being initialized (self from your __init__ method).
 
@@ -586,3 +233,301 @@ def initialize_form_select_querysets(form_instance: forms.Form, allifmaalparamet
             # No need for else here, if field not in form_instance.fields, it's already skipped
 
 
+# --- NEW: Generic Form Submission and Save Logic Function ---
+#@logged_in_user_must_have_profile
+#@logged_in_user_can_view
+def allif_common_form_submission_and_save(request,form_class: type[forms.ModelForm],title_text: str, 
+    success_redirect_url_name: str, # for the redirection url
+    template_path: str,# function specific template
+    
+    # New optional parameter for custom pre-save logic
+    pre_save_callback: Optional[callable] = None, # argument. This callback will be a function that
+    # the calling view provides to perform any model-specific assignments before the object is saved.
+    
+    
+    # New optional parameter for initial data (for GET request forms)
+    initial_data: Optional[dict] = None,
+    # New optional parameter for extra form arguments (for form __init__)
+    extra_form_args: Optional[list] = None
+    ):
+    
+    """
+    Helper function to encapsulate the common logic for processing form submissions
+    and saving new items, including custom pre-save assignments.
+
+    Args:
+        request (HttpRequest): The HttpRequest object.
+        form_class (type[forms.ModelForm]): The specific ModelForm class to use.
+        title_text (str): The title for the page.
+        success_redirect_url_name (str): The Django URL name to redirect to on successful form submission.
+        template_path (str): The path to the template to render.
+        pre_save_callback (callable, optional): A function (obj, request, allif_data) -> None
+                                                that performs model-specific assignments before obj.save().
+        initial_data (dict, optional): Initial data for the form on GET request.
+        extra_form_args (list, optional): Additional positional arguments to pass to form_class.__init__.
+    """
+    allif_data = common_shared_data(request)
+    company_id = allif_data.get("main_sbscrbr_entity").id
+
+    # Prepare form arguments for __init__
+    form_args = [company_id] # Default first argument for your forms
+    if extra_form_args:
+        form_args.extend(extra_form_args)
+
+    if request.method == 'POST':
+        form = form_class(*form_args, request.POST) 
+        if form.is_valid():
+            obj = form.save(commit=False)
+            
+            # --- Assign common fields from allif_data (fetching FK instances) ---
+            # These fields are expected to be on CommonBaseModel and inherited by 'obj'
+            
+            # Company
+            if hasattr(obj, 'company') and company_id:
+                try:
+                    obj.company = get_object_or_404(CommonCompanyDetailsModel, pk=company_id)
+                except Http404: # More specific exception for get_object_or_404
+                    print(f"WARNING: Company with ID {company_id} not found for {obj.__class__.__name__}.")
+                    obj.company = None 
+                except Exception as e:
+                    print(f"ERROR: Failed to retrieve company with ID {company_id}: {e}")
+                    obj.company = None
+            else:
+                pass
+            # Division
+            if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
+                try:
+                    obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id)
+                except Http404:
+                    print(f"WARNING: Division with ID {allif_data.get('logged_user_division').id} not found for {obj.__class__.__name__}.")
+                    obj.division = None
+                except Exception as e:
+                    print(f"ERROR: Failed to retrieve division with ID {allif_data.get('logged_user_division').id}: {e}")
+                    obj.division = None
+            else:
+                pass
+            # Branch
+            if hasattr(obj, 'branch') and allif_data.get("logged_user_branch").id:
+                try:
+                    obj.branch = get_object_or_404(CommonBranchesModel, pk=allif_data.get("logged_user_branch").id)
+                except Http404:
+                    print(f"WARNING: Branch with ID {allif_data.get('logged_user_branch').id} not found for {obj.__class__.__name__}.")
+                    obj.branch = None
+                except Exception as e:
+                    print(f"ERROR: Failed to retrieve branch with ID {allif_data.get('logged_user_branch').id}: {e}")
+                    obj.branch = None
+            else:
+                pass
+            # Department
+            if hasattr(obj, 'department') and allif_data.get("logged_user_department").id:
+                try:
+                    obj.department = get_object_or_404(CommonDepartmentsModel, pk=allif_data.get("logged_user_department").id)
+                except Http404:
+                    print(f"WARNING: Department with ID {allif_data.get('logged_user_department').id} not found for {obj.__class__.__name__}.")
+                    obj.department = None
+                except Exception as e:
+                    print(f"ERROR: Failed to retrieve department with ID {allif_data.get('logged_user_department').id}: {e}")
+                    obj.department = None
+            
+            if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
+                try:
+                    obj.operation_year = get_object_or_404(CommonOperationYearsModel, pk=allif_data.get("logged_user_operation_year").id)
+                except Http404:
+                    print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
+                    obj.operation_year = None
+                except Exception as e:
+                    print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
+                    obj.operation_year = None
+                    
+            if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
+                try:
+                    obj.operation_term = get_object_or_404(CommonOperationYearTermsModel, pk=allif_data.get("logged_user_operation_term").id)
+                except Http404:
+                    print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
+                    obj.operation_term = None
+                except Exception as e:
+                    print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
+                    obj.operation_term = None
+                    
+                    
+            # Owner (assuming 'usernmeslg' in allif_data is the User object)
+            if hasattr(obj, 'owner') and allif_data.get("usernmeslg"):
+                try:
+                    obj.owner=allif_data.get("usernmeslg") # This should be the User object
+                except Http404:
+                    print(f"WARNING: User {allif_data.get("usernmeslg")} not found for {obj.__class__.__name__}.")
+                    obj.owner = None
+                except Exception as e:
+                    print(f"ERROR: Failed to retrieve User {allif_data.get("usernmeslg")}: {e}")
+                    obj.owner = None
+            else:
+                pass
+            # --- Execute custom pre-save callback if provided ---
+            if pre_save_callback:
+                try:
+                    pre_save_callback(obj, request, allif_data)
+                except Exception as e:
+                    print(f"ERROR: Pre-save callback failed for {obj.__class__.__name__}: {e}")
+                    # You might want to add a user-facing error message here
+                    form.add_error(None, f"An internal error occurred during custom processing: {e}")
+                    # Re-render the form with errors
+                    context = {
+                        "form": form,
+                        "title": title_text,
+                        "user_var": allif_data.get("usrslg"),
+                        "glblslug": allif_data.get("compslg"),
+                        "error_message": form.errors, # Pass form errors
+                    }
+                    return render(request, template_path, context)
+
+            else:
+                pass
+            obj.save() # Finally save the object after all assignments
+            
+            # Redirect to the specified list URL with user and company slugs
+            return redirect(
+                reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                        kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")})
+            )
+        else:
+            # Form is invalid, render with errors
+            error_message = form.errors
+            allifcontext = {"error_message": error_message, "title": title_text}
+            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
+    else:
+        # GET request, initialize empty form
+        form = form_class(*form_args, initial=initial_data)
+
+    context = {
+        "form": form,
+        "title": title_text,
+        "user_var": allif_data.get("usrslg"), 
+        "glblslug": allif_data.get("compslg"), 
+    }
+    return render(request, template_path, context)
+
+
+
+# --- NEW: Generic Edit Item LOGIC Function ---
+def common_form_edit_and_save(request, 
+    pk: int, # Primary key of the object to edit
+    form_class: type[forms.ModelForm], 
+    title_text: str, 
+    success_redirect_url_name: str, 
+    template_path: str,
+    pre_save_callback: Optional[callable] = None,
+    extra_form_args: Optional[list] = None,
+    extra_context: Optional[dict] = None # For passing additional context to template
+):
+    """
+    Helper function to encapsulate the common logic for processing form submissions
+    and saving updates to existing items.
+
+    Args:
+        request (HttpRequest): The HttpRequest object.
+        pk (int): Primary key of the object to be edited.
+        form_class (type[forms.ModelForm]): The specific ModelForm class to use.
+        title_text (str): The title for the page.
+        success_redirect_url_name (str): The Django URL name to redirect to on successful form submission.
+        template_path (str): The path to the template to render.
+        pre_save_callback (callable, optional): A function (obj, request, allif_data) -> None
+                                                that performs model-specific assignments before obj.save().
+        extra_form_args (list, optional): Additional positional arguments to pass to form_class.__init__.
+        extra_context (dict, optional): Additional context variables to pass to the template.
+    """
+    allif_data = common_shared_data(request)
+    company_id = allif_data.get("main_sbscrbr_entity").id
+
+    # Determine the model class from the form's Meta
+    model_class = form_class.Meta.model
+    if not model_class:
+        raise ValueError(f"Form {form_class.__name__} does not have a model defined in its Meta class.")
+
+    # Retrieve the object to be updated using all_objects to bypass default managers
+    # and get_object_or_404 for robust error handling.
+    allifquery = get_object_or_404(model_class.all_objects, pk=pk)
+   
+    # --- Authorization Check (Crucial for multi-tenant/access control) ---
+    # This is a placeholder. Implement your actual granular authorization logic here.
+    if hasattr(allifquery, 'company')==100000:# you can remove this condition... just place  holder...
+        raise Http404("Unauthorized: Item does not belong to your company or access denied.")
+   
+    # Add more granular checks (division, branch, department) if necessary,
+    # similar to what you have in get_filtered_and_sorted_queryset.
+   
+    # Prepare form arguments for __init__ (company_id is typically the first)
+    form_args = [company_id] 
+    if extra_form_args:
+        form_args.extend(extra_form_args)
+
+    if request.method == 'POST':
+        form = form_class(*form_args, request.POST, instance=allifquery) 
+        if form.is_valid():
+            obj = form.save(commit=False) # obj is now item_instance with updated data
+
+            # --- Assign common 'updated_by' field ---
+            if hasattr(obj, 'updated_by') and allif_data.get("usernmeslg"):
+                obj.updated_by = allif_data.get("usernmeslg") # This should be the User object
+
+            # --- Execute custom pre-save callback if provided ---
+            if pre_save_callback:
+                try:
+                    pre_save_callback(obj, request, allif_data)
+                except Exception as e:
+                    print(f"ERROR: Pre-save callback failed for {obj.__class__.__name__} (edit): {e}")
+                    form.add_error(None, f"An internal error occurred during custom processing: {e}")
+                    context = {
+                        "form": form, "title": title_text, "allifquery": allifquery,
+                        "user_var": allif_data.get("usrslg"), "glblslug": allif_data.get("compslg"),
+                        "error_message": form.errors,
+                        **(extra_context or {})
+                    }
+                    return render(request, template_path, context)
+
+            obj.save() # Save the updated object
+            
+            return redirect(
+                reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                        kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")})
+            )
+        else:
+            # Form is invalid, render with errors
+            error_message = form.errors
+            allifcontext = {
+                "error_message": error_message, 
+                "title": title_text, 
+                "allifquery": allifquery, # Pass instance back for error rendering
+                "user_var": allif_data.get("usrslg"), 
+                "glblslug": allif_data.get("compslg"),
+            }
+            allifcontext.update(extra_context or {})
+            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
+    else:
+        # GET request, initialize form with instance data
+        form = form_class(*form_args, instance=allifquery)
+
+    context = {
+        "form": form,
+        "title": title_text,
+        "allifquery":allifquery, # Pass the instance to the template for display
+        "user_var": allif_data.get("usrslg"), 
+        "glblslug": allif_data.get("compslg"), 
+        **(extra_context or {})
+    }
+    return render(request, template_path, context)
+
+
+# --- NEW: Generic Direct Delete Logic Function ---
+def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_redirect_url_name: str,):
+    allif_data = common_shared_data(request)
+    user_slug = allif_data.get("usrslg")
+    company_slug = allif_data.get("compslg")
+    model_class = allif_delete_models_class_map.get(model_name)
+    if not model_class:
+        raise Http404(f"Model '{model_name}' not found in mapping.")
+
+    item = get_object_or_404(model_class.all_objects, pk=pk)
+
+    item.delete()
+    return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}',kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+  

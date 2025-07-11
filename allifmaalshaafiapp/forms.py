@@ -1,7 +1,7 @@
 from django import forms
 from .models import *
 from allifmaalcommonapp.forms import CommonBaseForm
-from allifmaalcommonapp.utils import initialize_form_select_querysets 
+from allifmaalcommonapp.utils import allif_initialize_form_select_querysets
 ############################# start of datepicker customization ##############################
 class DatePickerInput(forms.DateInput):#use this class whereever you have a date and it will give you the calender
     input_type='date'#
@@ -67,7 +67,7 @@ class AddTriageDetailsForm(CommonBaseForm):
             #'supplier': CommonSuppliersModel,
         }
         # Call the utility function
-        initialize_form_select_querysets(self, allifmaalparameter, field_model_map)
+        allif_initialize_form_select_querysets(self, allifmaalparameter, field_model_map)
       
 class AddAssessmentDetailsForm(forms.ModelForm):
     class Meta:
