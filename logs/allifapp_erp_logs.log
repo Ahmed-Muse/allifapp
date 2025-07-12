@@ -7203,3 +7203,1407 @@ INFO 2025-07-11 23:26:44,902 autoreload 25952 21364 C:\am\allifapp\allifapperp\a
 INFO 2025-07-11 23:26:45,966 autoreload 27972 19932 Watching for file changes with StatReloader
 INFO 2025-07-11 23:27:25,099 autoreload 27972 19932 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
 INFO 2025-07-11 23:27:25,994 autoreload 29688 21528 Watching for file changes with StatReloader
+INFO 2025-07-12 10:38:26,701 autoreload 16016 30676 Watching for file changes with StatReloader
+INFO 2025-07-12 10:42:16,072 autoreload 16016 30676 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:42:17,070 autoreload 11748 20920 Watching for file changes with StatReloader
+INFO 2025-07-12 10:44:31,944 autoreload 13020 24008 Watching for file changes with StatReloader
+WARNING 2025-07-12 10:44:53,201 log 13020 22772 Not Found: /favicon.ico
+INFO 2025-07-12 10:46:07,833 autoreload 13020 24008 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:46:08,993 autoreload 25924 21592 Watching for file changes with StatReloader
+INFO 2025-07-12 10:46:24,747 autoreload 25924 21592 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:46:25,738 autoreload 5716 28156 Watching for file changes with StatReloader
+INFO 2025-07-12 10:46:38,825 autoreload 5716 28156 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:46:39,688 autoreload 14360 15556 Watching for file changes with StatReloader
+INFO 2025-07-12 10:48:43,160 autoreload 14360 15556 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:48:44,175 autoreload 29668 3116 Watching for file changes with StatReloader
+INFO 2025-07-12 10:49:11,379 autoreload 29668 3116 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:49:12,443 autoreload 22848 27584 Watching for file changes with StatReloader
+INFO 2025-07-12 10:51:23,089 autoreload 22848 27584 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:51:24,202 autoreload 28488 26356 Watching for file changes with StatReloader
+INFO 2025-07-12 10:54:31,979 autoreload 28488 26356 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:54:33,797 autoreload 26920 1672 Watching for file changes with StatReloader
+INFO 2025-07-12 10:54:58,453 autoreload 26920 1672 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:54:59,455 autoreload 29628 16968 Watching for file changes with StatReloader
+INFO 2025-07-12 10:55:20,479 autoreload 29628 16968 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:55:21,415 autoreload 15940 22384 Watching for file changes with StatReloader
+INFO 2025-07-12 10:55:46,558 autoreload 15940 22384 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:55:47,577 autoreload 20516 29216 Watching for file changes with StatReloader
+INFO 2025-07-12 10:57:39,621 autoreload 20516 29216 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:57:40,361 autoreload 27476 1460 Watching for file changes with StatReloader
+INFO 2025-07-12 10:58:10,545 autoreload 27476 1460 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:58:11,475 autoreload 24192 21544 Watching for file changes with StatReloader
+INFO 2025-07-12 10:58:22,083 autoreload 24192 21544 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:58:23,039 autoreload 23652 28436 Watching for file changes with StatReloader
+INFO 2025-07-12 10:59:43,089 autoreload 23652 28436 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 10:59:43,890 autoreload 24468 30528 Watching for file changes with StatReloader
+ERROR 2025-07-12 10:59:57,288 views 24468 19688 Unexpected error for Tax 'Sales Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1828, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-12 10:59:57,317 views 24468 19688 Unexpected error for Supplier Tax 'Sales Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1854, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-12 10:59:57,320 views 24468 19688 Unexpected error for Tax 'VAT'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1828, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-12 10:59:57,322 views 24468 19688 Unexpected error for Supplier Tax 'VAT'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1854, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-12 10:59:57,323 views 24468 19688 Unexpected error for Tax 'Withholding Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1828, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-12 10:59:57,325 views 24468 19688 Unexpected error for Supplier Tax 'Withholding Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1854, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-12 10:59:57,369 views 24468 19688 Unexpected error for Operation Year 'Operation Year One'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonOperationYearsModel.DoesNotExist: CommonOperationYearsModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1960, in commonCreateDefaultValues
+    year_instance, created = CommonOperationYearsModel.objects.get_or_create(
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        year=year_data['year'], # Assuming 'year' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.
+ERROR 2025-07-12 10:59:57,370 views 24468 19688 Unexpected error for Operation Year 'Current Year'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonOperationYearsModel.DoesNotExist: CommonOperationYearsModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1960, in commonCreateDefaultValues
+    year_instance, created = CommonOperationYearsModel.objects.get_or_create(
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        year=year_data['year'], # Assuming 'year' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.
+ERROR 2025-07-12 10:59:57,371 views 24468 19688 Skipping term 'Term One' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-12 10:59:57,372 views 24468 19688 Skipping term 'Term Two' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-12 10:59:57,372 views 24468 19688 Skipping term 'Term Three' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-12 10:59:57,372 views 24468 19688 Skipping term 'Term Four' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-12 10:59:57,372 views 24468 19688 Skipping term 'Q1' due to missing parent year 'Current Year'.
+ERROR 2025-07-12 10:59:57,372 views 24468 19688 Skipping term 'Q2' due to missing parent year 'Current Year'.
+ERROR 2025-07-12 10:59:57,372 views 24468 19688 Skipping term 'Q3' due to missing parent year 'Current Year'.
+ERROR 2025-07-12 10:59:57,372 views 24468 19688 Skipping term 'Q4' due to missing parent year 'Current Year'.
+ERROR 2025-07-12 10:59:57,384 views 24468 19688 Unexpected error for Category 'General Category 1'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2058, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-12 10:59:57,386 views 24468 19688 Unexpected error for Category 'General Category 2'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2058, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-12 10:59:57,388 views 24468 19688 Unexpected error for Category 'Product Category - Electronics'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2058, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-12 10:59:57,390 views 24468 19688 Unexpected error for Category 'Service Category - Consulting'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2058, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-12 10:59:57,509 views 24468 19688 Default setup for Allifmaal International Ltd completed with errors. Results: {'company_scopes': {'created': 5, 'skipped': 0, 'errors': []}, 'taxes': {'created': 0, 'skipped': 3, 'errors': ["Error creating tax 'Sales Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid", "Error creating tax 'VAT': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid", "Error creating tax 'Withholding Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid"]}, 'supplier_taxes': {'created': 0, 'skipped': 3, 'errors': ["Error creating supplier tax 'Sales Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid", "Error creating supplier tax 'VAT': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid", "Error creating supplier tax 'Withholding Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid"]}, 'currencies': {'created': 5, 'skipped': 0, 'errors': []}, 'payment_terms': {'created': 6, 'skipped': 0, 'errors': []}, 'units': {'created': 12, 'skipped': 0, 'errors': []}, 'operation_years': {'created': 0, 'skipped': 2, 'errors': ["Error creating year 'Operation Year One': Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.", "Error creating year 'Current Year': Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'."]}, 'operation_year_terms': {'created': 0, 'skipped': 8, 'errors': ["Missing parent year 'Operation Year One' for term 'Term One'.", "Missing parent year 'Operation Year One' for term 'Term Two'.", "Missing parent year 'Operation Year One' for term 'Term Three'.", "Missing parent year 'Operation Year One' for term 'Term Four'.", "Missing parent year 'Current Year' for term 'Q1'.", "Missing parent year 'Current Year' for term 'Q2'.", "Missing parent year 'Current Year' for term 'Q3'.", "Missing parent year 'Current Year' for term 'Q4'."]}, 'codes': {'created': 5, 'skipped': 0, 'errors': []}, 'categories': {'created': 0, 'skipped': 4, 'errors': ["Error creating category 'General Category 1': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'General Category 2': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'Product Category - Electronics': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'Service Category - Consulting': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'."]}, 'gl_categories': {'created': 5, 'skipped': 0, 'errors': []}, 'chart_of_accounts': {'created': 47, 'skipped': 0, 'errors': []}, 'overall_error': False}
+INFO 2025-07-12 11:06:46,280 autoreload 30248 20048 Watching for file changes with StatReloader
+WARNING 2025-07-12 11:12:19,324 log 30248 21360 Not Found: /favicon.ico
+INFO 2025-07-12 11:12:43,658 autoreload 30248 20048 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-07-12 11:12:44,677 autoreload 13776 30512 Watching for file changes with StatReloader
+WARNING 2025-07-12 13:35:36,316 log 13776 17184 Not Found: /favicon.ico
+INFO 2025-07-12 13:42:02,608 autoreload 13776 30512 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 13:42:04,075 autoreload 24504 27272 Watching for file changes with StatReloader
+INFO 2025-07-12 13:43:32,255 autoreload 24504 27272 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 13:43:33,219 autoreload 29432 27660 Watching for file changes with StatReloader
+INFO 2025-07-12 13:43:56,565 autoreload 29432 27660 C:\am\allifapp\allifapperp\allifmaalcommonapp\allifutils.py changed, reloading.
+INFO 2025-07-12 13:43:57,251 autoreload 28900 10144 Watching for file changes with StatReloader
+INFO 2025-07-12 13:45:13,109 autoreload 28900 10144 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 13:45:13,757 autoreload 25388 21772 Watching for file changes with StatReloader
+INFO 2025-07-12 13:49:29,273 autoreload 25388 21772 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 13:49:30,205 autoreload 26932 17184 Watching for file changes with StatReloader
+INFO 2025-07-12 13:49:40,453 autoreload 26932 17184 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 13:49:41,397 autoreload 1308 29840 Watching for file changes with StatReloader
+INFO 2025-07-12 13:53:59,545 autoreload 1308 29840 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 13:54:00,396 autoreload 6956 12336 Watching for file changes with StatReloader
+INFO 2025-07-12 13:55:08,622 autoreload 6956 12336 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 13:55:09,310 autoreload 15232 10960 Watching for file changes with StatReloader
+INFO 2025-07-12 13:58:31,208 autoreload 15232 10960 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 13:58:31,948 autoreload 10872 24672 Watching for file changes with StatReloader
+INFO 2025-07-12 13:58:34,617 autoreload 10872 24672 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 13:58:35,288 autoreload 17688 29668 Watching for file changes with StatReloader
+INFO 2025-07-12 13:59:23,050 autoreload 17688 29668 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 13:59:23,963 autoreload 21720 13436 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:05:28,760 log 21720 17424 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrenciesActive' %}
+WARNING 2025-07-12 14:06:58,112 log 21720 17424 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrenciesActive' %}
+INFO 2025-07-12 14:07:55,870 autoreload 21720 13436 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 14:07:56,665 autoreload 28684 19376 Watching for file changes with StatReloader
+INFO 2025-07-12 14:09:10,769 autoreload 28684 19376 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 14:09:11,637 autoreload 18536 11680 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:09:16,241 log 18536 29080 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrenciesActive' %}
+INFO 2025-07-12 14:09:39,192 autoreload 18536 11680 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 14:09:40,130 autoreload 27352 5012 Watching for file changes with StatReloader
+INFO 2025-07-12 14:10:15,692 autoreload 27352 5012 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 14:10:16,435 autoreload 8660 17932 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:10:20,096 log 8660 12864 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrenciesActive' %}
+WARNING 2025-07-12 14:11:58,205 log 8660 12864 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+INFO 2025-07-12 14:15:16,430 autoreload 8660 17932 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 14:15:17,294 autoreload 24808 13900 Watching for file changes with StatReloader
+INFO 2025-07-12 14:23:51,940 autoreload 24808 13900 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 14:23:52,733 autoreload 7120 26904 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:23:56,132 log 7120 10232 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+INFO 2025-07-12 14:35:45,664 autoreload 7120 26904 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 14:35:46,593 autoreload 17964 20412 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:35:50,001 log 17964 1276 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+INFO 2025-07-12 14:36:13,988 autoreload 17964 20412 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 14:36:15,027 autoreload 27084 20196 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:36:18,623 log 27084 5056 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+INFO 2025-07-12 14:36:25,593 autoreload 27084 20196 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 14:36:26,527 autoreload 18256 27776 Watching for file changes with StatReloader
+INFO 2025-07-12 14:38:56,379 autoreload 18256 27776 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 14:38:57,124 autoreload 23036 27860 Watching for file changes with StatReloader
+INFO 2025-07-12 14:39:13,371 autoreload 23036 27860 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 14:39:14,120 autoreload 11092 12436 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:39:17,520 log 11092 3144 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+WARNING 2025-07-12 14:39:54,661 log 11092 3144 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+INFO 2025-07-12 14:41:01,468 autoreload 11092 12436 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 14:41:02,337 autoreload 26376 24888 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:41:08,388 log 26376 23540 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+INFO 2025-07-12 14:41:24,989 autoreload 26376 24888 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 14:41:26,025 autoreload 19680 1252 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:41:28,950 log 19680 23720 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+INFO 2025-07-12 14:41:46,772 autoreload 19680 1252 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 14:41:47,588 autoreload 23960 21592 Watching for file changes with StatReloader
+INFO 2025-07-12 14:43:08,843 autoreload 23960 21592 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 14:43:09,776 autoreload 7764 27084 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:43:13,179 log 7764 10960 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+INFO 2025-07-12 14:43:20,921 autoreload 7764 27084 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 14:43:21,865 autoreload 9752 9556 Watching for file changes with StatReloader
+WARNING 2025-07-12 14:44:14,052 log 9752 4704 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:allif_confirm_delete'                 model_name=item.__class__.__name__                 pk=item.pk                 user_slug=user_var                 company_slug=glblslug                 redirect_list_url_name='commonCurrencies' %}
+INFO 2025-07-12 14:49:24,834 autoreload 9752 9556 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 14:49:26,003 autoreload 24504 1560 Watching for file changes with StatReloader
+INFO 2025-07-12 15:04:11,222 autoreload 24504 1560 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 15:04:11,994 autoreload 29432 25764 Watching for file changes with StatReloader
+INFO 2025-07-12 15:04:26,039 autoreload 29432 25764 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 15:04:26,843 autoreload 23960 13152 Watching for file changes with StatReloader
+INFO 2025-07-12 15:12:31,118 autoreload 23960 13152 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 15:12:32,061 autoreload 21032 18984 Watching for file changes with StatReloader
+INFO 2025-07-12 15:12:45,039 autoreload 21032 18984 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 15:12:45,991 autoreload 23488 20896 Watching for file changes with StatReloader
+INFO 2025-07-12 15:13:44,403 autoreload 23488 20896 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 15:13:45,421 autoreload 26508 20060 Watching for file changes with StatReloader
+INFO 2025-07-12 15:14:12,038 autoreload 26508 20060 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 15:14:12,941 autoreload 27996 15436 Watching for file changes with StatReloader
+WARNING 2025-07-12 15:17:01,818 log 27996 8272 Not Found: /Currencies/Main/Money/Types/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url 'allifmaalcommonapp:commonDeleteCurrency'                 item.id                 user_var                 glblslug %}
+INFO 2025-07-12 15:22:37,769 autoreload 27996 15436 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 15:22:38,664 autoreload 13124 30588 Watching for file changes with StatReloader
+INFO 2025-07-12 15:27:48,562 autoreload 13124 30588 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 15:27:49,689 autoreload 11576 25500 Watching for file changes with StatReloader
+INFO 2025-07-12 15:28:00,338 autoreload 11576 25500 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 15:28:01,147 autoreload 17164 11684 Watching for file changes with StatReloader
+INFO 2025-07-12 15:29:41,212 autoreload 17164 11684 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 15:29:41,943 autoreload 28196 11552 Watching for file changes with StatReloader
+INFO 2025-07-12 15:29:57,136 autoreload 28196 11552 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 15:29:57,772 autoreload 10264 14464 Watching for file changes with StatReloader
+INFO 2025-07-12 15:33:16,474 autoreload 10264 14464 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 15:33:17,266 autoreload 4812 23488 Watching for file changes with StatReloader
+INFO 2025-07-12 15:49:36,816 autoreload 4812 23488 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 15:49:37,749 autoreload 19092 6712 Watching for file changes with StatReloader
+INFO 2025-07-12 15:56:18,347 autoreload 19092 6712 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 15:56:19,304 autoreload 25384 23124 Watching for file changes with StatReloader
+INFO 2025-07-12 15:56:43,707 autoreload 25384 23124 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 15:56:44,468 autoreload 18332 25048 Watching for file changes with StatReloader
+INFO 2025-07-12 15:57:54,259 autoreload 18332 25048 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 15:57:55,128 autoreload 16032 27272 Watching for file changes with StatReloader
+INFO 2025-07-12 15:58:01,599 autoreload 16032 27272 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 15:58:02,334 autoreload 22872 15736 Watching for file changes with StatReloader
+INFO 2025-07-12 16:01:42,551 autoreload 22872 15736 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 16:01:43,305 autoreload 8932 28132 Watching for file changes with StatReloader
+INFO 2025-07-12 16:01:47,751 autoreload 8932 28132 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 16:01:48,441 autoreload 25948 30292 Watching for file changes with StatReloader
+INFO 2025-07-12 16:02:15,968 autoreload 25948 30292 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:02:16,757 autoreload 22820 15668 Watching for file changes with StatReloader
+INFO 2025-07-12 16:05:37,180 autoreload 22820 15668 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:05:38,021 autoreload 27304 7520 Watching for file changes with StatReloader
+INFO 2025-07-12 16:05:46,327 autoreload 27304 7520 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 16:05:47,085 autoreload 29872 16260 Watching for file changes with StatReloader
+INFO 2025-07-12 16:21:27,928 autoreload 29872 16260 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:21:28,769 autoreload 27964 27988 Watching for file changes with StatReloader
+INFO 2025-07-12 16:26:53,697 autoreload 27964 27988 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:26:54,548 autoreload 17700 12888 Watching for file changes with StatReloader
+INFO 2025-07-12 16:27:30,476 autoreload 17700 12888 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:27:31,407 autoreload 26132 17252 Watching for file changes with StatReloader
+INFO 2025-07-12 16:29:18,449 autoreload 26132 17252 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:29:19,441 autoreload 20748 6368 Watching for file changes with StatReloader
+INFO 2025-07-12 16:29:54,197 autoreload 20748 6368 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:29:55,170 autoreload 29424 13900 Watching for file changes with StatReloader
+WARNING 2025-07-12 16:32:27,796 log 29424 13308 Not Found: /currency/details/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url delete_url_name                                     allifquery.id                                     user_var                                     glblslug %}
+WARNING 2025-07-12 16:32:37,610 log 29424 13308 Not Found: /currency/details/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url delete_url_name                                     allifquery.id                                     user_var                                     glblslug %}
+INFO 2025-07-12 16:34:06,776 autoreload 29424 13900 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:34:07,792 autoreload 3940 11000 Watching for file changes with StatReloader
+WARNING 2025-07-12 16:34:13,333 log 3940 12680 Not Found: /currency/details/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url delete_url_name                                     allifquery.id                                     user_var                                     glblslug %}
+WARNING 2025-07-12 16:34:21,915 log 3940 12680 Not Found: /currency/details/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url delete_url_name                                     allifquery.id                                     user_var                                     glblslug %}
+INFO 2025-07-12 16:34:34,911 autoreload 3940 11000 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:34:35,817 autoreload 27808 12104 Watching for file changes with StatReloader
+INFO 2025-07-12 16:35:21,756 autoreload 27808 12104 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 16:35:22,626 autoreload 9916 30248 Watching for file changes with StatReloader
+INFO 2025-07-12 16:35:40,682 autoreload 9916 30248 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:35:41,770 autoreload 19676 10000 Watching for file changes with StatReloader
+WARNING 2025-07-12 16:35:45,622 log 19676 25872 Not Found: /currency/details/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url delete_url_name                                     allifquery.id                                     user_var                                     glblslug %}
+WARNING 2025-07-12 16:41:11,481 log 19676 19964 Not Found: /currency/details/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/{% url delete_url_name                                     allifquery.id                                     user_var                                     glblslug %}
+INFO 2025-07-12 16:45:16,906 autoreload 19676 10000 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:45:17,839 autoreload 28168 9508 Watching for file changes with StatReloader
+INFO 2025-07-12 16:49:05,492 autoreload 28168 9508 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 16:49:06,789 autoreload 21256 28216 Watching for file changes with StatReloader
+INFO 2025-07-12 16:49:16,157 autoreload 21256 28216 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:49:17,038 autoreload 27832 21832 Watching for file changes with StatReloader
+INFO 2025-07-12 16:50:17,728 autoreload 27832 21832 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 16:50:18,667 autoreload 12728 20668 Watching for file changes with StatReloader
+INFO 2025-07-12 17:05:39,534 autoreload 12728 20668 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:05:40,519 autoreload 13716 19320 Watching for file changes with StatReloader
+INFO 2025-07-12 17:18:45,308 autoreload 13716 19320 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 17:18:46,205 autoreload 2304 9244 Watching for file changes with StatReloader
+INFO 2025-07-12 17:18:56,469 autoreload 2304 9244 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 17:18:57,357 autoreload 688 7024 Watching for file changes with StatReloader
+INFO 2025-07-12 17:20:24,964 autoreload 688 7024 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 17:20:25,830 autoreload 19296 27976 Watching for file changes with StatReloader
+INFO 2025-07-12 17:20:41,637 autoreload 19296 27976 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 17:20:42,575 autoreload 21864 29336 Watching for file changes with StatReloader
+INFO 2025-07-12 17:22:55,685 autoreload 21864 29336 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:22:56,616 autoreload 5684 9544 Watching for file changes with StatReloader
+INFO 2025-07-12 17:23:12,636 autoreload 5684 9544 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:23:13,565 autoreload 30556 27484 Watching for file changes with StatReloader
+INFO 2025-07-12 17:26:02,042 autoreload 30556 27484 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 17:26:03,022 autoreload 11344 23712 Watching for file changes with StatReloader
+ERROR 2025-07-12 17:26:10,747 log 11344 22228 Internal Server Error: /Want/To/Delete/This/Currency/Record/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Please/Confirm/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 628, in commonWantToDeleteCurrency
+    return allif_delete_confirm(request,model_name='CommonCurrenciesModel',pk=pk,success_redirect_url_name='commonCurrencies')
+TypeError: allif_delete_confirm() got an unexpected keyword argument 'success_redirect_url_name'
+INFO 2025-07-12 17:31:21,679 autoreload 11344 23712 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:31:22,669 autoreload 12124 30340 Watching for file changes with StatReloader
+INFO 2025-07-12 17:32:06,424 autoreload 12124 30340 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:32:07,105 autoreload 14628 1460 Watching for file changes with StatReloader
+INFO 2025-07-12 17:32:21,024 autoreload 14628 1460 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:32:22,276 autoreload 21832 8924 Watching for file changes with StatReloader
+ERROR 2025-07-12 17:32:29,948 log 21832 15524 Internal Server Error: /Want/To/Delete/This/Currency/Record/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Please/Confirm/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 628, in commonWantToDeleteCurrency
+    return allif_delete_confirm(request,pk,CommonCurrenciesModel,"Edit Currency",'allifmaalcommonapp/currencies/delete-currency-confirm.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 527, in allif_delete_confirm
+    model_class = model_name.Meta.model
+                  ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Meta' has no attribute 'model'
+INFO 2025-07-12 17:33:58,948 autoreload 21832 8924 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 17:33:59,965 autoreload 21276 23780 Watching for file changes with StatReloader
+ERROR 2025-07-12 17:34:01,798 log 21276 2816 Internal Server Error: /Want/To/Delete/This/Currency/Record/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Please/Confirm/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'redirect_list_url_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 886, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(
+                                            ~~~~~~~^
+        type(current), bit
+        ^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+AttributeError: type object 'RequestContext' has no attribute 'redirect_list_url_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'redirect_list_url_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 628, in commonWantToDeleteCurrency
+    return allif_delete_confirm(request,pk,CommonCurrenciesModel,"Edit Currency",'allifmaalcommonapp/currencies/delete-currency-confirm.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 538, in allif_delete_confirm
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 459, in render
+    view_name = self.view_name.resolve(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 736, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 847, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [redirect_list_url_name] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'title': 'Edit Currency', 'allifquery': <CommonCurrenciesModel: Lacagta Somalia>, 'user_var': 'user-full-names-85349024f8ef', 'glblslug': 'barasho-hospital2116-80c3a812382e'}]
+INFO 2025-07-12 17:35:34,004 autoreload 21276 23780 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 17:35:34,946 autoreload 21228 6884 Watching for file changes with StatReloader
+ERROR 2025-07-12 17:35:38,313 log 21228 17044 Internal Server Error: /Want/To/Delete/This/Currency/Record/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Please/Confirm/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 628, in commonWantToDeleteCurrency
+    return allif_delete_confirm(request,pk,CommonCurrenciesModel,"Edit Currency",'allifmaalcommonapp/currencies/delete-currency-confirm.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 527, in allif_delete_confirm
+    model_class = model_name.model
+                  ^^^^^^^^^^^^^^^^
+AttributeError: type object 'CommonCurrenciesModel' has no attribute 'model'. Did you mean: 'code'?
+INFO 2025-07-12 17:36:07,265 autoreload 21228 6884 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 17:36:08,230 autoreload 30432 16428 Watching for file changes with StatReloader
+INFO 2025-07-12 17:36:12,060 autoreload 30432 16428 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 17:36:12,948 autoreload 16556 24504 Watching for file changes with StatReloader
+INFO 2025-07-12 17:36:48,421 autoreload 16556 24504 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:36:49,380 autoreload 29840 30584 Watching for file changes with StatReloader
+WARNING 2025-07-12 17:36:57,573 log 29840 11984 Not Found: /Want/To/Delete/This/Currency/Record/49/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Please/Confirm/
+INFO 2025-07-12 17:37:27,449 autoreload 29840 30584 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:37:28,660 autoreload 1280 14492 Watching for file changes with StatReloader
+INFO 2025-07-12 17:37:41,952 autoreload 1280 14492 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:37:42,912 autoreload 19748 19112 Watching for file changes with StatReloader
+INFO 2025-07-12 17:38:48,555 autoreload 19748 19112 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:38:49,492 autoreload 15824 21936 Watching for file changes with StatReloader
+INFO 2025-07-12 17:38:55,803 autoreload 15824 21936 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:38:56,543 autoreload 10872 29380 Watching for file changes with StatReloader
+INFO 2025-07-12 17:42:27,612 autoreload 10872 29380 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:42:28,493 autoreload 11420 28740 Watching for file changes with StatReloader
+INFO 2025-07-12 17:42:52,587 autoreload 11420 28740 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:42:53,601 autoreload 17496 4004 Watching for file changes with StatReloader
+INFO 2025-07-12 17:43:08,864 autoreload 17496 4004 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:43:09,804 autoreload 25884 29840 Watching for file changes with StatReloader
+INFO 2025-07-12 17:43:30,175 autoreload 25884 29840 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:43:31,210 autoreload 20264 8096 Watching for file changes with StatReloader
+INFO 2025-07-12 17:43:55,828 autoreload 20264 8096 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:43:56,903 autoreload 13428 27136 Watching for file changes with StatReloader
+INFO 2025-07-12 17:49:41,728 autoreload 13428 27136 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-12 17:49:43,046 autoreload 29068 8308 Watching for file changes with StatReloader
+INFO 2025-07-12 17:52:01,316 autoreload 29068 8308 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 17:52:02,399 autoreload 22992 14948 Watching for file changes with StatReloader
+INFO 2025-07-12 18:35:38,075 autoreload 22992 14948 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 18:35:39,109 autoreload 16732 24108 Watching for file changes with StatReloader
+INFO 2025-07-12 18:36:03,459 autoreload 16732 24108 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 18:36:04,336 autoreload 29232 21252 Watching for file changes with StatReloader
+INFO 2025-07-12 18:37:28,740 autoreload 29232 21252 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 18:37:29,661 autoreload 31160 19920 Watching for file changes with StatReloader
+INFO 2025-07-12 18:38:08,830 autoreload 31160 19920 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 18:38:09,745 autoreload 23348 23992 Watching for file changes with StatReloader
+INFO 2025-07-12 18:38:23,517 autoreload 23348 23992 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 18:38:24,710 autoreload 16508 30004 Watching for file changes with StatReloader
+INFO 2025-07-12 18:41:33,167 autoreload 16508 30004 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 18:41:34,129 autoreload 31524 12480 Watching for file changes with StatReloader
+INFO 2025-07-12 18:56:52,706 autoreload 31524 12480 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 18:56:53,785 autoreload 10648 30640 Watching for file changes with StatReloader
+INFO 2025-07-12 18:59:30,409 autoreload 10648 30640 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 18:59:31,377 autoreload 28532 13192 Watching for file changes with StatReloader
+INFO 2025-07-12 19:00:10,469 autoreload 28532 13192 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 19:00:11,277 autoreload 18332 17492 Watching for file changes with StatReloader
+INFO 2025-07-12 19:01:56,383 autoreload 18332 17492 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 19:01:57,058 autoreload 31412 17084 Watching for file changes with StatReloader
+INFO 2025-07-12 19:02:53,196 autoreload 31412 17084 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 19:02:53,948 autoreload 28832 22560 Watching for file changes with StatReloader
+INFO 2025-07-12 19:03:40,555 autoreload 28832 22560 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 19:03:41,307 autoreload 31216 27696 Watching for file changes with StatReloader
+INFO 2025-07-12 19:03:56,936 autoreload 31216 27696 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 19:03:57,890 autoreload 16796 26312 Watching for file changes with StatReloader
+INFO 2025-07-12 19:09:36,115 autoreload 16796 26312 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 19:09:36,908 autoreload 24840 8332 Watching for file changes with StatReloader
+WARNING 2025-07-12 19:10:21,224 log 24840 19708 Not Found: /Currency/Money/Used/Search/Find/By/Searching/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-12 19:10:56,100 log 24840 19708 Not Found: /Currency/Money/Used/Search/Find/By/Searching/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 19:12:29,326 autoreload 24840 8332 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 19:12:30,046 autoreload 24816 28824 Watching for file changes with StatReloader
+INFO 2025-07-12 19:14:01,818 autoreload 24816 28824 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 19:14:02,703 autoreload 24368 25912 Watching for file changes with StatReloader
+INFO 2025-07-12 19:14:10,140 autoreload 24368 25912 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 19:14:10,986 autoreload 13592 17248 Watching for file changes with StatReloader
+INFO 2025-07-12 19:25:01,933 autoreload 13592 17248 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 19:25:02,810 autoreload 21352 6288 Watching for file changes with StatReloader
+INFO 2025-07-12 19:26:30,161 autoreload 21352 6288 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 19:26:30,937 autoreload 3368 30932 Watching for file changes with StatReloader
+INFO 2025-07-12 19:26:42,017 autoreload 3368 30932 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 19:26:42,711 autoreload 9388 6072 Watching for file changes with StatReloader
+INFO 2025-07-12 19:28:10,553 autoreload 9388 6072 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 19:28:11,363 autoreload 30628 23424 Watching for file changes with StatReloader
+INFO 2025-07-12 20:03:53,010 autoreload 30628 23424 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 20:03:53,787 autoreload 24356 22888 Watching for file changes with StatReloader
+INFO 2025-07-12 20:05:06,227 autoreload 24356 22888 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 20:05:06,911 autoreload 1568 29152 Watching for file changes with StatReloader
+INFO 2025-07-12 20:05:10,203 autoreload 1568 29152 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 20:05:11,063 autoreload 30060 17796 Watching for file changes with StatReloader
+INFO 2025-07-12 20:13:12,028 autoreload 30060 17796 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 20:13:13,016 autoreload 26400 31676 Watching for file changes with StatReloader
+INFO 2025-07-12 20:21:00,202 autoreload 26400 31676 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:21:01,139 autoreload 17640 26388 Watching for file changes with StatReloader
+ERROR 2025-07-12 20:21:39,516 log 17640 30744 Internal Server Error: /Advanced/Currency/Money/Type/s/Items/Search/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Shareholders/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 682, in commonCurrencyAdvanceSearch
+    return allif_advance_search_handler(
+        request,
+    ...<4 lines>...
+        # You can pass extra_context here if needed for the template
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 773, in allif_advance_search_handler
+    raise ValueError(f"Advanced search configuration missing for '{advanced_search_config_key}'.")
+ValueError: Advanced search configuration missing for 'CommonCurrenciesModel'.
+ERROR 2025-07-12 20:22:35,491 log 17640 1096 Internal Server Error: /Advanced/Currency/Money/Type/s/Items/Search/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Shareholders/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 682, in commonCurrencyAdvanceSearch
+    return allif_advance_search_handler(
+        request,
+    ...<4 lines>...
+        # You can pass extra_context here if needed for the template
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 773, in allif_advance_search_handler
+    raise ValueError(f"Advanced search configuration missing for '{advanced_search_config_key}'.")
+ValueError: Advanced search configuration missing for 'CommonCurrenciesModel'.
+INFO 2025-07-12 20:23:56,916 autoreload 17640 26388 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 20:23:57,948 autoreload 3876 6716 Watching for file changes with StatReloader
+INFO 2025-07-12 20:27:05,917 autoreload 3876 6716 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:27:07,063 autoreload 16504 30912 Watching for file changes with StatReloader
+INFO 2025-07-12 20:28:54,156 autoreload 16504 30912 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:28:55,284 autoreload 25312 14072 Watching for file changes with StatReloader
+INFO 2025-07-12 20:29:13,143 autoreload 25312 14072 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:29:14,026 autoreload 26132 22480 Watching for file changes with StatReloader
+INFO 2025-07-12 20:31:01,009 autoreload 26132 22480 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:31:01,938 autoreload 11460 28860 Watching for file changes with StatReloader
+INFO 2025-07-12 20:32:24,721 autoreload 11460 28860 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 20:32:25,647 autoreload 14772 25604 Watching for file changes with StatReloader
+INFO 2025-07-12 20:33:46,520 autoreload 14772 25604 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 20:33:48,083 autoreload 16432 18428 Watching for file changes with StatReloader
+INFO 2025-07-12 20:39:02,711 autoreload 16432 18428 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:39:03,914 autoreload 28660 31068 Watching for file changes with StatReloader
+INFO 2025-07-12 20:39:39,328 autoreload 28660 31068 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:39:40,462 autoreload 19552 30220 Watching for file changes with StatReloader
+INFO 2025-07-12 20:40:06,357 autoreload 19552 30220 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:40:07,312 autoreload 27048 19004 Watching for file changes with StatReloader
+INFO 2025-07-12 20:50:11,654 autoreload 27048 19004 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:50:12,620 autoreload 20488 29668 Watching for file changes with StatReloader
+INFO 2025-07-12 20:55:16,777 autoreload 20488 29668 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 20:55:17,820 autoreload 31236 30644 Watching for file changes with StatReloader
+INFO 2025-07-12 20:59:19,298 autoreload 31236 30644 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 20:59:20,222 autoreload 30676 14404 Watching for file changes with StatReloader
+INFO 2025-07-12 21:02:41,920 autoreload 30676 14404 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 21:02:42,800 autoreload 27988 1444 Watching for file changes with StatReloader
+INFO 2025-07-12 21:07:05,695 autoreload 27988 1444 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:07:06,644 autoreload 30656 7072 Watching for file changes with StatReloader
+INFO 2025-07-12 21:07:15,807 autoreload 30656 7072 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:07:16,691 autoreload 31496 5848 Watching for file changes with StatReloader
+INFO 2025-07-12 21:07:32,604 autoreload 31496 5848 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:07:33,645 autoreload 2492 21804 Watching for file changes with StatReloader
+INFO 2025-07-12 21:07:51,532 autoreload 2492 21804 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:07:52,467 autoreload 28112 31344 Watching for file changes with StatReloader
+INFO 2025-07-12 21:08:05,561 autoreload 28112 31344 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:08:06,634 autoreload 19128 30880 Watching for file changes with StatReloader
+ERROR 2025-07-12 21:09:18,372 log 19128 9048 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 685, in common_currency_pdf
+    return allif_document_pdf_handler(
+        request,
+        pk=pk,
+        document_config_key='CommonCurrenciesModel', # Key for DOCUMENT_PDF_CONFIGS in utils.py
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 950, in allif_document_pdf_handler
+    raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
+ValueError: Document PDF configuration missing for 'CommonCurrenciesModel'.
+INFO 2025-07-12 21:10:14,784 autoreload 19128 30880 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:10:15,684 autoreload 16524 24648 Watching for file changes with StatReloader
+ERROR 2025-07-12 21:10:22,766 log 16524 25936 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 685, in common_currency_pdf
+    return allif_document_pdf_handler(
+        request,
+        pk=pk,
+        document_config_key='CommonCurrenciesModel', # Key for DOCUMENT_PDF_CONFIGS in utils.py
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 950, in allif_document_pdf_handler
+    raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
+ValueError: Document PDF configuration missing for 'CommonCurrenciesModel'.
+INFO 2025-07-12 21:11:16,285 autoreload 16524 24648 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:11:17,186 autoreload 18384 17240 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:11:21,914 log 18384 21476 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:12:02,311 autoreload 18384 17240 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 21:12:03,189 autoreload 14072 6184 Watching for file changes with StatReloader
+INFO 2025-07-12 21:12:13,360 autoreload 14072 6184 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 21:12:14,224 autoreload 10168 30084 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:12:21,336 log 10168 14940 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-12 21:13:00,731 log 10168 14940 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:13:26,449 autoreload 10168 30084 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 21:13:27,314 autoreload 4296 20952 Watching for file changes with StatReloader
+INFO 2025-07-12 21:14:57,171 autoreload 4296 20952 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-12 21:14:58,086 autoreload 18736 21912 Watching for file changes with StatReloader
+INFO 2025-07-12 21:15:51,001 autoreload 18736 21912 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:15:52,065 autoreload 22004 22784 Watching for file changes with StatReloader
+INFO 2025-07-12 21:15:57,286 autoreload 22004 22784 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:15:57,988 autoreload 23844 31140 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:16:02,735 log 23844 1396 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-12 21:16:14,059 log 23844 30792 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-12 21:17:40,959 log 23844 2380 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:19:08,043 autoreload 23844 31140 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:19:09,212 autoreload 18536 1444 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:19:12,682 log 18536 31668 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:19:19,540 autoreload 18536 1444 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:19:20,672 autoreload 13896 16616 Watching for file changes with StatReloader
+INFO 2025-07-12 21:19:33,275 autoreload 13896 16616 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:19:34,236 autoreload 26180 30144 Watching for file changes with StatReloader
+INFO 2025-07-12 21:20:50,545 autoreload 26180 30144 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:20:51,406 autoreload 7760 8256 Watching for file changes with StatReloader
+INFO 2025-07-12 21:21:04,945 autoreload 7760 8256 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:21:05,847 autoreload 21524 9976 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:21:25,071 log 21524 28216 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:21:51,531 autoreload 21524 9976 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:21:52,450 autoreload 22284 25728 Watching for file changes with StatReloader
+INFO 2025-07-12 21:22:15,406 autoreload 22284 25728 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:22:16,450 autoreload 14864 29256 Watching for file changes with StatReloader
+INFO 2025-07-12 21:23:18,187 autoreload 14864 29256 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:23:19,220 autoreload 30828 31688 Watching for file changes with StatReloader
+ERROR 2025-07-12 21:23:22,325 log 30828 26400 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The view allifmaalcommonapp.views.common_currency_pdf didn't return an HttpResponse object. It returned None instead.
+INFO 2025-07-12 21:23:32,445 autoreload 30828 31688 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:23:33,498 autoreload 30416 24952 Watching for file changes with StatReloader
+INFO 2025-07-12 21:23:55,017 autoreload 30416 24952 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:23:55,853 autoreload 12300 11212 Watching for file changes with StatReloader
+INFO 2025-07-12 21:24:37,614 autoreload 12300 11212 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:24:38,683 autoreload 30608 15784 Watching for file changes with StatReloader
+INFO 2025-07-12 21:24:55,858 autoreload 30608 15784 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:24:57,010 autoreload 31572 9452 Watching for file changes with StatReloader
+INFO 2025-07-12 21:25:09,881 autoreload 31572 9452 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:25:10,652 autoreload 27796 15668 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:25:15,114 log 27796 16036 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:26:55,389 autoreload 27796 15668 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:26:56,506 autoreload 14456 2568 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:26:59,760 log 14456 8908 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:27:51,422 autoreload 14456 2568 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:27:52,396 autoreload 7432 16992 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:27:55,967 log 7432 21196 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:29:49,171 autoreload 7432 16992 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:29:50,125 autoreload 2836 24468 Watching for file changes with StatReloader
+INFO 2025-07-12 21:29:59,256 autoreload 2836 24468 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:30:00,379 autoreload 17492 18208 Watching for file changes with StatReloader
+INFO 2025-07-12 21:30:34,840 autoreload 17492 18208 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:30:35,783 autoreload 19376 20548 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:30:41,517 log 19376 30588 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:34:30,534 autoreload 19376 20548 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:34:31,412 autoreload 20020 11956 Watching for file changes with StatReloader
+ERROR 2025-07-12 21:34:33,026 log 20020 7436 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 684, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 971, in allif_document_pdf_handler
+    main_query = main_model_class.all_objects.filter(pk=pk)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'all_objects'
+INFO 2025-07-12 21:36:21,349 autoreload 20020 11956 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:36:22,297 autoreload 10960 31336 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:36:25,234 log 10960 26076 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:37:02,449 autoreload 10960 31336 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:37:03,467 autoreload 24884 31064 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:37:05,263 log 24884 19620 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:37:11,544 autoreload 24884 31064 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:37:12,495 autoreload 25892 19040 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:37:39,441 log 25892 21568 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:37:49,228 autoreload 17992 3548 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:37:51,176 log 17992 16940 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:39:30,837 autoreload 17992 3548 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:39:31,891 autoreload 31496 1280 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:39:33,490 log 31496 21084 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:39:47,914 autoreload 31496 1280 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:39:48,937 autoreload 21532 26420 Watching for file changes with StatReloader
+INFO 2025-07-12 21:40:40,279 autoreload 21532 26420 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:40:41,362 autoreload 28796 29864 Watching for file changes with StatReloader
+ERROR 2025-07-12 21:42:15,588 log 28796 30072 Internal Server Error: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 684, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 950, in allif_document_pdf_handler
+    raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
+ValueError: Document PDF configuration missing for 'CommonCurrenciesModel'.
+INFO 2025-07-12 21:42:40,097 autoreload 28796 29864 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:42:41,354 autoreload 12844 12000 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:42:44,050 log 12844 3984 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-12 21:42:57,890 log 12844 21472 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:44:16,457 autoreload 12844 12000 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:44:17,681 autoreload 15932 25936 Watching for file changes with StatReloader
+INFO 2025-07-12 21:44:42,013 autoreload 15932 25936 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:44:43,043 autoreload 28208 25896 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:46:39,440 log 28208 6496 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:46:57,884 autoreload 28208 25896 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:46:58,820 autoreload 23412 9556 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:47:06,966 log 23412 30796 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:48:09,280 autoreload 23412 9556 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:48:10,290 autoreload 30808 8932 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:48:25,145 log 30808 24976 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:49:12,710 autoreload 30808 8932 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:49:13,880 autoreload 24460 27764 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:49:15,364 log 24460 30728 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:49:37,368 autoreload 24460 27764 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:49:38,467 autoreload 30388 8256 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:49:40,255 log 30388 19108 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:49:51,887 autoreload 30388 8256 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:49:52,655 autoreload 17044 6756 Watching for file changes with StatReloader
+INFO 2025-07-12 21:50:05,210 autoreload 17044 6756 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:50:05,964 autoreload 27844 2244 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:50:07,840 log 27844 24436 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:50:23,736 autoreload 27844 2244 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:50:24,516 autoreload 9404 6232 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:50:26,108 log 9404 13416 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:50:38,904 autoreload 9404 6232 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:50:39,717 autoreload 9240 12116 Watching for file changes with StatReloader
+INFO 2025-07-12 21:50:52,811 autoreload 9240 12116 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:50:53,571 autoreload 22532 6756 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:50:55,353 log 22532 23692 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:51:14,582 autoreload 22532 6756 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:51:15,579 autoreload 20736 27076 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:51:17,351 log 20736 18408 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:51:39,633 autoreload 20736 27076 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:51:40,416 autoreload 29248 22172 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:51:41,996 log 29248 17816 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:51:51,691 autoreload 29248 22172 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:51:52,375 autoreload 24272 3368 Watching for file changes with StatReloader
+INFO 2025-07-12 21:53:10,340 autoreload 24272 3368 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:53:11,062 autoreload 14744 20792 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:53:21,272 log 14744 27844 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-12 21:53:23,303 log 14744 27844 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:53:32,804 autoreload 14744 20792 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:53:33,498 autoreload 28332 30160 Watching for file changes with StatReloader
+INFO 2025-07-12 21:55:41,627 autoreload 28332 30160 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 21:55:42,396 autoreload 24156 21820 Watching for file changes with StatReloader
+WARNING 2025-07-12 21:55:45,524 log 24156 28488 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 21:57:07,139 autoreload 24156 21820 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 21:57:08,068 autoreload 22876 2580 Watching for file changes with StatReloader
+INFO 2025-07-12 22:02:05,104 autoreload 22876 2580 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:02:06,293 autoreload 12936 17464 Watching for file changes with StatReloader
+WARNING 2025-07-12 22:02:08,034 log 12936 20548 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 22:04:07,394 autoreload 12936 17464 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:04:08,622 autoreload 14504 22524 Watching for file changes with StatReloader
+INFO 2025-07-12 22:05:02,617 autoreload 14504 22524 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:05:03,329 autoreload 19172 13428 Watching for file changes with StatReloader
+INFO 2025-07-12 22:08:40,140 autoreload 19172 13428 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:08:40,994 autoreload 11488 31328 Watching for file changes with StatReloader
+WARNING 2025-07-12 22:08:47,862 log 11488 28676 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 22:09:19,969 autoreload 11488 31328 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:09:21,145 autoreload 19696 5848 Watching for file changes with StatReloader
+INFO 2025-07-12 22:10:13,521 autoreload 19696 5848 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:10:14,392 autoreload 11488 28440 Watching for file changes with StatReloader
+WARNING 2025-07-12 22:10:17,541 log 11488 29728 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 22:10:57,184 autoreload 11488 28440 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:10:57,994 autoreload 28156 31016 Watching for file changes with StatReloader
+INFO 2025-07-12 22:12:14,646 autoreload 28156 31016 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:12:15,656 autoreload 13096 30196 Watching for file changes with StatReloader
+INFO 2025-07-12 22:12:38,761 autoreload 13096 30196 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:12:39,581 autoreload 31372 5676 Watching for file changes with StatReloader
+INFO 2025-07-12 22:13:33,477 autoreload 31372 5676 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 22:13:34,295 autoreload 15160 21232 Watching for file changes with StatReloader
+ERROR 2025-07-12 22:13:43,343 log 15160 25164 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1043, in allif_document_pdf_handler
+    raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
+ValueError: Document PDF configuration missing for 'CommonCurrenciesModel'.
+ERROR 2025-07-12 22:14:34,337 log 15160 31036 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1043, in allif_document_pdf_handler
+    raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
+ValueError: Document PDF configuration missing for 'CommonCurrenciesModel'.
+INFO 2025-07-12 22:15:12,105 autoreload 15160 21232 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 22:15:12,907 autoreload 22172 20316 Watching for file changes with StatReloader
+ERROR 2025-07-12 22:15:18,045 log 22172 6756 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1043, in allif_document_pdf_handler
+    raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
+ValueError: Document PDF configuration missing for 'CommonCurrenciesModel'.
+ERROR 2025-07-12 22:15:26,237 log 22172 29216 Internal Server Error: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1043, in allif_document_pdf_handler
+    raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
+ValueError: Document PDF configuration missing for 'CommonCurrenciesModel'.
+INFO 2025-07-12 22:16:43,684 autoreload 22172 20316 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 22:16:44,648 autoreload 11588 29452 Watching for file changes with StatReloader
+INFO 2025-07-12 22:17:21,882 autoreload 11588 29452 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:17:22,964 autoreload 10152 16720 Watching for file changes with StatReloader
+ERROR 2025-07-12 22:17:24,600 log 10152 18524 Internal Server Error: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1031, in allif_document_pdf_handler
+    return HttpRequest("n")
+TypeError: HttpRequest.__init__() takes 1 positional argument but 2 were given
+ERROR 2025-07-12 22:17:45,958 log 10152 18820 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1031, in allif_document_pdf_handler
+    return HttpRequest("n")
+TypeError: HttpRequest.__init__() takes 1 positional argument but 2 were given
+INFO 2025-07-12 22:18:10,794 autoreload 10152 16720 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:18:11,742 autoreload 26932 15424 Watching for file changes with StatReloader
+ERROR 2025-07-12 22:18:15,614 log 26932 18764 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1043, in allif_document_pdf_handler
+    raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
+ValueError: Document PDF configuration missing for 'CommonCurrenciesModel'.
+INFO 2025-07-12 22:18:50,879 autoreload 26932 15424 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:18:51,923 autoreload 28508 20516 Watching for file changes with StatReloader
+ERROR 2025-07-12 22:18:53,802 log 28508 14472 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1043, in allif_document_pdf_handler
+    raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
+ValueError: Document PDF configuration missing for 'CommonCurrenciesModel'.
+INFO 2025-07-12 22:19:10,428 autoreload 28508 20516 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 22:19:11,305 autoreload 25036 13188 Watching for file changes with StatReloader
+INFO 2025-07-12 22:21:29,679 autoreload 25036 13188 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:21:30,584 autoreload 30992 14688 Watching for file changes with StatReloader
+ERROR 2025-07-12 22:21:35,599 log 30992 1376 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1038, in allif_document_pdf_handler
+    items_model_name = config['items_model']
+                       ~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'items_model'
+INFO 2025-07-12 22:22:09,825 autoreload 30992 14688 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:22:10,825 autoreload 7132 4628 Watching for file changes with StatReloader
+WARNING 2025-07-12 22:22:12,362 log 7132 14744 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 22:22:36,052 autoreload 7132 4628 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:22:37,256 autoreload 9884 3368 Watching for file changes with StatReloader
+ERROR 2025-07-12 22:22:38,753 log 9884 11588 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1047, in allif_document_pdf_handler
+    items_related_field = config['items_related_field']
+                          ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'items_related_field'
+INFO 2025-07-12 22:24:09,712 autoreload 9884 3368 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:24:10,611 autoreload 27652 26076 Watching for file changes with StatReloader
+ERROR 2025-07-12 22:24:12,714 log 27652 31516 Internal Server Error: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 681, in common_currency_pdf
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1046, in allif_document_pdf_handler
+    if items_model_name:
+       ^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'items_model_name' where it is not associated with a value
+INFO 2025-07-12 22:25:05,917 autoreload 27652 26076 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:25:06,844 autoreload 26168 23448 Watching for file changes with StatReloader
+WARNING 2025-07-12 22:25:08,528 log 26168 29728 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-12 22:25:29,271 log 26168 29728 Not Found: /Convert/Currency/To/pdf/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-12 22:25:53,659 autoreload 26168 23448 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-12 22:25:54,563 autoreload 6428 27696 Watching for file changes with StatReloader
+INFO 2025-07-12 22:26:04,933 autoreload 6428 27696 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-12 22:26:06,087 autoreload 8196 17364 Watching for file changes with StatReloader

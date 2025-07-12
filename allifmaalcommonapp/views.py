@@ -10,7 +10,9 @@ from django.db import transaction # For transactions
 from django.core.cache import cache # For caching
 from django.forms import modelformset_factory # For formsets
 
-from allifmaalcommonapp.utils import allif_filtered_and_sorted_queryset,allif_delete_hanlder,allif_common_form_submission_and_save,common_form_edit_and_save
+from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,
+allif_delete_models_class_map,allif_delete_hanlder,allif_common_form_submission_and_save,
+allif_common_form_edit_and_save,allif_delete_confirm,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler)
 # ... (existing imports) ...
 from django.http import JsonResponse
 from django.urls import reverse
@@ -609,24 +611,47 @@ def commonDeleteDataSort(request,pk):
 def commonCurrencies(request,*allifargs,**allifkwargs):
     title="Currencies"
     allif_data=common_shared_data(request)
+    formats=CommonDocsFormatModel.objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,CommonCurrenciesModel,allif_data,explicit_scope='all')
-    context={"title":title,"allifqueryset":allifqueryset,}
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalcommonapp/currencies/currencies.html',context)
 
 @allif_base_view_wrapper
 def commonAddCurrency(request, *allifargs, **allifkwargs):
     return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
-  
+
+@allif_base_view_wrapper
+def commonEditCurrency(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonAddCurrencyForm,"Edit Currency","commonCurrencies",'allifmaalcommonapp/currencies/currency-details.html')
+
+@allif_base_view_wrapper
+def commonWantToDeleteCurrency(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonCurrenciesModel,"Delete this item",'allifmaalcommonapp/currencies/delete-currency-confirm.html')
+
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def commonDeleteCurrency(request,pk,*allifargs,**allifkwargs):
-     return allif_delete_hanlder(request,model_name='CommonCurrenciesModel',pk=pk,success_redirect_url_name='commonCurrencies')
- 
-@allif_base_view_wrapper
-def commonEditCurrency(request, pk, *allifargs, **allifkwargs):
-    return common_form_edit_and_save(request,pk,CommonAddCurrencyForm,"Edit Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
-  
+    return allif_delete_hanlder(request,model_name='CommonCurrenciesModel',pk=pk,success_redirect_url_name='commonCurrencies')
 
+
+@allif_base_view_wrapper
+def commonCurrencySearch(request,*allifargs,**allifkwargs):
+    return allif_search_handler(request,model_name='CommonCurrenciesModel',search_fields_key='CommonCurrenciesModel',
+        template_path='allifmaalcommonapp/currencies/currencies.html', # The template to render results
+        search_input_name='allifsearchcommonfieldname', # The name of your search input field
+        )
+
+def commonCurrencyAdvanceSearch(request,*allifargs,**allifkwargs):
+    # This view now simply calls the centralized advanced search handler
+    return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',
+        advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/currencies/currency-search-pdf.html', # Template for HTML results
+        #template_pdf_path='allifmaalcommonapp/stocks/stock-item-search-pdf.html', # Template for PDF export
+    )
+
+
+
+  
 ########################3 Payment terms ######################
 @allif_base_view_wrapper
 def commonPaymentTerms(request,*allifargs,**allifkwargs):
@@ -642,25 +667,25 @@ def commonAddPaymentTerm(request, *allifargs, **allifkwargs):
 
 @allif_base_view_wrapper
 def commonEditPaymentTerm(request,pk,*allifargs,**allifkwargs):
-    return common_form_edit_and_save(request,pk,CommonAddPaymentTermForm,"Update Payment Term","commonPaymentTerms",'allifmaalcommonapp/payments/terms/add_payment_term.html')
+    return allif_common_form_edit_and_save(request,pk,CommonAddPaymentTermForm,"Update Payment Term","commonPaymentTerms",'allifmaalcommonapp/payments/terms/add_payment_term.html')
 
 @allif_base_view_wrapper
 def commonDeletePaymentTerm(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonPaymentTermsModel',pk=pk,success_redirect_url_name='commonPaymentTerms')
  
+
+
+
+
+def common_currency_pdf(request, pk, *allifargs, **allifkwargs):
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonPurchaseOrdersModel',)
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+def common_purchase_order_pdf(request, pk, *allifargs, **allifkwargs):
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonPurchaseOrdersModel',)
   
   
   
@@ -1690,7 +1715,7 @@ def commonCompanyAdvanceSearch(request,*allifargs, **allifkwargs):
 
 @logged_in_user_must_have_profile
 @logged_in_user_can_delete
-@logged_in_user_is_admin 
+
 def commonDefaultValues(request,*allifargs,**allifkwargs):
     try:
         title="Default Values"
@@ -3452,7 +3477,7 @@ def commonUserHasDepartmentalAccess(request,pk,*allifargs,**allifkwargs):
     
 @logged_in_user_must_have_profile
 @subscriber_company_status
-@logged_in_user_has_universal_access
+
 def commonUserAllifaamlAdmin(request,pk):
     try:
         allif_data=common_shared_data(request)
@@ -4100,7 +4125,7 @@ def CommonSupplierDeleteTaxParameter(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view
-@logged_in_user_is_admin
+
 def commonGeneralLedgers(request,allifusr,allifslug,*allifargs,**allifkwargs):
     title="General Ledger Accounts"
     
@@ -4276,7 +4301,7 @@ def commonSynchGLAccount(request,pk,*allifargs,**allifkwargs):
 ####################### chart of accounts ########################
 @logged_in_user_must_have_profile
 @subscriber_company_status
-@logged_in_user_is_admin
+
 def commonChartofAccounts(request,*allifargs,**allifkwargs):
     title="Chart of Accounts"
     try:
@@ -4344,6 +4369,13 @@ def commonChartofAccounts(request,*allifargs,**allifkwargs):
             else:
                 allifqueryset=[]
         
+        allifqueryset=CommonChartofAccountsModel.all_objects.all()
+        
+        allif_data=common_shared_data(request)
+        allifqueryset =allif_filtered_and_sorted_queryset(request,CommonChartofAccountsModel,allif_data,explicit_scope='all')
+        context={"title":title,"allifqueryset":allifqueryset,}
+    
+    
         context = {
             "title":title,
             "allifqueryset":allifqueryset,
@@ -6904,7 +6936,7 @@ def commonAddExpense(request,*allifargs,**allifkwargs):
 def commonEditExpense(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        allifquery=CommonExpensesModel.objects.filter(pk=pk).first()
+        allifquery=CommonExpensesModel.all_objects.filter(pk=pk).first()
         form=CommonExpensesAddForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery)
         title=allifquery
         if request.method=='POST':
@@ -6934,7 +6966,7 @@ def commonEditExpense(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonExpenseDetails(request,pk,*allifargs,**allifkwargs):
     try:
-        allifquery=CommonExpensesModel.objects.filter(pk=pk).first()
+        allifquery=CommonExpensesModel.all_objects.filter(pk=pk).first()
         print(allifquery.pk)
        
         title="Expense Details"
@@ -6953,7 +6985,7 @@ def commonExpenseDetails(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_view
 def commonWantToDeleteExpense(request,pk,*allifargs,**allifkwargs):
     try:
-        allifquery=CommonExpensesModel.objects.filter(id=pk).first()
+        allifquery=CommonExpensesModel.all_objects.filter(id=pk).first()
         message="Are u sure to delete"
         context={
         "message":message,
@@ -6971,7 +7003,7 @@ def commonWantToDeleteExpense(request,pk,*allifargs,**allifkwargs):
 def commonDeleteExpense(request,pk,*allifargs,**allifkwargs):
     try:
         allif_data=common_shared_data(request)
-        CommonExpensesModel.objects.filter(id=pk).first().delete()
+        CommonExpensesModel.all_objects.filter(id=pk).first().delete()
         return redirect('allifmaalcommonapp:commonExpenses',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
     except Exception as ex:
@@ -8090,124 +8122,113 @@ def commonStockItemDetails(request,pk,*allifargs,**allifkwargs):
 @subscriber_company_status
 @logged_in_user_can_view
 def commonStockItemSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonStocksModel.objects.filter((Q(description__icontains=allifsearch)|Q(partNumber__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+ 
+    title="Search Results"
+    allif_data=common_shared_data(request)
+    if request.method=='POST':
+        allifsearch=request.POST.get('allifsearchcommonfieldname')
+        searched_data=CommonStocksModel.objects.filter((Q(description__icontains=allifsearch)|Q(partNumber__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
+    
+    else:
+        searched_data=[]
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalcommonapp/stocks/stocks.html',context)
+    context={
+    
+    "title":title,
+    "searched_data":searched_data,
+    
+    }
+    return render(request,'allifmaalcommonapp/stocks/stocks.html',context)
         
      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
 def commonStockItemAdvanceSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Stock Items Advanced Search Results"
-        allif_data=common_shared_data(request)
-        formats=CommonDocsFormatModel.objects.all()
+   
+    title="Stock Items Advanced Search Results"
+    allif_data=common_shared_data(request)
+    formats=CommonDocsFormatModel.objects.all()
 
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-        current_date=timezone.now().date().today()
+    scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
+    current_date=timezone.now().date().today()
+    firstDate=current_date
+    lastDate=current_date
+    largestAmount=0
+    searched_data=[]
+    firstDepo=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
+
+    lastDepo=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
+    if firstDepo and lastDepo:
+        firstDate=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
+        lastDate=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
+        largestAmount=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-quantity').first().quantity
+    else:
         firstDate=current_date
         lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=CommonStocksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-quantity').first().quantity
-        else:
-            firstDate=current_date
-            lastDate=current_date
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonStocksModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(quantity__gte=start_value or 0) & Q(quantity__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/stocks/stock-item-search-pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                    "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="stock-items-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-              
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                    "formats":formats,
-                    "title":title,
-                     "scopes":scopes
-                    }
-                    return render(request,'allifmaalcommonapp/stocks/stocks.html',context)
-                    
+    if request.method=='POST':
+        selected_option=request.POST.get('requiredformat')
+        start_date=request.POST.get('startdate',selected_option) or None
+        end_date=request.POST.get('enddate') or None
+        start_value=request.POST.get('startvalue') or None
+        end_value=request.POST.get('endvalue') or None
+        if start_date!="" or end_date!="" or start_value!="" or end_value!="":
+            searched_data=CommonStocksModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(quantity__gte=start_value or 0) & Q(quantity__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
+            #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
+            # if pdf is selected
+            if selected_option=="pdf":
+                template_path = 'allifmaalcommonapp/stocks/stock-item-search-pdf.html'
+                allifcontext = {
+                "searched_data":searched_data,
+                "title":title,
+                "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
+                "scopes":scopes,
+                }
+                
+                response = HttpResponse(content_type='application/pdf') # this opens on the same page
+                response = HttpResponse(content_type='application/doc')
+                response['Content-Disposition'] = 'filename="stock-items-advanced-searched-results.pdf"'
+                template = get_template(template_path)
+                html = template.render(allifcontext)
+                try:
+                    pisa_status=pisa.CreatePDF(html, dest=response)
+                except Exception as ex:
+                    error_context={'error_message': ex,}
+                    return render(request,'allifmaalcommonapp/error/error.html',error_context)
+                # if error then show some funy view
+                if pisa_status.err:
+                    return HttpResponse('We had some errors <pre>' + html + '</pre>')
+                return response
+            
             else:
                 searched_data=[]
-             
-            context={
-           
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
-            }
-            return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
-           
+                context = {
+                "searched_data":searched_data,
+                "formats":formats,
+                "title":title,
+                    "scopes":scopes
+                }
+                return render(request,'allifmaalcommonapp/stocks/stocks.html',context)
+                
         else:
-            context={
-           
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
-            }
-            return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
+            searched_data=[]
+            
+        context={
+        
+        "formats":formats,
+        "title":title,
+            "scopes":scopes
+        }
+        return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
+        
+    else:
+        context={
+        
+        "formats":formats,
+        "title":title,
+            "scopes":scopes
+        }
+        return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
           
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)      
-
-@logged_in_user_must_have_profile
+    
 @subscriber_company_status
 @logged_in_user_can_view
 def commonWantToDeleteStockItem(request,pk,*allifargs,**allifkwargs):

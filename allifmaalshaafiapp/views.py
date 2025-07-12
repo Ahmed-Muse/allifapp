@@ -211,10 +211,6 @@ def commonArchivedTasks(request, *allifargs, **allifkwargs):
         return render(request, 'allifmaalcommonapp/error/error.html', error_context)
 
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
 def AddTriageData(request,pk,*allifargs,**allifkwargs):
     title="Add Triage"
     try:

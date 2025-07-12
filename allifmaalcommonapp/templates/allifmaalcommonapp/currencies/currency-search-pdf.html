@@ -1,0 +1,64 @@
+{# C:\am\allifapp\allifapperp\allifmaalcommonapp\stocks\stock-item-search-pdf.html #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <style>
+        body { font-family: sans-serif; margin: 1in; }
+        h1 { text-align: center; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .footer { font-size: 0.8em; text-align: center; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <p>Generated on: {{ timezone.now|date:"Y-m-d H:i" }}</p>
+    {% if search_term %}
+        <p>Search Term: <strong>{{ search_term }}</strong></p>
+    {% endif %}
+    {% if start_date_input or end_date_input or start_value_input or end_value_input %}
+        <p>Filters Applied:</p>
+        <ul>
+            {% if start_date_input %}<li>Start Date: {{ start_date_input }}</li>{% endif %}
+            {% if end_date_input %}<li>End Date: {{ end_date_input }}</li>{% endif %}
+            {% if start_value_input %}<li>Min Quantity: {{ start_value_input }}</li>{% endif %}
+            {% if end_value_input %}<li>Max Quantity: {{ end_value_input }}</li>{% endif %}
+        </ul>
+    {% endif %}
+
+    {% if searched_data %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Part Number</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in searched_data %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.partNumber }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.date|date:'d/m/Y' }}</td>
+                        <td>{{ item.status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No records found for the applied filters.</p>
+    {% endif %}
+
+    <div class="footer">
+        Company: {{ main_sbscrbr_entity }}
+    </div>
+</body>
+</html>

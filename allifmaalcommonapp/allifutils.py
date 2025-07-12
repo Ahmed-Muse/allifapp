@@ -68,5 +68,7 @@ def common_shared_data(request):
         "logged_user_profile_staffslg":logged_user_profile_staffslg,
         "logged_user_operation_year":logged_user_operation_year,
         "logged_user_operation_term":logged_user_operation_term,
+        
+        #"usrslg": request.user.username if request.user.is_authenticated else "anonymous", 
     }
 

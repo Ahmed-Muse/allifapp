@@ -424,7 +424,7 @@ class CommonSupplierTaxParametersModel(CommonBaseModel):
         
 class CommonCurrenciesModel(CommonBaseModel):
     def __str__(self):
-        return str(self.description)
+        return str(self.name)
 
 
 class CommonPaymentTermsModel(CommonBaseModel):

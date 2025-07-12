@@ -141,9 +141,19 @@
         <tr data-id="{{item.id}}">
         <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddPODetails' item.id user_var glblslug %}">{{item.po_number}}</a></td>
        
+
+
         <td>
         {{item.supplier}}
       </td>
+
+ <td>
+        
+        <a href="{% url 'allifmaalcommonapp:common_currency_pdf' item.id user_var glblslug %}" class="allif-table-links">
+        dynmc pdf
+        </a>
+      </td>
+      
       <td>
         
         <a href="{% url 'allifmaalcommonapp:commonAddPOItems' item.id user_var glblslug %}" class="allif-table-links">

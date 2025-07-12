@@ -100,6 +100,12 @@ path('Currencies/Main/Money/Types/<str:allifusr>/<str:allifslug>/', views.common
 path('Add/New/Currency/<str:allifusr>/<str:allifslug>/', views.commonAddCurrency, name="commonAddCurrency"),
 path('Edit/Currency/Filter/Details/Money/Types/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCurrency, name="commonEditCurrency"),
 path('Delete/Currency/Record/Money/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteCurrency, name="commonDeleteCurrency"),
+path('Want/To/Delete/This/Currency/Record/<str:pk>/<str:allifusr>/<str:allifslug>/Please/Confirm/', views.commonWantToDeleteCurrency, name="commonWantToDeleteCurrency"),
+path('Currency/Money/Used/Search/Find/By/Searching/<str:allifusr>/<str:allifslug>/', views.commonCurrencySearch, name="commonCurrencySearch"),
+
+path('Advanced/Currency/Money/Type/s/Items/Search/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonCurrencyAdvanceSearch, name="commonCurrencyAdvanceSearch"),
+
+path('Convert/Currency/To/pdf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.common_currency_pdf, name="common_currency_pdf"),
 
 ################################## Payment Terms ##############
 path('Payment/Terms/Payment/Conditions/<str:allifusr>/<str:allifslug>/', views.commonPaymentTerms, name="commonPaymentTerms"),
@@ -623,6 +629,5 @@ path('Delete/The/Service/s/Program/Services/S/Permntly/<str:pk>/<str:allifusr>/<
 path('Want/Tp/Delete/This/Services/s/available/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteService, name="commonWantToDeleteService"),
 path('Service/s/Information/s/available/View/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonServiceDetails, name="commonServiceDetails"),
 path('Search/For/Services/s/available/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonServiceSearch, name="commonServiceSearch"),
-
 
 ]   
