@@ -29,6 +29,7 @@
         <td class="allif-table-header-td">Description</td>
         <td class="allif-table-header-td">Date</td>
         <td class="allif-table-header-td">Status</td>
+        <td class="allif-table-header-td">Download</td>
         <td class="allif-table-header-td">Navigate</td>
         {% include 'allifmaalcommonapp/includes/tables/full-table-header-lower-section.html' %}
         
@@ -38,17 +39,9 @@
         <td class="allif-table-content-td">
         <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}">{{item.description}}</a></td>
         
-        
-        <td>
-        
-      <a class="allif-table-links" href="{% url 'allifmaalcommonapp:common_currency_pdf' item.id user_var glblslug %}">pdf</a></td>
-        
-
-        
-        
         <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
         <td class="allif-table-content-td">{{item.status}}</td>
-<td class="allif-table-content-td">{{item.balance}}</td>
+        <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:common_currency_pdf' item.id user_var glblslug %}">Download</a></td>
         <td class="allif-table-content-td">
         {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
    
@@ -73,7 +66,7 @@
         <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}">{{item.description}}</a></td>
         <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
         <td class="allif-table-content-td">{{item.status}}</td>
-
+        <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:common_currency_pdf' item.id user_var glblslug %}">Download</a></td>
         <td class="allif-table-content-td">
         {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
    

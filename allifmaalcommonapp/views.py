@@ -642,21 +642,14 @@ def commonCurrencySearch(request,*allifargs,**allifkwargs):
 
 def commonCurrencyAdvanceSearch(request,*allifargs,**allifkwargs):
     # This view now simply calls the centralized advanced search handler
-    return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',
-        advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+    return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/currencies/currencies.html', # Template for HTML results
         template_pdf_path='allifmaalcommonapp/currencies/currency-advanced-search-pdf.html', # <-- CRITICAL: Pass the PDF template path
     )
 
-
-
 def common_currency_pdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
-  
-  
-
-
-  
+ 
 ########################3 Payment terms ######################
 @allif_base_view_wrapper
 def commonPaymentTerms(request,*allifargs,**allifkwargs):

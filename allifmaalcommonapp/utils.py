@@ -950,7 +950,8 @@ def allif_advance_search_handler(
         "lastDate_display": lastDate.date() if isinstance(lastDate, datetime.datetime) else lastDate,   # For display only
         "largestAmount_display": largestAmount,
         "selected_format_input": selected_option,
-        **(extra_context or {}) 
+        **(extra_context or {}),
+        "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity")
     }
 
     # --- Conditional Output (HTML or PDF) ---
