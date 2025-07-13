@@ -3,15 +3,21 @@
 # C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py
 from django import forms # Import forms for type hinting if needed
 from django.db.models import QuerySet # Import QuerySet for type hinting
-
+from django.utils import timezone 
 from django.db.models import QuerySet, Model # Import Model
 from django.http import HttpRequest
-
+import datetime
 from typing import Optional # Import Optional for type hinting
 from .models import *
 from allifmaalshaafiapp.models import *
 from django.db.models import QuerySet, Model, Q # Ensure Q is imported for complex lookups
 
+
+from typing import Optional, Dict, List, Any
+
+# For PDF generation
+from django.template.loader import get_template
+from xhtml2pdf import pisa # Assuming xhtml2pdf is installed (pip install xhtml2pdf)
 from django.shortcuts import render,redirect,get_object_or_404
 from .allifutils import common_shared_data
 from django.urls import reverse
@@ -21,7 +27,7 @@ from .models import CommonPurchaseOrdersModel, CommonPurchaseOrderItemsModel
 
 # Define sort mappings and default sort fields for different models here.
 # Use a clear identifier (e.g., model name in lowercase) as the key.
-MODEL_SORT_CONFIGS = {
+allif_model_sort_configs = {
     'commonexpensesmodel': { # Key should be consistent, e.g., model._meta.model_name
         'sort_mapping': {
             "Name Ascending": "name",
@@ -47,6 +53,7 @@ MODEL_SORT_CONFIGS = {
             "Name Descending": "-name",
             "Description Ascending": "description",
             "Description Descending": "-description",
+            
            
         },
         'default_sort_field': '-date',
@@ -91,7 +98,53 @@ MODEL_SORT_CONFIGS = {
     # Add other model sort configurations here
 }
 
-allif_delete_models_class_map= {
+
+
+
+# --- NEW: Search Configuration Map ---
+# Define which fields are searchable for each model
+allif_search_config_mapping = {
+    'CommonStocksModel': ['description__icontains', 'partNumber__icontains'],
+    'CommonCurrenciesModel': ['name__icontains', 'description__icontains'],
+    'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
+    'CommonTasksModel': ['name__icontains', 'description__icontains'], # Example
+    'TriagesModel': ['medical_file__icontains', 'pain_level__icontains'], # Example
+    # Add configurations for other models as needed
+}
+
+
+# --- NEW: Advanced Search Configuration Map ---
+# Define which fields are used for date and value range filtering for each model
+allif_advanced_search_configs = {
+    'CommonCurrenciesModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+    },
+    # Add configurations for other models here, e.g.:
+    'CommonExpensesModel': {
+        'date_field': 'starts',
+         'value_field': 'balance',
+         'default_order_by_date': '-starts',
+         'default_order_by_value': '-balance',
+     },
+     'CommonCustomerPaymentsModel': {
+         'date_field': 'payment_date',
+         'value_field': 'amount_paid',
+         'default_order_by_date': '-payment_date',
+         'default_order_by_value': '-amount_paid',
+     },
+}
+
+
+
+
+# --- ALLIF_MODEL_REGISTRY (Central Model Class Map) ---
+# This dictionary maps model names (strings) to their actual Python model classes.
+# It's used by all generic handlers (delete, search, advanced search, PDF generation)
+# to dynamically get the correct model class based on a string name.
+allif_main_models_registry = { 
     'CommonSectorsModel': CommonSectorsModel,
     'CommonCompanyScopeModel': CommonCompanyScopeModel,
     'CommonTaxParametersModel': CommonTaxParametersModel,
@@ -99,11 +152,60 @@ allif_delete_models_class_map= {
     'CommonTasksModel': CommonTasksModel,
     'CommonBanksModel': CommonBanksModel,
     'TriagesModel': TriagesModel, 
-    'CommonCurrenciesModel': CommonCurrenciesModel, 
+    'CommonCurrenciesModel': CommonCurrenciesModel, # Corrected typo CommonCurrenciesModel
     'CommonSupplierPaymentsModel': CommonSupplierPaymentsModel,
     'CommonCustomerPaymentsModel': CommonCustomerPaymentsModel,
     'CommonPaymentTermsModel': CommonPaymentTermsModel,
+    'CommonTransitModel': CommonTransitModel,
+    'CommonStocksModel': CommonStocksModel, 
+    'CommonPurchaseOrdersModel': CommonPurchaseOrdersModel, 
+    'CommonPurchaseOrderItemsModel': CommonPurchaseOrderItemsModel, 
+    'CommonExpensesModel': CommonExpensesModel,
+    'CommonTasksModel': CommonTasksModel,
+    'CommonBanksModel': CommonBanksModel,
+   
 }
+
+# --- Document PDF Configuration Map ---
+# Defines the main model, and optionally related items model and context keys for each document type
+allif_main_document_pdf_configuration= {
+    'CommonPurchaseOrdersModel': { # Key for Purchase Orders
+        'main_model': 'CommonPurchaseOrdersModel', 
+        'items_model': 'CommonPurchaseOrderItemsModel', # This is an optional key now
+        'items_related_field': 'po_item_con', # This is an optional key now
+        'title': 'Purchase Order',
+        'filename_prefix': 'PO',
+        'template_path': 'allifmaalcommonapp/purchases/po-pdf.html', 
+        'extra_context_map': { 
+            'supplier': 'po_supplier', 
+        },
+        'related_lookups': ['supplier'], 
+    },
+    # Example for a model that has NO related items, just the main model's PDF 
+    'CommonCurrenciesModel': {
+        'main_model': 'CommonCurrenciesModel',
+        # No 'items_model' or 'items_related_field' needed for this config
+        'title': 'Currency Details',
+        'filename_prefix': 'CUR',
+        'template_path': 'allifmaalcommonapp/currencies/currency-details-pdf.html', # Create this template
+        'extra_context_map': {}, # No extra fields to map
+        'related_lookups': [], # No related lookups needed
+    },
+    # Example for Invoice PDF:
+    'CommonInvoicesModel': {
+        'main_model': 'CommonInvoicesModel',
+         'items_model': 'CommonInvoiceItemsModel',
+         'items_related_field': 'invoice_item_con',
+         'title': 'Invoice',
+         'filename_prefix': 'INV',
+         'template_path': 'allifmaalcommonapp/sales/invoice-pdf.html',
+         'extra_context_map': {
+             'customer': 'invoice_customer',
+        },
+         'related_lookups': ['customer'],
+     },
+}
+
 
 def allif_filtered_and_sorted_queryset(request: HttpRequest,model_class: type[Model], allif_data: dict,explicit_scope: Optional[str] = None) -> QuerySet:
     """
@@ -123,7 +225,7 @@ def allif_filtered_and_sorted_queryset(request: HttpRequest,model_class: type[Mo
     company_id = allif_data.get("main_sbscrbr_entity")
 
     model_identifier = model_class._meta.model_name 
-    sort_config = MODEL_SORT_CONFIGS.get(model_identifier, {})
+    sort_config = allif_model_sort_configs.get(model_identifier, {})
     sort_mapping = sort_config.get('sort_mapping', {})
     default_sort_field = sort_config.get('default_sort_field', '-starts')
     default_ui_label = sort_config.get('default_ui_label', 'Default Sort')
@@ -422,10 +524,7 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
 
 
 # --- NEW: Generic Edit Item LOGIC Function ---
-def allif_common_form_edit_and_save(request, 
-    pk: int, # Primary key of the object to edit
-    form_class: type[forms.ModelForm], 
-    title_text: str, 
+def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.ModelForm],title_text: str, 
     success_redirect_url_name: str, 
     template_path: str,
     pre_save_callback: Optional[callable] = None,
@@ -557,7 +656,7 @@ def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_re
     allif_data = common_shared_data(request)
     user_slug = allif_data.get("usrslg")
     company_slug = allif_data.get("compslg")
-    model_class = allif_delete_models_class_map.get(model_name)
+    model_class = allif_main_models_registry.get(model_name)
     if not model_class:
         raise Http404(f"Model '{model_name}' not found in mapping.")
 
@@ -568,29 +667,8 @@ def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_re
 
 
 
-
-
-
-
-
-
-# --- NEW: Search Configuration Map ---
-# Define which fields are searchable for each model
-allif_search_config_mapping = {
-    'CommonStocksModel': ['description__icontains', 'partNumber__icontains'],
-    'CommonCurrenciesModel': ['name__icontains', 'description__icontains'],
-    'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
-    'CommonTasksModel': ['name__icontains', 'description__icontains'], # Example
-    'TriagesModel': ['medical_file__icontains', 'pain_level__icontains'], # Example
-    # Add configurations for other models as needed
-}
-
-
 # --- NEW: Centralized Search Handler ---
-def allif_search_handler(
-    request: HttpRequest,
-    model_name: str,
-    search_fields_key: str, # Key to look up in SEARCH_CONFIGS
+def allif_search_handler(request: HttpRequest,model_name: str,search_fields_key: str, # Key to look up in SEARCH_CONFIGS
     template_path: str,
     search_input_name: str = 'allifsearchcommonfieldname', # Name of the search input field
     extra_context: Optional[dict] = None
@@ -613,7 +691,7 @@ def allif_search_handler(
         search_term = request.GET.get(search_input_name, '').strip()
 
     if search_term:
-        model_class = allif_delete_models_class_map.get(model_name)
+        model_class = allif_main_models_registry.get(model_name)
         if not model_class:
             print(f"ERROR: Search - Model '{model_name}' not found in allif_delete_models_class_map.")
             raise Http404(f"Model '{model_name}' not found for search.")
@@ -676,57 +754,17 @@ def allif_search_handler(
     return render(request, template_path, context)
 
 
-# C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py
-
-from django.db.models import QuerySet, Model, Q # Ensure Q is imported
-from django.http import HttpRequest, Http404, HttpResponse # Ensure HttpResponse is imported
-from django.shortcuts import render, get_object_or_404, redirect 
-from django.urls import reverse 
-from django.utils import timezone # For timezone.now()
-from typing import Optional, Dict, List, Any
-
-# For PDF generation
-from django.template.loader import get_template
-from xhtml2pdf import pisa # Assuming xhtml2pdf is installed (pip install xhtml2pdf)
-
-
-# --- NEW: Advanced Search Configuration Map ---
-# Define which fields are used for date and value range filtering for each model
-allif_advanced_search_configs = {
-    'CommonCurrenciesModel': {
-        'date_field': 'date', # Name of the date field in CommonStocksModel
-        'value_field': 'quantity', # Name of the quantity/value field in CommonStocksModel
-        'default_order_by_date': '-date', # Default ordering for finding first/last date
-        'default_order_by_value': '-quantity', # Default ordering for finding largest value
-    },
-    # Add configurations for other models here, e.g.:
-    'CommonExpensesModel': {
-        'date_field': 'created_at',
-         'value_field': 'amount',
-         'default_order_by_date': '-created_at',
-         'default_order_by_value': '-amount',
-     },
-     'CommonCustomerPaymentsModel': {
-         'date_field': 'payment_date',
-         'value_field': 'amount_paid',
-         'default_order_by_date': '-payment_date',
-         'default_order_by_value': '-amount_paid',
-     },
-}
 
 # --- NEW: Generic PDF Generation Utility ---
-def allif_generate_pdf_response(
-    template_path: str, 
-    context: Dict[str, Any], 
-    filename: str = "document.pdf"
-) -> HttpResponse:
+def allif_generate_pdf_response(template_path: str, context: Dict[str, Any],filename: str = "document.pdf") -> HttpResponse:
     """
     Generates a PDF response from a Django template using xhtml2pdf.
     """
     template = get_template(template_path)
     html = template.render(context)
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'filename="{filename}"'
+    response['Content-Disposition'] = f'filename="{filename}"'# opens the pdf in the same page...
+    response['Content-Disposition'] = f'attachment; filename="{filename}"' # downloads the pdf...
     
     try:
         pisa_status = pisa.CreatePDF(html, dest=response)
@@ -740,14 +778,12 @@ def allif_generate_pdf_response(
     
     return response
 
-
-# --- NEW: Centralized Advanced Search Handler ---
 def allif_advance_search_handler(
     request: HttpRequest,
     model_name: str,
-    advanced_search_config_key: str, # Key to look up in ADVANCED_SEARCH_CONFIGS
+    advanced_search_config_key: str, 
     template_html_path: str,
-    template_pdf_path: Optional[str] = None, # Path to the PDF template
+    template_pdf_path: Optional[str] = None, 
     extra_context: Optional[dict] = None
 ) -> HttpResponse:
     """
@@ -760,16 +796,16 @@ def allif_advance_search_handler(
     company_id = allif_data.get("main_sbscrbr_entity")
 
     title = "Advanced Search Results"
-    searched_data = []
-    
-    model_class = allif_delete_models_class_map.get(model_name)
+    searched_data = [] 
+
+    model_class = allif_main_models_registry.get(model_name) 
     if not model_class:
-        print(f"ERROR: Advanced Search - Model '{model_name}' not found in allif_delete_models_class_map.")
+        #print(f"ERROR: Advanced Search - Model '{model_name}' not found in ALLIF_MODEL_REGISTRY.")
         raise Http404(f"Model '{model_name}' not found for advanced search.")
 
-    search_config = allif_advanced_search_configs.get(advanced_search_config_key)
+    search_config = allif_advanced_search_configs.get(advanced_search_config_key) 
     if not search_config:
-        print(f"ERROR: Advanced Search - No configuration for key '{advanced_search_config_key}' in ADVANCED_SEARCH_CONFIGS.")
+        #print(f"ERROR: Advanced Search - No configuration for key '{advanced_search_config_key}' in ADVANCED_SEARCH_CONFIGS.")
         raise ValueError(f"Advanced search configuration missing for '{advanced_search_config_key}'.")
 
     date_field = search_config['date_field']
@@ -778,24 +814,40 @@ def allif_advance_search_handler(
     default_order_by_value = search_config['default_order_by_value']
 
     # --- Calculate dynamic default values for date and amount ranges ---
-    current_date = timezone.now().date()
-    # Filter by company for defaults
-    company_queryset = model_class.objects.filter(company=company_id)
+    # Get the base queryset with company and access filtering
+    base_queryset = allif_filtered_and_sorted_queryset(request, model_class, allif_data, explicit_scope='all') 
 
-    first_item_by_date = company_queryset.order_by(date_field).first()
-    last_item_by_date = company_queryset.order_by(f'-{date_field}').first()
-    largest_item_by_value = company_queryset.order_by(default_order_by_value).first()
+    # Determine earliest/latest dates and largest value from the *entire* relevant dataset
+    # These will be used as defaults if user doesn't provide inputs
+    first_item_by_date = base_queryset.order_by(date_field).first()
+    last_item_by_date = base_queryset.order_by(f'-{date_field}').first()
+    largest_item_by_value = base_queryset.order_by(default_order_by_value).first()
 
-    firstDate = getattr(first_item_by_date, date_field, current_date) if first_item_by_date else current_date
-    lastDate = getattr(last_item_by_date, date_field, current_date) if last_item_by_date else current_date
+    # Initialize default dates as timezone-aware datetimes (midnight of current date)
+    # This prevents the RuntimeWarning when comparing with DateTimeFields
+    current_aware_datetime = timezone.make_aware(datetime.datetime.combine(timezone.now().date(), datetime.time.min))
+
+    # Get default firstDate (earliest record or current_aware_datetime)
+    if first_item_by_date and hasattr(first_item_by_date, date_field):
+        firstDate_val = getattr(first_item_by_date, date_field)
+        # If it's already a datetime, use it. If it's a date, convert to datetime.
+        firstDate = timezone.make_aware(datetime.datetime.combine(firstDate_val, datetime.time.min)) if isinstance(firstDate_val, datetime.date) and not isinstance(firstDate_val, datetime.datetime) else firstDate_val
+    else:
+        firstDate = current_aware_datetime
+
+    # Get default lastDate (latest record or current_aware_datetime)
+    if last_item_by_date and hasattr(last_item_by_date, date_field):
+        lastDate_val = getattr(last_item_by_date, date_field)
+        # If it's already a datetime, use it. If it's a date, convert to datetime.
+        lastDate = timezone.make_aware(datetime.datetime.combine(lastDate_val, datetime.time.max)) if isinstance(lastDate_val, datetime.date) and not isinstance(lastDate_val, datetime.datetime) else lastDate_val
+    else:
+        lastDate = current_aware_datetime
+
     largestAmount = getattr(largest_item_by_value, value_field, 0) if largest_item_by_value else 0
+    largestAmount = max(0, largestAmount) 
 
-    # Ensure largestAmount is at least 0 if no items exist
-    largestAmount = max(0, largestAmount)
-
-    # Fetch common data for context (formats, scopes)
     formats = CommonDocsFormatModel.objects.all()
-    scopes = CommonCompanyScopeModel.objects.filter(company=company_id).order_by('-date')[:4] # Adjust ordering/slicing as needed
+    scopes = CommonCompanyScopeModel.objects.filter(company=company_id).order_by('-date')[:4] 
 
     # --- Process POST/GET request for search parameters ---
     if request.method == 'POST':
@@ -804,7 +856,7 @@ def allif_advance_search_handler(
         end_date_str = request.POST.get('enddate')
         start_value_str = request.POST.get('startvalue')
         end_value_str = request.POST.get('endvalue')
-    else: # Initial GET request or GET with parameters
+    else: 
         selected_option = request.GET.get('requiredformat')
         start_date_str = request.GET.get('startdate')
         end_date_str = request.GET.get('enddate')
@@ -812,44 +864,73 @@ def allif_advance_search_handler(
         end_value_str = request.GET.get('endvalue')
     
     # Convert string inputs to appropriate types, using defaults if empty
-    start_date = start_date_str if start_date_str else None
-    end_date = end_date_str if end_date_str else None
-    start_value = float(start_value_str) if start_value_str else None
-    end_value = float(end_value_str) if end_value_str else None
+    # Convert input dates to timezone-aware datetimes for filtering
+    filter_start_date = None
+    if start_date_str:
+        try:
+            # Parse date string to date object, then combine with min time and make aware
+            filter_start_date = timezone.make_aware(datetime.datetime.combine(datetime.datetime.strptime(start_date_str, '%Y-%m-%d').date(), datetime.time.min))
+        except ValueError:
+            #print(f"WARNING: Invalid start_date_str: '{start_date_str}'. Ignoring date filter.")
+            filter_start_date = None
+
+    filter_end_date = None
+    if end_date_str:
+        try:
+            # Parse date string to date object, then combine with max time (23:59:59.999999) and make aware
+            filter_end_date = timezone.make_aware(datetime.datetime.combine(datetime.datetime.strptime(end_date_str, '%Y-%m-%d').date(), datetime.time.max))
+        except ValueError:
+            #print(f"WARNING: Invalid end_date_str: '{end_date_str}'. Ignoring date filter.")
+            filter_end_date = None
+    
+    # Safely convert value strings to float, default to None if empty or invalid
+    try:
+        start_value = float(start_value_str) if start_value_str else None
+    except ValueError:
+        start_value = None
+        #print(f"WARNING: Invalid start_value_str: '{start_value_str}'")
+    
+    try:
+        end_value = float(end_value_str) if end_value_str else None
+    except ValueError:
+        end_value = None
+        #print(f"WARNING: Invalid end_value_str: '{end_value_str}'")
 
     # Determine if any search criteria were provided
     search_criteria_provided = any([start_date_str, end_date_str, start_value_str, end_value_str])
 
+    # --- Apply filters only if search criteria are provided ---
     if search_criteria_provided:
-        # Start with the base company-filtered queryset
-        queryset = company_queryset # Already filtered by company
-
-        # Apply multi-tenancy access filters
-        queryset = allif_filtered_and_sorted_queryset(request, model_class, allif_data, explicit_scope='all') # Use 'all' scope for advanced search base
-
-        # Apply date range filters
-        if start_date:
-            queryset = queryset.filter(**{f'{date_field}__gte': start_date})
-        else:
-            queryset = queryset.filter(**{f'{date_field}__gte': firstDate})
+        queryset = base_queryset # Start with the base queryset
         
-        if end_date:
-            queryset = queryset.filter(**{f'{date_field}__lte': end_date})
+        # Apply date range filters using timezone-aware datetimes
+        if filter_start_date:
+            queryset = queryset.filter(**{f'{date_field}__gte': filter_start_date})
         else:
-            queryset = queryset.filter(**{f'{date_field}__lte': lastDate})
+            queryset = queryset.filter(**{f'{date_field}__gte': firstDate}) # Use timezone-aware default
+        
+        if filter_end_date:
+            queryset = queryset.filter(**{f'{date_field}__lte': filter_end_date})
+        else:
+            queryset = queryset.filter(**{f'{date_field}__lte': lastDate}) # Use timezone-aware default
 
         # Apply value range filters
         if start_value is not None:
             queryset = queryset.filter(**{f'{value_field}__gte': start_value})
         else:
-            queryset = queryset.filter(**{f'{value_field}__gte': 0}) # Default to 0 if not provided
+            queryset = queryset.filter(**{f'{value_field}__gte': 0}) 
         
         if end_value is not None:
             queryset = queryset.filter(**{f'{value_field}__lte': end_value})
         else:
-            queryset = queryset.filter(**{f'{value_field}__lte': largestAmount}) # Default to largestAmount if not provided
+            queryset = queryset.filter(**{f'{value_field}__lte': largestAmount}) 
+        
+        searched_data = queryset.distinct() 
+        #print(f"DEBUG: Advanced Search - Filtered results count: {searched_data.count()}")
+    else:
+        searched_data = base_queryset.distinct()
+        #print(f"DEBUG: Advanced Search - No criteria provided, showing all base data. Count: {searched_data.count()}")
 
-        searched_data = queryset.distinct() # Use distinct to avoid duplicates if Q objects overlap
 
     # Prepare context for rendering
     context = {
@@ -859,209 +940,82 @@ def allif_advance_search_handler(
         "scopes": scopes,
         "user_var": user_slug,
         "glblslug": company_slug,
-        "firstDate": firstDate,
-        "lastDate": lastDate,
-        "largestAmount": largestAmount,
-        # Pass back search inputs for form persistence
-        "start_date_input": start_date_str,
+        # Pass back original string inputs for form persistence
+        "start_date_input": start_date_str, 
         "end_date_input": end_date_str,
         "start_value_input": start_value_str,
         "end_value_input": end_value_str,
+        # Pass calculated defaults for display if needed
+        "firstDate_display": firstDate.date() if isinstance(firstDate, datetime.datetime) else firstDate, # For display only
+        "lastDate_display": lastDate.date() if isinstance(lastDate, datetime.datetime) else lastDate,   # For display only
+        "largestAmount_display": largestAmount,
         "selected_format_input": selected_option,
-        **(extra_context or {}) # Include any extra context passed in
+        **(extra_context or {}) 
     }
 
     # --- Conditional Output (HTML or PDF) ---
+    #print(f"DEBUG: Advanced Search - selected_option: '{selected_option}', template_pdf_path: '{template_pdf_path}'")
     if selected_option == "pdf" and template_pdf_path:
-        return allif_generate_pdf_response(
+        #print(f"DEBUG: Advanced Search - PDF option selected and template_pdf_path is valid. Calling allif_generate_pdf_response.")
+        return allif_generate_pdf_response( 
             template_pdf_path,
             context,
             filename=f"{advanced_search_config_key.lower()}-advanced-search-results.pdf"
         )
     else:
-        # If no search criteria, or not PDF, render the HTML template
+        #print(f"DEBUG: Advanced Search - HTML option selected or template_pdf_path is invalid. Rendering HTML template: '{template_html_path}'")
         return render(request, template_html_path, context)
 
-# --- NEW: Document PDF Configuration Map ---
-# Defines the main model, related items model, and context keys for each document type
-DOCUMENT_PDF_CONFIGS = {
-    'CommonPurchaseOrdersModel': { # Key for Purchase Orders
-        'main_model': 'CommonPurchaseOrdersModel',
-        'items_model': 'CommonPurchaseOrderItemsModel',
-        'items_related_field': 'po_item_con', # Field on items model linking to main PO
-        'title': 'Purchase Order',
-        'filename_prefix': 'PO',
-        'template_path': 'allifmaalcommonapp/currencies/currencies-pdf.html',
-        'extra_context_fields': { # Map main_model fields to context names
-            'supplier': 'po_supplier', # allifquery.supplier becomes context['po_supplier']
-        },
-        'related_lookups': ['supplier'], # Fields to select_related or prefetch_related for main model
-    },
-    # Add configurations for other document types, e.g.:
-    # 'CommonInvoicesModel': {
-    #     'main_model': 'CommonInvoicesModel',
-    #     'items_model': 'CommonInvoiceItemsModel',
-    #     'items_related_field': 'invoice_item_con',
-    #     'title': 'Invoice',
-    #     'filename_prefix': 'INV',
-    #     'template_path': 'allifmaalcommonapp/sales/invoice-pdf.html',
-    #     'extra_context_fields': {
-    #         'customer': 'invoice_customer',
-    #     },
-    #     'related_lookups': ['customer'],
-    # },
-    # 'CommonQuotesModel': {
-    #     'main_model': 'CommonQuotesModel',
-    #     'items_model': 'CommonQuoteItemsModel',
-    #     'items_related_field': 'quote_item_con',
-    #     'title': 'Quotation',
-    #     'filename_prefix': 'QTE',
-    #     'template_path': 'allifmaalcommonapp/sales/quote-pdf.html',
-    #     'extra_context_fields': {
-    #         'customer': 'quote_customer',
-    #     },
-    #     'related_lookups': ['customer'],
-    # },
-}
 
-
-# C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py
-
-# --- Standard Python Imports ---
-from typing import Optional, Dict, List, Any
-import datetime # Added for default date handling if needed
-
-# --- Django Imports ---
-from django.db.models import QuerySet, Model, Q 
-from django.http import HttpRequest, Http404, HttpResponse 
-from django.shortcuts import render, get_object_or_404, redirect 
-from django.urls import reverse 
-from django.utils import timezone 
-from django.template.loader import get_template 
-
-# --- Third-party Imports ---
-from xhtml2pdf import pisa 
-
-
-# --- ALLIF_MODEL_REGISTRY (Central Model Class Map) ---
-# This dictionary maps model names (strings) to their actual Python model classes.
-# It's used by all generic handlers (delete, search, advanced search, PDF generation)
-# to dynamically get the correct model class based on a string name.
-ALLIF_MODEL_REGISTRY = { 
-    'CommonSectorsModel': CommonSectorsModel,
-    'CommonCompanyScopeModel': CommonCompanyScopeModel,
-    'CommonTaxParametersModel': CommonTaxParametersModel,
-    'CommonExpensesModel': CommonExpensesModel,
-    'CommonTasksModel': CommonTasksModel,
-    'CommonBanksModel': CommonBanksModel,
-    'TriagesModel': TriagesModel, 
-    'CommonCurrenciesModel': CommonCurrenciesModel, 
-    'CommonSupplierPaymentsModel': CommonSupplierPaymentsModel,
-    'CommonCustomerPaymentsModel': CommonCustomerPaymentsModel,
-    'CommonPaymentTermsModel': CommonPaymentTermsModel,
-    'CommonTransitModel': CommonTransitModel,
-    'CommonStocksModel': CommonStocksModel, 
-    'CommonPurchaseOrdersModel': CommonPurchaseOrdersModel, # <-- CRITICAL: Must be here
-    'CommonPurchaseOrderItemsModel': CommonPurchaseOrderItemsModel, # <-- CRITICAL: Must be here
-    # Add other document models here if you add them to imports above
-    # 'CommonInvoicesModel': CommonInvoicesModel, 
-    # 'CommonInvoiceItemsModel': CommonInvoiceItemsModel, 
-    # 'CommonQuotesModel': CommonQuotesModel, 
-    # 'CommonQuoteItemsModel': CommonQuoteItemsModel, 
-}
-
-# --- Search Configuration Map (for simple search) ---
-SEARCH_CONFIGS = {
-    'CommonStocksModel': ['description__icontains', 'partNumber__icontains'],
-    'CommonCurrencyModel': ['name__icontains', 'description__icontains'],
-    'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], 
-    'CommonTasksModel': ['name__icontains', 'description__icontains'], 
-    'TriagesModel': ['medical_file__icontains', 'pain_level__icontains'], 
-}
-
-# --- Advanced Search Configuration Map ---
-ADVANCED_SEARCH_CONFIGS = {
-    'CommonStocksModel': {
-        'date_field': 'date', 
-        'value_field': 'quantity', 
-        'default_order_by_date': '-date', 
-        'default_order_by_value': '-quantity', 
-    },
-    # Add configurations for other models here
-}
-
-# --- Document PDF Configuration Map ---
-# Defines the main model, related items model, and context keys for each document type
-DOCUMENT_PDF_CONFIGS = {
-    'CommonPurchaseOrdersModel': { # Key for Purchase Orders
-        'main_model': 'CommonPurchaseOrdersModel', # String name of the main model
-        'items_model': 'CommonPurchaseOrderItemsModel', # String name of the items model
-        'items_related_field': 'po_item_con', # Field on items model linking to main PO
-        'title': 'Purchase Order',
-        'filename_prefix': 'PO',
-        'template_path': 'allifmaalcommonapp/purchases/po-pdf.html', # <-- Corrected template path for PO
-        'extra_context_map': { # Map main_model fields to context names
-            'supplier': 'po_supplier', # allifquery.supplier becomes context['po_supplier']
-        },
-        'related_lookups': ['supplier'], # Fields to select_related for main model optimization
-    },
-    # Add configurations for other document types as needed, e.g.:
-     'CommonCurrenciesModel': {
-         'main_model': 'CommonCurrenciesModel',
-         'items_model': 'CommonCurrenciesModel',
-         'items_related_field': 'invoice_item_con',
-       'title': 'Invoice',
-         'filename_prefix': 'INV',
-         'template_path': 'allifmaalcommonapp/sales/invoice-pdf.html',
-    #     'extra_context_map': {
-    #         'customer': 'invoice_customer',
-    #     },
-    #     'related_lookups': ['customer'],
-     },
-}
 
 
 # --- Centralized Document PDF Handler ---
-def allif_document_pdf_handler(
-    request: HttpRequest,
-    pk: int,
-    document_config_key: str, # Key to look up in DOCUMENT_PDF_CONFIGS
+def allif_document_pdf_handler(request: HttpRequest,pk: int,document_config_key: str, # Key to look up in DOCUMENT_PDF_CONFIGS
     extra_context: Optional[Dict[str, Any]] = None
 ) -> HttpResponse:
     """
     Handles generic PDF generation for various document types (PO, Invoice, Quote, etc.).
     Fetches the main document and its related items based on configuration.
+    It can generate a PDF for a main model with or without related items.
     """
     allif_data = common_shared_data(request)
     company_id = allif_data.get("main_sbscrbr_entity")
     user_slug = allif_data.get("usrslg")
     company_slug = allif_data.get("compslg")
 
-    config = DOCUMENT_PDF_CONFIGS.get(document_config_key)
+    config = allif_main_document_pdf_configuration.get(document_config_key)
     if not config:
         print(f"ERROR: PDF Handler - No configuration for key '{document_config_key}' in DOCUMENT_PDF_CONFIGS.")
         raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
 
     main_model_name = config['main_model']
+    # These are now optional in the config
+    items_model_name = config.get('items_model') 
+    items_related_field = config.get('items_related_field')
     
-    items_model_name = config['items_model']
-    items_related_field = config['items_related_field']
     title_prefix = config['title']
     filename_prefix = config['filename_prefix']
     template_path = config['template_path']
     extra_context_map = config.get('extra_context_map', {})
     related_lookups = config.get('related_lookups', [])
 
-    # Debugging print to see what's being looked up
-    print(f"DEBUG: PDF Handler - Looking up main_model_name: '{main_model_name}' and items_model_name: '{items_model_name}' in ALLIF_MODEL_REGISTRY.")
+    main_model_class = allif_main_models_registry.get(main_model_name) 
+    
+    # Only try to get items_model_class if items_model_name is provided in config
+    items_model_class = None
+    if items_model_name:
+        items_model_class = allif_main_models_registry.get(items_model_name)
 
-    main_model_class = ALLIF_MODEL_REGISTRY.get(main_model_name) # <-- Using ALLIF_MODEL_REGISTRY
-    items_model_class = ALLIF_MODEL_REGISTRY.get(items_model_name) # <-- Using ALLIF_MODEL_REGISTRY
-
-    if not main_model_class or not items_model_class:
-        print(f"ERROR: PDF Handler - main_model_class: {main_model_class}, items_model_class: {items_model_class}")
-        print(f"ERROR: PDF Handler - Model classes not found for '{main_model_name}' or '{items_model_name}' in ALLIF_MODEL_REGISTRY.")
-        raise Http404("Required models not found for PDF generation.1111")
+    if not main_model_class: # Only main model is strictly required
+        print(f"ERROR: PDF Handler - main_model_class: {main_model_class}")
+        print(f"ERROR: PDF Handler - Main model class '{main_model_name}' not found in ALLIF_MODEL_REGISTRY.")
+        raise Http404("Required main model not found for PDF generation.")
+    
+    # If items_model_name is provided but its class is not found, raise an error
+    if items_model_name and not items_model_class:
+        print(f"ERROR: PDF Handler - items_model_class: {items_model_class}")
+        print(f"ERROR: PDF Handler - Items model class '{items_model_name}' not found in ALLIF_MODEL_REGISTRY, but specified in config.")
+        raise Http404("Required items model not found for PDF generation, as specified in config.")
 
     try:
         # Fetch the main document object
@@ -1074,21 +1028,31 @@ def allif_document_pdf_handler(
         main_document = get_object_or_404(main_query, pk=pk)
 
         # --- Authorization Check (Crucial for multi-tenant) ---
-        
-        # Fetch related items for the document
-        items_queryset = items_model_class.objects.filter(**{items_related_field: main_document})
+        #if hasattr(main_document, 'company') and main_document.company and str(main_document.company.id) != company_id:
+            #print(f"ERROR: Unauthorized PDF generation attempt for document {main_document.pk} from company {company_id}.")
+            #raise Http404("Unauthorized: Document does not belong to your company or access denied.")
+
+        # Fetch related items for the document ONLY IF configured
+        items_queryset = None
+        if items_model_class and items_related_field:
+            try:
+                items_queryset = items_model_class.objects.filter(**{items_related_field: main_document})
+            except Exception as e:
+                print(f"WARNING: Could not fetch related items for {main_model_name} (ID: {pk}): {e}")
+                items_queryset = None # Ensure it's None if fetching fails
 
         # Prepare context for the PDF template
         context = {
             "title": title_prefix,
             "main_sbscrbr_entity": allif_data.get("main_sbscrbr_entity"),
             "scopes": CommonCompanyScopeModel.objects.filter(company=company_id).order_by('-date')[:4], 
-            "allifquery": main_document, 
-            "allifqueryset": items_queryset, 
+            "allifquery": main_document, # The main document object
+            "allifqueryset": items_queryset, # The related items (will be None if not configured/found)
             "system_user": allif_data.get("owner_user_object"), 
             "user_var": user_slug, 
             "glblslug": company_slug, 
             "timezone": timezone, 
+            "main_query":main_query,
         }
 
         # Add any extra context fields dynamically from the main_document

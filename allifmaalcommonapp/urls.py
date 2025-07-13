@@ -323,6 +323,8 @@ path('Delete/This/Expense/?/<str:pk>/<str:allifusr>/<str:allifslug>/', views.com
 path('Delete/Expense/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteExpense, name="commonDeleteExpense"),
 path('Post/Expense/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostExpense, name="commonPostExpense"),
 path('Search/Expense/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonExpenseSearch, name="commonExpenseSearch"),
+path('Expense/s/Advance/d/Search/s/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonExpenseAdvancedSearch, name="commonExpenseAdvancedSearch"),
+
 
 
 #################################### ORDER SECTION... ##################
@@ -401,6 +403,8 @@ path('Want/To/Delete/Ths/Purchase/Order/Now/<str:pk>/<str:allifusr>/<str:allifsl
 path('Want/To/Delete/This/Purchase/Order/Item/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeletePOItem, name="commonWantToDeletePOItem"),
 path('Edit/Purchase/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPOItem, name="commonEditPOItem"),
 path('Calculate/Purchase/Order/s/Misc/Costs/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCalculatePOMiscCosts, name="commonCalculatePOMiscCosts"),
+path('Convert/This/Purchase/Order/to/p/d/f/<str:pk>/<str:allifusr>/<str:allifslug>/', views.common_purchase_order_pdf, name="common_purchase_order_pdf"),
+
 
 ################################# warehouse stocks ##############################3
 path('Space/s/e/item/s/relteds/y/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonSpaceItems, name="commonSpaceItems"),

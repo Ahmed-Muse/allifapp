@@ -8607,3 +8607,502 @@ INFO 2025-07-12 22:25:53,659 autoreload 26168 23448 C:\am\allifapp\allifapperp\a
 INFO 2025-07-12 22:25:54,563 autoreload 6428 27696 Watching for file changes with StatReloader
 INFO 2025-07-12 22:26:04,933 autoreload 6428 27696 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
 INFO 2025-07-12 22:26:06,087 autoreload 8196 17364 Watching for file changes with StatReloader
+INFO 2025-07-13 17:32:49,486 autoreload 7736 27540 Watching for file changes with StatReloader
+INFO 2025-07-13 17:34:19,249 autoreload 7736 27540 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 17:34:20,510 autoreload 11160 5616 Watching for file changes with StatReloader
+INFO 2025-07-13 17:35:01,510 autoreload 11160 5616 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 17:35:02,850 autoreload 9012 728 Watching for file changes with StatReloader
+INFO 2025-07-13 17:35:15,298 autoreload 9012 728 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 17:35:16,804 autoreload 22496 30588 Watching for file changes with StatReloader
+INFO 2025-07-13 17:36:27,840 autoreload 22496 30588 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-13 17:36:29,143 autoreload 20212 21464 Watching for file changes with StatReloader
+WARNING 2025-07-13 17:37:23,459 log 20212 16280 Not Found: /favicon.ico
+INFO 2025-07-13 17:38:51,122 autoreload 20212 21464 C:\am\allifapp\allifapperp\allifmaalcommonapp\allifutils.py changed, reloading.
+INFO 2025-07-13 17:38:52,473 autoreload 27864 5912 Watching for file changes with StatReloader
+INFO 2025-07-13 17:46:02,532 autoreload 27864 5912 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 17:46:04,285 autoreload 3088 31324 Watching for file changes with StatReloader
+INFO 2025-07-13 17:46:11,675 autoreload 3088 31324 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 17:46:12,946 autoreload 2096 26504 Watching for file changes with StatReloader
+INFO 2025-07-13 17:47:31,840 autoreload 2096 26504 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 17:47:32,949 autoreload 31496 24296 Watching for file changes with StatReloader
+WARNING 2025-07-13 17:47:47,734 log 31496 11804 Not Found: /Convert/This/Purchase/Order/to/p/d/f/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-13 17:47:57,098 log 31496 11804 Not Found: /Convert/This/Purchase/Order/to/p/d/f/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-13 17:48:21,968 log 31496 11804 Not Found: /Convert/This/Purchase/Order/to/p/d/f/2/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 17:48:50,689 autoreload 31496 24296 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 17:48:52,267 autoreload 9936 27304 Watching for file changes with StatReloader
+INFO 2025-07-13 17:49:13,052 autoreload 9936 27304 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 17:49:14,444 autoreload 11772 25008 Watching for file changes with StatReloader
+WARNING 2025-07-13 17:49:29,077 log 11772 1388 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 17:50:06,817 autoreload 11772 25008 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 17:50:08,320 autoreload 22180 17768 Watching for file changes with StatReloader
+WARNING 2025-07-13 17:50:13,772 log 22180 14608 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 17:52:20,498 autoreload 22180 17768 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 17:52:21,794 autoreload 31320 18448 Watching for file changes with StatReloader
+INFO 2025-07-13 17:52:36,095 autoreload 31320 18448 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 17:52:37,580 autoreload 26048 17324 Watching for file changes with StatReloader
+WARNING 2025-07-13 17:52:41,941 log 26048 9444 Not Found: /Convert/Currency/To/pdf/55/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 17:54:09,768 autoreload 26048 17324 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 17:54:11,279 autoreload 26208 17312 Watching for file changes with StatReloader
+WARNING 2025-07-13 17:54:13,579 log 26208 12912 Not Found: /Convert/Currency/To/pdf/55/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 17:54:20,103 autoreload 26208 17312 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 17:54:21,301 autoreload 30868 25624 Watching for file changes with StatReloader
+WARNING 2025-07-13 17:58:59,982 log 30868 12972 Not Found: /Convert/Currency/To/pdf/55/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 17:59:52,102 autoreload 30868 25624 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 17:59:54,132 autoreload 9140 11600 Watching for file changes with StatReloader
+INFO 2025-07-13 18:00:41,632 autoreload 9140 11600 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-13 18:00:42,956 autoreload 31196 13296 Watching for file changes with StatReloader
+WARNING 2025-07-13 18:00:45,213 log 31196 14476 Not Found: /Convert/Currency/To/pdf/55/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+WARNING 2025-07-13 18:00:49,552 log 31196 14476 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 18:38:30,431 autoreload 31196 13296 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:38:32,506 autoreload 17176 5568 Watching for file changes with StatReloader
+INFO 2025-07-13 18:49:49,527 autoreload 17176 5568 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:49:50,595 autoreload 15184 19400 Watching for file changes with StatReloader
+WARNING 2025-07-13 18:49:54,097 log 15184 28636 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 18:50:37,622 autoreload 15184 19400 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:50:38,807 autoreload 20596 13120 Watching for file changes with StatReloader
+INFO 2025-07-13 18:50:54,388 autoreload 20596 13120 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:50:55,286 autoreload 25148 18832 Watching for file changes with StatReloader
+INFO 2025-07-13 18:51:19,223 autoreload 25148 18832 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:51:20,189 autoreload 12548 2764 Watching for file changes with StatReloader
+INFO 2025-07-13 18:51:36,981 autoreload 12548 2764 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:51:37,978 autoreload 27980 29892 Watching for file changes with StatReloader
+INFO 2025-07-13 18:52:13,878 autoreload 27980 29892 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:52:14,805 autoreload 13180 19160 Watching for file changes with StatReloader
+WARNING 2025-07-13 18:52:18,384 log 13180 6188 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 18:52:33,526 autoreload 13180 19160 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:52:34,548 autoreload 16332 11824 Watching for file changes with StatReloader
+INFO 2025-07-13 18:52:51,667 autoreload 16332 11824 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:52:52,583 autoreload 25264 30776 Watching for file changes with StatReloader
+INFO 2025-07-13 18:53:13,798 autoreload 25264 30776 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:53:14,730 autoreload 15136 29544 Watching for file changes with StatReloader
+INFO 2025-07-13 18:53:30,339 autoreload 15136 29544 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:53:31,307 autoreload 2700 6228 Watching for file changes with StatReloader
+INFO 2025-07-13 18:53:33,914 autoreload 2700 6228 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:53:34,584 autoreload 9404 16172 Watching for file changes with StatReloader
+INFO 2025-07-13 18:54:02,747 autoreload 9404 16172 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:54:03,650 autoreload 14544 27028 Watching for file changes with StatReloader
+INFO 2025-07-13 18:54:32,777 autoreload 14544 27028 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:54:33,779 autoreload 16956 7480 Watching for file changes with StatReloader
+INFO 2025-07-13 18:56:44,478 autoreload 16956 7480 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:56:45,408 autoreload 19204 30344 Watching for file changes with StatReloader
+INFO 2025-07-13 18:57:42,778 autoreload 19204 30344 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:57:43,672 autoreload 20464 31084 Watching for file changes with StatReloader
+INFO 2025-07-13 18:58:14,679 autoreload 20464 31084 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:58:15,592 autoreload 26036 13692 Watching for file changes with StatReloader
+INFO 2025-07-13 18:59:24,071 autoreload 26036 13692 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 18:59:24,935 autoreload 6908 17292 Watching for file changes with StatReloader
+INFO 2025-07-13 19:00:43,921 autoreload 6908 17292 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:00:44,792 autoreload 13228 27688 Watching for file changes with StatReloader
+INFO 2025-07-13 19:01:33,914 autoreload 13228 27688 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:01:34,798 autoreload 23068 25176 Watching for file changes with StatReloader
+INFO 2025-07-13 19:02:22,057 autoreload 23068 25176 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:02:22,970 autoreload 18964 3720 Watching for file changes with StatReloader
+INFO 2025-07-13 19:04:48,512 autoreload 18964 3720 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:04:49,480 autoreload 14740 31560 Watching for file changes with StatReloader
+INFO 2025-07-13 19:07:11,379 autoreload 14740 31560 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:07:12,279 autoreload 30588 5568 Watching for file changes with StatReloader
+INFO 2025-07-13 19:08:14,969 autoreload 30588 5568 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:08:15,828 autoreload 8444 11192 Watching for file changes with StatReloader
+INFO 2025-07-13 19:10:41,195 autoreload 8444 11192 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:10:42,101 autoreload 13144 30536 Watching for file changes with StatReloader
+INFO 2025-07-13 19:11:35,474 autoreload 13144 30536 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:11:36,386 autoreload 26808 27124 Watching for file changes with StatReloader
+INFO 2025-07-13 19:13:18,657 autoreload 26808 27124 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:13:19,481 autoreload 2028 11000 Watching for file changes with StatReloader
+INFO 2025-07-13 19:14:17,088 autoreload 2028 11000 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:14:17,933 autoreload 14164 24880 Watching for file changes with StatReloader
+INFO 2025-07-13 19:16:36,462 autoreload 14164 24880 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:16:37,351 autoreload 13284 8480 Watching for file changes with StatReloader
+INFO 2025-07-13 19:17:11,916 autoreload 13284 8480 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 19:17:13,018 autoreload 30636 17300 Watching for file changes with StatReloader
+INFO 2025-07-13 19:17:26,207 autoreload 30636 17300 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:17:27,283 autoreload 9404 6328 Watching for file changes with StatReloader
+INFO 2025-07-13 19:17:48,506 autoreload 9404 6328 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:17:49,303 autoreload 23300 3244 Watching for file changes with StatReloader
+INFO 2025-07-13 19:18:22,365 autoreload 23300 3244 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:18:23,271 autoreload 12748 21940 Watching for file changes with StatReloader
+INFO 2025-07-13 19:19:18,831 autoreload 12748 21940 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:19:19,732 autoreload 22084 20412 Watching for file changes with StatReloader
+INFO 2025-07-13 19:20:59,742 autoreload 22084 20412 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:21:00,652 autoreload 11656 26676 Watching for file changes with StatReloader
+INFO 2025-07-13 19:25:04,703 autoreload 11656 26676 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:25:05,710 autoreload 6496 15496 Watching for file changes with StatReloader
+INFO 2025-07-13 19:25:29,859 autoreload 6496 15496 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 19:25:30,840 autoreload 29580 21044 Watching for file changes with StatReloader
+INFO 2025-07-13 19:25:55,049 autoreload 29580 21044 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 19:25:56,023 autoreload 13524 17180 Watching for file changes with StatReloader
+INFO 2025-07-13 19:26:28,588 autoreload 13524 17180 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 19:26:29,789 autoreload 22760 21244 Watching for file changes with StatReloader
+INFO 2025-07-13 19:27:33,345 autoreload 22760 21244 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 19:27:34,346 autoreload 28692 13492 Watching for file changes with StatReloader
+INFO 2025-07-13 19:28:12,561 autoreload 28692 13492 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:28:13,614 autoreload 1708 6204 Watching for file changes with StatReloader
+INFO 2025-07-13 19:29:10,157 autoreload 1708 6204 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:29:11,130 autoreload 28892 26476 Watching for file changes with StatReloader
+INFO 2025-07-13 19:29:38,150 autoreload 28892 26476 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:29:39,086 autoreload 22276 31072 Watching for file changes with StatReloader
+INFO 2025-07-13 19:29:46,075 autoreload 22276 31072 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:29:46,970 autoreload 28124 4060 Watching for file changes with StatReloader
+INFO 2025-07-13 19:30:13,434 autoreload 28124 4060 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:30:14,303 autoreload 25360 23096 Watching for file changes with StatReloader
+WARNING 2025-07-13 19:30:20,630 log 25360 22044 Not Found: /Convert/Currency/To/pdf/56/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/
+INFO 2025-07-13 19:30:28,135 autoreload 25360 23096 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:30:29,011 autoreload 29352 18212 Watching for file changes with StatReloader
+INFO 2025-07-13 19:31:53,550 autoreload 29352 18212 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 19:31:54,544 autoreload 16472 26956 Watching for file changes with StatReloader
+INFO 2025-07-13 19:36:23,510 autoreload 16472 26956 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:36:24,689 autoreload 26500 11324 Watching for file changes with StatReloader
+INFO 2025-07-13 19:37:17,007 autoreload 26500 11324 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:37:17,880 autoreload 5244 5932 Watching for file changes with StatReloader
+INFO 2025-07-13 19:55:38,322 autoreload 5244 5932 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:55:39,366 autoreload 23348 12396 Watching for file changes with StatReloader
+ERROR 2025-07-13 19:55:42,527 log 23348 3128 Internal Server Error: /Advanced/Currency/Money/Type/s/Items/Search/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Shareholders/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 645, in commonCurrencyAdvanceSearch
+    return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',
+        advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/currencies/currencies.html', # Template for HTML results
+        #template_pdf_path='allifmaalcommonapp/stocks/stock-item-search-pdf.html', # Template for PDF export
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 911, in allif_advance_search_handler
+    return allif_generate_pdf_response(
+        template_pdf_path,
+        context,
+        filename=f"{advanced_search_config_key.lower()}-advanced-search-results.pdf"
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 762, in allif_generate_pdf_response
+    template = get_template(template_path)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 17, in get_template
+    for origin in self.get_template_sources(template_name):
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 70, in get_template_sources
+    yield from loader.get_template_sources(template_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\filesystem.py", line 35, in get_template_sources
+    name = safe_join(template_dir, template_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\_os.py", line 17, in safe_join
+    final_path = abspath(join(base, *paths))
+                         ~~~~^^^^^^^^^^^^^^
+  File "<frozen ntpath>", line 139, in join
+  File "<frozen genericpath>", line 188, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+INFO 2025-07-13 19:56:16,843 autoreload 23348 12396 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:56:18,060 autoreload 5596 29148 Watching for file changes with StatReloader
+INFO 2025-07-13 19:56:39,583 autoreload 5596 29148 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:56:40,357 autoreload 17956 18940 Watching for file changes with StatReloader
+INFO 2025-07-13 19:57:25,002 autoreload 17956 18940 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:57:25,711 autoreload 21956 10328 Watching for file changes with StatReloader
+INFO 2025-07-13 19:58:13,427 autoreload 21956 10328 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:58:14,263 autoreload 30364 15468 Watching for file changes with StatReloader
+INFO 2025-07-13 19:59:26,407 autoreload 30364 15468 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 19:59:27,302 autoreload 4476 28692 Watching for file changes with StatReloader
+INFO 2025-07-13 20:04:18,447 autoreload 4476 28692 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:04:19,326 autoreload 29744 19636 Watching for file changes with StatReloader
+INFO 2025-07-13 20:07:30,345 autoreload 29744 19636 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:07:31,219 autoreload 15084 14900 Watching for file changes with StatReloader
+INFO 2025-07-13 20:08:29,326 autoreload 15084 14900 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:08:30,333 autoreload 680 30816 Watching for file changes with StatReloader
+ERROR 2025-07-13 20:08:33,562 log 680 14124 Internal Server Error: /Advanced/Currency/Money/Type/s/Items/Search/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Shareholders/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 645, in commonCurrencyAdvanceSearch
+    return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',
+        advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/currencies/currencies.html', # Template for HTML results
+        #template_pdf_path='allifmaalcommonapp/stocks/stock-item-search-pdf.html', # Template for PDF export
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 911, in allif_advance_search_handler
+    return allif_generate_pdf_response(
+        template_pdf_path,
+        context,
+        filename=f"{advanced_search_config_key.lower()}-advanced-search-results.pdf"
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 762, in allif_generate_pdf_response
+    template = get_template(template_path)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 17, in get_template
+    for origin in self.get_template_sources(template_name):
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 70, in get_template_sources
+    yield from loader.get_template_sources(template_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\filesystem.py", line 35, in get_template_sources
+    name = safe_join(template_dir, template_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\_os.py", line 17, in safe_join
+    final_path = abspath(join(base, *paths))
+                         ~~~~^^^^^^^^^^^^^^
+  File "<frozen ntpath>", line 139, in join
+  File "<frozen genericpath>", line 188, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+INFO 2025-07-13 20:09:01,874 autoreload 680 30816 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:09:03,067 autoreload 18996 13552 Watching for file changes with StatReloader
+ERROR 2025-07-13 20:09:05,111 log 18996 11724 Internal Server Error: /Advanced/Currency/Money/Type/s/Items/Search/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Shareholders/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 645, in commonCurrencyAdvanceSearch
+    return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',
+        advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/currencies/currencies.html', # Template for HTML results
+        #template_pdf_path='allifmaalcommonapp/stocks/stock-item-search-pdf.html', # Template for PDF export
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 911, in allif_advance_search_handler
+    return allif_generate_pdf_response(
+        template_pdf_path,
+        context,
+        #filename=f"{advanced_search_config_key.lower()}-advanced-search-results.pdf"
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 762, in allif_generate_pdf_response
+    template = get_template(template_path)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 17, in get_template
+    for origin in self.get_template_sources(template_name):
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 70, in get_template_sources
+    yield from loader.get_template_sources(template_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\filesystem.py", line 35, in get_template_sources
+    name = safe_join(template_dir, template_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\_os.py", line 17, in safe_join
+    final_path = abspath(join(base, *paths))
+                         ~~~~^^^^^^^^^^^^^^
+  File "<frozen ntpath>", line 139, in join
+  File "<frozen genericpath>", line 188, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+INFO 2025-07-13 20:09:16,428 autoreload 18996 13552 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:09:17,488 autoreload 5072 20024 Watching for file changes with StatReloader
+ERROR 2025-07-13 20:09:19,266 log 5072 20644 Internal Server Error: /Advanced/Currency/Money/Type/s/Items/Search/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Shareholders/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 645, in commonCurrencyAdvanceSearch
+    return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',
+        advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/currencies/currencies.html', # Template for HTML results
+        #template_pdf_path='allifmaalcommonapp/stocks/stock-item-search-pdf.html', # Template for PDF export
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 911, in allif_advance_search_handler
+    return allif_generate_pdf_response(
+        #template_pdf_path,
+        context,
+        filename=f"{advanced_search_config_key.lower()}-advanced-search-results.pdf"
+    )
+TypeError: allif_generate_pdf_response() missing 1 required positional argument: 'context'
+INFO 2025-07-13 20:09:27,920 autoreload 5072 20024 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:09:29,159 autoreload 14712 9396 Watching for file changes with StatReloader
+ERROR 2025-07-13 20:09:31,904 log 14712 8444 Internal Server Error: /Advanced/Currency/Money/Type/s/Items/Search/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Shareholders/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 645, in commonCurrencyAdvanceSearch
+    return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',
+        advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/currencies/currencies.html', # Template for HTML results
+        #template_pdf_path='allifmaalcommonapp/stocks/stock-item-search-pdf.html', # Template for PDF export
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 911, in allif_advance_search_handler
+    return allif_generate_pdf_response(
+        template_pdf_path,
+        #context,
+        filename=f"{advanced_search_config_key.lower()}-advanced-search-results.pdf"
+    )
+TypeError: allif_generate_pdf_response() missing 1 required positional argument: 'context'
+INFO 2025-07-13 20:09:39,950 autoreload 14712 9396 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:09:40,984 autoreload 5568 15632 Watching for file changes with StatReloader
+INFO 2025-07-13 20:10:42,808 autoreload 5568 15632 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:10:43,722 autoreload 16448 23540 Watching for file changes with StatReloader
+ERROR 2025-07-13 20:10:50,604 log 16448 25420 Internal Server Error: /Advanced/Currency/Money/Type/s/Items/Search/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Shareholders/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The view allifmaalcommonapp.views.commonCurrencyAdvanceSearch didn't return an HttpResponse object. It returned None instead.
+INFO 2025-07-13 20:11:24,096 autoreload 16448 23540 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:11:25,264 autoreload 26508 18048 Watching for file changes with StatReloader
+INFO 2025-07-13 20:11:48,318 autoreload 26508 18048 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:11:49,270 autoreload 31048 15768 Watching for file changes with StatReloader
+INFO 2025-07-13 20:15:18,149 autoreload 31048 15768 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:15:19,058 autoreload 6404 11576 Watching for file changes with StatReloader
+INFO 2025-07-13 20:15:51,245 autoreload 6404 11576 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:15:52,361 autoreload 15124 27328 Watching for file changes with StatReloader
+INFO 2025-07-13 20:16:02,870 autoreload 15124 27328 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:16:04,022 autoreload 19524 17680 Watching for file changes with StatReloader
+INFO 2025-07-13 20:22:31,236 autoreload 19524 17680 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:22:32,425 autoreload 17096 26160 Watching for file changes with StatReloader
+INFO 2025-07-13 20:22:54,845 autoreload 17096 26160 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:22:56,071 autoreload 14996 19644 Watching for file changes with StatReloader
+INFO 2025-07-13 20:23:07,140 autoreload 14996 19644 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:23:08,081 autoreload 25060 20048 Watching for file changes with StatReloader
+INFO 2025-07-13 20:24:11,015 autoreload 25060 20048 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:24:11,885 autoreload 22568 21464 Watching for file changes with StatReloader
+INFO 2025-07-13 20:30:42,116 autoreload 22568 21464 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:30:43,208 autoreload 21944 13468 Watching for file changes with StatReloader
+INFO 2025-07-13 20:31:35,634 autoreload 21944 13468 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:31:36,654 autoreload 20568 19896 Watching for file changes with StatReloader
+INFO 2025-07-13 20:35:51,424 autoreload 20568 19896 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:35:52,431 autoreload 29900 21024 Watching for file changes with StatReloader
+INFO 2025-07-13 20:36:33,127 autoreload 29900 21024 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:36:34,153 autoreload 17964 29352 Watching for file changes with StatReloader
+INFO 2025-07-13 20:38:28,741 autoreload 17964 29352 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:38:29,757 autoreload 2328 30612 Watching for file changes with StatReloader
+INFO 2025-07-13 20:38:36,305 autoreload 2328 30612 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:38:37,018 autoreload 30276 16320 Watching for file changes with StatReloader
+INFO 2025-07-13 20:39:17,295 autoreload 30276 16320 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:39:18,262 autoreload 25360 28416 Watching for file changes with StatReloader
+INFO 2025-07-13 20:40:14,104 autoreload 25360 28416 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-13 20:40:15,128 autoreload 15740 30228 Watching for file changes with StatReloader
+INFO 2025-07-13 20:43:52,649 autoreload 15740 30228 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:43:54,016 autoreload 26080 11788 Watching for file changes with StatReloader
+ERROR 2025-07-13 20:44:19,062 log 26080 24884 Internal Server Error: /Expense/s/Advance/d/Search/s/user-full-names-85349024f8ef/barasho-hospital2116-80c3a812382e/Shareholders/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 7077, in commonExpenseAdvancedSearch
+    return allif_advance_search_handler(request,model_name='CommonExpensesModel',
+        advanced_search_config_key='CommonExpensesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/expenses/expenses.html', # Template for HTML results
+        template_pdf_path='allifmaalcommonapp/expenses/expenses-advance-search-pdf.html', # <-- CRITICAL: Pass the PDF template path
+    )
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 819, in allif_advance_search_handler
+    first_item_by_date = company_queryset.order_by(date_field).first()
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1659, in order_by
+    obj.query.add_ordering(*field_names)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 2222, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'created_at' into field. Choices are: amount, balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, expense_account, expense_account_id, id, last_updated, mode, mode_id, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, supplier, supplier_id, updated_by, updated_by_id, uuid
+INFO 2025-07-13 20:44:36,952 autoreload 26080 11788 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 20:44:37,953 autoreload 26060 17176 Watching for file changes with StatReloader
+INFO 2025-07-13 20:45:22,064 autoreload 26060 17176 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:45:23,142 autoreload 4340 16060 Watching for file changes with StatReloader
+INFO 2025-07-13 20:49:52,426 autoreload 4340 16060 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:49:53,288 autoreload 7084 16188 Watching for file changes with StatReloader
+INFO 2025-07-13 20:56:50,727 autoreload 7084 16188 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 20:56:51,726 autoreload 11816 27260 Watching for file changes with StatReloader
+INFO 2025-07-13 21:00:01,652 autoreload 11816 27260 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:00:02,461 autoreload 19216 14156 Watching for file changes with StatReloader
+INFO 2025-07-13 21:01:49,405 autoreload 20756 7684 Watching for file changes with StatReloader
+INFO 2025-07-13 21:05:36,243 autoreload 20756 7684 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:05:37,301 autoreload 22092 21132 Watching for file changes with StatReloader
+INFO 2025-07-13 21:09:44,583 autoreload 22092 21132 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:09:45,673 autoreload 26116 26240 Watching for file changes with StatReloader
+INFO 2025-07-13 21:15:26,357 autoreload 26116 26240 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:15:27,283 autoreload 5056 29024 Watching for file changes with StatReloader
+INFO 2025-07-13 21:15:37,520 autoreload 5056 29024 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:15:38,417 autoreload 23560 22604 Watching for file changes with StatReloader
+INFO 2025-07-13 21:23:11,361 autoreload 23560 22604 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:23:12,303 autoreload 11560 21808 Watching for file changes with StatReloader
+INFO 2025-07-13 21:24:37,083 autoreload 11560 21808 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:24:37,976 autoreload 16496 24304 Watching for file changes with StatReloader
+INFO 2025-07-13 21:24:59,925 autoreload 16496 24304 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:25:00,840 autoreload 24232 28044 Watching for file changes with StatReloader
+INFO 2025-07-13 21:25:43,372 autoreload 24232 28044 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:25:44,368 autoreload 15040 22656 Watching for file changes with StatReloader
+INFO 2025-07-13 21:28:22,975 autoreload 15040 22656 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 21:28:24,078 autoreload 468 21216 Watching for file changes with StatReloader
+INFO 2025-07-13 21:28:30,131 autoreload 468 21216 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-13 21:28:30,865 autoreload 31504 19748 Watching for file changes with StatReloader
+INFO 2025-07-13 21:35:25,338 autoreload 31504 19748 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:35:26,314 autoreload 29676 29740 Watching for file changes with StatReloader
+INFO 2025-07-13 21:36:46,383 autoreload 29676 29740 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:36:47,255 autoreload 27540 31508 Watching for file changes with StatReloader
+INFO 2025-07-13 21:40:00,150 autoreload 27540 31508 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:40:01,209 autoreload 15160 28668 Watching for file changes with StatReloader
+INFO 2025-07-13 21:42:30,251 autoreload 15160 28668 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:42:31,219 autoreload 30664 13668 Watching for file changes with StatReloader
+INFO 2025-07-13 21:43:21,295 autoreload 30664 13668 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:43:22,242 autoreload 2136 3944 Watching for file changes with StatReloader
+INFO 2025-07-13 21:44:59,972 autoreload 2136 3944 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:45:01,056 autoreload 26556 24816 Watching for file changes with StatReloader
+INFO 2025-07-13 21:46:36,162 autoreload 26556 24816 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:46:37,195 autoreload 28688 21956 Watching for file changes with StatReloader
+INFO 2025-07-13 21:48:22,449 autoreload 28688 21956 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 21:48:23,224 autoreload 17980 11484 Watching for file changes with StatReloader
+INFO 2025-07-13 22:00:41,509 autoreload 17980 11484 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:00:42,430 autoreload 13692 13420 Watching for file changes with StatReloader
+INFO 2025-07-13 22:02:58,517 autoreload 13692 13420 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:02:59,485 autoreload 18300 11836 Watching for file changes with StatReloader
+INFO 2025-07-13 22:03:20,300 autoreload 18300 11836 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:03:21,133 autoreload 15396 2944 Watching for file changes with StatReloader
+INFO 2025-07-13 22:06:14,689 autoreload 15396 2944 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:06:15,423 autoreload 19576 9200 Watching for file changes with StatReloader
+INFO 2025-07-13 22:06:25,379 autoreload 19576 9200 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:06:26,141 autoreload 15408 18048 Watching for file changes with StatReloader
+INFO 2025-07-13 22:06:41,637 autoreload 15408 18048 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:06:42,354 autoreload 16916 31364 Watching for file changes with StatReloader
+INFO 2025-07-13 22:06:50,362 autoreload 16916 31364 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:06:51,328 autoreload 18708 24964 Watching for file changes with StatReloader
+INFO 2025-07-13 22:07:29,877 autoreload 18708 24964 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:07:30,824 autoreload 30772 24232 Watching for file changes with StatReloader
+INFO 2025-07-13 22:07:40,380 autoreload 24184 31160 Watching for file changes with StatReloader
+INFO 2025-07-13 22:13:48,440 autoreload 24184 31160 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:13:49,524 autoreload 26124 31368 Watching for file changes with StatReloader
+INFO 2025-07-13 22:14:16,039 autoreload 26124 31368 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:14:17,029 autoreload 9240 13532 Watching for file changes with StatReloader
+INFO 2025-07-13 22:14:35,483 autoreload 9240 13532 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:14:36,456 autoreload 26504 13048 Watching for file changes with StatReloader
+INFO 2025-07-13 22:14:47,199 autoreload 26504 13048 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:14:48,062 autoreload 29280 22096 Watching for file changes with StatReloader
+INFO 2025-07-13 22:14:59,398 autoreload 29280 22096 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-13 22:15:00,461 autoreload 24392 19840 Watching for file changes with StatReloader

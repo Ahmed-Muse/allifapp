@@ -10,8 +10,7 @@ from django.db import transaction # For transactions
 from django.core.cache import cache # For caching
 from django.forms import modelformset_factory # For formsets
 
-from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,
-allif_delete_models_class_map,allif_delete_hanlder,allif_common_form_submission_and_save,
+from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,allif_delete_hanlder,allif_common_form_submission_and_save,
 allif_common_form_edit_and_save,allif_delete_confirm,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler)
 # ... (existing imports) ...
 from django.http import JsonResponse
@@ -645,10 +644,16 @@ def commonCurrencyAdvanceSearch(request,*allifargs,**allifkwargs):
     # This view now simply calls the centralized advanced search handler
     return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',
         advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
-        template_html_path='allifmaalcommonapp/currencies/currency-search-pdf.html', # Template for HTML results
-        #template_pdf_path='allifmaalcommonapp/stocks/stock-item-search-pdf.html', # Template for PDF export
+        template_html_path='allifmaalcommonapp/currencies/currencies.html', # Template for HTML results
+        template_pdf_path='allifmaalcommonapp/currencies/currency-advanced-search-pdf.html', # <-- CRITICAL: Pass the PDF template path
     )
 
+
+
+def common_currency_pdf(request, pk, *allifargs, **allifkwargs):
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+  
+  
 
 
   
@@ -677,18 +682,6 @@ def commonDeletePaymentTerm(request,pk,*allifargs,**allifkwargs):
 
 
 
-def common_currency_pdf(request, pk, *allifargs, **allifkwargs):
-    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonPurchaseOrdersModel',)
-  
-  
-
-
-
-def common_purchase_order_pdf(request, pk, *allifargs, **allifkwargs):
-    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonPurchaseOrdersModel',)
-  
-  
-  
   
   
   
@@ -6852,6 +6845,7 @@ def commonExpenses(request,*allifargs,**allifkwargs):
         
         
         title = "Expenses"
+        formats=CommonDocsFormatModel.objects.all()
         allif_data = common_shared_data(request)
         # Call the universal utility function
         # The utility now gets sort_mapping and default_sort_field internally
@@ -6885,6 +6879,7 @@ def commonExpenses(request,*allifargs,**allifkwargs):
             #"glblslug": allif_data.get("compslg"),
             #"base_url_name": request.resolver_match.view_name, 
             "sort_options": allifqueryset.sort_options, # Read from queryset attribute
+            "formats":formats,
         }
         #print(f"DEBUG: Context for template: {context.keys()}")
         
@@ -7076,6 +7071,15 @@ def commonPostExpense(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
+
+def commonExpenseAdvancedSearch(request,*allifargs,**allifkwargs):
+    # This view now simply calls the centralized advanced search handler
+    return allif_advance_search_handler(request,model_name='CommonExpensesModel',
+        advanced_search_config_key='CommonExpensesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/expenses/expenses.html', # Template for HTML results
+        template_pdf_path='allifmaalcommonapp/expenses/expenses-advance-search-pdf.html', # <-- CRITICAL: Pass the PDF template path
+    )
+
 
 ############################## STTART OF ORDERS SECTION... ###################################3
 @logged_in_user_must_have_profile
@@ -8326,6 +8330,13 @@ def commonNewPurchaseOrder(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context) 
 
 
+
+
+
+
+def common_purchase_order_pdf(request, pk, *allifargs, **allifkwargs):
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonPurchaseOrdersModel',)
+  
 @logged_in_user_must_have_profile
 @subscriber_company_status
 @logged_in_user_can_view

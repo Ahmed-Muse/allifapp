@@ -121,6 +121,7 @@
         <td class="allif-fix-table-col">P.O. Ref. No.</td>
      
         <td>Supplier</td>
+         <td>Download</td>
         <td>Amount</td>
         <td>Misc Costs</td>
         <td>Tax</td>
@@ -149,8 +150,8 @@
 
  <td>
         
-        <a href="{% url 'allifmaalcommonapp:common_currency_pdf' item.id user_var glblslug %}" class="allif-table-links">
-        dynmc pdf
+        <a href="{% url 'allifmaalcommonapp:common_purchase_order_pdf' item.id user_var glblslug %}" class="allif-table-links">
+        Download
         </a>
       </td>
       
