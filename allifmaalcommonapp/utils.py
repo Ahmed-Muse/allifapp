@@ -11,6 +11,28 @@ from typing import Optional # Import Optional for type hinting
 from .models import *
 from allifmaalshaafiapp.models import *
 from django.db.models import QuerySet, Model, Q # Ensure Q is imported for complex lookups
+from django.db import IntegrityError
+
+# --- Standard Python Imports ---
+from typing import Optional, Dict, List, Any
+import datetime 
+from decimal import Decimal 
+import io # For in-memory file handling
+from openpyxl.styles import Font, Border, Side, Alignment, PatternFill # For styling Excel
+# --- Django Imports ---
+from django.db.models import QuerySet, Model, Q 
+from django.http import HttpRequest, Http404, HttpResponse 
+from django.shortcuts import render, get_object_or_404, redirect 
+from django.urls import reverse 
+from django.utils import timezone 
+from django.template.loader import get_template 
+from django.db import transaction 
+from django.contrib import messages 
+
+# --- Third-party Imports ---
+from xhtml2pdf import pisa 
+import openpyxl # Import openpyxl for Excel generation
+
 
 
 from typing import Optional, Dict, List, Any
@@ -121,6 +143,14 @@ allif_advanced_search_configs = {
         'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
         'default_order_by_date': '-starts', # Default ordering for finding first/last date
         'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Currency Name'},
+        {'field': 'number', 'label': 'Currency Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Currency Description'},
+        {'field': 'balance', 'label': 'Currency Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
     },
     # Add configurations for other models here, e.g.:
     'CommonExpensesModel': {
@@ -128,6 +158,15 @@ allif_advanced_search_configs = {
          'value_field': 'balance',
          'default_order_by_date': '-starts',
          'default_order_by_value': '-balance',
+         
+          'excel_fields': [
+            {'field': 'name', 'label': 'Currency Name'},
+        {'field': 'number', 'label': 'Currency Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Currency Description'},
+        {'field': 'balance', 'label': 'Currency Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
      },
      'CommonCustomerPaymentsModel': {
          'date_field': 'payment_date',
@@ -205,6 +244,113 @@ allif_main_document_pdf_configuration= {
          'related_lookups': ['customer'],
      },
 }
+
+
+
+# --- NEW: EXCEL_UPLOAD_CONFIGS (Centralized Excel Upload Configuration Map) ---
+EXCEL_UPLOAD_CONFIGS = {
+    'CommonCurrenciesModel': {
+        'model': 'CommonCurrenciesModel', # String name for ALLIF_MODEL_REGISTRY lookup
+        'required_excel_headers': ['Name', 'Code', ], # Headers that MUST be in Excel
+        'field_mapping': { # Map Excel headers to model field names if different
+            'Currency Name': 'name',
+            'Code': 'code',
+           
+            'Description': 'description',
+            'Start Date': 'starts', # Assuming 'starts' is a DateTimeField/DateField
+            'End Date': 'ends',     # Assuming 'ends' is a DateTimeField/DateField
+         
+            'Status': 'status', # Example status field
+        },
+        'related_field_lookups': {
+            # No related fields for CommonCurrencyModel in this example
+        },
+        'default_values': {
+            #'is_active': True, # Default value if 'Is Active' column is missing or empty
+            'status': 'active', # Default status if 'Status' column is missing or empty
+        },
+    },
+    'CommonStocksModel': {
+        'model': 'CommonStocksModel',
+        'required_excel_headers': ['Part Number', 'Description', 'Unit Cost', 'Unit Price', 'Quantity'],
+        'field_mapping': {
+            'Part Number': 'partNumber',
+            'Description': 'description',
+            'Unit Cost': 'unitcost',
+            'Unit Price': 'unitPrice',
+            'Quantity': 'quantity',
+            'Category': 'category', # Excel column 'Category' maps to 'category' ForeignKey field
+            'Unit of Measure': 'unit_of_measure', # Excel column 'Unit of Measure' maps to 'unit_of_measure' ForeignKey field
+            'Inventory Account': 'inventory_account', # Excel column 'Inventory Account' maps to 'inventory_account' ForeignKey field
+            'Expense Account': 'expense_account',
+            'Income Account': 'income_account',
+            'Tax Rate Name': 'taxrate', # Assuming taxrate is a ForeignKey to CommonTaxParametersModel
+        },
+        'related_field_lookups': {
+            'category': {'model': 'CommonCategoriesModel', 'lookup_field': 'name'}, # Lookup Category by its 'name'
+            'unit_of_measure': {'model': 'CommonUnitsOfMeasureModel', 'lookup_field': 'name'}, # Lookup UnitOfMeasure by 'name'
+            'inventory_account': {'model': 'CommonChartofAccountsModel', 'lookup_field': 'name'}, # Lookup ChartOfAccounts by 'name'
+            'expense_account': {'model': 'CommonChartofAccountsModel', 'lookup_field': 'name'},
+            'income_account': {'model': 'CommonChartofAccountsModel', 'lookup_field': 'name'},
+            'taxrate': {'model': 'CommonTaxParametersModel', 'lookup_field': 'name'}, # Lookup TaxRate by 'name'
+        },
+        'default_values': {
+            'status': 'active',
+            'is_active': True,
+            'buyingPrice': Decimal('0.00'), # Default if not provided
+            'standardUnitCost': Decimal('0.00'),
+            'total_units_sold': 0,
+        },
+    },
+    # Add more configurations for other models here (e.g., CommonCustomersModel, CommonSuppliersModel)
+    # Example for CommonCustomersModel
+    'CommonCustomersModel': {
+        'model': 'CommonCustomersModel',
+        'required_excel_headers': ['Customer Name', 'Email'],
+        'field_mapping': {
+            'Customer Name': 'name',
+            'Email': 'email',
+            'Phone': 'phone',
+            'Address': 'address',
+            'Balance': 'balance',
+            'Turnover': 'turnover',
+            'Payment Term': 'payment_term',
+        },
+        'related_field_lookups': {
+            'payment_term': {'model': 'CommonPaymentTermModel', 'lookup_field': 'name'},
+        },
+        'default_values': {
+            'balance': Decimal('0.00'),
+            'turnover': Decimal('0.00'),
+            'status': 'active',
+            'is_active': True,
+        },
+    },
+    # Example for CommonSuppliersModel (similar to customers)
+    'CommonSuppliersModel': {
+        'model': 'CommonSuppliersModel',
+        'required_excel_headers': ['Supplier Name', 'Email'],
+        'field_mapping': {
+            'Supplier Name': 'name',
+            'Email': 'email',
+            'Phone': 'phone',
+            'Address': 'address',
+            'Balance': 'balance',
+            'Turnover': 'turnover',
+            'Payment Term': 'payment_term',
+        },
+        'related_field_lookups': {
+            'payment_term': {'model': 'CommonPaymentTermModel', 'lookup_field': 'name'},
+        },
+        'default_values': {
+            'balance': Decimal('0.00'),
+            'turnover': Decimal('0.00'),
+            'status': 'active',
+            'is_active': True,
+        },
+    },
+}
+
 
 
 def allif_filtered_and_sorted_queryset(request: HttpRequest,model_class: type[Model], allif_data: dict,explicit_scope: Optional[str] = None) -> QuerySet:
@@ -682,7 +828,7 @@ def allif_search_handler(request: HttpRequest,model_name: str,search_fields_key:
     company_id = allif_data.get("main_sbscrbr_entity")
 
     title = "Search Results"
-    searched_data = []
+    allifqueryset = []
     search_term = None
 
     if request.method == 'POST':
@@ -741,11 +887,11 @@ def allif_search_handler(request: HttpRequest,model_name: str,search_fields_key:
         else:
             queryset = model_class.objects.none()
 
-        searched_data = queryset.distinct() # Use distinct to avoid duplicates if Q objects overlap
+        allifqueryset = queryset.distinct() # Use distinct to avoid duplicates if Q objects overlap
 
     context = {
         "title": title,
-        "searched_data": searched_data,
+        "allifqueryset": allifqueryset,
         "user_var": user_slug,
         "glblslug": company_slug,
         "search_term": search_term, # Pass the search term back to the template for display
@@ -754,6 +900,101 @@ def allif_search_handler(request: HttpRequest,model_name: str,search_fields_key:
     return render(request, template_path, context)
 
 
+
+# --- NEW: Generic Excel Generation Utility ---
+def allif_generate_excel_response(
+    queryset: QuerySet, 
+    fields_config: List[Dict[str, str]], # [{'field': 'model_field_name', 'label': 'Column Header'}]
+    filename: str = "data.xlsx"
+) -> HttpResponse:
+    """
+    Generates an Excel (xlsx) file from a Django QuerySet.
+    'fields_config' is a list of dictionaries, where each dict has:
+    - 'field': The name of the model field (can be a related field lookup like 'customer__name').
+    - 'label': The desired column header in the Excel file.
+    """
+    print(f"DEBUG: allif_generate_excel_response called for filename: '{filename}'")
+    try:
+        workbook = openpyxl.Workbook()
+        sheet = workbook.active
+        sheet.title = "Data Export"
+
+        # Define styles
+        header_font = Font(bold=True, color="FFFFFF")
+        header_fill = PatternFill(start_color="4CAF50", end_color="4CAF50", fill_type="solid") # Green header
+        thin_border = Border(left=Side(style='thin'), 
+                             right=Side(style='thin'), 
+                             top=Side(style='thin'), 
+                             bottom=Side(style='thin'))
+        center_aligned_text = Alignment(horizontal="center")
+
+        # Write headers
+        headers = [field_info['label'] for field_info in fields_config]
+        sheet.append(headers)
+        
+        # Apply header styles
+        for cell in sheet[1]:
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.border = thin_border
+            cell.alignment = center_aligned_text
+
+        # Write data rows
+        for obj in queryset:
+            row_data = []
+            for field_info in fields_config:
+                field_name = field_info['field']
+                # Handle related fields (e.g., 'customer__name')
+                parts = field_name.split('__')
+                value = obj
+                try:
+                    for part in parts:
+                        value = getattr(value, part)
+                    # Format date/datetime objects
+                    if isinstance(value, (datetime.date, datetime.datetime)):
+                        value = value.strftime('%Y-%m-%d %H:%M:%S') if isinstance(value, datetime.datetime) else value.strftime('%Y-%m-%d')
+                    elif isinstance(value, Decimal):
+                         value = float(value) # Excel often prefers floats for numbers
+                    elif value is None:
+                        value = '' # Represent None as empty string in Excel
+                    row_data.append(value)
+                except AttributeError:
+                    row_data.append('') # Field not found or invalid lookup
+                    print(f"WARNING: Field '{field_name}' not found on object {obj} (ID: {obj.pk}).")
+                except Exception as e:
+                    row_data.append(f"Error: {e}") # Catch other potential issues
+                    print(f"ERROR: Failed to get value for field '{field_name}' on object {obj} (ID: {obj.pk}): {e}")
+            sheet.append(row_data)
+            
+        # Adjust column widths (optional)
+        for column in sheet.columns:
+            max_length = 0
+            column = [cell for cell in column]
+            for cell in column:
+                try:
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(str(cell.value))
+                except:
+                    pass
+            adjusted_width = (max_length + 2)
+            sheet.column_dimensions[column[0].column_letter].width = adjusted_width
+
+        # Create an in-memory binary stream
+        excel_file = io.BytesIO()
+        workbook.save(excel_file)
+        excel_file.seek(0) # Rewind to the beginning of the stream
+
+        response = HttpResponse(
+            excel_file.getvalue(),
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        print(f"DEBUG: Excel '{filename}' generated successfully.")
+        return response
+
+    except Exception as e:
+        print(f"CRITICAL ERROR: Exception during Excel generation for '{filename}': {e}")
+        return HttpResponse(f"An unexpected error occurred during Excel generation: {e}", status=500)
 
 # --- NEW: Generic PDF Generation Utility ---
 def allif_generate_pdf_response(template_path: str, context: Dict[str, Any],filename: str = "document.pdf") -> HttpResponse:
@@ -796,7 +1037,7 @@ def allif_advance_search_handler(
     company_id = allif_data.get("main_sbscrbr_entity")
 
     title = "Advanced Search Results"
-    searched_data = [] 
+    allifqueryset = [] 
 
     model_class = allif_main_models_registry.get(model_name) 
     if not model_class:
@@ -812,7 +1053,7 @@ def allif_advance_search_handler(
     value_field = search_config['value_field']
     default_order_by_date = search_config['default_order_by_date']
     default_order_by_value = search_config['default_order_by_value']
-
+    excel_fields = search_config.get('excel_fields', []) # NEW: Get excel fields config
     # --- Calculate dynamic default values for date and amount ranges ---
     # Get the base queryset with company and access filtering
     base_queryset = allif_filtered_and_sorted_queryset(request, model_class, allif_data, explicit_scope='all') 
@@ -925,17 +1166,17 @@ def allif_advance_search_handler(
         else:
             queryset = queryset.filter(**{f'{value_field}__lte': largestAmount}) 
         
-        searched_data = queryset.distinct() 
+        allifqueryset = queryset.distinct() 
         #print(f"DEBUG: Advanced Search - Filtered results count: {searched_data.count()}")
     else:
-        searched_data = base_queryset.distinct()
+        allifqueryset = base_queryset.distinct()
         #print(f"DEBUG: Advanced Search - No criteria provided, showing all base data. Count: {searched_data.count()}")
 
 
     # Prepare context for rendering
     context = {
         "title": title,
-        "searched_data": searched_data,
+        "allifqueryset": allifqueryset,
         "formats": formats,
         "scopes": scopes,
         "user_var": user_slug,
@@ -956,16 +1197,68 @@ def allif_advance_search_handler(
 
     # --- Conditional Output (HTML or PDF) ---
     #print(f"DEBUG: Advanced Search - selected_option: '{selected_option}', template_pdf_path: '{template_pdf_path}'")
-    if selected_option == "pdf" and template_pdf_path:
+    #if selected_option == "pdf" and template_pdf_path:
         #print(f"DEBUG: Advanced Search - PDF option selected and template_pdf_path is valid. Calling allif_generate_pdf_response.")
+        #return allif_generate_pdf_response( template_pdf_path,context,filename=f"{advanced_search_config_key.lower()}-advanced-search-results.pdf")
+    #else:
+        #print(f"DEBUG: Advanced Search - HTML option selected or template_pdf_path is invalid. Rendering HTML template: '{template_html_path}'")
+        #return render(request, template_html_path, context)
+
+     # --- Conditional Output (HTML, PDF, or Excel) ---
+    if selected_option == "pdf" and template_pdf_path:
+        context = {
+            "title": title,
+            "allifqueryset": allifqueryset, # Pass searched_data to PDF template
+            "formats": formats,
+            "scopes": scopes,
+            "user_var": user_slug,
+            "glblslug": company_slug,
+            "start_date_input": start_date_str, 
+            "end_date_input": end_date_str,
+            "start_value_input": start_value_str,
+            "end_value_input": end_value_str,
+            "firstDate_display": firstDate.date() if isinstance(firstDate, datetime.datetime) else firstDate, 
+            "lastDate_display": lastDate.date() if isinstance(lastDate, datetime.datetime) else lastDate,   
+            "largestAmount_display": largestAmount,
+            "selected_format_input": selected_option,
+            **(extra_context or {}),
+            "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity")
+        }
         return allif_generate_pdf_response( 
             template_pdf_path,
             context,
             filename=f"{advanced_search_config_key.lower()}-advanced-search-results.pdf"
         )
+    elif selected_option == "excel" and excel_fields: # NEW: Handle Excel option
+        # For Excel, we directly pass the queryset and fields config
+        filename = f"{advanced_search_config_key.lower()}-advanced-search-results.xlsx"
+        return allif_generate_excel_response(
+            allifqueryset, # Pass the queryset directly
+            excel_fields,
+            filename=filename
+        )
     else:
-        #print(f"DEBUG: Advanced Search - HTML option selected or template_pdf_path is invalid. Rendering HTML template: '{template_html_path}'")
+        # Prepare context for HTML rendering
+        context = {
+            "title": title,
+            "allifqueryset": allifqueryset, # Pass searched_data to HTML template
+            "formats": formats,
+            "scopes": scopes,
+            "user_var": user_slug,
+            "glblslug": company_slug,
+            "start_date_input": start_date_str, 
+            "end_date_input": end_date_str,
+            "start_value_input": start_value_str,
+            "end_value_input": end_value_str,
+            "firstDate_display": firstDate.date() if isinstance(firstDate, datetime.datetime) else firstDate, 
+            "lastDate_display": lastDate.date() if isinstance(lastDate, datetime.datetime) else lastDate,   
+            "largestAmount_display": largestAmount,
+            "selected_format_input": selected_option,
+            **(extra_context or {}),
+            "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity")
+        }
         return render(request, template_html_path, context)
+
 
 
 
@@ -1079,3 +1372,203 @@ def allif_document_pdf_handler(request: HttpRequest,pk: int,document_config_key:
     except Exception as e:
         print(f"CRITICAL ERROR: Failed to generate PDF for {document_config_key} (ID: {pk}): {e}")
         raise Http404(f"An unexpected error occurred during PDF generation: {e}")
+
+# --- NEW: Centralized Excel Upload Handler ---
+def allif_excel_upload_handler(
+    request: HttpRequest,
+    model_config_key: str, # Key to look up in EXCEL_UPLOAD_CONFIGS
+    success_redirect_url_name: str, # URL name to redirect to on success
+) -> HttpResponse:
+    """
+    Handles generic Excel file uploads for various models.
+    It reads an Excel file, validates data, performs type conversions,
+    and creates/updates model instances in an atomic transaction.
+    """
+    allif_data = common_shared_data(request)
+    user_slug = allif_data.get("usrslg")
+    company_slug = allif_data.get("compslg")
+    company_id = allif_data.get("main_sbscrbr_entity").id
+    
+    # Ensure it's a POST request and has a file
+    if request.method != 'POST' or 'excel_file' not in request.FILES:
+        messages.error(request, "Please upload an Excel file.")
+        return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                                kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+    excel_file = request.FILES['excel_file']
+
+    # Validate file type
+    if not excel_file.name.endswith(('.xlsx', '.xls')):
+        messages.error(request, "Invalid file type. Please upload an Excel file (.xlsx or .xls).")
+        return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                                kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+    config = EXCEL_UPLOAD_CONFIGS.get(model_config_key)
+    if not config:
+        messages.error(request, f"Excel upload configuration missing for '{model_config_key}'.")
+        return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                                kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+    model_name = config['model']
+    required_excel_headers = config.get('required_excel_headers', [])
+    field_mapping = config.get('field_mapping', {})
+    related_field_lookups = config.get('related_field_lookups', {})
+    default_values = config.get('default_values', {})
+
+    model_class = allif_main_models_registry.get(model_name)
+    if not model_class:
+        messages.error(request, f"Target model '{model_name}' not found in registry for Excel upload.")
+        return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                                kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+    # Use an in-memory file to open with openpyxl
+    file_content = io.BytesIO(excel_file.read())
+    
+    try:
+        workbook = openpyxl.load_workbook(file_content)
+        sheet = workbook.active
+        
+        # Read headers from the first row
+        headers = [cell.value for cell in sheet[1]]
+        
+        # Validate required headers
+        missing_headers = [h for h in required_excel_headers if h not in headers]
+        if missing_headers:
+            messages.error(request, f"Missing required Excel columns: {', '.join(missing_headers)}. Please ensure all mandatory columns are present.")
+            return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                                    kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+        successful_uploads = 0
+        failed_rows = []
+
+        # Start an atomic transaction
+        with transaction.atomic():
+            for row_idx, row in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=2): # Start from row 2 (after headers)
+                row_data = dict(zip(headers, row))
+                instance_data = {}
+                row_errors = []
+
+                # Apply default values first
+                for default_field, default_value in default_values.items():
+                    instance_data[default_field] = default_value
+
+                for excel_header, cell_value in row_data.items():
+                    # Map Excel header to model field name
+                    model_field_name = field_mapping.get(excel_header, excel_header) # Use mapping or direct header
+
+                    # Skip if model field doesn't exist or isn't in mapping and not a direct match
+                    if not hasattr(model_class, model_field_name):
+                        continue # Skip columns not relevant to the model
+
+                    # Handle related fields (ForeignKeys)
+                    if model_field_name in related_field_lookups:
+                        lookup_info = related_field_lookups[model_field_name]
+                        related_model_name = lookup_info['model']
+                        lookup_field = lookup_info['lookup_field']
+                        
+                        related_model_class = allif_main_models_registry.get(related_model_name)
+                        if not related_model_class:
+                            row_errors.append(f"Configuration error: Related model '{related_model_name}' not found for field '{model_field_name}'.")
+                            continue
+
+                        try:
+                            # Look up the related object
+                            related_obj = related_model_class.objects.get(**{lookup_field: cell_value})
+                            instance_data[model_field_name] = related_obj
+                        except related_model_class.DoesNotExist:
+                            row_errors.append(f"Related '{lookup_field}' '{cell_value}' not found for field '{excel_header}'.")
+                        except Exception as e:
+                            row_errors.append(f"Error looking up related '{excel_header}': {e}.")
+                    else:
+                        # Handle direct field values and type conversions
+                        field_obj = model_class._meta.get_field(model_field_name)
+                        
+                        try:
+                            # Attempt type conversion based on field type
+                            if field_obj.get_internal_type() == 'DecimalField':
+                                instance_data[model_field_name] = Decimal(str(cell_value or 0)) # Ensure string conversion before Decimal
+                            elif field_obj.get_internal_type() in ['DateField', 'DateTimeField']:
+                                if cell_value:
+                                    if isinstance(cell_value, datetime.datetime): # openpyxl might read dates as datetime objects
+                                        instance_data[model_field_name] = timezone.make_aware(cell_value) if field_obj.get_internal_type() == 'DateTimeField' else cell_value.date()
+                                    else: # Assume string format
+                                        # Try common date formats
+                                        parsed_date = None
+                                        for fmt in ['%Y-%m-%d', '%m/%d/%Y', '%d-%m-%Y', '%d/%m/%Y']:
+                                            try:
+                                                parsed_date = datetime.datetime.strptime(str(cell_value), fmt)
+                                                break
+                                            except ValueError:
+                                                pass
+                                        if parsed_date:
+                                            instance_data[model_field_name] = timezone.make_aware(parsed_date) if field_obj.get_internal_type() == 'DateTimeField' else parsed_date.date()
+                                        else:
+                                            raise ValueError(f"Invalid date format for '{excel_header}': '{cell_value}'. Expected YYYY-MM-DD or similar.")
+                                else:
+                                    instance_data[model_field_name] = None
+                            elif field_obj.get_internal_type() == 'BooleanField':
+                                if isinstance(cell_value, str):
+                                    instance_data[model_field_name] = cell_value.lower() in ['true', '1', 'yes', 'on']
+                                else:
+                                    instance_data[model_field_name] = bool(cell_value)
+                            else:
+                                instance_data[model_field_name] = cell_value # Default to direct assignment
+                        except ValueError as ve:
+                            row_errors.append(f"Data type error for '{excel_header}' ('{cell_value}'): {ve}.")
+                        except Exception as e:
+                            row_errors.append(f"Unexpected error processing '{excel_header}' ('{cell_value}'): {e}.")
+
+                # Add multi-tenancy fields (company, division, branch, department)
+                if hasattr(model_class, 'company'):
+                    instance_data['company'] = CommonCompanyDetailsModel.objects.get(pk=company_id) # Assuming company ID is PK
+                if hasattr(model_class, 'division') and allif_data.get("logged_in_user_has_divisional_access"):
+                    instance_data['division'] = CommonDivisionsModel.objects.get(pk=allif_data.get("logged_user_division").id)
+                if hasattr(model_class, 'branch') and allif_data.get("logged_in_user_has_branches_access"):
+                    instance_data['branch'] = CommonBranchesModel.objects.get(pk=allif_data.get("logged_user_branch").id)
+                if hasattr(model_class, 'department') and allif_data.get("logged_in_user_has_departmental_access"):
+                    instance_data['department'] = CommonDepartmentsModel.objects.get(pk=allif_data.get("logged_user_department").id)
+                
+                # Try to create/update the instance
+                if not row_errors:
+                    try:
+                        # For updates, you'd need a unique identifier from Excel (e.g., 'Code' or 'Part Number')
+                        # For simplicity, this example always creates new instances.
+                        # If you need update logic, you'd add a 'unique_lookup_field' to config
+                        # and try to get_or_create or update_or_create.
+                        instance = model_class(**instance_data)
+                        instance.full_clean() # Run model validation
+                        instance.save()
+                        successful_uploads += 1
+                    except ValidationError as e:
+                        row_errors.append(f"Model validation error: {e.message_dict}")
+                    except IntegrityError as e:
+                        row_errors.append(f"Database integrity error (e.g., duplicate unique field): {e}.")
+                    except Exception as e:
+                        row_errors.append(f"Failed to save row: {e}.")
+                
+                if row_errors:
+                    failed_rows.append({'row_number': row_idx, 'errors': row_errors, 'data': row_data})
+
+        # Provide feedback
+        if successful_uploads > 0:
+            messages.success(request, f"Successfully uploaded {successful_uploads} records for {model_name}.")
+        
+        if failed_rows:
+            error_msg = f"Failed to upload {len(failed_rows)} records for {model_name}. Details:"
+            for fail in failed_rows:
+                error_msg += f"\nRow {fail['row_number']}: {'; '.join(fail['errors'])}. Data: {fail['data']}"
+            messages.error(request, error_msg)
+            # You might want to log these detailed errors to a file as well
+
+        return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                                kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+    except Exception as e:
+        messages.error(request, f"An unexpected error occurred during Excel processingqqqqqqqqqqqqqqqqqq: {e}")
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.exception(f"CRITICAL ERROR: Excel upload failed for {model_config_key}: {e}")
+        return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                                kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+# ... (rest of your utils.py code) ...

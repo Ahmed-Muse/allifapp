@@ -7,22 +7,47 @@
 {% endblock%}
 {% block body %}
 <div class="allifmaal-main-container">
-
   <div class="allif-header-main-wrapper">
 <!--start....main headere-->
   {% include 'allifmaalcommonapp/includes/headers/search-form-header-upper-section.html' %}
   <form method='POST' action="{% url 'allifmaalcommonapp:commonCurrencySearch' user_var glblslug %}">{% csrf_token %}  
   {% include 'allifmaalcommonapp/includes/headers/search-form-header-lower-section.html' %}
+
+
+
+
+
+
+
+            <hr>
+            <li><a class="dropdown-item">Upload Data (Excel)</a></li>
+            <form method="POST" action="{% url 'allifmaalcommonapp:commonUploadExcel' 'CommonCurrenciesModel' user_var glblslug %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="excel_file" accept=".xlsx, .xls" class="form-control" required>
+                <button type="submit" class="btn allifmaal-submit-btn">Upload Excel</button>
+            </form>
+      
+
+
+
+
+
+
+
   <li><a class="dropdown-item">Advanced Searching</a></li>
   <form method='POST' action="{% url 'allifmaalcommonapp:commonCurrencyAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-  {% include 'allifmaalcommonapp/includes/headers/advanced-search-form-lower-section.html' %}
+  
+  
+  
+  
+  
+  
+    {% include 'allifmaalcommonapp/includes/headers/advanced-search-form-lower-section.html' %}
    <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}" >New Currency </a>
     <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
    {% include 'allifmaalcommonapp/includes/headers/header-lower-section.html' %}
   </div>
-  
     <div class="allifmaincontainer">
-
       <div class="allif-full-table-content-main-wrapper">
       {% include 'allifmaalcommonapp/includes/tables/full-table-header-upper-section.html' %}
         <td class="allif-fix-table-col">Currency</td>
@@ -32,61 +57,30 @@
         <td class="allif-table-header-td">Download</td>
         <td class="allif-table-header-td">Navigate</td>
         {% include 'allifmaalcommonapp/includes/tables/full-table-header-lower-section.html' %}
-        
       {% for item in allifqueryset %}  
         <tr data-id="{{item.id}}" class="allif-table-header-content-row">
         <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}">{{item.name}}</a></td>
         <td class="allif-table-content-td">
         <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}">{{item.description}}</a></td>
-        
         <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
         <td class="allif-table-content-td">{{item.status}}</td>
         <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:common_currency_pdf' item.id user_var glblslug %}">Download</a></td>
         <td class="allif-table-content-td">
         {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
-   
         <a href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
         {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-middle-section.html' %}
-        
         <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
         <a href="{% url 'allifmaalcommonapp:commonDeleteCurrency' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-        
         {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
         </td>
-
     </tr>
       {% endfor %}
-
-    {% if searched_data %}
-      {% for item in searched_data %} 
-
-      <tr data-id="{{item.id}}" class="allif-table-header-content-row">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}">{{item.name}}</a></td>
-        <td class="allif-table-content-td">
-        <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}">{{item.description}}</a></td>
-        <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
-        <td class="allif-table-content-td">{{item.status}}</td>
-        <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:common_currency_pdf' item.id user_var glblslug %}">Download</a></td>
-        <td class="allif-table-content-td">
-        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
-   
-        <a href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-middle-section.html' %}
-        
-        <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-        <a href="{% url 'allifmaalcommonapp:commonDeleteCurrency' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-        
-        {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
-        </td>
-
-    </tr>
-                        
-      {% endfor %}
-
-      {% endif %}
     {% include 'allifmaalcommonapp/includes/tables/full-table-last-section.html' %}
 
       </div>
+
+       {% include 'allifmaalcommonapp/error/error-message.html' %}
+
   </div><!--end of main container of the page....-->
 </div>
 {% block scripts %}

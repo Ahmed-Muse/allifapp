@@ -95,6 +95,11 @@ path('Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonD
 path('Search/Departments/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepartmentSearch, name="commonDepartmentSearch"),
 path('Want/To/Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDepartment, name="commonWantToDeleteDepartment"),
 
+
+    path('upload/excel/<str:model_config_key>/<str:allifusr>/<str:allifslug>/',views.commonUploadExcel, name='commonUploadExcel'),
+
+
+
 ################################## Currencies ##############
 path('Currencies/Main/Money/Types/<str:allifusr>/<str:allifslug>/', views.commonCurrencies, name="commonCurrencies"),
 path('Add/New/Currency/<str:allifusr>/<str:allifslug>/', views.commonAddCurrency, name="commonAddCurrency"),
@@ -633,5 +638,11 @@ path('Delete/The/Service/s/Program/Services/S/Permntly/<str:pk>/<str:allifusr>/<
 path('Want/Tp/Delete/This/Services/s/available/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteService, name="commonWantToDeleteService"),
 path('Service/s/Information/s/available/View/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonServiceDetails, name="commonServiceDetails"),
 path('Search/For/Services/s/available/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonServiceSearch, name="commonServiceSearch"),
+
+
+
+
+
+
 
 ]   

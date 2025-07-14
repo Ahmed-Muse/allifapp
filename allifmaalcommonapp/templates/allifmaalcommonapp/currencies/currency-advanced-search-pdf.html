@@ -13,37 +13,27 @@
 <!--start of ... table main dynamic content section-->
 <div class="allif-pdf-table-content-body-section">
     <table class="allif-pdf-table-body">
-
     <tr>
     <th colspan="3">Currency</th>
     <th colspan="3">Description</th>
     <th colspan="3">Comments</th>
     <th colspan="3">Date</th>
     </tr>
-   
     <tbody>
-    {% for item in searched_data %}
+    {% for item in allifqueryset %}
     <tr>
     <td colspan="3">{{item.name}}</td>
     <td colspan="3">{{item.description}}</td>
     <td colspan="3"> {{item.comments}}</td>
     <td colspan="3">{{item.date|date:'d/m/Y'}}</td>
-    
     </tr>
     {% endfor %}
-
     </tbody>
     </table>
     </div>
-    <!--start of ... table main dynamic content section-->
-
-  
 </div> 
-
 {% block scripts %}
-
 {% endblock %}
-
 {% endblock %}
    
  

@@ -10,8 +10,8 @@ from django.db import transaction # For transactions
 from django.core.cache import cache # For caching
 from django.forms import modelformset_factory # For formsets
 
-from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,allif_delete_hanlder,allif_common_form_submission_and_save,
-allif_common_form_edit_and_save,allif_delete_confirm,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler)
+from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,allif_main_models_registry,allif_delete_hanlder,allif_common_form_submission_and_save,
+allif_common_form_edit_and_save,allif_delete_confirm,allif_excel_upload_handler,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler)
 # ... (existing imports) ...
 from django.http import JsonResponse
 from django.urls import reverse
@@ -605,15 +605,42 @@ def commonDeleteDataSort(request,pk):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
+def commonUploadExcel(request, model_config_key, *allifargs, **allifkwargs):
+    """
+    Handles the Excel upload process by delegating to the centralized handler.
+    The `model_config_key` will determine which model's data is being uploaded.
+    """
+    # Determine the redirect URL based on the model being uploaded
+    # You might want to make this more dynamic, e.g., from EXCEL_UPLOAD_CONFIGS
+    if model_config_key == 'CommonCurrenciesModel':
+        success_redirect_url_name = 'commonCurrencies'
+    elif model_config_key == 'CommonStocksModel':
+        success_redirect_url_name = 'commonStocks' # Assuming you have a commonStocks list view
+    elif model_config_key == 'CommonCustomersModel':
+        success_redirect_url_name = 'commonCustomers' # Assuming you have a commonCustomers list view
+    elif model_config_key == 'CommonSuppliersModel':
+        success_redirect_url_name = 'commonSuppliers' # Assuming you have a commonSuppliers list view
+    else:
+        messages.error(request, f"No specific redirect URL defined for model config key: {model_config_key}.")
+        # Fallback to a generic home page or error page
+        allif_data = common_shared_data(request)
+        return redirect('allifmaalcommonapp:commonHome', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+
+    return allif_excel_upload_handler(request, model_config_key, success_redirect_url_name)
+
+# ... (rest of your views.py) ...
+
 ########################3 currencies ######################
 @allif_base_view_wrapper
 def commonCurrencies(request,*allifargs,**allifkwargs):
     title="Currencies"
     allif_data=common_shared_data(request)
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.objects.all() # Assuming this is needed for the advanced search form
+    allifqueryset=allif_filtered_and_sorted_queryset(request, allif_main_models_registry['CommonCurrenciesModel'], allif_data)
     allifqueryset =allif_filtered_and_sorted_queryset(request,CommonCurrenciesModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalcommonapp/currencies/currencies.html',context)
+
 
 @allif_base_view_wrapper
 def commonAddCurrency(request, *allifargs, **allifkwargs):
@@ -640,6 +667,7 @@ def commonCurrencySearch(request,*allifargs,**allifkwargs):
         search_input_name='allifsearchcommonfieldname', # The name of your search input field
         )
 
+@allif_base_view_wrapper
 def commonCurrencyAdvanceSearch(request,*allifargs,**allifkwargs):
     # This view now simply calls the centralized advanced search handler
     return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
@@ -647,6 +675,7 @@ def commonCurrencyAdvanceSearch(request,*allifargs,**allifkwargs):
         template_pdf_path='allifmaalcommonapp/currencies/currency-advanced-search-pdf.html', # <-- CRITICAL: Pass the PDF template path
     )
 
+@allif_base_view_wrapper
 def common_currency_pdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
  
@@ -670,15 +699,11 @@ def commonEditPaymentTerm(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonDeletePaymentTerm(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonPaymentTermsModel',pk=pk,success_redirect_url_name='commonPaymentTerms')
- 
 
 
 
 
-  
-  
-  
-  
+
   
   
   
