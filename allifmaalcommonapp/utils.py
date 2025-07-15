@@ -1558,7 +1558,8 @@ def allif_excel_upload_handler(
         if failed_rows:
             error_msg = f'Failed to upload {len(failed_rows)} records for {model_name}. Details:'
             for fail in failed_rows:
-                error_msg += f'\nRow {fail['row_number']}: {'; '.join(fail['errors'])}. Data: {fail['data']}'
+                pass
+                #error_msg += f'\nRow {fail['row_number']}: {'; '.join(fail['errors'])}. Data: {fail['data']}'
             messages.error(request, error_msg)
             # You might want to log these detailed errors to a file as well
 
@@ -1572,5 +1573,3 @@ def allif_excel_upload_handler(
         logger.exception(f'CRITICAL ERROR: Excel upload failed for {model_config_key}: {e}')
         return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
                                 kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
-
-# ... (rest of your utils.py code) ...
