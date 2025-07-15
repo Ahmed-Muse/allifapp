@@ -483,9 +483,11 @@ def allif_initialize_form_select_querysets(form_instance: forms.Form, allifmaalp
                 if isinstance(form_instance.fields[field_name], (forms.ModelChoiceField, forms.ModelMultipleChoiceField)):
                     form_instance.fields[field_name].queryset = model_class.objects.filter(company=allifmaalparameter)
                 else:
-                    print(f"WARNING: Field '{field_name}' in form is not a ModelChoiceField/ModelMultipleChoiceField. Skipping queryset initialization.")
+                    pass
+                    #print(f"WARNING: Field '{field_name}' in form is not a ModelChoiceField/ModelMultipleChoiceField. Skipping queryset initialization.")
             else:
-                print(f"WARNING: Field '{field_name}' not found in form fields. Skipping queryset initialization.")
+                pass
+                #print(f'WARNING: Field '{field_name}' not found in form fields. Skipping queryset initialization.')
     else:
         for field_name, model_class in field_model_map.items():
             if field_name in form_instance.fields:
@@ -548,10 +550,10 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
                 try:
                     obj.company = get_object_or_404(CommonCompanyDetailsModel, pk=company_id)
                 except Http404: # More specific exception for get_object_or_404
-                    print(f"WARNING: Company with ID {company_id} not found for {obj.__class__.__name__}.")
+                    #print(f"WARNING: Company with ID {company_id} not found for {obj.__class__.__name__}.")
                     obj.company = None 
                 except Exception as e:
-                    print(f"ERROR: Failed to retrieve company with ID {company_id}: {e}")
+                    #print(f"ERROR: Failed to retrieve company with ID {company_id}: {e}")
                     obj.company = None
             else:
                 pass
@@ -560,10 +562,10 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
                 try:
                     obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id)
                 except Http404:
-                    print(f"WARNING: Division with ID {allif_data.get('logged_user_division').id} not found for {obj.__class__.__name__}.")
+                    #print(f"WARNING: Division with ID {allif_data.get('logged_user_division').id} not found for {obj.__class__.__name__}.")
                     obj.division = None
                 except Exception as e:
-                    print(f"ERROR: Failed to retrieve division with ID {allif_data.get('logged_user_division').id}: {e}")
+                    #print(f"ERROR: Failed to retrieve division with ID {allif_data.get('logged_user_division').id}: {e}")
                     obj.division = None
             else:
                 pass
@@ -572,10 +574,10 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
                 try:
                     obj.branch = get_object_or_404(CommonBranchesModel, pk=allif_data.get("logged_user_branch").id)
                 except Http404:
-                    print(f"WARNING: Branch with ID {allif_data.get('logged_user_branch').id} not found for {obj.__class__.__name__}.")
+                    #print(f"WARNING: Branch with ID {allif_data.get('logged_user_branch').id} not found for {obj.__class__.__name__}.")
                     obj.branch = None
                 except Exception as e:
-                    print(f"ERROR: Failed to retrieve branch with ID {allif_data.get('logged_user_branch').id}: {e}")
+                    #print(f"ERROR: Failed to retrieve branch with ID {allif_data.get('logged_user_branch').id}: {e}")
                     obj.branch = None
             else:
                 pass
@@ -584,30 +586,30 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
                 try:
                     obj.department = get_object_or_404(CommonDepartmentsModel, pk=allif_data.get("logged_user_department").id)
                 except Http404:
-                    print(f"WARNING: Department with ID {allif_data.get('logged_user_department').id} not found for {obj.__class__.__name__}.")
+                    #print(f"WARNING: Department with ID {allif_data.get('logged_user_department').id} not found for {obj.__class__.__name__}.")
                     obj.department = None
                 except Exception as e:
-                    print(f"ERROR: Failed to retrieve department with ID {allif_data.get('logged_user_department').id}: {e}")
+                    #print(f"ERROR: Failed to retrieve department with ID {allif_data.get('logged_user_department').id}: {e}")
                     obj.department = None
             
             if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
                 try:
                     obj.operation_year = get_object_or_404(CommonOperationYearsModel, pk=allif_data.get("logged_user_operation_year").id)
                 except Http404:
-                    print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
+                    #print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
                     obj.operation_year = None
                 except Exception as e:
-                    print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
+                    #print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
                     obj.operation_year = None
                     
             if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
                 try:
                     obj.operation_term = get_object_or_404(CommonOperationYearTermsModel, pk=allif_data.get("logged_user_operation_term").id)
                 except Http404:
-                    print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
+                    #print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
                     obj.operation_term = None
                 except Exception as e:
-                    print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
+                    #print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
                     obj.operation_term = None
                     
                     
@@ -616,10 +618,10 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
                 try:
                     obj.owner=allif_data.get("usernmeslg") # This should be the User object
                 except Http404:
-                    print(f"WARNING: User {allif_data.get("usernmeslg")} not found for {obj.__class__.__name__}.")
+                    #print(f"WARNING: User {allif_data.get("usernmeslg")} not found for {obj.__class__.__name__}.")
                     obj.owner = None
                 except Exception as e:
-                    print(f"ERROR: Failed to retrieve User {allif_data.get("usernmeslg")}: {e}")
+                    #print(f"ERROR: Failed to retrieve User {allif_data.get("usernmeslg")}: {e}")
                     obj.owner = None
             else:
                 pass
@@ -628,7 +630,7 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
                 try:
                     pre_save_callback(obj, request, allif_data)
                 except Exception as e:
-                    print(f"ERROR: Pre-save callback failed for {obj.__class__.__name__}: {e}")
+                    #print(f"ERROR: Pre-save callback failed for {obj.__class__.__name__}: {e}")
                     # You might want to add a user-facing error message here
                     form.add_error(None, f"An internal error occurred during custom processing: {e}")
                     # Re-render the form with errors
@@ -699,7 +701,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
     # Determine the model class from the form's Meta
     model_class = form_class.Meta.model
     if not model_class:
-        raise ValueError(f"Form {form_class.__name__} does not have a model defined in its Meta class.")
+        raise ValueError(f'Form {form_class.__name__} does not have a model defined in its Meta class.')
 
     # Retrieve the object to be updated using all_objects to bypass default managers
     # and get_object_or_404 for robust error handling.
@@ -839,12 +841,12 @@ def allif_search_handler(request: HttpRequest,model_name: str,search_fields_key:
     if search_term:
         model_class = allif_main_models_registry.get(model_name)
         if not model_class:
-            print(f"ERROR: Search - Model '{model_name}' not found in allif_delete_models_class_map.")
+            #print(f"ERROR: Search - Model '{model_name}' not found in allif_delete_models_class_map.")
             raise Http404(f"Model '{model_name}' not found for search.")
 
         search_fields =allif_search_config_mapping.get(search_fields_key)
         if not search_fields:
-            print(f"ERROR: Search - No search fields configured for key '{search_fields_key}' in allif_search_config_mapping.")
+            #print(f"ERROR: Search - No search fields configured for key '{search_fields_key}' in allif_search_config_mapping.")
             raise ValueError(f"Search configuration missing for '{search_fields_key}'.")
 
         # Build dynamic Q objects for search
@@ -960,10 +962,10 @@ def allif_generate_excel_response(
                     row_data.append(value)
                 except AttributeError:
                     row_data.append('') # Field not found or invalid lookup
-                    print(f"WARNING: Field '{field_name}' not found on object {obj} (ID: {obj.pk}).")
+                    #print(f"WARNING: Field '{field_name}' not found on object {obj} (ID: {obj.pk}).")
                 except Exception as e:
                     row_data.append(f"Error: {e}") # Catch other potential issues
-                    print(f"ERROR: Failed to get value for field '{field_name}' on object {obj} (ID: {obj.pk}): {e}")
+                    #print(f"ERROR: Failed to get value for field '{field_name}' on object {obj} (ID: {obj.pk}): {e}")
             sheet.append(row_data)
             
         # Adjust column widths (optional)
@@ -993,8 +995,8 @@ def allif_generate_excel_response(
         return response
 
     except Exception as e:
-        print(f"CRITICAL ERROR: Exception during Excel generation for '{filename}': {e}")
-        return HttpResponse(f"An unexpected error occurred during Excel generation: {e}", status=500)
+        #print(f"CRITICAL ERROR: Exception during Excel generation for '{filename}': {e}")
+        return HttpResponse(f'An unexpected error occurred during Excel generation: {e}', status=500)
 
 # --- NEW: Generic PDF Generation Utility ---
 def allif_generate_pdf_response(template_path: str, context: Dict[str, Any],filename: str = "document.pdf") -> HttpResponse:
@@ -1011,10 +1013,10 @@ def allif_generate_pdf_response(template_path: str, context: Dict[str, Any],file
         pisa_status = pisa.CreatePDF(html, dest=response)
         if pisa_status.err:
             # If there's an error during PDF creation, return a generic error message
-            print(f"ERROR: PDF generation failed: {pisa_status.err}")
+            #print(f"ERROR: PDF generation failed: {pisa_status.err}")
             return HttpResponse('We had some errors generating the PDF. Please try again.', status=500)
     except Exception as e:
-        print(f"CRITICAL ERROR: Exception during PDF generation: {e}")
+        #print(f"CRITICAL ERROR: Exception during PDF generation: {e}")
         return HttpResponse(f"An unexpected error occurred during PDF generation: {e}", status=500)
     
     return response
@@ -1042,7 +1044,7 @@ def allif_advance_search_handler(
     model_class = allif_main_models_registry.get(model_name) 
     if not model_class:
         #print(f"ERROR: Advanced Search - Model '{model_name}' not found in ALLIF_MODEL_REGISTRY.")
-        raise Http404(f"Model '{model_name}' not found for advanced search.")
+        raise Http404(f'Model "{model_name}" not found for advanced search.')
 
     search_config = allif_advanced_search_configs.get(advanced_search_config_key) 
     if not search_config:
@@ -1279,7 +1281,7 @@ def allif_document_pdf_handler(request: HttpRequest,pk: int,document_config_key:
 
     config = allif_main_document_pdf_configuration.get(document_config_key)
     if not config:
-        print(f"ERROR: PDF Handler - No configuration for key '{document_config_key}' in DOCUMENT_PDF_CONFIGS.")
+        #print(f"ERROR: PDF Handler - No configuration for key '{document_config_key}' in DOCUMENT_PDF_CONFIGS.")
         raise ValueError(f"Document PDF configuration missing for '{document_config_key}'.")
 
     main_model_name = config['main_model']
@@ -1307,8 +1309,8 @@ def allif_document_pdf_handler(request: HttpRequest,pk: int,document_config_key:
     
     # If items_model_name is provided but its class is not found, raise an error
     if items_model_name and not items_model_class:
-        print(f"ERROR: PDF Handler - items_model_class: {items_model_class}")
-        print(f"ERROR: PDF Handler - Items model class '{items_model_name}' not found in ALLIF_MODEL_REGISTRY, but specified in config.")
+        #print(f"ERROR: PDF Handler - items_model_class: {items_model_class}")
+        #print(f"ERROR: PDF Handler - Items model class '{items_model_name}' not found in ALLIF_MODEL_REGISTRY, but specified in config.")
         raise Http404("Required items model not found for PDF generation, as specified in config.")
 
     try:
@@ -1370,7 +1372,7 @@ def allif_document_pdf_handler(request: HttpRequest,pk: int,document_config_key:
     except Http404 as e:
         raise e 
     except Exception as e:
-        print(f"CRITICAL ERROR: Failed to generate PDF for {document_config_key} (ID: {pk}): {e}")
+        #print(f"CRITICAL ERROR: Failed to generate PDF for {document_config_key} (ID: {pk}): {e}")
         raise Http404(f"An unexpected error occurred during PDF generation: {e}")
 
 # --- NEW: Centralized Excel Upload Handler ---
@@ -1514,9 +1516,9 @@ def allif_excel_upload_handler(
                             else:
                                 instance_data[model_field_name] = cell_value # Default to direct assignment
                         except ValueError as ve:
-                            row_errors.append(f"Data type error for '{excel_header}' ('{cell_value}'): {ve}.")
+                            row_errors.append(f'Data type error for "{excel_header}" ("{cell_value}"): {ve}.')
                         except Exception as e:
-                            row_errors.append(f"Unexpected error processing '{excel_header}' ('{cell_value}'): {e}.")
+                            row_errors.append(f'Unexpected error processing "{excel_header}" ("{cell_value}"): {e}.')
 
                 # Add multi-tenancy fields (company, division, branch, department)
                 if hasattr(model_class, 'company'):
@@ -1540,23 +1542,23 @@ def allif_excel_upload_handler(
                         instance.save()
                         successful_uploads += 1
                     except ValidationError as e:
-                        row_errors.append(f"Model validation error: {e.message_dict}")
+                        row_errors.append(f'Model validation error: {e.message_dict}')
                     except IntegrityError as e:
-                        row_errors.append(f"Database integrity error (e.g., duplicate unique field): {e}.")
+                        row_errors.append(f'Database integrity error (e.g., duplicate unique field): {e}.')
                     except Exception as e:
-                        row_errors.append(f"Failed to save row: {e}.")
+                        row_errors.append(f'Failed to save row: {e}.')
                 
                 if row_errors:
                     failed_rows.append({'row_number': row_idx, 'errors': row_errors, 'data': row_data})
 
         # Provide feedback
         if successful_uploads > 0:
-            messages.success(request, f"Successfully uploaded {successful_uploads} records for {model_name}.")
+            messages.success(request, f'Successfully uploaded {successful_uploads} records for {model_name}.')
         
         if failed_rows:
-            error_msg = f"Failed to upload {len(failed_rows)} records for {model_name}. Details:"
+            error_msg = f'Failed to upload {len(failed_rows)} records for {model_name}. Details:'
             for fail in failed_rows:
-                error_msg += f"\nRow {fail['row_number']}: {'; '.join(fail['errors'])}. Data: {fail['data']}"
+                error_msg += f'\nRow {fail['row_number']}: {'; '.join(fail['errors'])}. Data: {fail['data']}'
             messages.error(request, error_msg)
             # You might want to log these detailed errors to a file as well
 
@@ -1564,10 +1566,10 @@ def allif_excel_upload_handler(
                                 kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
 
     except Exception as e:
-        messages.error(request, f"An unexpected error occurred during Excel processingqqqqqqqqqqqqqqqqqq: {e}")
+        messages.error(request, f'An unexpected error occurred during Excel processingqqqqqqqqqqqqqqqqqq: {e}')
         import logging
         logger = logging.getLogger(__name__)
-        logger.exception(f"CRITICAL ERROR: Excel upload failed for {model_config_key}: {e}")
+        logger.exception(f'CRITICAL ERROR: Excel upload failed for {model_config_key}: {e}')
         return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
                                 kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
 

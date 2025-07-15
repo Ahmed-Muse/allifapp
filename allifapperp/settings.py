@@ -170,7 +170,7 @@ DATABASES = {
         ################# comment out this section during deployment... it is for development ############
         #'ENGINE': 'django.db.backends.mysql',
         #'NAME': 'allifmysqlcommondb',# this is the name of the database
-        #'HOST': 'localhost',
+        #HOST': 'localhost',
         #'USER': 'root',
         #'PASSWORD': 'Allif@1442',# Allif@6030114
         #'PORT': '3306',

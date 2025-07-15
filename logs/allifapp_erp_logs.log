@@ -11596,3 +11596,14 @@ INFO 2025-07-15 07:13:47,405 autoreload 13948 28420 Watching for file changes wi
 INFO 2025-07-15 17:29:15,213 autoreload 29504 1612 Watching for file changes with StatReloader
 INFO 2025-07-15 17:32:30,594 autoreload 29504 1612 C:\am\allifapp\allifapperp\allifapperp\settings.py changed, reloading.
 INFO 2025-07-15 17:32:31,551 autoreload 23616 18552 Watching for file changes with StatReloader
+INFO 2025-07-15 17:33:02,056 autoreload 5232 14992 Watching for file changes with StatReloader
+INFO 2025-07-15 17:33:06,946 autoreload 5232 14992 C:\am\allifapp\allifapperp\allifapperp\settings.py changed, reloading.
+INFO 2025-07-15 17:33:07,956 autoreload 30056 32748 Watching for file changes with StatReloader
+INFO 2025-07-15 17:54:56,810 autoreload 30056 32748 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 17:54:57,716 autoreload 26076 3944 Watching for file changes with StatReloader
+INFO 2025-07-15 17:55:28,987 autoreload 26076 3944 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 17:55:29,897 autoreload 24660 29420 Watching for file changes with StatReloader
+INFO 2025-07-15 17:55:35,676 autoreload 24660 29420 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 17:55:36,742 autoreload 28800 28124 Watching for file changes with StatReloader
+INFO 2025-07-15 17:56:11,003 autoreload 28800 28124 C:\am\allifapp\allifapperp\allifapperp\settings.py changed, reloading.
+INFO 2025-07-15 17:56:11,966 autoreload 12148 19156 Watching for file changes with StatReloader
