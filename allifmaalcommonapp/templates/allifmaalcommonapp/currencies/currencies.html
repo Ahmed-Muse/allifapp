@@ -13,39 +13,21 @@
   <form method='POST' action="{% url 'allifmaalcommonapp:commonCurrencySearch' user_var glblslug %}">{% csrf_token %}  
   {% include 'allifmaalcommonapp/includes/headers/search-form-header-lower-section.html' %}
 
-
-
-
-
-
-
-            <hr>
-            <li><a class="dropdown-item">Upload Data (Excel)</a></li>
-            <form method="POST" action="{% url 'allifmaalcommonapp:commonUploadExcel' 'CommonCurrenciesModel' user_var glblslug %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="file" name="excel_file" accept=".xlsx, .xls" class="form-control" required>
-                <button type="submit" class="btn allifmaal-submit-btn">Upload Excel</button>
-            </form>
-      
-
-
-
-
-
-
-
+  <div class="allif-main-excel-upload-wrapper">
+  <li><a class="dropdown-item">Upload Excel File</a></li>
+  <form method="POST" action="{% url 'allifmaalcommonapp:commonUploadExcel' 'CommonCurrenciesModel' user_var glblslug %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="excel_file" accept=".xlsx, .xls" class="form-control" required>
+      <button type="submit" class="btn allifmaal-submit-btn">Upload Excel</button>
+  </form>
+    </div>
   <li><a class="dropdown-item">Advanced Searching</a></li>
   <form method='POST' action="{% url 'allifmaalcommonapp:commonCurrencyAdvanceSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
   
-  
-  
-  
-  
-  
-    {% include 'allifmaalcommonapp/includes/headers/advanced-search-form-lower-section.html' %}
+  {% include 'allifmaalcommonapp/includes/headers/advanced-search-form-lower-section.html' %}
    <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}" >New Currency </a>
     <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
-   {% include 'allifmaalcommonapp/includes/headers/header-lower-section.html' %}
+  {% include 'allifmaalcommonapp/includes/headers/header-lower-section.html' %}
   </div>
     <div class="allifmaincontainer">
       <div class="allif-full-table-content-main-wrapper">

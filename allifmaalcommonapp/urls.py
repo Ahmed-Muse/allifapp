@@ -95,10 +95,8 @@ path('Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonD
 path('Search/Departments/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepartmentSearch, name="commonDepartmentSearch"),
 path('Want/To/Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDepartment, name="commonWantToDeleteDepartment"),
 
-
-    path('upload/excel/<str:model_config_key>/<str:allifusr>/<str:allifslug>/',views.commonUploadExcel, name='commonUploadExcel'),
-
-
+##################################3 EXCEL UPLOAD FUNCTION ###############################
+path('upload/excel/<str:model_config_key>/<str:allifusr>/<str:allifslug>/',views.commonUploadExcel, name='commonUploadExcel'),
 
 ################################## Currencies ##############
 path('Currencies/Main/Money/Types/<str:allifusr>/<str:allifslug>/', views.commonCurrencies, name="commonCurrencies"),

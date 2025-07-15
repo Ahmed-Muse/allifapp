@@ -605,6 +605,7 @@ def commonDeleteDataSort(request,pk):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
+########################## upload excel function ###########################
 def commonUploadExcel(request, model_config_key, *allifargs, **allifkwargs):
     """
     Handles the Excel upload process by delegating to the centralized handler.
@@ -678,6 +679,7 @@ def commonCurrencyAdvanceSearch(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def common_currency_pdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
+ 
  
 ########################3 Payment terms ######################
 @allif_base_view_wrapper

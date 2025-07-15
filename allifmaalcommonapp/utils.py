@@ -248,27 +248,27 @@ allif_main_document_pdf_configuration= {
 
 
 # --- NEW: EXCEL_UPLOAD_CONFIGS (Centralized Excel Upload Configuration Map) ---
-EXCEL_UPLOAD_CONFIGS = {
+allif_excel_upload_configs= {
     'CommonCurrenciesModel': {
         'model': 'CommonCurrenciesModel', # String name for ALLIF_MODEL_REGISTRY lookup
-        'required_excel_headers': ['Name', 'Code', ], # Headers that MUST be in Excel
+        'required_excel_headers': ['Name', 'Code', 'Description'], # Headers that MUST be in Excel
         'field_mapping': { # Map Excel headers to model field names if different
             'Currency Name': 'name',
             'Code': 'code',
            
             'Description': 'description',
-            'Start Date': 'starts', # Assuming 'starts' is a DateTimeField/DateField
-            'End Date': 'ends',     # Assuming 'ends' is a DateTimeField/DateField
+            #'Start Date': 'starts', # Assuming 'starts' is a DateTimeField/DateField
+            #'End Date': 'ends',     # Assuming 'ends' is a DateTimeField/DateField
          
-            'Status': 'status', # Example status field
+            #'Status': 'status', # Example status field
         },
-        'related_field_lookups': {
+        #'related_field_lookups': {
             # No related fields for CommonCurrencyModel in this example
-        },
-        'default_values': {
+        #},
+        #'default_values': {
             #'is_active': True, # Default value if 'Is Active' column is missing or empty
-            'status': 'active', # Default status if 'Status' column is missing or empty
-        },
+            #'status': 'active', # Default status if 'Status' column is missing or empty
+        #},
     },
     'CommonStocksModel': {
         'model': 'CommonStocksModel',
@@ -1403,7 +1403,7 @@ def allif_excel_upload_handler(
         return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
                                 kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
 
-    config = EXCEL_UPLOAD_CONFIGS.get(model_config_key)
+    config = allif_excel_upload_configs.get(model_config_key)
     if not config:
         messages.error(request, f"Excel upload configuration missing for '{model_config_key}'.")
         return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 

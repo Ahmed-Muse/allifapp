@@ -873,3 +873,10 @@ textarea.form-control {
      
       cursor: pointer;
     }
+
+/*... this for style uploading file....*/
+.allif-main-excel-upload-wrapper{
+  font-family: inherit;
+  padding: 0.01em;
+  margin: 0.01em;
+}
