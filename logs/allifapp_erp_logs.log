@@ -11607,3 +11607,1326 @@ INFO 2025-07-15 17:55:35,676 autoreload 24660 29420 C:\am\allifapp\allifapperp\a
 INFO 2025-07-15 17:55:36,742 autoreload 28800 28124 Watching for file changes with StatReloader
 INFO 2025-07-15 17:56:11,003 autoreload 28800 28124 C:\am\allifapp\allifapperp\allifapperp\settings.py changed, reloading.
 INFO 2025-07-15 17:56:11,966 autoreload 12148 19156 Watching for file changes with StatReloader
+INFO 2025-07-15 19:08:51,204 autoreload 12504 4752 Watching for file changes with StatReloader
+WARNING 2025-07-15 19:10:39,380 log 12504 13264 Not Found: /favicon.ico
+INFO 2025-07-15 19:13:21,252 autoreload 12504 4752 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 19:13:22,422 autoreload 8256 14232 Watching for file changes with StatReloader
+ERROR 2025-07-15 19:13:26,685 log 8256 24848 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 648, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 595, in allif_common_form_submission_and_save
+    if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+INFO 2025-07-15 19:16:10,782 autoreload 8256 14232 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:16:12,302 autoreload 19944 25844 Watching for file changes with StatReloader
+ERROR 2025-07-15 19:16:18,077 log 19944 24952 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 648, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 595, in allif_common_form_submission_and_save
+    if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+INFO 2025-07-15 19:16:43,715 autoreload 19944 25844 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:16:44,931 autoreload 22944 30832 Watching for file changes with StatReloader
+ERROR 2025-07-15 19:16:46,898 log 22944 26532 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 648, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 595, in allif_common_form_submission_and_save
+    if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+INFO 2025-07-15 19:17:05,742 autoreload 22944 30832 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:17:06,857 autoreload 25784 31376 Watching for file changes with StatReloader
+INFO 2025-07-15 19:17:13,399 autoreload 25784 31376 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:17:14,205 autoreload 25460 30580 Watching for file changes with StatReloader
+INFO 2025-07-15 19:17:24,567 autoreload 25460 30580 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:17:25,962 autoreload 31724 19200 Watching for file changes with StatReloader
+ERROR 2025-07-15 19:17:27,870 log 31724 23268 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 648, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 597, in allif_common_form_submission_and_save
+    if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+INFO 2025-07-15 19:21:34,986 autoreload 31724 19200 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:21:36,227 autoreload 20004 1120 Watching for file changes with StatReloader
+INFO 2025-07-15 19:29:49,170 autoreload 20004 1120 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:29:50,254 autoreload 23112 26228 Watching for file changes with StatReloader
+INFO 2025-07-15 19:32:00,038 autoreload 23112 26228 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:32:02,239 autoreload 13192 6548 Watching for file changes with StatReloader
+INFO 2025-07-15 19:34:37,739 autoreload 13192 6548 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:34:38,939 autoreload 2776 13904 Watching for file changes with StatReloader
+ERROR 2025-07-15 19:34:48,726 log 2776 18956 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 648, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 595, in allif_common_form_submission_and_save
+    if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+INFO 2025-07-15 19:35:42,840 autoreload 2776 13904 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:35:43,969 autoreload 32944 29700 Watching for file changes with StatReloader
+ERROR 2025-07-15 19:35:47,442 log 32944 23176 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 648, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 607, in allif_common_form_submission_and_save
+    if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+INFO 2025-07-15 19:36:59,050 autoreload 32944 29700 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:37:00,233 autoreload 33404 23492 Watching for file changes with StatReloader
+INFO 2025-07-15 19:37:57,001 autoreload 33404 23492 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:37:58,075 autoreload 19900 31068 Watching for file changes with StatReloader
+INFO 2025-07-15 19:38:10,739 autoreload 19900 31068 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 19:38:11,866 autoreload 30788 7436 Watching for file changes with StatReloader
+INFO 2025-07-15 19:39:35,989 autoreload 30788 7436 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 19:39:37,520 autoreload 13896 11684 Watching for file changes with StatReloader
+INFO 2025-07-15 19:39:49,941 autoreload 13896 11684 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 19:39:51,258 autoreload 20568 28224 Watching for file changes with StatReloader
+INFO 2025-07-15 19:40:21,693 autoreload 20568 28224 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 19:40:22,799 autoreload 33132 18912 Watching for file changes with StatReloader
+INFO 2025-07-15 19:40:31,275 autoreload 33132 18912 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 19:40:32,595 autoreload 33708 27344 Watching for file changes with StatReloader
+INFO 2025-07-15 20:03:32,224 autoreload 33708 27344 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 20:03:33,492 autoreload 6760 13340 Watching for file changes with StatReloader
+INFO 2025-07-15 20:05:21,712 autoreload 6760 13340 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 20:05:22,796 autoreload 13004 31812 Watching for file changes with StatReloader
+INFO 2025-07-15 20:05:26,726 autoreload 13004 31812 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 20:05:27,696 autoreload 32480 25840 Watching for file changes with StatReloader
+INFO 2025-07-15 20:06:12,983 autoreload 32480 25840 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 20:06:14,297 autoreload 26316 20116 Watching for file changes with StatReloader
+INFO 2025-07-15 20:06:46,712 autoreload 26316 20116 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 20:06:47,743 autoreload 16916 7820 Watching for file changes with StatReloader
+INFO 2025-07-15 20:08:04,211 autoreload 16916 7820 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 20:08:05,402 autoreload 33660 18052 Watching for file changes with StatReloader
+INFO 2025-07-15 20:09:35,585 autoreload 33660 18052 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 20:09:36,782 autoreload 28808 26732 Watching for file changes with StatReloader
+INFO 2025-07-15 20:11:29,994 autoreload 28808 26732 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 20:11:31,159 autoreload 34252 32044 Watching for file changes with StatReloader
+INFO 2025-07-15 20:11:40,721 autoreload 34252 32044 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 20:11:41,803 autoreload 24976 28332 Watching for file changes with StatReloader
+INFO 2025-07-15 20:22:53,477 autoreload 24976 28332 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 20:22:54,621 autoreload 29384 31816 Watching for file changes with StatReloader
+INFO 2025-07-15 20:23:16,282 autoreload 29384 31816 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 20:23:17,393 autoreload 14528 21540 Watching for file changes with StatReloader
+INFO 2025-07-15 20:23:24,547 autoreload 14528 21540 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 20:23:25,392 autoreload 9392 26632 Watching for file changes with StatReloader
+INFO 2025-07-15 20:23:45,829 autoreload 9392 26632 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-15 20:23:46,779 autoreload 28280 30404 Watching for file changes with StatReloader
+INFO 2025-07-15 20:31:19,938 autoreload 28280 30404 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 20:31:21,157 autoreload 20564 22996 Watching for file changes with StatReloader
+INFO 2025-07-15 20:33:06,810 autoreload 20564 22996 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 20:33:07,858 autoreload 20832 24992 Watching for file changes with StatReloader
+INFO 2025-07-15 20:35:12,726 autoreload 20832 24992 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-15 20:35:13,810 autoreload 27024 16856 Watching for file changes with StatReloader
+INFO 2025-07-15 20:35:16,600 autoreload 27024 16856 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-15 20:35:17,470 autoreload 24676 5504 Watching for file changes with StatReloader
+INFO 2025-07-15 20:40:08,832 autoreload 24676 5504 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-15 20:40:09,823 autoreload 23344 26740 Watching for file changes with StatReloader
+ERROR 2025-07-15 21:57:24,545 views 23344 26036 Unexpected error for Tax 'Sales Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1817, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-15 21:57:24,590 views 23344 26036 Unexpected error for Supplier Tax 'Sales Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1843, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-15 21:57:24,592 views 23344 26036 Unexpected error for Tax 'VAT'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1817, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-15 21:57:24,594 views 23344 26036 Unexpected error for Supplier Tax 'VAT'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1843, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-15 21:57:24,597 views 23344 26036 Unexpected error for Tax 'Withholding Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1817, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-15 21:57:24,599 views 23344 26036 Unexpected error for Supplier Tax 'Withholding Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1843, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-15 21:57:24,661 views 23344 26036 Unexpected error for Operation Year 'Operation Year One'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonOperationYearsModel.DoesNotExist: CommonOperationYearsModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1949, in commonCreateDefaultValues
+    year_instance, created = CommonOperationYearsModel.objects.get_or_create(
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        year=year_data['year'], # Assuming 'year' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.
+ERROR 2025-07-15 21:57:24,665 views 23344 26036 Unexpected error for Operation Year 'Current Year'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonOperationYearsModel.DoesNotExist: CommonOperationYearsModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1949, in commonCreateDefaultValues
+    year_instance, created = CommonOperationYearsModel.objects.get_or_create(
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        year=year_data['year'], # Assuming 'year' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.
+ERROR 2025-07-15 21:57:24,666 views 23344 26036 Skipping term 'Term One' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-15 21:57:24,666 views 23344 26036 Skipping term 'Term Two' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-15 21:57:24,666 views 23344 26036 Skipping term 'Term Three' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-15 21:57:24,666 views 23344 26036 Skipping term 'Term Four' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-15 21:57:24,666 views 23344 26036 Skipping term 'Q1' due to missing parent year 'Current Year'.
+ERROR 2025-07-15 21:57:24,666 views 23344 26036 Skipping term 'Q2' due to missing parent year 'Current Year'.
+ERROR 2025-07-15 21:57:24,666 views 23344 26036 Skipping term 'Q3' due to missing parent year 'Current Year'.
+ERROR 2025-07-15 21:57:24,666 views 23344 26036 Skipping term 'Q4' due to missing parent year 'Current Year'.
+ERROR 2025-07-15 21:57:24,680 views 23344 26036 Unexpected error for Category 'General Category 1'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2047, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-15 21:57:24,683 views 23344 26036 Unexpected error for Category 'General Category 2'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2047, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-15 21:57:24,685 views 23344 26036 Unexpected error for Category 'Product Category - Electronics'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2047, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-15 21:57:24,687 views 23344 26036 Unexpected error for Category 'Service Category - Consulting'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 2047, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-15 21:57:24,828 views 23344 26036 Default setup for barasho Hospital completed with errors. Results: {'company_scopes': {'created': 5, 'skipped': 0, 'errors': []}, 'taxes': {'created': 0, 'skipped': 3, 'errors': ["Error creating tax 'Sales Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid", "Error creating tax 'VAT': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid", "Error creating tax 'Withholding Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, tax_assumptions, tax_constraints, tax_exclusions, tax_resources, tax_risks, tax_stakeholders, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid"]}, 'supplier_taxes': {'created': 0, 'skipped': 3, 'errors': ["Error creating supplier tax 'Sales Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid", "Error creating supplier tax 'VAT': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid", "Error creating supplier tax 'Withholding Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid"]}, 'currencies': {'created': 5, 'skipped': 0, 'errors': []}, 'payment_terms': {'created': 6, 'skipped': 0, 'errors': []}, 'units': {'created': 12, 'skipped': 0, 'errors': []}, 'operation_years': {'created': 0, 'skipped': 2, 'errors': ["Error creating year 'Operation Year One': Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.", "Error creating year 'Current Year': Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'."]}, 'operation_year_terms': {'created': 0, 'skipped': 8, 'errors': ["Missing parent year 'Operation Year One' for term 'Term One'.", "Missing parent year 'Operation Year One' for term 'Term Two'.", "Missing parent year 'Operation Year One' for term 'Term Three'.", "Missing parent year 'Operation Year One' for term 'Term Four'.", "Missing parent year 'Current Year' for term 'Q1'.", "Missing parent year 'Current Year' for term 'Q2'.", "Missing parent year 'Current Year' for term 'Q3'.", "Missing parent year 'Current Year' for term 'Q4'."]}, 'codes': {'created': 5, 'skipped': 0, 'errors': []}, 'categories': {'created': 0, 'skipped': 4, 'errors': ["Error creating category 'General Category 1': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'General Category 2': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'Product Category - Electronics': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'Service Category - Consulting': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'."]}, 'gl_categories': {'created': 5, 'skipped': 0, 'errors': []}, 'chart_of_accounts': {'created': 47, 'skipped': 0, 'errors': []}, 'overall_error': False}
+INFO 2025-07-16 17:10:54,223 autoreload 11332 20528 Watching for file changes with StatReloader
+WARNING 2025-07-16 17:26:54,323 log 11332 26840 Not Found: /favicon.ico
+ERROR 2025-07-16 17:37:52,774 log 11332 6956 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 161, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/forms/add-form.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 599, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 712, in allif_common_form_submission_and_save
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/forms/add-form.html
+ERROR 2025-07-16 17:39:22,421 log 11332 6956 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 161, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/forms/add-form.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 599, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 712, in allif_common_form_submission_and_save
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/forms/add-form.html
+ERROR 2025-07-16 17:56:16,950 log 11332 6956 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 599, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 712, in allif_common_form_submission_and_save
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'allif-row1-column1' appears more than once
+ERROR 2025-07-16 18:56:00,362 log 11332 15432 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 599, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 712, in allif_common_form_submission_and_save
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'row-one-column-one-top-fields-name' appears more than once
+ERROR 2025-07-16 18:57:10,221 log 11332 15432 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 599, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 712, in allif_common_form_submission_and_save
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'row-one-column-one-top-fields-name' appears more than once
+ERROR 2025-07-17 18:44:01,284 log 11332 28308 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 599, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 712, in allif_common_form_submission_and_save
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'row-two-column-one-top-field-name' appears more than once
+ERROR 2025-07-17 19:37:49,646 log 11332 3560 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 599, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 712, in allif_common_form_submission_and_save
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'general-tab-col-one' appears more than once
+WARNING 2025-07-17 19:37:50,140 log 11332 3560 Not Found: /favicon.ico
+ERROR 2025-07-17 20:19:23,216 log 11332 20644 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 161, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/forms/add-form.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 599, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 712, in allif_common_form_submission_and_save
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/forms/add-form.html
+ERROR 2025-07-17 20:34:20,294 log 11332 20644 Internal Server Error: /Add/New/Currency/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 599, in commonAddCurrency
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 712, in allif_common_form_submission_and_save
+    return render(request, template_path, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'common_currency_pdf' with arguments '('', 'user-full-names-b86293ea7826', 'barasho-hospital2116-5691dc1aadae')' not found. 1 pattern(s) tried: ['Convert/Currency/To/pdf/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-07-17 20:36:52,498 autoreload 11332 20528 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-17 20:36:54,649 autoreload 28444 33436 Watching for file changes with StatReloader
+INFO 2025-07-17 20:36:58,245 autoreload 28444 33436 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-17 20:36:59,227 autoreload 13968 9640 Watching for file changes with StatReloader
+INFO 2025-07-17 21:58:25,870 autoreload 14156 12576 Watching for file changes with StatReloader
+WARNING 2025-07-17 22:39:14,478 log 14156 32356 Not Found: /favicon.ico

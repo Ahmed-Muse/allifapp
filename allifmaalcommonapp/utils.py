@@ -353,6 +353,38 @@ allif_excel_upload_configs= {
 
 
 
+allif_sector_redirect_map= {
+    "Sales": {
+        "home": "allifmaalsalesapp:salesHome",
+        "dashboard": "allifmaalsalesapp:salesDashboard",
+    },
+    "Healthcare": {
+        "home": "allifmaalshaafiapp:shaafiHome",
+        "dashboard": "allifmaalshaafiapp:shaafiDashboard",
+    },
+    "Hospitality": {
+        "home": "allifmaalhotelsapp:hotelsHome",
+        "dashboard": "allifmaalhotelsapp:hospitalityDashboard", # Note: your original had hospitalityDashboard here
+    },
+    "Education": {
+        "home": "allifmaalilmapp:ilmHome",
+        "dashboard": "allifmaalilmapp:ilmDashboard",
+    },
+    "Services": {
+        "home": "allifmaalservicesapp:servicesHome",
+        "dashboard": "allifmaalservicesapp:servicesDashboard",
+    },
+    "Realestate": {
+        "home": "allifmaalrealestateapp:realestateHome",
+        "dashboard": "allifmaalrealestateapp:realestateDashboard",
+    },
+    "Logistics": {
+        "home": "allifmaallogisticsapp:logisticsHome",
+        "dashboard": "allifmaallogisticsapp:logisticsDashboard",
+    },
+    # Add other sectors as needed
+}
+
 def allif_filtered_and_sorted_queryset(request: HttpRequest,model_class: type[Model], allif_data: dict,explicit_scope: Optional[str] = None) -> QuerySet:
     """
     Applies common filtering (company, scope, access levels) and sorting to a queryset.
@@ -591,27 +623,37 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
                 except Exception as e:
                     #print(f"ERROR: Failed to retrieve department with ID {allif_data.get('logged_user_department').id}: {e}")
                     obj.department = None
-            
-            if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
-                try:
-                    obj.operation_year = get_object_or_404(CommonOperationYearsModel, pk=allif_data.get("logged_user_operation_year").id)
-                except Http404:
-                    #print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
-                    obj.operation_year = None
-                except Exception as e:
-                    #print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
-                    obj.operation_year = None
-                    
-            if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
-                try:
-                    obj.operation_term = get_object_or_404(CommonOperationYearTermsModel, pk=allif_data.get("logged_user_operation_term").id)
-                except Http404:
-                    #print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
-                    obj.operation_term = None
-                except Exception as e:
-                    #print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
-                    obj.operation_term = None
-                    
+            if allif_data.get("logged_user_operation_year"):
+                if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
+                    try:
+                        
+                        obj.operation_year = get_object_or_404(CommonOperationYearsModel, pk=allif_data.get("logged_user_operation_year").id)
+                    except Http404:
+                        #print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
+                        obj.operation_year = None
+                        raise Http404("Unauthorized: Item does not belong to your company or access denied.")
+                    except Exception as e:
+                        #print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
+                        obj.operation_year = None
+                else:
+                    pass
+            else:
+                pass
+            if allif_data.get("logged_user_operation_term"):
+                if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
+                    try:
+                        
+                        obj.operation_term = get_object_or_404(CommonOperationYearTermsModel, pk=allif_data.get("logged_user_operation_term").id)
+                    except Http404:
+                        #print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
+                        obj.operation_term = None
+                    except Exception as e:
+                        #print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
+                        obj.operation_term = None
+                else:
+                    pass
+            else:
+                pass
                     
             # Owner (assuming 'usernmeslg' in allif_data is the User object)
             if hasattr(obj, 'owner') and allif_data.get("usernmeslg"):
@@ -1573,3 +1615,34 @@ def allif_excel_upload_handler(
         logger.exception(f'CRITICAL ERROR: Excel upload failed for {model_config_key}: {e}')
         return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
                                 kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+###############3 below is for function redirections... ####################
+# --- NEW: Generic Sector-Based Redirect Helper Function ---
+def allif_redirect_based_on_sector(request: HttpRequest, allif_data: dict, redirect_type: str) -> HttpResponse:
+    """
+    Redirects the user to the appropriate app's home or dashboard based on their
+    company's sector.
+    """
+    company_entity = allif_data.get("main_sbscrbr_entity")
+    user_slug = allif_data.get("usrslg")
+    company_slug = allif_data.get("compslg")
+
+    if not company_entity:
+        # This case should ideally be caught earlier by common_shared_data or decorators
+        # but as a fallback, redirect to company creation or decision point
+        return redirect('allifmaalcommonapp:commonAddnewEntity', allifusr=user_slug)
+
+    sector_name = str(company_entity.sector) # Convert sector object to string name
+
+    target_urls = allif_sector_redirect_map.get(sector_name)
+
+    if target_urls and redirect_type in target_urls:
+        url_name = target_urls[redirect_type]
+        return redirect(url_name, allifusr=user_slug, allifslug=company_slug)
+    else:
+        # If sector not found in map or redirect_type not defined for sector
+        #logger.warning(f"No redirect URL found for sector '{sector_name}' and type '{redirect_type}'. Redirecting to CommonDecisionPoint.")
+        messages.error(request, f"Your company's sector '{sector_name}' is not configured for this action. Please contact support.")
+        return redirect('allifmaalcommonapp:CommonDecisionPoint')
+
+# ... (rest of your utils.py code) ...

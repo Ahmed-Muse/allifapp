@@ -11,7 +11,7 @@ from django.core.cache import cache # For caching
 from django.forms import modelformset_factory # For formsets
 
 from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,allif_main_models_registry,allif_delete_hanlder,allif_common_form_submission_and_save,
-allif_common_form_edit_and_save,allif_delete_confirm,allif_excel_upload_handler,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler)
+allif_common_form_edit_and_save,allif_redirect_based_on_sector,allif_delete_confirm,allif_excel_upload_handler,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler)
 # ... (existing imports) ...
 from django.http import JsonResponse
 from django.urls import reverse
@@ -231,96 +231,47 @@ def commonEngineering(request):
     except Exception as ex:
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/web-error.html',error_context)
-    
+   
+@allif_view_exception_handler 
 @login_required(login_url='allifmaalusersapp:userLoginPage')
-def CommonDecisionPoint(request,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("main_sbscrbr_entity") is None or '' or allif_data.get("compslg") is None or '':#means that the logged user did not create a company and does not belong to any company
-            return redirect('allifmaalcommonapp:commonAddnewEntity',allifusr=allif_data.get("logged_in_user"))
-        elif allif_data.get("compslg") and str(allif_data.get("main_sbscrbr_entity"))!=None:
-            if str(allif_data.get("main_sbscrbr_entity").sector)=="Sales":
-                return redirect('allifmaalsalesapp:salesHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Healthcare":
-                return redirect('allifmaalshaafiapp:shaafiHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Hospitality":
-                return redirect('allifmaalhotelsapp:hotelsHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Education":
-                return redirect('allifmaalilmapp:ilmHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Services":
-                return redirect('allifmaalservicesapp:servicesHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Realestate":
-                return redirect('allifmaalrealestateapp:realestateHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Logistics":
-                return redirect('allifmaallogisticsapp:logisticsHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                return HttpResponse("Sorry, Your company must belong to a sector")
-        else:
-            return render(request,'allifmaalcommonapp/error/error.html')
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+def CommonDecisionPoint(request, *allifargs, **allifkwargs):
+    allif_data = common_shared_data(request)
+    company_entity = allif_data.get("main_sbscrbr_entity")
+    if not company_entity or not allif_data.get("compslg"):
+        # If company entity is not set or company slug is missing, redirect to company creation
+        return redirect('allifmaalcommonapp:commonAddnewEntity', allifusr=allif_data.get("usrslg"))
+    else:
+        # Company exists, redirect based on sector to the 'home' type URL
+        return allif_redirect_based_on_sector(request, allif_data, 'home')
 
-@logged_in_user_must_have_profile
-#@subscriber_company_status
-def commonHome(request,*allifargs,**allifkwargs):
-    try:
-        if request.user.email.endswith("info@allifmaal.com"):#just for remembering purposes
-            pass
-        allif_data=common_shared_data(request)
-        if allif_data.get("main_sbscrbr_entity")!=None:
-            if str(allif_data.get("main_sbscrbr_entity").sector)=="Salest":
-                return redirect('allifmaalsalesapp:salesHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Healthcare":
-                return redirect('allifmaalshaafiapp:shaafiHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Hospitality":
-                return redirect('allifmaalhotelsapp:hotelsHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Education":
-                return redirect('allifmaalilmapp:ilmHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Services":
-                return redirect('allifmaalservicesapp:servicesHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Realestate":
-                return redirect('allifmaalrealestateapp:realestateHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Logistics":
-                return redirect('allifmaallogisticsapp:logisticsHome',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                return redirect('allifmaalcommonapp:CommonDecisionPoint')
-        else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint')
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-def commonSpecificDashboard(request,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("main_sbscrbr_entity")!=None:
-            if str(allif_data.get("main_sbscrbr_entity").sector)=="Sales":
-                return redirect('allifmaalsalesapp:salesDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Healthcare":
-                return redirect('allifmaalshaafiapp:shaafiDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Hospitality":
-                return redirect('allifmaalhotelsapp:hospitalityDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Education":
-                return redirect('allifmaalilmapp:ilmDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Services":
-                return redirect('allifmaalservicesapp:servicesDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Realestate":
-                return redirect('allifmaalrealestateapp:realestateDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            elif str(allif_data.get("main_sbscrbr_entity").sector)=="Logistics":
-                return redirect('allifmaallogisticsapp:logisticsDashboard',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                return redirect('allifmaalcommonapp:CommonDecisionPoint')
-        else:
-            return redirect('allifmaalcommonapp:CommonDecisionPoint')
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+@allif_view_exception_handler 
+@login_required(login_url='allifmaalusersapp:userLoginPage')
+def commonHome(request, *allifargs, **allifkwargs):
+    allif_data = common_shared_data(request)
+    if request.user.email.endswith("info@allifmaal.com"):
+        pass
+    company_entity = allif_data.get("main_sbscrbr_entity")
+    if company_entity:
+        return allif_redirect_based_on_sector(request, allif_data, 'home')
+    else:
+        # Fallback if company_entity is unexpectedly None here (should be caught by decorators/DecisionPoint)
+        logger.warning("commonHome called without a main_sbscrbr_entity. Redirecting to CommonDecisionPoint.")
+        return redirect('allifmaalcommonapp:CommonDecisionPoint')
 
-################################### Sectors ############################### 
-
+@allif_view_exception_handler 
+@login_required(login_url='allifmaalusersapp:userLoginPage')
+def commonSpecificDashboard(request, *allifargs, **allifkwargs):
+    allif_data = common_shared_data(request)
+    company_entity = allif_data.get("main_sbscrbr_entity")
+    if company_entity:
+        # Company exists, redirect based on sector to the 'dashboard' type URL
+        return allif_redirect_based_on_sector(request, allif_data, 'dashboard')
+    else:
+        # Fallback if company_entity is unexpectedly None here
+        logger.warning("commonSpecificDashboard called without a main_sbscrbr_entity. Redirecting to CommonDecisionPoint.")
+        return redirect('allifmaalcommonapp:CommonDecisionPoint')
+     
 @logged_in_user_must_have_profile
 @allifmaal_admin
 def commonSectors(request,allifusr,*allifargs,**allifkwargs):
@@ -622,7 +573,7 @@ def commonUploadExcel(request, model_config_key, *allifargs, **allifkwargs):
     elif model_config_key == 'CommonSuppliersModel':
         success_redirect_url_name = 'commonSuppliers' # Assuming you have a commonSuppliers list view
     else:
-        messages.error(request, f"No specific redirect URL defined for model config key: {model_config_key}.")
+        messages.error(request, f'No specific redirect URL defined for model config key: {model_config_key}.')
         # Fallback to a generic home page or error page
         allif_data = common_shared_data(request)
         return redirect('allifmaalcommonapp:commonHome', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
@@ -643,13 +594,13 @@ def commonCurrencies(request,*allifargs,**allifkwargs):
     return render(request,'allifmaalcommonapp/currencies/currencies.html',context)
 
 
-@allif_base_view_wrapper
+#@allif_base_view_wrapper
 def commonAddCurrency(request, *allifargs, **allifkwargs):
-    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add_currency.html')
+    return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add-currency.html')
 
 @allif_base_view_wrapper
 def commonEditCurrency(request, pk, *allifargs, **allifkwargs):
-    return allif_common_form_edit_and_save(request,pk,CommonAddCurrencyForm,"Edit Currency","commonCurrencies",'allifmaalcommonapp/currencies/currency-details.html')
+    return allif_common_form_edit_and_save(request,pk,CommonAddCurrencyForm,"Edit Currency","commonCurrencies",'allifmaalcommonapp/currencies/add-currency.html')
 
 @allif_base_view_wrapper
 def commonWantToDeleteCurrency(request,pk,*allifargs,**allifkwargs):
@@ -3607,10 +3558,6 @@ def commonAddStaffProfile(request,allifusr,allifslug,*allifargs,**allifkwargs): 
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
     
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_has_universal_delete
-@logged_in_user_can_edit
 def commonEditStaffProfile(request,pk,*allifargs,**allifkwargs):
     title="Update Staff Profile Details"
     try:

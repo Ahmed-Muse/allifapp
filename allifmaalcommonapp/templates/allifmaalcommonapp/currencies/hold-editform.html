@@ -1,0 +1,41 @@
+{% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+<div class="allif-list-table-main-wrapper">
+
+<div class="allif-list-table-header-block-main-wrapper">
+ {% block allif_basic_search %}
+ <form method='POST' action="{% url 'allifmaalcommonapp:commonCurrencySearch' user_var glblslug %}">{% csrf_token %}  
+{% endblock %}
+ 
+ {% block allifmainheaderblock %}
+<a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}" >New Currency </a>
+<a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
+  {%endblock%}
+</div>
+
+ {% block list-table-content-seciton %}
+    <tr data-id="{{item.id}}" class="allif-table-header-content-row">
+    <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}"> {{item.name}}</a></td>
+    <td class="allif-table-content-td">{{item.description}} </td>
+    <td class="allif-table-content-td"> {{item.date|date:'d/m/Y'}} </td>
+    <td class="allif-table-content-td">{{item.status}}</td>
+      {% endblock %}
+
+
+  {% block allif_list_table_dropdown_link_one %}
+   <a href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+  
+   {% endblock %}
+
+  {% block allif_list_table_dropdown_link_two %}
+   <a href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+  {% endblock %}
+  
+   {% block allif_list_table_dropdown_delete_decline_link %}
+  <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+   {% endblock %}
+        
+  {% block allif_list_table_dropdown_delete_confirm_link %} 
+  <a href="{% url 'allifmaalcommonapp:commonDeleteCurrency' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+   {% endblock %}
+  
+</div>

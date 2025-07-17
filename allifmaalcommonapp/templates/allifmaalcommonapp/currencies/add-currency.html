@@ -1,0 +1,5 @@
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+ {% block add-form-header-block %}
+   <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}" >New Currency </a>
+  <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
+  {% endblock %}

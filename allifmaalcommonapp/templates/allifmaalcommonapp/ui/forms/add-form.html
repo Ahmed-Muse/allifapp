@@ -10,33 +10,42 @@
 <div class="allif-header-main-wrapper">
  <!--... START OF HEADER.... -->
 {% include 'allifmaalcommonapp/includes/headers/header-upper-section.html' %}
- <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}" >New Currency </a>
-  <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
+{% block add-form-header-block %}
+ 
+{%endblock%}
 {% include 'allifmaalcommonapp/includes/headers/header-lower-section.html' %}
  <!--... ENDT OF HEADER.... -->
 </div>
   <div class="allifmaincontainer">
-  <div class="allif-details-table-main-wrapper">
+   
+{% if allifquery %}
+     <div class="allif-details-table-main-wrapper">
   <!--... START OF TABLE.... -->
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
+    {% block details-table-col-one %}
       <tr>
         <td class="allif-fix-table-col">Name</td>
         <td>{{allifquery.name}}</td>
       </tr>
-      
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
+      {%endblock%}
 
+    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
+      {% block details-table-col-two %}
      <tr>
         <td class="allif-fix-table-col">Description</td>
         <td>{{allifquery.description}}</td>
       </tr>
+      {% endblock %}
         
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
      <!--... END OF TABLE.... -->
       </div>
+{% endif %}
 
   <div class="allif-form-main-wrapper">
     <form method='POST' action=''>{% csrf_token %}
+
+
     <!--START.... start of single pages content and its links section-->
     <div class="allif-single-page-tabs-contents-main-wrapper" >
     {% include 'allifmaalcommonapp/includes/links/single-page-links.html' %}
@@ -47,17 +56,25 @@
      
         <div class="allif-forms-table-main-wrapper">
         {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
+
+        {% block core-tab-col-one %}
           <tr>
             <td class="allif-fix-table-col-forms">Name</td>
             <td>{{form.name}}</td>
           </tr>
+        
+          {%endblock%}
         {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
+        {% block core-tab-col-two %}
         <tr>
           <td class="allif-fix-table-col-forms">Description</td>
           <td>{{form.description}}</td>
         </tr>
+       
+        {%endblock%}
         {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
     </div>
+
   </div>
        <!--END... End of show/hide table more details section one..ok...hree....-->
  <!--START.. Start of show/hide table section one-->
@@ -70,15 +87,19 @@
   <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-general-details" role="tabpanel" aria-labelledby="allif-single-page-tab-general-details-id">
     <div class="allif-forms-table-main-wrapper">
       {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
+       {% block general-tab-col-one %}
       <tr>
         <td class="allif-fix-table-col-forms">Balance</td>
         <td>{{form.balance}}</td>
       </tr>
+      {%endblock%}
       {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
+      {% block general-tab-col-two %}
       <tr>
         <td class="allif-fix-table-col-forms">Quantity</td>
         <td>{{form.quantity}}</td>
       </tr>
+      {%endblock%}
       {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
      </div>
     </div>
@@ -91,15 +112,19 @@
        <!--END... End of show/hide table more details section one-->
     <div class="allif-forms-table-main-wrapper">
     {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-one-section.html' %}
+    {% block bottom-fields-col-one%}
       <tr>
         <td class="allif-fix-table-col-forms">Code</td>
         <td>{{form.code}}</td>
       </tr>
+      {%endblock%}
       {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-two-section.html' %}
+      {% block bottom-fields-col-two %}
       <tr>
         <td class="allif-fix-table-col-forms">Number</td>
         <td>{{form.number}}</td>
       </tr>
+      {%endblock%}
       {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-section.html' %}
       {% include 'allifmaalcommonapp/includes/forms/forms-save-button.html' %}  
       {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-last-section.html' %}
@@ -108,8 +133,8 @@
          </form>
   </div>
 
-  <div class="allif-content-spacer"></div>
-  
+
+  {% if allifquery %}
   <!--... START OF COLLAPSIBLE SECTIONS.... -->
   <div class="allif-collapsible-sections-main-wrapper">
 <!--START......... Start of collapsible sectioon links..........-->
@@ -191,8 +216,7 @@
        <!--end....content of second dropdown/collapsible section-->
        </div>
 
-       
-    <!--... END OF COLLAPSIBLE SECTIONS.... -->
+       {% endif %}
       </div>
       <!--END.... END of single pages content and its links section-->
     </div>
