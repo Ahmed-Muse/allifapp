@@ -6,6 +6,16 @@
 {% block style %}
 {%endblock%}
 {% block body %}
+
+
+ {% if allifquery %}
+<!-- START... below is for loading contextual dynamic tags and links... used for only contextual links -->
+{% load allif_contextual_action_tags %} {# this helps to put the links where you want and it loads them #}
+{% allif_get_contextual_actions_map allifquery user_var glblslug as allif_contextual_action_links %}
+<!--'allif_contextual_action_links' now holds the dictionary returned by the tag-->
+<!-- END.. -->
+{% endif %}
+
 <div class="allifmaal-main-container">
 <div class="allif-header-main-wrapper">
  <!--... START OF HEADER.... -->
@@ -133,7 +143,8 @@
          </form>
   </div>
 
-
+   <div class="allif-content-spacer"></div>
+   {% block collapsible_section %}
   {% if allifquery %}
   <!--... START OF COLLAPSIBLE SECTIONS.... -->
   <div class="allif-collapsible-sections-main-wrapper">
@@ -146,15 +157,19 @@
     <div class="allif-details-table-main-wrapper">
      <!--... START OF TABLE.... -->
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
+   {% block allif_core_details_col_one %}
       <tr>
         <td class="allif-fix-table-col">Comments</td>
         <td>{{allifquery.comments}}</td>
       </tr>
+      {%endblock%}
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
+    {% block allif_core_details_col_two %}
       <tr>
         <td class="allif-fix-table-col">Balance</td>
         <td>{{allifquery.balance}}</td>
       </tr>
+      {%endblock%}
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
        <!--... END OF TABLE.... -->
       </div> 
@@ -166,15 +181,19 @@
      <!--... START OF TABLE.... -->
     <div class="allif-details-table-main-wrapper">
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
+   {% block allif_standard_details_col_one %}
       <tr>
         <td class="allif-fix-table-col">Quantity</td>
         <td>{{allifquery.quantity}}</td>
       </tr>
+      {%endblock%}
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
+     {% block allif_standard_details_col_two %}
       <tr>
         <td class="allif-fix-table-col">Date</td>
         <td>{{allifquery.date}}</td>
       </tr>
+      {%endblock%}
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
        <!--... END OF TABLE.... -->
        </div>
@@ -195,28 +214,40 @@
     </div>
     </div>
 
+    {% if remove_this_condition %}
     <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-sensitive-details">
       <div class="allif-details-table-main-wrapper">
         
   <!--... START OF TABLE.... -->
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
+
+   {% block allif_sensitive_section_col_one %}
       <tr>
         <td class="allif-fix-table-col">Download {{allifquery}}</td>
-        <td><a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:common_currency_pdf' allifquery.id user_var glblslug %}">Download {{allifquery}}</a></td>
+        <td><a class="amel-table-list-identifier" href="">Download {{allifquery}}</a></td>
       </tr>
+      {%endblock%}
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
+    {% block allif_sensitive_section_col_two %}
      <tr>
         <td class="allif-fix-table-col">Delet {{allifquery}}</td>
-        <td><a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteCurrency' allifquery.id user_var glblslug %}">Delete {{allifquery}}</a></td>
+        <td><a class="amel-table-list-identifier body-delete-link" href="">Delete {{allifquery}}</a></td>
       </tr>
+      {%endblock%}
+
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
      <!--... END OF TABLE.... -->
     </div>
     </div>
+    {% endif %}
+   
+
        <!--end....content of second dropdown/collapsible section-->
        </div>
 
        {% endif %}
+
+       {% endblock %}
       </div>
       <!--END.... END of single pages content and its links section-->
     </div>

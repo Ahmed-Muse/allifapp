@@ -1,5 +1,50 @@
 {% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+
  {% block add-form-header-block %}
-   <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}">New Currency </a>
-  <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
+ 
+  <a href="{% allif_get_single_nav_link_url 'Currencies' user_var glblslug %}">Currencies</a>
+  <a href="{% allif_get_single_nav_link_url 'Add_New_Currency' user_var glblslug %}">New Currency</a>
+
+  {% if 'common_currency_pdf' in allif_contextual_action_links %}
+  <a class="action-button" href="{{ allif_contextual_action_links.common_currency_pdf.url }}">Download</a>
+  {% endif %}
+
   {% endblock %}
+  
+  {% if allifquery %}
+  {% block allif_core_details_col_one %}
+      <tr>
+        <td class="allif-fix-table-col">Comments</td>
+        <td>{{allifquery.comments}}</td>
+      </tr>
+       <tr>
+        <td class="allif-fix-table-col">Number</td>
+        <td>{{allifquery.number}}</td>
+      </tr>
+      {%endblock%}
+    {% block allif_core_details_col_two %}
+      <tr>
+        <td class="allif-fix-table-col">Balance</td>
+        <td>{{allifquery.balance}}</td>
+      </tr>
+       <tr>
+        <td class="allif-fix-table-col">Code</td>
+        <td>{{allifquery.code}}</td>
+      </tr>
+      {% endblock %}
+
+     {% block allif_sensitive_section_col_one %}
+      <tr>
+        <td class="allif-fix-table-col">Download {{allifquery}}</td>
+        <td><a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:common_currency_pdf' allifquery.id user_var glblslug %}">Download {{allifquery}}</a></td>
+      </tr>
+      {% endblock %}
+    
+    {% block allif_sensitive_section_col_two %}
+     <tr>
+        <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+        <td><a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteCurrency' allifquery.id user_var glblslug %}">Delete {{allifquery}}</a></td>
+      </tr>
+      {% endblock %}
+    {% endif %}

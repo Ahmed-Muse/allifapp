@@ -8,6 +8,8 @@ allifmaal_general_links = [
     {'name': 'Banks', 'url_name': 'allifmaalcommonapp:commonBanks'},
     {'name': 'Customers', 'url_name': 'allifmaalcommonapp:commonCustomers'},
     {'name': 'Suppliers', 'url_name': 'allifmaalcommonapp:commonSuppliers'},
+    {'name': 'Currencies', 'url_name': 'allifmaalcommonapp:commonCurrencies'},
+    {'name': 'Add_New_Currency', 'url_name': 'allifmaalcommonapp:commonAddCurrency'},
     
     {'name': 'Assets', 'url_name': 'allifmaalcommonapp:commonAssets'},
     {'name': 'Expenses', 'url_name': 'allifmaalcommonapp:commonExpenses'},

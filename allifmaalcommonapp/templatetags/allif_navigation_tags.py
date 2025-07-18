@@ -1,7 +1,13 @@
 # your_app_name/templatetags/navigation_tags.py
 
 from django import template
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch # Import NoReverseMatch for better error handling
+# Ensure this import path is correct based on where your navigation_links.py is located
+#from allifmaalcommonapp.configs.navigation_links import allifmaal_general_links, allifmaal_sector_specific_links 
+import logging
+
+logger = logging.getLogger(__name__)
+
 from ..allif_navigation_links import allifmaal_general_links, allifmaal_sector_specific_links
 register = template.Library()
 
@@ -53,3 +59,30 @@ def allifapp_render_navigation_links(context, user_var, glblslug):
             # nav_links.append({'name': link['name'], 'url': '#'})
 
     return {'allif_custom_links':allifmaal_custom_links}
+
+
+@register.simple_tag(takes_context=True)
+def allif_get_single_nav_link_url(context, link_name, user_var, glblslug):
+    """
+    Returns the URL for a single general navigation link by its 'name'.
+    Returns '#' if the link is not found or URL cannot be resolved.
+    
+    Args:
+        link_name (str): The 'name' key of the link dictionary to find.
+        user_var (str): The username slug.
+        glblslug (str): The global company slug.
+    """
+    for link in allifmaal_general_links:
+        if link.get('name') == link_name: # Use .get() for safer access
+            try:
+                # Assuming this link needs user_var and glblslug
+                return reverse(link['url_name'], args=[user_var, glblslug])
+            except NoReverseMatch:
+                logger.warning(f"Could not resolve URL for general link '{link_name}' (URL name: '{link.get('url_name', 'N/A')}'). Check URL patterns.")
+                return "#" # Fallback URL
+            except KeyError:
+                logger.error(f"Link dictionary for '{link_name}' missing 'url_name' key.")
+                return "#"
+    
+    logger.warning(f"General navigation link with name '{link_name}' not found in allifmaal_general_links.")
+    return "#" # Fallback if link name is not found

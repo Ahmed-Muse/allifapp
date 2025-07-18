@@ -594,7 +594,7 @@ def commonCurrencies(request,*allifargs,**allifkwargs):
     return render(request,'allifmaalcommonapp/currencies/currencies.html',context)
 
 
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonAddCurrency(request, *allifargs, **allifkwargs):
     return allif_common_form_submission_and_save(request,CommonAddCurrencyForm,"Add New Currency","commonCurrencies",'allifmaalcommonapp/currencies/add-currency.html')
 

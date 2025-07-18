@@ -1,4 +1,5 @@
   {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+  {% load allif_navigation_tags %}
   {% block allif-basic-search-action %}
     {% url 'allifmaalcommonapp:commonCurrencySearch' user_var glblslug %}
   {% endblock %}
@@ -8,9 +9,10 @@
   {% block advanced-search-action %}
     {% url 'allifmaalcommonapp:commonCurrencyAdvanceSearch' user_var glblslug %}
   {% endblock %}
+
   {% block allif-header-links %}
-  <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}" >New Currency </a>
-  <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
+  <a href="{% allif_get_single_nav_link_url 'Currencies' user_var glblslug %}">Currencies</a>
+  <a href="{% allif_get_single_nav_link_url 'Add_New_Currency' user_var glblslug %}">New Currency</a>
   {% endblock %}
   {% block list-table-content-seciton %}
   {% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}
