@@ -624,7 +624,7 @@ def commonCurrencyAdvanceSearch(request,*allifargs,**allifkwargs):
     # This view now simply calls the centralized advanced search handler
     return allif_advance_search_handler(request,model_name='CommonCurrenciesModel',advanced_search_config_key='CommonCurrenciesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/currencies/currencies.html', # Template for HTML results
-        template_pdf_path='allifmaalcommonapp/currencies/currency-advanced-search-pdf.html', # <-- CRITICAL: Pass the PDF template path
+        template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
     )
 
 @allif_base_view_wrapper

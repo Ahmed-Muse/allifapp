@@ -24,7 +24,7 @@
 
       {% block allif-basic-search %}
         <li><a class="dropdown-item">Looking for something?</a></li>
-        <form method='POST' action="">{% csrf_token %}  
+        <form method='POST' action="{% block allif-basic-search-action %} {%endblock%}">{% csrf_token %}  
         <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
           placeholder="Type Here ...">
         
@@ -38,7 +38,7 @@
   {% block upload-excel-file %}
   <div class="allif-main-excel-upload-wrapper">
   <li><a class="dropdown-item">Upload Excel File</a></li>
-  <form method="POST" action="" enctype="multipart/form-data">
+  <form method="POST" action="{% block upload-excel-file-action %} {% endblock %}" enctype="multipart/form-data">
       {% csrf_token %}
       <input type="file" name="excel_file" accept=".xlsx, .xls" class="form-control" required>
       <button type="submit" class="btn allifmaal-submit-btn">Upload Excel</button>
@@ -48,7 +48,7 @@
     {% block advanced-search %}
 
   <li><a class="dropdown-item">Advanced Searching</a></li>
-  <form method='POST' action="" enctype="multipart/form-data">{% csrf_token %}
+  <form method='POST' action="{% block advanced-search-action %} {% endblock %}" enctype="multipart/form-data">{% csrf_token %}
    {% include 'allifmaalcommonapp/includes/forms/advanced-search-form.html' %}
     <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
     </form>
@@ -63,9 +63,8 @@
    
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 
-    
     {% block allif-header-links %}
-
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     {%endblock%}
     
 </div>
@@ -75,7 +74,6 @@
   </div><!--end....header row-->
 
 </div><!--end....main headere-->
-
 
     <div class="allifmaincontainer">
       <div class="allif-full-table-content-main-wrapper">
@@ -91,26 +89,23 @@
       {% include 'allifmaalcommonapp/includes/tables/full-table-header-lower-section.html' %}
       
       {% for item in allifqueryset %}  
-      {% block list-table-content-seciton %}
         <tr data-id="{{item.id}}" class="allif-table-header-content-row">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}"> {{item.name}}</a></td>
+        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% block list-table-content-seciton %} {% endblock %}"> {{item.name}}</a></td>
         <td class="allif-table-content-td"> {{item.description}} </td>
         <td class="allif-table-content-td"> {{item.date|date:'d/m/Y'}}</td>
         <td class="allif-table-content-td"> {{item.status}}</td>
-          {% endblock %}
         <td class="allif-table-content-td">
         {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
 
-        {% block list-table-content-seciton-dropdown-links %}
-        <a href="" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
-         {% endblock %}
+        
+        <a href="{% block list-table-content-seciton-dropdown-links %}  {% endblock %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+        
 
         {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-middle-section.html' %}
-       {% block list-table-content-seciton-dropdown-delete-links %}
-        <a href="" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-        <a href="" id="allif-confirm-delete">Confirm</a>
-       {% endblock %}
-        
+      
+        <a href="{% block list-table-content-seciton-dropdown-delete-decline %} {% endblock %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+        <a href="{% block list-table-content-seciton-dropdown-delete-confirm %} {% endblock %}" id="allif-confirm-delete">Confirm</a>
+     
         {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
         </td>
     </tr>

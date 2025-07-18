@@ -12930,3 +12930,18 @@ INFO 2025-07-17 20:36:58,245 autoreload 28444 33436 C:\am\allifapp\allifapperp\a
 INFO 2025-07-17 20:36:59,227 autoreload 13968 9640 Watching for file changes with StatReloader
 INFO 2025-07-17 21:58:25,870 autoreload 14156 12576 Watching for file changes with StatReloader
 WARNING 2025-07-17 22:39:14,478 log 14156 32356 Not Found: /favicon.ico
+INFO 2025-07-17 23:04:00,293 autoreload 9372 26040 Watching for file changes with StatReloader
+INFO 2025-07-18 11:37:58,332 autoreload 22532 30912 Watching for file changes with StatReloader
+WARNING 2025-07-18 11:52:43,086 log 22532 18744 Not Found: /Currencies/Main/Money/Types/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/<a href=
+WARNING 2025-07-18 11:52:43,216 log 22532 18744 Not Found: /favicon.ico
+INFO 2025-07-18 13:49:37,626 autoreload 22532 30912 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 13:49:39,007 autoreload 21064 34796 Watching for file changes with StatReloader
+WARNING 2025-07-18 14:48:11,208 log 21064 25548 Not Found: /favicon.ico
+WARNING 2025-07-18 14:51:23,708 log 21064 19108 Not Found: /favicon.ico
+INFO 2025-07-18 14:55:37,975 autoreload 16148 21636 Watching for file changes with StatReloader
+INFO 2025-07-18 14:58:04,487 autoreload 16148 21636 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 14:58:05,430 autoreload 30232 30048 Watching for file changes with StatReloader
+INFO 2025-07-18 14:59:25,673 autoreload 30232 30048 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-18 14:59:26,562 autoreload 13756 19704 Watching for file changes with StatReloader
+INFO 2025-07-18 14:59:30,427 autoreload 13756 19704 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-18 14:59:31,502 autoreload 17352 32732 Watching for file changes with StatReloader

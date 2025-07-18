@@ -7,11 +7,13 @@
 {%endblock%}
 {% block body %}
 <div class="allifmaal-main-container">
+
 <div class="allif-header-main-wrapper">
  <!--... START OF HEADER.... -->
 {% include 'allifmaalcommonapp/includes/headers/header-upper-section.html' %}
  <a href="{% url 'allifmaalcommonapp:commonAddCurrency' user_var glblslug %}" >New Currency </a>
   <a href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a>
+  {% block %}
 {% include 'allifmaalcommonapp/includes/headers/header-lower-section.html' %}
  <!--... ENDT OF HEADER.... -->
 </div>

@@ -1,14 +1,7 @@
 {% extends 'allifmaalcommonapp/ui/general/delete-confirm.html'%}
-{% block delete-actions %}
- <tr>
-    <td class="allif-fix-table-col">Edit {{allifquery}}</td>
-    <td><a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">No, Dont Delete {{allifquery}}</a></td>
-  </tr>
-
-  <tr>
-    <td class="allif-fix-table-col">Delet {{allifquery}}</td>
-    <td><a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalcommonapp:commonDeleteCurrency' allifquery.id user_var glblslug %}"> Yes, Delete {{allifquery}}</a></td>
-  </tr>
-{%endblock%}
-     
-   
+{% block delete-action-decline %}
+{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}
+{% endblock %}
+{% block delete-action-confirm %}
+{% url 'allifmaalcommonapp:commonDeleteCurrency' allifquery.id user_var glblslug %}
+{% endblock %}

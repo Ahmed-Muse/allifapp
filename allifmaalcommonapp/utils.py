@@ -226,7 +226,7 @@ allif_main_document_pdf_configuration= {
         # No 'items_model' or 'items_related_field' needed for this config
         'title': 'Currency Details',
         'filename_prefix': 'CUR',
-        'template_path': 'allifmaalcommonapp/currencies/currency-details-pdf.html', # Create this template
+        'template_path': 'allifmaalcommonapp/ui/pdf/item-pdf.html', # Create this template
         'extra_context_map': {}, # No extra fields to map
         'related_lookups': [], # No related lookups needed
     },
