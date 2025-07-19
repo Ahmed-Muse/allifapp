@@ -15,13 +15,14 @@
   <div class="col-md-12"><!--start....header column-->
   
   <div class="container-fluid amel-content-header">
+    {% block allif_header_forms_dropdown%}
     <div class="dropdown allifmaal-content-dropdown">
       <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
       Data Tools
       </a>  
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <div class="content-dropdown-menu">
-
+        {% include 'allifmaalcommonapp/includes/forms/sorting/allif-sorting-form.html' %}
       {% block allif-basic-search %}
         <li><a class="dropdown-item">Looking for something?</a></li>
         <form method='POST' action="{% block allif-basic-search-action %} {%endblock%}">{% csrf_token %}  
@@ -33,18 +34,9 @@
           <hr>
       {% endblock %}
           
-{% include 'allifmaalcommonapp/includes/forms/sorting/allif-sorting-form.html' %}
+
   
-  {% block upload-excel-file %}
-  <div class="allif-main-excel-upload-wrapper">
-  <li><a class="dropdown-item">Upload Excel File</a></li>
-  <form method="POST" action="{% block upload-excel-file-action %} {% endblock %}" enctype="multipart/form-data">
-      {% csrf_token %}
-      <input type="file" name="excel_file" accept=".xlsx, .xls" class="form-control" required>
-      <button type="submit" class="btn allifmaal-submit-btn">Upload Excel</button>
-  </form>
-    </div>
-    {% endblock %}
+ 
     {% block advanced-search %}
 
   <li><a class="dropdown-item">Advanced Searching</a></li>
@@ -54,10 +46,23 @@
     </form>
     <hr>
     {%endblock%}
+
+     {% block upload-excel-file %}
+  <div class="allif-main-excel-upload-wrapper">
+  <li><a class="dropdown-item">Upload Excel File</a></li>
+  <form method="POST" action="{% block upload-excel-file-action %} {% endblock %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="excel_file" accept=".xlsx, .xls" class="form-control" required>
+      <button type="submit" class="btn allifmaal-submit-btn">Upload Excel</button>
+  </form>
+    </div>
+    {% endblock %}
       
       </div>
       </ul>
     </div>
+
+    {%endblock%}
 
     <a class="amel-table-list-identifier">{{title}}:</a>
    
@@ -91,22 +96,19 @@
       
       {% for item in allifqueryset %}  
         <tr data-id="{{item.id}}" class="allif-table-header-content-row">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% block list-table-content-seciton %} {% endblock %}"> {{item.name}}</a></td>
+        <td class="allif-fix-table-col">
+          {% block list-table-content-seciton %} <a class="allif-table-links" href=""> {{item.name}} </a> {% endblock %}
+        </td>
         <td class="allif-table-content-td"> {{item.description}} </td>
         <td class="allif-table-content-td"> {{item.date|date:'d/m/Y'}}</td>
         <td class="allif-table-content-td"> {{item.status}}</td>
         <td class="allif-table-content-td">
         {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
 
-        
-        <a href="{% block list-table-content-seciton-dropdown-links %}  {% endblock %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
-        
+        {% block list-table-content-seciton-dropdown-links %}
+        <a href="" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+        {% endblock %}
 
-        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-middle-section.html' %}
-      
-        <a href="{% block list-table-content-seciton-dropdown-delete-decline %} {% endblock %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-        <a href="{% block list-table-content-seciton-dropdown-delete-confirm %} {% endblock %}" id="allif-confirm-delete">Confirm</a>
-     
         {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
         </td>
     </tr>

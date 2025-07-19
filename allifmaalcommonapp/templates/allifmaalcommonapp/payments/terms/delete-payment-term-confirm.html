@@ -1,0 +1,9 @@
+{% extends 'allifmaalcommonapp/ui/general/delete-confirm.html'%}
+{% block delete-action-decline %}
+<a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:commonPaymentTerms' user_var glblslug %}">No, Dont Delete {{allifquery}}</a>
+{% endblock %}
+
+{% block delete-action-confirm %}
+<a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalcommonapp:commonDeletePaymentTerm' allifquery.id user_var glblslug %}"> Yes, Delete {{allifquery}}</a>
+{% endblock %}
+     

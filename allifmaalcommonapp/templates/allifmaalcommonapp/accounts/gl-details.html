@@ -24,7 +24,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
 
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditGeneralLedger' user_var allifquery.id glblslug %}">Edit Account</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditGeneralLedger' allifquery.id user_var glblslug %}">Edit Account</a></li>
     
       <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteGenLedger' allifquery.id user_var glblslug %}">Delete Account</a></li>
    
@@ -181,7 +181,7 @@
             <div class="dropdown allif-confirm-action">
               
               <a href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-              <a href="{% url 'allifmaalcommonapp:commonDeleteChartofAccount' item.id %}" id="allif-confirm-delete">Confirm</a>
+              <a href="{% url 'allifmaalcommonapp:commonDeleteChartofAccount' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
             </div>
   
            

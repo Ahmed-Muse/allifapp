@@ -1,250 +1,38 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
-
-<div class="allifmaal-main-container">
-
-<div class="allif-header-main-wrapper">
- <!--... START OF HEADER.... -->
-{% include 'allifmaalcommonapp/includes/headers/header-upper-section.html' %}
-<a href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Taxes</a>
-{% include 'allifmaalcommonapp/includes/headers/header-lower-section.html' %}
- <!--... ENDT OF HEADER.... -->
-</div>
-  <div class="allifmaincontainer">
-
-  <div class="allif-details-table-main-wrapper">
-  <!--... START OF TABLE.... -->
-   {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
-      <tr>
-        <td class="allif-fix-table-col">Name</td>
-        <td>{{allifquery.name}}</td>
-      </tr>
-      <tr>
-        <td class="allif-fix-table-col">Description</td>
-        <td>{{allifquery.description}}</td>
-      </tr>
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
-
-      <tr>
-        <td class="allif-fix-table-col">Tax Rate</td>
-        <td>{{allifquery.taxrate}}</td>
-      </tr>
-    
-      <tr>
-        <td class="allif-fix-table-col">Tax Type</td>
-        <td>{{allifquery.taxtype}}</td>
-      </tr>
-        
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
-     <!--... END OF TABLE.... -->
-      </div>
-  <!--... START OF COLLAPSIBLE SECTIONS.... -->
-  <div class="allif-collapsible-sections-main-wrapper">
-<!--START......... Start of collapsible sectioon links..........-->
-  {% include 'allifmaalcommonapp/includes/links/collapse-links.html' %}
-    
-  <!--start....content of first dropdown/collapsible section-->
-  <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-core-details">
-  
-    <div class="allif-details-table-main-wrapper">
-     <!--... START OF TABLE.... -->
-   {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
-      <tr>
-        <td class="allif-fix-table-col">Assumptions</td>
-        <td>{{allifquery.tax_assumptions}}</td>
-      </tr>
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
-      <tr>
-        <td class="allif-fix-table-col">Required Resources</td>
-        <td>{{allifquery.tax_resources}}</td>
-      </tr>
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
-       <!--... END OF TABLE.... -->
-      </div> 
-      </div>
-    <!--end....content of first dropdown/collapsible section-->
-
-    <!--start....content of second dropdown/collapsible section-->
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-standard-details">
-     <!--... START OF TABLE.... -->
-    <div class="allif-details-table-main-wrapper">
-   {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
-      <tr>
-        <td class="allif-fix-table-col">Involved Risks</td>
-        <td>{{allifquery.tax_risks}}</td>
-      </tr>
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
-      <tr>
-        <td class="allif-fix-table-col">Stakeholders</td>
-        <td>{{allifquery.tax_stakeholders}}</td>
-      </tr>
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
-       <!--... END OF TABLE.... -->
-       </div>
-    </div>
-       <!--end....content of second dropdown/collapsible section-->
-
-    <!--start....content of second dropdown/collapsible section-->
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-general-details">
-      <div class="allif-details-table-main-wrapper">
-    {% include 'allifmaalcommonapp/includes/details/standard-base-details.html' %}
-    </div>
-    </div>
-       <!--end....content of second dropdown/collapsible section-->
-     
-        <!--start....content of second dropdown/collapsible section-->
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-static-details">
-      <div class="allif-details-table-main-wrapper">
-    {% include 'allifmaalcommonapp/includes/details/general-base-details.html' %}
-    </div>
-    </div>
-       <!--end....content of second dropdown/collapsible section-->
-       </div>
-    <!--... END OF COLLAPSIBLE SECTIONS.... -->
-
-
-    <div class="allif-content-spacer"></div>
-
- <!--START.... start of single pages content and its links section-->
-<div class="allif-single-page-tabs-contents-main-wrapper" >
- {% include 'allifmaalcommonapp/includes/links/single-page-links.html' %}
-    <!--start of singple page contents-->
-    <div class="tab-content allif-single-page-tab-content-wrapper" id="allif-single-page-tab-content-wrapper-id">
-
-       <!--START.. Start of show/hide table section one-->
-      <div class="tab-pane allif-single-page-tab-content-pane show active" id="allif-single-page-tab-core-details" role="tabpanel" aria-labelledby="allif-single-page-tab-core-details-id">
-        <form method='POST' action=''>{% csrf_token %}
-
-        <div class="allif-forms-table-main-wrapper">
-       {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-one-section.html' %}
-          <tr>
-            <td>Name</td>
-            <td>{{form.name}}</td>
-          </tr>
-      {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-two-section.html' %}
-
-          <tr>
-            <td>Tax Rate</td>
-            <td>{{form.taxrate}}</td>
-          </tr>
-
-      {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-section.html' %}
-                 
-          <tr>
-            <td>Tax Type</td>
-            <td>{{form.taxtype}}</td>
-          </tr>
-                
-      {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-last-section.html' %}
-    </div>
-  </div>
-       <!--END... End of show/hide table more details section one..ok...hree....-->
-
-
- <!--START.. Start of show/hide table section one-->
-    <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-standard-details" role="tabpanel" aria-labelledby="allif-single-page-tab-standard-details-id">
-      <div class="allif-forms-table-main-wrapper">
-      {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
-      <tr>
-        <td>Exclusions</td>
-        <td>{{form.tax_exclusions}}</td>
-      </tr>
-
-      {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
-
-      <tr>
-        <td>Stakeholders</td>
-        <td>{{form.tax_stakeholders}}</td>
-      </tr>
-
-      {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
-      
-     {% include 'allifmaalcommonapp/includes/forms/standard-form-fields.html' %}
-     </div>
-    </div>
-       <!--END... End of show/hide table more details section one-->
-
-  <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-general-details" role="tabpanel" aria-labelledby="allif-single-page-tab-general-details-id">
-    <div class="allif-forms-table-main-wrapper">
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
-
-    <tr>
-      <td>Constraints</td>
-      <td>{{form.tax_constraints}}</td>
-    </tr>
-
-    <tr>
-      <td>Assumptions</td>
-      <td>{{form.tax_assumptions}}</td>
-    </tr>
-
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
-
-    <tr>
-      <td>Risks</td>
-      <td>{{form.tax_risks}}</td>
-    </tr>
-
-    <tr>
-      <td>Quantity</td>
-      <td>{{form.quantity}}</td>
-    </tr>
-
-    {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
-    
-    {% include 'allifmaalcommonapp/includes/forms/general-form-fields.html' %}
-     </div>
-    </div>
-       <!--END... End of show/hide table more details section one-->
-
-    <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-static-details" role="tabpanel" aria-labelledby="allif-single-page-tab-static-id">
-     <div class="allif-forms-table-main-wrapper">
-    {% include 'allifmaalcommonapp/includes/forms/static-form-fields.html' %}
-     </div>
-    </div>
-       <!--END... End of show/hide table more details section one-->
-  
-    <div class="allif-forms-table-main-wrapper">
-    {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-one-section.html' %}
-          <tr>
-            <td>Tax Description</td>
-            <td>{{form.description}}</td>
-          </tr>
-      {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-two-section.html' %}
-
-          <tr>
-            <td>Required Resources</td>
-            <td>{{form.tax_resources}}</td>
-          </tr>
-
-      {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-section.html' %}
-      {% include 'allifmaalcommonapp/includes/forms/forms-save-button.html' %}  
-      {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-last-section.html' %}
-      </div>
-      
-    
-      </form>
-        </div>
-
-      </div>
-      <!--END.... END of single pages content and its links section-->
-   
-
-    </div>
-
-</div>
-  {% block scripts %}
-
-  
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+ {% block add-form-header-block %}
+  <a href="{% allif_get_single_nav_link_url 'TaxParameters' user_var glblslug %}">Sales Tax</a>
+  <a href="{% allif_get_single_nav_link_url 'AddATaxParameter' user_var glblslug %}">New Sales Tax</a>
   {% endblock %}
-   {% endblock %}
-   
+
+  {% block bottom-fields-col-one%}
+      <tr>
+        <td class="allif-fix-table-col-forms">Tax Rate</td>
+        <td>{{form.taxrate}}</td>
+      </tr>
+      {%endblock%}
+     
+      {% block bottom-fields-col-two %}
+      <tr>
+        <td class="allif-fix-table-col-forms">Tax Type</td>
+        <td>{{form.taxtype}}</td>
+      </tr>
+      {%endblock%}
 
 
-   
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'TaxParameters' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.commonWantToDeleteTaxParameter.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    {% endblock %}
+
+
+    

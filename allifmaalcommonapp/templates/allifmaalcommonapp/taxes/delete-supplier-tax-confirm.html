@@ -1,0 +1,13 @@
+{% extends 'allifmaalcommonapp/ui/general/delete-confirm.html'%}
+{% load allif_navigation_tags %}
+ <a href="{% allif_get_single_nav_link_url 'TaxParameters' user_var glblslug %}">Sales Tax</a>
+<a href="{% allif_get_single_nav_link_url 'AddATaxParameter' user_var glblslug %}">New Sales Tax</a>
+<a href="{% allif_get_single_nav_link_url 'SupplierTaxParameters' user_var glblslug %}">Supplier Tax Parameters</a>
+<a href="{% allif_get_single_nav_link_url 'AddSupplierTaxParameter' user_var glblslug %}">Add Supplier Tax Parameter</a>
+{% block delete-action-decline %}
+<a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:commonSupplierTaxParameters' user_var glblslug %}">No, Dont Delete {{allifquery}}</a>
+{% endblock %}
+
+{% block delete-action-confirm %}
+<a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalcommonapp:CommonSupplierDeleteTaxParameter' allifquery.id user_var glblslug %}"> Yes, Delete {{allifquery}}</a>
+{% endblock %}

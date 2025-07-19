@@ -1,0 +1,13 @@
+{% extends 'allifmaalcommonapp/ui/general/delete-confirm.html'%}
+{% load allif_navigation_tags %}
+<a href="{% allif_get_single_nav_link_url 'CompanyScopes' user_var glblslug %}">Scopes</a>
+<a href="{% allif_get_single_nav_link_url 'AddScope' user_var glblslug %}">New Scope</a>
+{% block delete-action-decline %}
+<a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:commonCompanyScopes' user_var glblslug %}">No, Dont Delete {{allifquery}}</a>
+{% endblock %}
+
+{% block delete-action-confirm %}
+<a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalcommonapp:commonDeleteCompanyScope' allifquery.id user_var glblslug %}"> Yes, Delete {{allifquery}}</a>
+{% endblock %}
+     
+  

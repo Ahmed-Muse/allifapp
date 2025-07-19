@@ -24,7 +24,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <div class="content-dropdown-menu">
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditChartofAccount' allifquery.id user_var glblslug %}">Edit Account</a></li>
-      <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonClearAcc' allifquery.id %}">Clear Account</a></li>
+      <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonClearAcc' allifquery.id user_var glblslug %}">Clear Account</a></li>
       <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteCoA' allifquery.id user_var glblslug %}">Delete Account</a></li>
  
    </div>

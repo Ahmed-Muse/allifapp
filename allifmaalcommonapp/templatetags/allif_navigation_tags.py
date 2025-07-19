@@ -8,7 +8,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-from ..allif_navigation_links import allifmaal_general_links, allifmaal_sector_specific_links
+from ..allif_navigation_links import allifmaal_general_links, allifmaal_sector_specific_links,allif_single_access_general_links
 register = template.Library()
 
 @register.inclusion_tag('allifmaalcommonapp/includes/allifapp_navigation_links.html', takes_context=True)
@@ -72,8 +72,8 @@ def allif_get_single_nav_link_url(context, link_name, user_var, glblslug):
         user_var (str): The username slug.
         glblslug (str): The global company slug.
     """
-    for link in allifmaal_general_links:
-        if link.get('name') == link_name: # Use .get() for safer access
+    for link in allif_single_access_general_links:
+        if link.get('name') == link_name: # Use .get() for safer access...
             try:
                 # Assuming this link needs user_var and glblslug
                 return reverse(link['url_name'], args=[user_var, glblslug])
@@ -84,5 +84,5 @@ def allif_get_single_nav_link_url(context, link_name, user_var, glblslug):
                 logger.error(f"Link dictionary for '{link_name}' missing 'url_name' key.")
                 return "#"
     
-    logger.warning(f"General navigation link with name '{link_name}' not found in allifmaal_general_links.")
+    logger.warning(f"General navigation link with name '{link_name}' not found in allif_single_access_general_links.")
     return "#" # Fallback if link name is not found

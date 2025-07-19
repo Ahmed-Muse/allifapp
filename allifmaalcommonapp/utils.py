@@ -13,6 +13,9 @@ from allifmaalshaafiapp.models import *
 from django.db.models import QuerySet, Model, Q # Ensure Q is imported for complex lookups
 from django.db import IntegrityError
 
+import logging
+
+logger = logging.getLogger(__name__)
 # --- Standard Python Imports ---
 from typing import Optional, Dict, List, Any
 import datetime 
@@ -82,6 +85,61 @@ allif_model_sort_configs = {
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
     
+    'commoncategoriesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+    
+     'commoncodesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+    'commoncompanyscopemodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+    
+     'commonapproversmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     
+    
+    
     'commontasksmodel': {
         'sort_mapping': {
             "Task Name Ascending": "name",
@@ -128,6 +186,14 @@ allif_model_sort_configs = {
 allif_search_config_mapping = {
     'CommonStocksModel': ['description__icontains', 'partNumber__icontains'],
     'CommonCurrenciesModel': ['name__icontains', 'description__icontains'],
+    'CommonCategoriesModel': ['name__icontains', 'description__icontains'],
+    'CommonCodesModel': ['name__icontains', 'description__icontains'],
+    'CommonChartofAccountsModel': ['name__icontains', 'description__icontains'],
+    
+   
+    
+    
+    
     'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
     'CommonTasksModel': ['name__icontains', 'description__icontains'], # Example
     'TriagesModel': ['medical_file__icontains', 'pain_level__icontains'], # Example
@@ -151,7 +217,28 @@ allif_advanced_search_configs = {
         {'field': 'balance', 'label': 'Currency Balance'},
         {'field': 'date', 'label': 'Date'},
         ]
+    
+    
     },
+    
+    'CommonChartofAccountsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Currency Name'},
+        {'field': 'number', 'label': 'Currency Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Currency Description'},
+        {'field': 'balance', 'label': 'Currency Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+    
+    
     # Add configurations for other models here, e.g.:
     'CommonExpensesModel': {
         'date_field': 'starts',
@@ -202,6 +289,13 @@ allif_main_models_registry = {
     'CommonExpensesModel': CommonExpensesModel,
     'CommonTasksModel': CommonTasksModel,
     'CommonBanksModel': CommonBanksModel,
+    'CommonUnitsModel':CommonUnitsModel,
+    'CommonCategoriesModel':CommonCategoriesModel,
+    'CommonCodesModel':CommonCodesModel,
+    'CommonApproversModel':CommonApproversModel,
+    'CommonSupplierTaxParametersModel':CommonSupplierTaxParametersModel,
+    'CommonChartofAccountsModel':CommonChartofAccountsModel,
+    'CommonGeneralLedgersModel':CommonGeneralLedgersModel,
    
 }
 
@@ -820,6 +914,141 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
 
 
 
+
+# ... (your existing ALLIF_MODEL_REGISTRY, EXCEL_UPLOAD_CONFIGS, etc.) ...
+# C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py
+
+# ... (existing imports, ensure logging, HttpRequest, HttpResponse, messages are imported) ...
+from django.db.models import QuerySet # Import QuerySet for type hinting
+
+logger = logging.getLogger(__name__)
+
+# ... (your existing ALLIF_MODEL_REGISTRY, EXCEL_UPLOAD_CONFIGS, etc.) ...
+
+# --- NEW: Generic Detail View Helper Function with Related Items ---
+def allif_common_detail_view(
+    request: HttpRequest,
+    model_class, # The Django model class (e.g., CommonCategoriesModel)
+    pk: int, # The primary key of the object
+    template_name: str, # The path to the specific detail template
+    title_map: dict = None, # Optional: For dynamic titles based on sector
+    related_data_configs: list = None, # NEW: List of dicts for related data
+) -> HttpResponse:
+    """
+    A generic function to handle detail views for various models, including related data.
+    It fetches a main object by PK, determines the title, fetches related objects,
+    and renders the specified template.
+
+    Args:
+        request (HttpRequest): The Django request object.
+        model_class: The Django model class of the main object to fetch.
+        pk (int): The primary key of the main object.
+        template_name (str): The path to the specific detail template.
+        title_map (dict, optional): A dictionary for dynamic titles based on sector.
+                                     e.g., {"Healthcare": "Patient Details", "default": "Customer Details"}.
+        related_data_configs (list, optional): A list of dictionaries, each defining
+                                                how to fetch a related queryset.
+                                                Example:
+                                                [
+                                                    {
+                                                        'context_key': 'invoice_items', # Key for template context
+                                                        'related_model': 'CommonInvoiceItemsModel', # String name of related model
+                                                        'filter_field': 'invoice', # Field on related_model that links to main_object
+                                                        'order_by': ['-date_created'], # Optional: Ordering for related items
+                                                        'prefetch_related': [], # Optional: List of related fields to prefetch
+                                                    },
+                                                    # ... more related configs
+                                                ]
+    Returns:
+        HttpResponse: The rendered Django template response.
+    """
+    try:
+        allif_data = common_shared_data(request) # Get shared data early for context
+        user_var = allif_data.get("usrslg")
+        glblslug = allif_data.get("compslg")
+
+        # Fetch the main object
+        if hasattr(model_class, 'all_objects'):
+            allifquery = model_class.objects.filter(pk=pk).first()
+        else:
+            allifquery = model_class.objects.filter(pk=pk).first()
+
+        if not allifquery:
+            logger.warning(f"Object of type {model_class.__name__} with PK {pk} not found.")
+            messages.error(request, f"{model_class.__name__} with ID {pk} not found.")
+            return render(request, 'allifmaalcommonapp/error/error.html', {'error_message': f"{model_class.__name__} not found."})
+
+        # Determine the title dynamically
+        title = str(allifquery) # Default title is the object's string representation
+
+        if title_map:
+            company_entity = allif_data.get("main_sbscrbr_entity")
+            sector = None
+            if company_entity and hasattr(company_entity, 'sector') and company_entity.sector:
+                sector = str(company_entity.sector)
+
+            if sector and sector in title_map:
+                title = title_map[sector]
+            elif 'default' in title_map:
+                title = title_map['default']
+
+        # Initialize context with main object and common data
+        context = {
+            "allifquery": allifquery, # The main object being detailed
+            "title": title,
+            "user_var": user_var,
+            "glblslug": glblslug,
+        }
+
+        # Fetch related data if configurations are provided
+        if related_data_configs:
+            for config in related_data_configs:
+                context_key = config.get('context_key')
+                related_model_name = config.get('related_model')
+                filter_field = config.get('filter_field')
+                order_by_fields = config.get('order_by', [])
+                prefetch_fields = config.get('prefetch_related', [])
+
+                if not all([context_key, related_model_name, filter_field]):
+                    logger.error(f"Incomplete related_data_config: {config}. Skipping.")
+                    continue
+
+                related_model_class = allif_main_models_registry.get(related_model_name)
+                if not related_model_class:
+                    logger.error(f"Related model '{related_model_name}' not found in ALLIF_MODEL_REGISTRY. Skipping.")
+                    continue
+
+                try:
+                    # Construct the filter to link to the main object
+                    filter_kwargs = {filter_field: allifquery}
+                    
+                    # Apply multi-tenancy filter if the related model has a 'company' field
+                    if hasattr(related_model_class, 'company') and allif_data.get('main_sbscrbr_entity'):
+                        filter_kwargs['company'] = allif_data['main_sbscrbr_entity']
+
+                    queryset = related_model_class.objects.filter(**filter_kwargs)
+                   
+
+                    # Apply prefetch_related if specified
+                    if prefetch_fields:
+                        queryset = queryset.prefetch_related(*prefetch_fields)
+                    
+                    # Apply ordering if specified
+                    if order_by_fields:
+                        queryset = queryset.order_by(*order_by_fields)
+
+                    context[context_key] = queryset # Add related queryset to context
+
+                except Exception as e:
+                    logger.exception(f"Error fetching related data for '{context_key}' (Model: {related_model_name}) related to {model_class.__name__} (PK: {pk}): {e}")
+                    context[context_key] = [] # Provide an empty list on error to prevent template errors
+
+        return render(request, template_name, context)
+
+    except Exception as ex:
+        logger.exception(f"Critical error in allif_common_detail_view for {model_class.__name__} (PK: {pk}): {ex}")
+        error_context = {'error_message': str(ex)}
+        return render(request, 'allifmaalcommonapp/error/error.html', error_context)
 
 
 # --- NEW: Generic Edit Item LOGIC Function ---

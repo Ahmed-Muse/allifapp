@@ -14024,3 +14024,1691 @@ INFO 2025-07-18 20:14:03,864 autoreload 3752 22772 C:\am\allifapp\allifapperp\al
 INFO 2025-07-18 20:14:05,420 autoreload 25132 16512 Watching for file changes with StatReloader
 INFO 2025-07-18 20:14:14,138 autoreload 25132 16512 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
 INFO 2025-07-18 20:14:14,975 autoreload 32068 33756 Watching for file changes with StatReloader
+INFO 2025-07-18 20:15:29,048 autoreload 15616 20048 Watching for file changes with StatReloader
+INFO 2025-07-18 21:04:10,610 autoreload 15616 20048 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:04:12,311 autoreload 26912 31240 Watching for file changes with StatReloader
+INFO 2025-07-18 21:04:39,931 autoreload 26912 31240 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:04:41,230 autoreload 22068 21904 Watching for file changes with StatReloader
+INFO 2025-07-18 21:04:53,335 autoreload 22068 21904 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:04:54,952 autoreload 11972 6460 Watching for file changes with StatReloader
+INFO 2025-07-18 21:05:07,988 autoreload 11972 6460 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:05:09,482 autoreload 19372 34308 Watching for file changes with StatReloader
+INFO 2025-07-18 21:05:21,304 autoreload 19372 34308 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:05:22,687 autoreload 12756 5288 Watching for file changes with StatReloader
+INFO 2025-07-18 21:05:35,521 autoreload 12756 5288 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:05:36,469 autoreload 34380 17928 Watching for file changes with StatReloader
+INFO 2025-07-18 21:09:57,738 autoreload 34380 17928 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:09:58,696 autoreload 26412 11052 Watching for file changes with StatReloader
+INFO 2025-07-18 21:10:21,862 autoreload 26412 11052 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:10:23,069 autoreload 31904 31916 Watching for file changes with StatReloader
+INFO 2025-07-18 21:20:03,416 autoreload 31904 31916 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-18 21:20:04,345 autoreload 30520 12436 Watching for file changes with StatReloader
+INFO 2025-07-18 21:23:29,909 autoreload 30520 12436 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:23:31,533 autoreload 29056 25848 Watching for file changes with StatReloader
+INFO 2025-07-18 21:24:04,499 autoreload 29056 25848 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:24:05,917 autoreload 19152 14140 Watching for file changes with StatReloader
+WARNING 2025-07-18 21:36:24,773 log 19152 12460 Not Found: /Payment/Terms/Payment/Conditions/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/% url 'allifmaalcommonapp:commonEditPaymentTerm' item.id user_var glblslug %}
+WARNING 2025-07-18 21:36:30,556 log 19152 12460 Not Found: /Payment/Terms/Payment/Conditions/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/% url 'allifmaalcommonapp:commonEditPaymentTerm' item.id user_var glblslug %}
+INFO 2025-07-18 21:43:31,443 autoreload 19152 14140 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-18 21:43:32,478 autoreload 20128 24336 Watching for file changes with StatReloader
+INFO 2025-07-18 21:43:56,753 autoreload 20128 24336 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 21:43:58,221 autoreload 14764 33196 Watching for file changes with StatReloader
+INFO 2025-07-18 22:32:43,234 autoreload 14764 33196 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 22:32:44,785 autoreload 17196 4636 Watching for file changes with StatReloader
+INFO 2025-07-18 22:32:48,011 autoreload 17196 4636 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 22:32:48,908 autoreload 19400 23792 Watching for file changes with StatReloader
+INFO 2025-07-18 22:32:55,175 autoreload 19400 23792 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 22:32:56,142 autoreload 33844 21712 Watching for file changes with StatReloader
+INFO 2025-07-18 22:34:13,112 autoreload 33844 21712 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-18 22:34:14,125 autoreload 15936 17372 Watching for file changes with StatReloader
+INFO 2025-07-18 22:34:19,150 autoreload 15936 17372 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-18 22:34:20,097 autoreload 26808 25672 Watching for file changes with StatReloader
+INFO 2025-07-18 22:36:34,573 autoreload 26808 25672 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-18 22:36:35,435 autoreload 19400 12216 Watching for file changes with StatReloader
+INFO 2025-07-18 22:45:18,061 autoreload 19400 12216 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 22:45:19,453 autoreload 26984 32272 Watching for file changes with StatReloader
+INFO 2025-07-18 22:46:18,609 autoreload 26984 32272 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-18 22:46:19,576 autoreload 27088 17108 Watching for file changes with StatReloader
+INFO 2025-07-18 22:57:08,922 autoreload 27088 17108 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-18 22:57:10,132 autoreload 18168 7096 Watching for file changes with StatReloader
+INFO 2025-07-18 23:00:20,957 autoreload 18168 7096 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-18 23:00:22,087 autoreload 19356 20576 Watching for file changes with StatReloader
+INFO 2025-07-18 23:01:08,520 autoreload 29612 19004 Watching for file changes with StatReloader
+INFO 2025-07-18 23:01:35,094 autoreload 29612 19004 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-18 23:01:36,516 autoreload 23796 33572 Watching for file changes with StatReloader
+INFO 2025-07-18 23:02:42,028 autoreload 3720 19952 Watching for file changes with StatReloader
+INFO 2025-07-19 09:34:18,986 autoreload 28728 22092 Watching for file changes with StatReloader
+INFO 2025-07-19 10:17:42,382 autoreload 28728 22092 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 10:17:44,136 autoreload 20528 23960 Watching for file changes with StatReloader
+INFO 2025-07-19 10:18:30,782 autoreload 20528 23960 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 10:18:31,934 autoreload 27044 32664 Watching for file changes with StatReloader
+INFO 2025-07-19 10:19:29,195 autoreload 27044 32664 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 10:19:30,618 autoreload 16172 31056 Watching for file changes with StatReloader
+INFO 2025-07-19 10:19:37,382 autoreload 16172 31056 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 10:19:38,269 autoreload 20792 13800 Watching for file changes with StatReloader
+INFO 2025-07-19 10:20:15,226 autoreload 20792 13800 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 10:20:16,382 autoreload 16896 34328 Watching for file changes with StatReloader
+INFO 2025-07-19 10:20:20,885 autoreload 16896 34328 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 10:20:21,895 autoreload 29688 30116 Watching for file changes with StatReloader
+INFO 2025-07-19 10:21:27,222 autoreload 29688 30116 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 10:21:28,291 autoreload 15512 19872 Watching for file changes with StatReloader
+INFO 2025-07-19 10:22:49,474 autoreload 15512 19872 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 10:22:50,376 autoreload 22324 32644 Watching for file changes with StatReloader
+INFO 2025-07-19 10:24:37,811 autoreload 22324 32644 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 10:24:38,988 autoreload 26232 19636 Watching for file changes with StatReloader
+INFO 2025-07-19 10:33:56,514 autoreload 26232 19636 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 10:33:57,425 autoreload 33236 32320 Watching for file changes with StatReloader
+INFO 2025-07-19 10:34:36,939 autoreload 33236 32320 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 10:34:38,115 autoreload 26648 31188 Watching for file changes with StatReloader
+INFO 2025-07-19 10:35:55,408 autoreload 26648 31188 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 10:35:56,278 autoreload 31480 26348 Watching for file changes with StatReloader
+INFO 2025-07-19 10:36:07,307 autoreload 31480 26348 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 10:36:08,285 autoreload 22944 30204 Watching for file changes with StatReloader
+INFO 2025-07-19 10:39:57,924 autoreload 22944 30204 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 10:39:58,950 autoreload 24324 19964 Watching for file changes with StatReloader
+WARNING 2025-07-19 10:42:47,762 allif_navigation_tags 24324 33152 General navigation link with name 'MeasuringUnitsff' not found in allifmaal_general_links.
+INFO 2025-07-19 10:44:03,098 autoreload 24324 19964 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 10:44:04,134 autoreload 30068 7104 Watching for file changes with StatReloader
+INFO 2025-07-19 10:47:34,756 autoreload 30068 7104 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 10:47:35,701 autoreload 6164 34504 Watching for file changes with StatReloader
+INFO 2025-07-19 10:58:52,951 autoreload 6164 34504 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 10:58:53,882 autoreload 27416 5172 Watching for file changes with StatReloader
+INFO 2025-07-19 10:59:34,644 autoreload 27416 5172 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 10:59:35,968 autoreload 34536 14404 Watching for file changes with StatReloader
+INFO 2025-07-19 11:15:45,171 autoreload 34536 14404 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:15:46,317 autoreload 11824 32248 Watching for file changes with StatReloader
+INFO 2025-07-19 11:16:09,352 autoreload 11824 32248 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:16:10,285 autoreload 33812 33004 Watching for file changes with StatReloader
+INFO 2025-07-19 11:18:23,614 autoreload 33812 33004 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:18:24,676 autoreload 18652 25980 Watching for file changes with StatReloader
+INFO 2025-07-19 11:18:40,564 autoreload 18652 25980 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:18:41,562 autoreload 22556 6948 Watching for file changes with StatReloader
+INFO 2025-07-19 11:20:04,668 autoreload 22556 6948 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:20:05,950 autoreload 7040 31692 Watching for file changes with StatReloader
+INFO 2025-07-19 11:25:12,468 autoreload 7040 31692 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 11:25:13,372 autoreload 12724 4488 Watching for file changes with StatReloader
+INFO 2025-07-19 11:29:25,791 autoreload 11884 17028 Watching for file changes with StatReloader
+INFO 2025-07-19 11:40:33,172 autoreload 11884 17028 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:40:34,484 autoreload 19944 20572 Watching for file changes with StatReloader
+INFO 2025-07-19 11:41:33,433 autoreload 19944 20572 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:41:34,847 autoreload 29272 15276 Watching for file changes with StatReloader
+INFO 2025-07-19 11:41:39,328 autoreload 34024 16704 Watching for file changes with StatReloader
+INFO 2025-07-19 11:41:48,982 autoreload 34024 16704 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:41:50,606 autoreload 13856 34308 Watching for file changes with StatReloader
+INFO 2025-07-19 11:42:34,850 autoreload 13856 34308 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:42:36,375 autoreload 12724 32160 Watching for file changes with StatReloader
+INFO 2025-07-19 11:42:47,504 autoreload 12724 32160 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:42:48,902 autoreload 29288 30036 Watching for file changes with StatReloader
+INFO 2025-07-19 11:42:53,129 autoreload 29288 30036 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:42:53,998 autoreload 11112 31140 Watching for file changes with StatReloader
+INFO 2025-07-19 11:44:08,784 autoreload 11112 31140 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 11:44:09,917 autoreload 32288 6312 Watching for file changes with StatReloader
+INFO 2025-07-19 11:44:31,324 autoreload 32288 6312 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 11:44:32,635 autoreload 30036 29288 Watching for file changes with StatReloader
+INFO 2025-07-19 11:45:05,942 autoreload 30036 29288 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 11:45:07,252 autoreload 34076 2252 Watching for file changes with StatReloader
+INFO 2025-07-19 11:46:33,548 autoreload 34076 2252 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 11:46:34,661 autoreload 17132 12184 Watching for file changes with StatReloader
+INFO 2025-07-19 11:51:15,728 autoreload 17132 12184 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 11:51:16,802 autoreload 13624 27516 Watching for file changes with StatReloader
+INFO 2025-07-19 11:52:15,579 autoreload 13624 27516 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 11:52:16,683 autoreload 14128 13788 Watching for file changes with StatReloader
+INFO 2025-07-19 11:52:20,398 autoreload 14128 13788 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 11:52:21,430 autoreload 32500 24560 Watching for file changes with StatReloader
+INFO 2025-07-19 11:52:53,805 autoreload 32500 24560 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 11:52:54,986 autoreload 28448 19896 Watching for file changes with StatReloader
+INFO 2025-07-19 12:00:47,474 autoreload 28448 19896 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 12:00:48,764 autoreload 32596 17496 Watching for file changes with StatReloader
+INFO 2025-07-19 12:01:30,899 autoreload 32596 17496 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 12:01:31,975 autoreload 24516 32468 Watching for file changes with StatReloader
+INFO 2025-07-19 12:02:39,755 autoreload 24516 32468 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 12:02:41,002 autoreload 17044 15824 Watching for file changes with StatReloader
+INFO 2025-07-19 12:03:06,055 autoreload 17044 15824 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 12:03:07,230 autoreload 20724 28708 Watching for file changes with StatReloader
+INFO 2025-07-19 12:03:29,147 autoreload 20724 28708 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 12:03:30,255 autoreload 33592 28284 Watching for file changes with StatReloader
+INFO 2025-07-19 12:07:36,045 autoreload 33592 28284 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 12:07:37,156 autoreload 29332 20936 Watching for file changes with StatReloader
+INFO 2025-07-19 12:15:47,211 autoreload 29332 20936 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 12:15:48,825 autoreload 12340 32752 Watching for file changes with StatReloader
+INFO 2025-07-19 12:19:42,095 autoreload 12340 32752 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 12:19:43,164 autoreload 21560 1344 Watching for file changes with StatReloader
+INFO 2025-07-19 12:19:53,439 autoreload 21560 1344 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 12:19:55,023 autoreload 20368 15356 Watching for file changes with StatReloader
+INFO 2025-07-19 12:20:23,780 autoreload 20368 15356 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 12:20:25,054 autoreload 19644 26164 Watching for file changes with StatReloader
+INFO 2025-07-19 12:21:44,564 autoreload 19644 26164 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 12:21:45,980 autoreload 16952 14284 Watching for file changes with StatReloader
+INFO 2025-07-19 12:23:06,015 autoreload 16952 14284 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 12:23:07,345 autoreload 24728 20620 Watching for file changes with StatReloader
+ERROR 2025-07-19 12:23:12,996 utils 24728 4880 Error in common_detail_view for CommonCategoriesModel (PK: 4): cannot access local variable 'allif_data' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 899, in allif_common_detail_view
+    "user_var": allif_data.get("usrslg"), # Ensure these are passed for templates
+                ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'allif_data' where it is not associated with a value
+ERROR 2025-07-19 12:23:21,415 utils 24728 4880 Error in common_detail_view for CommonCategoriesModel (PK: 4): cannot access local variable 'allif_data' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 899, in allif_common_detail_view
+    "user_var": allif_data.get("usrslg"), # Ensure these are passed for templates
+                ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'allif_data' where it is not associated with a value
+INFO 2025-07-19 12:24:48,805 autoreload 24728 20620 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 12:24:50,193 autoreload 13400 9224 Watching for file changes with StatReloader
+INFO 2025-07-19 12:25:38,926 autoreload 13400 9224 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 12:25:40,584 autoreload 14164 19944 Watching for file changes with StatReloader
+WARNING 2025-07-19 12:27:16,609 log 14164 4160 Not Found: /favicon.ico
+ERROR 2025-07-19 13:09:33,372 utils 14164 2052 Error in common_detail_view for CommonCategoriesModel (PK: 4): 'block' tag with name 'details-table-col-one' appears more than once
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 903, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'details-table-col-one' appears more than once
+ERROR 2025-07-19 13:10:30,751 utils 14164 2052 Error in common_detail_view for CommonCategoriesModel (PK: 4): 'block' tag with name 'details-table-col-one' appears more than once
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 903, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'details-table-col-one' appears more than once
+ERROR 2025-07-19 13:14:22,908 utils 14164 2052 Error in common_detail_view for CommonCategoriesModel (PK: 4): 'block' tag with name 'core-details-tab-col-one' appears more than once
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 903, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 953, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'core-details-tab-col-one' appears more than once
+ERROR 2025-07-19 13:16:00,040 utils 14164 2052 Error in common_detail_view for CommonCategoriesModel (PK: 4): 'block' tag with name 'core-details-tab-col-one' appears more than once
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 903, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'core-details-tab-col-one' appears more than once
+INFO 2025-07-19 13:53:59,695 autoreload 14164 19944 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 13:54:02,602 autoreload 9200 33532 Watching for file changes with StatReloader
+INFO 2025-07-19 13:54:07,459 autoreload 9200 33532 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 13:54:09,026 autoreload 20820 15384 Watching for file changes with StatReloader
+INFO 2025-07-19 14:05:38,921 autoreload 20820 15384 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:05:40,099 autoreload 29488 27932 Watching for file changes with StatReloader
+WARNING 2025-07-19 14:13:12,395 utils 29488 22020 Object of type CommonCategoriesModel with PK 5 not found.
+WARNING 2025-07-19 14:13:20,260 utils 29488 28612 Object of type CommonCategoriesModel with PK 5 not found.
+INFO 2025-07-19 14:15:01,448 autoreload 29488 27932 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 14:15:02,630 autoreload 21804 26836 Watching for file changes with StatReloader
+INFO 2025-07-19 14:15:58,981 autoreload 21804 26836 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 14:16:00,117 autoreload 19680 13212 Watching for file changes with StatReloader
+INFO 2025-07-19 14:16:42,685 autoreload 19680 13212 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 14:16:43,783 autoreload 32216 22052 Watching for file changes with StatReloader
+INFO 2025-07-19 14:17:16,044 autoreload 32216 22052 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 14:17:17,147 autoreload 11996 15204 Watching for file changes with StatReloader
+INFO 2025-07-19 14:22:17,037 autoreload 11996 15204 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:22:18,572 autoreload 4572 25316 Watching for file changes with StatReloader
+INFO 2025-07-19 14:24:18,971 autoreload 4572 25316 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 14:24:20,247 autoreload 26056 26308 Watching for file changes with StatReloader
+INFO 2025-07-19 14:26:24,552 autoreload 26056 26308 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:26:25,956 autoreload 29548 23220 Watching for file changes with StatReloader
+INFO 2025-07-19 14:27:29,686 autoreload 29548 23220 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:27:30,755 autoreload 25872 20820 Watching for file changes with StatReloader
+INFO 2025-07-19 14:31:51,373 autoreload 25872 20820 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:31:52,727 autoreload 16936 12344 Watching for file changes with StatReloader
+INFO 2025-07-19 14:32:00,676 autoreload 16936 12344 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:32:02,015 autoreload 34716 28040 Watching for file changes with StatReloader
+INFO 2025-07-19 14:36:04,252 autoreload 34716 28040 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:36:05,664 autoreload 3084 9848 Watching for file changes with StatReloader
+INFO 2025-07-19 14:36:48,660 autoreload 3084 9848 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:36:50,006 autoreload 20644 14272 Watching for file changes with StatReloader
+INFO 2025-07-19 14:38:26,414 autoreload 20644 14272 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:38:27,571 autoreload 34012 28400 Watching for file changes with StatReloader
+INFO 2025-07-19 14:41:37,792 autoreload 34012 28400 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:41:39,068 autoreload 24964 20736 Watching for file changes with StatReloader
+INFO 2025-07-19 14:41:57,119 autoreload 24964 20736 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:41:58,363 autoreload 20072 24468 Watching for file changes with StatReloader
+INFO 2025-07-19 14:42:02,929 autoreload 20072 24468 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:42:04,050 autoreload 15728 5256 Watching for file changes with StatReloader
+INFO 2025-07-19 14:43:23,987 autoreload 15728 5256 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 14:43:25,024 autoreload 13340 31764 Watching for file changes with StatReloader
+INFO 2025-07-19 14:49:25,170 autoreload 13340 31764 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 14:49:26,303 autoreload 28936 30300 Watching for file changes with StatReloader
+INFO 2025-07-19 14:52:01,496 autoreload 28936 30300 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 14:52:02,652 autoreload 32204 34200 Watching for file changes with StatReloader
+INFO 2025-07-19 14:53:23,136 autoreload 32204 34200 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 14:53:24,237 autoreload 26320 20636 Watching for file changes with StatReloader
+INFO 2025-07-19 14:59:36,151 autoreload 31680 33688 Watching for file changes with StatReloader
+INFO 2025-07-19 15:00:39,012 autoreload 31680 33688 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:00:40,459 autoreload 30544 27392 Watching for file changes with StatReloader
+INFO 2025-07-19 15:01:06,821 autoreload 30544 27392 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:01:07,859 autoreload 23616 21580 Watching for file changes with StatReloader
+INFO 2025-07-19 15:02:23,242 autoreload 23616 21580 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:02:24,469 autoreload 13896 9884 Watching for file changes with StatReloader
+INFO 2025-07-19 15:09:05,345 autoreload 13896 9884 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 15:09:06,692 autoreload 32208 2196 Watching for file changes with StatReloader
+INFO 2025-07-19 15:09:26,912 autoreload 32208 2196 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 15:09:28,066 autoreload 30984 26612 Watching for file changes with StatReloader
+INFO 2025-07-19 15:13:38,041 autoreload 30984 26612 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:13:39,468 autoreload 6696 31060 Watching for file changes with StatReloader
+INFO 2025-07-19 15:14:46,990 autoreload 6696 31060 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:14:48,201 autoreload 12968 12124 Watching for file changes with StatReloader
+INFO 2025-07-19 15:19:23,554 autoreload 12968 12124 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:19:24,839 autoreload 12996 33592 Watching for file changes with StatReloader
+INFO 2025-07-19 15:21:09,098 autoreload 12996 33592 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:21:10,228 autoreload 11456 33008 Watching for file changes with StatReloader
+INFO 2025-07-19 15:23:14,323 autoreload 11456 33008 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:23:15,444 autoreload 33084 1964 Watching for file changes with StatReloader
+INFO 2025-07-19 15:23:19,862 autoreload 33084 1964 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:23:21,118 autoreload 15512 31168 Watching for file changes with StatReloader
+INFO 2025-07-19 15:23:43,641 autoreload 15512 31168 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:23:45,015 autoreload 22804 29704 Watching for file changes with StatReloader
+INFO 2025-07-19 15:24:48,598 autoreload 22804 29704 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:24:49,646 autoreload 32744 25212 Watching for file changes with StatReloader
+INFO 2025-07-19 15:24:58,966 autoreload 32744 25212 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:25:00,098 autoreload 31936 2272 Watching for file changes with StatReloader
+INFO 2025-07-19 15:26:21,879 autoreload 31936 2272 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 15:26:22,954 autoreload 17496 17524 Watching for file changes with StatReloader
+INFO 2025-07-19 15:27:11,375 autoreload 17496 17524 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 15:27:12,453 autoreload 34360 33908 Watching for file changes with StatReloader
+INFO 2025-07-19 15:28:07,700 autoreload 34360 33908 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 15:28:09,109 autoreload 29284 8728 Watching for file changes with StatReloader
+INFO 2025-07-19 15:35:21,600 autoreload 29284 8728 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 15:35:22,983 autoreload 33720 7104 Watching for file changes with StatReloader
+INFO 2025-07-19 15:56:05,847 autoreload 33720 7104 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:56:07,434 autoreload 15824 14276 Watching for file changes with StatReloader
+INFO 2025-07-19 15:59:51,703 autoreload 15824 14276 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 15:59:53,395 autoreload 15632 25824 Watching for file changes with StatReloader
+INFO 2025-07-19 16:02:06,908 autoreload 15632 25824 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:02:08,546 autoreload 9936 11820 Watching for file changes with StatReloader
+INFO 2025-07-19 16:03:33,577 autoreload 9936 11820 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:03:35,030 autoreload 10132 25664 Watching for file changes with StatReloader
+INFO 2025-07-19 16:03:47,966 autoreload 10132 25664 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:03:49,716 autoreload 32048 21928 Watching for file changes with StatReloader
+INFO 2025-07-19 16:04:17,884 autoreload 32048 21928 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:04:19,482 autoreload 27556 22592 Watching for file changes with StatReloader
+INFO 2025-07-19 16:06:26,762 autoreload 27556 22592 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:06:28,469 autoreload 32648 30120 Watching for file changes with StatReloader
+INFO 2025-07-19 16:09:09,232 autoreload 32648 30120 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:09:11,075 autoreload 18908 26248 Watching for file changes with StatReloader
+INFO 2025-07-19 16:11:36,269 autoreload 18908 26248 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 16:11:37,844 autoreload 22476 31772 Watching for file changes with StatReloader
+INFO 2025-07-19 16:11:55,467 autoreload 22476 31772 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:11:57,233 autoreload 1144 31116 Watching for file changes with StatReloader
+INFO 2025-07-19 16:13:16,385 autoreload 1144 31116 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 16:13:17,997 autoreload 27152 31480 Watching for file changes with StatReloader
+INFO 2025-07-19 16:13:28,533 autoreload 27152 31480 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 16:13:30,161 autoreload 34236 27216 Watching for file changes with StatReloader
+INFO 2025-07-19 16:13:59,461 autoreload 34236 27216 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 16:14:01,403 autoreload 13992 16200 Watching for file changes with StatReloader
+INFO 2025-07-19 16:14:39,851 autoreload 13992 16200 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:14:41,582 autoreload 22376 26856 Watching for file changes with StatReloader
+INFO 2025-07-19 16:18:59,970 autoreload 22376 26856 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:19:01,549 autoreload 22008 4488 Watching for file changes with StatReloader
+INFO 2025-07-19 16:23:17,882 autoreload 22008 4488 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:23:19,514 autoreload 27112 22404 Watching for file changes with StatReloader
+INFO 2025-07-19 16:28:42,408 autoreload 27112 22404 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:28:44,311 autoreload 26288 15644 Watching for file changes with StatReloader
+INFO 2025-07-19 16:32:18,823 autoreload 26288 15644 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 16:32:20,502 autoreload 26036 21068 Watching for file changes with StatReloader
+INFO 2025-07-19 16:33:36,933 autoreload 26036 21068 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 16:33:38,541 autoreload 12048 34028 Watching for file changes with StatReloader
+INFO 2025-07-19 16:33:49,842 autoreload 12048 34028 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 16:33:51,378 autoreload 24820 12152 Watching for file changes with StatReloader
+INFO 2025-07-19 16:35:58,575 autoreload 24820 12152 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 16:36:00,155 autoreload 4428 27832 Watching for file changes with StatReloader
+INFO 2025-07-19 16:38:31,763 autoreload 4428 27832 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 16:38:33,346 autoreload 9820 15276 Watching for file changes with StatReloader
+INFO 2025-07-19 16:40:07,088 autoreload 9820 15276 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 16:40:09,002 autoreload 28712 15132 Watching for file changes with StatReloader
+INFO 2025-07-19 16:40:26,508 autoreload 28712 15132 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 16:40:27,827 autoreload 33688 33184 Watching for file changes with StatReloader
+INFO 2025-07-19 16:40:39,985 autoreload 33688 33184 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 16:40:41,490 autoreload 26720 23496 Watching for file changes with StatReloader
+INFO 2025-07-19 16:42:46,202 autoreload 26720 23496 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 16:42:47,833 autoreload 13416 9476 Watching for file changes with StatReloader
+INFO 2025-07-19 16:50:28,502 autoreload 13416 9476 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 16:50:30,236 autoreload 17320 20300 Watching for file changes with StatReloader
+INFO 2025-07-19 16:51:52,808 autoreload 17320 20300 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 16:51:54,746 autoreload 31224 28856 Watching for file changes with StatReloader
+INFO 2025-07-19 16:58:42,480 autoreload 31224 28856 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:58:43,936 autoreload 7112 14976 Watching for file changes with StatReloader
+INFO 2025-07-19 16:59:26,139 autoreload 7112 14976 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 16:59:27,824 autoreload 32480 18672 Watching for file changes with StatReloader
+INFO 2025-07-19 17:00:33,818 autoreload 32480 18672 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:00:35,316 autoreload 34352 28400 Watching for file changes with StatReloader
+INFO 2025-07-19 17:02:07,751 autoreload 34352 28400 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:02:09,580 autoreload 31804 27976 Watching for file changes with StatReloader
+INFO 2025-07-19 17:03:01,656 autoreload 31804 27976 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:03:03,544 autoreload 20060 5620 Watching for file changes with StatReloader
+INFO 2025-07-19 17:03:33,539 autoreload 20060 5620 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:03:35,068 autoreload 20940 19276 Watching for file changes with StatReloader
+WARNING 2025-07-19 17:04:01,090 allif_navigation_tags 20940 21004 General navigation link with name 'AddSupplierParameter' not found in allifmaal_general_links.
+INFO 2025-07-19 17:07:27,739 autoreload 20940 19276 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:07:29,624 autoreload 4340 24268 Watching for file changes with StatReloader
+INFO 2025-07-19 17:07:44,375 autoreload 4340 24268 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:07:47,258 autoreload 28936 4580 Watching for file changes with StatReloader
+INFO 2025-07-19 17:08:03,771 autoreload 28936 4580 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 17:08:05,376 autoreload 26248 18492 Watching for file changes with StatReloader
+INFO 2025-07-19 17:10:19,083 autoreload 26248 18492 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:10:20,662 autoreload 28472 22084 Watching for file changes with StatReloader
+INFO 2025-07-19 17:11:31,468 autoreload 28472 22084 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 17:11:33,029 autoreload 22804 20952 Watching for file changes with StatReloader
+INFO 2025-07-19 17:12:26,936 autoreload 22804 20952 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 17:12:28,747 autoreload 33316 31932 Watching for file changes with StatReloader
+INFO 2025-07-19 17:13:03,006 autoreload 33316 31932 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-19 17:13:04,363 autoreload 5280 21436 Watching for file changes with StatReloader
+INFO 2025-07-19 17:19:12,592 autoreload 5280 21436 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:19:13,989 autoreload 31276 34732 Watching for file changes with StatReloader
+INFO 2025-07-19 17:22:06,463 autoreload 31276 34732 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:22:07,697 autoreload 4580 7780 Watching for file changes with StatReloader
+INFO 2025-07-19 17:23:59,963 autoreload 4580 7780 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-19 17:24:01,095 autoreload 28528 7324 Watching for file changes with StatReloader
+INFO 2025-07-19 17:25:15,835 autoreload 28528 7324 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-19 17:25:16,913 autoreload 28272 13100 Watching for file changes with StatReloader
+INFO 2025-07-19 17:25:40,342 autoreload 28332 11608 Watching for file changes with StatReloader
+INFO 2025-07-19 17:36:19,130 autoreload 28332 11608 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:36:20,525 autoreload 17320 25080 Watching for file changes with StatReloader
+INFO 2025-07-19 17:36:55,063 autoreload 17320 25080 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:36:56,195 autoreload 6676 10996 Watching for file changes with StatReloader
+INFO 2025-07-19 17:39:45,095 autoreload 6676 10996 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 17:39:46,180 autoreload 20860 7428 Watching for file changes with StatReloader
+INFO 2025-07-19 17:40:30,109 autoreload 20576 31092 Watching for file changes with StatReloader
+INFO 2025-07-19 17:44:09,216 autoreload 22480 2180 Watching for file changes with StatReloader
+INFO 2025-07-19 17:44:39,459 autoreload 22480 2180 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 17:44:40,602 autoreload 15436 21136 Watching for file changes with StatReloader
+INFO 2025-07-19 17:45:22,588 autoreload 15436 21136 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 17:45:23,772 autoreload 23004 27680 Watching for file changes with StatReloader
+INFO 2025-07-19 17:45:54,354 autoreload 23004 27680 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 17:45:55,502 autoreload 21928 228 Watching for file changes with StatReloader
+INFO 2025-07-19 17:46:20,435 autoreload 21928 228 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-19 17:46:21,718 autoreload 13144 25416 Watching for file changes with StatReloader
+INFO 2025-07-19 17:48:02,555 autoreload 13144 25416 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:48:03,680 autoreload 23432 2980 Watching for file changes with StatReloader
+INFO 2025-07-19 17:49:20,631 autoreload 23432 2980 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:49:21,959 autoreload 16628 13344 Watching for file changes with StatReloader
+INFO 2025-07-19 17:49:38,690 autoreload 16628 13344 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:49:39,860 autoreload 23400 34672 Watching for file changes with StatReloader
+INFO 2025-07-19 17:49:44,456 autoreload 23400 34672 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:49:45,729 autoreload 31416 13588 Watching for file changes with StatReloader
+INFO 2025-07-19 17:49:50,209 autoreload 31416 13588 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:49:51,738 autoreload 32292 14948 Watching for file changes with StatReloader
+INFO 2025-07-19 17:50:32,373 autoreload 32292 14948 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:50:33,476 autoreload 12272 21908 Watching for file changes with StatReloader
+INFO 2025-07-19 17:50:54,299 autoreload 12272 21908 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:50:55,350 autoreload 2516 34632 Watching for file changes with StatReloader
+INFO 2025-07-19 17:54:43,933 autoreload 2516 34632 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:54:45,246 autoreload 15400 17328 Watching for file changes with StatReloader
+INFO 2025-07-19 17:55:23,538 autoreload 15400 17328 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:55:25,376 autoreload 12100 17324 Watching for file changes with StatReloader
+INFO 2025-07-19 17:56:44,300 autoreload 12100 17324 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:56:45,692 autoreload 13088 26484 Watching for file changes with StatReloader
+INFO 2025-07-19 17:58:47,936 autoreload 13088 26484 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:58:49,018 autoreload 30120 32208 Watching for file changes with StatReloader
+INFO 2025-07-19 17:59:08,951 autoreload 30120 32208 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 17:59:10,144 autoreload 25504 23772 Watching for file changes with StatReloader
+INFO 2025-07-19 18:00:06,987 autoreload 25504 23772 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:00:08,060 autoreload 6232 29124 Watching for file changes with StatReloader
+INFO 2025-07-19 18:00:50,780 autoreload 6232 29124 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:00:51,872 autoreload 15440 33432 Watching for file changes with StatReloader
+INFO 2025-07-19 18:02:28,945 autoreload 15440 33432 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:02:30,031 autoreload 15816 24628 Watching for file changes with StatReloader
+INFO 2025-07-19 18:03:31,743 autoreload 15816 24628 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:03:33,106 autoreload 12404 20932 Watching for file changes with StatReloader
+INFO 2025-07-19 18:05:22,577 autoreload 12404 20932 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 18:05:23,701 autoreload 15864 33220 Watching for file changes with StatReloader
+WARNING 2025-07-19 18:05:28,264 utils 15864 4344 Object of type CommonCategoriesModel with PK 5 not found.
+WARNING 2025-07-19 18:05:35,917 utils 15864 4344 Object of type CommonCategoriesModel with PK 5 not found.
+WARNING 2025-07-19 18:06:53,669 utils 15864 4344 Object of type CommonCategoriesModel with PK 6 not found.
+INFO 2025-07-19 18:08:34,659 autoreload 15864 33220 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:08:36,051 autoreload 27112 19584 Watching for file changes with StatReloader
+INFO 2025-07-19 18:08:59,922 autoreload 27112 19584 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:09:01,105 autoreload 27692 30132 Watching for file changes with StatReloader
+INFO 2025-07-19 18:09:06,966 autoreload 27692 30132 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:09:08,459 autoreload 28876 33988 Watching for file changes with StatReloader
+INFO 2025-07-19 18:09:58,911 autoreload 28876 33988 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:10:00,221 autoreload 22908 460 Watching for file changes with StatReloader
+INFO 2025-07-19 18:13:27,871 autoreload 22908 460 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 18:13:30,376 autoreload 23496 31596 Watching for file changes with StatReloader
+INFO 2025-07-19 18:17:33,838 autoreload 23496 31596 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 18:17:34,965 autoreload 26036 31036 Watching for file changes with StatReloader
+INFO 2025-07-19 18:39:22,257 autoreload 26036 31036 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:39:23,932 autoreload 27052 25804 Watching for file changes with StatReloader
+INFO 2025-07-19 18:40:27,928 autoreload 27052 25804 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:40:29,384 autoreload 26104 12384 Watching for file changes with StatReloader
+INFO 2025-07-19 18:41:40,210 autoreload 26104 12384 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:41:42,171 autoreload 24552 35648 Watching for file changes with StatReloader
+WARNING 2025-07-19 18:41:51,052 utils 24552 8876 Object of type CommonInvoicesModel with PK 1 not found.
+INFO 2025-07-19 18:42:25,278 autoreload 24552 35648 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:42:27,038 autoreload 1376 35324 Watching for file changes with StatReloader
+ERROR 2025-07-19 18:42:35,198 utils 1376 32108 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-19 18:42:55,777 autoreload 1376 35324 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:42:57,731 autoreload 15624 28112 Watching for file changes with StatReloader
+ERROR 2025-07-19 18:43:01,048 utils 15624 27652 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-19 18:43:28,336 autoreload 15624 28112 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:43:30,180 autoreload 22284 29368 Watching for file changes with StatReloader
+ERROR 2025-07-19 18:43:33,174 utils 22284 10264 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-19 18:44:12,083 autoreload 22284 29368 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:44:13,944 autoreload 29968 2096 Watching for file changes with StatReloader
+ERROR 2025-07-19 18:44:18,720 utils 29968 13444 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-19 18:44:19,795 utils 29968 13444 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-19 18:45:03,748 utils 29968 13444 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-19 18:45:06,302 utils 29968 13444 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-19 18:45:08,907 utils 29968 13444 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-19 18:45:11,836 utils 29968 13444 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-19 18:46:14,426 utils 29968 13444 Related model 'CommonInvoiceItemsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-19 18:46:39,486 autoreload 29968 2096 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:46:41,555 autoreload 33384 21100 Watching for file changes with StatReloader
+ERROR 2025-07-19 18:46:45,652 utils 33384 23624 Related model 'CommonChartofAccountsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-19 18:46:49,691 utils 33384 23624 Related model 'CommonChartofAccountsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-19 18:47:38,005 autoreload 33384 21100 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 18:47:39,610 autoreload 15252 33944 Watching for file changes with StatReloader
+INFO 2025-07-19 18:47:44,209 autoreload 15252 33944 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 18:47:45,701 autoreload 22108 30364 Watching for file changes with StatReloader
+INFO 2025-07-19 18:48:04,706 autoreload 24704 28788 Watching for file changes with StatReloader
+INFO 2025-07-19 18:49:56,491 autoreload 24704 28788 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 18:49:57,974 autoreload 32368 25960 Watching for file changes with StatReloader
+INFO 2025-07-19 18:50:39,201 autoreload 32368 25960 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 18:50:40,743 autoreload 13420 31648 Watching for file changes with StatReloader
+INFO 2025-07-19 18:52:47,082 autoreload 13420 31648 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:52:48,814 autoreload 13368 19108 Watching for file changes with StatReloader
+INFO 2025-07-19 18:54:04,920 autoreload 13368 19108 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:54:06,609 autoreload 2980 21856 Watching for file changes with StatReloader
+INFO 2025-07-19 18:55:21,730 autoreload 2980 21856 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:55:22,908 autoreload 13920 17676 Watching for file changes with StatReloader
+INFO 2025-07-19 18:56:33,282 autoreload 13920 17676 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:56:34,868 autoreload 30400 18528 Watching for file changes with StatReloader
+INFO 2025-07-19 18:59:35,394 autoreload 30400 18528 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 18:59:37,073 autoreload 16732 25752 Watching for file changes with StatReloader
+INFO 2025-07-19 18:59:59,108 autoreload 16732 25752 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:00:00,776 autoreload 28456 31300 Watching for file changes with StatReloader
+INFO 2025-07-19 19:07:04,716 autoreload 28456 31300 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:07:06,402 autoreload 4212 32660 Watching for file changes with StatReloader
+INFO 2025-07-19 19:07:57,143 autoreload 4212 32660 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:07:58,791 autoreload 20620 28344 Watching for file changes with StatReloader
+INFO 2025-07-19 19:09:58,744 autoreload 20620 28344 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:10:00,018 autoreload 8432 21116 Watching for file changes with StatReloader
+INFO 2025-07-19 19:11:29,604 autoreload 8432 21116 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:11:31,350 autoreload 25356 1752 Watching for file changes with StatReloader
+INFO 2025-07-19 19:13:47,325 autoreload 25356 1752 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:13:48,810 autoreload 35096 28688 Watching for file changes with StatReloader
+INFO 2025-07-19 19:15:01,573 autoreload 35096 28688 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:15:02,971 autoreload 28328 16992 Watching for file changes with StatReloader
+INFO 2025-07-19 19:15:12,931 autoreload 28328 16992 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:15:14,701 autoreload 27532 35572 Watching for file changes with StatReloader
+INFO 2025-07-19 19:16:52,431 autoreload 27532 35572 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:16:54,107 autoreload 3296 15008 Watching for file changes with StatReloader
+INFO 2025-07-19 19:17:02,858 autoreload 3296 15008 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:17:04,499 autoreload 16732 27620 Watching for file changes with StatReloader
+ERROR 2025-07-19 19:20:37,309 views 16732 21528 Unexpected error for Tax 'Sales Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1473, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-19 19:20:37,411 views 16732 21528 Unexpected error for Supplier Tax 'Sales Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1499, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-19 19:20:37,422 views 16732 21528 Unexpected error for Tax 'VAT'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1473, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-19 19:20:37,429 views 16732 21528 Unexpected error for Supplier Tax 'VAT'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1499, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-19 19:20:37,439 views 16732 21528 Unexpected error for Tax 'Withholding Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1473, in commonCreateDefaultValues
+    _, created = CommonTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid
+ERROR 2025-07-19 19:20:37,450 views 16732 21528 Unexpected error for Supplier Tax 'Withholding Tax'.
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1499, in commonCreateDefaultValues
+    _, created = CommonSupplierTaxParametersModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        taxname=tax_data['taxname'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 623, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid
+ERROR 2025-07-19 19:20:37,580 views 16732 21528 Unexpected error for Operation Year 'Operation Year One'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonOperationYearsModel.DoesNotExist: CommonOperationYearsModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1605, in commonCreateDefaultValues
+    year_instance, created = CommonOperationYearsModel.objects.get_or_create(
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        year=year_data['year'], # Assuming 'year' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.
+ERROR 2025-07-19 19:20:37,589 views 16732 21528 Unexpected error for Operation Year 'Current Year'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonOperationYearsModel.DoesNotExist: CommonOperationYearsModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1605, in commonCreateDefaultValues
+    year_instance, created = CommonOperationYearsModel.objects.get_or_create(
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        year=year_data['year'], # Assuming 'year' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.
+ERROR 2025-07-19 19:20:37,595 views 16732 21528 Skipping term 'Term One' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-19 19:20:37,595 views 16732 21528 Skipping term 'Term Two' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-19 19:20:37,596 views 16732 21528 Skipping term 'Term Three' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-19 19:20:37,596 views 16732 21528 Skipping term 'Term Four' due to missing parent year 'Operation Year One'.
+ERROR 2025-07-19 19:20:37,596 views 16732 21528 Skipping term 'Q1' due to missing parent year 'Current Year'.
+ERROR 2025-07-19 19:20:37,596 views 16732 21528 Skipping term 'Q2' due to missing parent year 'Current Year'.
+ERROR 2025-07-19 19:20:37,596 views 16732 21528 Skipping term 'Q3' due to missing parent year 'Current Year'.
+ERROR 2025-07-19 19:20:37,597 views 16732 21528 Skipping term 'Q4' due to missing parent year 'Current Year'.
+ERROR 2025-07-19 19:20:37,629 views 16732 21528 Unexpected error for Category 'General Category 1'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1703, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-19 19:20:37,637 views 16732 21528 Unexpected error for Category 'General Category 2'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1703, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-19 19:20:37,651 views 16732 21528 Unexpected error for Category 'Product Category - Electronics'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1703, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-19 19:20:37,666 views 16732 21528 Unexpected error for Category 'Service Category - Consulting'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+allifmaalcommonapp.models.CommonCategoriesModel.DoesNotExist: CommonCategoriesModel matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1703, in commonCreateDefaultValues
+    _, created = CommonCategoriesModel.objects.get_or_create(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        name=cat_data['name'], # Assuming 'name' is the unique identifier field
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        }
+        ^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 918, in get_or_create
+    params = self._extract_model_params(defaults, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 999, in _extract_model_params
+    raise exceptions.FieldError(
+    ...<5 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.
+ERROR 2025-07-19 19:20:37,912 views 16732 21528 Default setup for barasho Hospital completed with errors. Results: {'company_scopes': {'created': 5, 'skipped': 0, 'errors': []}, 'taxes': {'created': 0, 'skipped': 3, 'errors': ["Error creating tax 'Sales Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid", "Error creating tax 'VAT': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid", "Error creating tax 'Withholding Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, stktxrte, taxrate, taxtype, txinvce, txqr, updated_by, updated_by_id, uuid"]}, 'supplier_taxes': {'created': 0, 'skipped': 3, 'errors': ["Error creating supplier tax 'Sales Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid", "Error creating supplier tax 'VAT': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid", "Error creating supplier tax 'Withholding Tax': Cannot resolve keyword 'taxname' into field. Choices are: balance, branch, branch_id, code, comments, company, company_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, sppltxrt, starts, status, supplrstktxrte, taxrate, taxtype, updated_by, updated_by_id, uuid"]}, 'currencies': {'created': 5, 'skipped': 0, 'errors': []}, 'payment_terms': {'created': 6, 'skipped': 0, 'errors': []}, 'units': {'created': 12, 'skipped': 0, 'errors': []}, 'operation_years': {'created': 0, 'skipped': 2, 'errors': ["Error creating year 'Operation Year One': Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'.", "Error creating year 'Current Year': Invalid field name(s) for model CommonOperationYearsModel: 'end_date', 'start_date'."]}, 'operation_year_terms': {'created': 0, 'skipped': 8, 'errors': ["Missing parent year 'Operation Year One' for term 'Term One'.", "Missing parent year 'Operation Year One' for term 'Term Two'.", "Missing parent year 'Operation Year One' for term 'Term Three'.", "Missing parent year 'Operation Year One' for term 'Term Four'.", "Missing parent year 'Current Year' for term 'Q1'.", "Missing parent year 'Current Year' for term 'Q2'.", "Missing parent year 'Current Year' for term 'Q3'.", "Missing parent year 'Current Year' for term 'Q4'."]}, 'codes': {'created': 5, 'skipped': 0, 'errors': []}, 'categories': {'created': 0, 'skipped': 4, 'errors': ["Error creating category 'General Category 1': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'General Category 2': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'Product Category - Electronics': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'.", "Error creating category 'Service Category - Consulting': Invalid field name(s) for model CommonCategoriesModel: 'end_date', 'start_date'."]}, 'gl_categories': {'created': 4, 'skipped': 1, 'errors': []}, 'chart_of_accounts': {'created': 47, 'skipped': 0, 'errors': []}, 'overall_error': False}
+INFO 2025-07-19 19:25:00,425 autoreload 16732 27620 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 19:25:02,359 autoreload 35744 25504 Watching for file changes with StatReloader
+INFO 2025-07-19 19:26:15,394 autoreload 35744 25504 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:26:16,954 autoreload 18160 26940 Watching for file changes with StatReloader
+INFO 2025-07-19 19:27:41,123 autoreload 18160 26940 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:27:42,860 autoreload 32512 33928 Watching for file changes with StatReloader
+INFO 2025-07-19 19:28:05,553 autoreload 32512 33928 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:28:07,328 autoreload 23624 12724 Watching for file changes with StatReloader
+INFO 2025-07-19 19:29:01,397 autoreload 23624 12724 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 19:29:03,189 autoreload 18056 31188 Watching for file changes with StatReloader
+INFO 2025-07-19 19:29:35,066 autoreload 18056 31188 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 19:29:36,516 autoreload 29680 25884 Watching for file changes with StatReloader
+INFO 2025-07-19 19:30:15,371 autoreload 35672 25000 Watching for file changes with StatReloader
+INFO 2025-07-19 19:30:33,354 autoreload 35672 25000 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 19:30:34,882 autoreload 35376 28420 Watching for file changes with StatReloader
+INFO 2025-07-19 19:32:15,572 autoreload 35376 28420 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:32:17,154 autoreload 23036 32104 Watching for file changes with StatReloader
+INFO 2025-07-19 19:32:53,425 autoreload 23036 32104 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 19:32:55,073 autoreload 29368 31788 Watching for file changes with StatReloader
+INFO 2025-07-19 19:33:31,051 autoreload 29368 31788 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 19:33:32,713 autoreload 29256 7432 Watching for file changes with StatReloader
+INFO 2025-07-19 19:35:28,685 autoreload 29256 7432 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:35:30,446 autoreload 32292 33684 Watching for file changes with StatReloader
+INFO 2025-07-19 19:36:10,778 autoreload 32292 33684 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:36:12,257 autoreload 28768 20260 Watching for file changes with StatReloader
+INFO 2025-07-19 19:36:31,841 autoreload 28768 20260 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:36:33,401 autoreload 15384 23644 Watching for file changes with StatReloader
+INFO 2025-07-19 19:37:33,800 autoreload 15384 23644 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 19:37:35,409 autoreload 15624 26756 Watching for file changes with StatReloader
+INFO 2025-07-19 20:01:22,958 autoreload 15624 26756 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:01:24,192 autoreload 32048 30116 Watching for file changes with StatReloader
+ERROR 2025-07-19 20:01:26,185 utils 32048 35388 Error fetching related data for 'related_chart_accounts' (Model: CommonChartofAccountsModel) related to CommonGeneralLedgersModel (PK: 7): Cannot resolve keyword 'general_ledger' into field. Choices are: amesupayrlnm, amsalrn, balance, branch, branch_id, category, category_id, cmassetrl, coabnka, coabnkafrm, coabnkdpasset, coaexprelnamepaytocmm, coaexprelnm, coaincomerelnm, coainvrelnm, code, comments, company, company_id, cstasschac, date, delete_status, department, department_id, description, division, division_id, dpscustrlnmdfd, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, statement, status, updated_by, updated_by_id, uuid
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1005, in allif_common_detail_view
+    queryset = related_model_class.objects.filter(**filter_kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'general_ledger' into field. Choices are: amesupayrlnm, amsalrn, balance, branch, branch_id, category, category_id, cmassetrl, coabnka, coabnkafrm, coabnkdpasset, coaexprelnamepaytocmm, coaexprelnm, coaincomerelnm, coainvrelnm, code, comments, company, company_id, cstasschac, date, delete_status, department, department_id, description, division, division_id, dpscustrlnmdfd, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, statement, status, updated_by, updated_by_id, uuid
+INFO 2025-07-19 20:01:37,667 autoreload 34240 26100 Watching for file changes with StatReloader
+ERROR 2025-07-19 20:01:39,666 utils 34240 22404 Error fetching related data for 'related_chart_accounts' (Model: CommonChartofAccountsModel) related to CommonGeneralLedgersModel (PK: 7): Cannot resolve keyword 'general_ledger' into field. Choices are: amesupayrlnm, amsalrn, balance, branch, branch_id, category, category_id, cmassetrl, coabnka, coabnkafrm, coabnkdpasset, coaexprelnamepaytocmm, coaexprelnm, coaincomerelnm, coainvrelnm, code, comments, company, company_id, cstasschac, date, delete_status, department, department_id, description, division, division_id, dpscustrlnmdfd, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, statement, status, updated_by, updated_by_id, uuid
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1005, in allif_common_detail_view
+    queryset = related_model_class.objects.filter(**filter_kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1427, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1237, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'general_ledger' into field. Choices are: amesupayrlnm, amsalrn, balance, branch, branch_id, category, category_id, cmassetrl, coabnka, coabnkafrm, coabnkdpasset, coaexprelnamepaytocmm, coaexprelnm, coaincomerelnm, coainvrelnm, code, comments, company, company_id, cstasschac, date, delete_status, department, department_id, description, division, division_id, dpscustrlnmdfd, ends, id, last_updated, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, statement, status, updated_by, updated_by_id, uuid
+INFO 2025-07-19 20:02:05,785 autoreload 34240 26100 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:02:06,983 autoreload 24272 28272 Watching for file changes with StatReloader
+INFO 2025-07-19 20:03:04,197 autoreload 24272 28272 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:03:05,697 autoreload 25540 10264 Watching for file changes with StatReloader
+INFO 2025-07-19 20:04:14,124 autoreload 25540 10264 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:04:15,582 autoreload 25436 23952 Watching for file changes with StatReloader
+INFO 2025-07-19 20:04:49,506 autoreload 25436 23952 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:04:50,964 autoreload 13816 26744 Watching for file changes with StatReloader
+INFO 2025-07-19 20:05:09,013 autoreload 13816 26744 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:05:10,448 autoreload 24076 15968 Watching for file changes with StatReloader
+INFO 2025-07-19 20:05:31,541 autoreload 24076 15968 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:05:32,843 autoreload 10184 32488 Watching for file changes with StatReloader
+INFO 2025-07-19 20:06:46,933 autoreload 10184 32488 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:06:48,115 autoreload 35584 5172 Watching for file changes with StatReloader
+INFO 2025-07-19 20:08:55,738 autoreload 35584 5172 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:08:57,002 autoreload 15772 26364 Watching for file changes with StatReloader
+INFO 2025-07-19 20:09:16,689 autoreload 15772 26364 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:09:17,653 autoreload 3144 23164 Watching for file changes with StatReloader
+INFO 2025-07-19 20:26:19,376 autoreload 3144 23164 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:26:20,311 autoreload 14948 23888 Watching for file changes with StatReloader
+INFO 2025-07-19 20:29:50,812 autoreload 14948 23888 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:29:51,934 autoreload 400 11696 Watching for file changes with StatReloader
+INFO 2025-07-19 20:30:00,650 autoreload 400 11696 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:30:02,210 autoreload 4768 27652 Watching for file changes with StatReloader
+ERROR 2025-07-19 20:30:06,113 log 4768 26824 Internal Server Error: /Chart/of/Account/94/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/Details/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: commonChartofAccountDetails() missing 1 required positional argument: 'pk'
+INFO 2025-07-19 20:30:38,414 autoreload 4768 27652 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:30:39,879 autoreload 29660 21388 Watching for file changes with StatReloader
+ERROR 2025-07-19 20:30:41,907 log 29660 4344 Internal Server Error: /Chart/of/Account/94/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/Details/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: commonChartofAccountDetails() missing 1 required positional argument: 'pk'
+INFO 2025-07-19 20:30:59,108 autoreload 29660 21388 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:31:00,339 autoreload 33448 26896 Watching for file changes with StatReloader
+INFO 2025-07-19 20:34:48,734 autoreload 33448 26896 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-19 20:34:49,883 autoreload 25284 30760 Watching for file changes with StatReloader
+ERROR 2025-07-19 20:34:54,251 utils 25284 20940 Critical error in allif_common_detail_view for CommonGeneralLedgersModel (PK: 7): Reverse for 'commonDeleteChartofAccount' with arguments '(48,)' not found. 1 pattern(s) tried: ['Delete/Chart/of/Account/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1022, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonDeleteChartofAccount' with arguments '(48,)' not found. 1 pattern(s) tried: ['Delete/Chart/of/Account/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-07-19 20:35:15,333 autoreload 30608 2952 Watching for file changes with StatReloader
+ERROR 2025-07-19 20:35:27,029 utils 30608 30024 Critical error in allif_common_detail_view for CommonGeneralLedgersModel (PK: 7): Reverse for 'commonDeleteChartofAccount' with arguments '(48,)' not found. 1 pattern(s) tried: ['Delete/Chart/of/Account/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1022, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonDeleteChartofAccount' with arguments '(48,)' not found. 1 pattern(s) tried: ['Delete/Chart/of/Account/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+ERROR 2025-07-19 20:36:13,927 utils 30608 30024 Critical error in allif_common_detail_view for CommonChartofAccountsModel (PK: 52): Reverse for 'commonClearAcc' with arguments '(52,)' not found. 1 pattern(s) tried: ['Clear/Account/Balances/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1022, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonClearAcc' with arguments '(52,)' not found. 1 pattern(s) tried: ['Clear/Account/Balances/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-07-19 20:40:24,753 autoreload 30608 2952 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:40:26,344 autoreload 3636 11136 Watching for file changes with StatReloader
+INFO 2025-07-19 20:40:32,056 autoreload 3636 11136 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:40:33,656 autoreload 23092 35360 Watching for file changes with StatReloader
+INFO 2025-07-19 20:41:00,923 autoreload 23092 35360 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:41:02,461 autoreload 28796 12676 Watching for file changes with StatReloader
+INFO 2025-07-19 20:41:41,794 autoreload 28796 12676 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:41:42,899 autoreload 35104 23376 Watching for file changes with StatReloader
+INFO 2025-07-19 20:42:08,571 autoreload 35104 23376 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:42:09,694 autoreload 31920 27520 Watching for file changes with StatReloader
+INFO 2025-07-19 20:42:39,084 autoreload 31920 27520 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:42:40,232 autoreload 28688 35428 Watching for file changes with StatReloader
+INFO 2025-07-19 20:43:50,366 autoreload 28688 35428 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:43:51,481 autoreload 27208 27940 Watching for file changes with StatReloader
+INFO 2025-07-19 20:47:32,112 autoreload 27208 27940 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:47:33,448 autoreload 32712 35060 Watching for file changes with StatReloader
+INFO 2025-07-19 20:51:17,406 autoreload 32712 35060 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 20:51:18,508 autoreload 35132 5228 Watching for file changes with StatReloader
+INFO 2025-07-19 20:53:05,541 autoreload 35132 5228 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-19 20:53:06,885 autoreload 5244 21060 Watching for file changes with StatReloader
+INFO 2025-07-19 20:53:28,343 autoreload 5244 21060 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:53:29,739 autoreload 11888 35248 Watching for file changes with StatReloader
+INFO 2025-07-19 20:55:46,302 autoreload 11888 35248 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:55:47,450 autoreload 2252 24784 Watching for file changes with StatReloader
+INFO 2025-07-19 20:57:33,252 autoreload 2252 24784 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:57:34,602 autoreload 27708 14808 Watching for file changes with StatReloader
+INFO 2025-07-19 20:58:21,077 autoreload 27708 14808 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:58:22,430 autoreload 24744 34092 Watching for file changes with StatReloader
+INFO 2025-07-19 20:58:26,020 autoreload 24744 34092 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:58:26,926 autoreload 27216 11736 Watching for file changes with StatReloader
+INFO 2025-07-19 20:58:45,467 autoreload 27216 11736 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:58:46,602 autoreload 24476 23952 Watching for file changes with StatReloader
+INFO 2025-07-19 20:59:06,510 autoreload 24476 23952 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:59:07,619 autoreload 35148 33384 Watching for file changes with StatReloader
+INFO 2025-07-19 20:59:23,006 autoreload 35148 33384 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-19 20:59:24,037 autoreload 8040 26284 Watching for file changes with StatReloader

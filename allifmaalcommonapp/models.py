@@ -359,12 +359,12 @@ class CommonCompanyScopeModel(CommonBaseModel):# this is the company  hospitalit
 class CommonTaxParametersModel(CommonBaseModel):
     taxtype=models.CharField(choices=taxoptions, blank=True, max_length=30,default='Default')
     taxrate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,default=0)
-    tax_resources=models.TextField(blank=True,null=True,help_text="Resources required by this particular scope")
-    tax_constraints=models.TextField(blank=True,null=True,)
-    tax_assumptions=models.TextField(blank=True,null=True)
-    tax_exclusions = models.TextField(blank=True,null=True,help_text="Specific items, features, or activities that are explicitly excluded from this scope.")
-    tax_stakeholders = models.TextField(blank=True,null=True,help_text="Key individuals or groups affected by or having an interest in this scope.")
-    tax_risks=models.TextField(blank=True,null=True,help_text="A summary of identified risks associated with this scope.")
+    #tax_resources=models.TextField(blank=True,null=True,help_text="Resources required by this particular scope")
+    #tax_constraints=models.TextField(blank=True,null=True,)
+    #tax_assumptions=models.TextField(blank=True,null=True)
+    #tax_exclusions = models.TextField(blank=True,null=True,help_text="Specific items, features, or activities that are explicitly excluded from this scope.")
+    #tax_stakeholders = models.TextField(blank=True,null=True,help_text="Key individuals or groups affected by or having an interest in this scope.")
+    #tax_risks=models.TextField(blank=True,null=True,help_text="A summary of identified risks associated with this scope.")
 
     def __str__(self):
         return f"{self.name} ({self.taxrate}%)"
@@ -430,11 +430,11 @@ class CommonCurrenciesModel(CommonBaseModel):
 class CommonPaymentTermsModel(CommonBaseModel):
   
     def __str__(self):
-        return str(self.description)
+        return str(self.name)
     
 class CommonUnitsModel(CommonBaseModel):
     def __str__(self):
-        return str(self.description)
+        return str(self.name)
 
 
 #########################################3 stock, items, services, subjects categories.. ##############################################

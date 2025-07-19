@@ -1,0 +1,20 @@
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+ {% block add-form-header-block %}
+ <a href="{% allif_get_single_nav_link_url 'CompanyScopes' user_var glblslug %}">Scopes</a>
+<a href="{% allif_get_single_nav_link_url 'AddScope' user_var glblslug %}">New Scope</a>
+  {% endblock %}
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'CompanyScopes' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.commonWantToDeleteScope.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    {% endblock %}
+
+   

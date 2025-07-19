@@ -6,6 +6,34 @@ allif_sector_contextual_action_require_pk_links= {
     {'name': 'addDoctorAssessment', 'url_name': 'allifmaalshaafiapp:addDoctorAssessment', 'requires_pk': True},
     {'name': 'common_currency_pdf', 'url_name': 'allifmaalcommonapp:common_currency_pdf', 'requires_pk': True},
     {'name': 'commonWantToDeleteCurrency', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCurrency', 'requires_pk': True},
+    
+    {'name': 'commonWantToDeletePaymentTerm', 'url_name': 'allifmaalcommonapp:commonWantToDeletePaymentTerm', 'requires_pk': True},
+    {'name': 'commonDeletePaymentTerm', 'url_name': 'allifmaalcommonapp:commonDeletePaymentTerm', 'requires_pk': True},
+    
+    {'name': 'commonConfirmDeleteUnits', 'url_name': 'allifmaalcommonapp:commonConfirmDeleteUnits', 'requires_pk': True},
+    {'name': 'commonDeleteUnit', 'url_name': 'allifmaalcommonapp:commonDeleteUnit', 'requires_pk': True},
+   
+    {'name': 'commonWantToDeleteCategory', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCategory', 'requires_pk': True},
+    {'name': 'commonDeleteCategory', 'url_name': 'allifmaalcommonapp:commonDeleteCategory', 'requires_pk': True},
+    
+    {'name': 'commonWantToDeleteCode', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCode', 'requires_pk': True},
+    {'name': 'commonDeleteCode', 'url_name': 'allifmaalcommonapp:commonDeleteCode', 'requires_pk': True},
+    
+    {'name': 'commonWantToDeleteScope', 'url_name': 'allifmaalcommonapp:commonWantToDeleteScope', 'requires_pk': True},
+    {'name': 'commonDeleteCompanyScope', 'url_name': 'allifmaalcommonapp:commonDeleteCompanyScope', 'requires_pk': True},
+    
+    {'name': 'commonWantToDeleteApprover', 'url_name': 'allifmaalcommonapp:commonWantToDeleteApprover', 'requires_pk': True},
+    {'name': 'commonDeleteApprover', 'url_name': 'allifmaalcommonapp:commonDeleteApprover', 'requires_pk': True},
+    
+    {'name': 'CommonDeleteTaxParameter', 'url_name': 'allifmaalcommonapp:CommonDeleteTaxParameter', 'requires_pk': True},
+    {'name': 'commonWantToDeleteTaxParameter', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTaxParameter', 'requires_pk': True},
+  
+    {'name': 'commonWantToDeleteSupplierTaxParameter', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSupplierTaxParameter', 'requires_pk': True},
+    {'name': 'CommonSupplierDeleteTaxParameter', 'url_name': 'allifmaalcommonapp:CommonSupplierDeleteTaxParameter', 'requires_pk': True},
+  
+  
+  
+  
     ],
     
     'Education': [

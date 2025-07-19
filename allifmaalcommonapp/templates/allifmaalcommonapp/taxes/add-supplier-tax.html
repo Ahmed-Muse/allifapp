@@ -1,0 +1,34 @@
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+ {% block add-form-header-block %}
+  <a href="{% allif_get_single_nav_link_url 'TaxParameters' user_var glblslug %}">Sales Tax</a>
+  <a href="{% allif_get_single_nav_link_url 'AddATaxParameter' user_var glblslug %}">New Sales Tax</a>
+  <a href="{% allif_get_single_nav_link_url 'SupplierTaxParameters' user_var glblslug %}">Supplier Tax Parameters</a>
+  <a href="{% allif_get_single_nav_link_url 'AddATaxParameter' user_var glblslug %}">Add Supplier Tax Parameter</a>
+  {% endblock %}
+  {% block bottom-fields-col-one%}
+    <tr>
+    <td class="allif-fix-table-col-forms">Tax Rate</td>
+    <td>{{form.taxrate}}</td>
+    </tr>
+    {%endblock%}
+    
+    {% block bottom-fields-col-two %}
+    <tr>
+    <td class="allif-fix-table-col-forms">Tax Type</td>
+    <td>{{form.taxtype}}</td>
+    </tr>
+    {%endblock%}
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'SupplierTaxParameters' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.commonWantToDeleteSupplierTaxParameter.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    {% endblock %}

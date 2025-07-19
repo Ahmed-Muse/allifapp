@@ -63,11 +63,11 @@ path('Delete/All/The/Default/s/value/s/<str:allifusr>/<str:allifslug>/', views.c
 
 
 ########################3 company scopes ###################
-path('Company/Scopes/<str:allifusr>/<str:allifslug>/', views.commonAddCompanyScope, name="commonAddCompanyScope"),
+path('Add/New/Entity/Company/Scopes/<str:allifusr>/<str:allifslug>/', views.commonAddCompanyScope, name="commonAddCompanyScope"),
 path('Edit/Company/Scope/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCompanyScope, name="commonEditCompanyScope"),
 path('Delete/Company/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCompanyScope, name="commonDeleteCompanyScope"),
 path('Want/To/Delete/This/Scope/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteScope, name="commonWantToDeleteScope"),
-
+path('Company/Scopes/<str:allifusr>/<str:allifslug>/', views.commonCompanyScopes, name="commonCompanyScopes"),
 
 #########################33 divisions ########################
 path('Company/Divisions/<str:allifusr>/<str:allifslug>/', views.commonDivisions, name="commonDivisions"),
@@ -116,11 +116,15 @@ path('Add/New/Payment/Term/Payment/Conditions/<str:allifusr>/<str:allifslug>/', 
 path('Edit/Payment/Terms/Details/Money/Conditions/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPaymentTerm, name="commonEditPaymentTerm"),
 path('Delete/Payment/Term/s/Money/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeletePaymentTerm, name="commonDeletePaymentTerm"),
 
+path('Want/To/Delete/This/payment/s/Term/s/Record/<str:pk>/<str:allifusr>/<str:allifslug>/Please/Confirm/', views.commonWantToDeletePaymentTerm, name="commonWantToDeletePaymentTerm"),
 ################################## Units ##############
 path('Units/of/measure/<str:allifusr>/<str:allifslug>/', views.commonUnits, name="commonUnits"),
 path('Add/New/Unit/of/Measure/<str:allifusr>/<str:allifslug>/', views.commonAddUnit, name="commonAddUnit"),
 path('Edit/Unit/Details/Of/Measure/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditUnit, name="commonEditUnit"),
 path('Delete/Unit/Of/Measure/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteUnit, name="commonDeleteUnit"),
+path('Delete/Confirm/Initiate/Unit/Of/Measure/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonConfirmDeleteUnits, name="commonConfirmDeleteUnits"),
+
+
 
 
 ################################## Operation Years ##############
@@ -206,18 +210,25 @@ path('Approver/Details/Viewing/More/Ifn/<str:pk>/<str:allifusr>/<str:allifslug>/
 
 ################################### TAXES #########################3
 path('Tax/Parameters/<str:allifusr>/<str:allifslug>/', views.commonTaxParameters, name="commonTaxParameters"),
+path('Add/New/Tax/Parameters/Details/<str:allifusr>/<str:allifslug>/', views.commonAddATaxParameter, name="commonAddATaxParameter"),
+
+
 path('Update/Tax/Parameter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonUpdateTaxDetails, name="CommonUpdateTaxDetails"),
 path('Delete/Tax/Parameter/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonDeleteTaxParameter, name="CommonDeleteTaxParameter"),
 
 path('Tax/Suppliers/Parameters/<str:allifusr>/<str:allifslug>/', views.commonSupplierTaxParameters, name="commonSupplierTaxParameters"),
 path('Update/Tax/Suppliers/Parameter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonSupplierUpdateTaxDetails, name="CommonSupplierUpdateTaxDetails"),
 path('Delete/Tax/Parameter/Suppliers/Taxes/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonSupplierDeleteTaxParameter, name="CommonSupplierDeleteTaxParameter"),
+path('Do/You/u/U/Really/Want/Delete/This/Tax/Parameter/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteTaxParameter, name="commonWantToDeleteTaxParameter"),
+
+path('Add/Supplier/s/Tax/s/Parameter/s/<str:allifusr>/<str:allifslug>/', views.commonAddSupplierTaxParameter, name="commonAddSupplierTaxParameter"),
+path('Are/You/Sure/To/Delete/Supplier/s/Tax/s/Parameter/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteSupplierTaxParameter, name="commonWantToDeleteSupplierTaxParameter"),
 
 ##################################### General Ledger accounts ################
 path('General/Ledgers/Accounts/<str:allifusr>/<str:allifslug>/', views.commonGeneralLedgers, name="commonGeneralLedgers"),
 path('Add/General/Ledger/Account/<str:allifusr>/<str:allifslug>/', views.commonAddGeneralLedger, name="commonAddGeneralLedger"),
-path('Edit/General/Ledger/Account/<str:allifusr>/<str:pk>/<str:allifslug>/Update/', views.commonEditGeneralLedger, name="commonEditGeneralLedger"),
-path('View/General/Ledger/<str:allifslug>/<str:allifusr>/<str:allifrandom>/Details/', views.commonGeneralLedgerDetails, name="commonGeneralLedgerDetails"),
+path('Edit/General/Ledger/Account/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditGeneralLedger, name="commonEditGeneralLedger"),
+path('View/General/Ledger/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonGeneralLedgerDetails, name="commonGeneralLedgerDetails"),
 path('Delete/General/Ledger/Account/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteGeneralLedger, name="commonDeleteGeneralLedger"),
 path('Synchornize/General/Ledger/Account/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonSynchGLAccount, name="commonSynchGLAccount"),
 path('Want/To/Delete/General/Ledger/Account/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteGenLedger, name="commonWantToDeleteGenLedger"),
@@ -227,10 +238,10 @@ path('Chart/of/Accounts/<str:allifusr>/<str:allifslug>/', views.commonChartofAcc
 path('Add/Chart/of/Account/<str:allifusr>/<str:allifslug>/', views.commonAddChartofAccount, name="commonAddChartofAccount"),
 path('Edit/Chart/of/Account/<str:pk>/<str:allifusr>/<str:allifslug>/Update/', views.commonEditChartofAccount, name="commonEditChartofAccount"),
 path('Search/Chart/of/Accounts/<str:allifusr>/<str:allifslug>/', views.commonChartofAccountSearch, name="commonChartofAccountSearch"),
-path('Chart/of/Account/<str:allifslug>/<str:allifusr>/<str:allifslugcmon>/Details/', views.commonChartofAccountDetails, name="commonChartofAccountDetails"),
-path('Delete/Chart/of/Account/<str:pk>/Update/', views.commonDeleteChartofAccount, name="commonDeleteChartofAccount"),
+path('Chart/of/Account/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonChartofAccountDetails, name="commonChartofAccountDetails"),
+path('Delete/Chart/of/Account/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteChartofAccount, name="commonDeleteChartofAccount"),
 path('Chart/of/Accounts/', views.commonSelectedRelatedAccs, name="commonSelectedRelatedAccs"),
-path('Clear/Account/Balances/<str:pk>/', views.commonClearAcc, name="commonClearAcc"),
+path('Clear/Account/Balances/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonClearAcc, name="commonClearAcc"),
 path('Want/To/Delete/Chart/of/Account/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteCoA, name="commonWantToDeleteCoA"),
 path('Chart/of/Accounts/Advanced/Search/<str:allifusr>/<str:allifslug>/', views.commonChartofAccAdvanceSearch, name="commonChartofAccAdvanceSearch"),
 
