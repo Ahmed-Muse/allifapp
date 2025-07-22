@@ -30,7 +30,13 @@ allif_sector_contextual_action_require_pk_links= {
   
     {'name': 'commonWantToDeleteSupplierTaxParameter', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSupplierTaxParameter', 'requires_pk': True},
     {'name': 'CommonSupplierDeleteTaxParameter', 'url_name': 'allifmaalcommonapp:CommonSupplierDeleteTaxParameter', 'requires_pk': True},
+    
+    {'name': 'wanttodeletebank', 'url_name': 'allifmaalcommonapp:commonWantToDeleteBank', 'requires_pk': True},
+    {'name': 'commonDeleteBank', 'url_name': 'allifmaalcommonapp:commonDeleteBank', 'requires_pk': True},
+    
+    {'name': 'DeleteDeposit', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDeposit', 'requires_pk': True},
   
+     {'name': 'DeleteWithdrawal', 'url_name': 'allifmaalcommonapp:commonWantToDeleteWithdrawal', 'requires_pk': True},
   
   
   

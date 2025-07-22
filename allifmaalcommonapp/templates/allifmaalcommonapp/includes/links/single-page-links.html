@@ -21,7 +21,7 @@
        {% endif %}
       </a>
        
-      {% if ahmedmuse%}
+     {% if use_later_if_necessary %}
       <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-general-details-id" data-bs-toggle="tab" 
         data-bs-target="#allif-single-page-tab-general-details" type="button" role="tab" aria-controls="additional-info" aria-selected="false">
        
@@ -32,7 +32,7 @@
        {% endif %}
        
         </a>
-       {% endif %}
+    {%endif%}
         
     {% if ahmedmuse%}
         <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-static-details-id" data-bs-toggle="tab" 
@@ -47,6 +47,15 @@
 
         </a>
         {% endif %}
+
+       
+        <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-sensitive-details-id" data-bs-toggle="tab" 
+        data-bs-target="#allif-single-page-tab-sensitive-details" type="button" role="tab" aria-controls="additional-info" aria-selected="false">
+      
+       Sensitive Area
+      
+        </a>
+  
        
       </ul>
       </div>

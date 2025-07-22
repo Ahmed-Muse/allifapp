@@ -99,9 +99,16 @@ allif_single_access_general_links = [
     {'name': 'SupplierTaxParameters', 'url_name': 'allifmaalcommonapp:commonSupplierTaxParameters'},
     {'name': 'AddSupplierTaxParameter', 'url_name': 'allifmaalcommonapp:commonAddSupplierTaxParameter'},
     
+    {'name': 'Banks', 'url_name': 'allifmaalcommonapp:commonBanks'},
+    {'name': 'AddBank', 'url_name': 'allifmaalcommonapp:commonAddBank'},
     
+     {'name': 'Deposits', 'url_name': 'allifmaalcommonapp:commonBankShareholderDeposits'},
+    {'name': 'Withdrawals', 'url_name': 'allifmaalcommonapp:commonBankWithdrawals'},
     
+    {'name': 'AddDeposits', 'url_name': 'allifmaalcommonapp:commonAddBankShareholderDeposit'},
+    {'name': 'AddWithdrawals', 'url_name': 'allifmaalcommonapp:commonAddBankWithdrawal'},
     
+ 
     
     {'name': 'Assets', 'url_name': 'allifmaalcommonapp:commonAssets'},
     {'name': 'Expenses', 'url_name': 'allifmaalcommonapp:commonExpenses'},

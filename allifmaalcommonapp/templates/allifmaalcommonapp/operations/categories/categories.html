@@ -9,7 +9,7 @@
 <a href="{% allif_get_single_nav_link_url 'Categories' user_var glblslug %}">Categories</a>
 <a href="{% allif_get_single_nav_link_url 'AddCategory' user_var glblslug %}">Add Category</a>
 {% endblock %}
-{% block list-table-content-seciton %}
+{% block list-table-content-seciton-links %}
 <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCategoryDetails' item.id user_var glblslug %}"> {{item.name}}</a>
 
 {% endblock %}

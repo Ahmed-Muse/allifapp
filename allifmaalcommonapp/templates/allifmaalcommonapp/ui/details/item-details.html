@@ -7,7 +7,6 @@
 {%endblock%}
 {% block body %}
 
-
  {% if allifquery %}
 <!-- START... below is for loading contextual dynamic tags and links... used for only contextual links -->
 {% load allif_contextual_action_tags %} {# this helps to put the links where you want and it loads them #}
@@ -29,7 +28,7 @@
 
   <div class="allifmaincontainer">
    
-     <div class="allif-details-table-main-wrapper">
+  <div class="allif-details-table-main-wrapper">
   <!--... START OF TABLE.... -->
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
     {% block details-table-col-one %}
@@ -52,10 +51,6 @@
       </div>
    
 
-  <div class="allif-form-main-wrapper">
-    <form method='POST' action=''>{% csrf_token %}
-
-
     <!--START.... start of single pages content and its links section-->
     <div class="allif-single-page-tabs-contents-main-wrapper" >
     {% include 'allifmaalcommonapp/includes/links/single-page-links.html' %}
@@ -63,12 +58,8 @@
     <div class="tab-content allif-single-page-tab-content-wrapper" id="allif-single-page-tab-content-wrapper-id">
        <!--START.. Start of show/hide table section one-->
       <div class="tab-pane allif-single-page-tab-content-pane show active" id="allif-single-page-tab-core-details" role="tabpanel" aria-labelledby="allif-single-page-tab-core-details-id">
-     
-       
-
-
-
-        <div class="allif-details-table-main-wrapper">
+   
+  <div class="allif-details-table-main-wrapper">
   <!--... START OF TABLE.... -->
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
     {% block core-details-tab-col-one %}
@@ -96,12 +87,12 @@
  <!--START.. Start of show/hide table section one-->
     <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-standard-details" role="tabpanel" aria-labelledby="allif-single-page-tab-standard-details-id">
       <div class="allif-forms-table-main-wrapper">
-     {% include 'allifmaalcommonapp/includes/forms/standard-form-fields.html' %}
+     {% include 'allifmaalcommonapp/includes/details/standard-base-details.html' %}
      </div>
     </div>
        <!--END... End of show/hide table more details section one-->
 
-    {% if ahmedmuse%}
+    
   <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-general-details" role="tabpanel" aria-labelledby="allif-single-page-tab-general-details-id">
     <div class="allif-details-table-main-wrapper">
   <!--... START OF TABLE.... -->
@@ -113,6 +104,8 @@
       </tr>
       {%endblock%}
 
+  
+
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
       {% block general-details-tab-col-two %}
      <tr>
@@ -120,130 +113,36 @@
         <td>{{allifquery.description}}</td>
       </tr>
       {% endblock %}
-        
+      
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
      <!--... END OF TABLE.... -->
       </div>
     </div>
-{% endif %}
+
 
        <!--END... End of show/hide table more details section one-->
     <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-static-details" role="tabpanel" aria-labelledby="allif-single-page-tab-static-id">
-     <div class="allif-forms-table-main-wrapper">
-    {% include 'allifmaalcommonapp/includes/forms/static-form-fields.html' %}
+     <div class="allif-details-table-main-wrapper">
+    {% include 'allifmaalcommonapp/includes/details/static-details.html' %}
      </div>
     </div>
+
+
        <!--END... End of show/hide table more details section one-->
-   <div class="allif-details-table-main-wrapper">
-  <!--... START OF TABLE.... -->
-   {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
-    {% block bottom-details-tab-col-one %}
-      <tr>
-        <td class="allif-fix-table-col">Name</td>
-        <td>{{allifquery.name}}</td>
-      </tr>
-      {%endblock%}
-
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
-      {% block bottom-details-tab-col-two %}
-     <tr>
-        <td class="allif-fix-table-col">Description</td>
-        <td>{{allifquery.description}}</td>
-      </tr>
-      {% endblock %}
-        
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
-     <!--... END OF TABLE.... -->
-      </div>
-        </div>
-         </form>
-  </div>
-
-   <div class="allif-content-spacer"></div>
-   {% block collapsible_section %}
-  {% if allifquery %}
-  <!--... START OF COLLAPSIBLE SECTIONS.... -->
-  <div class="allif-collapsible-sections-main-wrapper">
-<!--START......... Start of collapsible sectioon links..........-->
-  {% include 'allifmaalcommonapp/includes/links/collapse-links.html' %}
-    
-  <!--start....content of first dropdown/collapsible section-->
-  <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-core-details">
-  
+    <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-sensitive-details" role="tabpanel" aria-labelledby="allif-single-page-tab-sensitive-id">
     <div class="allif-details-table-main-wrapper">
      <!--... START OF TABLE.... -->
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
-   {% block allif_core_details_col_one %}
-      <tr>
-        <td class="allif-fix-table-col">Comments</td>
-        <td>{{allifquery.comments}}</td>
-      </tr>
-      {%endblock%}
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
-    {% block allif_core_details_col_two %}
-      <tr>
-        <td class="allif-fix-table-col">Balance</td>
-        <td>{{allifquery.balance}}</td>
-      </tr>
-      {%endblock%}
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
-       <!--... END OF TABLE.... -->
-      </div> 
-      </div>
-    <!--end....content of first dropdown/collapsible section-->
-
-    <!--start....content of second dropdown/collapsible section-->
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-standard-details">
-     <!--... START OF TABLE.... -->
-    <div class="allif-details-table-main-wrapper">
-   {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
-   {% block allif_standard_details_col_one %}
-      <tr>
-        <td class="allif-fix-table-col">Quantity</td>
-        <td>{{allifquery.quantity}}</td>
-      </tr>
-      {%endblock%}
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
-     {% block allif_standard_details_col_two %}
-      <tr>
-        <td class="allif-fix-table-col">Date</td>
-        <td>{{allifquery.date}}</td>
-      </tr>
-      {%endblock%}
-    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
-       <!--... END OF TABLE.... -->
-       </div>
-    </div>
-       <!--end....content of second dropdown/collapsible section-->
-    <!--start....content of second dropdown/collapsible section-->
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-general-details">
-      <div class="allif-details-table-main-wrapper">
-    {% include 'allifmaalcommonapp/includes/details/standard-base-details.html' %}
-    </div>
-    </div>
-       <!--end....content of second dropdown/collapsible section-->
-    
-        <!--start....content of second dropdown/collapsible section-->
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-static-details">
-      <div class="allif-details-table-main-wrapper">
-    {% include 'allifmaalcommonapp/includes/details/general-base-details.html' %}
-    </div>
-    </div>
-
-  
-    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-sensitive-details">
-      <div class="allif-details-table-main-wrapper">
-        
-  <!--... START OF TABLE.... -->
-   {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
-
-   {% block allif_sensitive_section_col_one %}
+   
+    {% block allif_sensitive_section_col_one %}
       <tr>
         <td class="allif-fix-table-col">{{allifquery}}</td>
         <td><a class="amel-table-list-identifier" href="">Download {{allifquery}}</a></td>
       </tr>
       {%endblock%}
+
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
+    
     {% block allif_sensitive_section_col_two %}
      <tr>
         <td class="allif-fix-table-col">Delet {{allifquery}}</td>
@@ -253,19 +152,195 @@
 
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
      <!--... END OF TABLE.... -->
+     </div>
     </div>
+
+
+
+
+        </div>
+        
+
+<div class="allif-content-spacer"></div>
+{% block item_details_related_items_full_table %}
+  <div class="allif-full-table-content-main-wrapper">
+      {% include 'allifmaalcommonapp/includes/tables/full-table-header-upper-section.html' %}
+
+      {% block list-table-headers %}
+        <td class="allif-fix-table-col"> Name </td>
+        <td class="allif-table-header-td"> Description</td>
+        <td class="allif-table-header-td"> Date </td>
+        <td class="allif-table-header-td"> Status</td>
+         {% endblock %}
+        <td class="allif-table-header-td">Navigate</td>
+      {% include 'allifmaalcommonapp/includes/tables/full-table-header-lower-section.html' %}
+      
+      {% for item in allifqueryset %}  
+        <tr data-id="{{item.id}}" class="allif-table-header-content-row">
+        {% block list-table-content-seciton %}
+        <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}<a class="allif-table-links" href=""> {{item.name}} </a>{%endblock%}</td>
+        <td class="allif-table-content-td"> {{item.description}} </td>
+        <td class="allif-table-content-td"> {{item.date|date:'d/m/Y'}}</td>
+        <td class="allif-table-content-td"> {{item.status}}</td>
+        {% endblock %}
+        <td class="allif-table-content-td">
+           
+        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
+
+        {% block list-table-content-seciton-dropdown-links %}
+        <a href="" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+        {% endblock %}
+
+        {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
+        </td>
+    </tr>
+      {% endfor %}
+    {% include 'allifmaalcommonapp/includes/tables/full-table-last-section.html' %}
+
+      </div>
+{%endblock%}
+
+
+{% block item_details_related_items_full_half_tables %}
+<div class="row mt-12"> <!--start....table row-->
+  <div class="row">
+  <div class="col-md-6"> <!--start....table column-->
+    <div class="table-content-description"> <a href="" class="allif-table-links"> {{allifquery}} </a> </div>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+          {% block half_table_one_headers %}
+        <td class="allif-fix-table-col">Amount</td>
+        <td>Description</td>
+        <td>Date</td>
+       {%endblock%}
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in deposits %} 
+        <tr data-id="{{item.id}}">
+          {% block half_table_one_content %}
+          <td class="allif-fix-table-col">
+            <a href="" class="allif-table-links">
+            {{item.amount|floatformat:2|intcomma}}
+            </a>
+           </td>
+          <td>
+            {{item.description}}
+           </td>
+        
+        
+         <td>
+          {{item.date|date:'d/m/Y'}}
+         </td>
+         {%endblock%}
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+              {% block half_table_one_content_dropdown_links %}
+              <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              {%endblock%}
+             
+            </div>
+          </div>
+      
+        </td>
+
+      
+       
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
     </div>
-   
-   
+   </div>
 
-       <!--end....content of second dropdown/collapsible section-->
-       </div>
+</div><!--end....table column-->
+<div class="col-md-6"> <!--start....table column-->
+  <div class="table-content-description"> <a href="" class="allif-table-links"> {{allifquery}} Withdrawals </a> </div>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+          {% block half_table_two_headers %}
+        <td class="allif-fix-table-col">Amount</td>
+        <td>Description</td>
+        <td>Date</td>
+        {%endblock%}
+       
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+           
+        {% for item in allifqueryset %} 
+        <tr data-id="{{item.id}}">
+          {% block half_table_two_content %}
+          <td class="allif-fix-table-col">
+            <a href="" class="allif-table-links">
+            {{item.amount|floatformat:2|intcomma}}
+            </a>
+           </td>
+          <td>
+            {{item.description}}
+           </td>
+        
+        
+         <td>
+          {{item.date|date:'d/m/Y'}}
+         </td>
+         {%endblock%}
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+              {% block half_table_two_content_dropdown_links %}
+              <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              {%endblock%}
+              
+            </div>
+          </div>
+       
 
-       {% endif %}
+        </td>
 
-       {% endblock %}
+      
+       
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+</div>
+{%endblock%}
+
+
+<div class="allif-content-spacer"></div>
+
       </div>
       <!--END.... END of single pages content and its links section-->
+    </div>
     </div>
   {% block scripts %}
   {% endblock %}

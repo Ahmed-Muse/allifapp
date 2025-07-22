@@ -95,7 +95,7 @@
     </div>
        <!--END... End of show/hide table more details section one-->
 
-    {% if ahmedmuse%}
+    {% if consider_to_remove %}
   <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-general-details" role="tabpanel" aria-labelledby="allif-single-page-tab-general-details-id">
     <div class="allif-forms-table-main-wrapper">
       {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
@@ -123,6 +123,36 @@
     {% include 'allifmaalcommonapp/includes/forms/static-form-fields.html' %}
      </div>
     </div>
+
+    {% if allifquery %}
+
+    <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-sensitive-details" role="tabpanel" aria-labelledby="allif-single-page-tab-sensitive-id">
+       <div class="allif-forms-table-main-wrapper">
+        {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
+   
+    {% block allif_sensitive_section_col_one %}
+      <tr>
+        <td class="allif-fix-table-col">{{allifquery}}</td>
+        <td><a class="amel-table-list-identifier" href="">Download {{allifquery}}</a></td>
+      </tr>
+      {%endblock%}
+
+    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
+    
+    {% block allif_sensitive_section_col_two %}
+     <tr>
+        <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+        <td><a class="amel-table-list-identifier body-delete-link" href="">Delete {{allifquery}}</a></td>
+      </tr>
+      {%endblock%}
+
+    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-lower-section.html' %}
+
+       </div>
+    </div>
+    {%endif%}
+
+
        <!--END... End of show/hide table more details section one-->
     <div class="allif-forms-table-main-wrapper">
     {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-one-section.html' %}
@@ -149,7 +179,7 @@
 
    <div class="allif-content-spacer"></div>
    {% block collapsible_section %}
-  {% if allifquery %}
+  {% if consider_to_remove_this_section %}
   <!--... START OF COLLAPSIBLE SECTIONS.... -->
   <div class="allif-collapsible-sections-main-wrapper">
 <!--START......... Start of collapsible sectioon links..........-->
@@ -225,14 +255,14 @@
   <!--... START OF TABLE.... -->
    {% include 'allifmaalcommonapp/includes/details/two-column-details-table-upper-section.html' %}
 
-   {% block allif_sensitive_section_col_one %}
+   {% block allif_collapsible_sensitive_section_col_one %}
       <tr>
         <td class="allif-fix-table-col">{{allifquery}}</td>
         <td><a class="amel-table-list-identifier" href="">Download {{allifquery}}</a></td>
       </tr>
       {%endblock%}
     {% include 'allifmaalcommonapp/includes/details/two-column-details-table-middle-section.html' %}
-    {% block allif_sensitive_section_col_two %}
+    {% block allif_collapsible_sensitive_section_col_two %}
      <tr>
         <td class="allif-fix-table-col">Delet {{allifquery}}</td>
         <td><a class="amel-table-list-identifier body-delete-link" href="">Delete {{allifquery}}</a></td>

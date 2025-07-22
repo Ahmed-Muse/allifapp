@@ -7,7 +7,7 @@
   <a href="{% allif_get_single_nav_link_url 'Payment_Terms' user_var glblslug %}">Payment Terms</a>
   <a href="{% allif_get_single_nav_link_url 'Add_Payment_Term' user_var glblslug %}">New Payment Term</a>
   {% endblock %}
-  {% block list-table-content-seciton %}
+  {% block list-table-content-seciton-links %}
   <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditPaymentTerm' item.id user_var glblslug %}"> {{item.name}}</a>
   {% endblock %}
   {% block list-table-content-seciton-dropdown-links %}

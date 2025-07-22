@@ -2571,10 +2571,6 @@ def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is 
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 
-@logged_in_user_must_have_profile
-@logged_in_user_can_edit
-@logged_in_user_is_admin
-@subscriber_company_status
 def commonEditUser(request,pk,*allifargs,**allifkwargs):
     title="Update User Details"
     try:
@@ -2603,8 +2599,6 @@ def commonEditUser(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
        
-@logged_in_user_must_have_profile
-@logged_in_user_is_admin
 #@subscriber_company_status
 def commonUserDetails(request,pk,*allifargs,**allifkwargs):
     title="User Details"
@@ -3663,792 +3657,183 @@ def commonClearAcc(request,pk,*allifargs,**allifkwargs):
    
 
 
+############################################# BANKS ##############################3
+@allif_base_view_wrapper
 def commonBanks(request,*allifargs,**allifkwargs):
-    #try:
-        title="Banks"
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonBanksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonBanksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonBanksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonBanksModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
+    title="Banks"
+    allif_data=common_shared_data(request)
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonBanksModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,}
+    return render(request,'allifmaalcommonapp/banks/banks.html',context)
 
-        #allifqueryset=CommonBanksModel.objects.all()
-        #allifqueryset = get_filtered_and_sorted_queryset(request,CommonBanksModel, allif_data)
-        allifqueryset=CommonBanksModel.all_objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        
-        
-        # Call the universal utility function for TriagesModel
-        allifqueryset = allif_filtered_and_sorted_queryset(request, CommonBanksModel,allif_data)#gives all
-        
-        #print(f"DEBUG: Final Queryset for Triage: {allifqueryset.query}")
+@allif_base_view_wrapper
+def commonAddBank(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonAddBankForm,"Add Bank","commonBanks",'allifmaalcommonapp/banks/add-bank.html')
 
-        allifqueryset =allif_filtered_and_sorted_queryset(request,CommonBanksModel,allif_data,# these only show all records...
-            
-            #we can also add the extra filtering parameter as below
-            #explicit_scope='Archived' # <-- Explicitly set scope to 'archived'
-            explicit_scope='all',# shows all records
-            #explicit_scope='active', # shows only active records....
-            #explicit_scope='archived'# shows only archived data
-        )
-        
-        context = {
-            "title":title,
-            "allifqueryset":allifqueryset,
-        }
-        return render(request,'allifmaalcommonapp/banks/banks.html',context)
-    
-    #except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-def commonAddBank(request,allifusr,allifslug,*allifargs,**allifkwargs):
-    title="Add New Bank"
-    try:
-        allif_data=common_shared_data(request)
-        form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj = form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonBanks',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"))
-        context={"title":title,"form":form,}
-        return render(request,'allifmaalcommonapp/banks/add-bank.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+@allif_base_view_wrapper
+def commonEditBank(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonAddBankForm,"Edit Bank","commonBanks",'allifmaalcommonapp/banks/add-bank.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-def commonEditBank(request,pk,*allifargs,**allifkwargs):
-    title="Update Bank Details"
-    try:
-        allif_data=common_shared_data(request)
-        #allifquery_update=CommonBanksModel.all_objects.filter(id=pk).first()
-        allifquery_update= get_object_or_404(CommonBanksModel.all_objects, id=pk)
-        form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonBanks',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-               
-        else:
-            form=CommonAddBankForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalcommonapp/banks/add-bank.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-      
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonBankDetails(request,allifslug,*allifargs,**allifkwargs):
-    try:
-        title="Bank Details"
-        allif_data=common_shared_data(request)
-        allifquery=CommonBanksModel.all_objects.filter(pk=allifslug).first()
-        allifqueryset=CommonBankWithdrawalsModel.objects.filter(bank=allifquery,company=allif_data.get("main_sbscrbr_entity"))
-        queryset=CommonBankWithdrawalsModel.objects.filter(bank=allifquery,company=allif_data.get("main_sbscrbr_entity"))
-        deposits=CommonShareholderBankDepositsModel.objects.filter(bank=allifquery)
-        context={
-            "allifquery":allifquery,
-            "title":title,
-            "allifqueryset":allifqueryset,
-            "queryset":queryset,
-            "deposits":deposits,
-        }
-        return render(request,'allifmaalcommonapp/banks/bank-details.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_can_delete  
+@allif_base_view_wrapper
 def commonWantToDeleteBank(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=CommonBanksModel.all_objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalcommonapp/banks/delete-bank-confirm.html',context)
+    return allif_delete_confirm(request,pk,CommonBanksModel,"Delete this item",'allifmaalcommonapp/banks/delete-bank-confirm.html')
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)   
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_branches_delete
-@logged_in_user_can_delete  
+@logged_in_user_can_delete
+@allif_base_view_wrapper
 def commonDeleteBank(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonBanksModel.all_objects.filter(pk=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonBanks',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-        
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    return allif_delete_hanlder(request,model_name='CommonBanksModel',pk=pk,success_redirect_url_name='commonBanks')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view 
+@allif_base_view_wrapper
 def commonBankSearch(request,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Search Results"
-        searched_data=[]
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            if allif_data.get("logged_in_user_has_universal_access")==True:
-                searched_data=CommonBanksModel.objects.filter((Q(name__icontains=allifsearch)|Q(account__icontains=allifsearch)|Q(balance__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-            elif allif_data.get("logged_in_user_has_divisional_access")==True:
-                searched_data=CommonBanksModel.objects.filter((Q(name__icontains=allifsearch)|Q(account__icontains=allifsearch)|Q(balance__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")) & Q(division=allif_data.get("logged_user_division")))
-            elif allif_data.get("logged_in_user_has_branches_access")==True:
-                searched_data=CommonBanksModel.objects.filter((Q(name__icontains=allifsearch)|Q(account__icontains=allifsearch)|Q(balance__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")) & Q(division=allif_data.get("logged_user_division")) & Q(branch=allif_data.get("logged_user_branch")))
-            elif allif_data.get("logged_in_user_has_departmental_access")==True:
-                searched_data=CommonBanksModel.objects.filter((Q(name__icontains=allifsearch)|Q(account__icontains=allifsearch)|Q(balance__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")) & Q(division=allif_data.get("logged_user_division")) & Q(department=allif_data.get("logged_user_department")) & Q(branch=allif_data.get("logged_user_branch")))
-            else:
-                searched_data=[]
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='CommonBanksModel',search_fields_key='CommonBanksModel',
+    template_path='allifmaalcommonapp/banks/banks.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={"title":title,"allifsearch":allifsearch,"searched_data":searched_data,}
-        return render(request,'allifmaalcommonapp/banks/banks.html',context)
+
+@allif_base_view_wrapper
+def commonBankDetails(request, pk, *allifargs, **allifkwargs):
+    allif_data=common_shared_data(request)
+    allifquery=CommonBanksModel.all_objects.filter(id=pk).first()
+    allifqueryset=CommonBankWithdrawalsModel.objects.filter(bank=allifquery,company=allif_data.get("main_sbscrbr_entity"))
+    deposits=CommonShareholderBankDepositsModel.objects.filter(bank=allifquery)
+   
+    return allif_common_detail_view(
+        request,
+        model_class=CommonBanksModel,
+        pk=pk,
+        template_name='allifmaalcommonapp/banks/bank-details.html', # Create this template
+        title_map={'default': 'Bank Details'},
+        related_data_configs=[
+            {
+            'context_key': 'allifqueryset', # This will be available in template
+            'related_model': 'CommonBankWithdrawalsModel', # Name of the related model
+            'filter_field': 'bank', # Field on CommonInvoiceItemsModel that links to CommonInvoicesModel
+            'order_by': ['number'], # Order the items
+            #'prefetch_related': ['product'], # If CommonInvoiceItemsModel has a 'product' ForeignKey, prefetch it
+            },
             
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+            {
+            'context_key': 'deposits', # This will be available in template 
+            'related_model': 'CommonShareholderBankDepositsModel', # Name of the related model
+            'filter_field': 'bank', # Field on CommonInvoiceItemsModel that links to CommonInvoicesModel
+            'order_by': ['number'], # Order the items
+            #'prefetch_related': ['product'], # If CommonInvoiceItemsModel has a 'product' ForeignKey, prefetch it
+        }
+        ]
+    )
+
+
     
 ############################################### BANK DEPOSITS ################################
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view 
+@allif_base_view_wrapper
 def commonBankShareholderDeposits(request,*allifargs,**allifkwargs):
-    try:
-        title="Bank Deposits"
-        allif_data=common_shared_data(request)
-        formats=CommonDocsFormatModel.objects.all()
-        allifqueryset=[]
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,"formats":formats,
-        }
-        return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-       
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
-def commonAddBankShareholderDeposit(request,*allifargs,**allifkwargs):
-    title="Add New Bank Deposit"
-    try:
-        allif_data=common_shared_data(request)
-        form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"), request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-               
-        context={
-            "form":form,
-            "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-            "title":title,
-           
-            }
-        return render(request,'allifmaalcommonapp/banks/deposits/shareholders/add-deposit-sh.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-        
+    title="Shareholder Bank Deposits"
+    allif_data=common_shared_data(request)
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonShareholderBankDepositsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
-def commonPostShareholderDeposit(request,pk,*allifargs,**allifkwargs):
-    #try:
-        allif_data=common_shared_data(request)
-        allifquery=CommonShareholderBankDepositsModel.objects.filter(id=pk).first()
-        #if allifquery.status=="posted":
-        bank=allifquery.bank
-        amount=allifquery.amount
-        chartaccasset=allifquery.asset
-        chartacceqty=allifquery.equity
-        ########### increase the asset account
-        query=CommonChartofAccountsModel.objects.filter(id=chartaccasset.id).first()
-        initial_bank_balnce=query.balance
-        query.balance=initial_bank_balnce+Decimal(amount)
-        query.save()
+@allif_base_view_wrapper
+def commonAddBankShareholderDeposit(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonBankDepositAddForm,"Add Deposit","commonBankShareholderDeposits",'allifmaalcommonapp/banks/deposits/shareholders/add-deposit-sh.html')
 
-        ############ increase equity account ##############
-        eqtyquery=CommonChartofAccountsModel.objects.filter(id=chartacceqty.id).first()
-        initial_bank_balnce=eqtyquery.balance
-        eqtyquery.balance=initial_bank_balnce+Decimal(amount)
-        allifquery.status="posted"
-        allifquery.save()
-        eqtyquery.save()
-        return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-        #else:
-           # return render(request,'allifmaalcommonapp/error/error.html',error_context)
-          
-    #except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaaladminapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-def commonEditBankShareholderDeposit(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=CommonShareholderBankDepositsModel.objects.filter(id=pk).first()
-        form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
-        title=allifquery_update
-        if request.method=='POST':
-            form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=allifquery_update)
-            if form.is_valid():
-                obj = form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-        
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonBankDepositAddForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
+@allif_base_view_wrapper
+def commonEditBankShareholderDeposit(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonBankDepositAddForm,"Edit Deposit","commonBankShareholderDeposits",'allifmaalcommonapp/banks/deposits/shareholders/add-deposit-sh.html')
 
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalcommonapp/banks/deposits/shareholders/add-deposit-sh.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-       
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonBankShareholderDepositDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=CommonShareholderBankDepositsModel.objects.filter(pk=pk).first()
-        title="Deposit Details"
-        context={
-            "allifquery":allifquery,
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposit-details-sh.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def commonWantToDeleteDeposit(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=CommonShareholderBankDepositsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalcommonapp/banks/deposits/shareholders/delete-deposit-confirm.html',context)
+    return allif_delete_confirm(request,pk,CommonShareholderBankDepositsModel,"Delete this item",'allifmaalcommonapp/banks/deposits/shareholders/delete-deposit-confirm.html')
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)         
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
 @logged_in_user_can_delete
-@logged_in_user_has_branches_delete
+@allif_base_view_wrapper
 def commonDeleteBankShareholderDeposit(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonShareholderBankDepositsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    return allif_delete_hanlder(request,model_name='CommonShareholderBankDepositsModel',pk=pk,success_redirect_url_name='commonBankShareholderDeposits')
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def commonDepositSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonShareholderBankDepositsModel.objects.filter((Q(description__icontains=allifsearch)|Q(amount__icontains=allifsearch)|Q(bank__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-            context={
-            "title":title,
-            "allifsearch":allifsearch,
-            "searched_data":searched_data,
-        }
-        return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
-            
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    return allif_search_handler(request,model_name='CommonShareholderBankDepositsModel',search_fields_key='CommonShareholderBankDepositsModel',
+    template_path='allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',search_input_name='allifsearchcommonfieldname',)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+
+@allif_base_view_wrapper
 def commonDepositAdvanceSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Bank Deposits Advanced Search"
-        allif_data=common_shared_data(request)
-        formats=CommonDocsFormatModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-        allifqueryset=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        firstDepo=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
+    # This view now simply calls the centralized advanced search handler
+    return allif_advance_search_handler(request,model_name='CommonShareholderBankDepositsModel',advanced_search_config_key='CommonShareholderBankDepositsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html', # Template for HTML results
+        template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
+        #accounts/coa-search-pdf.html
+    )
+    
+@allif_base_view_wrapper      
+def commonPostShareholderDeposit(request,pk,*allifargs,**allifkwargs):
+   
+    allif_data=common_shared_data(request)
+    allifquery=CommonShareholderBankDepositsModel.objects.filter(id=pk).first()
+    #if allifquery.status=="posted":
+    bank=allifquery.bank
+    amount=allifquery.amount
+    chartaccasset=allifquery.asset
+    chartacceqty=allifquery.equity
+    ########### increase the asset account
+    query=CommonChartofAccountsModel.objects.filter(id=chartaccasset.id).first()
+    initial_bank_balnce=query.balance
+    query.balance=initial_bank_balnce+Decimal(amount)
+    query.save()
 
-        lastDepo=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=CommonShareholderBankDepositsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-     
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-               
-                if selected_option=="pdf":
-                    template_path='allifmaalcommonapp/banks/deposits/shareholders/deposit-search-pdf.html'
-                    allifcontext={"searched_data":searched_data,"title":title,"main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),"scopes":scopes,}
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="bank-deposits-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                    "formats":formats,
-                    "title":title,
-                     "scopes":scopes
-                    }
-                    return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
-                   
-            else:
-                searched_data=[]
-                allifqueryset=[]
-                context={"allifqueryset":allifqueryset,"formats":formats,"title":title,
-                }
-                return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
-       
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
-            }
-            return render(request,'allifmaalcommonapp/banks/deposits/shareholders/deposits-sh.html',context)
-           
+    ############ increase equity account ##############
+    eqtyquery=CommonChartofAccountsModel.objects.filter(id=chartacceqty.id).first()
+    initial_bank_balnce=eqtyquery.balance
+    eqtyquery.balance=initial_bank_balnce+Decimal(amount)
+    allifquery.status="posted"
+    allifquery.save()
+    eqtyquery.save()
+    return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonClearShareholderDepositSearch(request,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-       
 ############################################### BANK WITHDRAWALS ################################
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def commonBankWithdrawals(request,*allifargs,**allifkwargs):
-    try:
-        title="Bank Withdrawals"
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-        allif_data=common_shared_data(request)
-        formats=CommonDocsFormatModel.objects.all()
-        allifqueryset=[]
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={
-            "title":title,
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "datasorts":datasorts,
-        }
-        return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-def commonAddBankWithdrawal(request,*allifargs,**allifkwargs):
-    try:
-        title="New Withdrawal"
-        allif_data=common_shared_data(request)
-        form=CommonBankWithdrawalsAddForm(allif_data.get("main_sbscrbr_entity"))
-        
-        if request.method=='POST':
-            bank=request.POST.get('bank')
-            amount=request.POST.get('amount')
-            chart_account=request.POST.get('asset')
-            bankcoa=request.POST.get('bankcoa')
-            
-            form=CommonBankWithdrawalsAddForm(allif_data.get("main_sbscrbr_entity"), request.POST)
-            if form.is_valid():
-                obj = form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-               
-                obj.save()
-                myquery=CommonBanksModel.objects.filter(id=bank).first()
-                initial_bank_balnce=myquery.balance
-                myquery.balance=initial_bank_balnce-Decimal(amount)
-                myquery.deposit=0
-                myquery.withdrawal=Decimal(amount)
-                myquery.save()
-                acc=CommonChartofAccountsModel.objects.filter(pk=chart_account).first()# The misc cost service supplier
-                init_acc_balance=acc.balance
-                acc.balance=init_acc_balance+Decimal(amount)
-                
-                acc.save()
+    title="Money Withdrawals"
+    allif_data=common_shared_data(request)
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonBankWithdrawalsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
 
-                accnt=CommonChartofAccountsModel.objects.filter(pk=bankcoa).first()# The misc cost service supplier
-                init_acc_balance=accnt.balance
-                accnt.balance=init_acc_balance-Decimal(amount)
-                accnt.save()
-                return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+@allif_base_view_wrapper
+def commonAddBankWithdrawal(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonBankWithdrawalsAddForm,"New Withdrawal","commonBankWithdrawals",'allifmaalcommonapp/banks/withdrawals/add-withdrawal.html')
 
-        context={
-            "form":form,
-            "title":title,
-            
-            }
-        return render(request,'allifmaalcommonapp/banks/withdrawals/add-withdrawal.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-def commonEditBankWithdrawal(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=CommonBankWithdrawalsModel.objects.filter(id=pk).first()
-        form=CommonBankWithdrawalsAddForm(allif_data.get("main_sbscrbr_entity"), instance=allifquery_update)
-        title=allifquery_update
-        if request.method=='POST':
-            form=CommonBankWithdrawalsAddForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+@allif_base_view_wrapper
+def commonEditBankWithdrawal(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonBankWithdrawalsAddForm,"Edit withdrawal","commonBankWithdrawals",'allifmaalcommonapp/banks/withdrawals/add-withdrawal.html')
 
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalcommonapp/banks/withdrawals/add-withdrawal.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-       
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonBankWithdrawalDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=CommonBankWithdrawalsModel.objects.filter(pk=pk).first()
-        title="Withdrawal Details"
-        context={
-            "allifquery":allifquery,
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawal-details.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def commonWantToDeleteWithdrawal(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=CommonBankWithdrawalsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalcommonapp/banks/withdrawals/delete-withdrawal-confirm.html',context)
+    return allif_delete_confirm(request,pk,CommonBankWithdrawalsModel,"Delete this item",'allifmaalcommonapp/banks/withdrawals/delete-withdrawal-confirm.html')
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)              
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
 @logged_in_user_can_delete
-@logged_in_user_has_branches_delete
+@allif_base_view_wrapper
 def commonDeleteBankWithdrawal(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonBankWithdrawalsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    return allif_delete_hanlder(request,model_name='CommonBankWithdrawalsModel',pk=pk,success_redirect_url_name='commonBankWithdrawals')
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def commonWithdrawalSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        searched_data=[]
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonBankWithdrawalsModel.objects.filter((Q(description__icontains=allifsearch)|Q(amount__icontains=allifsearch)|Q(bank__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='CommonBankWithdrawalsModel',search_fields_key='CommonBankWithdrawalsModel',
+    template_path='allifmaalcommonapp/banks/withdrawals/withdrawals.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        "title":title,
-        "searched_data":searched_data,
-        }
-        return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
-   
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Bank Withdrawals Advanced Search"
-        allif_data=common_shared_data(request)
-        formats=CommonDocsFormatModel.objects.all()
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-        allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        firstDepo=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
+    # This view now simply calls the centralized advanced search handler
+    return allif_advance_search_handler(request,model_name='CommonBankWithdrawalsModel',advanced_search_config_key='CommonBankWithdrawalsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/banks/withdrawals/withdrawals.html', # Template for HTML results
+        template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
+        #accounts/coa-search-pdf.html
+    )
 
-        lastDepo=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonBankWithdrawalsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/banks/withdrawals/withdrawal-search-pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                    "scopes":scopes
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="bank-withdrawals-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                # if excel is selected
-                
-                else:
-                    searched_data=CommonBankWithdrawalsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                    context = {
-                    "searched_data":searched_data,
-                    "formats":formats,
-                    "title":title,
-                     "scopes":scopes
-                    }
-                    return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
-                    
-            else:
-                allifqueryset=CommonBankWithdrawalsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-                
-                
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
-            }
-            return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
-           
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-             "scopes":scopes
-            }
-            return render(request,'allifmaalcommonapp/banks/withdrawals/withdrawals.html',context)
-          
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-#################################### BANKS SECTION #############################
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonClearShareholderWithdrwlSearch(request,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        return redirect('allifmaalcommonapp:commonBankWithdrawals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
        
 ##############################33 suppliers section ###############3
 @logged_in_user_must_have_profile

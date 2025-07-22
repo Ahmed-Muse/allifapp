@@ -111,6 +111,50 @@ allif_model_sort_configs = {
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
      
+     'commonbanksmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     'commonshareholderbankdepositsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     'commonbankwithdrawalsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     
+     
+     
+     
+     
     'commoncompanyscopemodel': { # Key should be consistent, e.g., model._meta.model_name
         'sort_mapping': {
             "Name Ascending": "name",
@@ -189,6 +233,13 @@ allif_search_config_mapping = {
     'CommonCategoriesModel': ['name__icontains', 'description__icontains'],
     'CommonCodesModel': ['name__icontains', 'description__icontains'],
     'CommonChartofAccountsModel': ['name__icontains', 'description__icontains'],
+    'CommonBanksModel': ['name__icontains', 'description__icontains','balance__icontains'],
+    
+    'CommonShareholderBankDepositsModel': ['name__icontains', 'description__icontains','amount__icontains'],
+    
+    'CommonBankWithdrawalsModel': ['name__icontains', 'description__icontains','amount__icontains'],
+    
+    
     
    
     
@@ -237,6 +288,44 @@ allif_advanced_search_configs = {
     
     
     },
+    
+     'CommonShareholderBankDepositsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+     
+      'CommonBankWithdrawalsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+     
+     
+     
+    
     
     
     # Add configurations for other models here, e.g.:
@@ -296,6 +385,9 @@ allif_main_models_registry = {
     'CommonSupplierTaxParametersModel':CommonSupplierTaxParametersModel,
     'CommonChartofAccountsModel':CommonChartofAccountsModel,
     'CommonGeneralLedgersModel':CommonGeneralLedgersModel,
+    'CommonShareholderBankDepositsModel':CommonShareholderBankDepositsModel,
+    
+    'CommonBankWithdrawalsModel':CommonBankWithdrawalsModel,
    
 }
 
@@ -860,10 +952,89 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
         form = form_class(*form_args, request.POST, instance=allifquery) 
         if form.is_valid():
             obj = form.save(commit=False) # obj is now item_instance with updated data
+            if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
+                try:
+                    obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id)
+                except Http404:
+                    #print(f"WARNING: Division with ID {allif_data.get('logged_user_division').id} not found for {obj.__class__.__name__}.")
+                    obj.division = None
+                except Exception as e:
+                    #print(f"ERROR: Failed to retrieve division with ID {allif_data.get('logged_user_division').id}: {e}")
+                    obj.division = None
+            else:
+                pass
+            # Branch
+            if hasattr(obj, 'branch') and allif_data.get("logged_user_branch").id:
+                try:
+                    obj.branch = get_object_or_404(CommonBranchesModel, pk=allif_data.get("logged_user_branch").id)
+                except Http404:
+                    #print(f"WARNING: Branch with ID {allif_data.get('logged_user_branch').id} not found for {obj.__class__.__name__}.")
+                    obj.branch = None
+                except Exception as e:
+                    #print(f"ERROR: Failed to retrieve branch with ID {allif_data.get('logged_user_branch').id}: {e}")
+                    obj.branch = None
+            else:
+                pass
+            # Department
+            if hasattr(obj, 'department') and allif_data.get("logged_user_department").id:
+                try:
+                    obj.department = get_object_or_404(CommonDepartmentsModel, pk=allif_data.get("logged_user_department").id)
+                except Http404:
+                    #print(f"WARNING: Department with ID {allif_data.get('logged_user_department').id} not found for {obj.__class__.__name__}.")
+                    obj.department = None
+                except Exception as e:
+                    #print(f"ERROR: Failed to retrieve department with ID {allif_data.get('logged_user_department').id}: {e}")
+                    obj.department = None
+            if allif_data.get("logged_user_operation_year"):
+                if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
+                    try:
+                        
+                        obj.operation_year = get_object_or_404(CommonOperationYearsModel, pk=allif_data.get("logged_user_operation_year").id)
+                    except Http404:
+                        #print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
+                        obj.operation_year = None
+                        raise Http404("Unauthorized: Item does not belong to your company or access denied.")
+                    except Exception as e:
+                        #print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
+                        obj.operation_year = None
+                else:
+                    pass
+            else:
+                pass
+            if allif_data.get("logged_user_operation_term"):
+                if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
+                    try:
+                        
+                        obj.operation_term = get_object_or_404(CommonOperationYearTermsModel, pk=allif_data.get("logged_user_operation_term").id)
+                    except Http404:
+                        #print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
+                        obj.operation_term = None
+                    except Exception as e:
+                        #print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
+                        obj.operation_term = None
+                else:
+                    pass
+            else:
+                pass
+                    
+            # Owner (assuming 'usernmeslg' in allif_data is the User object)
+            if hasattr(obj, 'owner') and allif_data.get("usernmeslg"):
+                try:
+                    obj.owner=allif_data.get("usernmeslg") # This should be the User object
+                except Http404:
+                    #print(f"WARNING: User {allif_data.get("usernmeslg")} not found for {obj.__class__.__name__}.")
+                    obj.owner = None
+                except Exception as e:
+                    #print(f"ERROR: Failed to retrieve User {allif_data.get("usernmeslg")}: {e}")
+                    obj.owner = None
+            else:
+                pass
+            
 
             # --- Assign common 'updated_by' field ---
             if hasattr(obj, 'updated_by') and allif_data.get("usernmeslg"):
                 obj.updated_by = allif_data.get("usernmeslg") # This should be the User object
+                
 
             # --- Execute custom pre-save callback if provided ---
             if pre_save_callback:

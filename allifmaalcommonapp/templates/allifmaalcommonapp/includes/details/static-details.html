@@ -1,0 +1,103 @@
+{% if allifmaal %}
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-6">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+        <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{allifquery.company}}</td>
+          </tr>
+      <tr>
+        <td class="allif-fix-table-col">Division</td>
+        <td>{{allifquery.division}}</td>
+        </tr>
+      <tr>
+        <td class="allif-fix-table-col">Branch</td>
+        <td>{{allifquery.branch}}</td>
+        </tr>
+      <tr>
+        <td class="allif-fix-table-col">Department</td>
+        <td>{{allifquery.department}}</td>
+        </tr>
+       <tr>
+        <td class="allif-fix-table-col">Created By</td>
+        <td>{{allifquery.owner}}</td>
+        </tr>
+
+       
+       <tr>
+        <td class="allif-fix-table-col">Operation Year</td>
+        <td>{{allifquery.operation_year}}</td>
+        </tr>
+        <tr>
+        <td class="allif-fix-table-col">Operation Term</td>
+        <td>{{allifquery.operation_term}}</td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-6">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+        
+       
+          <tr>
+            <td class="allif-fix-table-col">Delete Status</td>
+            <td>{{allifquery.delete_status}}</td>
+            </tr>
+             <tr>
+            <td class="allif-fix-table-col">Reference</td>
+            <td>{{allifquery.reference}}</td>
+            </tr>
+
+            <tr>
+            <td class="allif-fix-table-col">Created On</td>
+            <td>{{allifquery.date|date:'d/m/Y'}}</td>
+            </tr>
+            
+             <tr>
+            <td class="allif-fix-table-col">Updated On</td>
+            <td>{{allifquery.last_updated|date:'d/m/Y'}}</td>
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Priority</td>
+            <td>{{allifquery.priority}}</td>
+            </tr>
+
+            <tr>
+            <td class="allif-fix-table-col">Transaction ID</td>
+            <td>{{allifquery.uuid}}</td>
+            </tr>
+             <tr>
+        <td class="allif-fix-table-col">Updated By</td>
+        <td>{{allifquery.updated_by}}</td>
+        </tr>
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    </div><!--end of row div --->
+      
+        </div>
+
+</div><!--end....table row-->
+</div>
+<!--end of table-->
+
+</div><!--end of main container of the page............-->
+{%endif%}

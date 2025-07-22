@@ -10,7 +10,7 @@
 <a href="{% allif_get_single_nav_link_url 'AddATaxParameter' user_var glblslug %}">Add Supplier Tax Parameter</a>
 
 {% endblock %}
-{% block list-table-content-seciton %}
+{% block list-table-content-seciton-links %}
 <a class="allif-table-links" href="{% url 'allifmaalcommonapp:CommonUpdateTaxDetails' item.id user_var glblslug %}"> {{item.name}}</a>
 {% endblock %}
 {% block list-table-content-seciton-dropdown-links %}

@@ -15712,3 +15712,1028 @@ INFO 2025-07-19 20:59:06,510 autoreload 24476 23952 C:\am\allifapp\allifapperp\a
 INFO 2025-07-19 20:59:07,619 autoreload 35148 33384 Watching for file changes with StatReloader
 INFO 2025-07-19 20:59:23,006 autoreload 35148 33384 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
 INFO 2025-07-19 20:59:24,037 autoreload 8040 26284 Watching for file changes with StatReloader
+INFO 2025-07-20 07:15:20,534 autoreload 33576 30064 Watching for file changes with StatReloader
+INFO 2025-07-20 07:30:12,401 autoreload 33576 30064 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:30:14,127 autoreload 14772 1852 Watching for file changes with StatReloader
+INFO 2025-07-20 07:30:20,622 autoreload 14772 1852 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:30:22,142 autoreload 31992 31564 Watching for file changes with StatReloader
+INFO 2025-07-20 07:30:55,738 autoreload 31992 31564 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:30:57,283 autoreload 4472 24864 Watching for file changes with StatReloader
+INFO 2025-07-20 07:33:31,305 autoreload 4472 24864 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:33:32,941 autoreload 21716 13636 Watching for file changes with StatReloader
+INFO 2025-07-20 07:33:50,491 autoreload 21716 13636 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:33:52,034 autoreload 18588 19260 Watching for file changes with StatReloader
+INFO 2025-07-20 07:34:10,739 autoreload 18588 19260 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:34:12,141 autoreload 24512 11316 Watching for file changes with StatReloader
+INFO 2025-07-20 07:34:53,690 autoreload 24512 11316 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:34:55,165 autoreload 11836 12496 Watching for file changes with StatReloader
+INFO 2025-07-20 07:35:32,028 autoreload 11836 12496 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:35:33,658 autoreload 35596 32072 Watching for file changes with StatReloader
+INFO 2025-07-20 07:37:43,562 autoreload 35596 32072 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-20 07:37:45,099 autoreload 26424 32560 Watching for file changes with StatReloader
+INFO 2025-07-20 07:38:20,560 autoreload 26424 32560 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:38:22,218 autoreload 30008 28032 Watching for file changes with StatReloader
+INFO 2025-07-20 07:38:48,314 autoreload 30008 28032 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:38:49,971 autoreload 28640 31148 Watching for file changes with StatReloader
+INFO 2025-07-20 07:38:58,980 autoreload 28640 31148 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:39:00,548 autoreload 35824 26584 Watching for file changes with StatReloader
+INFO 2025-07-20 07:39:43,277 autoreload 35824 26584 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:39:44,912 autoreload 1752 6356 Watching for file changes with StatReloader
+INFO 2025-07-20 07:44:39,727 autoreload 1752 6356 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:44:41,120 autoreload 19484 9996 Watching for file changes with StatReloader
+INFO 2025-07-20 07:45:41,577 autoreload 19484 9996 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-20 07:45:43,171 autoreload 33436 14288 Watching for file changes with StatReloader
+INFO 2025-07-20 07:46:59,686 autoreload 33436 14288 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:47:01,289 autoreload 4540 8816 Watching for file changes with StatReloader
+INFO 2025-07-20 07:48:08,417 autoreload 4540 8816 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-20 07:48:09,953 autoreload 20576 32708 Watching for file changes with StatReloader
+ERROR 2025-07-20 07:48:15,106 utils 20576 12096 Related model 'CommonBankWithdrawalsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-20 07:48:15,107 utils 20576 12096 Critical error in allif_common_detail_view for CommonBanksModel (PK: 2): allifmaalcommonapp/accounts/banks/bank-details.html
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1046, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/accounts/banks/bank-details.html
+INFO 2025-07-20 07:48:34,342 autoreload 20576 32708 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:48:36,015 autoreload 24248 14600 Watching for file changes with StatReloader
+ERROR 2025-07-20 07:48:39,847 utils 24248 27740 Related model 'CommonBankWithdrawalsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-20 07:49:17,915 utils 24248 27740 Related model 'CommonBankWithdrawalsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-20 07:49:27,974 utils 24248 27740 Related model 'CommonBankWithdrawalsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-20 07:49:42,842 utils 24248 27740 Related model 'CommonBankWithdrawalsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+WARNING 2025-07-20 07:51:22,367 log 24248 27740 Not Found: /favicon.ico
+INFO 2025-07-20 07:52:27,624 autoreload 24248 14600 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:52:29,448 autoreload 35836 27468 Watching for file changes with StatReloader
+INFO 2025-07-20 07:52:56,772 autoreload 35836 27468 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:52:58,638 autoreload 32084 22636 Watching for file changes with StatReloader
+INFO 2025-07-20 07:54:30,216 autoreload 32084 22636 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:54:31,856 autoreload 21040 31860 Watching for file changes with StatReloader
+ERROR 2025-07-20 07:55:43,317 utils 21040 18244 Related model 'CommonBankWithdrawalsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-20 07:57:24,963 autoreload 21040 31860 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:57:26,601 autoreload 20032 24388 Watching for file changes with StatReloader
+INFO 2025-07-20 07:58:27,888 autoreload 20032 24388 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:58:29,697 autoreload 2952 24204 Watching for file changes with StatReloader
+ERROR 2025-07-20 07:58:32,397 utils 2952 35564 Related model 'CommonBankWithdrawalsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+ERROR 2025-07-20 07:58:33,853 utils 2952 35564 Related model 'CommonBankWithdrawalsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-20 07:58:43,120 autoreload 2952 24204 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:58:44,782 autoreload 31012 34172 Watching for file changes with StatReloader
+INFO 2025-07-20 07:59:03,471 autoreload 31012 34172 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:59:04,958 autoreload 17452 35148 Watching for file changes with StatReloader
+ERROR 2025-07-20 07:59:07,340 utils 17452 17428 Related model 'CommonBankWithdrawalsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-20 07:59:44,064 autoreload 17452 35148 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 07:59:45,848 autoreload 13920 26544 Watching for file changes with StatReloader
+ERROR 2025-07-20 07:59:48,664 utils 13920 26860 Related model 'CommonShareholderBankDepositsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-20 08:00:00,577 autoreload 13920 26544 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:00:02,287 autoreload 12900 26100 Watching for file changes with StatReloader
+ERROR 2025-07-20 08:00:05,060 utils 12900 13092 Related model 'CommonShareholderBankDepositsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-20 08:00:56,739 autoreload 12900 26100 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:00:58,424 autoreload 29884 33752 Watching for file changes with StatReloader
+ERROR 2025-07-20 08:01:04,081 utils 29884 12044 Related model 'CommonShareholderBankDepositsModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-20 08:01:40,334 autoreload 29884 33752 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:01:41,955 autoreload 27216 24020 Watching for file changes with StatReloader
+INFO 2025-07-20 08:02:41,039 autoreload 27216 24020 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-20 08:02:42,709 autoreload 17824 27420 Watching for file changes with StatReloader
+INFO 2025-07-20 08:03:35,168 autoreload 17824 27420 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:03:36,804 autoreload 12252 17444 Watching for file changes with StatReloader
+INFO 2025-07-20 08:03:50,396 autoreload 12252 17444 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:03:52,110 autoreload 13800 22992 Watching for file changes with StatReloader
+INFO 2025-07-20 08:05:14,281 autoreload 13800 22992 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:05:15,993 autoreload 7388 3568 Watching for file changes with StatReloader
+ERROR 2025-07-20 08:05:18,658 utils 7388 22952 Critical error in allif_common_detail_view for CommonBanksModel (PK: 3): Cannot find 'product' on CommonBankWithdrawalsModel object, 'product' is an invalid parameter to prefetch_related()
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1049, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 194, in render
+    len_values = len(values)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1883, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1273, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 2296, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'product' on CommonBankWithdrawalsModel object, 'product' is an invalid parameter to prefetch_related()
+INFO 2025-07-20 08:05:29,631 autoreload 7388 3568 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:05:31,389 autoreload 20460 24156 Watching for file changes with StatReloader
+INFO 2025-07-20 08:06:45,791 autoreload 20460 24156 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:06:47,384 autoreload 30316 31728 Watching for file changes with StatReloader
+INFO 2025-07-20 08:06:52,706 autoreload 30316 31728 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:06:54,372 autoreload 1376 8008 Watching for file changes with StatReloader
+INFO 2025-07-20 08:07:30,632 autoreload 1376 8008 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 08:07:32,542 autoreload 9240 24112 Watching for file changes with StatReloader
+INFO 2025-07-20 18:04:55,472 autoreload 32604 9792 Watching for file changes with StatReloader
+INFO 2025-07-20 18:36:07,377 autoreload 32604 9792 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 18:36:09,419 autoreload 16856 18292 Watching for file changes with StatReloader
+WARNING 2025-07-20 19:02:28,677 allif_navigation_tags 16856 24416 General navigation link with name 'AddBank' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:28,677 allif_navigation_tags 16856 24416 General navigation link with name 'Deposits' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:28,678 allif_navigation_tags 16856 24416 General navigation link with name 'Withdrawals' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:30,119 allif_navigation_tags 16856 24416 General navigation link with name 'AddBank' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:30,119 allif_navigation_tags 16856 24416 General navigation link with name 'Deposits' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:30,119 allif_navigation_tags 16856 24416 General navigation link with name 'Withdrawals' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:32,887 allif_navigation_tags 16856 24416 General navigation link with name 'AddBank' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:32,887 allif_navigation_tags 16856 24416 General navigation link with name 'Deposits' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:32,887 allif_navigation_tags 16856 24416 General navigation link with name 'Withdrawals' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:35,095 allif_navigation_tags 16856 24416 General navigation link with name 'AddBank' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:35,096 allif_navigation_tags 16856 24416 General navigation link with name 'Deposits' not found in allif_single_access_general_links.
+WARNING 2025-07-20 19:02:35,096 allif_navigation_tags 16856 24416 General navigation link with name 'Withdrawals' not found in allif_single_access_general_links.
+INFO 2025-07-20 19:05:27,103 autoreload 16856 18292 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-20 19:05:29,505 autoreload 35284 15248 Watching for file changes with StatReloader
+INFO 2025-07-20 19:05:44,394 autoreload 32700 33128 Watching for file changes with StatReloader
+INFO 2025-07-20 19:11:08,027 autoreload 32700 33128 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-20 19:11:09,154 autoreload 24656 20632 Watching for file changes with StatReloader
+INFO 2025-07-20 19:11:54,684 autoreload 24656 20632 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 19:11:56,083 autoreload 29004 23332 Watching for file changes with StatReloader
+INFO 2025-07-20 19:13:14,644 autoreload 29004 23332 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-20 19:13:15,760 autoreload 18704 35760 Watching for file changes with StatReloader
+INFO 2025-07-20 19:24:05,204 autoreload 18704 35760 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 19:24:06,729 autoreload 34244 15808 Watching for file changes with StatReloader
+WARNING 2025-07-20 19:26:34,063 utils 34244 34176 Object of type CommonBanksModel with PK 4 not found.
+INFO 2025-07-20 20:10:56,000 autoreload 34244 15808 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-20 20:10:57,321 autoreload 7328 32020 Watching for file changes with StatReloader
+INFO 2025-07-20 20:11:39,894 autoreload 7328 32020 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-20 20:11:41,118 autoreload 17272 24656 Watching for file changes with StatReloader
+INFO 2025-07-20 20:12:09,947 autoreload 17272 24656 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-20 20:12:11,030 autoreload 14972 20564 Watching for file changes with StatReloader
+INFO 2025-07-20 20:12:13,778 autoreload 14972 20564 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-20 20:12:14,674 autoreload 28860 28980 Watching for file changes with StatReloader
+INFO 2025-07-20 20:12:45,663 autoreload 28860 28980 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-20 20:12:46,851 autoreload 9704 1460 Watching for file changes with StatReloader
+INFO 2025-07-20 20:15:02,901 autoreload 9704 1460 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-20 20:15:04,069 autoreload 11032 23672 Watching for file changes with StatReloader
+INFO 2025-07-20 20:15:46,961 autoreload 11032 23672 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 20:15:48,227 autoreload 10540 24932 Watching for file changes with StatReloader
+INFO 2025-07-20 20:16:06,071 autoreload 10540 24932 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-20 20:16:07,179 autoreload 34636 5912 Watching for file changes with StatReloader
+INFO 2025-07-20 20:16:13,064 autoreload 34636 5912 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-20 20:16:13,932 autoreload 16084 34996 Watching for file changes with StatReloader
+INFO 2025-07-20 20:16:29,881 autoreload 16084 34996 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-20 20:16:31,027 autoreload 5212 10208 Watching for file changes with StatReloader
+WARNING 2025-07-20 20:18:16,809 utils 5212 35184 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:18:29,214 utils 5212 35184 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:19:01,595 utils 5212 35184 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:19:25,149 utils 5212 35184 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:20:40,766 utils 5212 35184 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:21:32,379 utils 5212 35184 Object of type CommonBanksModel with PK 4 not found.
+INFO 2025-07-20 20:21:59,369 autoreload 5212 10208 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 20:22:00,759 autoreload 4080 24348 Watching for file changes with StatReloader
+INFO 2025-07-20 20:22:09,661 autoreload 4080 24348 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 20:22:11,168 autoreload 24660 1640 Watching for file changes with StatReloader
+WARNING 2025-07-20 20:22:15,377 utils 24660 35788 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:22:17,610 utils 24660 35788 Object of type CommonBanksModel with PK 4 not found.
+INFO 2025-07-20 20:22:28,536 autoreload 18636 17588 Watching for file changes with StatReloader
+WARNING 2025-07-20 20:22:39,697 utils 18636 35420 Object of type CommonBanksModel with PK 4 not found.
+INFO 2025-07-20 20:22:49,722 autoreload 18636 17588 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 20:22:51,186 autoreload 8816 27720 Watching for file changes with StatReloader
+INFO 2025-07-20 20:22:56,743 autoreload 8816 27720 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 20:22:57,883 autoreload 30768 33228 Watching for file changes with StatReloader
+WARNING 2025-07-20 20:22:59,657 utils 30768 30100 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:23:03,716 utils 30768 30100 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:23:37,961 utils 30768 30100 Object of type CommonBanksModel with PK 4 not found.
+INFO 2025-07-20 20:23:56,188 autoreload 30768 33228 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 20:23:57,444 autoreload 33688 19892 Watching for file changes with StatReloader
+INFO 2025-07-20 20:24:33,508 autoreload 33688 19892 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-20 20:24:34,613 autoreload 18216 15556 Watching for file changes with StatReloader
+WARNING 2025-07-20 20:24:40,846 utils 18216 33888 Object of type CommonBanksModel with PK 4 not found.
+INFO 2025-07-20 20:25:36,755 autoreload 18216 15556 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-20 20:25:38,215 autoreload 1460 9804 Watching for file changes with StatReloader
+ERROR 2025-07-20 20:25:42,821 utils 1460 16116 Critical error in allif_common_detail_view for CommonBanksModel (PK: 4): Reverse for 'commonEditBank' with arguments '('', 'user-full-names-b86293ea7826', 'barasho-hospital2116-5691dc1aadae')' not found. 1 pattern(s) tried: ['Edit/Bank/Details/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/Update/\\Z']
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1061, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonEditBank' with arguments '('', 'user-full-names-b86293ea7826', 'barasho-hospital2116-5691dc1aadae')' not found. 1 pattern(s) tried: ['Edit/Bank/Details/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/Update/\\Z']
+INFO 2025-07-20 20:26:24,519 autoreload 1460 9804 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-20 20:26:25,877 autoreload 35112 11032 Watching for file changes with StatReloader
+WARNING 2025-07-20 20:26:27,553 utils 35112 23200 Object of type CommonBanksModel with PK 4 not found.
+INFO 2025-07-20 20:28:51,299 autoreload 35112 11032 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 20:28:52,413 autoreload 22712 23752 Watching for file changes with StatReloader
+WARNING 2025-07-20 20:28:56,223 utils 22712 21292 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:28:58,529 utils 22712 21292 Object of type CommonBanksModel with PK 4 not found.
+INFO 2025-07-20 20:29:08,326 autoreload 22712 23752 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-20 20:29:10,102 autoreload 24524 35316 Watching for file changes with StatReloader
+INFO 2025-07-20 20:29:52,078 autoreload 32252 26184 Watching for file changes with StatReloader
+WARNING 2025-07-20 20:37:26,444 utils 32252 35080 Object of type CommonBanksModel with PK 4 not found.
+WARNING 2025-07-20 20:39:51,540 log 32252 35080 Not Found: /favicon.ico
+ERROR 2025-07-20 20:40:02,145 utils 32252 35080 Critical error in allif_common_detail_view for CommonBanksModel (PK: 10): Invalid filter: 'intcomma'
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1065, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2025-07-20 20:48:59,596 utils 32252 35080 Critical error in allif_common_detail_view for CommonBanksModel (PK: 10): allifmaalcommonapp/ui/details/read-only-details.html
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 161, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/details/read-only-details.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1065, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/details/read-only-details.html
+INFO 2025-07-20 21:19:58,845 autoreload 32252 26184 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-20 21:20:00,105 autoreload 13304 2212 Watching for file changes with StatReloader
+ERROR 2025-07-20 21:51:31,173 utils 13304 4852 Critical error in allif_common_detail_view for CommonBanksModel (PK: 10): allifmaalcommonapp/ui/details/full_table_list.html
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 197, in render
+    template = context.template.engine.select_template(template_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 212, in select_template
+    raise TemplateDoesNotExist(", ".join(not_found))
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/details/full_table_list.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1144, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/ui/details/full_table_list.html
+ERROR 2025-07-20 21:55:22,734 utils 13304 4852 Critical error in allif_common_detail_view for CommonBanksModel (PK: 10): 'block' tag with name 'list-table-headers' appears more than once
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1144, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'list-table-headers' appears more than once
+INFO 2025-07-21 07:10:32,494 autoreload 12324 26192 Watching for file changes with StatReloader
+WARNING 2025-07-21 07:22:07,979 utils 12324 20088 Object of type CommonBanksModel with PK 11 not found.
+WARNING 2025-07-21 07:22:15,462 utils 12324 20088 Object of type CommonBanksModel with PK 11 not found.
+WARNING 2025-07-21 07:23:47,867 utils 12324 20088 Object of type CommonBanksModel with PK 11 not found.
+INFO 2025-07-21 07:24:06,558 autoreload 12324 26192 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-21 07:24:08,611 autoreload 10312 26312 Watching for file changes with StatReloader
+WARNING 2025-07-21 07:24:11,380 utils 10312 33468 Object of type CommonBanksModel with PK 11 not found.
+WARNING 2025-07-21 07:24:14,752 utils 10312 33468 Object of type CommonBanksModel with PK 11 not found.
+INFO 2025-07-21 07:24:30,486 autoreload 10312 26312 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-21 07:24:32,229 autoreload 7436 12408 Watching for file changes with StatReloader
+WARNING 2025-07-21 07:24:38,125 utils 7436 13992 Object of type CommonBanksModel with PK 11 not found.
+INFO 2025-07-21 07:25:58,599 autoreload 7436 12408 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-21 07:26:00,223 autoreload 4768 21480 Watching for file changes with StatReloader
+WARNING 2025-07-21 07:26:02,376 utils 4768 18392 Object of type CommonBanksModel with PK 11 not found.
+WARNING 2025-07-21 07:26:04,126 utils 4768 18392 Object of type CommonBanksModel with PK 11 not found.
+INFO 2025-07-21 07:26:22,406 autoreload 4768 21480 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-21 07:26:23,839 autoreload 33860 30760 Watching for file changes with StatReloader
+INFO 2025-07-21 07:26:41,825 autoreload 33860 30760 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-21 07:26:43,240 autoreload 30256 31320 Watching for file changes with StatReloader
+INFO 2025-07-21 07:27:16,138 autoreload 30256 31320 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-21 07:27:17,783 autoreload 2120 8868 Watching for file changes with StatReloader
+WARNING 2025-07-21 07:27:20,012 utils 2120 22048 Object of type CommonBanksModel with PK 11 not found.
+INFO 2025-07-21 07:27:31,158 autoreload 2120 8868 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-21 07:27:32,655 autoreload 22404 11364 Watching for file changes with StatReloader
+INFO 2025-07-21 07:27:54,572 autoreload 22404 11364 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-21 07:27:56,682 autoreload 32736 20324 Watching for file changes with StatReloader
+INFO 2025-07-21 07:28:13,160 autoreload 32736 20324 C:\am\allifapp\allifapperp\allifmaalcommonapp\allifutils.py changed, reloading.
+INFO 2025-07-21 07:28:14,946 autoreload 34952 16124 Watching for file changes with StatReloader
+INFO 2025-07-21 07:28:34,592 autoreload 34952 16124 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-21 07:28:36,165 autoreload 25684 4828 Watching for file changes with StatReloader
+INFO 2025-07-21 07:28:57,264 autoreload 25684 4828 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-21 07:28:59,154 autoreload 33496 31972 Watching for file changes with StatReloader
+WARNING 2025-07-21 07:29:01,502 utils 33496 21112 Object of type CommonBanksModel with PK 11 not found.
+INFO 2025-07-21 07:29:16,102 autoreload 33496 31972 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-21 07:29:17,732 autoreload 30316 19612 Watching for file changes with StatReloader
+INFO 2025-07-21 07:29:26,231 autoreload 30316 19612 C:\am\allifapp\allifapperp\allifmaalcommonapp\allifutils.py changed, reloading.
+INFO 2025-07-21 07:29:27,810 autoreload 31732 33452 Watching for file changes with StatReloader
+INFO 2025-07-21 07:29:38,865 autoreload 31732 33452 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-21 07:29:40,587 autoreload 11612 28480 Watching for file changes with StatReloader
+WARNING 2025-07-21 07:29:44,455 utils 11612 10008 Object of type CommonBanksModel with PK 11 not found.
+WARNING 2025-07-21 07:29:49,632 utils 11612 10008 Object of type CommonBanksModel with PK 11 not found.
+WARNING 2025-07-21 07:30:57,430 utils 11612 10008 Object of type CommonBanksModel with PK 11 not found.
+INFO 2025-07-21 07:32:01,597 autoreload 11612 28480 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-21 07:32:03,286 autoreload 13660 6564 Watching for file changes with StatReloader
+ERROR 2025-07-21 07:40:19,392 utils 13660 17420 Critical error in allif_common_detail_view for CommonBanksModel (PK: 10): Invalid filter: 'intcomma'
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1144, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 853, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+INFO 2025-07-22 17:10:07,620 autoreload 17844 15600 Watching for file changes with StatReloader
+ERROR 2025-07-22 19:05:34,483 utils 17844 34768 Critical error in allif_common_detail_view for CommonBanksModel (PK: 12): allifmaalcommonapp/includes/details/static-details.html
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 197, in render
+    template = context.template.engine.select_template(template_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 212, in select_template
+    raise TemplateDoesNotExist(", ".join(not_found))
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/includes/details/static-details.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1144, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/includes/details/static-details.html
+ERROR 2025-07-22 19:08:40,272 utils 17844 24232 Critical error in allif_common_detail_view for CommonBanksModel (PK: 12): allifmaalcommonapp/includes/details/static-details.html
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 197, in render
+    template = context.template.engine.select_template(template_name)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 212, in select_template
+    raise TemplateDoesNotExist(", ".join(not_found))
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/includes/details/static-details.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1144, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: allifmaalcommonapp/includes/details/static-details.html
+ERROR 2025-07-22 19:22:02,350 utils 17844 24232 Critical error in allif_common_detail_view for CommonBanksModel (PK: 12): 'block' tag with name 'allif_sensitive_section_col_one' appears more than once
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1144, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        template_name,
+        ^^^^^^^^^^^^^^
+        skip=history,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 953, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 226, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'allif_sensitive_section_col_one' appears more than once
+WARNING 2025-07-22 19:37:25,893 log 17844 6028 Not Found: /favicon.ico
+ERROR 2025-07-22 20:52:11,130 utils 17844 8020 Critical error in allif_common_detail_view for CommonBanksModel (PK: 12): Invalid block tag on line 50: 'allif_get_single_nav_link_url', expected 'endblock'. Did you forget to register or load this tag?
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'allif_get_single_nav_link_url'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1144, in allif_common_detail_view
+    return render(request, template_name, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 558, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 50: 'allif_get_single_nav_link_url', expected 'endblock'. Did you forget to register or load this tag?
+INFO 2025-07-22 21:36:43,541 autoreload 17844 15600 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:36:45,429 autoreload 36032 29036 Watching for file changes with StatReloader
+INFO 2025-07-22 21:37:40,387 autoreload 36032 29036 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:37:41,523 autoreload 16776 22008 Watching for file changes with StatReloader
+INFO 2025-07-22 21:38:47,546 autoreload 16776 22008 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:38:48,631 autoreload 9628 30788 Watching for file changes with StatReloader
+INFO 2025-07-22 21:39:01,634 autoreload 9628 30788 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:39:03,009 autoreload 7720 34484 Watching for file changes with StatReloader
+INFO 2025-07-22 21:39:10,618 autoreload 7720 34484 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:39:11,649 autoreload 36132 32624 Watching for file changes with StatReloader
+INFO 2025-07-22 21:39:21,084 autoreload 36132 32624 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:39:22,372 autoreload 24840 19016 Watching for file changes with StatReloader
+INFO 2025-07-22 21:40:49,706 autoreload 24840 19016 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:40:50,794 autoreload 18796 17164 Watching for file changes with StatReloader
+INFO 2025-07-22 21:41:16,085 autoreload 18796 17164 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:41:17,053 autoreload 34804 28760 Watching for file changes with StatReloader
+INFO 2025-07-22 21:41:20,065 autoreload 34804 28760 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:41:20,937 autoreload 26064 15116 Watching for file changes with StatReloader
+INFO 2025-07-22 21:43:09,077 autoreload 26064 15116 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:43:10,474 autoreload 31508 28900 Watching for file changes with StatReloader
+INFO 2025-07-22 21:43:23,275 autoreload 31508 28900 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-22 21:43:24,242 autoreload 7720 15532 Watching for file changes with StatReloader
+INFO 2025-07-22 21:46:51,383 autoreload 7720 15532 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:46:52,620 autoreload 36856 29176 Watching for file changes with StatReloader
+INFO 2025-07-22 21:48:55,484 autoreload 36856 29176 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:48:56,363 autoreload 24364 33260 Watching for file changes with StatReloader
+INFO 2025-07-22 21:49:34,397 autoreload 24364 33260 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:49:35,845 autoreload 31144 31740 Watching for file changes with StatReloader
+INFO 2025-07-22 21:50:12,636 autoreload 31144 31740 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:50:13,882 autoreload 3152 11528 Watching for file changes with StatReloader
+INFO 2025-07-22 21:53:09,990 autoreload 3152 11528 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:53:10,915 autoreload 19380 36760 Watching for file changes with StatReloader
+INFO 2025-07-22 21:53:45,620 autoreload 19380 36760 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:53:46,775 autoreload 9364 9780 Watching for file changes with StatReloader
+INFO 2025-07-22 21:55:50,072 autoreload 9364 9780 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:55:50,978 autoreload 11732 12452 Watching for file changes with StatReloader
+INFO 2025-07-22 21:59:30,973 autoreload 11732 12452 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 21:59:31,856 autoreload 12044 21632 Watching for file changes with StatReloader
+INFO 2025-07-22 22:01:03,834 autoreload 12044 21632 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 22:01:04,756 autoreload 7340 36100 Watching for file changes with StatReloader
+INFO 2025-07-22 22:01:36,108 autoreload 7340 36100 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 22:01:37,025 autoreload 22308 21068 Watching for file changes with StatReloader
+INFO 2025-07-22 22:02:48,236 autoreload 22308 21068 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 22:02:49,654 autoreload 11868 36784 Watching for file changes with StatReloader
+INFO 2025-07-22 22:04:11,742 autoreload 11868 36784 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 22:04:12,798 autoreload 14900 31176 Watching for file changes with StatReloader
+INFO 2025-07-22 22:11:58,265 autoreload 14900 31176 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-22 22:11:59,277 autoreload 16072 16756 Watching for file changes with StatReloader
+WARNING 2025-07-22 22:20:16,858 utils 16072 30380 Object of type CommonBanksModel with PK 11 not found.
+WARNING 2025-07-22 22:20:32,651 utils 16072 30380 Object of type CommonBanksModel with PK 11 not found.
+INFO 2025-07-22 22:24:35,665 autoreload 16072 16756 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 22:24:36,614 autoreload 30544 16732 Watching for file changes with StatReloader
+INFO 2025-07-22 22:25:19,627 autoreload 30544 16732 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-22 22:25:20,508 autoreload 30020 35732 Watching for file changes with StatReloader
+INFO 2025-07-22 22:25:25,359 autoreload 30020 35732 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-22 22:25:26,441 autoreload 30572 30256 Watching for file changes with StatReloader
+WARNING 2025-07-22 22:25:52,088 utils 30572 24332 Object of type CommonBanksModel with PK 11 not found.
+INFO 2025-07-22 22:27:00,803 autoreload 30572 30256 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 22:27:01,950 autoreload 16716 21032 Watching for file changes with StatReloader
+INFO 2025-07-22 22:29:08,943 autoreload 16716 21032 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-22 22:29:10,083 autoreload 12800 20640 Watching for file changes with StatReloader
+INFO 2025-07-22 22:30:01,768 autoreload 12800 20640 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-22 22:30:03,166 autoreload 6812 26260 Watching for file changes with StatReloader
+INFO 2025-07-22 22:31:25,351 autoreload 6812 26260 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-22 22:31:26,228 autoreload 12080 32428 Watching for file changes with StatReloader
+INFO 2025-07-22 22:32:31,983 autoreload 12080 32428 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-22 22:32:33,550 autoreload 16724 30688 Watching for file changes with StatReloader
+INFO 2025-07-22 23:05:06,501 autoreload 16724 30688 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-22 23:05:07,722 autoreload 14140 36136 Watching for file changes with StatReloader
+INFO 2025-07-22 23:07:47,529 autoreload 14140 36136 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-22 23:07:48,647 autoreload 3948 28556 Watching for file changes with StatReloader
+INFO 2025-07-22 23:08:20,511 autoreload 3948 28556 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-22 23:08:21,612 autoreload 28440 28792 Watching for file changes with StatReloader
+INFO 2025-07-22 23:08:50,084 autoreload 28440 28792 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-22 23:08:51,189 autoreload 23100 6312 Watching for file changes with StatReloader
+INFO 2025-07-22 23:09:08,143 autoreload 23100 6312 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-22 23:09:09,173 autoreload 35496 12160 Watching for file changes with StatReloader
+INFO 2025-07-22 23:09:37,803 autoreload 35496 12160 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-22 23:09:38,864 autoreload 31056 11636 Watching for file changes with StatReloader
+INFO 2025-07-22 23:09:44,501 autoreload 31056 11636 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-22 23:09:45,785 autoreload 29540 20956 Watching for file changes with StatReloader
+INFO 2025-07-22 23:13:32,291 autoreload 29540 20956 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-22 23:13:33,263 autoreload 11412 27264 Watching for file changes with StatReloader
+INFO 2025-07-22 23:15:25,370 autoreload 11412 27264 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-22 23:15:26,281 autoreload 22236 36072 Watching for file changes with StatReloader
+INFO 2025-07-22 23:16:20,461 autoreload 22236 36072 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-22 23:16:21,437 autoreload 23320 23540 Watching for file changes with StatReloader
+INFO 2025-07-22 23:16:27,363 autoreload 23320 23540 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-22 23:16:28,337 autoreload 27736 16372 Watching for file changes with StatReloader

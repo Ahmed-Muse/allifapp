@@ -96,13 +96,14 @@
       
       {% for item in allifqueryset %}  
         <tr data-id="{{item.id}}" class="allif-table-header-content-row">
-        <td class="allif-fix-table-col">
-          {% block list-table-content-seciton %} <a class="allif-table-links" href=""> {{item.name}} </a> {% endblock %}
-        </td>
+        {% block list-table-content-seciton %}
+        <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}<a class="allif-table-links" href=""> {{item.name}} </a>{%endblock%}</td>
         <td class="allif-table-content-td"> {{item.description}} </td>
         <td class="allif-table-content-td"> {{item.date|date:'d/m/Y'}}</td>
         <td class="allif-table-content-td"> {{item.status}}</td>
+        {% endblock %}
         <td class="allif-table-content-td">
+           
         {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
 
         {% block list-table-content-seciton-dropdown-links %}

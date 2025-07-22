@@ -9,7 +9,7 @@
 <a href="{% allif_get_single_nav_link_url 'CompanyScopes' user_var glblslug %}">Scopes</a>
 <a href="{% allif_get_single_nav_link_url 'AddScope' user_var glblslug %}">New Scope</a>
 {% endblock %}
-{% block list-table-content-seciton %}
+{% block list-table-content-seciton-links %}
 <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCompanyScope' item.id user_var glblslug %}"> {{item.name}}</a>
 
 {% endblock %}

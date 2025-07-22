@@ -7,7 +7,7 @@
 <a href="{% allif_get_single_nav_link_url 'MeasuringUnits' user_var glblslug %}">Measuring Units</a>
 <a href="{% allif_get_single_nav_link_url 'AddUnit' user_var glblslug %}">New Unit</a>
 {% endblock %}
-{% block list-table-content-seciton %}
+{% block list-table-content-seciton-links %}
 <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditUnit' item.id user_var glblslug %}"> {{item.name}}</a>
 {% endblock %}
 {% block list-table-content-seciton-dropdown-links %}

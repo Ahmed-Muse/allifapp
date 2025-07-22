@@ -253,7 +253,7 @@ path('Delete/Bank/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteE
 path('Banks/<str:allifusr>/<str:allifslug>/', views.commonBanks, name="commonBanks"),
 path('Add/New/Bank/<str:allifusr>/<str:allifslug>/', views.commonAddBank, name="commonAddBank"),
 path('Edit/Bank/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Update/', views.commonEditBank, name="commonEditBank"),
-path('View/Bank/<str:allifslug>/<str:allifusr>/<str:allifrandom>/Details/', views.commonBankDetails, name="commonBankDetails"),
+path('View/Bank/Details/More/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonBankDetails, name="commonBankDetails"),
 path('Delete/Bank/<str:pk>/<str:allifusr>/<str:allifslug>/Permntly/', views.commonDeleteBank, name="commonDeleteBank"),
 path('Search/Bank/<str:allifusr>/<str:allifslug>/', views.commonBankSearch, name="commonBankSearch"),
 path('Want/To/Delete/Bank/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteBank, name="commonWantToDeleteBank"),
@@ -262,24 +262,23 @@ path('Want/To/Delete/Bank/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commo
 path('Bank/Deposits/<str:allifusr>/<str:allifslug>/', views.commonBankShareholderDeposits, name="commonBankShareholderDeposits"),
 path('Add/New/Bank/Deposit/<str:allifusr>/<str:allifslug>/', views.commonAddBankShareholderDeposit, name="commonAddBankShareholderDeposit"),
 path('Edit/Bank/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditBankShareholderDeposit, name="commonEditBankShareholderDeposit"),
-path('Bank/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonBankShareholderDepositDetails, name="commonBankShareholderDepositDetails"),
+
 path('Delete/Bank/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteBankShareholderDeposit, name="commonDeleteBankShareholderDeposit"),
 path('Search/Bank/Deposit/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepositSearch, name="commonDepositSearch"),
 path('Want/To/Delete/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDeposit, name="commonWantToDeleteDeposit"),
 path('Search/Results/Deposits/<str:allifusr>/<str:allifslug>/Advaned/Search/', views.commonDepositAdvanceSearch, name="commonDepositAdvanceSearch"),
-path('Clear/Shareholder/Search/Results/Deposits/<str:allifusr>/<str:allifslug>/', views.commonClearShareholderDepositSearch, name="commonClearShareholderDepositSearch"),
+
 path('Post/This/Bank/Deposit/Post/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostShareholderDeposit, name="commonPostShareholderDeposit"),
 
 ####################################3 withdrawals ###########################3
 path('Bank/Withdrawals/<str:allifusr>/<str:allifslug>/', views.commonBankWithdrawals, name="commonBankWithdrawals"),
 path('Add/New/Bank/Withdrawal/<str:allifusr>/<str:allifslug>/', views.commonAddBankWithdrawal, name="commonAddBankWithdrawal"),
 path('Edit/Bank/Withdrawal/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditBankWithdrawal, name="commonEditBankWithdrawal"),
-path('Bank/Withdrawal/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonBankWithdrawalDetails, name="commonBankWithdrawalDetails"),
+
 path('Delete/Bank/Withdrawal/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteBankWithdrawal, name="commonDeleteBankWithdrawal"),
 path('Search/Bank/Withdrawals/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonWithdrawalSearch, name="commonWithdrawalSearch"),
 path('Want/To/Delete/Withdrawal/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteWithdrawal, name="commonWantToDeleteWithdrawal"),
 path('Search/Results/Withdrawals/<str:allifusr>/<str:allifslug>/', views.commonWithdrawalAdvanceSearch, name="commonWithdrawalAdvanceSearch"),
-path('Clear/Shareholder/Search/Results/Withdrawls/<str:allifusr>/<str:allifslug>/', views.commonClearShareholderWithdrwlSearch, name="commonClearShareholderWithdrwlSearch"),
 
 ############################ suppliers sections ##################################3
 path('Suppliers/<str:allifusr>/<str:allifslug>/List/', views.commonSuppliers, name="commonSuppliers"),

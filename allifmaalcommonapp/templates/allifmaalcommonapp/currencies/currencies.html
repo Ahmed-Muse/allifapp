@@ -14,7 +14,7 @@
   <a href="{% allif_get_single_nav_link_url 'Currencies' user_var glblslug %}">Currencies</a>
   <a href="{% allif_get_single_nav_link_url 'Add_New_Currency' user_var glblslug %}">New Currency</a>
   {% endblock %}
-  {% block list-table-content-seciton %}
+  {% block list-table-content-seciton-links %}
   <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCurrency' item.id user_var glblslug %}"> {{item.name}}</a>
   
   {% endblock %}

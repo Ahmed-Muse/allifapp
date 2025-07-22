@@ -12,8 +12,12 @@
       <table class="table table-layout">
       <tbody>
         <tr>
-          <td class="allif-fix-table-col">Code</td>
-          <td>{{allifquery.code}}</td>
+          <td class="allif-fix-table-col">Starts</td>
+          <td>{{allifquery.starts|date:'d/m/Y'}}</td>
+          </tr>
+           <tr>
+          <td class="allif-fix-table-col">Ends</td>
+          <td>{{allifquery.ends|date:'d/m/Y'}}</td>
           </tr>
     
         </tbody>
@@ -31,8 +35,13 @@
          
          
           <tr>
-            <td class="allif-fix-table-col">Number</td>
-            <td>{{allifquery.number}}</td>
+            <td class="allif-fix-table-col">Reference</td>
+            <td>{{allifquery.reference}}</td>
+            </tr>
+
+              <tr>
+            <td class="allif-fix-table-col">Comments</td>
+            <td>{{allifquery.comments}}</td>
             </tr>
            
           </tbody>
@@ -48,10 +57,13 @@
        <table class="table table-layout">
         <tbody>
           <tr>
-            <td class="allif-fix-table-col">Reference</td>
-            <td>{{allifquery.reference}}</td>
+            <td class="allif-fix-table-col">Status</td>
+            <td>{{allifquery.status}}</td>
             </tr>
-           
+            <tr>
+            <td class="allif-fix-table-col">Priority</td>
+            <td>{{allifquery.priority}}</td>
+            </tr>
           </tbody>
           </table>
   </div>
