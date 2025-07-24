@@ -501,10 +501,7 @@ vehicle_type_options = (
         ('Tow Truck','Tow Truck'),
         ('Motorcycle','Motorcycle'),
 	)
-equipment_status_options = (
-		('Active', 'Active'),
-		('Inactive', 'Inactive'),
-	)
+
 oil_options = (
 		('Petrol', 'Petrol'),
 		('Diesel', 'Diesel'),

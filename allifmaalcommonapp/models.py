@@ -640,11 +640,11 @@ class CommonCustomersModel(CommonBaseModel):
     #..... start.... below fields is special for educational setup....
     #form=models.ForeignKey(CommonFormsModel,on_delete=models.SET_NULL,blank=True,null=True)
     #className=models.ForeignKey(CommonClassesModel,on_delete=models.SET_NULL,blank=True,null=True)
-    course_category=models.ForeignKey(CommonCategoriesModel,blank=True,null=True, on_delete=models.CASCADE, related_name='course_enrollments')
+    #course_category=models.ForeignKey(CommonCategoriesModel,blank=True,null=True, on_delete=models.CASCADE, related_name='course_enrollments')
     #operation_year=models.ForeignKey(CommonOperationYearsModel, on_delete=models.CASCADE, related_name='year_enrollments',null=True,blank=True)
-    term=models.ForeignKey(CommonOperationYearTermsModel, on_delete=models.CASCADE, related_name='term_enrollments',blank=True,null=True)
-    enrollment_date=models.DateField(auto_now_add=True,blank=True,null=True)
-    client_status=models.CharField(max_length=4, choices=student_status_choices, default='ENR',blank=True,null=True)
+    #term=models.ForeignKey(CommonOperationYearTermsModel, on_delete=models.CASCADE, related_name='term_enrollments',blank=True,null=True)
+    #enrollment_date=models.DateField(auto_now_add=True,blank=True,null=True)
+    #client_status=models.CharField(max_length=4, choices=student_status_choices, default='ENR',blank=True,null=True)
 
      #..... end.... below fields is special for educational setup....
     
@@ -658,16 +658,16 @@ class CommonCustomersModel(CommonBaseModel):
     triaged=models.BooleanField('Mark triaged',default=False,blank=True,null=True)
     seen=models.BooleanField('Mark seen',default=False,blank=True,null=True)
     gender=models.CharField(max_length=25, blank=True, null=True,choices=gender)
-    date_of_birth=models.DateField(blank=True,null=True)
+    #date_of_birth=models.DateField(blank=True,null=True)
     
     blood_group=models.CharField(max_length=3, choices=BLOOD_GROUPS, blank=True, null=True)
     # Storing allergies/conditions as free text initially, but consider ManyToManyField
     # to a catalogue of allergies/conditions for structured data later.
-    known_allergies=models.TextField(blank=True, null=True,help_text="List of known allergies (e.g., Penicillin, Peanuts)")
-    chronic_conditions = models.TextField(blank=True, null=True,help_text="List of chronic medical conditions (e.g., Diabetes, Hypertension)")
+    #known_allergies=models.TextField(blank=True, null=True,help_text="List of known allergies (e.g., Penicillin, Peanuts)")
+    #chronic_conditions = models.TextField(blank=True, null=True,help_text="List of chronic medical conditions (e.g., Diabetes, Hypertension)")
     
     ############### below hospitality specific fields.... ################3
-    passport_number = models.CharField(max_length=100, blank=True, null=True, unique=True, help_text="Unique ID for guest")
+    document_number = models.CharField(max_length=100, blank=True, null=True, unique=False, help_text="Unique ID for guest")
     nationality=models.CharField(max_length=100, blank=True, null=True)
     def __str__(self) -> str:
         return self.name
@@ -727,9 +727,9 @@ class CommonAssetsModel(CommonBaseModel):
     terms=models.ForeignKey(CommonPaymentTermsModel, related_name="asstpymnterms",on_delete=models.SET_NULL,null=True,blank=True)
     asset_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='cmassetrl')
     cost_account=models.ForeignKey(CommonChartofAccountsModel, blank=False, null=True,on_delete=models.SET_NULL,related_name='cstasschac')
-    equipment_name=models.CharField(max_length=50, blank=True, null=True)
+    #equipment_name=models.CharField(max_length=50, blank=True, null=True)
     #description=models.CharField(max_length=50,blank=False,null=True)
-    years_depreciated=models.CharField(max_length=30,blank=False,null=True)
+    years_depreciated=models.CharField(max_length=30,blank=True,null=True)
     #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     value=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
     sum_years_digits=models.IntegerField(blank=True,null=True,default=0)
@@ -758,8 +758,7 @@ class CommonAssetsModel(CommonBaseModel):
     maker_name=models.CharField(max_length=50, blank=True, null=True)
     equipment_model=models.CharField(max_length=50, blank=True, null=True)
     manufactured_year=models.CharField(max_length=30, blank=True, null=True)
-    equipment_status=models.CharField(max_length=50, blank=True, null=True,choices=equipment_status_options)
-   
+  
     starting_odometer=models.CharField(default=0,blank=True,null=True,max_length=250)
     primary_meter=models.CharField(max_length=30, blank=True, null=True,choices=primary_meter_options,default='Kilometers')
     
@@ -1437,14 +1436,6 @@ class CommonContactsModel(models.Model):
 
 
 
-
-
-################################the models below are all fully implemented....look for common areas whwere they can be used in future....#####################################################
-
-class CommonAssetCategoriesModel(CommonBaseModel):
-   
-    def __str__(self):
-        return str(self.description)
 
 class CommonProgramsModel(CommonBaseModel):# not used...may be deleted
     """

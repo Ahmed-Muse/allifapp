@@ -108,10 +108,20 @@ allif_single_access_general_links = [
     {'name': 'AddDeposits', 'url_name': 'allifmaalcommonapp:commonAddBankShareholderDeposit'},
     {'name': 'AddWithdrawals', 'url_name': 'allifmaalcommonapp:commonAddBankWithdrawal'},
     
- 
+    {'name': 'Suppliers', 'url_name': 'allifmaalcommonapp:commonSuppliers'},
+    {'name': 'AddSupplier', 'url_name': 'allifmaalcommonapp:commonAddSupplier'},
+    
+    {'name': 'Clients', 'url_name': 'allifmaalcommonapp:commonCustomers'},
+    {'name': 'AddClient', 'url_name': 'allifmaalcommonapp:commonAddCustomer'},
+    {'name': 'ReceiveClientPayment', 'url_name': 'allifmaalcommonapp:commonReceiveCustomerMoney'},
     
     {'name': 'Assets', 'url_name': 'allifmaalcommonapp:commonAssets'},
-    {'name': 'Expenses', 'url_name': 'allifmaalcommonapp:commonExpenses'},
+    {'name': 'AddAsset', 'url_name': 'allifmaalcommonapp:commonAddAsset'},
+    
+     {'name': 'Expenses', 'url_name': 'allifmaalcommonapp:commonExpenses'},
+    {'name': 'AddExpense', 'url_name': 'allifmaalcommonapp:commonAddExpense'},
+ 
+    
     {'name': 'Stocks', 'url_name': 'allifmaalcommonapp:commonStocks'},
     {'name': 'Transactions', 'url_name': 'allifmaalcommonapp:commonTransactions'},
     

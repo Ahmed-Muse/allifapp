@@ -149,6 +149,62 @@ allif_model_sort_configs = {
         'default_sort_field': '-date',
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
+    
+    
+    'commonsuppliersmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     'commoncustomersmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     
+      'commonassetsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+      
+      
+      'commonexpensesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
      
      
      
@@ -238,10 +294,13 @@ allif_search_config_mapping = {
     'CommonShareholderBankDepositsModel': ['name__icontains', 'description__icontains','amount__icontains'],
     
     'CommonBankWithdrawalsModel': ['name__icontains', 'description__icontains','amount__icontains'],
+    'CommonSuppliersModel': ['name__icontains', 'description__icontains','balance__icontains'],
+    
+     'CommonCustomersModel': ['name__icontains', 'description__icontains','balance__icontains'],
+    
+     'CommonAssetsModel': ['name__icontains', 'description__icontains','balance__icontains'],
     
     
-    
-   
     
     
     
@@ -322,6 +381,58 @@ allif_advanced_search_configs = {
     
     
     },
+      
+    'CommonSuppliersModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+    
+     'CommonCustomersModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+     'CommonAssetsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+     
+     
      
      
      
@@ -388,6 +499,9 @@ allif_main_models_registry = {
     'CommonShareholderBankDepositsModel':CommonShareholderBankDepositsModel,
     
     'CommonBankWithdrawalsModel':CommonBankWithdrawalsModel,
+    'CommonSuppliersModel':CommonSuppliersModel,
+    "CommonCustomersModel":CommonCustomersModel,
+    "CommonAssetsModel":CommonAssetsModel,
    
 }
 
@@ -456,6 +570,32 @@ allif_excel_upload_configs= {
             #'status': 'active', # Default status if 'Status' column is missing or empty
         #},
     },
+    
+     'CommonAssetsModel': {
+        'model': 'CommonAssetsModel', # String name for ALLIF_MODEL_REGISTRY lookup
+        'required_excel_headers': ['Name', 'Code', 'Description'], # Headers that MUST be in Excel
+        'field_mapping': { # Map Excel headers to model field names if different
+            'Currency Name': 'name',
+            'Code': 'code',
+           
+            'Description': 'description',
+            #'Start Date': 'starts', # Assuming 'starts' is a DateTimeField/DateField
+            #'End Date': 'ends',     # Assuming 'ends' is a DateTimeField/DateField
+         
+            #'Status': 'status', # Example status field
+        },
+        #'related_field_lookups': {
+            # No related fields for CommonCurrencyModel in this example
+        #},
+        #'default_values': {
+            #'is_active': True, # Default value if 'Is Active' column is missing or empty
+            #'status': 'active', # Default status if 'Status' column is missing or empty
+        #},
+    },
+    
+    
+    
+    
     'CommonStocksModel': {
         'model': 'CommonStocksModel',
         'required_excel_headers': ['Part Number', 'Description', 'Unit Cost', 'Unit Price', 'Quantity'],
@@ -903,6 +1043,7 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
 def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.ModelForm],title_text: str, 
     success_redirect_url_name: str, 
     template_path: str,
+    is_edit_mode: bool = True,
     pre_save_callback: Optional[callable] = None,
     extra_form_args: Optional[list] = None,
     extra_context: Optional[dict] = None # For passing additional context to template
@@ -1050,8 +1191,10 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
                         **(extra_context or {})
                     }
                     return render(request, template_path, context)
-
-            obj.save() # Save the updated object
+            if 1==1:# put further conditions on who can update the items... for instance, you can say only admins can change....
+                obj.save() # Save the updated object
+            else:
+                return HttpResponse("You are not allowed to make changes.")
             
             return redirect(
                 reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
@@ -2046,3 +2189,4 @@ def allif_redirect_based_on_sector(request: HttpRequest, allif_data: dict, redir
         return redirect('allifmaalcommonapp:CommonDecisionPoint')
 
 # ... (rest of your utils.py code) ...
+

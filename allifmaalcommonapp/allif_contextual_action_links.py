@@ -37,6 +37,26 @@ allif_sector_contextual_action_require_pk_links= {
     {'name': 'DeleteDeposit', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDeposit', 'requires_pk': True},
   
      {'name': 'DeleteWithdrawal', 'url_name': 'allifmaalcommonapp:commonWantToDeleteWithdrawal', 'requires_pk': True},
+    
+    {'name': 'DeleteSupplierConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSupplier', 'requires_pk': True},
+  
+    {'name': 'DeleteSupplier', 'url_name': 'allifmaalcommonapp:commonDeleteSupplier', 'requires_pk': True},
+    
+    {'name': 'DeleteCustomerConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCustomer', 'requires_pk': True},
+  
+    {'name': 'DeleteCustomer', 'url_name': 'allifmaalcommonapp:commonDeleteSupplier', 'requires_pk': True},
+    
+    {'name': 'TopUpCustomerAccount', 'url_name': 'allifmaalcommonapp:commonTopUpCustomerAccount', 'requires_pk': True},
+    {'name': 'CustomerLedgers', 'url_name': 'allifmaalcommonapp:commonCustomerLedgerEntries', 'requires_pk': True},
+   
+   {'name': 'DeleteAssetConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteAsset', 'requires_pk': True},
+    {'name': 'DeleteAsset', 'url_name': 'allifmaalcommonapp:commonDeleteAsset', 'requires_pk': True},
+   
+
+{'name': 'DeleteExpenseConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteExpense', 'requires_pk': True},
+    {'name': 'DeleteExpense', 'url_name': 'allifmaalcommonapp:commonDeleteExpense', 'requires_pk': True},
+   
+  
   
   
   

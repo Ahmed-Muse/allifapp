@@ -686,13 +686,14 @@ class CommonBankWithdrawalsAddForm(CommonBaseForm):
 class CommonAddSupplierForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
         model=CommonSuppliersModel
-        fields=CommonBaseForm.Meta.fields + ['phone','email','address','city','balance','turnover','contact','country',]
+        fields=CommonBaseForm.Meta.fields + ['phone','email','address','city','balance','turnover','contact','country','coverage']
         widgets = {
             **CommonBaseForm.Meta.widgets,
             'phone':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'email':forms.EmailInput(attrs={'class':'form-control','placeholder':''}),
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'city':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'coverage':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             
             'turnover':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'contact':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -705,12 +706,17 @@ class CommonAddSupplierForm(CommonBaseForm):
 class CommonCustomerAddForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
         model=CommonCustomersModel
-        fields=CommonBaseForm.Meta.fields + ['uid','seen','register','triaged','phone','email','address','city','sales','country',
-                  'turnover','gender','contact','nextkin','relationship','age','paymentType']
+        fields=CommonBaseForm.Meta.fields + ['uid','seen','register','triaged','phone','email',
+                                             'address','city','sales','country',
+                  'turnover','gender','contact','nextkin','relationship','age','paymentType',
+                  'document_number','nationality','blood_group']
+        
         widgets = {
             **CommonBaseForm.Meta.widgets,
            'uid':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'document_number':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'nationality':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'phone':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'email':forms.EmailInput(attrs={'class':'form-control','placeholder':''}),
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -725,10 +731,18 @@ class CommonCustomerAddForm(CommonBaseForm):
            
             'country':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-
+            'blood_group':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
             'gender':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'paymentType':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
+
+             # --- Add widgets for BooleanFields here ---
+            'register': forms.CheckboxInput(attrs={'class': 'form-check-input', 'id': 'register-checkbox'}), # Example class and ID
+            'triaged': forms.CheckboxInput(attrs={'class': 'form-check-input', 'id': 'triaged-checkbox'}),
+            'seen': forms.CheckboxInput(attrs={'class': 'form-check-input', 'id': 'seen-checkbox'}),
+        
+        
         }
 
 
@@ -762,29 +776,38 @@ class CommonAddUnitForm(CommonBaseForm):
         **CommonBaseForm.Meta.widgets,
         }
   
-
-
-
-class CommonAddAssetCategoryForm(CommonBaseForm):
-    class Meta(CommonBaseForm.Meta):
-        model=CommonAssetCategoriesModel
-        fields=CommonBaseForm.Meta.fields + []
-        widgets = {
-        **CommonBaseForm.Meta.widgets,
-        }
-        
-
-
+    
 class CommonAssetsAddForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
         model=CommonAssetsModel
-        fields=CommonBaseForm.Meta.fields + ['supplier','current_value','salvage_value','depreciated_by','depreciation','terms','asset_account','cost_account','quantity','value','lifespan',
-                  'acquired','category','employee_in_charge','expires','deposit','asset_status']
+        fields=CommonBaseForm.Meta.fields + ['supplier','current_value','salvage_value','depreciated_by',
+                                             'depreciation','terms','asset_account','cost_account',
+                                             'quantity','value','lifespan',
+                  'acquired','category','employee_in_charge','expires','deposit','asset_status',
+'next_service_due','last_service_date','capacity_kg','plate_number','energy_usage','oil_capacity','oil_type',
+'primary_meter','starting_odometer','manufactured_year','equipment_model','maker_name'
+                  
+                  ]
         widgets = {
         **CommonBaseForm.Meta.widgets,
             'supplier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
             'quantity':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'capacity_kg':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
+            'plate_number':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'energy_usage':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'oil_capacity':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+           
+            'starting_odometer':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'manufactured_year':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'equipment_model':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'maker_name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
+            'oil_type':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'primary_meter':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
+            
             'value':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'deposit':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'lifespan':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -793,7 +816,9 @@ class CommonAssetsAddForm(CommonBaseForm):
             'cost_account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'acquired' : DatePickerInput(attrs={'class':'form-control'}),
             'expires' : DatePickerInput(attrs={'class':'form-control'}),
-          
+            'next_service_due' : DatePickerInput(attrs={'class':'form-control'}),
+            'last_service_date' : DatePickerInput(attrs={'class':'form-control'}),
+           
             'category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'employee_in_charge':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'asset_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),

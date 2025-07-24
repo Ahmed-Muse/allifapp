@@ -1,4 +1,5 @@
 from django.urls import path
+from django.urls import path, re_path # Import re_path for optional parameter
 from . import views
 app_name='allifmaalcommonapp'
 urlpatterns = [
@@ -109,6 +110,7 @@ path('Currency/Money/Used/Search/Find/By/Searching/<str:allifusr>/<str:allifslug
 path('Advanced/Currency/Money/Type/s/Items/Search/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonCurrencyAdvanceSearch, name="commonCurrencyAdvanceSearch"),
 
 path('Convert/Currency/To/pdf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.common_currency_pdf, name="common_currency_pdf"),
+
 
 ################################## Payment Terms ##############
 path('Payment/Terms/Payment/Conditions/<str:allifusr>/<str:allifslug>/', views.commonPaymentTerms, name="commonPaymentTerms"),
@@ -284,12 +286,14 @@ path('Search/Results/Withdrawals/<str:allifusr>/<str:allifslug>/', views.commonW
 path('Suppliers/<str:allifusr>/<str:allifslug>/List/', views.commonSuppliers, name="commonSuppliers"),
 path('Add/Supplier/<str:allifusr>/<str:allifslug>/New/', views.commonAddSupplier, name="commonAddSupplier"),
 path('Edit/Supplier/<str:pk>/<str:allifusr>/<str:allifslug>/Update/', views.commonEditSupplier, name="commonEditSupplier"),
-path('View/Supplier/<str:allifslug>/<str:allifusr>/<str:allifslugrandom>/Details/', views.commonSupplierDetails, name="commonSupplierDetails"),
+path('View/Supplier/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonSupplierDetails, name="commonSupplierDetails"),
 path('Delete/Supplier/<str:pk>/<str:allifusr>/<str:allifslug>/Permntly/', views.commonDeleteSupplier, name="commonDeleteSupplier"),
 path('Search/Suppliers/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonSupplierSearch, name="commonSupplierSearch"),
 path('Want/To/Delete/Supplier/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteSupplier, name="commonWantToDeleteSupplier"),
 path('Search/Results/Suppliers/<str:allifusr>/<str:allifslug>/', views.commonSupplierAdvanceSearch, name="commonSupplierAdvanceSearch"),
-path('Clear/Suplier/Search/Results/Deposits/<str:allifusr>/<str:allifslug>/', views.commonClearSupplierSearch, name="commonClearSupplierSearch"),
+
+
+
 
 ############################3 CUSTOMERS SECTION ################################### 
 
@@ -305,15 +309,6 @@ path('Want/To/Delete/This/Customer/<str:pk>/<str:allifusr>/<str:allifslug>/', vi
 
 ################################ assets #######################
 
-#####################3 company departments #################
-path('Assets/Categories/<str:allifusr>/<str:allifslug>/', views.commonAssetCategories, name="commonAssetCategories"),
-path('Add/New/Asset/Category/<str:allifusr>/<str:allifslug>/', views.commonAddAssetCategory, name="commonAddAssetCategory"),
-path('Edit/Asset/Category/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Update/', views.commonEditAssetCategory, name="commonEditAssetCategory"),
-path('View/Asset/Category/<str:allifslug>/<str:allifusr>/<str:allifrandom>/Details/', views.commonAssetCategoryDetails, name="commonAssetCategoryDetails"),
-path('Delete/Asset/Category/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteAssetCategory, name="commonDeleteAssetCategory"),
-path('Search/Asset/Category/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonAssetCategorySearch, name="commonAssetCategorySearch"),
-path('Want/To/Delete/This/Asset/Category/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteAssetCategory, name="commonWantToDeleteAssetCategory"),
-
 ##############################3############# Main Assets #############################################
 path('Assets/<str:allifusr>/<str:allifslug>/', views.commonAssets, name="commonAssets"),
 path('Add/Asset/<str:allifusr>/<str:allifslug>/New/', views.commonAddAsset, name="commonAddAsset"),
@@ -323,6 +318,8 @@ path('Delete/Asset/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.comm
 path('Search/Asset/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonAssetSearch, name="commonAssetSearch"),
 path('Post/Asset/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonPostAsset, name="commonPostAsset"),
 path('Want/To/Delete/This/Asset/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteAsset, name="commonWantToDeleteAsset"),
+path('Asset/s/advance/d/search/detail/s/<str:allifusr>/<str:allifslug>/find/out/', views.commonAssetAdvanceSearch, name="commonAssetAdvanceSearch"),
+
 
 ################################### ASSET DEPRECATION ############33
 path('Depreciate/Asset/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonDepreciateAsset, name="commonDepreciateAsset"),
@@ -646,8 +643,6 @@ path('Delete/The/Service/s/Program/Services/S/Permntly/<str:pk>/<str:allifusr>/<
 path('Want/Tp/Delete/This/Services/s/available/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteService, name="commonWantToDeleteService"),
 path('Service/s/Information/s/available/View/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonServiceDetails, name="commonServiceDetails"),
 path('Search/For/Services/s/available/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonServiceSearch, name="commonServiceSearch"),
-
-
 
 
 

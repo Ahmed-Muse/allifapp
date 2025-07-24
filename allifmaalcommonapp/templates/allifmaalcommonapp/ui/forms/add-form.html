@@ -59,6 +59,7 @@
     <!--START.... start of single pages content and its links section-->
     <div class="allif-single-page-tabs-contents-main-wrapper" >
     {% include 'allifmaalcommonapp/includes/links/single-page-links.html' %}
+
     <!--start of singple page contents-->
     <div class="tab-content allif-single-page-tab-content-wrapper" id="allif-single-page-tab-content-wrapper-id">
        <!--START.. Start of show/hide table section one-->
@@ -76,6 +77,7 @@
           {%endblock%}
         {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
         {% block core-tab-col-two %}
+        
         <tr>
           <td class="allif-fix-table-col-forms">Description</td>
           <td>{{form.description}}</td>
@@ -90,6 +92,26 @@
  <!--START.. Start of show/hide table section one-->
     <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-standard-details" role="tabpanel" aria-labelledby="allif-single-page-tab-standard-details-id">
       <div class="allif-forms-table-main-wrapper">
+
+        {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-one-section.html' %}
+
+        {% block standard-tab-col-one %}
+          <tr>
+            <td class="allif-fix-table-col-forms">Name</td>
+            <td>{{form.name}}</td>
+          </tr>
+        
+          {%endblock%}
+        {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-section.html' %}
+        {% block standard-tab-col-two %}
+        <tr>
+          <td class="allif-fix-table-col-forms">Description</td>
+          <td>{{form.description}}</td>
+        </tr>
+       
+        {%endblock%}
+        {% include 'allifmaalcommonapp/includes/forms/two-column-forms-table-column-two-last-section.html' %}
+
      {% include 'allifmaalcommonapp/includes/forms/standard-form-fields.html' %}
      </div>
     </div>
@@ -123,6 +145,8 @@
     {% include 'allifmaalcommonapp/includes/forms/static-form-fields.html' %}
      </div>
     </div>
+
+
 
     {% if allifquery %}
 

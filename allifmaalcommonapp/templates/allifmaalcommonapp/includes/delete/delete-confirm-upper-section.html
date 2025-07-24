@@ -9,7 +9,12 @@
 <div class="col-md-12"><!--start....header column-->
 
 <div class="container-fluid amel-content-header">
+  
+ <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+  {% block add-form-header-block %}
   <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+
+  {% endblock %}
 
 </div>
 
