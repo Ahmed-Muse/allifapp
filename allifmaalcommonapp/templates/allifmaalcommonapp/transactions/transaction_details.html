@@ -1,370 +1,76 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
+  {% extends 'allifmaalcommonapp/ui/details/item-details.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block add-form-header-block %}
+  <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
+  <a href="{% allif_get_single_nav_link_url 'AddTransaction' user_var glblslug %}">New Transaction</a>
+  {%endblock%}
 
-<!-- START... below is for loading contextual dynamic tags and links... used for only contextual links -->
-{% load allif_contextual_action_tags %} {# this helps to put the links where you want and it loads them #}
-{% allif_get_contextual_actions_map allifquery user_var glblslug as allif_contextual_action_links %}
-<!--'allif_contextual_action_links' now holds the dictionary returned by the tag-->
-<!-- END.. -->
-<div class="allifmaal-main-container">
-
-
-<!--start....main headere-->
-<div class="card-header">
-
-<div class="row mt-12" ><!--start....header row-->
-
-<div class="col-md-12"><!--start....header column-->
-
-<div class="container-fluid amel-content-header">
-<div class="dropdown allifmaal-content-dropdown">
-  <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  Actions
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' allifquery.id user_var glblslug %}">Refresh</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionItems' allifquery.id user_var glblslug %}">Add Item</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpaceBookings' allifquery.id user_var glblslug %}">Space Allocation</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddSpaceBookingItems' allifquery.id user_var glblslug %}">Allocate Space</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonProgress' allifquery.id user_var glblslug %}">Progress Records</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactionToPdf' allifquery.id user_var glblslug %}">Download</a></li>
-      <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteTransaction' allifquery.id user_var glblslug %}">Delete Item</a></li>
-       
-   </div>
-  </ul>
-</div>
-<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-<a href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Transactions</a>
-
-{% if 'commonAddTransactionDetails' in allif_contextual_action_links %}
-    <a href="{{ allif_contextual_action_links.commonAddTransactionDetails.url }}">Transaction Details</a>
-  {% else %}
-    <a href="">Transaction Details</a>
-{% endif %}
-
-
-
-{% if 'AddTriageData' in allif_contextual_action_links %}
-
-<a href="{% url 'allifmaalshaafiapp:triageData' user_var glblslug %}">Triage Records</a>
-  <a class="action-button" href="{{ allif_contextual_action_links.AddTriageData.url }}">Add Triage</a>
-  <a class="action-button" href="{{ allif_contextual_action_links.addDoctorAssessment.url }}"> Add Doctor Assessment</a>
-{% else %}
-{% endif %}
-
-
-{% if 'addExamDetails' in allif_contextual_action_links %} {# Example for a new action name #}
-
-  <a class="action-button" href="{{ allif_contextual_action_links.addExamDetails.url }}">New Examination</a>
- 
-{% else %}
-{% endif %}
-
-</div>
-
-    </div><!--end....header column-->
-  
-  </div><!--end....header row-->
-
-</div><!--end....main headere-->
-
-  <div class="allifmaincontainer">
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">{{allifquery}} Details </div>
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
+  {% block details-table-col-one %}
+    <tr>
+      <td class="allif-fix-table-col">Name</td>
+      <td>{{allifquery.name}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Customer</td>
+      <td>{{allifquery.customer}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Employee in Charge</td>
+      <td>{{allifquery.employee_in_charge}}</td>
+    </tr>
     
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-    
-        <tr>
-          <td class="allif-fix-table-col">Company</td>
-          <td>{{allifquery.company}}</td>
-          </tr>
-      <tr>
-        <td class="allif-fix-table-col">Division</td>
-        <td>{{allifquery.division}}</td>
-        </tr>
-      <tr>
-        <td class="allif-fix-table-col">Branch</td>
-        <td>{{allifquery.branch}}</td>
-        </tr>
-        <tr>
-          <td class="allif-fix-table-col">Department</td>
-          <td>{{allifquery.department}}</td>
-          </tr>
-            
-          <tr>
-            <td class="allif-fix-table-col">Number</td>
-            <td>{{allifquery.trans_number}}</td>
-            </tr>
-     
-          <tr>
-            <td class="allif-fix-table-col">Client</td>
-            <td>{{allifquery.customer}}</td>
-            </tr>
-           
-           
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-           <tr>
-              <td class="allif-fix-table-col">Name</td>
-              <td>{{allifquery.name}}</td>
-              </tr>
-            <tr>
-          <td class="allif-fix-table-col">Code</td>
-          <td>{{allifquery.code}}</td>
-          </tr>
-                
-         <tr>
-                <td class="allif-fix-table-col">Description</td>
-                <td>{{allifquery.description}}</td>
-                </tr>
-                   
-                    <tr>
-                      <td class="allif-fix-table-col">Start Date</td>
-                      <td>{{allifquery.start_date}}</td>
-                      </tr>
-                      <tr>
-                        <td class="allif-fix-table-col">End Date</td>
-                        <td>{{allifquery.end_date}}</td>
-                        </tr>
-                     
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-       
-            <tr>
-                <td class="allif-fix-table-col">Operation Year</td>
-                <td>{{allifquery.operation_year}}</td>
-                </tr>
-          <tr>
-            <td class="allif-fix-table-col">Operation Term</td>
-            <td>{{allifquery.operation_term}}</td>
-            </tr>
-                        
-                  
-          <tr>
-            <td class="allif-fix-table-col">Staff In Charge</td>
-            <td>{{allifquery.employee_in_charge}}</td>
-            </tr>
-          <tr>
-            <td class="allif-fix-table-col">Created By</td>
-            <td>{{allifquery.owner}}</td>
-            </tr>
+  {%endblock%}
 
-        
-            <tr>
-              <td class="allif-fix-table-col">Comments</td>
-              <td>{{allifquery.comments}}</td>
-          
-          </tr> 
-          <tr>
-              <td class="allif-fix-table-col">Mode of Payment</td>
-              <td>{{allifquery.payment_mode}}</td>
-          
-          </tr> 
-      
-          </tbody>
-          </table>
-          
-  </div>
-    </div>
-
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
-<hr>
-
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit {{allifquery}} Transaction Details</div>
-  <form method='POST' action=''>{% csrf_token %}
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-
-      <tr>
-        <td class="allif-fix-table-col">Division</td>
-        <td>{{form.division}}</td>
-    
-        </tr>
-        
-        <tr>
-          <td class="allif-fix-table-col">Branch</td>
-          <td>{{form.branch}}</td>
-      
-          </tr>
-          <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td>{{form.department}}</td>
-        
-            </tr>
-             <tr>
-              <td class="allif-fix-table-col">Customer</td>
-              <td>{{form.customer}}</td>
-          
-              </tr>
-         
-          <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
-        
-            </tr>
-     
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-      
-             
-             <tr>
-            <td class="allif-fix-table-col">Name</td>
-            <td>{{form.name}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">Code</td>
-            <td>{{form.code}}</td>
-        
-            </tr>
-          <tr>
-            <td class="allif-fix-table-col">Comments</td>
-            <td>{{form.comments}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">Start Date</td>
-            <td>{{form.start_date}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">End Date</td>
-            <td>{{form.end_date}}</td>
-        
-            </tr>
-         
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-          
-              <tr>
-              <td class="allif-fix-table-col">Staff in charge</td>
-              <td>{{form.employee_in_charge}}</td>
-          
-              </tr> 
-        <tr>
-            <td class="allif-fix-table-col">Mode of Payment</td>
-            <td>{{form.payment_mode}}</td>
-        
-            </tr>
-           
-     
-      <tr>
-          <td class="allif-fix-table-col">Operation Year</td>
-          <td>{{form.operation_year}}</td>
-      
-          </tr>
-           <tr>
-          <td class="allif-fix-table-col">Operation Term</td>
-          <td>{{form.operation_term}}</td>
-      
-          </tr>
-          
-             
-        <tr>
-          <td class="allif-fix-table-col">Action</td>
-          <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-      
-          </tr>
-          </tbody>
-          </table>
-
-          
-  </div>
-  
-    </div>
-  
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-</form>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
-<hr>
-<br>
-</div>
-</div>
-  {% block scripts %}
-
+  {% block details-table-col-two %}
+  <tr>
+    <td class="allif-fix-table-col">Description</td>
+    <td>{{allifquery.description}}</td>
+  </tr>
+   <tr>
+      <td class="allif-fix-table-col">Amount</td>
+      <td>{{allifquery.amount|floatformat:2|intcomma}}</td>
+    </tr>
+  <tr>
+    <td class="allif-fix-table-col">Balance</td>
+    <td>{{allifquery.balance|floatformat:2|intcomma}}</td>
+  </tr>
   {% endblock %}
-   {% endblock %}
   
+  {% block core-details-tab-col-one %}
+  <tr>
+    <td class="allif-fix-table-col">Mode of Payment</td>
+    <td>{{allifquery.payment_mode}}</td>
+  </tr>
+  {%endblock%}
+
+  {% block core-details-tab-col-two %}
+  <tr>
+    <td class="allif-fix-table-col">Date</td>
+    <td>{{allifquery.date|date:'d/m/Y'}}</td>
+  </tr>
+  {% endblock %}
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col">{{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {%endblock%}
+
+  {% block general-details-tab-col-two %}
+  <tr>
+    <td class="allif-fix-table-col">Description</td>
+    <td>{{allifquery.description}}</td>
+  </tr>
+  {% endblock %}
+  
+  {% block allif_sensitive_section_col_two %}
+  <tr>
+    <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+    <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteTransactionConfirm.url }}">Delete {{allifquery}}</a></td>
+  </tr>
+  {%endblock%}
+
+{% block item_details_related_items_full_half_tables %}
+{%endblock%}

@@ -15,8 +15,6 @@
     <a class="amel-table-list-identifier">Add Items {{allifquery}}:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
   
-  <a href="{% url 'allifmaalcommonapp:commonPOToPdf' allifquery.id user_var glblslug %}">Download</a>
-
   <a href="{% url 'allifmaalcommonapp:commonAddPODetails' allifquery.id user_var glblslug %}">Back to PO</a>
     <a href="{% url 'allifmaalcommonapp:commonAddPOItems' allifquery.id user_var glblslug %}">Refresh</a>
     <a href="{% url 'allifmaalcommonapp:commonPOMiscCost' allifquery.id user_var glblslug %}">Misc Costs</a>

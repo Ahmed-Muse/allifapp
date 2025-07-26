@@ -1,404 +1,101 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
- 
-<!--start....main headere-->
-<div class="card-header">
-
-<div class="row mt-12" ><!--start....header row-->
-
-<div class="col-md-12"><!--start....header column-->
-
-<div class="container-fluid amel-content-header">
-
-  <a class="amel-table-list-identifier">Adding Spaces:</a>
-
-  <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-  <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a>
-  <a href="{% url 'allifmaalcommonapp:commonAddSpace' user_var glblslug %}">Add New Space</a>
-  
-  <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
-  <a href="{% url 'allifmaalcommonapp:commonAddSpaceUnit' user_var glblslug %}">Add New Unit</a>
-
-
-</div>
-
-    </div><!--end....header column-->
-  
-  </div><!--end....header row-->
-
-</div><!--end....main headere-->
-
-
-  <div class="allifmaincontainer">
-{% if allifquery_update %}
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Edit {{allifquery}} Space</div>
-  <form method='POST' action=''>{% csrf_token %}
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-
-      <tr>
-        <td class="allif-fix-table-col">Division</td>
-        <td>{{form.division}}</td>
-    
-        </tr>
-        
-        <tr>
-          <td class="allif-fix-table-col">Branch</td>
-          <td>{{form.branch}}</td>
-      
-          </tr>
-
-           <tr>
-          <td class="allif-fix-table-col">Department</td>
-          <td>{{form.department}}</td>
-      
-          </tr>
-             <tr>
-          <td class="allif-fix-table-col">Space Number</td>
-          <td>{{form.number}}</td>
-      
-          </tr>
-        <tr>
-          <td class="allif-fix-table-col">Name</td>
-          <td>{{form.name}}</td>
-      
-          </tr>
-      <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
-        
-            </tr>
-       
-              <tr>
-            <td class="allif-fix-table-col">#Rooms</td>
-            <td>{{form.number_of_bedrooms}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">#Washrooms</td>
-            <td>{{form.number_of_bathrooms}}</td>
-        
-            </tr>
-          <tr>
-            <td class="allif-fix-table-col">Capacity</td>
-            <td>{{form.capacity}}</td>
-        
-            </tr>
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-           <tr>
-            <td class="allif-fix-table-col">Base Price/Night</td>
-            <td>{{form.base_price_per_night}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Max Occupancy</td>
-            <td>{{form.max_occupancy}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Monthly Rent</td>
-            <td>{{form.monthly_rent}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">#Units</td>
-            <td>{{form.number_of_units}}</td>
-        
-            </tr>
-            
-
-        <tr>
-            <td class="allif-fix-table-col">Amenities</td>
-            <td>{{form.amenities}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">Status</td>
-            <td>{{form.current_status}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">#Floor</td>
-            <td>{{form.space_floor}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Space Type</td>
-            <td>{{form.space_type}}</td>
-        
-            </tr>
-            
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-         <tr>
-            <td class="allif-fix-table-col">Asset</td>
-            <td>{{form.asset}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">Staff in Charge</td>
-            <td>{{form.emplyee_in_charge}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Phone</td>
-            <td>{{form.contact_phone}}</td>
-        
-            </tr>
-           
-              <tr>
-            <td class="allif-fix-table-col">City</td>
-            <td>{{form.city}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Address</td>
-            <td>{{form.address}}</td>
-        
-            </tr>
-           
-            <tr>
-              <td class="allif-fix-table-col">Action</td>
-              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-          
-              </tr>
-          </tbody>
-          </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-
-<div class="error-body">
-  <p>{{error_message}}</p>
-  </div>
-</form>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-{% else %}
-
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add New Space</div>
-  <form method='POST' action=''>{% csrf_token %}
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-         <tr>
-          <td class="allif-fix-table-col">Space Number</td>
-          <td>{{form.number}}</td>
-      
-          </tr>
-        <tr>
-          <td class="allif-fix-table-col">Name</td>
-          <td>{{form.name}}</td>
-      
-          </tr>
-      <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">#Units</td>
-            <td>{{form.number_of_units}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">#Rooms</td>
-            <td>{{form.number_of_bedrooms}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">#Washrooms</td>
-            <td>{{form.number_of_bathrooms}}</td>
-        
-            </tr>
-          <tr>
-            <td class="allif-fix-table-col">Capacity</td>
-            <td>{{form.capacity}}</td>
-        
-            </tr>
-               
-           
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-           <tr>
-            <td class="allif-fix-table-col">Base Price/Night</td>
-            <td>{{form.base_price_per_night}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Max Occupancy</td>
-            <td>{{form.max_occupancy}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Monthly Rent</td>
-            <td>{{form.monthly_rent}}</td>
-        
-            </tr>
-            
-           
-
-        <tr>
-            <td class="allif-fix-table-col">Amenities</td>
-            <td>{{form.amenities}}</td>
-        
-            </tr>
-         <tr>
-            <td class="allif-fix-table-col">Status</td>
-            <td>{{form.current_status}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">#Floor</td>
-            <td>{{form.space_floor}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Space Type</td>
-            <td>{{form.space_type}}</td>
-        
-            </tr>
-            
-           
-           
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-         <tr>
-            <td class="allif-fix-table-col">Asset</td>
-            <td>{{form.asset}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">Staff in Charge</td>
-            <td>{{form.emplyee_in_charge}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Phone</td>
-            <td>{{form.contact_phone}}</td>
-        
-            </tr>
-           
-              <tr>
-            <td class="allif-fix-table-col">City</td>
-            <td>{{form.city}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Address</td>
-            <td>{{form.address}}</td>
-        
-            </tr>
-          
-          
-          
-        <tr>
-          <td class="allif-fix-table-col">Action</td>
-          <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-      
-          </tr>
-      </tbody>
-      </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-
-<div class="error-body">
-  <p>{{error_message}}</p>
-  </div>
-</form>
-<!--end of table-->
-
-
-
-</div><!--end of main container of the page....-->
-
-{% endif %}
-
-
-</div>
-
-</div>
-  {% block scripts %}
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+ {% block add-form-header-block %}
+  <a href="{% allif_get_single_nav_link_url 'Spaces' user_var glblslug %}">Spaces</a>
+  <a href="{% allif_get_single_nav_link_url 'AddSpace' user_var glblslug %}">New Space</a>
 
   {% endblock %}
-   {% endblock %}
+   {% block core-tab-col-one %}
+    <tr>
+      <td class="allif-fix-table-col-forms">Space Name</td>
+      <td>{{form.name}}</td>
+    </tr>
+   <tr>
+          <td class="allif-fix-table-col-forms">Description</td>
+          <td>{{form.description}}</td>
+        </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">No. of Units</td>
+      <td>{{form.number_of_units}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">No. of Bedrooms</td>
+      <td>{{form.number_of_bedrooms}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">No. of Bathrooms</td>
+      <td>{{form.number_of_bathrooms}}</td>
+    </tr>
    
+    {%endblock%}
+
+    {% block core-tab-col-two %}
+    <tr>
+      <td class="allif-fix-table-col-forms">Amenities</td>
+      <td>{{form.amenities}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Base Price/Night</td>
+      <td>{{form.base_price_per_night}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">Capacity</td>
+      <td>{{form.capacity}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">Max. Occupancy</td>
+      <td>{{form.max_occupancy}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">Monthly Rent</td>
+      <td>{{form.monthly_rent}}</td>
+    </tr>
+    
+   
+    {%endblock%}
+
+     {% block standard-tab-col-one %}
+     
+    <tr>
+      <td class="allif-fix-table-col-forms">Current Status</td>
+      <td>{{form.current_status}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">Space Floor</td>
+      <td>{{form.space_floor}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">Space Type</td>
+      <td>{{form.space_type}}</td>
+    </tr>
+    
+    {%endblock%}
+       
+   {% block standard-tab-col-two %}
+   <tr>
+      <td class="allif-fix-table-col-forms">Asset</td>
+      <td>{{form.asset}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">Staff in Charge</td>
+      <td>{{form.emplyee_in_charge}}</td>
+    </tr>
+   
+  
+    {%endblock%}
+
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Spaces' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteSpaceConfirm.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    {% endblock %}
+
+

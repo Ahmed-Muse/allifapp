@@ -1,117 +1,18 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
+{% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+{% load allif_navigation_tags %}
+{% block allif_header_forms_dropdown%}
 {% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
-<!--start....main headere-->
-<div class="card-header">
 
-  <div class="row mt-12" ><!--start....header row-->
+{% block allif-header-links %}
+<a href="{% allif_get_single_nav_link_url 'Spaces' user_var glblslug %}">Spaces</a>
+<a href="{% allif_get_single_nav_link_url 'AddSpace' user_var glblslug %}">New Space</a>
+<a href="{% allif_get_single_nav_link_url 'SpaceUnits' user_var glblslug %}">Space Units</a>
+<a href="{% allif_get_single_nav_link_url 'AddSpaceUnit' user_var glblslug %}">New Space Unit</a>
+{% endblock %}
+{% block list-table-content-seciton-links %}
+<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceDetails' item.id user_var glblslug %}"> {{item.name}}</a>
+{% endblock %}
+{% block list-table-content-seciton-dropdown-links %}
+<a href="{% url 'allifmaalcommonapp:commonEditSpace' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+{% endblock %}
   
-  <div class="col-md-12"><!--start....header column-->
-  
-  <div class="container-fluid amel-content-header">
-   <a class="amel-table-list-identifier">Spaces:</a>
-
-  <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-  <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a>
-  <a href="{% url 'allifmaalcommonapp:commonAddSpace' user_var glblslug %}">Add New Space</a>
-  
-  <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
-  <a href="{% url 'allifmaalcommonapp:commonAddSpaceUnit' user_var glblslug %}">Add New Unit</a>
-
-  </div>
-  
-      </div><!--end....header column-->
-    
-    </div><!--end....header row-->
-  
-  </div><!--end....main headere-->
-
-<div class="allifmaincontainer">  
-<div class="row mt-12"> <!--start....table row-->
-
-  <div class="col-md-12"> <!--start....table column-->
-
-    <div class="allif-scroll-table">
-      <div class="table-responsive allif-full-table">
-      <table class="table table-layout">
-        <thead>
-          <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Space Unit</td>
-         <td>Ref. Number</td>
-          <td>Asset</td>
-          <td>Date</td>
-       
-          <td>Navigate</td>
-          
-          <td> . . . </td>
-          <td></td>
-          </tr>
-          </thead>
-          <tbody class="allif-table-body">
-           
-          
-          {% for item in allifqueryset %} 
-          <tr data-id="{{item.id}}">
-          <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
-          <td>
-            {{item.number}}
-           </td>
-            <td>
-            {{item.asset}}
-           </td>
-          
-           <td>
-            {{item.date|date:'d/m/Y'}}
-           </td>
-          
-           <td>
-            <div class="dropdown allifmaal-content-dropdown">
-              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
-              <div class="dropdown-content">
-                <a href="{% url 'allifmaalcommonapp:commonEditSpace' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
-                
-              </div>
-            </div>
-            <div class="dropdown allif-confirm-action">
-              
-              <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-              <a href="{% url 'allifmaalcommonapp:commonDeleteSpace' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-            </div>
-  
-           
-          </td>
-         <td> . . . </td>
-         <td></td>
-        
-    
-      </tr>
-      {% endfor %}
-     
-        </tbody>
-      </table>
-      </div>
-     </div>
-
-     
-      </div><!--end....table column-->
-  </div>
-
-</div><!--end....table row-->
-
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
-  {% block scripts %}
-  <!--when you put the js code here, it gives a repetitive results....-->
-  {% endblock %}
-  
-   {% endblock %}
-   

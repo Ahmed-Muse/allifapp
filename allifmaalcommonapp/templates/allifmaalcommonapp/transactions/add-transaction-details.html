@@ -17,15 +17,13 @@
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <div class="content-dropdown-menu">
-       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddPODetails' allifquery.id user_var glblslug %}">Edit Item</a></li>
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddPOItems' allifquery.id user_var glblslug %}">Add Item</a></li>
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPOMiscCost' allifquery.id user_var glblslug %}">Misc Costs</a></li>
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCalculatePOMiscCosts' allifquery.id user_var glblslug %}">Calculate PO Misc Costs</a></li>
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPostPO' allifquery.id user_var glblslug %}">Post PO</a></li>
-         
-        <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeletePO' allifquery.id user_var glblslug %}">Delete Item</a></li>
-    
-        
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' allifquery.id user_var glblslug %}">Refresh</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddTransactionItems' allifquery.id user_var glblslug %}">Add Item</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpaceBookings' allifquery.id user_var glblslug %}">Space Allocation</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonAddSpaceBookingItems' allifquery.id user_var glblslug %}">Allocate Space</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonProgress' allifquery.id user_var glblslug %}">Progress Records</a></li>
+      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactionToPdf' allifquery.id user_var glblslug %}">Download</a></li>
+     
     </div>
     </ul>
   </div>
@@ -33,10 +31,6 @@
 
   <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
   <a href="{{ allif_contextual_action_links.commonTransactionDetails.url }}">Transaction Details</a>
-  <a href="{{ allif_contextual_action_links.potopdf.url }}">Download</a>
-  <a href="{{ allif_contextual_action_links.pomiscosts.url }}">Misc. Costs</a>
- 
-  
  
 {% if 'commonAddTransactionDetails' in allif_contextual_action_links %}
     <a href="{{ allif_contextual_action_links.commonAddTransactionDetails.url }}">Refresh</a>
@@ -62,12 +56,12 @@
 
    {% block core-tab-col-one %}
     <tr>
-      <td class="allif-fix-table-col-forms">Purchase Name</td>
+      <td class="allif-fix-table-col-forms">Transaction Name</td>
       <td>{{form.name}}</td>
     </tr>
     <tr>
-      <td class="allif-fix-table-col-forms">Supplier</td>
-      <td>{{form.supplier}}</td>
+      <td class="allif-fix-table-col-forms">Customer</td>
+      <td>{{form.customer}}</td>
     </tr>
     
         
@@ -80,68 +74,32 @@
         </tr>
 
      <tr>
-      <td class="allif-fix-table-col-forms">Delivery</td>
-      <td>{{form.delivery}}</td>
+      <td class="allif-fix-table-col-forms">Staff in Charge</td>
+      <td>{{form.employee_in_charge}}</td>
     </tr>
      
     {%endblock%}
 
      {% block standard-tab-col-one %}
-    
+      <tr>
+      <td class="allif-fix-table-col-forms">Payment Mode</td>
+      <td>{{form.payment_mode}}</td>
+    </tr>
      <tr>
       <td class="allif-fix-table-col-forms">Quantity</td>
       <td>{{form.quantity}}</td>
-    </tr>
-
-     <tr>
-      <td class="allif-fix-table-col-forms">Amount</td>
-      <td>{{form.amount}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Misc. Costs</td>
-      <td>{{form.misccosts}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Tax Amount</td>
-      <td>{{form.taxamount}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Grand Total</td>
-      <td>{{form.grandtotal}}</td>
-    </tr>
-    
-       <tr>
-      <td class="allif-fix-table-col-forms">Uplift</td>
-      <td>{{form.uplift}}</td>
     </tr>
     
     {%endblock%}
        
    {% block standard-tab-col-two %}
          <tr>
-      <td class="allif-fix-table-col-forms">Aprroval Status</td>
-      <td>{{form.approval_status}}</td>
+      <td class="allif-fix-table-col-forms">Amount</td>
+      <td>{{form.amount}}</td>
     </tr>
      <tr>
       <td class="allif-fix-table-col-forms">Balance</td>
       <td>{{form.balance}}</td>
-    </tr>
-  
-     <tr>
-      <td class="allif-fix-table-col-forms">Sales Tax</td>
-      <td>{{form.taxrate}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Posting Status</td>
-      <td>{{form.posting_po_status}}</td>
-    </tr>
-      <tr>
-      <td class="allif-fix-table-col-forms">Payment Mode</td>
-      <td>{{form.payment_terms}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Currency</td>
-      <td>{{form.currency}}</td>
     </tr>
        
        
@@ -151,13 +109,13 @@
   {% block allif_sensitive_section_col_one %}
     <tr>
       <td class="allif-fix-table-col"> {{allifquery}}</td>
-      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'PurchaseOrders' user_var glblslug %}">Go Back</a></td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Go Back</a></td>
     </tr>
   {% endblock %}
   {% block allif_sensitive_section_col_two %}
     <tr>
       <td class="allif-fix-table-col">Delet {{allifquery}}</td>
-      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeletePurchaseOrderConfirm.url }}">Delete {{allifquery}}</a></td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteTransactionConfirm.url }}">Delete {{allifquery}}</a></td>
     </tr>
     
     {% endblock %}

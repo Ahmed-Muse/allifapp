@@ -307,7 +307,7 @@ class CommonBaseModel(models.Model):
     number=models.CharField(max_length=50,blank=True,null=True,default='#No', unique=False, help_text="Unique code for the program, e.g., BSCIT")
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     description= models.TextField(null=True, blank=True,default='Description')
-    quantity=models.DecimalField(max_digits=10, decimal_places=2,blank=True,null=True)
+    quantity=models.DecimalField(max_digits=10, decimal_places=2,blank=True,null=True,default=0)
     comments=models.TextField(blank=True,null=True, default='Comments')
     starts=models.DateTimeField(blank=True,null=True,default=timezone.now)
     ends=models.DateTimeField(blank=True,null=True,default=timezone.now)
@@ -802,11 +802,11 @@ class CommonSpacesModel(CommonBaseModel):
     amenities=models.CharField(max_length=250,blank=True,null=True)
     number_of_bedrooms=models.CharField(max_length=100,blank=True,null=True)
     number_of_bathrooms=models.CharField(max_length=100,blank=True,null=True)
-    address=models.TextField(blank=True,null=True)
-    city=models.CharField(max_length=100,blank=True,null=True)
+    #address=models.TextField(blank=True,null=True)
+    #city=models.CharField(max_length=100,blank=True,null=True)
     capacity=models.CharField(max_length=100,blank=True,null=True)
     emplyee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='managed_warehouses')
-    contact_phone = models.CharField(max_length=50, blank=True, null=True)
+    #contact_phone = models.CharField(max_length=50, blank=True, null=True)
     
     def __str__(self):
         return str(self.name)
@@ -963,12 +963,10 @@ class CommonTransactionsModel(CommonBaseModel):# very important model
     
     employee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="encounters_as_primary_doctor",help_text="The main employee attending this encounter.")
     customer=models.ForeignKey(CommonCustomersModel, on_delete=models.SET_NULL,blank=True,null=True, related_name="custmtransrlnme",help_text="The customer associated with this encounter.")
-    
-   
     payment_mode=models.ForeignKey(CommonPaymentTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='terms_payment_mode_trans')
-    amount=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    amount=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     def __str__(self):
-        return str(self.customer)
+        return str(self.customer if self.customer else self.number)
 
 class CommonTransactionItemsModel(CommonBaseModel):
     """
@@ -1024,7 +1022,7 @@ class CommonSpaceBookingItemsModel(CommonBaseModel):
         return str(self.space_unit)
     @property
     def space_allocation_amount(self):
-        booking_amount=self.quantity * self.space_unit.unitprice
+        booking_amount=Decimal(self.quantity or 0) * Decimal(self.space_unit.unitprice or 0)
         return booking_amount
 
 

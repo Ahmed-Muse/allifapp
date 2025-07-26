@@ -56,9 +56,34 @@ allif_sector_contextual_action_require_pk_links= {
 {'name': 'DeleteExpenseConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteExpense', 'requires_pk': True},
     {'name': 'DeleteExpense', 'url_name': 'allifmaalcommonapp:commonDeleteExpense', 'requires_pk': True},
    
+{'name': 'DeleteTransactionConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTransaction', 'requires_pk': True},
+    {'name': 'DeleteTransaction', 'url_name': 'allifmaalcommonapp:commonDeleteTransaction', 'requires_pk': True},
+   
+  {'name': 'commonAddTransactionDetails', 'url_name': 'allifmaalcommonapp:commonAddTransactionDetails', 'requires_pk': True},
+   
+   {'name': 'commonTransactionDetails', 'url_name': 'allifmaalcommonapp:commonTransactionDetails', 'requires_pk': True},
+   
+  {'name': 'DeleteSpaceConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSpace', 'requires_pk': True},
+   
+   {'name': 'DeleteSpace', 'url_name': 'allifmaalcommonapp:commonDeleteSpace', 'requires_pk': True},
+   
+   {'name': 'DeleteSpaceUnitConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSpaceUnit', 'requires_pk': True},
+    {'name': 'DeleteSpaceUnit', 'url_name': 'allifmaalcommonapp:commonDeleteSpaceUnit', 'requires_pk': True},
+   
+   {'name': 'DeleteStockItemConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteStockItem', 'requires_pk': True},
+    {'name': 'DeleteStockItem', 'url_name': 'allifmaalcommonapp:commonDeleteStockItem', 'requires_pk': True},
+   
   
-  
-  
+  {'name': 'DeletePurchaseOrderConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeletePO', 'requires_pk': True},
+    {'name': 'DeletePurchaseOrder', 'url_name': 'allifmaalcommonapp:commonDeletePO', 'requires_pk': True},
+       {'name': 'potopdf', 'url_name': 'allifmaalcommonapp:common_purchase_order_pdf', 'requires_pk': True},
+    {'name': 'pomiscosts', 'url_name': 'allifmaalcommonapp:commonPOMiscCost', 'requires_pk': True},
+   
+   {'name': 'DeleteTransferOrderConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTransferOrder', 'requires_pk': True},
+    {'name': 'DeleteTransferOrder', 'url_name': 'allifmaalcommonapp:commonDeleteTransferOrder', 'requires_pk': True},
+   {'name': 'trfpdf', 'url_name': 'allifmaalcommonapp:commonTransferOrderPdf', 'requires_pk': True},
+   
+   
   
     ],
     

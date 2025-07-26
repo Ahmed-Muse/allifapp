@@ -1,303 +1,132 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
+  {% extends 'allifmaalcommonapp/ui/details/item-details.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block add-form-header-block %}
+  <a href="{% allif_get_single_nav_link_url 'Spaces' user_var glblslug %}">Spaces</a>
+ <a href="{% allif_get_single_nav_link_url 'SpaceUnits' user_var glblslug %}">Space Units</a>
+<a href="{% allif_get_single_nav_link_url 'AddSpaceUnit' user_var glblslug %}">New Space Unit</a>
+  {%endblock%}
 
-<div class="allifmaal-main-container">
-  
-<!--start....main headere-->
-<div class="card-header">
+  {% block details-table-col-one %}
+    <tr>
+      <td class="allif-fix-table-col">Name</td>
+      <td>{{allifquery.name}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col">Main Building</td>
+      <td>{{allifquery.space}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Description</td>
+      <td>{{allifquery.description}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Employee in Charge</td>
+      <td>{{allifquery.emplyee_in_charge}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Number</td>
+      <td>{{allifquery.number}}</td>
+    </tr>
 
-<div class="row mt-12" ><!--start....header row-->
-
-<div class="col-md-12"><!--start....header column-->
-
-<div class="container-fluid amel-content-header">
-<div class="dropdown allifmaal-content-dropdown">
-  <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  Actions
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <div class="content-dropdown-menu">
-
+     <tr>
+      <td class="allif-fix-table-col">Code</td>
+      <td>{{allifquery.code}}</td>
+    </tr>
     
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditSpaceUnit' allifquery.id  user_var glblslug %}">Edit Item</a></li>
-    
-      <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteSpaceUnit' allifquery.id user_var glblslug %}">Delete Account</a></li>
-   
-   </div>
-  </ul>
-</div>
+  {%endblock%}
 
-<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-<a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a>
-<a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
-</div>
-
-    </div><!--end....header column-->
-  
-  </div><!--end....header row-->
- </div>
-    <div class="allifmaincontainer">
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">{{allifquery}} Details</div>
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-       
-      <tr>
-        <td class="allif-fix-table-col">Company</td>
-        <td>{{allifquery.company}}</td>
-    
-        </tr>
-        <tr>
-          <td class="allif-fix-table-col">Division</td>
-          <td> {{allifquery.division}}</td>
-      
-          </tr>
-          <tr>
-            <td class="allif-fix-table-col">Branch</td>
-            <td> {{allifquery.branch}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td> {{allifquery.department}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Main Space</td>
-            <td>{{allifquery.space}}</td>
-        
-            </tr>
-         <tr>
-          <td class="allif-fix-table-col">Unit Number</td>
-          <td>{{allifquery.number}}</td>
-        </tr>
-        <tr>
-          <td class="allif-fix-table-col">Name</td>
-          <td>{{allifquery.name}}</td>
-      
-          </tr>
-            <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{allifquery.description}}</td>
-            </tr>
-       
-       
-           
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-           <tr>
-          <td class="allif-fix-table-col">Unit Cost</td>
-          <td>{{allifquery.unitcost}}</td>
-        </tr>
-        <tr>
-          <td class="allif-fix-table-col">Unit Price</td>
-          <td>{{allifquery.unitprice}}</td>
-        </tr>
-       
-          <tr>
-          <td class="allif-fix-table-col">Amenities</td>
-          <td>{{allifquery.amenities}}</td>
-      
-          </tr>
-           
-          <tr>
-            <td class="allif-fix-table-col">Base Price/Night</td>
-            <td>{{allifquery.base_price_per_night}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Max Occupancy</td>
-            <td>{{allifquery.max_occupancy}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Monthly Rent</td>
-            <td>{{allifquery.monthly_rent}}</td>
-        
-            </tr>
-        
-         
-       <tr>
-          <td class="allif-fix-table-col">Area in m2</td>
-          <td>{{allifquery.area_sqm}}</td>
-        </tr>
-         <tr>
-          <td class="allif-fix-table-col">#Rooms</td>
-          <td>{{allifquery.rooms}}</td>
-        </tr>
-         <tr>
-          <td class="allif-fix-table-col">#Washrooms</td>
-          <td>{{allifquery.washrooms}}</td>
-        </tr>
+  {% block details-table-col-two %}
+  <tr>
+      <td class="allif-fix-table-col">Unit Cost</td>
+      <td>{{allifquery.unitcost}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Unit Price</td>
+      <td>{{allifquery.unitprice}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Unit Type</td>
+      <td>{{allifquery.unit_type}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Capacity</td>
+      <td>{{allifquery.capacity}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Area SQM</td>
+      <td>{{allifquery.area_sqm}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">#Rooms</td>
+      <td>{{allifquery.rooms}}</td>
+    </tr>
      
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-           <tr>
-            <td class="allif-fix-table-col">Capacity</td>
-            <td>{{allifquery.capacity}}</td>
-        
-            </tr>
-           <tr>
-          <td class="allif-fix-table-col">Space Floor</td>
-          <td>{{allifquery.space_floor}}</td>
-        </tr>
-
-             <tr>
-            <td class="allif-fix-table-col">Space Type</td>
-            <td>{{allifquery.space_type}}</td>
-        
-            </tr>
-           
-             <tr>
-            <td class="allif-fix-table-col">Unit Type</td>
-            <td>{{allifquery.unit_type}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">Status</td>
-            <td>{{allifquery.current_status}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Staff in Charge</td>
-            <td>{{allifquery.emplyee_in_charge}}</td>
-        
-            </tr>
-        
-          <tr>
-            <td class="allif-fix-table-col">Date</td>
-            <td>{{allifquery.date}}</td>
-        
-            </tr>
-            <tr>
-              <td class="allif-fix-table-col">Owner</td>
-              <td>{{allifquery.owner}}</td>
-          
-              </tr>
-         
-        
-          </tbody>
-          </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
-<div class="row mt-12"> <!--start....table row-->
-  <div class="col-md-12"> <!--start....table column-->
-    <div class="allif-scroll-table">
-      <div class="table-responsive allif-full-table">
-      <table class="table table-layout">
-        <thead>
-          <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Stock Item</td>
-          <td>Quantity</td>
-         
-          <td>Navigate</td>
-          
-          <td> . . . </td>
-          <td></td>
-          </tr>
-          </thead>
-          <tbody class="allif-table-body">
-           
-          
-          {% for item in allifqueryset %} 
-          <tr data-id="{{item.id}}">
-          <td class="allif-fix-table-col"><a class="allif-table-links" href="">{{item.description}}</a></td>
-          
-            <td>
-            {{item.quantity}}
-           </td>
-           
-          <td>
-            <div class="dropdown allifmaal-content-dropdown">
-              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
-              <div class="dropdown-content">
-                <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
-                
-              </div>
-            </div>
-            <div class="dropdown allif-confirm-action">
-              
-              <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-              <a href="{% url 'allifmaalcommonapp:commonDeleteSpaceUnit' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-            </div>
-  
-           
-          </td>
-  
-         <td> . . . </td>
-         <td></td>
-        </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-      </div>
-     </div>
-
-</div><!--end....table column-->
-
-</div><!--end....table row-->
-
-
-</div>
-
-</div>
-  {% block scripts %}
-
   {% endblock %}
-   {% endblock %}
-   
+  
+  {% block core-details-tab-col-one %}
+ <tr>
+      <td class="allif-fix-table-col">Per Night Price</td>
+      <td>{{allifquery.base_price_per_night|floatformat:2|intcomma}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Max Occupancy</td>
+      <td>{{allifquery.max_occupancy}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Number</td>
+      <td>{{allifquery.monthly_rent}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Amenities</td>
+      <td>{{allifquery.amenities}}</td>
+    </tr>
+    
+  {%endblock%}
 
+  {% block core-details-tab-col-two %}
+  <tr>
+      <td class="allif-fix-table-col">Space Floor</td>
+      <td>{{allifquery.space_floor}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Space Type</td>
+      <td>{{allifquery.space_type}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Current Status</td>
+      <td>{{allifquery.current_status}}</td>
+    </tr>
+    
+  <tr>
+    <td class="allif-fix-table-col">Balance</td>
+    <td>{{allifquery.balance|floatformat:2|intcomma}}</td>
+  </tr>
+  {% endblock %}
 
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col">{{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'SpaceUnits' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {%endblock%}
 
+  {% block general-details-tab-col-two %}
+  <tr>
+    <td class="allif-fix-table-col">Description</td>
+    <td>{{allifquery.description}}</td>
+  </tr>
+  {% endblock %}
+  
+  {% block allif_sensitive_section_col_two %}
+  <tr>
+    <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+    <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteSpaceUnitConfirm.url }}">Delete {{allifquery}}</a></td>
+  </tr>
+  {%endblock%}
 
-
-
+{% block item_details_related_items_full_half_tables %}
+{%endblock%}
 
 
 

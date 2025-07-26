@@ -1195,10 +1195,11 @@ class CommonPOMiscCostAddForm(CommonBaseForm):
 class CommonAddSpaceForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
         model=CommonSpacesModel
-        fields=CommonBaseForm.Meta.fields + ['asset','contact_phone','emplyee_in_charge','number_of_units',
-                  'capacity','city','address','amenities',
+        fields=CommonBaseForm.Meta.fields + ['asset','emplyee_in_charge','number_of_units',
+                  'capacity','amenities',
                   'max_occupancy','monthly_rent','base_price_per_night',
-                  'current_status','name','space_floor','space_type','number_of_bedrooms','number_of_bathrooms']
+                  'current_status','name','space_floor','space_type','number_of_bedrooms',
+                  'number_of_bathrooms']
         widgets = {
         **CommonBaseForm.Meta.widgets,
         'number_of_units':forms.TextInput(attrs={'class':'form-control'}),
@@ -1475,11 +1476,11 @@ class CommonAddSalaryForm(CommonBaseForm):
 class CommonAddTransactionDetailsForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
         model=CommonTransactionsModel
-        fields=CommonBaseForm.Meta.fields + ['customer','payment_mode','employee_in_charge']
+        fields=CommonBaseForm.Meta.fields + ['customer','payment_mode','employee_in_charge','amount']
         widgets = {
         **CommonBaseForm.Meta.widgets,
        'employee_in_charge':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-        
+        'amount':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
         'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         'payment_mode':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         

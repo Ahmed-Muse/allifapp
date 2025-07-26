@@ -12,12 +12,14 @@
   <div class="row mt-12" ><!--start....header row-->
   <div class="col-md-12"><!--start....header column-->
   <div class="container-fluid amel-content-header">
-    <a class="amel-table-list-identifier">Add Items {{allifquery}}:</a>
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
     
-    <a href="{% url 'allifmaalcommonapp:commonTransferOrders' user_var glblslug %}">Transfer Orders</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddTransferOrderDetails' allifquery.id user_var glblslug %}">{{allifquery}}</a>
-   
+    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' allifquery.id user_var glblslug %}">Transaction</a>
+     <a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a>
+    <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
+    <a href="{% url 'allifmaalcommonapp:commonAddSpaceBookingItems' allifquery.id user_var glblslug %}">Allocate Space</a>
+ 
+  
   </div>
   
       </div><!--end....header column-->
@@ -31,6 +33,7 @@
 
 
   <div class="row mt-12"> <!--start....table row-->
+    <div class="table-details-content-description">Allocate Space for {{allifquery}} </div>
     <div class="col-md-12"><!--start of the first row body-->
       <div class="allif-form-container">
       
@@ -40,10 +43,13 @@
           <table class="table table-layout">
             <thead>
               <tr class="allif-table-header-row">
-               
-                <td>Item Description</td>
+                <td>Space</td>
+                <td>Unit</td>
                 <td>Quantity</td>
-               
+                <td>Price</td>
+                <td>Amount</td>
+                <td>Booked Date</td>
+              
               <td>Navigate</td>
               
               <td> . . . </td>
@@ -54,26 +60,30 @@
              
               {% for item in allifqueryset %} 
               <tr data-id="{{item.id}}">
-              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.items.id user_var glblslug %}">{{item.items}}</a></td>
+              <td><a class="allif-table-links" href="">{{item.space}}</a></td>
             
-          <td>{{item.quantity|floatformat:2|intcomma}}</td>
+              <td>{{item.space_unit}}</td>
+              <td>{{item.quantity|floatformat:2|intcomma}}</td>
+              <td>{{item.space_unit.unitprice|floatformat:2|intcomma}}</td>
+              <td>{{item.space_allocation_amount|floatformat:2|intcomma}}</td>
+              <td>{{item.date|date:'d/m/Y'}}</td>
+        
          
                <td>
                 <div class="dropdown allifmaal-content-dropdown">
                   <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
                   <div class="dropdown-content">
-                    <a href="{% url 'allifmaalcommonapp:commonEditTransferOrderItem' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+                    <a href="{% url 'allifmaalcommonapp:commonEditSpaceBookingItem' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
                     <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
                     
                   </div>
                 </div>
                 <div class="dropdown allif-confirm-action">
                   
-                  <a href="{% url 'allifmaalcommonapp:commonAddTransferOrderItems' item.trans_ord_items_con.id user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-                  <a href="{% url 'allifmaalcommonapp:commonDeleteTransferOrderItem' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
+                  <a href="{% url 'allifmaalcommonapp:commonAddSpaceBookingItems' item.trans_number.id user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+                  <a href="{% url 'allifmaalcommonapp:commonDeleteSpaceBookingItem' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
                 </div>
-      
-               
+    
               </td>
              <td> . . . </td>
              <td></td>
@@ -81,19 +91,28 @@
         
           </tr>
           {% endfor %}
-
            <tr>
+          
+            <td id="allif-table-sums-section" colspan="4">Total</td>
+            <td id="allif-table-sums-section" colspan="2">{{allifquery.amount|floatformat:2|intcomma}}</td>
+            <td id="allif-table-sums-section" colspan="6"></td>
+            
+          </tr>
+          <tr>
                 <form method='POST' action=''>{% csrf_token %}
                  
                   <td id="allif-table-inline-form">{{form.items}}</td>
+                  <td id="allif-table-inline-form">{{form.space_unit}}</td>
                   <td id="allif-table-inline-form">{{form.quantity}}</td>
-                 
                   <td id="allif-table-inline-form"> <input type="submit" value='Add' class="btn btn-success allifmaal-submit-btn"></td>
-                 
+                  <td id="allif-table-sums-section" colspan="8"></td>
+                
                 </form>
                 </tr>
 
-        
+         
+  
+         
             </tbody>
           </table>
           </div>

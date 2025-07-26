@@ -123,7 +123,23 @@ allif_single_access_general_links = [
  
     
     {'name': 'Stocks', 'url_name': 'allifmaalcommonapp:commonStocks'},
+    {'name': 'AddStockItem', 'url_name': 'allifmaalcommonapp:commonAddStockItem'},
     {'name': 'Transactions', 'url_name': 'allifmaalcommonapp:commonTransactions'},
+    {'name': 'AddTransaction', 'url_name': 'allifmaalcommonapp:commonNewTransaction'},
+    
+    {'name': 'Spaces', 'url_name': 'allifmaalcommonapp:commonSpaces'},
+    {'name': 'AddSpace', 'url_name': 'allifmaalcommonapp:commonAddSpace'},
+    {'name': 'SpaceUnits', 'url_name': 'allifmaalcommonapp:commonSpaceUnits'},
+    {'name': 'AddSpaceUnit', 'url_name': 'allifmaalcommonapp:commonAddSpaceUnit'},
+    
+     {'name': 'PurchaseOrders', 'url_name': 'allifmaalcommonapp:commonPurchaseOrders'},
+    {'name': 'AddPurchaseOrder', 'url_name': 'allifmaalcommonapp:commonNewPurchaseOrder'},
+    
+     {'name': 'TransferOrders', 'url_name': 'allifmaalcommonapp:commonTransferOrders'},
+    {'name': 'AddTransferOrder', 'url_name': 'allifmaalcommonapp:commonNewTransferOrder'},
+    
+    
+    
     
     {'name': 'Transport', 'url_name': 'allifmaalcommonapp:commonTransits'},
     {'name': 'Procurement', 'url_name': 'allifmaalcommonapp:commonPurchaseOrders'},

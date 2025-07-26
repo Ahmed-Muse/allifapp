@@ -88,6 +88,7 @@
     <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-standard-details" role="tabpanel" aria-labelledby="allif-single-page-tab-standard-details-id">
       <div class="allif-forms-table-main-wrapper">
      {% include 'allifmaalcommonapp/includes/details/standard-base-details.html' %}
+     
      </div>
     </div>
        <!--END... End of show/hide table more details section one-->
@@ -225,7 +226,7 @@
         <tbody class="allif-table-body">
          
         
-        {% for item in deposits %} 
+        {% for item in allifqueryset %} 
         <tr data-id="{{item.id}}">
           {% block half_table_one_content %}
           <td class="allif-fix-table-col">

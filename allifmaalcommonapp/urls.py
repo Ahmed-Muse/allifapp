@@ -343,6 +343,7 @@ path('Initiate/New/Transaction/s/Order/s/Events/<str:allifusr>/<str:allifslug>/L
 
 path('Add/Transaction/s/Order/s/Events/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddTransactionDetails, name="commonAddTransactionDetails"),
 path('Delete/This/Transaction/s/Order/s/Events/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteTransaction, name="commonDeleteTransaction"),
+path('Transaction/s/Detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/View/Details/', views.commonTransactionDetails, name="commonTransactionDetails"),
 
 ######### transaction items ##############3
 path('Add/Transactions/Orders/Events/Items/<str:pk>/<str:allifusr>/<str:allifslug>/List/', views.commonAddTransactionItems, name="commonAddTransactionItems"),
@@ -403,14 +404,14 @@ path('Add/PO/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddPOIt
 path('Delete/Purchase/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeletePOItem, name="commonDeletePOItem"),
 path('Purchase/Order/Mis/Costs/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPOMiscCost, name="commonPOMiscCost"),
 path('Post/PO/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostPO, name="commonPostPO"),
-path('PO/Misc/Cost/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPOMiscCostDetails, name="commonPOMiscCostDetails"),
+
 path('Delete/PO/Misc/Cost/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteMiscCost, name="commonDeleteMiscCost"),
 path('Edit/PO/Misc/Cost/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPOMiscCostDetails, name="commonEditPOMiscCostDetails"),
-path('Convert/PO/PDF/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPOToPdf, name="commonPOToPdf"),
+
 path('Advanced/Stock/Purchase/Orders/Search/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonPOAdvanceSearch, name="commonPOAdvanceSearch"),
 path('Search/Purchase/Orders/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonPOSearch, name="commonPOSearch"),
 path('Want/To/Delete/Ths/Purchase/Order/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeletePO, name="commonWantToDeletePO"),
-path('Want/To/Delete/This/Purchase/Order/Item/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeletePOItem, name="commonWantToDeletePOItem"),
+
 path('Edit/Purchase/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPOItem, name="commonEditPOItem"),
 path('Calculate/Purchase/Order/s/Misc/Costs/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCalculatePOMiscCosts, name="commonCalculatePOMiscCosts"),
 path('Convert/This/Purchase/Order/to/p/d/f/<str:pk>/<str:allifusr>/<str:allifslug>/', views.common_purchase_order_pdf, name="common_purchase_order_pdf"),
@@ -431,10 +432,11 @@ path('Add/Transfer/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.c
 path('Delete/Transfer/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteTransferOrderItem, name="commonDeleteTransferOrderItem"),
 
 path('Post/Transfer/Order/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostTransferOrder, name="commonPostTransferOrder"),
+path('Advance/d/Search/s/ing/Transfer/Orders/<str:allifusr>/<str:allifslug>/', views.commonTRFAdvanceSearch, name="commonTRFAdvanceSearch"),
 
 path('Convert/Transfer/Order/PDF/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonTransferOrderPdf, name="commonTransferOrderPdf"),
 
-path('Search/Transfer/Orders/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonTransferOrdersSearch, name="commonTransferOrdersSearch"),
+path('Search/Transfer/Orders/<str:allifusr>/<str:allifslug>/Details/', views.commonTransferOrdersSearch, name="commonTransferOrdersSearch"),
 path('Want/To/Delete/Ths/Trnsfr/Order/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteTransferOrder, name="commonWantToDeleteTransferOrder"),
 
 path('Edit/Transfer/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditTransferOrderItem, name="commonEditTransferOrderItem"),

@@ -45,7 +45,7 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa # Assuming xhtml2pdf is installed (pip install xhtml2pdf)
 from django.shortcuts import render,redirect,get_object_or_404
 from .allifutils import common_shared_data
-from django.urls import reverse
+from django.urls import reverse,NoReverseMatch
 from django.http import Http404
 
 from .models import CommonPurchaseOrdersModel, CommonPurchaseOrderItemsModel
@@ -204,6 +204,85 @@ allif_model_sort_configs = {
         'default_sort_field': '-date',
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
+      
+     'commontransactionsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     'commonspaceunitsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     'commonstocksmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+      'commonpurchaseordersmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+      
+       'commonstocktransferordersmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+      'commonstocktransferorderitemsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
      
      
      
@@ -284,7 +363,7 @@ allif_model_sort_configs = {
 # --- NEW: Search Configuration Map ---
 # Define which fields are searchable for each model
 allif_search_config_mapping = {
-    'CommonStocksModel': ['description__icontains', 'partNumber__icontains'],
+    'CommonStocksModel': ['description__icontains', 'number__icontains','name__icontains','unitPrice__icontains'],
     'CommonCurrenciesModel': ['name__icontains', 'description__icontains'],
     'CommonCategoriesModel': ['name__icontains', 'description__icontains'],
     'CommonCodesModel': ['name__icontains', 'description__icontains'],
@@ -299,9 +378,19 @@ allif_search_config_mapping = {
      'CommonCustomersModel': ['name__icontains', 'description__icontains','balance__icontains'],
     
      'CommonAssetsModel': ['name__icontains', 'description__icontains','balance__icontains'],
+     'CommonTransactionsModel': ['name__icontains', 'description__icontains','balance__icontains'],
+    
+    'CommonSpaceUnitsModel': ['name__icontains', 'description__icontains','balance__icontains'],
+  
+    'CommonPurchaseOrdersModel': ['name__icontains', 'description__icontains','number__icontains'],
+    
+    'CommonStockTransferOrderItemsModel': ['name__icontains', 'description__icontains','number__icontains'],
+    'CommonStockTransferOrdersModel': ['name__icontains', 'description__icontains','number__icontains'],
     
     
-    
+     
+     
+  
     
     
     'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
@@ -432,6 +521,91 @@ allif_advanced_search_configs = {
     
     },
      
+      'CommonTransactionsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+      
+    'CommonStocksModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+    
+    'CommonPurchaseOrdersModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+    
+     'CommonStockTransferOrdersModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+     
+      'CommonStockTransferOrderItemsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+     
      
      
      
@@ -502,6 +676,15 @@ allif_main_models_registry = {
     'CommonSuppliersModel':CommonSuppliersModel,
     "CommonCustomersModel":CommonCustomersModel,
     "CommonAssetsModel":CommonAssetsModel,
+    "CommonTransactionsModel":CommonTransactionsModel,
+    "CommonTransactionItemsModel":CommonTransactionItemsModel,
+    "CommonSpacesModel":CommonSpacesModel,
+    "CommonSpaceUnitsModel":CommonSpaceUnitsModel,
+    "CommonSpaceBookingItemsModel":CommonSpaceBookingItemsModel,
+    "CommonPurchaseOrderMiscCostsModel":CommonPurchaseOrderMiscCostsModel,
+    "CommonStockTransferOrderItemsModel":CommonStockTransferOrderItemsModel,
+    "CommonStockTransferOrdersModel":CommonStockTransferOrdersModel,
+   
    
 }
 
@@ -514,12 +697,41 @@ allif_main_document_pdf_configuration= {
         'items_related_field': 'po_item_con', # This is an optional key now
         'title': 'Purchase Order',
         'filename_prefix': 'PO',
-        'template_path': 'allifmaalcommonapp/purchases/po-pdf.html', 
+        'template_path': 'allifmaalcommonapp/ui/pdf/items-pdf.html', 
         'extra_context_map': { 
             'supplier': 'po_supplier', 
         },
         'related_lookups': ['supplier'], 
     },
+    
+     'CommonStockTransferOrdersModel': { # Key for Purchase Orders
+        'main_model': 'CommonStockTransferOrdersModel', 
+        'items_model': 'CommonStockTransferOrderItemsModel', # This is an optional key now
+        'items_related_field': 'trans_ord_items_con', # This is an optional key now
+        'title': 'Transfer Order',
+        'filename_prefix': 'TRF',
+        'template_path': 'allifmaalcommonapp/ui/pdf/items-pdf.html', 
+        'extra_context_map': { 
+            'supplier': 'po_supplier', 
+        },
+        #'related_lookups': ['supplier'], 
+    },
+    
+    
+    
+    'CommonTransactionsModel': { # Key for Purchase Orders
+        'main_model': 'CommonTransactionsModel', 
+        'items_model': 'CommonSpaceBookingItemsModel', # This is an optional key now
+        'items_related_field': 'trans_number', # This is an optional key now
+        'title': 'Purchase Order',
+        'filename_prefix': 'PO',
+        'template_path': 'allifmaalcommonapp/booking/space_allocation_pdf.html', 
+        'extra_context_map': { 
+            'supplier': 'trans_number', 
+        },
+        'related_lookups': ['trans_number'], 
+    },
+    
     # Example for a model that has NO related items, just the main model's PDF 
     'CommonCurrenciesModel': {
         'main_model': 'CommonCurrenciesModel',
@@ -530,6 +742,21 @@ allif_main_document_pdf_configuration= {
         'extra_context_map': {}, # No extra fields to map
         'related_lookups': [], # No related lookups needed
     },
+    
+    'CommonTransactionsModel': {
+        'main_model': 'CommonCurrenciesModel',
+        # No 'items_model' or 'items_related_field' needed for this config
+        'title': 'Currency Details',
+        'filename_prefix': 'CUR',
+        'template_path': 'allifmaalcommonapp/ui/pdf/item-pdf.html', # Create this template
+        'extra_context_map': {}, # No extra fields to map
+        'related_lookups': [], # No related lookups needed
+    },
+    
+    
+    
+    
+    
     # Example for Invoice PDF:
     'CommonInvoicesModel': {
         'main_model': 'CommonInvoicesModel',
@@ -857,7 +1084,7 @@ def allif_initialize_form_select_querysets(form_instance: forms.Form, allifmaalp
 # --- NEW: Generic Form Submission and Save Logic Function ---
 #@logged_in_user_must_have_profile
 #@logged_in_user_can_view
-def allif_common_form_submission_and_save(request,form_class: type[forms.ModelForm],title_text: str, 
+def allif_common_form_submission_and_save____checkwithotherfunctionthendelete(request,form_class: type[forms.ModelForm],title_text: str, 
     success_redirect_url_name: str, # for the redirection url
     template_path: str,# function specific template
     
@@ -869,7 +1096,15 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
     # New optional parameter for initial data (for GET request forms)
     initial_data: Optional[dict] = None,
     # New optional parameter for extra form arguments (for form __init__)
-    extra_form_args: Optional[list] = None
+    extra_form_args: Optional[list] = None,
+    extra_context: Optional[dict] = None,
+    
+    # NEW OPTIONAL PARAMETER FOR REDIRECTION LOGIC
+    redirect_with_pk: bool = False, # Set to True if the success_redirect_url_name expects a 'pk' argument
+    # --- NEW ADDITION START: Parameter for the PK value to use in redirect ---
+    redirect_pk_value: Optional[int] = None, # <--- NEW: The specific PK to use for redirection if redirect_with_pk is True
+    # --- NEW ADDITION END ---
+    
     ):
     
     """
@@ -889,6 +1124,9 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
     """
     allif_data = common_shared_data(request)
     company_id = allif_data.get("main_sbscrbr_entity").id
+    user_var = allif_data.get("usrslg")
+    glblslug = allif_data.get("compslg")
+    print(f"DEBUG UTILS: 4. allif_common_form_submission_and_save received extra_context keys: {(extra_context or {}).keys()}")
 
     # Prepare form arguments for __init__
     form_args = [company_id] # Default first argument for your forms
@@ -1015,11 +1253,36 @@ def allif_common_form_submission_and_save(request,form_class: type[forms.ModelFo
                 pass
             obj.save() # Finally save the object after all assignments
             
-            # Redirect to the specified list URL with user and company slugs
-            return redirect(
-                reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
-                        kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")})
-            )
+            # --- NEW ADDITION START: Dynamic Redirection Logic (using redirect_pk_value) ---
+            # Initialize kwargs with the standard user and company slugs
+            redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
+            
+            # Conditionally add 'pk' to kwargs ONLY if redirect_with_pk is True
+            # AND if a redirect_pk_value has been provided.
+            if redirect_with_pk and redirect_pk_value is not None:
+                redirect_kwargs['pk'] = redirect_pk_value # Use the explicitly provided PK for redirection
+            elif redirect_with_pk and redirect_pk_value is None:
+                # This is a warning/error case: redirect_with_pk is True but no value was given.
+                # Fallback to obj.pk, but log a warning.
+                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk ({obj.pk}).")
+                redirect_kwargs['pk'] = obj.pk
+            
+            try:
+                # Attempt to reverse the URL with the dynamically built kwargs
+                final_redirect_url = reverse(f'allifmaalcommonapp:{success_redirect_url_name}', kwargs=redirect_kwargs)
+            except NoReverseMatch as e:
+                # If reverse fails (e.g., due to missing/extra arguments for the URL pattern),
+                # log the error and provide a fallback redirect.
+                logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
+                messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
+                # Fallback to a generic home page if redirection fails
+                return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
+
+            return redirect(final_redirect_url)
+            # --- NEW ADDITION END ---
+            
+            # Redirect to the specified list URL with user and company slugs....previous...........
+            #return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}',kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")}))
         else:
             # Form is invalid, render with errors
             error_message = form.errors
@@ -1046,7 +1309,14 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
     is_edit_mode: bool = True,
     pre_save_callback: Optional[callable] = None,
     extra_form_args: Optional[list] = None,
-    extra_context: Optional[dict] = None # For passing additional context to template
+    extra_context: Optional[dict] = None, # For passing additional context to template
+    
+    # NEW OPTIONAL PARAMETER FOR REDIRECTION LOGIC
+    redirect_with_pk: bool = False, # Set to True if the success_redirect_url_name expects a 'pk' argument
+    # --- NEW ADDITION START: Parameter for the PK value to use in redirect ---
+    redirect_pk_value: Optional[int] = None, # <--- NEW: The specific PK to use for redirection if redirect_with_pk is True
+    # --- NEW ADDITION END ---
+    
 ):
     """
     Helper function to encapsulate the common logic for processing form submissions
@@ -1066,7 +1336,9 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
     """
     allif_data = common_shared_data(request)
     company_id = allif_data.get("main_sbscrbr_entity").id
-
+    user_var = allif_data.get("usrslg")
+    glblslug = allif_data.get("compslg")
+    ahmedyaremuse="am tesint this gy"
     # Determine the model class from the form's Meta
     model_class = form_class.Meta.model
     if not model_class:
@@ -1188,18 +1460,39 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
                         "form": form, "title": title_text, "allifquery": allifquery,
                         "user_var": allif_data.get("usrslg"), "glblslug": allif_data.get("compslg"),
                         "error_message": form.errors,
-                        **(extra_context or {})
+                        **(extra_context or {}),
+                        "ahmedyaremuse":ahmedyaremuse,
                     }
                     return render(request, template_path, context)
-            if 1==1:# put further conditions on who can update the items... for instance, you can say only admins can change....
-                obj.save() # Save the updated object
-            else:
-                return HttpResponse("You are not allowed to make changes.")
             
-            return redirect(
-                reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
-                        kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")})
-            )
+           
+            obj.save() # Save the updated object
+            
+            messages.success(request, f"{title_text} created successfully!")
+            
+            redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
+            
+            if redirect_with_pk and redirect_pk_value is not None:
+                redirect_kwargs['pk'] = redirect_pk_value
+            elif redirect_with_pk and redirect_pk_value is None:
+                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk ({obj.pk}).")
+                redirect_kwargs['pk'] = obj.pk
+            
+            try:
+                final_redirect_url = reverse(f'allifmaalcommonapp:{success_redirect_url_name}', kwargs=redirect_kwargs)
+            except NoReverseMatch as e:
+                logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
+                messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
+                return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
+
+            return redirect(final_redirect_url)
+        
+           
+            
+            #return redirect(
+                #reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
+                        #kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")})
+            #)
         else:
             # Form is invalid, render with errors
             error_message = form.errors
@@ -1209,6 +1502,13 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
                 "allifquery": allifquery, # Pass instance back for error rendering
                 "user_var": allif_data.get("usrslg"), 
                 "glblslug": allif_data.get("compslg"),
+                
+                  "form": form, # Pass the form with errors
+                "title": title_text,
+                "user_var": user_var,
+                "glblslug": glblslug,
+                "ahmedyaremuse":ahmedyaremuse,
+                **(extra_context or {}) # Crucially, include extra_context here
             }
             allifcontext.update(extra_context or {})
             return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
@@ -1222,8 +1522,180 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
         "allifquery":allifquery, # Pass the instance to the template for display
         "user_var": allif_data.get("usrslg"), 
         "glblslug": allif_data.get("compslg"), 
-        **(extra_context or {})
+        **(extra_context or {}),
+        "ahmedyaremuse":ahmedyaremuse,
+        
+     "form": form,
+        "title": title_text,
+        "user_var": user_var, 
+        "glblslug": glblslug, 
+        **(extra_context or {}) # Include extra_context here
     }
+    return render(request, template_path, context)
+
+#.... before de
+
+# C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py
+
+# ... (Your existing imports) ...
+from django.urls import reverse, NoReverseMatch # Make sure this is imported
+from typing import Optional, Callable # Make sure these are imported
+
+# ... (Your existing model imports, logger, common_shared_data, etc.) ...
+
+def allif_common_form_submission_and_save(
+    request,
+    form_class: type[forms.ModelForm],
+    title_text: str,
+    success_redirect_url_name: str, # for the redirection url
+    template_path: str,# function specific template
+    
+    pre_save_callback: Optional[Callable] = None,
+    initial_data: Optional[dict] = None,
+    extra_form_args: Optional[list] = None,
+    
+    extra_context: Optional[dict] = None, # For passing additional context to template
+    redirect_with_pk: bool = False, # Set to True if the success_redirect_url_name expects a 'pk' argument
+    redirect_pk_value: Optional[int] = None, # The specific PK to use for redirection if redirect_with_pk is True
+):
+    """
+    Helper function to encapsulate the common logic for processing form submissions
+    and saving new items, including custom pre-save assignments.
+    Dynamically handles redirection URLs with or without a 'pk' argument
+    based on the 'redirect_with_pk' flag.
+    Ensures that extra_context is always passed to the template, even on form validation errors.
+    """
+    allif_data = common_shared_data(request)
+    company_id = allif_data.get("main_sbscrbr_entity").id
+    user_var = allif_data.get("usrslg")
+    glblslug = allif_data.get("compslg")
+
+    print(f"DEBUG UTILS: 4. allif_common_form_submission_and_save received extra_context keys: {(extra_context or {}).keys()}")
+
+    # Prepare form arguments for __init__
+    form_args = [company_id] # Default first argument for your forms
+    if extra_form_args:
+        form_args.extend(extra_form_args)
+
+    if request.method == 'POST':
+        form = form_class(*form_args, request.POST) 
+        if form.is_valid():
+            obj = form.save(commit=False)
+            
+            # --- Assign common fields from allif_data (fetching FK instances) ---
+            if hasattr(obj, 'company') and allif_data.get("main_sbscrbr_entity"):
+                obj.company = allif_data.get("main_sbscrbr_entity")
+            if hasattr(obj, 'division') and allif_data.get("logged_user_division"):
+                obj.division = allif_data.get("logged_user_division")
+            if hasattr(obj, 'branch') and allif_data.get("logged_user_branch"):
+                obj.branch = allif_data.get("logged_user_branch")
+            if hasattr(obj, 'department') and allif_data.get("logged_user_department"):
+                obj.department = allif_data.get("logged_user_department")
+            if allif_data.get("logged_user_operation_year"):
+                if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
+                    try:
+                        obj.operation_year = get_object_or_404(CommonOperationYearsModel, pk=allif_data.get("logged_user_operation_year").id)
+                    except Http404:
+                        obj.operation_year = None
+                    except Exception as e:
+                        logger.error(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
+                        obj.operation_year = None
+                else:
+                    pass
+            else:
+                pass
+            if allif_data.get("logged_user_operation_term"):
+                if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
+                    try:
+                        obj.operation_term = get_object_or_404(CommonOperationYearTermsModel, pk=allif_data.get("logged_user_operation_term").id)
+                    except Http404:
+                        obj.operation_term = None
+                    except Exception as e:
+                        logger.error(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
+                        obj.operation_term = None
+                else:
+                    pass
+            else:
+                pass
+            
+            if hasattr(obj, 'owner') and allif_data.get("owner_user_object"):
+                obj.owner = allif_data.get("owner_user_object")
+            if hasattr(obj, 'updated_by') and request.user.is_authenticated:
+                obj.updated_by = request.user
+            
+            if pre_save_callback:
+                try:
+                    pre_save_callback(obj, request, allif_data)
+                except Exception as e:
+                    logger.error(f"Pre-save callback failed for {obj.__class__.__name__}: {e}")
+                    form.add_error(None, f"An internal error occurred during custom processing: {e}")
+                    
+                    # --- NEW ADDITION START: Context for pre_save_callback error (renders template_path) ---
+                    context = {
+                        "form": form,
+                        "title": title_text,
+                        "user_var": user_var,
+                        "glblslug": glblslug,
+                        # No "error_message" key needed here, form.errors will be used directly by template
+                        **(extra_context or {}) 
+                    }
+                    print(f"DEBUG UTILS: 5. Context for pre_save_callback error (POST error): {context.keys()}")
+                    print(f"DEBUG UTILS:    - allifquery in error context: {context.get('allifquery')}")
+                    print(f"DEBUG UTILS:    - allifqueryset in error context: {context.get('allifqueryset')}")
+                    return render(request, template_path, context) # Render original template_path
+                    # --- NEW ADDITION END ---
+
+            obj.save()
+            messages.success(request, f"{title_text} created successfully!")
+            
+            redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
+            
+            if redirect_with_pk and redirect_pk_value is not None:
+                redirect_kwargs['pk'] = redirect_pk_value
+            elif redirect_with_pk and redirect_pk_value is None:
+                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk ({obj.pk}).")
+                redirect_kwargs['pk'] = obj.pk
+            
+            try:
+                final_redirect_url = reverse(f'allifmaalcommonapp:{success_redirect_url_name}', kwargs=redirect_kwargs)
+            except NoReverseMatch as e:
+                logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
+                messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
+                return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
+
+            return redirect(final_redirect_url)
+        else:
+            # Form is invalid, render with errors
+            messages.error(request, "Please correct the errors below.") # Use Django messages
+            
+            # --- NEW ADDITION START: Context for form validation error (renders template_path) ---
+            context = { # Changed from allifcontext to context for consistency
+                "form": form, # Pass the form with errors
+                "title": title_text,
+                "user_var": user_var,
+                "glblslug": glblslug,
+                **(extra_context or {}) # Crucially, include extra_context here
+            }
+            print(f"DEBUG UTILS: 6. Context for form validation error (invalid POST): {context.keys()}")
+            print(f"DEBUG UTILS:    - allifquery in invalid POST context: {context.get('allifquery')}")
+            print(f"DEBUG UTILS:    - allifqueryset in invalid POST context: {context.get('allifqueryset')}")
+            return render(request, template_path, context) # Render original template_path
+            # --- NEW ADDITION END ---
+    else:
+        form = form_class(*form_args, initial=initial_data)
+
+    # --- NEW ADDITION START: Context for GET request (renders template_path) ---
+    context = {
+        "form": form,
+        "title": title_text,
+        "user_var": user_var, 
+        "glblslug": glblslug, 
+        **(extra_context or {}) # Include extra_context here
+    }
+    print(f"DEBUG UTILS: 7. Final context for {template_path} (GET request): {context.keys()}")
+    print(f"DEBUG UTILS:    - allifquery in final GET context: {context.get('allifquery')}")
+    print(f"DEBUG UTILS:    - allifqueryset in final GET context: {context.get('allifqueryset')}")
+    # --- NEW ADDITION END ---
     return render(request, template_path, context)
 
 
@@ -1366,7 +1838,8 @@ def allif_common_detail_view(
 
 
 # --- NEW: Generic Edit Item LOGIC Function ---
-def allif_delete_confirm(request,pk: int,model_name: str,title_text: str, template_path: str):
+def allif_delete_confirm(request,pk: int,model_name: str,title_text: str,
+            template_path: str,):
     
     allif_data = common_shared_data(request)
     #model_class = model_name.model
@@ -1385,7 +1858,10 @@ def allif_delete_confirm(request,pk: int,model_name: str,title_text: str, templa
     }
     return render(request, template_path, context)
 
-def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_redirect_url_name: str,):
+def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_redirect_url_name: str,
+                         redirect_with_pk: bool = False,redirect_pk_value: Optional[int] = None,
+                         
+                         ):
     allif_data = common_shared_data(request)
     user_slug = allif_data.get("usrslg")
     company_slug = allif_data.get("compslg")
@@ -1396,6 +1872,25 @@ def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_re
     item = get_object_or_404(model_class.all_objects, pk=pk)
 
     item.delete()
+    
+    
+    
+       
+    redirect_kwargs = {'allifusr': user_slug, 'allifslug': company_slug}
+    if redirect_with_pk and redirect_pk_value is not None:
+        redirect_kwargs['pk'] = redirect_pk_value
+    elif redirect_with_pk and redirect_pk_value is None:
+        logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk .")
+        #redirect_kwargs['pk'] = obj.pk
+    
+    try:
+        final_redirect_url = reverse(f'allifmaalcommonapp:{success_redirect_url_name}', kwargs=redirect_kwargs)
+    except NoReverseMatch as e:
+        logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
+        messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
+        return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_slug, 'allifslug':company_slug}))
+
+    return redirect(final_redirect_url)
     return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}',kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
 
 
