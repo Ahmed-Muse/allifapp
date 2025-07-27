@@ -138,15 +138,21 @@ allif_single_access_general_links = [
      {'name': 'TransferOrders', 'url_name': 'allifmaalcommonapp:commonTransferOrders'},
     {'name': 'AddTransferOrder', 'url_name': 'allifmaalcommonapp:commonNewTransferOrder'},
     
+    {'name': 'Quotes', 'url_name': 'allifmaalcommonapp:commonQuotes'},
+    {'name': 'AddQuote', 'url_name': 'allifmaalcommonapp:commonNewQuote'},
     
+     {'name': 'Invoices', 'url_name': 'allifmaalcommonapp:commonInvoices'},
+    {'name': 'AddInvoice', 'url_name': 'allifmaalcommonapp:commonNewInvoice'},
     
+    {'name': 'CreditNotes', 'url_name': 'allifmaalcommonapp:commonCreditNotes'},
+    {'name': 'AddCreditNote', 'url_name': 'allifmaalcommonapp:commonNewCreditNote'},
     
     {'name': 'Transport', 'url_name': 'allifmaalcommonapp:commonTransits'},
     {'name': 'Procurement', 'url_name': 'allifmaalcommonapp:commonPurchaseOrders'},
     {'name': 'Quotations', 'url_name': 'allifmaalcommonapp:commonQuotes'},
     {'name': 'Invoices', 'url_name': 'allifmaalcommonapp:commonInvoices'},
     
-    {'name': 'Ledgers', 'url_name': 'allifmaalcommonapp:commonLedgerEntries'},
+    {'name': 'LedgerEntries', 'url_name': 'allifmaalcommonapp:commonLedgerEntries'},
     {'name': 'Payments', 'url_name': 'allifmaalcommonapp:commonCustomerPayments'},
     {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},
     {'name': 'Profit & Loss', 'url_name': 'allifmaalcommonapp:commonProfitAndLoss'},

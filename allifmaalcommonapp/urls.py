@@ -453,7 +453,7 @@ path('Search/For/Quotes/<str:allifusr>/<str:allifslug>/', views.commonSearchAjax
 path('Search/For/Quotes/Quotations/<str:allifusr>/<str:allifslug>/', views.commonQuotesSearch, name="commonQuotesSearch"),
 path('Advanced/Quotations/Search/<str:allifusr>/<str:allifslug>/', views.commonQuoteAdvanceSearch, name="commonQuoteAdvanceSearch"),
 path('Want/To/Delete/This/Quotation/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteQuote, name="commonWantToDeleteQuote"),
-path('Want/To/Delete/This/Quote/Item/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonWantToDeleteQuoteItem, name="commonWantToDeleteQuoteItem"),
+
 path('Edit/Quote/Item/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonEditQuoteItem, name="commonEditQuoteItem"),
 
 ####################################### INVOICES ##################################
@@ -470,7 +470,7 @@ path('Search/For/Invoices/<str:allifusr>/<str:allifslug>/', views.commonSearchAj
 path('Search/For/Invoices//<str:allifusr>/<str:allifslug>/', views.commonInvoicesSearch, name="commonInvoicesSearch"),
 path('Advanced/Invoices/Search/<str:allifusr>/<str:allifslug>/List/Invoices/', views.commonInvoiceAdvanceSearch, name="commonInvoiceAdvanceSearch"),
 path('Want/To/Delete/This/Invoice/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonWantToDeleteInvoice, name="commonWantToDeleteInvoice"),
-path('Want/To/Delete/This/Invoice/Item/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/From/Invoice/', views.commonWantToDeleteInvoiceItem, name="commonWantToDeleteInvoiceItem"),
+
 path('Edit/Invoice/Item/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Now/For/This/Invoice/', views.commonEditInvoiceItem, name="commonEditInvoiceItem"),
 
 

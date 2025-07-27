@@ -270,7 +270,7 @@ allif_model_sort_configs = {
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
      
-      'commonstocktransferorderitemsmodel': { # Key should be consistent, e.g., model._meta.model_name
+      'commonquotesmodel': { # Key should be consistent, e.g., model._meta.model_name
         'sort_mapping': {
             "Name Ascending": "name",
             "Name Descending": "-name",
@@ -283,9 +283,45 @@ allif_model_sort_configs = {
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
      
+      'commoninvoicesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
      
+     'commoncreditnotesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+      'commonledgerentriesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
      
-     
+    
      
      
      
@@ -384,14 +420,14 @@ allif_search_config_mapping = {
   
     'CommonPurchaseOrdersModel': ['name__icontains', 'description__icontains','number__icontains'],
     
-    'CommonStockTransferOrderItemsModel': ['name__icontains', 'description__icontains','number__icontains'],
+    'CommonQuotesModel': ['name__icontains', 'description__icontains','number__icontains'],
     'CommonStockTransferOrdersModel': ['name__icontains', 'description__icontains','number__icontains'],
     
-    
+    'CommonInvoicesModel': ['name__icontains', 'description__icontains','number__icontains'],
+     'CommonCreditNotesModel': ['name__icontains', 'description__icontains','number__icontains'],
      
+     'CommonLedgerEntriesModel': ['name__icontains', 'description__icontains','number__icontains'],
      
-  
-    
     
     'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
     'CommonTasksModel': ['name__icontains', 'description__icontains'], # Example
@@ -589,7 +625,7 @@ allif_advanced_search_configs = {
     
     },
      
-      'CommonStockTransferOrderItemsModel': {
+      'CommonQuotesModel': {
         'date_field': 'starts', # Name of the date field in CommonStocksModel
         'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
         'default_order_by_date': '-starts', # Default ordering for finding first/last date
@@ -605,6 +641,58 @@ allif_advanced_search_configs = {
     
     
     },
+       'CommonInvoicesModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+       'CommonCreditNotesModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+     'CommonLedgerEntriesModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+     
+     
+     
+     
      
      
      
@@ -684,6 +772,13 @@ allif_main_models_registry = {
     "CommonPurchaseOrderMiscCostsModel":CommonPurchaseOrderMiscCostsModel,
     "CommonStockTransferOrderItemsModel":CommonStockTransferOrderItemsModel,
     "CommonStockTransferOrdersModel":CommonStockTransferOrdersModel,
+    "CommonQuotesModel":CommonQuotesModel,
+    "CommonQuoteItemsModel":CommonQuoteItemsModel,
+    "CommonInvoicesModel":CommonInvoicesModel,
+    "CommonInvoiceItemsModel":CommonInvoiceItemsModel,
+    "CommonCreditNotesModel":CommonCreditNotesModel,
+    "CommonCreditNoteItemsModel":CommonCreditNoteItemsModel,
+    "CommonLedgerEntriesModel":CommonLedgerEntriesModel,
    
    
 }
@@ -716,6 +811,46 @@ allif_main_document_pdf_configuration= {
         },
         #'related_lookups': ['supplier'], 
     },
+     
+     
+      'CommonQuotesModel': { # Key for Purchase Orders
+        'main_model': 'CommonQuotesModel', 
+        'items_model': 'CommonQuoteItemsModel', # This is an optional key now
+        'items_related_field': 'allifquoteitemconnector', # This is an optional key now
+        'title': 'Transfer Order',
+        'filename_prefix': 'TRF',
+        'template_path': 'allifmaalcommonapp/quotes/quote-pdf.html', 
+        'extra_context_map': { 
+            'supplier': 'po_supplier', 
+        },
+        #'related_lookups': ['supplier'], 
+    },
+    'CommonInvoicesModel': { # Key for Purchase Orders
+        'main_model': 'CommonInvoicesModel', 
+        'items_model': 'CommonInvoiceItemsModel', # This is an optional key now
+        'items_related_field': 'allifinvitemconnector', # This is an optional key now
+        'title': 'Invoice',
+        'filename_prefix': 'Inv',
+        'template_path': 'allifmaalcommonapp/invoices/invoice-pdf.html', 
+        'extra_context_map': { 
+            'supplier': 'po_supplier', 
+        },
+        #'related_lookups': ['supplier'], 
+    },
+     
+    'CommonCreditNotesModel': { # Key for Purchase Orders
+        'main_model': 'CommonCreditNotesModel', 
+        'items_model': 'CommonCreditNoteItemsModel', # This is an optional key now
+        'items_related_field': 'credit_note', # This is an optional key now
+        'title': 'Invoice',
+        'filename_prefix': 'Inv',
+        'template_path': 'allifmaalcommonapp/ui/pdf/items-pdf.html', 
+        'extra_context_map': { 
+            'supplier': 'po_supplier', 
+        },
+        #'related_lookups': ['supplier'], 
+    },
+   
     
     
     
@@ -756,20 +891,6 @@ allif_main_document_pdf_configuration= {
     
     
     
-    
-    # Example for Invoice PDF:
-    'CommonInvoicesModel': {
-        'main_model': 'CommonInvoicesModel',
-         'items_model': 'CommonInvoiceItemsModel',
-         'items_related_field': 'invoice_item_con',
-         'title': 'Invoice',
-         'filename_prefix': 'INV',
-         'template_path': 'allifmaalcommonapp/sales/invoice-pdf.html',
-         'extra_context_map': {
-             'customer': 'invoice_customer',
-        },
-         'related_lookups': ['customer'],
-     },
 }
 
 

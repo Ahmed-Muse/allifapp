@@ -1,5 +1,6 @@
 {% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
 {% load humanize %}
+{% load allif_navigation_tags %}
 {% block title %}
 {{title}}
 {% endblock %}
@@ -39,6 +40,8 @@
 <a href="{% url 'allifmaalcommonapp:commonAddUser' user_var glblslug %}">New Staff</a>
 <a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}">New Profile</a>
 
+ <a href="{{ allif_contextual_action_links.StaffLedgerEntries.url }}">Ledger Entries</a>
+ 
 </div>
 
     </div><!--end....header column-->

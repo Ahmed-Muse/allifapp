@@ -7,8 +7,8 @@
 
 
 <a href="{% url 'allifmaalcommonapp:commonTopUpCustomerAccount' allifquery.id user_var glblslug %}"> Top Up Customer Account </a>
-<a href="{% url 'allifmaalcommonapp:commonCustomerLedgerEntries' allifquery.id user_var glblslug %}">Customer Ledger Entries </a>
 
+<a href="{{ allif_contextual_action_links.CustomerLedgerEntries.url }}">Ledger Entries</a>
 
   {%endblock%}
 

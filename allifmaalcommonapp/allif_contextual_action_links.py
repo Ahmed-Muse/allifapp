@@ -83,8 +83,40 @@ allif_sector_contextual_action_require_pk_links= {
     {'name': 'DeleteTransferOrder', 'url_name': 'allifmaalcommonapp:commonDeleteTransferOrder', 'requires_pk': True},
    {'name': 'trfpdf', 'url_name': 'allifmaalcommonapp:commonTransferOrderPdf', 'requires_pk': True},
    
+   {'name': 'quotepdf', 'url_name': 'allifmaalcommonapp:commonQuoteToPdf', 'requires_pk': True},
+   {'name': 'addquotedetails', 'url_name': 'allifmaalcommonapp:commonAddQuoteDetails', 'requires_pk': True},
+  {'name': 'addquoteitems', 'url_name': 'allifmaalcommonapp:commonAddQuoteItems', 'requires_pk': True},
    
+   {'name': 'DeleteQuoteConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteQuote', 'requires_pk': True},
+   
+   {'name': 'DeleteQuote', 'url_name': 'allifmaalcommonapp:commonDeleteQuote', 'requires_pk': True},
+   
+   {'name': 'InvoiceDetails', 'url_name': 'allifmaalcommonapp:commonAddInvoiceDetails', 'requires_pk': True},
+   {'name': 'DeleteInvoice', 'url_name': 'allifmaalcommonapp:commonDeleteInvoice', 'requires_pk': True},
+   {'name': 'DeleteInvoiceConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteInvoice', 'requires_pk': True},
+   {'name': 'PostInvoice', 'url_name': 'allifmaalcommonapp:commonPostInvoice', 'requires_pk': True},
+   {'name': 'invoicepdf', 'url_name': 'allifmaalcommonapp:commonInvoiceToPdf', 'requires_pk': True},
+   
+   
+   {'name': 'CreditNotePdf', 'url_name': 'allifmaalcommonapp:commonCreditNotePdf', 'requires_pk': True},
+   {'name': 'PostCreditNote', 'url_name': 'allifmaalcommonapp:commonPostCreditNote', 'requires_pk': True},
+   {'name': 'AddCNDetails', 'url_name': 'allifmaalcommonapp:commonAddCreditNoteDetails', 'requires_pk': True},
+   {'name': 'DeleteCreditNote', 'url_name': 'allifmaalcommonapp:commonDeleteCreditNote', 'requires_pk': True},
+   {'name': 'DeleteCreditNoteConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCreditNote', 'requires_pk': True},
   
+  {'name': 'StaffLedgerEntries', 'url_name': 'allifmaalcommonapp:commonStaffLedgerEntries', 'requires_pk': True},
+    {'name': 'CustomerLedgerEntries', 'url_name': 'allifmaalcommonapp:commonCustomerLedgerEntries', 'requires_pk': True},
+    
+    {'name': 'SupplierLedgerEntries', 'url_name': 'allifmaalcommonapp:commonSupplierLedgerEntries', 'requires_pk': True},
+    {'name': 'DeleteLedgerEntryConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteLedgerEntry', 'requires_pk': True},
+    {'name': 'DeleteLedgerEntry', 'url_name': 'allifmaalcommonapp:commonDeleteLedgerEntry', 'requires_pk': True},
+    
+    
+     
+   
+
+
+   
     ],
     
     'Education': [

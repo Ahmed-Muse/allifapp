@@ -1,5 +1,6 @@
 {% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
 {% load humanize %}
+{% load allif_navigation_tags %}
 {% block title %}
 {{title}}
 {% endblock %}
@@ -14,11 +15,7 @@
   <div class="container-fluid amel-content-header">
     <a class="amel-table-list-identifier">Add Items {{allifquery}}:</a>
     <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    
-    <a href="{% url 'allifmaalcommonapp:commonQuotes' user_var glblslug %}">Quotations</a>
-    <a href="{% url 'allifmaalcommonapp:commonInvoices' user_var glblslug %}">Invoices</a>
-    <a href="{% url 'allifmaalcommonapp:commonInvoiceToPdf' allifquery.id user_var glblslug %}">Download</a>
-    
+ <a href="{% allif_get_single_nav_link_url 'CreditNotes' user_var glblslug %}">Credit Notes</a>
   </div>
   
       </div><!--end....header column-->

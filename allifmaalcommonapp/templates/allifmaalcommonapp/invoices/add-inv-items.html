@@ -62,7 +62,7 @@
              
               {% for item in allifqueryset %} 
               <tr data-id="{{item.id}}">
-              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.description.id user_var glblslug %}">{{item.description}}</a></td>
+              <td><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.items.id user_var glblslug %}">{{item.items}}</a></td>
             
           <td>{{item.quantity|floatformat:2|intcomma}}</td>
           <td>{{item.discount|floatformat:2|intcomma}}%</td>
@@ -102,7 +102,7 @@
            <tr>
                 <form method='POST' action=''>{% csrf_token %}
                  
-                  <td id="allif-table-inline-form">{{form.description}}</td>
+                  <td id="allif-table-inline-form">{{form.items}}</td>
                   <td id="allif-table-inline-form">{{form.quantity}}</td>
                   <td id="allif-table-inline-form">{{form.discount}}</td>
                   <td id="allif-table-inline-form"> <input type="submit" value='Add' class="btn btn-success allifmaal-submit-btn"></td>
