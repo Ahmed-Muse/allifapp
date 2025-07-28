@@ -3208,22 +3208,19 @@ def commonEditStaffProfile(request,pk,*allifargs,**allifkwargs):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-def commonStaffProfileDetails(request,allifslug,*allifargs,**allifkwargs):
-    try:
-        title="Staff Profile Details"
-        allifqueryset=CommonEmployeesModel.all_objects.filter(stffslug=allifslug).first()
-        context={
-            "allifqueryset":allifqueryset,
-            "title":title,
-    
-        }
-        return render(request,'allifmaalcommonapp/hrm/profiles/profile-details.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+def commonStaffProfileDetails(request, pk, *allifargs, **allifkwargs):
+    """
+    Shows details of a General Ledger account, including its related Chart of Accounts entries.
+    """
+    return allif_common_detail_view(
+        request,
+        model_class=CommonEmployeesModel,
+        pk=pk,
+        template_name='allifmaalcommonapp/hrm/profiles/profile-details.html',
+        title_map={'default': 'Staff Profile Details'},
+       
+    )
+
 
 
 @logged_in_user_must_have_profile
@@ -4478,8 +4475,9 @@ def commonNewTransaction(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonTransactionDetails(request, pk, *allifargs, **allifkwargs):
     allif_data=common_shared_data(request)
-    parent_transaction = get_object_or_404(CommonTransactionsModel, id=pk) 
-    allifqueryset = CommonTransactionItemsModel.objects.filter(trans_number=parent_transaction)
+    #parent_transaction = get_object_or_404(CommonTransactionsModel, id=pk) 
+    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifqueryset = CommonTransactionItemsModel.objects.filter(trans_number=allifquery)
     return allif_common_detail_view(request,model_class=CommonTransactionsModel,pk=pk,
         template_name='allifmaalcommonapp/transactions/transaction_details.html', # Create this template
         title_map={'default': 'Transaction Details'},
@@ -4535,7 +4533,8 @@ def commonTransactionToPdf(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonAddTransactionItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery= get_object_or_404(CommonTransactionsModel, id=pk) 
+    #allifquery= get_object_or_404(CommonTransactionsModel, id=pk) 
+    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
     allifqueryset = CommonTransactionItemsModel.objects.filter(trans_number=allifquery)
     def transaction_item_pre_save(obj, request, allif_data):
         obj.trans_number = allifquery
@@ -4694,7 +4693,8 @@ def commonSpaceBookings(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonAddSpaceBookingItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery= get_object_or_404(CommonTransactionsModel, id=pk) 
+    #allifquery= get_object_or_404(CommonTransactionsModel, id=pk)
+    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
     allifqueryset = CommonSpaceBookingItemsModel.objects.filter(trans_number=allifquery)
     initial_amount=0
     for items in allifqueryset:
@@ -4832,7 +4832,8 @@ def commonStockItemAdvanceSearch(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonStockItemDetails(request, pk, *allifargs, **allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery = get_object_or_404(CommonStocksModel, id=pk) 
+    #allifquery = get_object_or_404(CommonStocksModel, id=pk) 
+    allifquery=CommonStocksModel.all_objects.filter(id=pk).first()
     return allif_common_detail_view(request,model_class=CommonStocksModel,pk=pk,
         template_name='allifmaalcommonapp/stocks/stock-details.html', # Create this template
         title_map={'default': 'Stock Details'},)
@@ -4906,7 +4907,8 @@ def common_purchase_order_pdf(request, pk, *allifargs, **allifkwargs):
 @allif_base_view_wrapper
 def commonPOMiscCost(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery= get_object_or_404(CommonPurchaseOrdersModel, id=pk) 
+    #allifquery= get_object_or_404(CommonPurchaseOrdersModel, id=pk)
+    allifquery=CommonPurchaseOrdersModel.all_objects.filter(id=pk).first()
     allifqueryset = CommonPurchaseOrderMiscCostsModel.all_objects.filter(po_misc_cost_con=allifquery)
     queryset=CommonPurchaseOrderItemsModel.all_objects.filter(po_item_con=allifquery)
     po_total=0
@@ -4969,7 +4971,8 @@ def commonCalculatePOMiscCosts(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def commonDeleteMiscCost(request,pk,*allifargs,**allifkwargs):
-    query=get_object_or_404(CommonPurchaseOrderMiscCostsModel, id=pk)
+    #query=get_object_or_404(CommonPurchaseOrderMiscCostsModel, id=pk)
+    query=CommonPurchaseOrderMiscCostsModel.all_objects.filter(id=pk).first()
     allifquery=query.po_misc_cost_con.id
     return allif_delete_hanlder(request,model_name='CommonPurchaseOrderMiscCostsModel',
     pk=pk,success_redirect_url_name='commonPOMiscCost',redirect_with_pk=True,redirect_pk_value=allifquery)
@@ -5116,7 +5119,8 @@ def commonPostPO(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonAddPOItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery= get_object_or_404(CommonPurchaseOrdersModel, id=pk) 
+    #allifquery= get_object_or_404(CommonPurchaseOrdersModel, id=pk) 
+    allifquery=CommonPurchaseOrdersModel.all_objects.filter(id=pk).first()
     allifqueryset =CommonPurchaseOrderItemsModel.objects.filter(po_item_con=allifquery)
     queryset=CommonPurchaseOrderMiscCostsModel.objects.filter(po_misc_cost_con=allifquery)
     
@@ -5151,7 +5155,8 @@ def commonAddPOItems(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonEditPOItem(request, pk, *allifargs, **allifkwargs):
     
-    query=get_object_or_404(CommonPurchaseOrderItemsModel, id=pk) 
+    #query=get_object_or_404(CommonPurchaseOrderItemsModel, id=pk) 
+    query=CommonPurchaseOrderItemsModel.all_objects.filter(id=pk).first()
     allifquery=query.po_item_con.id
     return allif_common_form_edit_and_save(request,pk,CommonPOItemAddForm,"Edit PO Item Details",
     'commonAddPOItems','allifmaalcommonapp/purchases/add-po-items.html',
@@ -5161,7 +5166,8 @@ def commonEditPOItem(request, pk, *allifargs, **allifkwargs):
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def commonDeletePOItem(request,pk,*allifargs,**allifkwargs):
-    query=get_object_or_404(CommonPurchaseOrderItemsModel, id=pk)
+    #query=get_object_or_404(CommonPurchaseOrderItemsModel, id=pk)
+    query=CommonPurchaseOrderItemsModel.all_objects.filter(id=pk).first()
     allifquery=query.po_item_con.id
     return allif_delete_hanlder(request,model_name='CommonPurchaseOrderItemsModel',
     pk=pk,success_redirect_url_name='commonAddPOItems',redirect_with_pk=True,redirect_pk_value=allifquery)
@@ -5179,7 +5185,8 @@ def commonTransferOrders(request,*allifargs,**allifkwargs):
 
 @allif_base_view_wrapper
 def commonAddTransferOrderDetails(request, pk, *allifargs, **allifkwargs):
-    allifquery= get_object_or_404(CommonStockTransferOrdersModel, id=pk) 
+    #allifquery= get_object_or_404(CommonStockTransferOrdersModel, id=pk) 
+    allifquery=CommonStockTransferOrdersModel.all_objects.filter(id=pk).first()
     allifqueryset=CommonStockTransferOrderItemsModel.objects.filter(trans_ord_items_con=allifquery)
         
     return allif_common_form_edit_and_save(request,pk,CommonAddTransferOrderDetailsForm,"Add Transfer Order Details",
@@ -5216,7 +5223,8 @@ def commonTransferOrderPdf(request, pk, *allifargs, **allifkwargs):
 @allif_base_view_wrapper
 def commonAddTransferOrderItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery= get_object_or_404(CommonStockTransferOrdersModel, id=pk) 
+    #allifquery= get_object_or_404(CommonStockTransferOrdersModel, id=pk) 
+    allifquery=CommonStockTransferOrdersModel.all_objects.filter(id=pk).first()
     allifqueryset=CommonStockTransferOrderItemsModel.objects.filter(trans_ord_items_con=allifquery)
   
     def transaction_item_pre_save(obj, request, allif_data):
@@ -5238,7 +5246,8 @@ def commonEditTransferOrderItem(request, pk, *allifargs, **allifkwargs):
     
     """
     
-    query=get_object_or_404(CommonStockTransferOrderItemsModel, id=pk) 
+    #query=get_object_or_404(CommonStockTransferOrderItemsModel, id=pk) 
+    query=CommonStockTransferOrderItemsModel.all_objects.filter(id=pk).first()
     allifquery=query.trans_ord_items_con.id
     return allif_common_form_edit_and_save(request,pk,CommonAddTransferOrderItemForm,"Edit TRF Item Details",
     'commonAddTransferOrderItems','allifmaalcommonapp/stocks/transfers/add-transfer-order-item.html',
@@ -5248,7 +5257,8 @@ def commonEditTransferOrderItem(request, pk, *allifargs, **allifkwargs):
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def commonDeleteTransferOrderItem(request,pk,*allifargs,**allifkwargs):
-    query=get_object_or_404(CommonStockTransferOrderItemsModel, id=pk)
+    #query=get_object_or_404(CommonStockTransferOrderItemsModel, id=pk)
+    query=CommonStockTransferOrderItemsModel.all_objects.filter(id=pk).first()
     allifquery=query.trans_ord_items_con.id
     return allif_delete_hanlder(request,model_name='CommonStockTransferOrderItemsModel',
     pk=pk,success_redirect_url_name='commonAddTransferOrderItems',redirect_with_pk=True,redirect_pk_value=allifquery)
@@ -5394,7 +5404,8 @@ def commonQuotes(request,*allifargs,**allifkwargs):
 
 @allif_base_view_wrapper
 def commonAddQuoteDetails(request, pk, *allifargs, **allifkwargs):
-    allifquery= get_object_or_404(CommonQuotesModel, id=pk) 
+    #allifquery= get_object_or_404(CommonQuotesModel, id=pk) 
+    allifquery=CommonQuotesModel.all_objects.filter(id=pk).first()
     return allif_common_form_edit_and_save(request,pk,CommonAddQuoteDetailsForm,"Add Quote Details",
     'commonAddQuoteDetails','allifmaalcommonapp/quotes/add-quote-details.html',
     redirect_with_pk=True,redirect_pk_value=pk,)
@@ -5429,7 +5440,8 @@ def commonQuoteToPdf(request, pk, *allifargs, **allifkwargs):
 @allif_base_view_wrapper
 def commonAddQuoteItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery= get_object_or_404(CommonQuotesModel, id=pk) 
+    #allifquery= get_object_or_404(CommonQuotesModel, id=pk) 
+    allifquery=CommonQuotesModel.all_objects.filter(id=pk).first()
     allifqueryset=CommonQuoteItemsModel.objects.filter(allifquoteitemconnector=allifquery)
     allif_qte_discount=allifquery.discount
     
@@ -5464,7 +5476,8 @@ def commonAddQuoteItems(request,pk,*allifargs,**allifkwargs):
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def commonDeleteQuoteItem(request,pk,*allifargs,**allifkwargs):
-    query=get_object_or_404(CommonQuoteItemsModel, id=pk)
+    #query=get_object_or_404(CommonQuoteItemsModel, id=pk)
+    query=CommonQuoteItemsModel.all_objects.filter(id=pk).first()
     allifquery=query.allifquoteitemconnector.id
     return allif_delete_hanlder(request,model_name='CommonQuoteItemsModel',
     pk=pk,success_redirect_url_name='commonAddQuoteItems',redirect_with_pk=True,redirect_pk_value=allifquery)
@@ -5551,7 +5564,8 @@ def commonInvoices(request,*allifargs,**allifkwargs):
 
 @allif_base_view_wrapper
 def commonAddInvoiceDetails(request, pk, *allifargs, **allifkwargs):
-    allifquery= get_object_or_404(CommonInvoicesModel, id=pk) 
+    #allifquery= get_object_or_404(CommonInvoicesModel, id=pk) 
+    allifquery=CommonInvoicesModel.all_objects.filter(id=pk).first()
     return allif_common_form_edit_and_save(request,pk,CommonAddInvoiceDetailsForm,"Add Invoice Details",
     'commonAddInvoiceDetails','allifmaalcommonapp/invoices/add-invoice-details.html',
     redirect_with_pk=True,redirect_pk_value=pk,)
@@ -5591,7 +5605,8 @@ def commonNewInvoice(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonAddInvoiceItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery= get_object_or_404(CommonInvoicesModel, id=pk) 
+    #allifquery= get_object_or_404(CommonInvoicesModel, id=pk) 
+    allifquery=CommonInvoicesModel.all_objects.filter(id=pk).first()
     allifqueryset=CommonInvoiceItemsModel.objects.filter(allifinvitemconnector=allifquery)
     allif_qte_discount=allifquery.discount
     
@@ -5665,7 +5680,8 @@ def commonEditInvoiceItem(request,pk,*allifargs,**allifkwargs):
  
 @allif_base_view_wrapper
 def commonDeleteInvoiceItem(request,pk,*allifargs,**allifkwargs):
-    query=get_object_or_404(CommonInvoiceItemsModel, id=pk)
+    #query=get_object_or_404(CommonInvoiceItemsModel, id=pk)
+    query=CommonInvoiceItemsModel.all_objects.filter(id=pk).first()
     allifquery=query.allifinvitemconnector.id
     return allif_delete_hanlder(request,model_name='CommonInvoiceItemsModel',
     pk=pk,success_redirect_url_name='commonAddInvoiceItems',redirect_with_pk=True,redirect_pk_value=allifquery)
@@ -5841,7 +5857,8 @@ def commonCreditNotes(request,*allifargs,**allifkwargs):
 
 @allif_base_view_wrapper
 def commonAddCreditNoteDetails(request, pk, *allifargs, **allifkwargs):
-    allifquery= get_object_or_404(CommonCreditNotesModel, id=pk) 
+    #allifquery= get_object_or_404(CommonCreditNotesModel, id=pk) 
+    allifquery=CommonCreditNotesModel.all_objects.filter(id=pk).first()
     return allif_common_form_edit_and_save(request,pk,CommonAddCreditNoteDetailsForm,"Add CN Details",
     'commonAddCreditNoteDetails','allifmaalcommonapp/creditnotes/add-credit-note-details.html',
     redirect_with_pk=True,redirect_pk_value=pk,)
@@ -5880,7 +5897,8 @@ def commonNewCreditNote(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonAddCreditNoteItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery= get_object_or_404(CommonCreditNotesModel, id=pk) 
+    #allifquery= get_object_or_404(CommonCreditNotesModel, id=pk) 
+    allifquery=CommonCreditNotesModel.all_objects.filter(id=pk).first()
     allifqueryset=CommonCreditNoteItemsModel.objects.filter(credit_note=allifquery)
    
     def transaction_item_pre_save(obj, request, allif_data):
@@ -5927,7 +5945,8 @@ def commonEditCreditNoteItem(request,pk,*allifargs,**allifkwargs):
  
 @allif_base_view_wrapper
 def commonDeleteCreditNoteItem(request,pk,*allifargs,**allifkwargs):
-    query=get_object_or_404(CommonCreditNoteItemsModel, id=pk)
+    #query=get_object_or_404(CommonCreditNoteItemsModel, id=pk)
+    query=CommonCreditNoteItemsModel.all_objects.filter(id=pk).first()
     allifquery=query.credit_note.id
     return allif_delete_hanlder(request,model_name='CommonCreditNoteItemsModel',
     pk=pk,success_redirect_url_name='commonAddCreditNoteItems',redirect_with_pk=True,redirect_pk_value=allifquery)
@@ -6147,1859 +6166,491 @@ def commonStaffLedgerEntries(request, pk, *allifargs, **allifkwargs):
 
 ##############################3 PAYMENTS #############################
 ######### supplier payments section ############
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
+@allif_base_view_wrapper
 def commonSupplierPayments(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
     title="Supplier Payments"
-    try:
-        allif_data=common_shared_data(request)
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-        allifquerysetlatest=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:7]
-       
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('date')
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
-        else:
-            allifqueryset=[]
-        context={
-        "title":title,
-        "allifqueryset":allifqueryset,
-        "allifquerysetlatest":allifquerysetlatest,
-        "allifqueryset":allifqueryset,
-        "formats":formats,
-        "datasorts":datasorts,
-        }
-        return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payments.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonSupplierPaymentsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payments.html',context)
+
+@allif_base_view_wrapper
+def commonSupplierPaymentDetails(request, pk, *allifargs, **allifkwargs):
+    #allifquery= get_object_or_404(CommonSupplierPaymentsModel, id=pk) 
+    allifquery=CommonSupplierPaymentsModel.all_objects.filter(id=pk).first()
+    return allif_common_form_edit_and_save(request,pk,CommonAddSupplierPaymentForm,"Supplier Payment Details",
+    'commonSupplierPaymentDetails','allifmaalcommonapp/payments/suppliers/supplier-payment-details.html',
+    redirect_with_pk=True,redirect_pk_value=pk,)
+
+
 def commonPaySupplier(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Pay Supplier"
-        allif_data=common_shared_data(request)
-        allifquery=CommonSuppliersModel.objects.filter(id=pk).first()
-        form=CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"))
-        if request.method=='POST':
-            form=CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.supplier=allifquery
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonSupplierPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"))
-        context={
-            "form":form,  
-            "title":title,
-            "allifquery":allifquery,
-        }
-        return render(request,'allifmaalcommonapp/payments/suppliers/pay-supplier.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonSupplierPaymentSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonSupplierPaymentsModel.objects.filter((Q(amount__icontains=allifsearch)
-            |Q(description__icontains=allifsearch)|Q(supplier__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        else:
-            searched_data=[]
-        context={
-        "title":title,
-        "searched_data":searched_data,
-        "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),}
-        return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payments.html',context)
-     
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allif_data=common_shared_data(request)
     
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonSupplierPaymentAdvanceSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Supplier Payment Advanced Search Results"
-        allif_data=common_shared_data(request)
-       
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-        allifqueryset=[]
-    
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
+    allifquery=CommonSuppliersModel.all_objects.filter(id=pk).first()
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.supplier=allifquery
+    my_extra_context={"allifquery":allifquery}
+    return allif_common_form_submission_and_save(request,form_class=CommonAddSupplierPaymentForm,
+        title_text="Add Supplier Payment",
+        success_redirect_url_name='commonSupplierPayments', # This URL expects a PK
+        template_path='allifmaalcommonapp/payments/suppliers/pay-supplier.html',
+        pre_save_callback=transaction_item_pre_save,
+        extra_context=my_extra_context,)
+   
 
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=CommonSupplierPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-        
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonSupplierPaymentsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
+@allif_base_view_wrapper
+def commonWantToDeleteSupplierPayment(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonSupplierPaymentsModel,"Delete this item",
+    'allifmaalcommonapp/payments/suppliers/x-supplier-payment-confrm.html')
 
-                    template_path = 'allifmaalcommonapp/payments/suppliers/supplier-payment-search-pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                   "datasorts":datasorts,
-                   "formats":formats,
-                   "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="supplier-payment-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-             
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "datasorts":datasorts,
-                   "formats":formats,
-                    }
-                    return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payments.html',context)
-            else:
-                searched_data=[]
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-            "datashorts":datasorts,
-            "formats":formats,
-            "searched_data":searched_data,
-            }
-            return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payments.html',context)
-           
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-            "datashorts":datasorts,
-            "formats":formats,
-            }
-            return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payments.html',context)
-           
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)            
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonWantToDeleteSupplierPayment(request,pk,*allifargs,**allifkwargs): 
-    try:
-        allifquery=CommonSupplierPaymentsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete"
-        context={
-        "title":title,
-        "allifquery":allifquery,
-        }
-        return render(request,'allifmaalcommonapp/payments/suppliers/x-supplier-payment-confrm.html',context)
-        
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-    
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
 @logged_in_user_can_delete
-@logged_in_user_has_departmental_delete
+@allif_base_view_wrapper
 def commonDeleteSupplierPayment(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonSupplierPaymentsModel.objects.get(id=pk).delete()
-        return redirect('allifmaalcommonapp:commonSupplierPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_has_departmental_access
-def commonSupplierPaymentDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Supplier Payment Details "
-        allif_data=common_shared_data(request)
-        allifquery=CommonSupplierPaymentsModel.objects.filter(id=pk).first()
-        form =CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"),instance=allifquery)
-        if request.method=='POST':
-            form=CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"),request.POST, instance=allifquery)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonSupplierPaymentDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form =CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"),instance=allifquery)
+    return allif_delete_hanlder(request,model_name='CommonSupplierPaymentsModel',pk=pk,success_redirect_url_name='commonSupplierPayments')
 
-        context={
-            
-            "title":title,
-            "allifquery":allifquery,
-            "form":form,
-        }
-        return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payment-details.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonEditSupplierPayment(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Update Supplier Payment"
-        allif_data=common_shared_data(request)
-        allifquery_update=CommonSupplierPaymentsModel.objects.filter(id=pk).first()
-        form=CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"),instance=allifquery_update)
-        if request.method=='POST':
-            form = CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"),request.POST, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonSupplierPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"),instance=allifquery_update)
+@allif_base_view_wrapper
+def commonSupplierPaymentSearch(request,*allifargs,**allifkwargs):
+    return allif_search_handler(request,model_name='CommonSupplierPaymentsModel',search_fields_key='CommonSupplierPaymentsModel',
+    template_path='allifmaalcommonapp/payments/suppliers/supplier-payments.html',search_input_name='allifsearchcommonfieldname',)
 
-        context = {
-            'form':form,
-            "allifquery_update":allifquery_update,
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/payments/suppliers/pay-supplier.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
+
+@allif_base_view_wrapper
+def commonSupplierPaymentAdvanceSearch(request,*allifargs,**allifkwargs):
+    return allif_advance_search_handler(request,model_name='CommonSupplierPaymentsModel',advanced_search_config_key='CommonSupplierPaymentsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/payments/suppliers/supplier-payments.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
+   
 def commonPostSupplierPayment(request,pk,*allifargs,**allifkwargs):#global
-    try:
-        allif_data=common_shared_data(request)
-        allifquery=CommonSupplierPaymentsModel.objects.filter(id=pk).first()
-        allifsup=allifquery.supplier.id
-        amount=allifquery.amount#this gives the amount of salary given to the staff
-        pay_from_acc_id=allifquery.account.id
-        mysupp=CommonSuppliersModel.objects.filter(id=allifsup).first()
-        init_balance=mysupp.balance
-        mysupp.balance=init_balance + amount
-        mysupp.save()
+    allif_data=common_shared_data(request)
+    allifquery=CommonSupplierPaymentsModel.all_objects.filter(id=pk).first()
+    allifsup=allifquery.supplier.id
+    amount=allifquery.amount#this gives the amount of salary given to the staff
+    pay_from_acc_id=allifquery.account.id
+    mysupp=CommonSuppliersModel.all_objects.filter(id=allifsup).first()
+    init_balance=mysupp.balance
+    mysupp.balance=init_balance + amount
+    mysupp.save()
 
-        # reduce the balance of the cash account or account salary paid from
-        payfromccount=CommonChartofAccountsModel.objects.filter(pk=pay_from_acc_id).first()
-        acc_balance=payfromccount.balance
-        payfromccount.balance=acc_balance-amount
-        payfromccount.save()
-        mysign=-1
+    # reduce the balance of the cash account or account salary paid from
+    payfromccount=CommonChartofAccountsModel.all_objects.filter(pk=pay_from_acc_id).first()
+    acc_balance=payfromccount.balance
+    payfromccount.balance=acc_balance-amount
+    payfromccount.save()
+    mysign=-1
 
-        # update the supplier statement as well.
-        transaction=CommonSupplierStatementsModel.objects.create(supplier=mysupp,credit=amount*mysign,
-        comments="Payment",balance= Decimal(init_balance)+Decimal(amount))#get the ord
-        
-        CommonLedgerEntriesModel.objects.create(supplier=mysupp,credit=amount*mysign,
-        comments="Payment",balance= Decimal(init_balance)+Decimal(amount),company=allif_data.get("main_sbscrbr_entity"),owner=request.user,ledgowner="supplier")#get the ord
-        legs=CommonLedgerEntriesModel.objects.all()
+    # update the supplier statement as well.
+    transaction=CommonSupplierStatementsModel.all_objects.create(supplier=mysupp,credit=amount*mysign,
+    comments="Payment",balance= Decimal(init_balance)+Decimal(amount))#get the ord
+    
+    CommonLedgerEntriesModel.all_objects.create(supplier=mysupp,credit=amount*mysign,
+    comments="Payment",balance= Decimal(init_balance)+Decimal(amount),company=allif_data.get("main_sbscrbr_entity"),owner=request.user,ledgowner="supplier")#get the ord
+    legs=CommonLedgerEntriesModel.all_objects.all()
 
-        allifquery.status="posted"
-        allifquery.save()
-        return redirect('allifmaalcommonapp:commonSupplierPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    allifquery.status="posted"
+    allifquery.save()
+    return redirect('allifmaalcommonapp:commonSupplierPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
+@allif_base_view_wrapper
 def commonPostedSupplierPayments(request,*allifargs,**allifkwargs):
-    try:
-        title="Posted Supplier Payments"
-        allif_data=common_shared_data(request)
-        allifqueryset=CommonSupplierPaymentsModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"))
-        context={
-            "allifqueryset":allifqueryset,
-            "title":title,
-            
-        }
-        return render(request,'allifmaalcommonapp/payments/suppliers/posted-payments.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-       
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
-def commonPaySupplierDirect(request,*allifargs,**allifkwargs):
-    title="Direct Pay Supplier"
-    try:
-        allif_data=common_shared_data(request)
-        form=CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"))
-    
-        if request.method=='POST':
-            form=CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonSupplierPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddSupplierPaymentForm(allif_data.get("main_sbscrbr_entity"),allif_data.get("logged_user_department"))
-    
-        context={
-            "form":form,  
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/payments/suppliers/pay-supplier-directly.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allif_data=common_shared_data(request)
+    title="Posted Supplier Payments"
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonSupplierPaymentsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/payments/suppliers/posted-payments.html',context)
+
+
+@allif_base_view_wrapper
+def commonPaySupplierDirect(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonAddSupplierPaymentForm,
+    "Supplier Payment Initiations","commonSupplierPayments",'allifmaalcommonapp/payments/suppliers/pay-supplier-directly.html')
 
 #
 ################ SUPPLIER STATEMENTS####################
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
-def commonSupplierStatementpdf(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-        allifquery=CommonSuppliersModel.objects.filter(id=pk).first()
-        allifqueryset=CommonLedgerEntriesModel.objects.filter(supplier=allifquery,company=allif_data.get("main_sbscrbr_entity")).order_by('date') 
-        total=sum(transaction.balance for transaction in allifqueryset) 
-        mydate=timezone.now().date().today()
-        system_user=request.user
-        title="Supplier Statement "+" "+str(allifquery)
-        template_path = 'allifmaalcommonapp/statements/suppliers/supplier_statement_pdf.html'
-      
-        context = {
-        'allifquery':allifquery,
-        "system_user":system_user,
-        "title":title,
-        "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-        
-        "mydate":mydate,
-        "scopes":scopes,
-      
-        }
-
-        response = HttpResponse(content_type='application/pdf') # this opens on the same page
-        response = HttpResponse(content_type='application/doc')
-        response['Content-Disposition'] = 'filename="Supplier-Statement.pdf"'
-        template = get_template(template_path)
-        html = template.render(context)
-        
-      
-        # create a pdf
-        try:
-            pisa_status = pisa.CreatePDF(
-        html, dest=response)
-        except:
-            return HttpResponse("Something went wrong!")
-        # if error then show some funy view
-        if pisa_status.err:
-            return HttpResponse('We had some errors <pre>' + html + '</pre>')
-        
-        return response
-    ##################################33 our customers ###################################3
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+@allif_base_view_wrapper
+def commonSupplierStatementpdf(request, pk, *allifargs, **allifkwargs):
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonSuppliersModel',)
 
 
 ######################### customer payments #################3
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
+@allif_base_view_wrapper
 def commonCustomerPayments(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
     title="Customer Payments"
-    try:
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonCustomerPaymentsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/payments/customers/customer-payments.html',context)
 
-        allif_data=common_shared_data(request)
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonCustomerPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('date')
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonCustomerPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonCustomerPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonCustomerPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
-        else:
-            allifqueryset=[]
-        context={
-            
-            "title":title,
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "datasorts":datasorts,
-            
-        }
-        return render(request,'allifmaalcommonapp/payments/customers/customer-payments.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+def commonTopUpCustomerAccount(request,pk,*allifargs,**allifkwargs):
+    allif_data = common_shared_data(request)
+    customer_instance = get_object_or_404(CommonCustomersModel.all_objects, id=pk)
+    def customer_payment_pre_save(obj, request, allif_data):
+        obj.customer = customer_instance
+    default_cash_accs = CommonChartofAccountsModel.objects.filter(description="Cash").first()
+    initial_form_data = {'account': default_cash_accs} if default_cash_accs else {}
+    topups_queryset = CommonCustomerPaymentsModel.objects.filter(customer=customer_instance)
+    extra_context={"customer": customer_instance,"topups": topups_queryset,}
+    return allif_common_form_submission_and_save(request,CommonAddCustomerPaymentForm,
+        f"Receive Payment From {customer_instance}", # Dynamic title
+        "commonCustomerPayments", # The URL name for customer payments list
+        'allifmaalcommonapp/payments/customers/add-customer-payment.html',
+        pre_save_callback=customer_payment_pre_save,
+        initial_data=initial_form_data,)
+    
+
+@allif_base_view_wrapper
+def commonWantToDeleteCustomerPayment(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonCustomerPaymentsModel,"Delete this item",
+    'allifmaalcommonapp/payments/customers/x-cust-payment-confrm.html')
+
+@logged_in_user_can_delete
+@allif_base_view_wrapper
+def commonDeleteCustomerPayment(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_hanlder(request,model_name='CommonCustomerPaymentsModel',pk=pk,success_redirect_url_name='commonCustomerPayments')
 
 
- #################################
+@allif_base_view_wrapper
+def commonCustomerPaymentSearch(request,*allifargs,**allifkwargs):
+    return allif_search_handler(request,model_name='CommonCustomerPaymentsModel',search_fields_key='CommonCustomerPaymentsModel',
+    template_path='allifmaalcommonapp/payments/customers/customer-payments.html',search_input_name='allifsearchcommonfieldname',)
+
+
+@allif_base_view_wrapper
+def commonCustomerPaymentAdvanceSearch(request,*allifargs,**allifkwargs):
+    return allif_advance_search_handler(request,model_name='CommonCustomerPaymentsModel',advanced_search_config_key='CommonCustomerPaymentsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/payments/customers/customer-payments.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
+
+@allif_base_view_wrapper
+def commonCustomerPaymentDetails(request, pk, *allifargs, **allifkwargs):
+    allifquery= get_object_or_404(CommonCustomerPaymentsModel, id=pk) 
+    return allif_common_form_edit_and_save(request,pk,CommonAddCustomerPaymentForm,"Customer Payment Details",
+    'commonCustomerPaymentDetails','allifmaalcommonapp/payments/customers/customer-payment-details.html',
+    redirect_with_pk=True,redirect_pk_value=pk,)
  
 
-def commonTopUpCustomerAccount(request,pk,*allifargs,**allifkwargs):
-    """
-    Fetches customer_instance and topups_queryset before calling the generic helper, as these are
-    specific to this view and needed for the pre_save_callback and template context.
+@allif_base_view_wrapper
+def commonReceiveCustomerMoney(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonAddCustomerPaymentForm,"Receipt Customer Money",
+    "commonTaxParameters",'allifmaalcommonapp/payments/customers/receive-customer-money.html')
 
-    Defines customer_payment_pre_save as its pre_save_callback to assign obj.customer.
-
-    Passes initial_data for the form and extra_context for the template.
-    """
-    
-    try:
-        allif_data = common_shared_data(request)
-        customer_instance = get_object_or_404(CommonCustomersModel.all_objects, id=pk)
-        
-        # Define the pre_save_callback for specific assignments for this view
-        def customer_payment_pre_save(obj, request, allif_data):
-            """
-            pre_save_callback: Optional[callable] = None: This is the key for customization. If provided,
-            this function will be called after common fields are assigned but before obj.save(). It receives (obj, request, allif_data).
-
-            initial_data: Optional[dict] = None: For passing initial data to the form on GET requests (like initial={'account': default_cash_accs}).
-
-            extra_form_args: Optional[list] = None: For forms that take additional positional arguments in
-            their __init__ (like CommonAddSupplierPaymentForm taking logged_user_department).
-
-            extra_context: Optional[dict] = None: To pass additional context variables specific to
-            a particular view to the template (e.g., customer and topups for commonTopUpCustomerAccount).
-            ... pre_save_callback execution: After common fields are assigned, if pre_save_callback is provided, it's executed.
-            .... This is where you put obj.customer = top_up_cust_account etc.
-            """
-            obj.customer = customer_instance # Assign the fetched customer instance
-            # Any other custom assignments for CommonCustomerPaymentsModel can go here
-            
-        # Get default cash account for initial data
-        default_cash_accs = CommonChartofAccountsModel.objects.filter(description="Cash").first()
-        initial_form_data = {'account': default_cash_accs} if default_cash_accs else {}
-
-        # The 'topups' queryset is for display in the template, not for saving the form.
-        # It should be fetched and passed to the template directly by this specific view.
-        topups_queryset = CommonCustomerPaymentsModel.objects.filter(customer=customer_instance)
-
-        # Pass the customer object and topups queryset to the template context
-        extra_context = {
-            "customer": customer_instance,
-            "topups": topups_queryset,
-        }
-
-        return allif_common_form_submission_and_save(
-            request,
-            CommonAddCustomerPaymentForm,
-            f"Receive Payment From {customer_instance}", # Dynamic title
-            "commonCustomerPayments", # The URL name for customer payments list
-            'allifmaalcommonapp/payments/customers/add-customer-payment.html',
-            pre_save_callback=customer_payment_pre_save,
-            initial_data=initial_form_data, # Pass initial data for GET request
-            # No extra_form_args needed if CommonAddCustomerPaymentForm only takes company_id
-            #extra_context=extra_context # Pass extra context for the template
-        )
-    except Exception as ex:
-        print(f"ERROR: commonTopUpCustomerAccount view failed: {ex}")
-        error_context={'error_message': ex, 'title': "Error Receiving Payment"}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-"""
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonTopUpCustomerAccount(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-       
-        default_cash_accs=CommonChartofAccountsModel.objects.filter(description="Cash").first()
-        form=CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"),initial={'account':default_cash_accs})
-        customer=CommonCustomersModel.objects.get(id=pk)
-        mycustid=customer.id
-        title="Receive Payment From "+ str(customer)
-    
-        top_up_cust_account= get_object_or_404(CommonCustomersModel, id=pk)
-        topups=CommonCustomerPaymentsModel.objects.filter(customer=customer)#this line helps to
-      
-        add_item= None
-        if request.method=='POST':
-            form=CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.customer=top_up_cust_account
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                form=CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"))
-                return redirect('allifmaalcommonapp:commonCustomerPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            pass
-
-        context={
-            "form":form,  
-            "customer":customer,
-            "topups":topups,
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/payments/customers/add-customer-payment.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-"""
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_has_departmental_access
-def commonEditCustomerPayment(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Update Customer Payment"
-        allif_data=common_shared_data(request)
-        allifquery_update=CommonCustomerPaymentsModel.objects.get(id=pk)
-        form=CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-
-        if request.method=='POST':
-            form =CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"),request.POST, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonCustomerPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-    
-        context = {
-            "form":form,
-            "allifquery_update":allifquery_update,
-           
-            "title":title,
-        }
-        
-        return render(request,'allifmaalcommonapp/payments/customers/add-customer-payment.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonWantToDeleteCustomerPayment(request,pk,*allifargs,**allifkwargs): 
-    try:
-        allifquery=CommonCustomerPaymentsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete"
-        context={
-        "title":title,
-        "allifquery":allifquery,
-        }
-        return render(request,'allifmaalcommonapp/payments/customers/x-cust-payment-confrm.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_has_departmental_delete
-def commonDeleteCustomerPayment(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonCustomerPaymentsModel.objects.get(id=pk).delete()
-        return redirect('allifmaalcommonapp:commonCustomerPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonCustomerPaymentDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Payment Details "
-        allif_data=common_shared_data(request)
-       
-        allifquery=CommonCustomerPaymentsModel.objects.filter(id=pk).first()
-        form=CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
-        if request.method=='POST':
-            form =CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"),request.POST, instance=allifquery)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonCustomerPaymentDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            pass
-        context={
-            
-            "title":title,
-            "allifquery":allifquery,
-            "form":form,
-            
-        }
-        return render(request,'allifmaalcommonapp/payments/customers/customer-payment-details.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonReceiveCustomerMoney(request,*allifargs,**allifkwargs):
-    try:
-        title="Receive Customer Money"
-        allif_data=common_shared_data(request)
-        form=CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=CommonAddCustomerPaymentForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj= form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonCustomerPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            pass
-        context={
-            "form":form,  
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/payments/customers/receive-customer-money.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
+@allif_base_view_wrapper
 def commonPostCustomerPayment(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        
-        payment=CommonCustomerPaymentsModel.objects.get(id=pk)#very important to get id to go to particular shipment
-        myamount=payment.amount#this gives the initial account
-        customer=payment.customer
-        debit_acc=payment.account
-        if (customer and myamount)!=None:
-            mycust=CommonCustomersModel.objects.get(id=customer.id)
-            initial_cust_acc_bal=mycust.balance
-            mycust.balance= Decimal(initial_cust_acc_bal)-Decimal(myamount)
-            mycust.status=='posted'
-            mycust.save()
+    allif_data=common_shared_data(request)
+    payment=CommonCustomerPaymentsModel.all_objects.get(id=pk)#very important to get id to go to particular shipment
+    myamount=payment.amount#this gives the initial account
+    customer=payment.customer
+    debit_acc=payment.account
+    if (customer and myamount)!=None:
+        mycust=CommonCustomersModel.all_objects.get(id=customer.id)
+        initial_cust_acc_bal=mycust.balance
+        mycust.balance= Decimal(initial_cust_acc_bal)-Decimal(myamount)
+        mycust.status=='posted'
+        mycust.save()
 
-            # debit the asset account where the money from customer is received to
-            coa_acc=CommonChartofAccountsModel.objects.get(id=debit_acc.id)
-            initial_coa_acc_bal=coa_acc.balance
-            coa_acc.balance= Decimal(initial_coa_acc_bal)+Decimal(myamount)
-            coa_acc.save()
-            CommonLedgerEntriesModel.objects.create(customer=customer,credit=myamount,
-            comments="payment",company=allif_data.get("main_sbscrbr_entity"),owner=request.user,ledgowner="customer")
-            return redirect('allifmaalcommonapp:commonCustomerPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        # debit the asset account where the money from customer is received to
+        coa_acc=CommonChartofAccountsModel.all_objects.get(id=debit_acc.id)
+        initial_coa_acc_bal=coa_acc.balance
+        coa_acc.balance= Decimal(initial_coa_acc_bal)+Decimal(myamount)
+        coa_acc.save()
+        CommonLedgerEntriesModel.all_objects.create(customer=customer,credit=myamount,
+        comments="payment",company=allif_data.get("main_sbscrbr_entity"),owner=request.user,ledgowner="customer")
+        return redirect('allifmaalcommonapp:commonCustomerPayments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-        else:
-            return render(request,'allifmaalcommonapp/error/error.html')
-           
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
+    else:
+        return render(request,'allifmaalcommonapp/error/error.html')
+
+@allif_base_view_wrapper
 def commonPostedCustomerPayments(request,*allifargs,**allifkwargs):
-    try:
-        title="Posted Customer Payments"
-        allif_data=common_shared_data(request)
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-      
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonCustomerPaymentsModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity")).order_by('date')
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonCustomerPaymentsModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonCustomerPaymentsModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonCustomerPaymentsModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
-        else:
-            allifqueryset=[]
-        context={
-            "allifqueryset":allifqueryset,
-            "title":title,
-            "formats":formats,
-            "datasorts":datasorts,
-         
-        }
-        return render(request,'allifmaalcommonapp/payments/customers/customer-posted-payments.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allif_data=common_shared_data(request)
+    title="Posted Customer Payments"
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonCustomerPaymentsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/payments/customers/customer-posted-payments.html',context)
 
+@allif_base_view_wrapper
+def commonCustomerStatementpdf(request, pk, *allifargs, **allifkwargs):
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCustomersModel',)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
-def commonCustomerStatementpdf(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        mydate=timezone.now().date().today()
-        AllifQueryDetails=get_object_or_404(CommonCustomersModel,id=pk)
-        title="Customer Statement "+" "+str(AllifQueryDetails)
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-        AllifObject=CommonCustomersModel.objects.get(id=pk)
-        PO_suplier=AllifObject.name
-        AllifQueryItems= CommonCustomerStatementsModel.objects.filter(customer=AllifObject)
-        template_path = 'allifmaalcommonapp/statements/customers/customer_statement_pdf.html'
-     
-        context = {
-        'AllifQueryDetails':AllifQueryDetails,
-        "AllifQueryItems":AllifQueryItems,
-        #"companyDetails":companyDetails,
-        "scopes":scopes, 
-        "system_user":allif_data.get("usernmeslg"),
-        "title":title,
-        
-        "PO_suplier":PO_suplier,
-        "AllifObject":AllifObject,
-        "mydate":mydate,
-        "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-    
-        }
-        
-       
-        response = HttpResponse(content_type='application/pdf') # this opens on the same page
-        response = HttpResponse(content_type='application/doc')
-        response['Content-Disposition'] = 'filename="Customer-Statement.pdf"'
-        template=get_template(template_path)
-        html=template.render(context)
-
-        # create a pdf
-        try:
-            pisa_status = pisa.CreatePDF(
-        html, dest=response)
-        except:
-            return HttpResponse("Something went wrong!")
-        # if error then show some funy view
-        if pisa_status.err:
-            return HttpResponse('We had some errors <pre>' + html + '</pre>')
-        
-        return response
-    ##################################33 our customers ###################################3
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
-def commonCustomerPaymentSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-       
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonCustomerPaymentsModel.objects.filter((Q(amount__icontains=allifsearch)
-            |Q(description__icontains=allifsearch)|Q(customer__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        else:
-            searched_data=[]
-
-        context={
-        "title":title,
-       
-        "searched_data":searched_data,
-        "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-    }
-        return render(request,'allifmaalcommonapp/payments/customers/customer-payments.html',context)
-     
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
-def commonCustomerPaymentAdvanceSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Customer Payment Advanced Search Results"
-        allif_data=common_shared_data(request)
-       
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-        allifqueryset=[]
-       
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=CommonCustomerPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=CommonCustomerPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=CommonCustomerPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=CommonCustomerPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=CommonCustomerPaymentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-        
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonCustomerPaymentsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-
-                    template_path = 'allifmaalcommonapp/payments/customers/customer-payment-search-pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                   "datasorts":datasorts,
-                   "formats":formats,
-                   "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="customer-payment-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                # if excel is selected
-              
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                    
-                    "title":title,
-                    "datasorts":datasorts,
-                   "formats":formats,
-                    }
-                    return render(request,'allifmaalcommonapp/payments/customers/customer-payments.html',context)
-            else:
-                searched_data=[]
-             
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-            "datashorts":datasorts,
-            "formats":formats,
-            }
-            return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payments.html',context)
-           
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-            "datashorts":datasorts,
-            "formats":formats,
-            }
-            return render(request,'allifmaalcommonapp/payments/suppliers/supplier-payments.html',context)
-           
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
 
 ########################3 staff salaries #############
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_universal_access
+@allif_base_view_wrapper
 def commonSalaries(request,*allifargs,**allifkwargs):
-    try:
-        title="Staff Salaries"
-        allif_data=common_shared_data(request)
-      
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-        allifqueryset=[]
-        allifqueryset=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+    allif_data=common_shared_data(request)
+    title="Salaries"
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonSalariesModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/hrm/salaries/salaries.html',context)
 
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('date')
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
-        else:
-            allifqueryset=[]
-        context = {
-            "title":title,
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "datasorts":datasorts,
-        }
+@allif_base_view_wrapper
+def commonAddSalary(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonAddSalaryForm,"New Salary","commonSalaries",'allifmaalcommonapp/hrm/salaries/add-salary.html')
 
-        return render(request,'allifmaalcommonapp/hrm/salaries/salaries.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_branches_access
-def commonAddSalary(request,*allifargs,**allifkwargs):
-    try:
-        title="Initiate Salary Payment"
-        allif_data=common_shared_data(request)
-        form =CommonAddSalaryForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form =CommonAddSalaryForm(allif_data.get("main_sbscrbr_entity"),request.POST,request.FILES)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonSalaries',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                form.non_field_errors
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddSalaryForm(allif_data.get("main_sbscrbr_entity"))
-       
-        context = {
-            "title":title,
-            "form":form,}
+@allif_base_view_wrapper
+def commonEditSalaryDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonAddSalaryForm,"Edit Salary","commonSalaries",'allifmaalcommonapp/hrm/salaries/add-salary.html')
+@allif_base_view_wrapper
+def commonSalaryDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=CommonSalariesModel,pk=pk,
+        template_name='allifmaalcommonapp/hrm/salaries/salary-details.html', # Create this template
+        title_map={'default': 'Salary Details'},)
 
-        return render(request,'allifmaalcommonapp/hrm/salaries/add-salary.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_divisional_access
-def commonSalarySearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonSalariesModel.objects.filter((Q(amount__icontains=allifsearch)
-            |Q(description__icontains=allifsearch)|Q(staff__firstName__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        else:
-            searched_data=[]
+@allif_base_view_wrapper
+def commonWantToDeleteSalary(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonSalariesModel,"Delete this item",'allifmaalcommonapp/hrm/salaries/x-salary-confirm.html')
 
-        context={
-        "title":title,
-        "searched_data":searched_data,
-        }
-        return render(request,'allifmaalcommonapp/hrm/salaries/salaries.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_divisional_access
-def commonSalaryAdvanceSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Advanced Search"
-        allif_data=common_shared_data(request)
-       
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-        allifqueryset=[]
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=CommonSalariesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonSalariesModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-
-                    template_path = 'allifmaalcommonapp/hrm/salaries/salaries_search_pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                   "datasorts":datasorts,
-                   "formats":formats,
-                   "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                # if excel is selected
-               
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                    
-                    "title":title,
-                    "datasorts":datasorts,
-                   "formats":formats,
-                    }
-                    return render(request,'allifmaalcommonapp/hrm/salaries/salaries.html',context)
-                   
-            else:
-                searched_data=[]
-             
-                context={
-                "allifqueryset":allifqueryset,
-                "formats":formats,
-                "title":title,
-                "datashorts":datasorts,
-                "formats":formats,
-                }
-                return render(request,'allifmaalcommonapp/hrm/salaries/salaries.html',context)
-           
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "title":title,
-            "datashorts":datasorts,
-            "formats":formats,
-            }
-            return render(request,'allifmaalcommonapp/hrm/salaries/salaries.html',context)
-          
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_divisional_access
-def commonSalaryDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Salary Details"
-        allifquery=CommonSalariesModel.objects.filter(id=pk).first()
-        context={
-            "allifquery":allifquery,
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/hrm/salaries/salary-details.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_divisional_access
-def commonEditSalaryDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Update Salary Details"
-        allif_data=common_shared_data(request)
-        allifquery_update=CommonSalariesModel.objects.get(id=pk)
-        form=CommonAddSalaryForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)#insert the content of the table stored in the selected id in the update form
-        #we could have used the add customer form but the validation will refuse us to update since fields may exist
-        if request.method=='POST':
-            form =CommonAddSalaryForm(allif_data.get("main_sbscrbr_entity"),request.POST, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonSalaries',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                form.non_field_errors
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddSalaryForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context = {
-            'form':form,
-            "allifquery_update":allifquery_update,
-            "title":title,
-        }
-        return render(request,'allifmaalcommonapp/hrm/salaries/add-salary.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_divisional_access
-def commonWantToDeleteSalary(request,pk,*allifargs,**allifkwargs): 
-    try:
-        allifquery=CommonSalariesModel.objects.filter(id=pk).first()
-        title="Are you sure to delete"
-        context={
-        "title":title,
-        "allifquery":allifquery,
-       
-        }
-        return render(request,'allifmaalcommonapp/hrm/salaries/x-salary-confirm.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_divisional_access
-@logged_in_user_has_divisional_delete
+@logged_in_user_can_delete
+@allif_base_view_wrapper
 def commonDeleteSalary(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonSalariesModel.objects.get(id=pk).delete()
+    return allif_delete_hanlder(request,model_name='CommonSalariesModel',pk=pk,success_redirect_url_name='commonSalaries')
+
+@allif_base_view_wrapper
+def commonSalarySearch(request,*allifargs,**allifkwargs):
+    return allif_search_handler(request,model_name='CommonSalariesModel',search_fields_key='CommonSalariesModel',
+    template_path='allifmaalcommonapp/hrm/salaries/salaries.html',search_input_name='allifsearchcommonfieldname',)
+
+
+@allif_base_view_wrapper
+def commonSalaryAdvanceSearch(request,*allifargs,**allifkwargs):
+    # This view now simply calls the centralized advanced search handler
+    return allif_advance_search_handler(request,model_name='CommonSalariesModel',advanced_search_config_key='CommonSalariesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/hrm/salaries/salaries.html', # Template for HTML results
+        template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
+        #accounts/coa-search-pdf.html
+    )
+    
+
+def commonPostSalary(request,pk,*allifargs,**allifkwargs):
+
+    allif_data=common_shared_data(request)
+    allifquery=CommonSalariesModel.all_objects.get(id=pk)
+    emp_no=allifquery.staff.number
+    normal_salary=allifquery.amount#this gives the amount of salary given to the staff
+    month_salary=allifquery.salary_payable
+    pay_from_acc_id=allifquery.account.id
+    
+    CommonLedgerEntriesModel.all_objects.create(credit=month_salary,
+    comments="payment",company=allif_data.get("main_sbscrbr_entity"),owner=request.user,ledgowner="staff")
+
+    # first get the salaries account
+    salaries_balance=CommonChartofAccountsModel.all_objects.filter(description="Salaries")
+    equityacc=CommonChartofAccountsModel.all_objects.filter(description="Equity")
+    if salaries_balance and equityacc:
+
+        # increase the salaries expense account
+        sal_balances=CommonChartofAccountsModel.all_objects.get(description="Salaries")
+        init_balance=sal_balances.balance
+        sal_balances.balance=init_balance +month_salary
+        sal_balances.save()
+
+        # reduce the balance of the cash account or account salary paid from
+        salaryaccount=CommonChartofAccountsModel.all_objects.get(pk=pay_from_acc_id)
+        acc_balance=salaryaccount.balance
+        salaryaccount.balance=acc_balance-month_salary
+        salaryaccount.save()
+
+        # reduce the balance of the equity account to balance the accounting equation...
+        equityaccount=CommonChartofAccountsModel.all_objects.get(description="Equity")
+        acc_balance=equityaccount.balance
+        equityaccount.balance=acc_balance-month_salary
+        equityaccount.save()
+
+        # increase the value in the accommulation in the hrm model
+        allifstaff=CommonEmployeesModel.all_objects.get(number=emp_no)
+        salary_accommulation=allifstaff.total_salary_paid
+        allifstaff.total_salary_paid=salary_accommulation+(month_salary)
+
+        # also the salary balance account is affected depending on whether the amount paid is more than 
+        # or less than the normal salary
+        init_salary_balance=allifstaff.salary_balance
+        allifstaff.salary_balance=(month_salary-normal_salary)+init_salary_balance
+        allifstaff.save()
+
+        #
+        allifquery.status="posted"
+        allifquery.save()
         return redirect('allifmaalcommonapp:commonSalaries',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_divisional_access
-def commonPostSalary(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        allifquery=CommonSalariesModel.objects.get(id=pk)
-        emp_no=allifquery.staff.number
-        normal_salary=allifquery.amount#this gives the amount of salary given to the staff
-        month_salary=allifquery.salary_payable
-        pay_from_acc_id=allifquery.account.id
-       
-        CommonLedgerEntriesModel.objects.create(credit=month_salary,
-        comments="payment",company=allif_data.get("main_sbscrbr_entity"),owner=request.user,ledgowner="staff")
-    
-        # first get the salaries account
-        salaries_balance=CommonChartofAccountsModel.objects.filter(description="Salaries")
-        equityacc=CommonChartofAccountsModel.objects.filter(description="Equity")
-        if salaries_balance and equityacc:
+    else:
 
-            # increase the salaries expense account
-            sal_balances=CommonChartofAccountsModel.objects.get(description="Salaries")
-            init_balance=sal_balances.balance
-            sal_balances.balance=init_balance +month_salary
-            sal_balances.save()
-
-            # reduce the balance of the cash account or account salary paid from
-            salaryaccount=CommonChartofAccountsModel.objects.get(pk=pay_from_acc_id)
-            acc_balance=salaryaccount.balance
-            salaryaccount.balance=acc_balance-month_salary
-            salaryaccount.save()
-
-            # reduce the balance of the equity account to balance the accounting equation...
-            equityaccount=CommonChartofAccountsModel.objects.get(description="Equity")
-            acc_balance=equityaccount.balance
-            equityaccount.balance=acc_balance-month_salary
-            equityaccount.save()
-
-            # increase the value in the accommulation in the hrm model
-            allifstaff=CommonEmployeesModel.objects.get(number=emp_no)
-            salary_accommulation=allifstaff.total_salary_paid
-            allifstaff.total_salary_paid=salary_accommulation+(month_salary)
-
-            # also the salary balance account is affected depending on whether the amount paid is more than 
-            # or less than the normal salary
-            init_salary_balance=allifstaff.salary_balance
-            allifstaff.salary_balance=(month_salary-normal_salary)+init_salary_balance
-            allifstaff.save()
-
-            #
-            allifquery.status="posted"
-            allifquery.save()
-            return redirect('allifmaalcommonapp:commonSalaries',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-
-        else:
-
-            messgeone=messages.error(request, 'Please note that either Equity or Salaries or both accounts are missing in the chart of accounts.')
-            messgetwo=messages.error(request, 'Add Equity and Salaries accounts in the Equity and Expenses categories respectively, if they are not already there, then post again.')
-           
-            return render(request,'allifmaalcommonapp/error/error.html')
-            
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_divisional_access
+        messgeone=messages.error(request, 'Please note that either Equity or Salaries or both accounts are missing in the chart of accounts.')
+        messgetwo=messages.error(request, 'Add Equity and Salaries accounts in the Equity and Expenses categories respectively, if they are not already there, then post again.')
+        
+        return render(request,'allifmaalcommonapp/error/error.html')
+        
+     
+@allif_base_view_wrapper
 def commonPostedSalaries(request,*allifargs,**allifkwargs):
-    try:
-        title="Posted Staff Salaries"
-        allif_data=common_shared_data(request)
-      
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-       
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonSalariesModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity")).order_by('date')
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonSalariesModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonSalariesModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonSalariesModel.objects.filter(status="posted",company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
-        else:
-            allifqueryset=[]
-        context = {
-            "title":title,
-            "allifqueryset":allifqueryset,
-            "formats":formats,
-            "datasorts":datasorts,
-        }
-
-        return render(request,'allifmaalcommonapp/hrm/salaries/posted-salaries.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
+    allif_data=common_shared_data(request)
+    title="Posted Salaries"
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonSalariesModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/hrm/salaries/posted-salaries.html',context)
 
 ################################ JOBS ############################
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
+@allif_base_view_wrapper
 def commonJobs(request,*allifargs,**allifkwargs):
-    try:
-        title="Jobs"
-        allif_data=common_shared_data(request)
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-     
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('date')
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division")).order_by('date')
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch")).order_by('date')
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department")).order_by('date')
-        else:
-            allifqueryset=[]
-        context={
-            "allifqueryset":allifqueryset,
-            "title":title,
-            "formats":formats,
-            "datasorts":datasorts,
-        }
-        return render(request,'allifmaalcommonapp/jobs/jobs.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allif_data=common_shared_data(request)
+    title="Jobs"
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonJobsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/jobs/jobs.html',context)
 
+@allif_base_view_wrapper
+def commonAddSalary(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonAddSalaryForm,"New Salary","commonSalaries",'allifmaalcommonapp/hrm/salaries/add-salary.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
-def commonNewJobs(request,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        current_datetime=timezone.now().date().today()
-        job_year=current_datetime.year
-        last_job= CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('id').last()
-        last_obj=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if last_obj:
-            last_obj_id=last_obj.id
-            last_obj_incremented=last_obj_id+1
-            jobNo= 'Job/'+str(uuid4()).split('-')[1]+'/'+str(last_obj_incremented)+'/'+str(job_year)
-        else:
-            jobNo= 'First/Job/'+str(uuid4()).split('-')[1]
-        newJobRef=CommonJobsModel.objects.create(number=jobNo,description="Job Description",company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg") or None,
-                    division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        newJobRef.save()
-        return redirect('allifmaalcommonapp:commonJobs',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+@allif_base_view_wrapper
+def commonEditSalaryDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonAddSalaryForm,"Edit Salary","commonSalaries",'allifmaalcommonapp/hrm/salaries/add-salary.html')
+@allif_base_view_wrapper
+def commonSalaryDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=CommonJobsModel,pk=pk,
+        template_name='allifmaalcommonapp/hrm/salaries/salary-details.html', # Create this template
+        title_map={'default': 'Salary Details'},)
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
-def commonJobSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-      
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=CommonJobsModel.objects.filter((Q(job_number__icontains=allifsearch)
-            |Q(description__icontains=allifsearch)|Q(customer__name__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-           
-            context={
-            "title":title,
-            "allifsearch":allifsearch,
-            "searched_data":searched_data,
-           
-        }
-        return render(request,'allifmaalcommonapp/jobs/jobs.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonJobAdvanceSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Advanced Search"
-        allif_data=common_shared_data(request)
-      
-        formats=CommonDocsFormatModel.objects.all()
-        datasorts=CommonDataSortsModel.objects.all()
-        allifqueryset=[]
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
+@allif_base_view_wrapper
+def commonWantToDeleteJob(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonJobsModel,"Delete this item",'allifmaalcommonapp/jobs/delete_job_confirm.html')
 
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        else:
-            firstDate=current_date
-            lastDate=current_date
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=CommonJobsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate)  & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-
-                    template_path='allifmaalcommonapp/jobs/job-search-pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                   "datasorts":datasorts,
-                   "formats":formats,
-                   "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="searched-result.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-               
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                    
-                    "title":title,
-                    "datasorts":datasorts,
-                   "formats":formats,
-                    }
-                    return render(request,'allifmaalcommonapp/jobs/jobs.html',context)
-                    
-                   
-            else:
-                searched_data=[]
-                context={
-                 "searched_data":searched_data,
-                "formats":formats,
-                "title":title,
-                "datashorts":datasorts,
-                "formats":formats,
-                }
-                return render(request,'allifmaalcommonapp/jobs/jobs.html',context)
-            
-        else:
-            searched_data=[]
-            context={
-            "searched_data":searched_data,
-            "formats":formats,
-            "title":title,
-            "datashorts":datasorts,
-            "formats":formats,
-            }
-            return render(request,'allifmaalcommonapp/jobs/jobs.html',context)
-           
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-@logged_in_user_must_have_profile
-@subscriber_company_status
 @logged_in_user_can_delete
-@logged_in_user_has_departmental_delete
+@allif_base_view_wrapper
 def commonDeleteJob(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        CommonJobsModel.objects.get(id=pk).delete()
-        return redirect('allifmaalcommonapp:commonJobs',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    return allif_delete_hanlder(request,model_name='CommonJobsModel',pk=pk,success_redirect_url_name='commonJobs')
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-   
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_access
-def commonAddJobDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Add Job Details"
-        allif_data=common_shared_data(request)
-       
-        allifquery=CommonJobsModel.objects.filter(id=pk).first()
-        form=CommonAddJobDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
-        if request.method =='POST':
-            form=CommonAddJobDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST,instance=allifquery)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalcommonapp:commonAddJobDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+@allif_base_view_wrapper
+def commonJobSearch(request,*allifargs,**allifkwargs):
+    return allif_search_handler(request,model_name='CommonJobsModel',search_fields_key='CommonJobsModel',
+    template_path='allifmaalcommonapp/jobs/jobs.html',search_input_name='allifsearchcommonfieldname',)
 
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=CommonAddJobDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
-        context={
-            "form":form,
-            "title":title,
-            "allifquery":allifquery,
-        }
-        return render(request,'allifmaalcommonapp/jobs/add-job-details.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
- 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_has_departmental_delete
+
+@allif_base_view_wrapper
+def commonJobAdvanceSearch(request,*allifargs,**allifkwargs):
+    # This view now simply calls the centralized advanced search handler
+    return allif_advance_search_handler(request,model_name='CommonJobsModel',advanced_search_config_key='CommonJobsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/jobs/jobs.html', # Template for HTML results
+        template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
+        #accounts/coa-search-pdf.html
+    )
+    
+@allif_base_view_wrapper
+def commonNewJobs(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
+    current_datetime=timezone.now().date().today()
+    job_year=current_datetime.year
+    last_job= CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('id').last()
+    last_obj=CommonJobsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
+    if last_obj:
+        last_obj_id=last_obj.id
+        last_obj_incremented=last_obj_id+1
+        jobNo= 'Job/'+str(uuid4()).split('-')[1]+'/'+str(last_obj_incremented)+'/'+str(job_year)
+    else:
+        jobNo= 'First/Job/'+str(uuid4()).split('-')[1]
+    newJobRef=CommonJobsModel.objects.create(number=jobNo,description="Job Description",company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg") or None,
+                division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+    newJobRef.save()
+    return redirect('allifmaalcommonapp:commonJobs',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
+
+
+@allif_base_view_wrapper
+def commonAddJobDetails(request, pk, *allifargs, **allifkwargs):
+    #allifquery= get_object_or_404(CommonInvoicesModel, id=pk) 
+    allifquery=CommonJobsModel.all_objects.filter(id=pk).first()
+    return allif_common_form_edit_and_save(request,pk,CommonAddJobDetailsForm,"Add Invoice Details",
+    'commonAddInvoiceDetails','allifmaalcommonapp/jobs/add-job-details.html',
+    redirect_with_pk=True,redirect_pk_value=pk,)
+    
+@allif_base_view_wrapper
 def commonAddJobItems(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Add Job Items"
-        allif_data=common_shared_data(request)
-       
-        allifquery=CommonJobsModel.objects.filter(id=pk).first()
-        form=CommonAddJobItemsForm(allif_data.get("main_sbscrbr_entity"))
-        allifqueryset= CommonJobItemsModel.objects.filter(jobitemconnector=allifquery)#this line helps to
-    
-        add_item= None
-        if request.method=='POST':
-            form=CommonAddJobItemsForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                add_item= form.save(commit=False)
-                add_item.jobitemconnector=allifquery
-                add_item.save()
-                return redirect('allifmaalcommonapp:commonAddJobItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    allif_data=common_shared_data(request)
+    #allifquery= get_object_or_404(CommonInvoicesModel, id=pk) 
+    allifquery=CommonInvoicesModel.all_objects.filter(id=pk).first()
+    allifqueryset=CommonInvoiceItemsModel.objects.filter(allifinvitemconnector=allifquery)
+   
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.allifinvitemconnector=allifquery
+    my_extra_context={"allifquery":allifquery,"allifqueryset": allifqueryset}
+    return allif_common_form_submission_and_save(request,form_class=CommonAddJobItemsForm,
+        title_text="Add Invoice Items",
+        success_redirect_url_name='commonAddInvoiceItems', # This URL expects a PK
+        template_path='allifmaalcommonapp/jobs/add-job-items.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
+        extra_context=my_extra_context,)
 
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+@allif_base_view_wrapper
+def commonEditJobsItems(request,pk,*allifargs,**allifkwargs):
+    title="Edit Invoice Item Details"
+    allif_data=common_shared_data(request)
+    
+    myquery=CommonInvoiceItemsModel.objects.filter(id=pk).first()
+    allifquery=myquery.allifinvitemconnector
+    allifqueryset=CommonInvoiceItemsModel.objects.filter(allifinvitemconnector=allifquery).order_by('-date')
+
+    form=CommonAddInvoiceItemsForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
+    if request.method=='POST':
+        form=CommonAddInvoiceItemsForm(allif_data.get("main_sbscrbr_entity"), request.POST, instance=myquery)
+        if form.is_valid():
+            obj=form.save(commit=False)
+            obj.save()
+            return redirect('allifmaalcommonapp:commonAddInvoiceItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
         else:
-            form=CommonAddJobItemsForm(allif_data.get("main_sbscrbr_entity"))
-
-        context={
-            
-            "form":form,
-            "title":title,
-            "allifquery":allifquery,
-            "allifqueryset":allifqueryset
-        }
-        return render(request,'allifmaalcommonapp/jobs/add-job-items.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+            error_message=form.errors
+            allifcontext={"error_message":error_message,"title":title,}
+            return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+    else:
+        myquery=CommonInvoiceItemsModel.objects.filter(id=pk).first()
+        allifquery=myquery.allifinvitemconnector
+        allifqueryset=CommonInvoiceItemsModel.objects.filter(allifinvitemconnector=allifquery).order_by('-date')
+        form=CommonAddInvoiceItemsForm(allif_data.get("main_sbscrbr_entity"), instance=myquery)
     
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_can_delete
-def commonWantToDeleteJob(request,pk,*allifargs,**allifkwargs): 
-    try:
-        allifquery=CommonJobsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete"
-        context={
-        "title":title,
-        "allifquery":allifquery,
-        }
-        return render(request,'allifmaalcommonapp/jobs/delete_job_confirm.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonWantToDeleteJobItem(request,pk,*allifargs,**allifkwargs): 
-    try:
-        allifquery=CommonJobItemsModel.objects.filter(id=pk).first()
-        
-        title="Are you sure to delete"
-        context={
-        "title":title,
-        "allifquery":allifquery,
-       
-        }
-        return render(request,'allifmaalcommonapp/jobs/add-job-items.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context) 
-       
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+    context={"title":title,"form":form,"allifquery":allifquery,
+                "allifqueryset":allifqueryset,"myquery":myquery,}
+    return render(request,'allifmaalcommonapp/invoices/add-inv-items.html',context)
+ 
+ 
+ 
+@allif_base_view_wrapper
 def commonDeleteJobItem(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        myallifquery=CommonJobItemsModel.objects.filter(id=pk).first()
-        allifquery=myallifquery.jobitemconnector
-        myallifquery.delete()
-        return redirect('allifmaalcommonapp:commonAddJobItems',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+    #query=get_object_or_404(CommonInvoiceItemsModel, id=pk)
+    query=CommonJobItemsModel.all_objects.filter(id=pk).first()
+    allifquery=query.allifinvitemconnector.id
+    return allif_delete_hanlder(request,model_name='CommonInvoiceItemsModel',
+    pk=pk,success_redirect_url_name='commonAddJobItems',redirect_with_pk=True,redirect_pk_value=allifquery)
 
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+
+
+@allif_base_view_wrapper
 def commonInvoiceJob(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Invoice Job"
-        allif_data=common_shared_data(request)
-        form=CommonAddJobItemsForm(allif_data.get("main_sbscrbr_entity"))
-     
-        allifquery=CommonJobsModel.objects.filter(id=pk).first()
-       
-        allifqueryset=CommonJobItemsModel.objects.filter(jobitemconnector=allifquery)
-    
-        context={
-        "allifquery":allifquery,
-        "allifqueryset":allifqueryset,
-        "title":title,
-        "form":form,
-            
-        }
-        
-        return render(request,'allifmaalcommonapp/jobs/invoice-job.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonJobInvoicePdf(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Job Invoice Pdf"
-        allif_data=common_shared_data(request)
-        system_user=request.user
-        my_job_id=CommonJobsModel.objects.get(id=pk)
-        job_Items =CommonJobItemsModel.objects.filter(jobitemconnector=my_job_id)
-        myuplift=0
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-    
-        template_path = 'allifmaalcommonapp/jobs/job-inv-pdf.html'
-    
-        context={
-            "my_job_id":my_job_id,
-            "job_Items":job_Items,
-            "myuplift":myuplift,
-        
-            "system_user":system_user,
-            "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-            "title":title,
-            "scopes":scopes,
-
-            
-        }
-        
-        
-     
-        response = HttpResponse(content_type='application/pdf') # this opens on the same page
-        response = HttpResponse(content_type='application/doc')
-        response['Content-Disposition'] = 'filename="searched-result.pdf"'
-        template = get_template(template_path)
-        html = template.render(context)
-
-        # create a pdf
-        try:
-            pisa_status = pisa.CreatePDF(
-        html, dest=response)
-        except:
-            return HttpResponse("Something went wrong!")
-        # if error then show some funy view
-        if pisa_status.err:
-            return HttpResponse('We had some errors <pre>' + html + '</pre>')
-        
-        return response
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allif_data=common_shared_data(request)
+    #allifquery= get_object_or_404(CommonInvoicesModel, id=pk) 
+    allifquery=CommonInvoicesModel.all_objects.filter(id=pk).first()
+    allifqueryset=CommonInvoiceItemsModel.objects.filter(allifinvitemconnector=allifquery)
+   
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.allifinvitemconnector=allifquery
+    my_extra_context={"allifquery":allifquery,"allifqueryset": allifqueryset}
+    return allif_common_form_submission_and_save(request,form_class=CommonAddJobItemsForm,
+        title_text="Add Invoice Items",
+        success_redirect_url_name='commonAddInvoiceItems', # This URL expects a PK
+        template_path='allifmaalcommonapp/jobs/invoice-job.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
+        extra_context=my_extra_context,)
 
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-def commonJobTransactionReportpdf(request,pk,*allifargs,**allifkwargs):
-    try:
-        title="Job Invoice Pdf"
-        allif_data=common_shared_data(request)
-        system_user=request.user
-        my_job_id=CommonJobsModel.objects.get(id=pk)
-        job_Items =CommonJobItemsModel.objects.filter(jobitemconnector=my_job_id)
-        myuplift=0
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-        allif_data=common_shared_data(request)
-        system_user=request.user
-        my_job_id=CommonJobsModel.objects.get(id=pk)
-        job_Items =CommonJobItemsModel.objects.filter(jobitemconnector=my_job_id)
-        myuplift=0
-    
-        template_path = 'allifmaalcommonapp/jobs/job-trans-report-pdf.html'
-    
-        context={
-            "my_job_id":my_job_id,
-            "job_Items":job_Items,
-            "myuplift":myuplift,
-        
-            "system_user":system_user,
-            "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-            "title":title,
-            "scopes":scopes,
+@allif_base_view_wrapper
+def commonJobInvoicePdf(request, pk, *allifargs, **allifkwargs):
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonJobsModel',)
 
-            
-        }
-        
-        
-     
-        response = HttpResponse(content_type='application/pdf') # this opens on the same page
-        response = HttpResponse(content_type='application/doc')
-        response['Content-Disposition'] = 'filename="searched-result.pdf"'
-        template = get_template(template_path)
-        html = template.render(context)
 
-        # create a pdf
-        try:
-            pisa_status = pisa.CreatePDF(
-        html, dest=response)
-        except:
-            return HttpResponse("Something went wrong!")
-        # if error then show some funy view
-        if pisa_status.err:
-            return HttpResponse('We had some errors <pre>' + html + '</pre>')
-        
-        return response
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
+@allif_base_view_wrapper
+def commonJobTransactionReportpdf(request, pk, *allifargs, **allifkwargs):
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonJobsModel',)
 
 ################################## TASKS ###########################################
 @logged_in_user_must_have_profile

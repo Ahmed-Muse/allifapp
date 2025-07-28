@@ -197,7 +197,7 @@ path('User/Is/Allifmaal/Admin/<str:pk>/', views.commonUserAllifaamlAdmin, name="
 path('Staff/Profiles/<str:allifusr>/<str:allifslug>/Main/List/', views.commonStaffProfiles, name="commonStaffProfiles"),
 path('Add/New/Staff/Profile/Details/<str:allifusr>/<str:allifslug>/', views.commonAddStaffProfile, name="commonAddStaffProfile"),
 path('Edit/Staff/Profile/Details/<int:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditStaffProfile, name="commonEditStaffProfile"),
-path('View/Employee/Profile/Details/<str:allifslug>/<str:allifusr>/<str:allifslugstaff>/', views.commonStaffProfileDetails, name="commonStaffProfileDetails"),
+path('View/Employee/Profile/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonStaffProfileDetails, name="commonStaffProfileDetails"),
 path('Delete/Profile/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteProfile, name="commonDeleteProfile"),
 path('Want/Tp/Delete/Profile/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteProfile, name="commonWantToDeleteProfile"),
 path('Search/For/Employee/Profile/Details/HRM/Staff/Details/<str:allifusr>/<str:allifslug>/', views.commonProfileSearch, name="commonProfileSearch"),
@@ -508,7 +508,7 @@ path('Supplier/Payments/<str:allifusr>/<str:allifslug>/', views.commonSupplierPa
 path('Supplier/Payment/Processing/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonPaySupplier, name="commonPaySupplier"),
 path('Delete/Supplier/Payment/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteSupplierPayment, name="commonDeleteSupplierPayment"),
 path('Supplier/Payment/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonSupplierPaymentDetails, name="commonSupplierPaymentDetails"),
-path('Edit/Supplier/Payment/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditSupplierPayment, name="commonEditSupplierPayment"),
+
 path('Post/Supplier/Payment/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostSupplierPayment, name="commonPostSupplierPayment"),
 path('Posted/Supplier/Payments/<str:allifusr>/<str:allifslug>/', views.commonPostedSupplierPayments, name="commonPostedSupplierPayments"),
 path('Pay/Supplier/<str:allifusr>/<str:allifslug>/', views.commonPaySupplierDirect, name="commonPaySupplierDirect"),
@@ -520,7 +520,7 @@ path('Advanced/Search/For/Supplier/Payment/Details/<str:allifusr>/<str:allifslug
 ######################### customer payments and statments ########################
 path('Customer/Payments/<str:allifusr>/<str:allifslug>/', views.commonCustomerPayments, name="commonCustomerPayments"),
 path('Customer/Payment/Processing/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonTopUpCustomerAccount, name="commonTopUpCustomerAccount"),
-path('Edit/Customer/Payment/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCustomerPayment, name="commonEditCustomerPayment"),
+
 path('Delete/Customer/Payment/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteCustomerPayment, name="commonDeleteCustomerPayment"),
 path('Customer/Payment/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCustomerPaymentDetails, name="commonCustomerPaymentDetails"),
 path('Post/Customer/Payment/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostCustomerPayment, name="commonPostCustomerPayment"),
@@ -556,7 +556,6 @@ path('Job/Transactions/Report/<str:pk>/<str:allifusr>/<str:allifslug>/', views.c
 path('Search/For/Job/Details/Basic/Search/<str:allifusr>/<str:allifslug>/', views.commonJobSearch, name="commonJobSearch"),
 path('Advanced/Search/For/Jobs/Details/<str:allifusr>/<str:allifslug>/', views.commonJobAdvanceSearch, name="commonJobAdvanceSearch"),
 path('Want/To/Delete/This/Job/Entry/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/From/List/', views.commonWantToDeleteJob, name="commonWantToDeleteJob"),
-path('Want/To/Delete/This/Job/Item/Entries/From/This/Job/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/From/List/', views.commonWantToDeleteJobItem, name="commonWantToDeleteJobItem"),
 
 #############################3 TASKS #########################
 path('Tasks/<str:allifusr>/<str:allifslug>/', views.commonTasks, name="commonTasks"),

@@ -111,11 +111,35 @@ allif_sector_contextual_action_require_pk_links= {
     {'name': 'DeleteLedgerEntryConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteLedgerEntry', 'requires_pk': True},
     {'name': 'DeleteLedgerEntry', 'url_name': 'allifmaalcommonapp:commonDeleteLedgerEntry', 'requires_pk': True},
     
+    {'name': 'PaySupplier', 'url_name': 'allifmaalcommonapp:commonPaySupplier', 'requires_pk': True},
+    {'name': 'DeleteSupplierPaymentConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSupplierPayment', 'requires_pk': True},
+    {'name': 'DeleteSupplierPayment', 'url_name': 'allifmaalcommonapp:commonDeleteSupplierPayment', 'requires_pk': True},
+    {'name': 'SupplierPaymentDetails', 'url_name': 'allifmaalcommonapp:commonSupplierPaymentDetails', 'requires_pk': True},
     
+    {'name': 'PostSupplierPayment', 'url_name': 'allifmaalcommonapp:commonPostSupplierPayment', 'requires_pk': True},
+    
+     {'name': 'SupplierPaymentPdf', 'url_name': 'allifmaalcommonapp:commonSupplierStatementpdf', 'requires_pk': True},
+   
+   
+   {'name': 'DeleteCustomerPayment', 'url_name': 'allifmaalcommonapp:commonDeleteCustomerPayment', 'requires_pk': True},
+   
+   {'name': 'CustomerPaymentDetails', 'url_name': 'allifmaalcommonapp:commonCustomerPaymentDetails', 'requires_pk': True},
+   
+   {'name': 'PostCustomerPayment', 'url_name': 'allifmaalcommonapp:commonPostCustomerPayment', 'requires_pk': True},
+   
+   {'name': 'CustomerStatementPdf', 'url_name': 'allifmaalcommonapp:commonCustomerStatementpdf', 'requires_pk': True},
+   
+   {'name': 'DeleteCustomerPaymentConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCustomerPayment', 'requires_pk': True},
+   
+   {'name': 'SalaryDetails', 'url_name': 'allifmaalcommonapp:commonSalaryDetails', 'requires_pk': True},
+   {'name': 'EditSalary', 'url_name': 'allifmaalcommonapp:commonEditSalaryDetails', 'requires_pk': True},
+   {'name': 'PostSalary', 'url_name': 'allifmaalcommonapp:commonPostSalary', 'requires_pk': True},
+   
+   {'name': 'DeleteSalaryConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSalary', 'requires_pk': True},
+   
      
    
-
-
+   
    
     ],
     

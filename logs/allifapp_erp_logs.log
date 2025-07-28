@@ -23794,3 +23794,1983 @@ INFO 2025-07-27 23:10:23,642 autoreload 27948 36804 C:\am\allifapp\allifapperp\a
 INFO 2025-07-27 23:10:24,577 autoreload 2328 39248 Watching for file changes with StatReloader
 INFO 2025-07-27 23:10:47,739 autoreload 2328 39248 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
 INFO 2025-07-27 23:10:48,943 autoreload 16120 32256 Watching for file changes with StatReloader
+INFO 2025-07-28 06:24:22,051 autoreload 24292 20216 Watching for file changes with StatReloader
+INFO 2025-07-28 06:26:25,010 autoreload 24292 20216 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:26:26,747 autoreload 38284 23232 Watching for file changes with StatReloader
+INFO 2025-07-28 06:27:31,845 autoreload 38284 23232 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 06:27:33,368 autoreload 18896 35532 Watching for file changes with StatReloader
+INFO 2025-07-28 06:30:34,867 autoreload 18896 35532 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:30:36,756 autoreload 38320 37220 Watching for file changes with StatReloader
+ERROR 2025-07-28 06:30:41,380 log 38320 35160 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.all_objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+WARNING 2025-07-28 06:30:41,692 log 38320 35160 Not Found: /favicon.ico
+INFO 2025-07-28 06:31:31,573 autoreload 38320 37220 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:31:33,115 autoreload 32656 3924 Watching for file changes with StatReloader
+ERROR 2025-07-28 06:31:36,086 log 32656 24456 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3220, in commonStaffProfileDetails
+    return render(request,'allifmaalcommonapp/hrm/profiles/profile-details.html',context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonEditStaffProfile' with arguments '('', 'user-full-names-b86293ea7826', 'barasho-hospital2116-5691dc1aadae')' not found. 1 pattern(s) tried: ['Edit/Staff/Profile/Details/(?P<pk>[0-9]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-07-28 06:31:51,629 autoreload 32656 3924 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:31:53,186 autoreload 37872 19880 Watching for file changes with StatReloader
+INFO 2025-07-28 06:32:05,244 autoreload 37872 19880 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:32:06,903 autoreload 8124 24768 Watching for file changes with StatReloader
+ERROR 2025-07-28 06:32:09,661 log 8124 18676 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.all_objects.filter(pk=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+INFO 2025-07-28 06:32:45,183 autoreload 8124 24768 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:32:46,856 autoreload 23752 30780 Watching for file changes with StatReloader
+INFO 2025-07-28 06:33:17,381 autoreload 23752 30780 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 06:33:18,831 autoreload 35384 35376 Watching for file changes with StatReloader
+WARNING 2025-07-28 06:33:21,326 log 35384 25260 Not Found: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+INFO 2025-07-28 06:34:52,016 autoreload 35384 35376 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 06:34:53,386 autoreload 24960 18392 Watching for file changes with StatReloader
+INFO 2025-07-28 06:35:01,246 autoreload 24960 18392 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 06:35:03,004 autoreload 32740 21384 Watching for file changes with StatReloader
+ERROR 2025-07-28 06:35:07,678 log 32740 30572 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.all_objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+ERROR 2025-07-28 06:36:02,294 log 32740 30572 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.all_objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+INFO 2025-07-28 06:36:18,160 autoreload 32740 21384 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:36:20,015 autoreload 32080 20700 Watching for file changes with StatReloader
+ERROR 2025-07-28 06:36:24,060 log 32080 25856 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+ERROR 2025-07-28 06:36:25,853 log 32080 25856 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+INFO 2025-07-28 06:36:36,649 autoreload 32080 20700 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:36:38,741 autoreload 19356 39940 Watching for file changes with StatReloader
+INFO 2025-07-28 06:38:45,075 autoreload 19356 39940 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:38:46,622 autoreload 25728 40220 Watching for file changes with StatReloader
+ERROR 2025-07-28 06:38:56,880 utils 25728 31384 Critical error in allif_common_detail_view for CommonEmployeesModel (PK: barasho-hospital-2116-86d99698a99e-ahmed-muse): Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1879, in allif_common_detail_view
+    allifquery = model_class.objects.filter(pk=pk).first()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+INFO 2025-07-28 06:39:17,381 autoreload 25728 40220 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:39:19,115 autoreload 32876 40304 Watching for file changes with StatReloader
+ERROR 2025-07-28 06:39:21,714 log 32876 29260 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.all_objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+ERROR 2025-07-28 06:40:00,110 log 32876 29260 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.all_objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+ERROR 2025-07-28 06:40:01,781 log 32876 29260 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.all_objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+INFO 2025-07-28 06:40:46,608 autoreload 32876 40304 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 06:40:48,432 autoreload 38544 31596 Watching for file changes with StatReloader
+WARNING 2025-07-28 06:40:52,294 log 38544 6472 Not Found: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+WARNING 2025-07-28 06:40:53,078 log 38544 6472 Not Found: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+INFO 2025-07-28 06:42:07,112 autoreload 38544 31596 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 06:42:08,871 autoreload 30076 22432 Watching for file changes with StatReloader
+ERROR 2025-07-28 06:42:13,092 log 30076 40104 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.all_objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+ERROR 2025-07-28 06:43:02,580 log 30076 40104 Internal Server Error: /View/Employee/Profile/Details/barasho-hospital-2116-86d99698a99e-ahmed-muse/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'barasho-hospital-2116-86d99698a99e-ahmed-muse'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3214, in commonStaffProfileDetails
+    allifquery=CommonEmployeesModel.all_objects.filter(id=pk).first()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'barasho-hospital-2116-86d99698a99e-ahmed-muse'.
+ERROR 2025-07-28 06:43:06,606 log 30076 40104 Internal Server Error: /View/Employee/Profile/Details/2/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 3220, in commonStaffProfileDetails
+    return render(request,'allifmaalcommonapp/hrm/profiles/profile-details.html',context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonEditStaffProfile' with arguments '('', 'user-full-names-b86293ea7826', 'barasho-hospital2116-5691dc1aadae')' not found. 1 pattern(s) tried: ['Edit/Staff/Profile/Details/(?P<pk>[0-9]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-07-28 06:46:35,257 autoreload 30076 22432 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:46:37,227 autoreload 24088 30716 Watching for file changes with StatReloader
+WARNING 2025-07-28 06:46:42,535 utils 24088 27084 Object of type CommonGeneralLedgersModel with PK 2 not found.
+INFO 2025-07-28 06:46:58,757 autoreload 24088 30716 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:47:00,335 autoreload 11212 32744 Watching for file changes with StatReloader
+INFO 2025-07-28 06:47:23,171 autoreload 11212 32744 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:47:24,896 autoreload 34752 12616 Watching for file changes with StatReloader
+INFO 2025-07-28 06:49:45,970 autoreload 34752 12616 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:49:47,693 autoreload 35616 1444 Watching for file changes with StatReloader
+INFO 2025-07-28 06:50:21,087 autoreload 35616 1444 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 06:50:22,875 autoreload 39260 24196 Watching for file changes with StatReloader
+INFO 2025-07-28 07:04:13,999 autoreload 39260 24196 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:04:15,585 autoreload 22652 7164 Watching for file changes with StatReloader
+INFO 2025-07-28 07:04:48,677 autoreload 22652 7164 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:04:50,905 autoreload 40864 21524 Watching for file changes with StatReloader
+INFO 2025-07-28 07:06:27,158 autoreload 40864 21524 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 07:06:28,778 autoreload 31056 25884 Watching for file changes with StatReloader
+INFO 2025-07-28 07:06:46,987 autoreload 31056 25884 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 07:06:48,737 autoreload 21820 32312 Watching for file changes with StatReloader
+INFO 2025-07-28 07:07:48,720 autoreload 21820 32312 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:07:50,306 autoreload 33456 13272 Watching for file changes with StatReloader
+INFO 2025-07-28 07:09:23,518 autoreload 33456 13272 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 07:09:25,014 autoreload 12332 2104 Watching for file changes with StatReloader
+INFO 2025-07-28 07:10:23,788 autoreload 12332 2104 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-28 07:10:25,315 autoreload 33260 29056 Watching for file changes with StatReloader
+INFO 2025-07-28 07:11:28,338 autoreload 33260 29056 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:11:29,804 autoreload 23672 13820 Watching for file changes with StatReloader
+INFO 2025-07-28 07:20:22,341 autoreload 23672 13820 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:20:23,971 autoreload 40680 28728 Watching for file changes with StatReloader
+INFO 2025-07-28 07:21:07,040 autoreload 40680 28728 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:21:08,428 autoreload 38844 16348 Watching for file changes with StatReloader
+INFO 2025-07-28 07:25:49,475 autoreload 38844 16348 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:25:51,057 autoreload 33832 14808 Watching for file changes with StatReloader
+INFO 2025-07-28 07:28:06,000 autoreload 33832 14808 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 07:28:07,747 autoreload 12204 26116 Watching for file changes with StatReloader
+INFO 2025-07-28 07:28:28,686 autoreload 12204 26116 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:28:30,054 autoreload 37508 37528 Watching for file changes with StatReloader
+INFO 2025-07-28 07:29:19,833 autoreload 37508 37528 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:29:21,391 autoreload 40596 26632 Watching for file changes with StatReloader
+INFO 2025-07-28 07:31:35,478 autoreload 40596 26632 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:31:37,175 autoreload 28448 17888 Watching for file changes with StatReloader
+ERROR 2025-07-28 07:31:45,822 log 28448 11212 Internal Server Error: /Supplier/Payment/Processing/4/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/Now/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 6163, in commonPaySupplier
+    return allif_common_form_submission_and_save(request,form_class=CommonAddSupplierPaymentForm,
+        title_text="Add Supplier Payment",
+    ...<2 lines>...
+        pre_save_callback=transaction_item_pre_save,
+        extra_context=my_extra_context,)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1856, in allif_common_form_submission_and_save
+    form = form_class(*form_args, initial=initial_data)
+TypeError: CommonAddSupplierPaymentForm.__init__() missing 1 required positional argument: 'dept'
+INFO 2025-07-28 07:34:47,405 autoreload 28448 17888 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:34:48,921 autoreload 31372 21580 Watching for file changes with StatReloader
+ERROR 2025-07-28 07:34:52,086 log 31372 32008 Internal Server Error: /Supplier/Payment/Processing/4/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/Now/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 6163, in commonPaySupplier
+    return allif_common_form_submission_and_save(request,form_class=CommonAddSupplierPaymentForm,
+        title_text="Add Supplier Payment",
+    ...<2 lines>...
+        pre_save_callback=transaction_item_pre_save,
+        extra_context=my_extra_context,)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1856, in allif_common_form_submission_and_save
+    form = form_class(*form_args, initial=initial_data)
+TypeError: CommonAddSupplierPaymentForm.__init__() missing 1 required positional argument: 'dept'
+INFO 2025-07-28 07:36:02,754 autoreload 31372 21580 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-28 07:36:04,399 autoreload 35776 32568 Watching for file changes with StatReloader
+INFO 2025-07-28 07:38:37,522 autoreload 35776 32568 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-28 07:38:39,008 autoreload 27016 17032 Watching for file changes with StatReloader
+INFO 2025-07-28 07:39:12,908 autoreload 27016 17032 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-28 07:39:14,497 autoreload 21472 22040 Watching for file changes with StatReloader
+ERROR 2025-07-28 07:39:16,672 log 21472 23024 Internal Server Error: /Supplier/Payment/Processing/4/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/Now/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 6163, in commonPaySupplier
+    return allif_common_form_submission_and_save(request,form_class=CommonAddSupplierPaymentForm,
+        title_text="Add Supplier Payment",
+    ...<2 lines>...
+        pre_save_callback=transaction_item_pre_save,
+        extra_context=my_extra_context,)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1856, in allif_common_form_submission_and_save
+    form = form_class(*form_args, initial=initial_data)
+TypeError: CommonAddSupplierPaymentForm.__init__() missing 1 required positional argument: 'dept'
+INFO 2025-07-28 07:39:34,102 autoreload 21472 22040 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-28 07:39:35,580 autoreload 488 12480 Watching for file changes with StatReloader
+INFO 2025-07-28 07:40:02,753 autoreload 488 12480 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-28 07:40:04,329 autoreload 30252 27332 Watching for file changes with StatReloader
+INFO 2025-07-28 07:41:17,057 autoreload 30252 27332 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:41:18,747 autoreload 29828 9388 Watching for file changes with StatReloader
+INFO 2025-07-28 07:42:13,004 autoreload 29828 9388 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:42:14,876 autoreload 24436 37152 Watching for file changes with StatReloader
+INFO 2025-07-28 07:42:27,599 autoreload 24436 37152 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:42:29,511 autoreload 34744 35984 Watching for file changes with StatReloader
+INFO 2025-07-28 07:46:19,887 autoreload 34744 35984 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:46:21,414 autoreload 8364 14048 Watching for file changes with StatReloader
+INFO 2025-07-28 07:47:25,671 autoreload 8364 14048 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:47:27,214 autoreload 33136 17228 Watching for file changes with StatReloader
+INFO 2025-07-28 07:48:29,193 autoreload 33136 17228 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 07:48:30,633 autoreload 22776 19584 Watching for file changes with StatReloader
+INFO 2025-07-28 07:50:36,679 autoreload 22776 19584 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:50:38,119 autoreload 34864 38704 Watching for file changes with StatReloader
+INFO 2025-07-28 07:59:52,638 autoreload 34864 38704 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 07:59:54,268 autoreload 26632 9600 Watching for file changes with StatReloader
+INFO 2025-07-28 08:01:51,174 autoreload 26632 9600 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 08:01:53,245 autoreload 31276 13712 Watching for file changes with StatReloader
+INFO 2025-07-28 08:04:58,913 autoreload 31276 13712 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 08:05:00,934 autoreload 21564 228 Watching for file changes with StatReloader
+INFO 2025-07-28 08:05:24,601 autoreload 21564 228 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 08:05:26,627 autoreload 4344 29624 Watching for file changes with StatReloader
+INFO 2025-07-28 08:06:48,609 autoreload 4344 29624 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 08:06:51,073 autoreload 12476 13028 Watching for file changes with StatReloader
+INFO 2025-07-28 17:55:52,052 autoreload 31764 17736 Watching for file changes with StatReloader
+INFO 2025-07-28 18:04:17,933 autoreload 31764 17736 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 18:04:19,503 autoreload 33860 32980 Watching for file changes with StatReloader
+INFO 2025-07-28 18:04:23,161 autoreload 33860 32980 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 18:04:24,681 autoreload 32656 26308 Watching for file changes with StatReloader
+INFO 2025-07-28 18:04:28,403 autoreload 32656 26308 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 18:04:29,347 autoreload 16220 20128 Watching for file changes with StatReloader
+INFO 2025-07-28 18:06:54,955 autoreload 16220 20128 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 18:06:56,057 autoreload 20992 22868 Watching for file changes with StatReloader
+INFO 2025-07-28 18:08:08,430 autoreload 20992 22868 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 18:08:09,559 autoreload 39924 38776 Watching for file changes with StatReloader
+INFO 2025-07-28 18:11:26,981 autoreload 39924 38776 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 18:11:28,201 autoreload 20872 18628 Watching for file changes with StatReloader
+INFO 2025-07-28 18:11:37,475 autoreload 20872 18628 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 18:11:38,536 autoreload 4212 22656 Watching for file changes with StatReloader
+INFO 2025-07-28 18:12:05,557 autoreload 4212 22656 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 18:12:06,678 autoreload 39092 31768 Watching for file changes with StatReloader
+INFO 2025-07-28 18:12:13,653 autoreload 39092 31768 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 18:12:14,650 autoreload 34872 21784 Watching for file changes with StatReloader
+INFO 2025-07-28 18:14:40,647 autoreload 34872 21784 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 18:14:42,002 autoreload 28396 12788 Watching for file changes with StatReloader
+INFO 2025-07-28 19:04:47,369 autoreload 28396 12788 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 19:04:49,616 autoreload 34832 40272 Watching for file changes with StatReloader
+INFO 2025-07-28 19:10:51,982 autoreload 40172 2748 Watching for file changes with StatReloader
+INFO 2025-07-28 19:33:18,384 autoreload 40172 2748 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 19:33:19,724 autoreload 39224 21576 Watching for file changes with StatReloader
+INFO 2025-07-28 19:34:00,029 autoreload 39224 21576 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-28 19:34:01,238 autoreload 1340 28260 Watching for file changes with StatReloader
+INFO 2025-07-28 19:38:33,198 autoreload 1340 28260 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 19:38:34,668 autoreload 11972 40684 Watching for file changes with StatReloader
+INFO 2025-07-28 19:39:09,170 autoreload 11972 40684 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 19:39:10,339 autoreload 33160 18688 Watching for file changes with StatReloader
+INFO 2025-07-28 19:39:16,335 autoreload 33160 18688 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 19:39:17,344 autoreload 37176 7580 Watching for file changes with StatReloader
+INFO 2025-07-28 19:59:04,260 autoreload 37176 7580 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 19:59:05,800 autoreload 33328 26176 Watching for file changes with StatReloader
+INFO 2025-07-28 20:00:23,508 autoreload 33328 26176 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 20:00:24,540 autoreload 36696 13136 Watching for file changes with StatReloader
+WARNING 2025-07-28 20:01:54,235 tables 36696 17340 <table> is empty
+'<tbody> </tbody>'
+INFO 2025-07-28 20:04:42,109 autoreload 36696 13136 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 20:04:43,144 autoreload 27604 12336 Watching for file changes with StatReloader
+INFO 2025-07-28 20:04:46,970 autoreload 27604 12336 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 20:04:48,077 autoreload 20792 36360 Watching for file changes with StatReloader
+INFO 2025-07-28 20:07:27,411 autoreload 21912 37244 Watching for file changes with StatReloader
+INFO 2025-07-28 20:08:19,460 autoreload 21912 37244 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:08:20,535 autoreload 13812 5144 Watching for file changes with StatReloader
+INFO 2025-07-28 20:08:29,877 autoreload 13812 5144 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:08:31,316 autoreload 21592 28788 Watching for file changes with StatReloader
+WARNING 2025-07-28 20:08:33,593 log 21592 24340 Not Found: /Supplier/Payment/Details/3/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+WARNING 2025-07-28 20:08:33,665 log 21592 24340 Not Found: /favicon.ico
+WARNING 2025-07-28 20:09:12,412 log 21592 24340 Not Found: /Supplier/Payment/Details/5/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+WARNING 2025-07-28 20:09:33,312 log 21592 24340 Not Found: /Supplier/Payment/Details/5/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+WARNING 2025-07-28 20:09:59,182 log 21592 24340 Not Found: /Supplier/Payment/Details/5/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+INFO 2025-07-28 20:11:09,112 autoreload 21592 28788 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 20:11:10,469 autoreload 39612 29920 Watching for file changes with StatReloader
+WARNING 2025-07-28 20:11:14,231 log 39612 31932 Not Found: /Supplier/Payment/Details/5/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+WARNING 2025-07-28 20:11:24,522 log 39612 31932 Not Found: /Supplier/Payment/Details/5/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+WARNING 2025-07-28 20:11:56,326 log 39612 31932 Not Found: /Supplier/Payment/Details/5/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+INFO 2025-07-28 20:12:09,754 autoreload 39612 29920 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:12:10,795 autoreload 39428 19880 Watching for file changes with StatReloader
+INFO 2025-07-28 20:12:59,937 autoreload 39428 19880 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:13:01,406 autoreload 26912 24948 Watching for file changes with StatReloader
+INFO 2025-07-28 20:13:06,035 autoreload 26912 24948 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:13:07,361 autoreload 18384 18796 Watching for file changes with StatReloader
+INFO 2025-07-28 20:14:26,453 autoreload 18384 18796 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:14:27,693 autoreload 8272 12052 Watching for file changes with StatReloader
+INFO 2025-07-28 20:28:34,150 autoreload 8272 12052 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:28:35,582 autoreload 2216 6580 Watching for file changes with StatReloader
+INFO 2025-07-28 20:28:44,716 autoreload 2216 6580 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:28:46,031 autoreload 28112 26104 Watching for file changes with StatReloader
+INFO 2025-07-28 20:30:29,202 autoreload 28112 26104 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:30:30,871 autoreload 30532 20032 Watching for file changes with StatReloader
+ERROR 2025-07-28 20:30:34,317 log 30532 4608 Internal Server Error: /Post/Supplier/Payment/5/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 6227, in commonPostSupplierPayment
+    allifsup=allifquery.supplier.id
+             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'supplier'
+ERROR 2025-07-28 20:31:11,242 log 30532 4608 Internal Server Error: /Post/Supplier/Payment/2/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 6227, in commonPostSupplierPayment
+    allifsup=allifquery.supplier.id
+             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'supplier'
+ERROR 2025-07-28 20:32:06,554 log 30532 4608 Internal Server Error: /Post/Supplier/Payment/2/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 6227, in commonPostSupplierPayment
+    allifsup=allifquery.supplier.id
+             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'supplier'
+INFO 2025-07-28 20:33:24,293 autoreload 30532 20032 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:33:25,564 autoreload 39660 35680 Watching for file changes with StatReloader
+WARNING 2025-07-28 20:35:54,536 tables 39660 37704 <table> is empty
+'<tbody> </tbody>'
+WARNING 2025-07-28 20:37:08,872 tables 39660 37704 <table> is empty
+'<tbody> </tbody>'
+INFO 2025-07-28 20:39:25,454 autoreload 39660 35680 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:39:26,582 autoreload 19248 23112 Watching for file changes with StatReloader
+INFO 2025-07-28 20:40:15,489 autoreload 19248 23112 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:40:16,707 autoreload 4880 15824 Watching for file changes with StatReloader
+INFO 2025-07-28 20:41:12,662 autoreload 4880 15824 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 20:41:13,752 autoreload 21972 25944 Watching for file changes with StatReloader
+INFO 2025-07-28 20:47:05,325 autoreload 21972 25944 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 20:47:06,408 autoreload 15928 15816 Watching for file changes with StatReloader
+INFO 2025-07-28 20:47:42,082 autoreload 15928 15816 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 20:47:43,254 autoreload 28928 30528 Watching for file changes with StatReloader
+INFO 2025-07-28 20:47:49,239 autoreload 28928 30528 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 20:47:50,166 autoreload 20128 23924 Watching for file changes with StatReloader
+INFO 2025-07-28 20:51:45,969 autoreload 20128 23924 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:51:47,552 autoreload 36388 17824 Watching for file changes with StatReloader
+ERROR 2025-07-28 20:51:49,858 log 36388 24588 Internal Server Error: /Advanced/Search/For/Customer/Payment/Details/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 6322, in commonCustomerPaymentAdvanceSearch
+    return allif_advance_search_handler(request,model_name='CommonCustomerPaymentsModel',advanced_search_config_key='CommonCustomerPaymentsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/payments/customers/customer-payments.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 2359, in allif_advance_search_handler
+    first_item_by_date = base_queryset.order_by(date_field).first()
+                         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1659, in order_by
+    obj.query.add_ordering(*field_names)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 2222, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1725, in names_to_path
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Cannot resolve keyword 'payment_date' into field. Choices are: amount, balance, branch, branch_id, code, comments, company, company_id, customer, customer_id, date, delete_status, department, department_id, description, division, division_id, ends, id, last_updated, mode, mode_id, name, number, operation_term, operation_term_id, operation_year, operation_year_id, owner, owner_id, priority, quantity, reference, starts, status, updated_by, updated_by_id, uuid
+INFO 2025-07-28 20:55:45,747 autoreload 36388 17824 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 20:55:46,994 autoreload 33928 19636 Watching for file changes with StatReloader
+INFO 2025-07-28 20:55:55,515 autoreload 33928 19636 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:55:57,403 autoreload 31816 17060 Watching for file changes with StatReloader
+INFO 2025-07-28 20:56:41,559 autoreload 31816 17060 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 20:56:42,798 autoreload 25304 28436 Watching for file changes with StatReloader
+INFO 2025-07-28 20:57:11,351 autoreload 25304 28436 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 20:57:12,674 autoreload 22684 6504 Watching for file changes with StatReloader
+INFO 2025-07-28 21:06:58,037 autoreload 22684 6504 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 21:06:59,596 autoreload 25336 31900 Watching for file changes with StatReloader
+INFO 2025-07-28 21:11:24,277 autoreload 25336 31900 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 21:11:25,842 autoreload 38900 37516 Watching for file changes with StatReloader
+INFO 2025-07-28 21:11:52,413 autoreload 38900 37516 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 21:11:53,538 autoreload 36688 33192 Watching for file changes with StatReloader
+INFO 2025-07-28 21:21:24,270 autoreload 36688 33192 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 21:21:25,604 autoreload 12080 22680 Watching for file changes with StatReloader
+INFO 2025-07-28 21:23:25,661 autoreload 12080 22680 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-28 21:23:26,960 autoreload 23624 20020 Watching for file changes with StatReloader
+INFO 2025-07-28 21:23:55,865 autoreload 33352 33888 Watching for file changes with StatReloader
+INFO 2025-07-28 21:24:29,067 autoreload 33352 33888 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-28 21:24:30,379 autoreload 11384 37020 Watching for file changes with StatReloader
+INFO 2025-07-28 21:25:27,419 autoreload 11384 37020 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 21:25:28,564 autoreload 24616 26700 Watching for file changes with StatReloader
+INFO 2025-07-28 21:28:16,567 autoreload 24616 26700 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 21:28:17,654 autoreload 15040 40360 Watching for file changes with StatReloader
+INFO 2025-07-28 21:35:03,248 autoreload 15652 20360 Watching for file changes with StatReloader
+INFO 2025-07-28 21:38:31,836 autoreload 15652 20360 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 21:38:32,941 autoreload 36672 11600 Watching for file changes with StatReloader
+INFO 2025-07-28 21:38:38,801 autoreload 36672 11600 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 21:38:39,801 autoreload 5088 13848 Watching for file changes with StatReloader
+WARNING 2025-07-28 21:42:15,163 allif_navigation_tags 5088 1012 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-07-28 21:43:53,722 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:43:54,841 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:43:56,523 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:43:59,393 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:44:02,392 context 5088 1012 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:44:02,412 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 899, in _parseAtIdent
+    src, declarations = self._parseDeclarationGroup(src)
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 561, in _parseStylesheet
+    src, atResults = self._parseAtKeyword(src)
+                     ~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 692, in _parseAtKeyword
+    src, result = self._parseAtIdent(src)
+                  ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 902, in _parseAtIdent
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+ERROR 2025-07-28 21:44:06,133 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 999, in _parseSimpleSelector
+    src, selector = self._parseSelectorPseudo(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1080, in _parseSelectorPseudo
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Pseudo Function closing ')' not found:: (':not(', '[href]):not([class])')
+ERROR 2025-07-28 21:44:07,713 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+ERROR 2025-07-28 21:44:09,481 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+WARNING 2025-07-28 21:44:11,111 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:44:12,242 context 5088 1012 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:44:12,244 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 997, in _parseSimpleSelector
+    src, selector = self._parseSelectorAttribute(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1048, in _parseSelectorAttribute
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Attribute closing ']' not found:: ('[class', '*=" bi-"]::before,[c')
+ERROR 2025-07-28 21:44:12,790 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1101, in _parseDeclarationGroup
+    src, single_property = self._parseDeclaration(src)
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1144, in _parseDeclaration
+    src, single_property = self._parseDeclarationProperty(src, property_name)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1152, in _parseDeclarationProperty
+    src, expr = self._parseExpression(src)
+                ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1169, in _parseExpression
+    src, term = self._parseExpressionTerm(src)
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1221, in _parseExpressionTerm
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Terminal function expression expected closing ')':: ('alpha(opacity', '=0)}.select2-hidden-')
+WARNING 2025-07-28 21:44:21,620 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:44:22,300 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:44:23,183 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:44:24,782 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:44:27,210 context 5088 1012 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:44:27,215 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 899, in _parseAtIdent
+    src, declarations = self._parseDeclarationGroup(src)
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 561, in _parseStylesheet
+    src, atResults = self._parseAtKeyword(src)
+                     ~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 692, in _parseAtKeyword
+    src, result = self._parseAtIdent(src)
+                  ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 902, in _parseAtIdent
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+ERROR 2025-07-28 21:44:30,117 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 999, in _parseSimpleSelector
+    src, selector = self._parseSelectorPseudo(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1080, in _parseSelectorPseudo
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Pseudo Function closing ')' not found:: (':not(', '[href]):not([class])')
+ERROR 2025-07-28 21:44:31,640 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+ERROR 2025-07-28 21:44:33,101 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+WARNING 2025-07-28 21:44:34,881 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:44:36,090 context 5088 1012 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:44:36,092 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 997, in _parseSimpleSelector
+    src, selector = self._parseSelectorAttribute(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1048, in _parseSelectorAttribute
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Attribute closing ']' not found:: ('[class', '*=" bi-"]::before,[c')
+ERROR 2025-07-28 21:44:36,971 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1101, in _parseDeclarationGroup
+    src, single_property = self._parseDeclaration(src)
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1144, in _parseDeclaration
+    src, single_property = self._parseDeclarationProperty(src, property_name)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1152, in _parseDeclarationProperty
+    src, expr = self._parseExpression(src)
+                ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1169, in _parseExpression
+    src, term = self._parseExpressionTerm(src)
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1221, in _parseExpressionTerm
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Terminal function expression expected closing ')':: ('alpha(opacity', '=0)}.select2-hidden-')
+WARNING 2025-07-28 21:46:55,441 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:46:56,264 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:46:57,201 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:46:59,543 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:47:03,555 context 5088 1012 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:47:03,560 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 899, in _parseAtIdent
+    src, declarations = self._parseDeclarationGroup(src)
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 561, in _parseStylesheet
+    src, atResults = self._parseAtKeyword(src)
+                     ~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 692, in _parseAtKeyword
+    src, result = self._parseAtIdent(src)
+                  ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 902, in _parseAtIdent
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+ERROR 2025-07-28 21:47:05,591 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 999, in _parseSimpleSelector
+    src, selector = self._parseSelectorPseudo(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1080, in _parseSelectorPseudo
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Pseudo Function closing ')' not found:: (':not(', '[href]):not([class])')
+ERROR 2025-07-28 21:47:07,371 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+ERROR 2025-07-28 21:47:09,032 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+WARNING 2025-07-28 21:47:12,548 context 5088 1012 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:47:14,387 context 5088 1012 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:47:14,388 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 997, in _parseSimpleSelector
+    src, selector = self._parseSelectorAttribute(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1048, in _parseSelectorAttribute
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Attribute closing ']' not found:: ('[class', '*=" bi-"]::before,[c')
+ERROR 2025-07-28 21:47:14,940 context 5088 1012 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1101, in _parseDeclarationGroup
+    src, single_property = self._parseDeclaration(src)
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1144, in _parseDeclaration
+    src, single_property = self._parseDeclarationProperty(src, property_name)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1152, in _parseDeclarationProperty
+    src, expr = self._parseExpression(src)
+                ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1169, in _parseExpression
+    src, term = self._parseExpressionTerm(src)
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1221, in _parseExpressionTerm
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Terminal function expression expected closing ')':: ('alpha(opacity', '=0)}.select2-hidden-')
+WARNING 2025-07-28 21:47:15,028 parser 5088 1012 Attribute 'type' of wrong value, allowed is one of: ['text', 'hidden', 'checkbox']
+'<label>Start Date</label>'
+WARNING 2025-07-28 21:47:15,030 parser 5088 1012 Attribute 'type' of wrong value, allowed is one of: ['text', 'hidden', 'checkbox']
+'<label>End Date</label>'
+WARNING 2025-07-28 21:47:30,083 tables 5088 1012 <table> is empty
+'<tbody> </tbody>'
+INFO 2025-07-28 21:49:12,361 autoreload 5088 13848 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 21:49:13,488 autoreload 19264 35640 Watching for file changes with StatReloader
+WARNING 2025-07-28 21:49:34,409 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:49:35,179 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:49:35,980 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:49:37,183 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:49:39,051 context 19264 32056 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:49:39,057 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 899, in _parseAtIdent
+    src, declarations = self._parseDeclarationGroup(src)
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 561, in _parseStylesheet
+    src, atResults = self._parseAtKeyword(src)
+                     ~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 692, in _parseAtKeyword
+    src, result = self._parseAtIdent(src)
+                  ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 902, in _parseAtIdent
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+ERROR 2025-07-28 21:49:40,626 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 999, in _parseSimpleSelector
+    src, selector = self._parseSelectorPseudo(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1080, in _parseSelectorPseudo
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Pseudo Function closing ')' not found:: (':not(', '[href]):not([class])')
+ERROR 2025-07-28 21:49:42,829 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+ERROR 2025-07-28 21:49:44,657 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+WARNING 2025-07-28 21:49:46,211 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:49:47,340 context 19264 32056 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:49:47,343 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 997, in _parseSimpleSelector
+    src, selector = self._parseSelectorAttribute(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1048, in _parseSelectorAttribute
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Attribute closing ']' not found:: ('[class', '*=" bi-"]::before,[c')
+ERROR 2025-07-28 21:49:47,945 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1101, in _parseDeclarationGroup
+    src, single_property = self._parseDeclaration(src)
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1144, in _parseDeclaration
+    src, single_property = self._parseDeclarationProperty(src, property_name)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1152, in _parseDeclarationProperty
+    src, expr = self._parseExpression(src)
+                ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1169, in _parseExpression
+    src, term = self._parseExpressionTerm(src)
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1221, in _parseExpressionTerm
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Terminal function expression expected closing ')':: ('alpha(opacity', '=0)}.select2-hidden-')
+WARNING 2025-07-28 21:49:48,036 parser 19264 32056 Attribute 'type' of wrong value, allowed is one of: ['text', 'hidden', 'checkbox']
+'<label>Start Date</label>'
+WARNING 2025-07-28 21:49:48,038 parser 19264 32056 Attribute 'type' of wrong value, allowed is one of: ['text', 'hidden', 'checkbox']
+'<label>End Date</label>'
+WARNING 2025-07-28 21:49:48,654 allif_navigation_tags 19264 32056 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-07-28 21:49:53,349 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:49:54,065 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:49:54,950 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:49:56,222 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:49:57,949 context 19264 32056 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:49:57,954 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 899, in _parseAtIdent
+    src, declarations = self._parseDeclarationGroup(src)
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 561, in _parseStylesheet
+    src, atResults = self._parseAtKeyword(src)
+                     ~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 692, in _parseAtKeyword
+    src, result = self._parseAtIdent(src)
+                  ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 902, in _parseAtIdent
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1120, in _parseDeclarationGroup
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Declaration group closing '}' not found:: ('{0', '%{-webkit-transform:')
+ERROR 2025-07-28 21:49:59,699 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 999, in _parseSimpleSelector
+    src, selector = self._parseSelectorPseudo(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1080, in _parseSelectorPseudo
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Pseudo Function closing ')' not found:: (':not(', '[href]):not([class])')
+ERROR 2025-07-28 21:50:01,416 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+ERROR 2025-07-28 21:50:03,318 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 542, in _parseStylesheet
+    src = self.re_comment.sub("", src)
+TypeError: expected string or bytes-like object, got 'NoneType'
+WARNING 2025-07-28 21:50:05,041 context 19264 32056 wrong attributes for <pdf:font>
+
+WARNING 2025-07-28 21:50:06,025 context 19264 32056 wrong attributes for <pdf:font>
+
+ERROR 2025-07-28 21:50:06,027 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 918, in _parseRuleset
+    src, selectors = self._parseSelectorGroup(src)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 928, in _parseSelectorGroup
+    src, selector = self._parseSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 942, in _parseSelector
+    src, selector = self._parseSimpleSelector(src)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 997, in _parseSimpleSelector
+    src, selector = self._parseSelectorAttribute(src, selector)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1048, in _parseSelectorAttribute
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Selector Attribute closing ']' not found:: ('[class', '*=" bi-"]::before,[c')
+ERROR 2025-07-28 21:50:06,679 context 19264 32056 Error while parsing CSS file
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\context.py", line 519, in parseExternal
+    result = self.parse(cssFile.getData())
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 458, in parse
+    src, stylesheet = self._parseStylesheet(src)
+                      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 566, in _parseStylesheet
+    src, ruleset = self._parseRuleset(src)
+                   ~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 919, in _parseRuleset
+    src, properties = self._parseDeclarationGroup(src.lstrip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1101, in _parseDeclarationGroup
+    src, single_property = self._parseDeclaration(src)
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1144, in _parseDeclaration
+    src, single_property = self._parseDeclarationProperty(src, property_name)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1152, in _parseDeclarationProperty
+    src, expr = self._parseExpression(src)
+                ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1169, in _parseExpression
+    src, term = self._parseExpressionTerm(src)
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\xhtml2pdf\w3c\cssParser.py", line 1221, in _parseExpressionTerm
+    raise self.ParseError(msg, src, ctxsrc)
+xhtml2pdf.w3c.cssParser.CSSParseError: Terminal function expression expected closing ')':: ('alpha(opacity', '=0)}.select2-hidden-')
+WARNING 2025-07-28 21:50:06,763 parser 19264 32056 Attribute 'type' of wrong value, allowed is one of: ['text', 'hidden', 'checkbox']
+'<label>Start Date</label>'
+WARNING 2025-07-28 21:50:06,765 parser 19264 32056 Attribute 'type' of wrong value, allowed is one of: ['text', 'hidden', 'checkbox']
+'<label>End Date</label>'
+INFO 2025-07-28 21:51:08,163 autoreload 19264 35640 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 21:51:09,439 autoreload 25268 5272 Watching for file changes with StatReloader
+INFO 2025-07-28 21:51:25,823 autoreload 25268 5272 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 21:51:26,927 autoreload 14940 38484 Watching for file changes with StatReloader
+INFO 2025-07-28 21:52:01,612 autoreload 14940 38484 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 21:52:02,820 autoreload 18384 32900 Watching for file changes with StatReloader
+WARNING 2025-07-28 21:52:06,437 tables 18384 28000 <table> is empty
+'<tbody> </tbody>'
+INFO 2025-07-28 21:53:35,133 autoreload 18384 32900 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 21:53:36,236 autoreload 22628 512 Watching for file changes with StatReloader
+INFO 2025-07-28 21:54:17,908 autoreload 22628 512 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 21:54:19,155 autoreload 23892 31220 Watching for file changes with StatReloader
+INFO 2025-07-28 22:10:23,071 autoreload 23892 31220 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:10:24,482 autoreload 20632 36744 Watching for file changes with StatReloader
+INFO 2025-07-28 22:11:08,137 autoreload 20632 36744 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:11:08,998 autoreload 39660 9852 Watching for file changes with StatReloader
+INFO 2025-07-28 22:11:28,702 autoreload 39660 9852 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:11:29,607 autoreload 15624 30768 Watching for file changes with StatReloader
+INFO 2025-07-28 22:11:49,475 autoreload 15624 30768 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 22:11:50,520 autoreload 34972 32972 Watching for file changes with StatReloader
+INFO 2025-07-28 22:13:52,907 autoreload 34972 32972 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-28 22:13:54,174 autoreload 34924 8376 Watching for file changes with StatReloader
+INFO 2025-07-28 22:15:59,813 autoreload 34924 8376 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 22:16:00,673 autoreload 30072 35004 Watching for file changes with StatReloader
+INFO 2025-07-28 22:16:16,959 autoreload 30072 35004 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-28 22:16:17,860 autoreload 26864 30824 Watching for file changes with StatReloader
+INFO 2025-07-28 22:18:11,226 autoreload 26864 30824 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 22:18:12,234 autoreload 25528 31520 Watching for file changes with StatReloader
+INFO 2025-07-28 22:18:39,276 autoreload 25528 31520 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 22:18:40,255 autoreload 7272 23764 Watching for file changes with StatReloader
+INFO 2025-07-28 22:18:43,295 autoreload 7272 23764 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-28 22:18:44,211 autoreload 40716 15576 Watching for file changes with StatReloader
+INFO 2025-07-28 22:19:01,712 autoreload 40716 15576 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:19:02,790 autoreload 1836 22800 Watching for file changes with StatReloader
+INFO 2025-07-28 22:19:57,231 autoreload 1836 22800 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:19:58,157 autoreload 33840 38028 Watching for file changes with StatReloader
+INFO 2025-07-28 22:20:07,362 autoreload 33840 38028 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:20:08,534 autoreload 40376 26980 Watching for file changes with StatReloader
+INFO 2025-07-28 22:21:09,405 autoreload 40376 26980 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:21:10,883 autoreload 33432 22612 Watching for file changes with StatReloader
+INFO 2025-07-28 22:21:43,986 autoreload 33432 22612 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:21:44,970 autoreload 10104 3104 Watching for file changes with StatReloader
+INFO 2025-07-28 22:21:59,538 autoreload 10104 3104 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:22:00,492 autoreload 31752 7072 Watching for file changes with StatReloader
+INFO 2025-07-28 22:22:39,399 autoreload 31752 7072 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:22:40,327 autoreload 31372 35096 Watching for file changes with StatReloader
+INFO 2025-07-28 22:53:30,029 autoreload 31372 35096 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:53:31,172 autoreload 4500 22264 Watching for file changes with StatReloader
+INFO 2025-07-28 22:53:49,169 autoreload 4500 22264 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:53:50,148 autoreload 4512 39480 Watching for file changes with StatReloader
+INFO 2025-07-28 22:53:55,583 autoreload 4512 39480 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:53:57,094 autoreload 33068 18468 Watching for file changes with StatReloader
+INFO 2025-07-28 22:57:44,642 autoreload 33068 18468 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 22:57:45,651 autoreload 22568 8752 Watching for file changes with StatReloader
+INFO 2025-07-28 23:01:53,388 autoreload 22568 8752 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:01:54,435 autoreload 34140 35176 Watching for file changes with StatReloader
+INFO 2025-07-28 23:04:34,710 autoreload 34140 35176 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:04:35,894 autoreload 37812 36492 Watching for file changes with StatReloader
+INFO 2025-07-28 23:04:39,263 autoreload 37812 36492 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:04:40,363 autoreload 14596 17920 Watching for file changes with StatReloader
+INFO 2025-07-28 23:04:44,424 autoreload 14596 17920 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:04:45,257 autoreload 39344 37668 Watching for file changes with StatReloader
+INFO 2025-07-28 23:04:51,100 autoreload 39344 37668 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:04:52,081 autoreload 13472 23324 Watching for file changes with StatReloader
+INFO 2025-07-28 23:07:17,446 autoreload 13472 23324 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:07:18,420 autoreload 12724 25116 Watching for file changes with StatReloader
+INFO 2025-07-28 23:08:58,782 autoreload 12724 25116 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:08:59,826 autoreload 22932 27604 Watching for file changes with StatReloader
+INFO 2025-07-28 23:09:23,154 autoreload 22932 27604 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:09:24,189 autoreload 34120 31124 Watching for file changes with StatReloader
+INFO 2025-07-28 23:10:47,870 autoreload 34120 31124 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:10:48,882 autoreload 12996 31624 Watching for file changes with StatReloader
+INFO 2025-07-28 23:11:05,390 autoreload 12996 31624 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-28 23:11:06,378 autoreload 12156 8164 Watching for file changes with StatReloader
+INFO 2025-07-28 23:12:26,471 autoreload 12156 8164 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-28 23:12:27,550 autoreload 11776 28928 Watching for file changes with StatReloader

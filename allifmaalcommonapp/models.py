@@ -683,7 +683,7 @@ class CommonCustomersModel(CommonBaseModel):
 class CommonCustomerPaymentsModel(CommonBaseModel):
     customer=models.ForeignKey(CommonCustomersModel,related_name="allifcustpaymentreltedname",on_delete=models.CASCADE,blank=True,null=True)
     amount=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
-    
+    account=models.ForeignKey(CommonChartofAccountsModel,related_name="customer_payment_coa",on_delete=models.SET_NULL,blank=True,null=True)
     mode=models.ForeignKey(CommonPaymentTermsModel, related_name="custmrpymnterms",on_delete=models.SET_NULL,null=True,blank=True)
     
     def __str__(self):

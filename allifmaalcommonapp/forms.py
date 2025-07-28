@@ -8,7 +8,35 @@ from allifmaalcommonapp.utils import allif_initialize_form_select_querysets
 from django import forms
 from django.forms.widgets import DateInput # Or your specific DatePickerInput import
 # from some_app.widgets import DatePickerInput # Example if DatePickerInput is custom
+class CommonLearnning(forms.ModelForm):
+    """
+    form filter has two arguments...
+    
+    """
+    class Meta:
+        model=CommonOperationYearsModel
+        fields = ['department','branch','division','is_current','description','comments','starts','ends','year']
+        widgets={
+        'supplier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+        'amount':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+        'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+        'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+        'mode':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
 
+        'account':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
+          # the css class that we are passing
+        }
+    def __init__(self, allifmaalparameter,dept, *args, **kwargs):
+        super().__init__(allifmaalparameter, *args, **kwargs)
+        if allifmaalparameter:
+            self.fields['supplier'].queryset =CommonSuppliersModel.objects.filter(company=allifmaalparameter,department=dept)
+            self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=29999,department=dept).order_by('code')
+            self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=29999,department=dept).order_by('code')
+
+        else:
+            self.fields['supplier'].queryset =CommonSuppliersModel.objects.none()
+            self.fields['account'].queryset =CommonChartofAccountsModel.objects.none()
 # --- Custom Widget (assuming this is how your DatePickerInput works) ---
 class DatePickerInput(DateInput):
     input_type = 'date' # Renders as an HTML5 date input
@@ -1413,13 +1441,14 @@ class CommonAddSupplierPaymentForm(CommonBaseForm):
             
           # the css class that we are passing
         }
-    def __init__(self, allifmaalparameter,dept, *args, **kwargs):
+    def __init__(self, allifmaalparameter, *args, **kwargs):
         super().__init__(allifmaalparameter, *args, **kwargs)
         if allifmaalparameter:
-            self.fields['supplier'].queryset =CommonSuppliersModel.objects.filter(company=allifmaalparameter,department=dept)
-            self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=29999,department=dept).order_by('code')
+            self.fields['supplier'].queryset =CommonSuppliersModel.objects.filter(company=allifmaalparameter)
+            self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=29999).order_by('code')
+            self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=29999).order_by('code')
 
-        else:
+        else:########
             self.fields['supplier'].queryset =CommonSuppliersModel.objects.none()
             self.fields['account'].queryset =CommonChartofAccountsModel.objects.none()
 
@@ -1428,7 +1457,7 @@ class CommonAddSupplierPaymentForm(CommonBaseForm):
 class CommonAddCustomerPaymentForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
         model=CommonCustomerPaymentsModel
-        fields=CommonBaseForm.Meta.fields + ['customer','amount','mode']
+        fields=CommonBaseForm.Meta.fields + ['customer','amount','mode','account']
         widgets = {
         **CommonBaseForm.Meta.widgets,
         'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -1441,10 +1470,10 @@ class CommonAddCustomerPaymentForm(CommonBaseForm):
         super().__init__(allifmaalparameter, *args, **kwargs)
         if allifmaalparameter:
             self.fields['customer'].queryset =CommonCustomersModel.objects.filter(company=allifmaalparameter)
-            #self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=19999)
+            self.fields['account'].queryset =CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=19999)
         else:
             self.fields['customer'].queryset =CommonCustomersModel.objects.none()
-            #self.fields['account'].queryset =CommonChartofAccountsModel.objects.none()
+            self.fields['account'].queryset =CommonChartofAccountsModel.objects.none()
 
 
 class CommonAddSalaryForm(CommonBaseForm):

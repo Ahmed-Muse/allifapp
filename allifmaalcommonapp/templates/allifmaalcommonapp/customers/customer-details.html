@@ -4,11 +4,9 @@
   {% block add-form-header-block %}
  <a href="{% allif_get_single_nav_link_url 'Clients' user_var glblslug %}">Customers</a>
 <a href="{% allif_get_single_nav_link_url 'AddClient' user_var glblslug %}">Add Customer</a>
-
-
-<a href="{% url 'allifmaalcommonapp:commonTopUpCustomerAccount' allifquery.id user_var glblslug %}"> Top Up Customer Account </a>
-
+<a href="{{ allif_contextual_action_links.TopUpCustomerAccount.url }}">Receipt Money</a>
 <a href="{{ allif_contextual_action_links.CustomerLedgerEntries.url }}">Ledger Entries</a>
+<a href="{{ allif_contextual_action_links.CustomerStatementPdf.url }}">Customer Statement</a>
 
   {%endblock%}
 

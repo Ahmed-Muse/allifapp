@@ -113,7 +113,7 @@ allif_single_access_general_links = [
     
     {'name': 'Clients', 'url_name': 'allifmaalcommonapp:commonCustomers'},
     {'name': 'AddClient', 'url_name': 'allifmaalcommonapp:commonAddCustomer'},
-    {'name': 'ReceiveClientPayment', 'url_name': 'allifmaalcommonapp:commonReceiveCustomerMoney'},
+    
     
     {'name': 'Assets', 'url_name': 'allifmaalcommonapp:commonAssets'},
     {'name': 'AddAsset', 'url_name': 'allifmaalcommonapp:commonAddAsset'},
@@ -153,7 +153,22 @@ allif_single_access_general_links = [
     {'name': 'Invoices', 'url_name': 'allifmaalcommonapp:commonInvoices'},
     
     {'name': 'LedgerEntries', 'url_name': 'allifmaalcommonapp:commonLedgerEntries'},
-    {'name': 'Payments', 'url_name': 'allifmaalcommonapp:commonCustomerPayments'},
+    {'name': 'CustomerPayments', 'url_name': 'allifmaalcommonapp:commonCustomerPayments'},
+    
+    {'name': 'ReceiptClientPayment', 'url_name': 'allifmaalcommonapp:commonReceiveCustomerMoney'},
+    
+     {'name': 'PostedCustomerPayments', 'url_name': 'allifmaalcommonapp:commonPostedCustomerPayments'},
+     {'name': 'SupplierPayments', 'url_name': 'allifmaalcommonapp:commonSupplierPayments'},
+     {'name': 'PostedSupplierPayments', 'url_name': 'allifmaalcommonapp:commonPostedSupplierPayments'},
+     {'name': 'DirectSupplierPayment', 'url_name': 'allifmaalcommonapp:commonPaySupplierDirect'},
+     
+     
+    {'name': 'Salaries', 'url_name': 'allifmaalcommonapp:commonSalaries'},
+    {'name': 'AddSalary', 'url_name': 'allifmaalcommonapp:commonAddSalary'},
+    {'name': 'PostedSalaries', 'url_name': 'allifmaalcommonapp:commonPostedSalaries'},
+     
+     
+    
     {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},
     {'name': 'Profit & Loss', 'url_name': 'allifmaalcommonapp:commonProfitAndLoss'},
     
