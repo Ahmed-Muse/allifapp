@@ -166,8 +166,17 @@ allif_single_access_general_links = [
     {'name': 'Salaries', 'url_name': 'allifmaalcommonapp:commonSalaries'},
     {'name': 'AddSalary', 'url_name': 'allifmaalcommonapp:commonAddSalary'},
     {'name': 'PostedSalaries', 'url_name': 'allifmaalcommonapp:commonPostedSalaries'},
+    {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},
+    {'name': 'AddJob', 'url_name': 'allifmaalcommonapp:commonNewJobs'},
+    
+    {'name': 'Transits', 'url_name': 'allifmaalcommonapp:commonTransits'},
+    {'name': 'AddTransit', 'url_name': 'allifmaalcommonapp:commonNewTransit'},
      
-     
+     {'name': 'Creditors', 'url_name': 'allifmaalcommonapp:commonCreditorsReportpdf'},
+     {'name': 'Debtors', 'url_name': 'allifmaalcommonapp:commonDebtorsReport'},
+     {'name': 'AvailableStock', 'url_name': 'allifmaalcommonapp:commonAvailableStockpdf'},
+  
+    
     
     {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},
     {'name': 'Profit & Loss', 'url_name': 'allifmaalcommonapp:commonProfitAndLoss'},

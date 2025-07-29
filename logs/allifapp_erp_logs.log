@@ -25774,3 +25774,327 @@ INFO 2025-07-28 23:11:05,390 autoreload 12996 31624 C:\am\allifapp\allifapperp\a
 INFO 2025-07-28 23:11:06,378 autoreload 12156 8164 Watching for file changes with StatReloader
 INFO 2025-07-28 23:12:26,471 autoreload 12156 8164 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
 INFO 2025-07-28 23:12:27,550 autoreload 11776 28928 Watching for file changes with StatReloader
+INFO 2025-07-29 06:30:54,175 autoreload 11836 16232 Watching for file changes with StatReloader
+INFO 2025-07-29 06:40:19,518 autoreload 11836 16232 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 06:40:21,113 autoreload 29332 1280 Watching for file changes with StatReloader
+INFO 2025-07-29 06:40:39,698 autoreload 29332 1280 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 06:40:41,000 autoreload 22848 15656 Watching for file changes with StatReloader
+INFO 2025-07-29 06:42:50,760 autoreload 22848 15656 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 06:42:52,439 autoreload 36044 11036 Watching for file changes with StatReloader
+INFO 2025-07-29 06:46:45,124 autoreload 36044 11036 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 06:46:46,856 autoreload 6312 31092 Watching for file changes with StatReloader
+INFO 2025-07-29 06:52:29,331 autoreload 30808 28528 Watching for file changes with StatReloader
+INFO 2025-07-29 06:54:59,990 autoreload 30808 28528 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 06:55:01,865 autoreload 27128 27020 Watching for file changes with StatReloader
+INFO 2025-07-29 06:55:21,454 autoreload 27128 27020 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 06:55:22,869 autoreload 23164 21292 Watching for file changes with StatReloader
+INFO 2025-07-29 06:56:59,871 autoreload 23164 21292 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 06:57:01,482 autoreload 37360 37196 Watching for file changes with StatReloader
+INFO 2025-07-29 06:57:59,516 autoreload 37360 37196 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 06:58:01,248 autoreload 7336 17104 Watching for file changes with StatReloader
+INFO 2025-07-29 06:58:57,564 autoreload 7336 17104 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 06:58:59,043 autoreload 32608 18244 Watching for file changes with StatReloader
+INFO 2025-07-29 07:00:37,340 autoreload 32608 18244 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 07:00:38,844 autoreload 39684 25384 Watching for file changes with StatReloader
+INFO 2025-07-29 07:14:18,946 autoreload 39684 25384 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-29 07:14:20,523 autoreload 5188 20516 Watching for file changes with StatReloader
+INFO 2025-07-29 07:14:44,334 autoreload 5188 20516 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:14:46,401 autoreload 38188 13856 Watching for file changes with StatReloader
+INFO 2025-07-29 07:16:04,807 autoreload 38188 13856 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-29 07:16:06,447 autoreload 23772 13812 Watching for file changes with StatReloader
+INFO 2025-07-29 07:17:08,676 autoreload 23772 13812 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-29 07:17:10,171 autoreload 23116 24292 Watching for file changes with StatReloader
+INFO 2025-07-29 07:17:58,427 autoreload 23116 24292 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:18:00,191 autoreload 36840 21840 Watching for file changes with StatReloader
+INFO 2025-07-29 07:23:39,952 autoreload 36840 21840 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 07:23:41,593 autoreload 8544 32592 Watching for file changes with StatReloader
+INFO 2025-07-29 07:27:12,049 autoreload 8544 32592 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:27:13,592 autoreload 20520 30852 Watching for file changes with StatReloader
+INFO 2025-07-29 07:29:45,752 autoreload 20520 30852 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:29:47,438 autoreload 40744 39452 Watching for file changes with StatReloader
+INFO 2025-07-29 07:30:20,300 autoreload 40744 39452 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 07:30:21,843 autoreload 39940 26252 Watching for file changes with StatReloader
+INFO 2025-07-29 07:32:50,723 autoreload 39940 26252 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:32:52,510 autoreload 20196 36924 Watching for file changes with StatReloader
+INFO 2025-07-29 07:33:21,269 autoreload 20196 36924 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:33:22,993 autoreload 37628 3152 Watching for file changes with StatReloader
+INFO 2025-07-29 07:36:26,018 autoreload 37628 3152 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:36:27,660 autoreload 13148 6320 Watching for file changes with StatReloader
+INFO 2025-07-29 07:39:46,184 autoreload 13148 6320 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:39:48,004 autoreload 20608 3296 Watching for file changes with StatReloader
+INFO 2025-07-29 07:40:38,994 autoreload 20608 3296 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:40:40,448 autoreload 30068 12724 Watching for file changes with StatReloader
+INFO 2025-07-29 07:44:16,459 autoreload 30068 12724 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-29 07:44:18,173 autoreload 16128 32684 Watching for file changes with StatReloader
+INFO 2025-07-29 07:46:24,706 autoreload 16128 32684 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:46:26,860 autoreload 23628 20608 Watching for file changes with StatReloader
+INFO 2025-07-29 07:46:33,903 autoreload 23628 20608 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-29 07:46:35,503 autoreload 10016 40876 Watching for file changes with StatReloader
+WARNING 2025-07-29 07:46:58,824 log 10016 6724 Not Found: /Delete/Job/Item/s/8/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+WARNING 2025-07-29 07:46:58,914 log 10016 6724 Not Found: /favicon.ico
+INFO 2025-07-29 07:48:23,688 autoreload 10016 40876 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:48:25,132 autoreload 35056 34476 Watching for file changes with StatReloader
+INFO 2025-07-29 07:50:57,470 autoreload 35056 34476 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:50:58,932 autoreload 30496 33764 Watching for file changes with StatReloader
+INFO 2025-07-29 07:51:07,596 autoreload 30496 33764 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:51:09,191 autoreload 34428 1820 Watching for file changes with StatReloader
+INFO 2025-07-29 07:53:52,178 autoreload 34428 1820 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:53:53,616 autoreload 39404 28224 Watching for file changes with StatReloader
+INFO 2025-07-29 07:54:39,250 autoreload 39404 28224 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:54:40,712 autoreload 31848 26192 Watching for file changes with StatReloader
+INFO 2025-07-29 07:55:16,813 autoreload 31848 26192 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:55:18,318 autoreload 31740 8656 Watching for file changes with StatReloader
+INFO 2025-07-29 07:57:05,314 autoreload 31740 8656 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:57:06,802 autoreload 1152 30848 Watching for file changes with StatReloader
+INFO 2025-07-29 07:57:15,417 autoreload 1152 30848 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 07:57:16,749 autoreload 39800 36400 Watching for file changes with StatReloader
+INFO 2025-07-29 17:36:24,380 autoreload 18276 20448 Watching for file changes with StatReloader
+INFO 2025-07-29 17:46:00,154 autoreload 18276 20448 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 17:46:01,731 autoreload 35864 37924 Watching for file changes with StatReloader
+INFO 2025-07-29 17:53:08,403 autoreload 35864 37924 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 17:53:09,498 autoreload 16356 25824 Watching for file changes with StatReloader
+INFO 2025-07-29 17:53:20,018 autoreload 16356 25824 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 17:53:21,090 autoreload 25304 31352 Watching for file changes with StatReloader
+INFO 2025-07-29 17:54:31,801 autoreload 25304 31352 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 17:54:33,072 autoreload 30852 7680 Watching for file changes with StatReloader
+INFO 2025-07-29 17:56:27,421 autoreload 30852 7680 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 17:56:28,655 autoreload 20064 21064 Watching for file changes with StatReloader
+INFO 2025-07-29 17:58:06,757 autoreload 20064 21064 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 17:58:07,930 autoreload 18760 37968 Watching for file changes with StatReloader
+INFO 2025-07-29 17:59:02,062 autoreload 18760 37968 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 17:59:03,178 autoreload 31508 4356 Watching for file changes with StatReloader
+INFO 2025-07-29 18:00:39,983 autoreload 31508 4356 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 18:00:41,259 autoreload 22480 13824 Watching for file changes with StatReloader
+INFO 2025-07-29 18:01:57,254 autoreload 22480 13824 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 18:01:58,220 autoreload 34904 8988 Watching for file changes with StatReloader
+INFO 2025-07-29 18:08:17,879 autoreload 34904 8988 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 18:08:19,085 autoreload 22316 13184 Watching for file changes with StatReloader
+INFO 2025-07-29 18:09:31,772 autoreload 22316 13184 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 18:09:33,053 autoreload 39896 13856 Watching for file changes with StatReloader
+INFO 2025-07-29 18:10:43,492 autoreload 39896 13856 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 18:10:44,428 autoreload 25916 14712 Watching for file changes with StatReloader
+INFO 2025-07-29 18:11:07,402 autoreload 25916 14712 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-29 18:11:08,323 autoreload 1596 29700 Watching for file changes with StatReloader
+INFO 2025-07-29 18:15:40,324 autoreload 1596 29700 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 18:15:41,248 autoreload 21148 37528 Watching for file changes with StatReloader
+INFO 2025-07-29 18:16:30,576 autoreload 21148 37528 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-29 18:16:31,426 autoreload 25420 35984 Watching for file changes with StatReloader
+INFO 2025-07-29 18:17:00,338 autoreload 25420 35984 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-29 18:17:01,257 autoreload 25932 31676 Watching for file changes with StatReloader
+WARNING 2025-07-29 18:17:53,029 allif_navigation_tags 25932 25220 General navigation link with name 'AddTransport' not found in allif_single_access_general_links.
+WARNING 2025-07-29 18:17:54,420 allif_navigation_tags 25932 25220 General navigation link with name 'AddTransport' not found in allif_single_access_general_links.
+WARNING 2025-07-29 18:17:55,737 allif_navigation_tags 25932 25220 General navigation link with name 'AddTransport' not found in allif_single_access_general_links.
+WARNING 2025-07-29 18:17:56,316 allif_navigation_tags 25932 25220 General navigation link with name 'AddTransport' not found in allif_single_access_general_links.
+INFO 2025-07-29 18:19:45,291 autoreload 25932 31676 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 18:19:46,798 autoreload 39068 34300 Watching for file changes with StatReloader
+WARNING 2025-07-29 18:42:30,255 allif_navigation_tags 39068 23776 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-07-29 18:42:39,326 allif_navigation_tags 39068 23776 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-07-29 18:56:43,835 autoreload 39068 34300 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-29 18:56:46,064 autoreload 38484 8336 Watching for file changes with StatReloader
+INFO 2025-07-29 18:57:13,508 autoreload 38484 8336 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-29 18:57:14,970 autoreload 30844 25280 Watching for file changes with StatReloader
+INFO 2025-07-29 18:57:47,753 autoreload 26068 9288 Watching for file changes with StatReloader
+INFO 2025-07-29 18:58:34,031 autoreload 26068 9288 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-29 18:58:35,144 autoreload 9240 38852 Watching for file changes with StatReloader
+INFO 2025-07-29 18:59:36,699 autoreload 9240 38852 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-29 18:59:37,854 autoreload 39080 36660 Watching for file changes with StatReloader
+INFO 2025-07-29 19:00:06,016 autoreload 28608 12628 Watching for file changes with StatReloader
+INFO 2025-07-29 19:00:45,814 autoreload 28608 12628 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-29 19:00:46,961 autoreload 40388 22768 Watching for file changes with StatReloader
+INFO 2025-07-29 19:04:44,287 autoreload 40388 22768 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 19:04:45,829 autoreload 26760 18448 Watching for file changes with StatReloader
+WARNING 2025-07-29 19:13:39,968 allif_navigation_tags 26760 39196 General navigation link with name 'Transportations' not found in allif_single_access_general_links.
+WARNING 2025-07-29 19:13:42,827 allif_navigation_tags 26760 39196 General navigation link with name 'Transportations' not found in allif_single_access_general_links.
+WARNING 2025-07-29 19:13:52,569 allif_navigation_tags 26760 39196 General navigation link with name 'Transports' not found in allif_single_access_general_links.
+INFO 2025-07-29 19:20:14,377 autoreload 26760 18448 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 19:20:15,639 autoreload 21316 38508 Watching for file changes with StatReloader
+INFO 2025-07-29 19:21:07,185 autoreload 21316 38508 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 19:21:08,698 autoreload 14760 35760 Watching for file changes with StatReloader
+INFO 2025-07-29 19:22:13,723 autoreload 14760 35760 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 19:22:15,076 autoreload 36896 38232 Watching for file changes with StatReloader
+INFO 2025-07-29 19:28:43,487 autoreload 36896 38232 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 19:28:44,625 autoreload 29952 31524 Watching for file changes with StatReloader
+WARNING 2025-07-29 19:28:58,192 tables 29952 21052 <table> is empty
+'<tbody> </tbody>'
+INFO 2025-07-29 19:30:07,029 autoreload 29952 31524 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 19:30:08,223 autoreload 22344 28500 Watching for file changes with StatReloader
+WARNING 2025-07-29 19:30:22,836 tables 22344 18828 <table> is empty
+'<tbody> </tbody>'
+WARNING 2025-07-29 19:57:34,674 utils 22344 36764 Object of type CommonTransitItemsModel with PK 1 not found.
+INFO 2025-07-29 19:59:52,848 autoreload 22344 28500 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 19:59:54,105 autoreload 4648 34904 Watching for file changes with StatReloader
+INFO 2025-07-29 20:00:25,298 autoreload 4648 34904 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 20:00:26,585 autoreload 28604 14744 Watching for file changes with StatReloader
+INFO 2025-07-29 20:36:19,799 autoreload 28604 14744 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-29 20:36:21,556 autoreload 24848 820 Watching for file changes with StatReloader
+INFO 2025-07-29 20:36:55,924 autoreload 24848 820 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-07-29 20:36:57,159 autoreload 17032 8324 Watching for file changes with StatReloader
+INFO 2025-07-29 20:45:54,280 autoreload 17032 8324 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 20:45:55,528 autoreload 10264 13304 Watching for file changes with StatReloader
+INFO 2025-07-29 20:50:28,444 autoreload 10264 13304 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 20:50:29,950 autoreload 952 34412 Watching for file changes with StatReloader
+INFO 2025-07-29 20:59:17,500 autoreload 952 34412 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-07-29 20:59:18,721 autoreload 32772 31484 Watching for file changes with StatReloader
+WARNING 2025-07-29 21:00:24,432 tables 32772 14164 <table> is empty
+'<tbody> </tbody>'
+WARNING 2025-07-29 21:00:26,682 tables 32772 14164 <table> is empty
+'<tbody> </tbody>'
+WARNING 2025-07-29 21:00:29,110 tables 32772 14164 <table> is empty
+'<tbody> </tbody>'
+INFO 2025-07-29 21:02:10,771 autoreload 32772 31484 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:02:12,410 autoreload 33528 1672 Watching for file changes with StatReloader
+INFO 2025-07-29 21:03:49,389 autoreload 33528 1672 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:03:50,719 autoreload 12480 22872 Watching for file changes with StatReloader
+INFO 2025-07-29 21:05:01,954 autoreload 12480 22872 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:05:03,440 autoreload 39472 26100 Watching for file changes with StatReloader
+WARNING 2025-07-29 21:05:06,222 tables 39472 24256 <table> is empty
+'<tbody> </tbody>'
+INFO 2025-07-29 21:06:15,130 autoreload 39472 26100 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:06:16,243 autoreload 6564 17188 Watching for file changes with StatReloader
+INFO 2025-07-29 21:07:30,571 autoreload 6564 17188 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:07:31,906 autoreload 19844 40312 Watching for file changes with StatReloader
+INFO 2025-07-29 21:08:25,158 autoreload 19844 40312 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:08:26,424 autoreload 32508 32560 Watching for file changes with StatReloader
+INFO 2025-07-29 21:10:17,921 autoreload 32508 32560 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:10:19,072 autoreload 37860 21804 Watching for file changes with StatReloader
+INFO 2025-07-29 21:11:30,058 autoreload 37860 21804 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:11:31,241 autoreload 24412 18336 Watching for file changes with StatReloader
+INFO 2025-07-29 21:12:19,180 autoreload 24412 18336 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:12:20,499 autoreload 31136 28396 Watching for file changes with StatReloader
+INFO 2025-07-29 21:13:48,152 autoreload 31136 28396 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:13:49,490 autoreload 28448 19996 Watching for file changes with StatReloader
+INFO 2025-07-29 21:14:27,922 autoreload 28448 19996 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:14:28,994 autoreload 27176 35300 Watching for file changes with StatReloader
+INFO 2025-07-29 21:17:34,312 autoreload 27176 35300 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:17:35,777 autoreload 38440 29208 Watching for file changes with StatReloader
+INFO 2025-07-29 21:17:51,316 autoreload 38440 29208 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:17:52,833 autoreload 21172 32152 Watching for file changes with StatReloader
+INFO 2025-07-29 21:18:37,024 autoreload 21172 32152 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:18:38,197 autoreload 11892 35360 Watching for file changes with StatReloader
+INFO 2025-07-29 21:18:55,029 autoreload 11892 35360 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:18:56,247 autoreload 34092 37908 Watching for file changes with StatReloader
+INFO 2025-07-29 21:19:29,180 autoreload 34092 37908 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:19:30,320 autoreload 37240 21052 Watching for file changes with StatReloader
+INFO 2025-07-29 21:20:23,655 autoreload 37240 21052 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:20:24,771 autoreload 15288 40012 Watching for file changes with StatReloader
+INFO 2025-07-29 21:20:53,948 autoreload 15288 40012 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:20:55,215 autoreload 20880 20540 Watching for file changes with StatReloader
+INFO 2025-07-29 21:22:41,846 autoreload 20880 20540 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:22:43,221 autoreload 35176 24800 Watching for file changes with StatReloader
+INFO 2025-07-29 21:22:53,251 autoreload 35176 24800 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:22:54,280 autoreload 944 1560 Watching for file changes with StatReloader
+INFO 2025-07-29 21:23:17,518 autoreload 944 1560 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-29 21:23:19,030 autoreload 35756 37236 Watching for file changes with StatReloader
+INFO 2025-07-29 21:23:22,919 autoreload 35756 37236 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:23:23,898 autoreload 39880 39080 Watching for file changes with StatReloader
+INFO 2025-07-29 21:25:51,987 autoreload 39880 39080 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:25:53,486 autoreload 35628 21580 Watching for file changes with StatReloader
+INFO 2025-07-29 21:29:10,936 autoreload 35628 21580 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:29:12,015 autoreload 10188 36064 Watching for file changes with StatReloader
+INFO 2025-07-29 21:30:18,255 autoreload 10188 36064 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:30:19,179 autoreload 36268 16896 Watching for file changes with StatReloader
+INFO 2025-07-29 21:32:32,012 autoreload 36268 16896 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:32:32,891 autoreload 3144 34344 Watching for file changes with StatReloader
+INFO 2025-07-29 21:35:06,946 autoreload 3144 34344 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:35:07,920 autoreload 39200 35972 Watching for file changes with StatReloader
+WARNING 2025-07-29 21:35:27,317 log 39200 25280 Not Found: /favicon.ico
+INFO 2025-07-29 21:35:41,136 autoreload 39200 35972 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:35:42,563 autoreload 33544 24856 Watching for file changes with StatReloader
+INFO 2025-07-29 21:43:20,548 autoreload 33544 24856 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:43:21,525 autoreload 22140 38520 Watching for file changes with StatReloader
+INFO 2025-07-29 21:46:55,895 autoreload 22140 38520 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:46:57,085 autoreload 34336 36764 Watching for file changes with StatReloader
+INFO 2025-07-29 21:47:53,403 autoreload 34336 36764 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:47:54,341 autoreload 10072 31856 Watching for file changes with StatReloader
+INFO 2025-07-29 21:48:23,031 autoreload 10072 31856 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:48:24,549 autoreload 35360 38084 Watching for file changes with StatReloader
+ERROR 2025-07-29 21:48:26,600 utils 35360 33824 Related model 'CommonProgressModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-29 21:50:21,407 autoreload 35360 38084 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:50:22,345 autoreload 33308 14704 Watching for file changes with StatReloader
+INFO 2025-07-29 21:51:38,600 autoreload 33308 14704 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:51:39,836 autoreload 13600 23364 Watching for file changes with StatReloader
+ERROR 2025-07-29 21:51:41,968 utils 13600 22412 Related model 'CommonProgressModel' not found in ALLIF_MODEL_REGISTRY. Skipping.
+INFO 2025-07-29 21:52:20,268 autoreload 13600 23364 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:52:21,660 autoreload 972 40828 Watching for file changes with StatReloader
+WARNING 2025-07-29 21:52:23,617 utils 972 10812 Object of type CommonProgressModel with PK 17 not found.
+INFO 2025-07-29 21:53:02,105 autoreload 972 40828 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 21:53:03,309 autoreload 38316 5256 Watching for file changes with StatReloader
+WARNING 2025-07-29 21:53:05,059 utils 38316 33564 Object of type CommonProgressModel with PK 17 not found.
+WARNING 2025-07-29 21:53:56,494 utils 38316 33564 Object of type CommonProgressModel with PK 17 not found.
+INFO 2025-07-29 21:54:37,825 autoreload 38316 5256 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:54:39,275 autoreload 30556 32492 Watching for file changes with StatReloader
+INFO 2025-07-29 21:59:21,345 autoreload 30556 32492 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 21:59:22,287 autoreload 20236 33748 Watching for file changes with StatReloader
+INFO 2025-07-29 22:00:06,873 autoreload 20236 33748 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:00:08,321 autoreload 22900 37788 Watching for file changes with StatReloader
+WARNING 2025-07-29 22:00:10,404 log 22900 9116 Not Found: /Add/New/progress/records/information/area/17/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+WARNING 2025-07-29 22:02:59,260 log 22900 9116 Not Found: /Add/New/progress/records/information/area/17/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+INFO 2025-07-29 22:04:24,116 autoreload 22900 37788 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-29 22:04:25,116 autoreload 30548 26848 Watching for file changes with StatReloader
+WARNING 2025-07-29 22:05:27,156 log 30548 34792 Not Found: /Add/New/progress/records/information/area/17/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+WARNING 2025-07-29 22:05:30,988 log 30548 34792 Not Found: /Add/New/progress/records/information/area/17/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+INFO 2025-07-29 22:06:48,864 autoreload 30548 26848 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:06:50,211 autoreload 31176 18760 Watching for file changes with StatReloader
+WARNING 2025-07-29 22:06:57,770 log 31176 8480 Not Found: /Add/New/progress/records/information/area/17/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+INFO 2025-07-29 22:07:16,577 autoreload 31176 18760 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:07:17,582 autoreload 16816 31620 Watching for file changes with StatReloader
+WARNING 2025-07-29 22:08:22,868 log 16816 39120 Not Found: /Add/New/progress/records/information/area/17/user-full-names-b86293ea7826/barasho-hospital2116-5691dc1aadae/
+INFO 2025-07-29 22:11:01,808 autoreload 16816 31620 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:11:03,048 autoreload 34744 32708 Watching for file changes with StatReloader
+INFO 2025-07-29 22:11:34,943 autoreload 34744 32708 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:11:36,197 autoreload 27056 13424 Watching for file changes with StatReloader
+INFO 2025-07-29 22:19:11,644 autoreload 27056 13424 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:19:13,030 autoreload 11624 39456 Watching for file changes with StatReloader
+INFO 2025-07-29 22:19:18,080 autoreload 11624 39456 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:19:19,729 autoreload 24340 20332 Watching for file changes with StatReloader
+INFO 2025-07-29 22:26:40,273 autoreload 24340 20332 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:26:41,392 autoreload 16040 34336 Watching for file changes with StatReloader
+INFO 2025-07-29 22:28:30,766 autoreload 16040 34336 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:28:31,987 autoreload 20332 22068 Watching for file changes with StatReloader
+INFO 2025-07-29 22:28:52,621 autoreload 20332 22068 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:28:53,762 autoreload 31560 29516 Watching for file changes with StatReloader
+INFO 2025-07-29 22:31:46,749 autoreload 31560 29516 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:31:47,902 autoreload 29592 39528 Watching for file changes with StatReloader
+INFO 2025-07-29 22:32:50,006 autoreload 29592 39528 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-29 22:32:51,122 autoreload 14028 39304 Watching for file changes with StatReloader
+INFO 2025-07-29 22:33:22,982 autoreload 14028 39304 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:33:24,127 autoreload 6196 756 Watching for file changes with StatReloader
+INFO 2025-07-29 22:34:47,004 autoreload 6196 756 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:34:48,126 autoreload 20744 6496 Watching for file changes with StatReloader
+INFO 2025-07-29 22:35:51,121 autoreload 20744 6496 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 22:35:52,420 autoreload 22932 34792 Watching for file changes with StatReloader
+INFO 2025-07-29 22:37:01,842 autoreload 22932 34792 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 22:37:03,204 autoreload 8868 33764 Watching for file changes with StatReloader
+INFO 2025-07-29 22:37:18,852 autoreload 8868 33764 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-07-29 22:37:20,095 autoreload 23756 33780 Watching for file changes with StatReloader
+WARNING 2025-07-29 22:42:49,510 allif_navigation_tags 23756 5240 General navigation link with name 'Progresses' not found in allif_single_access_general_links.
+INFO 2025-07-29 22:45:39,275 autoreload 23756 33780 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 22:45:40,524 autoreload 30800 37924 Watching for file changes with StatReloader
+INFO 2025-07-29 22:45:46,620 autoreload 30800 37924 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 22:45:47,603 autoreload 20300 16216 Watching for file changes with StatReloader
+INFO 2025-07-29 22:47:34,208 autoreload 20300 16216 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-07-29 22:47:35,527 autoreload 10672 14152 Watching for file changes with StatReloader
+INFO 2025-07-29 22:48:18,361 autoreload 10672 14152 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 22:48:19,521 autoreload 40564 22076 Watching for file changes with StatReloader
+INFO 2025-07-29 22:49:38,440 autoreload 15040 3612 Watching for file changes with StatReloader
+INFO 2025-07-29 22:50:41,608 autoreload 15040 3612 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 22:50:42,780 autoreload 32376 13848 Watching for file changes with StatReloader
+INFO 2025-07-29 22:54:09,204 autoreload 32376 13848 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-07-29 22:54:10,468 autoreload 36444 31636 Watching for file changes with StatReloader
+INFO 2025-07-29 22:57:59,550 autoreload 36444 31636 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 22:58:00,925 autoreload 11856 40200 Watching for file changes with StatReloader
+WARNING 2025-07-29 23:06:14,535 utils 11856 34104 Object of type CommonTransactionsModel with PK 1 not found.
+INFO 2025-07-29 23:10:26,803 autoreload 11856 40200 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 23:10:28,101 autoreload 16936 24628 Watching for file changes with StatReloader
+INFO 2025-07-29 23:12:37,041 autoreload 16936 24628 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 23:12:38,520 autoreload 35852 30024 Watching for file changes with StatReloader
+INFO 2025-07-29 23:13:42,545 autoreload 35852 30024 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 23:13:44,121 autoreload 23984 34640 Watching for file changes with StatReloader
+INFO 2025-07-29 23:18:57,018 autoreload 23984 34640 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-07-29 23:18:58,121 autoreload 5560 38544 Watching for file changes with StatReloader
+INFO 2025-07-29 23:21:51,957 autoreload 5560 38544 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 23:21:53,255 autoreload 33264 14176 Watching for file changes with StatReloader
+INFO 2025-07-29 23:23:06,207 autoreload 33264 14176 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 23:23:07,312 autoreload 24888 14844 Watching for file changes with StatReloader
+INFO 2025-07-29 23:23:18,991 autoreload 24888 14844 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-07-29 23:23:20,096 autoreload 5188 27736 Watching for file changes with StatReloader

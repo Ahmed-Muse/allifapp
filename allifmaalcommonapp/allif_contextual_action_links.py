@@ -137,10 +137,28 @@ allif_sector_contextual_action_require_pk_links= {
    
    {'name': 'DeleteSalaryConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSalary', 'requires_pk': True},
    
-     
+  {'name': 'DeleteJobConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteJob', 'requires_pk': True},
+   {'name': 'DeleteJob', 'url_name': 'allifmaalcommonapp:commonDeleteJob', 'requires_pk': True},
+   {'name': 'AddJobDetails', 'url_name': 'allifmaalcommonapp:commonAddJobDetails', 'requires_pk': True},
+   {'name': 'InvoiceJob', 'url_name': 'allifmaalcommonapp:commonInvoiceJob', 'requires_pk': True},
+   {'name': 'JobInvoicePdf', 'url_name': 'allifmaalcommonapp:commonJobInvoicePdf', 'requires_pk': True},
+   {'name': 'JobTransactionPdf', 'url_name': 'allifmaalcommonapp:commonJobTransactionReportpdf', 'requires_pk': True},
+   {'name': 'AddJobItems', 'url_name': 'allifmaalcommonapp:commonAddJobItems', 'requires_pk': True},
+   
+   {'name': 'DeleteTransitConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTransit', 'requires_pk': True},
+   {'name': 'DeleteTransit', 'url_name': 'allifmaalcommonapp:commonDeleteTransit', 'requires_pk': True},
+   {'name': 'AddTransitDetails', 'url_name': 'allifmaalcommonapp:commonAddTransitDetails', 'requires_pk': True},
+   {'name': 'AddShipmentItems', 'url_name': 'allifmaalcommonapp:commonAddShipmentItems', 'requires_pk': True},
+   {'name': 'TransitPdf', 'url_name': 'allifmaalcommonapp:commonTransitToPdf', 'requires_pk': True},
+   
+   {'name': 'TransitItemDetails', 'url_name': 'allifmaalcommonapp:commonShipmentItemDetails', 'requires_pk': True},
+    {'name': 'DeleteShipmentItem', 'url_name': 'allifmaalcommonapp:commonDeleteShipmentItem', 'requires_pk': True},
+   {'name': 'DeleteProgressConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteProgress', 'requires_pk': True},
+   
+    {'name': 'AddProgress', 'url_name': 'allifmaalcommonapp:commonAddProgress', 'requires_pk': True},
    
    
-   
+  
     ],
     
     'Education': [

@@ -1546,23 +1546,25 @@ class CommonAddTransactionItemForm(CommonBaseForm):
             self.fields['items'].queryset =CommonStocksModel.objects.none()
             self.fields['trans_number'].queryset=CommonTransactionsModel.objects.none()
 
-
-
 class CommonAddJobDetailsForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
         model=CommonJobsModel
-        fields=CommonBaseForm.Meta.fields + ['customer']
+        fields=CommonBaseForm.Meta.fields + ['customer','job_status','payment_terms','currency']
         widgets = {
         **CommonBaseForm.Meta.widgets,
         'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+        'job_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+        'payment_terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+        'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super().__init__(allifmaalparameter, *args, **kwargs)
         if allifmaalparameter:
             self.fields['customer'].queryset =CommonCustomersModel.objects.filter(company=allifmaalparameter)
-       
+            self.fields['currency'].queryset =CommonCurrenciesModel.objects.filter(company=allifmaalparameter)
         else:
             self.fields['customer'].queryset =CommonCustomersModel.objects.none()
+            self.fields['currency'].queryset =CommonCurrenciesModel.all_objects.none()
        
 
 
@@ -1614,8 +1616,8 @@ class CommonAddTasksForm(CommonBaseForm):
 class CommonAddTransitDetailsForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
         model=CommonTransitModel
-        fields=CommonBaseForm.Meta.fields + ['carrier','received_on','expected','origin','via',
-                  'dispatched_by','customer','received_by',
+        fields=CommonBaseForm.Meta.fields + ['carrier','received_on','expected','origin','via','terms','currency',
+                  'dispatched_by','customer','received_by','transit_status',
                   'destination','delivery_confirmed_by_employee','delivery_confirmation_date_time',
                   'exit_warehouse','supplier','delivery_confirmed_by_customer','delivery_notes',
                   'entry_warehouse',]
@@ -1626,10 +1628,11 @@ class CommonAddTransitDetailsForm(CommonBaseForm):
             'delivery_confirmed_by_customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'dispatched_by':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'received_by':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            
+            'terms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'carrier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'shipment_number':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            
+            'transit_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'origin':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'entry_warehouse':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'exit_warehouse':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),

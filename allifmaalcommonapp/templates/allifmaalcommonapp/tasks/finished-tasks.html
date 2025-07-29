@@ -26,7 +26,7 @@
         <li><a class="dropdown-item">Looking for something?</a></li>
         <a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTasks' user_var glblslug %}">Clear Search</a>
           
-        <form method='POST' action="{% url 'allifmaalcommonapp:commonTaskBasicSearch' user_var glblslug %}">{% csrf_token %}
+        <form method='POST' action="">{% csrf_token %}
         
           <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
           placeholder="Type Here ...">
@@ -86,7 +86,7 @@
       
       {% for item in allifqueryset %} 
       <tr data-id="{{item.id}}">
-      <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddSeeTaskDetails' item.id user_var glblslug %}">{{item.task}}</a></td>
+      <td class="allif-fix-table-col"><a class="allif-table-links" href="">{{item.task}}</a></td>
      
       
       <td>{{item.ends|date:'d/m/Y'}}</td>

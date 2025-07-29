@@ -359,6 +359,32 @@ allif_model_sort_configs = {
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
      
+     'commonjobsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+      'commontransitmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
      
      
      
@@ -466,6 +492,9 @@ allif_search_config_mapping = {
      'CommonSupplierPaymentsModel': ['name__icontains', 'description__icontains','number__icontains'],
      'CommonCustomerPaymentsModel': ['name__icontains', 'description__icontains','number__icontains'],
      'CommonSalariesModel': ['name__icontains', 'description__icontains','number__icontains'],
+     'CommonJobsModel': ['name__icontains', 'description__icontains','number__icontains'],
+     'CommonTransitModel': ['name__icontains', 'description__icontains','number__icontains'],
+      'CommonProgressModel': ['name__icontains', 'description__icontains','number__icontains'],
      
     
     'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
@@ -779,8 +808,57 @@ allif_advanced_search_configs = {
     
     
     },
+      
+      'CommonJobsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+      
+     'CommonTransitModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
      
-     
+     'CommonProgressModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
      
      
      
@@ -865,7 +943,11 @@ allif_main_models_registry = {
     "CommonCreditNoteItemsModel":CommonCreditNoteItemsModel,
     "CommonLedgerEntriesModel":CommonLedgerEntriesModel,
     "CommonSalariesModel":CommonSalariesModel,
-   
+    "CommonJobsModel":CommonJobsModel,
+    "CommonJobItemsModel":CommonJobItemsModel,
+    "CommonTransitModel":CommonTransitModel,
+    "CommonTransitItemsModel":CommonTransitItemsModel,
+   "CommonProgressModel":CommonProgressModel,
    
 }
 
@@ -1005,11 +1087,32 @@ allif_main_document_pdf_configuration= {
     },
     
     
+    'CommonJobsModel': { # Key for Purchase Orders
+        'main_model': 'CommonJobsModel', 
+        'items_model': 'CommonJobItemsModel', # This is an optional key now
+        'items_related_field': 'credit_note', # This is an optional key now
+        'title': 'Invoice',
+        'filename_prefix': 'Inv',
+        'template_path': 'allifmaalcommonapp/ui/pdf/items-pdf.html', 
+        'extra_context_map': { 
+            'supplier': 'po_supplier', 
+        },
+        #'related_lookups': ['supplier'], 
+    },
+    
+     'CommonTransitModel': { # Key for Purchase Orders
+        'main_model': 'CommonTransitModel', 
+        'items_model': 'CommonTransitItemsModel', # This is an optional key now
+        'items_related_field': 'shipment', # This is an optional key now
+        'title': 'Transport',
+        'filename_prefix': 'Shipment',
+        'template_path': 'allifmaalcommonapp/transport/shipment_pdf.html', 
+       
+    },
+    
     
     
 }
-
-
 
 # --- NEW: EXCEL_UPLOAD_CONFIGS (Centralized Excel Upload Configuration Map) ---
 allif_excel_upload_configs= {

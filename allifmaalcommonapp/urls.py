@@ -563,9 +563,6 @@ path('Complete/Task/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonMarkT
 path('Completed/Tasks/<str:allifusr>/<str:allifslug>/', views.commonCompletedTasks, name="commonCompletedTasks"),
 path('Delete/Task/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteTask, name="commonDeleteTask"),
 path('Edit/Task/Update/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditTask, name="commonEditTask"),
-path('Search/For/Job/Details/Basic/Search/<str:allifusr>/<str:allifslug>/', views.commonTasksSearch, name="commonJobSearch"),
-path('Task/Details/Basic/Search/<str:allifusr>/<str:allifslug>/', views.commonTaskBasicSearch, name="commonTaskBasicSearch"),
-path('Add/See/Task/Details/View/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddSeeTaskDetails, name="commonAddSeeTaskDetails"),
 
 ####################################### profit and loss ######################
 path('Profit/And/Loss/Analysis/<str:allifusr>/<str:allifslug>/', views.commonProfitAndLoss, name="commonProfitAndLoss"),
@@ -601,6 +598,8 @@ path('Want/To/Delete/progress/s/ses/records/s/s/<str:pk>/<str:allifusr>/<str:all
 path('Delete/Progress/s/details/s/records/Prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteProgress, name="commonDeleteProgress"),
 path('Progress/ses/s/Details/Viewing/More/Information/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonProgressDetails, name="commonProgressDetails"),
 path('Search/for/Progress/Records/unit/s/<str:allifusr>/<str:allifslug>/', views.commonProgressSearch, name="commonProgressSearch"),
+path('Advanced/Progress/s/Search/s/<str:allifusr>/<str:allifslug>/', views.commonProgressAdvanceSearch, name="commonProgressAdvanceSearch"),
+
 
 
 #########################3 customer contacts #############################################

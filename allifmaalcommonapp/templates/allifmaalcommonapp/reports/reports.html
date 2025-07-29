@@ -1,105 +1,18 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
+{% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+{% load allif_navigation_tags %}
+{% block allif_header_forms_dropdown%}
 {% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
 
-<!--start....main headere-->
-<div class="card-header">
-
-<div class="row mt-12" ><!--start....header row-->
-
-<div class="col-md-12"><!--start....header column-->
-
-<div class="container-fluid amel-content-header">
-
- <a class="amel-table-list-identifier">Reports:</a>
-  <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
- 
-</div>
-
-    </div><!--end....header column-->
+{% block allif-header-links %}
+<a href="{% allif_get_single_nav_link_url 'Creditors' user_var glblslug %}">Creditors</a>
+<a href="{% allif_get_single_nav_link_url 'Debtors' user_var glblslug %}">Debtors</a>
+<a href="{% allif_get_single_nav_link_url 'AvailableStock' user_var glblslug %}">Available Stock</a>
+{% endblock %}
+{% block list-table-content-seciton-links %}
+<a class="allif-table-links" href=""> {{item.name}}</a>
+{% endblock %}
+{% block list-table-content-seciton-dropdown-links %}
+<a href="" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+{% endblock %}
   
-  </div><!--end....header row-->
 
-</div><!--end....main headere-->
-
-  <div class="allifmaincontainer">
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Available Reports</div>
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-        <tr>
-          <td class="allif-fix-table-col">Creditors Report</td>
-          <td><a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:commonCreditorsReportpdf' user_var glblslug %}">Download</a></td>
-          </tr>
-      
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-         <tr>
-        <td class="allif-fix-table-col">Debtors Report</td>
-        <td><a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:commonDebtorsReport' user_var glblslug %}">Download</a></td>
-        </tr>
-     
-   
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-          <tr>
-        <td class="allif-fix-table-col">Available Stock</td>
-        <td><a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:commonAvailableStockpdf' user_var glblslug %}">Download</a></td>
-        </tr>
-     
-          </tbody>
-          </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
-</div>
-</div>
-  {% block scripts %}
-
-  {% endblock %}
-   {% endblock %}
-   

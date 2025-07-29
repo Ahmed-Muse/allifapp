@@ -1369,6 +1369,8 @@ class CommonTransitModel(CommonBaseModel):
     delivery_confirmed_by_employee=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='confirmed_deliveries_employee')
     delivery_confirmation_date_time=models.DateTimeField(blank=True,null=True)
     delivery_notes=models.CharField(blank=True, null=True,max_length=250)
+    terms=models.ForeignKey(CommonPaymentTermsModel, related_name="transit_payment_terms",on_delete=models.SET_NULL,null=True,blank=True)
+    currency=models.ForeignKey(CommonCurrenciesModel, related_name="transit_currency",on_delete=models.SET_NULL,null=True,blank=True)
   
     def __str__(self):
          return '{}'.format(self.number)
