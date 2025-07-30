@@ -4,31 +4,6 @@ from allifmaalcommonapp.constants import TRIAGE_DISPOSITION_CHOICES,MENTAL_STATU
 from allifmaalusersapp.models import User
 from allifmaalcommonapp.models import CommonBaseModel,CommonTransactionsModel,CommonSpacesModel,CommonSpaceUnitsModel,CommonCategoriesModel, CommonSuppliersModel, CommonEmployeesModel, CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel, CommonCustomersModel,CommonStocksModel,CommonCompanyDetailsModel
 
-
-# --- Define Your Custom Manager for Active Objects ---
-class ActiveManager(models.Manager):
-    """
-    A custom manager that returns only objects with status='Approved'
-    and delete_status='Deletable' by default.
-    """
-    def get_queryset(self):
-        return super().get_queryset().filter(status='Active')
-    
-    def for_company(self, company_id):
-        # Assuming your model (or its CommonBaseModel) has a 'company' field
-        return self.get_queryset().filter(company=company_id)
-
-    def archived(self):
-        """Returns only archived (soft-deleted) objects."""
-        return super().get_queryset().filter(delete_status='Archived')
-
-    def all_with_archived(self):
-        """Returns all objects, including active and archived."""
-        return super().get_queryset()
-
-# ... (Your other models like CommonUnitsModel, CommonCompanyDetailsModel, etc.) ...
-
-
 # Usage: CommonCompanyScopeModel.active_scopes.for_company(company_id)
 class TriagesModel(CommonBaseModel):# very important model
     """
@@ -75,12 +50,7 @@ class TriagesModel(CommonBaseModel):# very important model
     mobility_status = models.CharField(max_length=50, blank=True, null=True, choices=MOBILITY_CHOICES)
    
     mental_status = models.CharField(max_length=50, blank=True, null=True, choices=MENTAL_STATUS_CHOICES)
-    
-     # --- Assign the custom manager ---
-    # 'objects' is the default manager (accesses all records without default filtering)
-    #objects = models.Manager() 
-    # 'active_triage' is your custom manager (accesses only active records by default)
-    #active_triage = ActiveManager() 
+
     class Meta:
        
         ordering = ['-temperature'] # Your ordering is also here
@@ -88,7 +58,7 @@ class TriagesModel(CommonBaseModel):# very important model
         return str(self.medical_file)
 
 
-class AssessmentsModel(models.Model):# very important model
+class AssessmentsModel(CommonBaseModel):# very important model
     """
     these are used to record patient assessments like triage records, doctor observations...
     """
@@ -118,25 +88,15 @@ class AssessmentsModel(models.Model):# very important model
 
     treatment_plan=models.TextField(blank=True, null=True,help_text="Treatment plan (medications, tests, referrals, follow-up).")
     
-    owner=models.ForeignKey(User, related_name="ownr_assessments",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_assessment",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_assessment",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_assessments",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_assessments",on_delete=models.SET_NULL,null=True,blank=True)
     def __str__(self):
         return str(self.medical_file)
 
 
-class LabTestRequestsModel(models.Model):
+class LabTestRequestsModel(CommonBaseModel):
     """
     Represents a request from a healthcare professional for one or more laboratory tests.
     """
-    owner=models.ForeignKey(User, related_name="owner_lab_test_requests",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="company_lab_test_requests",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="divisions_lab_test_requests",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="branch_lab_test_requests",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_lab_test_requests",on_delete=models.SET_NULL,null=True,blank=True)
-    
+  
     description=models.CharField(max_length=50, help_text="Type of referral (Internal or External).",blank=True,null=True)
     items=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="items_lab_test_requests",)
     date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient admission.")
@@ -152,16 +112,11 @@ class LabTestRequestsModel(models.Model):
     def __str__(self):
         return str(self.medical_file)
     
-class LabTestResultsModel(models.Model):
+class LabTestResultsModel(CommonBaseModel):
     """
     Stores the results for a specific test item from a laboratory order.
     """
-    owner=models.ForeignKey(User, related_name="owner_lab_test_requests_results",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="company_lab_test_requests_results",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="divisions_lab_test_requests_results",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="branch_lab_test_requests_results",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_lab_test_requests_results",on_delete=models.SET_NULL,null=True,blank=True)
-    
+  
     results=models.CharField(max_length=50,blank=True,null=True,default='Results')
     description=models.CharField(max_length=50,blank=True,null=True,default='Results')
     date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient admission.")
@@ -179,7 +134,7 @@ class LabTestResultsModel(models.Model):
         return str(self.results)
       
        
-class MedicationsModel(models.Model):# prescriptions...
+class MedicationsModel(CommonBaseModel):# prescriptions...
     """
     Represents an actual prescription of medication  and otherprescriptions issued by a doctor for a patient.
     """
@@ -193,11 +148,6 @@ class MedicationsModel(models.Model):# prescriptions...
     quantity=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     is_issued=models.BooleanField(max_length=50,default=False,help_text="True if the prescription has been dispensed by the pharmacy.")
 
-    owner=models.ForeignKey(User, related_name="ownrprescrptns",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpprescrptns",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsprescrptns",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchprescrptn",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptprescrptns",on_delete=models.SET_NULL,null=True,blank=True)
     frequency=models.CharField(max_length=350,blank=True,null=True)
     duration=models.CharField(max_length=350,blank=True,null=True)
     
@@ -217,16 +167,11 @@ class MedicationsModel(models.Model):# prescriptions...
         return str(self.medication)
 
 
-class AdmissionsModel(models.Model):
+class AdmissionsModel(CommonBaseModel):
     """
     defines admisions of patients in the hospital...
     """
-    owner=models.ForeignKey(User, related_name="ownradmissns",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpadmissns",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsadmissns",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchaadmissns",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptadmissns",on_delete=models.SET_NULL,null=True,blank=True)
-    description=models.CharField(max_length=50, help_text="Type of referral (Internal or External).",blank=True,null=True)
+   
     admitting_doctor=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="admitted_patients",)
     date_time=models.DateTimeField(blank=True, null=True, auto_now_add=True,help_text="Date and time of patient admission.")
     reason_for_admission=models.TextField(max_length=250,blank=True, null=True,help_text="The primary reason for patient admission.")
@@ -242,14 +187,8 @@ class AdmissionsModel(models.Model):
         return str(self.medical_file)
 
 
-class MedicalAdministrationsModel(models.Model):
-   
-    owner=models.ForeignKey(User, related_name="ownmedcladmins",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpmedcladmins",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsmedcladmins",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brnchamedcladmins",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptmedcladmins",on_delete=models.SET_NULL,null=True,blank=True)
-   
+class MedicalAdministrationsModel(CommonBaseModel):
+ 
     medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="medication_administrations", blank=True, null=True,help_text="The encounter this medication administration belongs to.")
     # Link to the prescription this administration fulfills (optional, but good for tracking)
     prescription=models.ForeignKey(MedicationsModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="administrations",help_text="The prescription being administered (optional)." )
@@ -259,8 +198,7 @@ class MedicalAdministrationsModel(models.Model):
     dosage_value=models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True,help_text="The actual dosage administered (e.g., '500').")
     dosage_unit = models.CharField(max_length=10, choices=DOSAGE_UNITS, blank=True, null=True,help_text="The unit of the administered dosage (e.g., 'MG', 'ML').")
     via=models.CharField(max_length=10, choices=ADMINISTRATION_ROUTES, blank=True, null=True,help_text="The route by which the medication was administered.")
-    comments=models.TextField(blank=True, null=True,help_text="Any additional comments about the administration.")
-    
+  
     administration_date_time = models.DateTimeField(auto_now_add=True, blank=True, null=True) # Renamed 'date', auto_now_add
     given_on = models.DateTimeField(blank=True, null=True) # Keep if 'given_on' is the actual time of administration
     last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -268,7 +206,7 @@ class MedicalAdministrationsModel(models.Model):
     def __str__(self):
         return str(self.medical_file)
 
-class DischargesModel(models.Model):
+class DischargesModel(CommonBaseModel):
     #For inpatients, a summary at discharge.
     admission=models.ForeignKey(AdmissionsModel, related_name="dschrgsummryadmsn", on_delete=models.SET_NULL, null=True, blank=True)
     discharge_summary=models.CharField(null=True, blank=True,max_length=250)
@@ -278,28 +216,18 @@ class DischargesModel(models.Model):
     recorded_on = models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of note-taking
     last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
 
-    owner=models.ForeignKey(User, related_name="owned_nursing_notes", on_delete=models.SET_NULL, null=True, blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel, related_name="company_nursing_notes", on_delete=models.CASCADE, null=True, blank=True)
-    division=models.ForeignKey(CommonDivisionsModel, related_name="division_nursing_notes", on_delete=models.SET_NULL, null=True, blank=True)
-    branch=models.ForeignKey(CommonBranchesModel, related_name="branch_nursing_notes", on_delete=models.SET_NULL, null=True, blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel, related_name="department_nursing_notes", on_delete=models.SET_NULL, null=True, blank=True)
     def __str__(self):
         return str(self.patient)
 
 
-class ReferralsModel(models.Model):
+class ReferralsModel(CommonBaseModel):
     
     """
     Records a patient referral to another doctor, department, or external organization.
     """
     
     reason_for_referral=models.CharField(null=True, blank=True,max_length=250, help_text="The reason for the referral.")
-    owner=models.ForeignKey(User, related_name="owner_referalls",on_delete=models.SET_NULL,null=True,blank=True)
-    company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmprefrals",on_delete=models.CASCADE,null=True,blank=True)
-    division=models.ForeignKey(CommonDivisionsModel,related_name="dvsrefrals",on_delete=models.SET_NULL,null=True,blank=True)
-    branch=models.ForeignKey(CommonBranchesModel,related_name="brncharefrals",on_delete=models.SET_NULL,null=True,blank=True)
-    department=models.ForeignKey(CommonDepartmentsModel,related_name="deptrefrals",on_delete=models.SET_NULL,null=True,blank=True)
-    
+   
     referring_doctor=models.ForeignKey(CommonEmployeesModel,help_text="The doctor issuing the referral.",related_name="referring_doctor",on_delete=models.SET_NULL,null=True,blank=True)
     referred_on=models.DateField(blank=True, null=True)
     

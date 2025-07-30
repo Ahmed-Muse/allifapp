@@ -175,6 +175,10 @@ allif_single_access_general_links = [
      {'name': 'Creditors', 'url_name': 'allifmaalcommonapp:commonCreditorsReportpdf'},
      {'name': 'Debtors', 'url_name': 'allifmaalcommonapp:commonDebtorsReport'},
      {'name': 'AvailableStock', 'url_name': 'allifmaalcommonapp:commonAvailableStockpdf'},
+     {'name': 'triagedata', 'url_name': 'allifmaalshaafiapp:triageData'},
+     {'name': 'prescriptions', 'url_name': 'allifmaalshaafiapp:prescriptions'},
+     {'name': 'MedicalAssessments', 'url_name': 'allifmaalshaafiapp:doctorAssessments'},
+     
   
     
     

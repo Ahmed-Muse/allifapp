@@ -8,7 +8,6 @@ path('Healthcare/Dashboard/<str:allifusr>/<str:allifslug>/', views.shaafiDashboa
 
 ################################3 triage data ###########################3
 path('Triage/Data/Recorded/Patient/Informations/<str:allifusr>/<str:allifslug>/', views.triageData, name="triageData"),
-path('All/Triage/s/Data/Recorded/Patient/Informations/<str:allifusr>/<str:allifslug>/', views.allTriageData, name="allTriageData"),
 path('Add/New/Triage/Data/Details/information/Records/<str:pk>/<str:allifusr>/<str:allifslug>/', views.AddTriageData, name="AddTriageData"),
 path('Edit/Update/Triage/Data/information/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editTriageData, name="editTriageData"),
 path('Search/For/Triage/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.triageDataSearch, name="triageDataSearch"),
@@ -67,6 +66,9 @@ path('treatment/medication/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:
 path('Do/You/u/Really/Want/to/Delete/This/treatment/s/medication/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteTreatment, name="wantToDeleteTreatment"),
 path('Delete/This/Treatments/now/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteTreatment, name="deleteTreatment"),
 
+path('advanced/treatment/s/search/e/s/<str:allifusr>/<str:allifslug>/', views.treatmentAdvancedSearch, name="treatmentAdvancedSearch"),
+
+
 #####################3 admissions ##############
 path('Admission/patient/s/<str:allifusr>/<str:allifslug>/', views.admissions, name="admissions"),
 path('Add/New/admission/s/medication/s/<str:allifusr>/<str:allifslug>/', views.addAdmission, name="addAdmission"),
@@ -75,6 +77,8 @@ path('Search/For/admission/medication/s/Details/<str:allifusr>/<str:allifslug>/'
 path('admission/s/medication/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.admissionDetails, name="admissionDetails"),
 path('Do/You/u/Really/Want/to/Delete/This/admission/s/s/medication/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteAdmission, name="wantToDeleteAdmission"),
 path('Delete/This/admission/s/now/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteAdmission, name="deleteAdmission"),
+path('Admission/s/Advanced/Search/es/<str:allifusr>/<str:allifslug>/', views.addmissionAdvancedSearch, name="addmissionAdvancedSearch"),
+
 
 ################## discharges ##########################
 path('Discharge/s/s/s/of/patients/clients/s/<str:allifusr>/<str:allifslug>/', views.discharges, name="discharges"),
@@ -84,6 +88,8 @@ path('Search/For/discharge/s/medication/s/Details/<str:allifusr>/<str:allifslug>
 path('discharge/s/hospitalization/s/Details/Information/s/<str:int>/<str:allifusr>/<str:allifslug>/', views.dischargeDetails, name="dischargeDetails"),
 path('Do/You/u/Really/Want/to/Delete/The/selected/discharge/s/hospitalization/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteDischarge, name="wantToDeleteDischarge"),
 path('Delete/This/Discharge/s/now/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteDischarge, name="deleteDischarge"),
+path('advanced/discharge/s/searches/<str:allifusr>/<str:allifslug>/', views.dischargeAdvancedSearch, name="dischargeAdvancedSearch"),
+
 
 #####################3 referals ##############
 path('Referals/s/of/clients/s/<str:allifusr>/<str:allifslug>/', views.referrals, name="referrals"),
@@ -93,5 +99,6 @@ path('Search/For/referral/s/medication/s/Details/<str:allifusr>/<str:allifslug>/
 path('Referral/s/medication/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.referralDetails, name="referralDetails"),
 path('Do/You/u/Really/Want/to/Delete/This/Referral/s/now/s/medication/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteReferral, name="wantToDeleteReferral"),
 path('Delete/This/Referral/s/now/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteReferral, name="deleteReferral"),
+path('Referal/s/advanced/search/s/<str:allifusr>/<str:allifslug>/', views.referalAdvancedSearch, name="referalAdvancedSearch"),
 
 ]  

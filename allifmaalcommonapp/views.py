@@ -1775,7 +1775,7 @@ def commonCreateDefaultValues(request, *allifargs, **allifkwargs):
                             company=current_company,
                             #defaults={'type': gl_cat_data['type']} # Pass 'type' as a default
                         )
-                        logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+                        logger.info("Comments")
                         gl_category_objects_map[gl_cat_data['description']] = gl_category_instance
                         if created: results['gl_categories']['created'] += 1
                         else: results['gl_categories']['skipped'] += 1

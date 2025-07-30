@@ -414,6 +414,19 @@ allif_model_sort_configs = {
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
      
+    'assessmentsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
      
     
     
@@ -495,11 +508,13 @@ allif_search_config_mapping = {
      'CommonJobsModel': ['name__icontains', 'description__icontains','number__icontains'],
      'CommonTransitModel': ['name__icontains', 'description__icontains','number__icontains'],
       'CommonProgressModel': ['name__icontains', 'description__icontains','number__icontains'],
+     'TriagesModel': ['name__icontains', 'description__icontains','number__icontains'],
+     'AssessmentsModel': ['name__icontains', 'description__icontains','number__icontains'],
      
     
     'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
     'CommonTasksModel': ['name__icontains', 'description__icontains'], # Example
-    'TriagesModel': ['medical_file__icontains', 'pain_level__icontains'], # Example
+    #'TriagesModel': ['medical_file__customer__icontains', 'pain_level__icontains'], # Example
     # Add configurations for other models as needed
 }
 
@@ -860,6 +875,40 @@ allif_advanced_search_configs = {
     
     },
      
+      'TriagesModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+       'AssessmentsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+     
+     
      
      
      
@@ -948,6 +997,8 @@ allif_main_models_registry = {
     "CommonTransitModel":CommonTransitModel,
     "CommonTransitItemsModel":CommonTransitItemsModel,
    "CommonProgressModel":CommonProgressModel,
+   "AssessmentsModel":AssessmentsModel,
+  
    
 }
 
@@ -1656,6 +1707,9 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
     # --- NEW ADDITION START: Parameter for the PK value to use in redirect ---
     redirect_pk_value: Optional[int] = None, # <--- NEW: The specific PK to use for redirection if redirect_with_pk is True
     # --- NEW ADDITION END ---
+     # --- NEW ADDITION START: Parameter for the app namespace ---
+    app_namespace: Optional[str] = 'allifmaalcommonapp', # <--- NEW: The app namespace for redirection URL
+    # --- NEW ADDITION END ---
     
 ):
     """
@@ -1807,26 +1861,45 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
             
            
             obj.save() # Save the updated object
-            
-            messages.success(request, f"{title_text} created successfully!")
-            
+            # --- NEW ADDITION START: Dynamic Redirection Logic (using app_namespace) ---..
             redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
             
             if redirect_with_pk and redirect_pk_value is not None:
                 redirect_kwargs['pk'] = redirect_pk_value
             elif redirect_with_pk and redirect_pk_value is None:
-                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk ({obj.pk}).")
+                # For edit/detail, if redirect_pk_value isn't provided, use the current object's PK
+                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to current item's PK ({obj.pk}).")
                 redirect_kwargs['pk'] = obj.pk
             
+            try:
+                # Construct the full URL name using the app_namespace
+                full_url_name = f'{app_namespace}:{success_redirect_url_name}'
+                final_redirect_url = reverse(full_url_name, kwargs=redirect_kwargs)
+            except NoReverseMatch as e:
+                logger.error(f"Failed to reverse URL '{full_url_name}' with kwargs {redirect_kwargs}: {e}")
+                messages.error(request, f"Successfully saved, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{full_url_name}'.")
+                # Fallback to a generic home page if redirection fails
+                return redirect(reverse(f'allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
+
+            return redirect(final_redirect_url)
+            # --- NEW ADDITION END ---
+            
+            """
+            messages.success(request, f"{title_text} created successfully!")
+            redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
+            if redirect_with_pk and redirect_pk_value is not None:
+                redirect_kwargs['pk'] = redirect_pk_value
+            elif redirect_with_pk and redirect_pk_value is None:
+                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk ({obj.pk}).")
+                redirect_kwargs['pk'] = obj.pk
             try:
                 final_redirect_url = reverse(f'allifmaalcommonapp:{success_redirect_url_name}', kwargs=redirect_kwargs)
             except NoReverseMatch as e:
                 logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
                 messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
                 return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
-
             return redirect(final_redirect_url)
-        
+            """
            
             
             #return redirect(
@@ -1897,6 +1970,9 @@ def allif_common_form_submission_and_save(
     extra_context: Optional[dict] = None, # For passing additional context to template
     redirect_with_pk: bool = False, # Set to True if the success_redirect_url_name expects a 'pk' argument
     redirect_pk_value: Optional[int] = None, # The specific PK to use for redirection if redirect_with_pk is True
+     # --- NEW ADDITION START: Parameter for the app namespace ---
+    app_namespace: Optional[str] = 'allifmaalcommonapp', # <--- NEW: The app namespace for redirection URL
+    # --- NEW ADDITION END ---
 ):
     """
     Helper function to encapsulate the common logic for processing form submissions
@@ -1979,17 +2055,39 @@ def allif_common_form_submission_and_save(
                         # No "error_message" key needed here, form.errors will be used directly by template
                         **(extra_context or {}) 
                     }
-                    print(f"DEBUG UTILS: 5. Context for pre_save_callback error (POST error): {context.keys()}")
-                    print(f"DEBUG UTILS:    - allifquery in error context: {context.get('allifquery')}")
-                    print(f"DEBUG UTILS:    - allifqueryset in error context: {context.get('allifqueryset')}")
+                    
                     return render(request, template_path, context) # Render original template_path
                     # --- NEW ADDITION END ---
 
             obj.save()
-            messages.success(request, f"{title_text} created successfully!")
             
+            # --- NEW ADDITION START: Dynamic Redirection Logic (using app_namespace) ---
             redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
             
+            if redirect_with_pk and redirect_pk_value is not None:
+                redirect_kwargs['pk'] = redirect_pk_value
+            elif redirect_with_pk and redirect_pk_value is None:
+                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk ({obj.pk}).")
+                redirect_kwargs['pk'] = obj.pk
+            
+            try:
+                # Construct the full URL name using the app_namespace
+                full_url_name = f'{app_namespace}:{success_redirect_url_name}'
+                final_redirect_url = reverse(full_url_name, kwargs=redirect_kwargs)
+            except NoReverseMatch as e:
+                logger.error(f"Failed to reverse URL '{full_url_name}' with kwargs {redirect_kwargs}: {e}")
+                messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{full_url_name}'.")
+                # Fallback to a generic home page, ensuring it also uses the app_namespace if needed
+                # For commonHome, it's usually in commonapp, but being explicit is safer
+                return redirect(reverse(f'allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
+
+            return redirect(final_redirect_url)
+            # --- NEW ADDITION END ---
+            
+            
+            """
+            messages.success(request, f"{title_text} created successfully!")
+            redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
             if redirect_with_pk and redirect_pk_value is not None:
                 redirect_kwargs['pk'] = redirect_pk_value
             elif redirect_with_pk and redirect_pk_value is None:
@@ -2002,8 +2100,8 @@ def allif_common_form_submission_and_save(
                 logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
                 messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
                 return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
-
             return redirect(final_redirect_url)
+            """
         else:
             # Form is invalid, render with errors
             messages.error(request, "Please correct the errors below.") # Use Django messages
@@ -2200,12 +2298,98 @@ def allif_delete_confirm(request,pk: int,model_name: str,title_text: str,
 
 def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_redirect_url_name: str,
                          redirect_with_pk: bool = False,redirect_pk_value: Optional[int] = None,
-                         
+                           # --- NEW ADDITION START: Parameter for the app namespace ---
+    app_namespace: Optional[str] = 'allifmaalcommonapp', # <--- NEW: The app namespace for redirection URL
+    # --- NEW ADDITION END ---
                          ):
     allif_data = common_shared_data(request)
     user_slug = allif_data.get("usrslg")
     company_slug = allif_data.get("compslg")
     model_class = allif_main_models_registry.get(model_name)
+    
+    
+    """
+    Helper function to encapsulate the common logic for deleting items.
+    Dynamically handles redirection URLs with or without a 'pk' argument
+    based on the 'redirect_with_pk' flag and 'redirect_pk_value'.
+    Supports dynamic app namespaces for redirection URLs.
+    """
+    allif_data = common_shared_data(request)
+    user_slug = allif_data.get("usrslg")
+    company_slug = allif_data.get("compslg")
+
+    model_class = allif_main_models_registry.get(model_name)
+    if not model_class:
+        messages.error(request, f"Error: Model '{model_name}' not found.")
+        # Fallback to home if model not found
+        return redirect(reverse(f'{app_namespace}:commonHome', kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+    try:
+        # Use .all_objects if available, otherwise .objects
+        if hasattr(model_class, 'all_objects'):
+            item = get_object_or_404(model_class.all_objects, pk=pk)
+        else:
+            item = get_object_or_404(model_class.objects, pk=pk)
+
+        # --- NEW ADDITION START: Authorization Check (similar to edit/save) ---
+        # Crucial for multi-tenant data segregation
+        if hasattr(item, 'company') and item.company != allif_data.get('main_sbscrbr_entity'):
+            logger.warning(f"Unauthorized delete attempt for {model_name} (PK: {pk}) by user {request.user} for company {allif_data.get('main_sbscrbr_entity')}.")
+            messages.error(request, f"Access denied to delete {model_name} with ID {pk}.")
+            # Redirect to the success URL, but without deleting
+            # We need to ensure the redirect_pk_value is used here if applicable
+            redirect_kwargs_unauthorized = {'allifusr': user_slug, 'allifslug': company_slug}
+            if redirect_with_pk and redirect_pk_value is not None:
+                redirect_kwargs_unauthorized['pk'] = redirect_pk_value
+            # If no redirect_pk_value is given for a PK-requiring URL, it's an issue.
+            # For delete, usually you redirect to a list or parent, so obj.pk is not relevant here.
+            try:
+                unauthorized_redirect_url = reverse(f'{app_namespace}:{success_redirect_url_name}', kwargs=redirect_kwargs_unauthorized)
+            except NoReverseMatch as e:
+                logger.error(f"Failed to reverse URL '{app_namespace}:{success_redirect_url_name}' for unauthorized delete: {e}")
+                unauthorized_redirect_url = reverse(f'allifmaalcommonapp:commonHome', kwargs={'allifusr': user_slug, 'allifslug': company_slug})
+            return redirect(unauthorized_redirect_url)
+        # --- NEW ADDITION END ---
+
+        item_display_name = str(item) # Get a string representation before deleting
+        item.delete()
+        messages.success(request, f"{model_name} '{item_display_name}' deleted successfully!")
+
+    except Http404:
+        messages.error(request, f"{model_name} with ID {pk} not found.")
+    except Exception as e:
+        logger.exception(f"Error deleting {model_name} (PK: {pk}): {e}")
+        messages.error(request, f"An error occurred while deleting {model_name}: {e}")
+
+    # --- NEW ADDITION START: Dynamic Redirection Logic (using app_namespace) ---
+    redirect_kwargs = {'allifusr': user_slug, 'allifslug': company_slug}
+    
+    if redirect_with_pk and redirect_pk_value is not None:
+        redirect_kwargs['pk'] = redirect_pk_value
+    elif redirect_with_pk and redirect_pk_value is None:
+        # For delete, if redirect_with_pk is True but no redirect_pk_value is given,
+        # it usually means redirecting to a parent list or a specific parent's detail page.
+        # It cannot fall back to 'obj.pk' because 'obj' (the deleted item) no longer exists.
+        # This case needs careful handling in the calling view.
+        logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided in delete handler. This might lead to NoReverseMatch.")
+        # No automatic fallback to obj.pk here as obj is deleted.
+        # The calling view MUST provide redirect_pk_value if redirect_with_pk is True.
+    
+    try:
+        # Construct the full URL name using the app_namespace
+        full_url_name = f'{app_namespace}:{success_redirect_url_name}'
+        final_redirect_url = reverse(full_url_name, kwargs=redirect_kwargs)
+    except NoReverseMatch as e:
+        logger.error(f"Failed to reverse URL '{full_url_name}' with kwargs {redirect_kwargs}: {e}")
+        messages.error(request, f"Deletion successful, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{full_url_name}'.")
+        # Fallback to a generic home page if redirection fails
+        return redirect(reverse(f'allifmaalcommonapp:commonHome', kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+
+    return redirect(final_redirect_url)
+    # --- NEW ADDITION END ---
+
+
+"""
     if not model_class:
         raise Http404(f"Model '{model_name}' not found in mapping.")
 
@@ -2213,9 +2397,6 @@ def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_re
 
     item.delete()
     
-    
-    
-       
     redirect_kwargs = {'allifusr': user_slug, 'allifslug': company_slug}
     if redirect_with_pk and redirect_pk_value is not None:
         redirect_kwargs['pk'] = redirect_pk_value
@@ -2231,9 +2412,9 @@ def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_re
         return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_slug, 'allifslug':company_slug}))
 
     return redirect(final_redirect_url)
-    return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}',kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
+    #return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}',kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
 
-
+"""
 
 # --- NEW: Centralized Search Handler ---
 def allif_search_handler(request: HttpRequest,model_name: str,search_fields_key: str, # Key to look up in SEARCH_CONFIGS

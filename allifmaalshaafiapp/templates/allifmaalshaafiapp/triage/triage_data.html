@@ -1,101 +1,48 @@
-{% extends 'allifmaalshaafiapp/base/uimainbase/shaafibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
-  <div class="allif-header-main-wrapper">
-<!--start....main headere-->
-  {% include 'allifmaalcommonapp/includes/headers/search-form-header-upper-section.html' %}
-  <form method='POST' action="{% url 'allifmaalshaafiapp:prescriptionSearch' user_var glblslug %}">{% csrf_token %}  
-  {% include 'allifmaalcommonapp/includes/headers/search-form-header-lower-section.html' %}
-  <li><a class="dropdown-item">Advanced Searching</a></li>
-  <form method='POST' action="{% url 'allifmaalshaafiapp:prescriptionAdvancedSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-  {% include 'allifmaalcommonapp/includes/headers/advanced-search-form-lower-section.html' %}
-  
-  <a href="{% url 'allifmaalcommonapp:commonTransactions' user_var glblslug %}">Transactions</a>
-    <a href="{% url 'allifmaalshaafiapp:triageData' user_var glblslug %}">Triage</a>
-  <a href="{% url 'allifmaalshaafiapp:allTriageData' user_var glblslug %}">View All</a>
-   {% include 'allifmaalcommonapp/includes/headers/header-lower-section.html' %}
-  </div>
-  
-    <div class="allifmaincontainer">
-      <div class="allif-full-table-content-main-wrapper">
-      {% include 'allifmaalcommonapp/includes/tables/full-table-header-upper-section.html' %}
-            
-        <td class="allif-fix-table-col">Patient</td>
-        <td class="allif-table-header-td">Reference No.</td>
-        <td class="allif-table-header-td">Blood Pressure</td>
-        <td class="allif-table-header-td">Temperature D.C</td>
-        <td class="allif-table-header-td">Recorded On</td>
-        <td class="allif-table-header-td">Status</td>
-        <td class="allif-table-header-td">Navigate</td>
-        {% include 'allifmaalcommonapp/includes/tables/full-table-header-lower-section.html' %}
-        
-      {% for item in allifqueryset %}  
-        <tr data-id="{{item.id}}" class="allif-table-header-content-row">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.medical_file.customer.id user_var glblslug %}">{{item.medical_file.customer}}</a></td>
-        <td class="allif-table-content-td">
-        <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.medical_file.id user_var glblslug %}">{{item.medical_file.number}}</a></td>
-        <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:triageDataDetails' item.id user_var glblslug %}"> {{item.blood_pressure_systolic}}/{{item.blood_pressure_diastolic}}</a></td>
-        <td class="allif-table-content-td">{{item.temperature}}</td>
-        <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
-        <td class="allif-table-content-td">{{item.status}}</td>
-        
-        <td class="allif-table-content-td">
-        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
-   
-        <a href="{% url 'allifmaalshaafiapp:editTriageData' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-        <a href="{% url 'allifmaalshaafiapp:AddTriageData' item.medical_file.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Add Triage</a>
-        
-        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-middle-section.html' %}
-        
-        <a href="{% url 'allifmaalshaafiapp:prescriptions' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-        <a href="{% url 'allifmaalshaafiapp:deleteTriageData' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-        
-        {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
-        </td>
-  
-    </tr>
-      {% endfor %}
-      {% if searched_data %}
-      {% for item in searched_data %}
-     <tr data-id="{{item.id}}" class="allif-table-header-content-row">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.medical_file.customer.id user_var glblslug %}">{{item.medical_file.customer}}</a></td>
-        <td class="allif-table-content-td">
-        <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.medical_file.id user_var glblslug %}">{{item.medical_file.number}}</a>
-        </td>
-        <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:triageDataDetails' item.id user_var glblslug %}"> {{item.blood_pressure_systolic}}/{{item.blood_pressure_diastolic}}</a></td>
-        <td class="allif-table-content-td">{{item.temperature}}</td>
-        <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
-        <td class="allif-table-content-td">{{item.owner}}</td>
-        
-        <td class="allif-table-content-td">
-        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
-   
-        <a href="{% url 'allifmaalshaafiapp:editTriageData' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-        <a href="{% url 'allifmaalshaafiapp:AddTriageData' item.medical_file.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Add Triage</a>
-        
-        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-middle-section.html' %}
-        
-        <a href="{% url 'allifmaalshaafiapp:prescriptions' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-        <a href="{% url 'allifmaalshaafiapp:deleteTriageData' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-        
-        {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
-        </td>
-    </tr>
-    {% endfor %}
-      {%endif %}
-    {% include 'allifmaalcommonapp/includes/tables/full-table-last-section.html' %}
-
-    </div>
-</div><!--end of main container of the page....-->
-</div>
-  {% block scripts %}
+  {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block allif-basic-search-action %}
+    {% url 'allifmaalshaafiapp:triageDataSearch' user_var glblslug %}
+  {% endblock %}
+ 
+  {% block advanced-search-action %}
+    {% url 'allifmaalshaafiapp:triageDataAdvancedSearch' user_var glblslug %}
+  {% endblock %}
+  {% block upload-excel-file-action %}
   
   {% endblock %}
-   {% endblock %}
+  {% block allif-header-links %}
+   <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
+  <a href="{% allif_get_single_nav_link_url 'triagedata' user_var glblslug %}">Triage</a>
+  <a href="{% allif_get_single_nav_link_url 'MedicalAssessments' user_var glblslug %}">Assessments</a>
+  <a href="{% allif_get_single_nav_link_url 'prescriptions' user_var glblslug %}">Prescriptions</a>
+  
+ 
+  {% endblock %}
+  {% block upload-excel-file %}
+  {%endblock%}
+  {% block list-table-headers %}
+ 
+  <td class="allif-fix-table-col">Patient</td>
+  <td class="allif-table-header-td">Reference No.</td>
+  <td class="allif-table-header-td">Blood Pressure</td>
+  <td class="allif-table-header-td">Temperature D.C</td>
+  <td class="allif-table-header-td">Recorded On</td>
+  <td class="allif-table-header-td">Status</td>
    
+  {% endblock %}
+
+    
+  {% block list-table-content-seciton %}
+  <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.medical_file.customer.id user_var glblslug %}">{{item.medical_file.customer}}</a></td>
+  <td class="allif-table-content-td">
+  <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.medical_file.id user_var glblslug %}">{{item.medical_file.number}}</a></td>
+  <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:triageDataDetails' item.id user_var glblslug %}"> {{item.blood_pressure_systolic}}/{{item.blood_pressure_diastolic}}</a></td>
+  <td class="allif-table-content-td">{{item.temperature}}</td>
+  <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
+  <td class="allif-table-content-td">{{item.status}}</td>
+  {% endblock %}
+  {% block list-table-content-seciton-dropdown-links %}
+  <a href="{% url 'allifmaalshaafiapp:editTriageData' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Record</a>
+  <a href="{% url 'allifmaalshaafiapp:AddTriageData' item.medical_file.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Add Triage</a>
+  {% endblock %}

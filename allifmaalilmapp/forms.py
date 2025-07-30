@@ -13,7 +13,7 @@ class DateTimePickerInput(forms.DateTimeInput):#use this wherever you have datet
 class AddExamDetailsForm(forms.ModelForm):
     class Meta:
         model =ExaminationsModel
-        fields = ['subject','comments','description','exam_file','exam_date','division','branch','department']
+        fields = ['subject','description','exam_file',]
         widgets={
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -35,7 +35,7 @@ class AddExamDetailsForm(forms.ModelForm):
 class AddExamResultsForm(forms.ModelForm):
     class Meta:
         model =ExamResultsModel
-        fields = ['subject','comments','result','grade','description','exam_file','result_date','division','branch','department']
+        fields = ['subject','comments','result','grade','description','exam_file']
         widgets={
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),

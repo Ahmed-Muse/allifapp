@@ -156,6 +156,9 @@ allif_sector_contextual_action_require_pk_links= {
    {'name': 'DeleteProgressConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteProgress', 'requires_pk': True},
    
     {'name': 'AddProgress', 'url_name': 'allifmaalcommonapp:commonAddProgress', 'requires_pk': True},
+    {'name': 'DeleteTriageConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteTriageData', 'requires_pk': True},
+    {'name': 'DeleteTriage', 'url_name': 'allifmaalshaafiapp:deleteTriageData', 'requires_pk': True},
+    {'name': 'EditTriageData', 'url_name': 'allifmaalshaafiapp:editTriageData', 'requires_pk': True},
    
    
   

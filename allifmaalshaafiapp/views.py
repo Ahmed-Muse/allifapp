@@ -3,7 +3,7 @@ from allifmaalcommonapp.allifutils import common_shared_data
 from allifmaalcommonapp.decorators import subscriber_company_status,logged_in_user_must_have_profile
 from allifmaalcommonapp.decorators import *
 from allifmaalcommonapp.models import CommonCompanyScopeModel,CommonDataSortsModel
-# Create your views here.
+# Create your views here...20200 lines...
 from .models import *
 from django.template.loader import get_template
 from django.db.models import Q
@@ -13,7 +13,10 @@ from django.shortcuts import render
 from .forms import *
 from django.db.models import Q
 from allifmaalcommonapp.utils import allif_filtered_and_sorted_queryset # Import the new helper function
-
+from allifmaalcommonapp.models import CommonDocsFormatModel
+from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,allif_common_detail_view,allif_main_models_registry,allif_delete_hanlder,allif_common_form_submission_and_save,
+allif_common_form_edit_and_save,allif_redirect_based_on_sector,allif_delete_confirm,allif_excel_upload_handler,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler)
+# ... (existing imports) ...
 # Create your views here.
 #@logged_in_user_must_have_profile
 #@subscriber_company_status
@@ -50,2214 +53,519 @@ def shaafiDashboard(request,*allifargs,**allifkwargs):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 ##################3 Triage ####################
-
-
+@allif_base_view_wrapper
 def triageData(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
     title="Triage Records"
-    try:
-        allif_data=common_shared_data(request)
-        #allifqueryset=TriagesModel.active_triage.filter(company=allif_data.get("main_sbscrbr_entity"))
-      
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        #allifqueryset=TriagesModel.active_triage.all()
-        #allifqueryset = TriagesModel.active_triage.filter(company=allif_data.get("main_sbscrbr_entity"))
-        #allifqueryset = TriagesModel.active_triage.for_company(allif_data.get("main_sbscrbr_entity"))
-        allifqueryset=TriagesModel.objects.all()
-        
-        allifqueryset=CommonCompanyDetailsModel.objects.all()
-        
-        # Query: Get active, deletable triage records for the company
-        allifqueryset = allif_filtered_and_sorted_queryset(
-            request, 
-            TriagesModel, 
-            allif_data # No extra_filters needed here for basic triage data
-        )
-        allifqueryset=TriagesModel.all_objects.all()
-       
-         # This will get ACTIVE, DELETABLE triage records for the company
-        allifqueryset = allif_filtered_and_sorted_queryset(
-            request, 
-            TriagesModel, 
-            allif_data,
-            #access_scope='active', # Explicitly request active (default)
-            #extra_filters={'status': "active"},
-            
-        )
-        
-        
-        
-        
-        
-        
-        title = "Triage Records"
-        allif_data = common_shared_data(request)
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,TriagesModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
 
-        # Call the universal utility function for TriagesModel
-        allifqueryset = allif_filtered_and_sorted_queryset(request, TriagesModel,allif_data)#gives all
-        
-        #print(f"DEBUG: Final Queryset for Triage: {allifqueryset.query}")
-
-        allifqueryset = allif_filtered_and_sorted_queryset(request,TriagesModel,allif_data,# these only show all records...
-            
-            #we can also add the extra filtering parameter as below
-            #explicit_scope='Archived' # <-- Explicitly set scope to 'archived'
-            explicit_scope='all',# shows all records
-            #explicit_scope='active', # shows only active records....
-            #explicit_scope='archived'# shows only archived data
-        )
-        
-        
-        context = {
-            "title": title,
-            "allifqueryset": allifqueryset, 
-            "current_scope": allifqueryset.current_scope, 
-            "current_sort_ui_label": allifqueryset.current_sort_ui_label, 
-            "user_var": allif_data.get("usrslg"), 
-            "glblslug": allif_data.get("compslg"),
-            "base_url_name": request.resolver_match.view_name, 
-            #"sort_options": allifqueryset.sort_options, 
-            
-            "allifqueryset": allifqueryset, 
-            "current_scope": allifqueryset.current_scope, 
-            "current_sort_ui_label": allifqueryset.current_sort_ui_label, 
-            "user_var": allif_data.get("usrslg"), 
-            "glblslug": allif_data.get("compslg"),
-            "base_url_name": request.resolver_match.view_name, # This should be 'triageData'
-            "sort_options": allifqueryset.sort_options, 
-        }
-        #print(f"DEBUG: Context for template: {context.keys()}")
-        #print(f"DEBUG: Final Queryset for Triage: {allifqueryset.query}")
-        #print(f"DEBUG: Context for Triage: base_url_name={request.resolver_match.view_name}, user_var={allif_data.get('usrslg')}, glblslug={allif_data.get('compslg')}, current_scope={allifqueryset.current_scope}")
-
-        
-        
-        #context={"title":title,"allifqueryset":allifqueryset,}
-        return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-
-# --- NEW EXAMPLE VIEW: To get ALL (active, inactive, archived) tasks ---
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin # Assuming only admins can see all tasks
-def allTriageData(request, *allifargs, **allifkwargs):
-    try:
-        title = "All Triage Data"
-        allif_data = common_shared_data(request)
-        
-        # Query: Get ALL tasks (active, inactive, archived) for the company
-        allifqueryset = allif_filtered_and_sorted_queryset(
-            request, 
-            TriagesModel, 
-            allif_data, 
-            access_scope='all' # Crucial: Request all records
-        )
-        
-        context = {
-            "title": title,
-            "allifqueryset": allifqueryset,
-            "user_var": allif_data.get("usrslg"), 
-            "glblslug": allif_data.get("compslg"),
-        }
-        # You might render a different template or pass a flag to the same template
-        return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
-       
-    except Exception as ex:
-        error_context = {'error_message': ex,}
-        return render(request, 'allifmaalcommonapp/error/error.html', error_context)
-
-# --- NEW EXAMPLE VIEW: To get ARCHIVED tasks ---
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin # Assuming only admins can see archived tasks
-def commonArchivedTasks(request, *allifargs, **allifkwargs):
-    try:
-        title = "Archived Tasks"
-        allif_data = common_shared_data(request)
-        
-        # Query: Get only ARCHIVED tasks for the company
-        allifqueryset = allif_filtered_and_sorted_queryset(
-            request, 
-            TriagesModel, 
-            allif_data, 
-            access_scope='archived' # Crucial: Request only archived records
-        )
-        
-        
-        context = {
-            "title": title,
-            "allifqueryset": allifqueryset,
-            "user_var": allif_data.get("usrslg"), 
-            "glblslug": allif_data.get("compslg"),
-        }
-        # You might render a different template or pass a flag to the same template
-        return render(request, 'allifmaalcommonapp/tasks/archived-tasks.html', context)
-    except Exception as ex:
-        error_context = {'error_message': ex,}
-        return render(request, 'allifmaalcommonapp/error/error.html', error_context)
-
-
+@allif_base_view_wrapper
 def AddTriageData(request,pk,*allifargs,**allifkwargs):
-    title="Add Triage"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
-        form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.medical_file=allifquery
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:AddTriageData',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "form":form,
-            "allifquery":allifquery,
-        }
-        return render(request,'allifmaalshaafiapp/triage/add_triage_data.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.medical_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=AddTriageDetailsForm,title_text="New Triage",
+        success_redirect_url_name='AddTriageData',template_path='allifmaalshaafiapp/triage/add_triage_data.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+ 
+@allif_base_view_wrapper
+def editTriageData(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,AddTriageDetailsForm,"Edit",
+    'editTriageData','allifmaalshaafiapp/triage/add_triage_data.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
-def editTriageData(request,pk,*allifargs,**allifkwargs):
-    title="Edit Triage"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=get_object_or_404(TriagesModel.all_objects, id=pk)
-        form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:editTriageData',pk=allifquery_update.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalshaafiapp/triage/add_triage_data.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
+def triageDataDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=TriagesModel,pk=pk,
+        template_name='allifmaalshaafiapp/triage/triage_data_details.html', # Create this template
+        title_map={'default': 'Triage Details'},)
+
+@allif_base_view_wrapper
 def triageDataSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=TriagesModel.objects.filter((Q(complaints__icontains=allifsearch)|Q(medical_file__customer__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='TriagesModel',search_fields_key='TriagesModel',
+    template_path='allifmaalshaafiapp/triage/triage_data.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def triageDataAdvancedSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Purchase Order Advanced Search Results"
-        allif_data=common_shared_data(request)
-       
-        allifqueryset=[]
-       
-        firstDate=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-        lastDate=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-        largestAmount=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+    return allif_advance_search_handler(request,model_name='TriagesModel',advanced_search_config_key='TriagesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalshaafiapp/triage/triage_data.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=TriagesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=MedicationsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/triages/triage_data_search_pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                 
-                   "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                # if excel is selected
-                
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                   
-                    }
-                    return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
-            else:
-                searched_data=[]
-              
-                context={
-                    "searched_data":searched_data,
-            
-                }
-                return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-           
-            "title":title,
-           
-            }
-            return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-         
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-def triageDataDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Triage Details"
-        allifquery=get_object_or_404(TriagesModel.all_objects, id=pk)
-        form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
-        if request.method=='POST':
-            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:triageDataDetails',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery)
-        
-        context={
-            "allifquery":allifquery,
-            "title":title,
-            "form":form,
-          
-        }
-        return render(request,'allifmaalshaafiapp/triage/triage_data_details.html',context)
-    
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_departmental_delete
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def wantToDeleteTriageData(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=get_object_or_404(TriagesModel.all_objects, id=pk)
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalshaafiapp/triages/delete_triage_data_confirm.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+    return allif_delete_confirm(request,pk,TriagesModel,"Delete this item",
+    'allifmaalshaafiapp/triage/delete_triage_data_confirm.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_universal_delete
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def deleteTriageData(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        get_object_or_404(TriagesModel.all_objects, id=pk).delete()
-        return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    return allif_delete_hanlder(request,model_name='TriagesModel',
+    pk=pk,success_redirect_url_name='triageData',app_namespace='allifmaalshaafiapp',)
 
 
 ######################### doctor assessments/observations #######################
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin
+@allif_base_view_wrapper
 def doctorAssessments(request,*allifargs,**allifkwargs):
-    title="Add Triage Data"
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,}
-        return render(request,'allifmaalshaafiapp/assessments/doctor_assessments.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
+    allif_data=common_shared_data(request)
+    title="Patient Assessments"
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,AssessmentsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalshaafiapp/assessments/doctor_assessments.html',context)
+
+@allif_base_view_wrapper
 def addDoctorAssessment(request,pk,*allifargs,**allifkwargs):
-    title="Add Doctor Assessment"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
-        form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.medical_file=allifquery
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddTriageDetailsForm(allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "form":form,
-            "allifquery":allifquery,
-        }
-        return render(request,'allifmaalshaafiapp/assessments/doctor_assessments.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.medical_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=AddAssessmentDetailsForm,
+    title_text="New Assessment",
+        success_redirect_url_name='addDoctorAssessment',
+        template_path='allifmaalshaafiapp/assessments/add-assessment.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+ 
+@allif_base_view_wrapper
+def editDoctorAssessment(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,AddAssessmentDetailsForm,"Edit",
+    'editDoctorAssessment','allifmaalshaafiapp/assessments/add-assessment.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_is_admin
-def editDoctorAssessment(request,pk,*allifargs,**allifkwargs):
-    title="Update Triage Data Details"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=AssessmentsModel.objects.filter(id=pk).first()
-        form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddAssessmentDetailsForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalshaafiapp/assessments/add_doctor_assessment.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
+def doctorAssessmentDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=AssessmentsModel,pk=pk,
+        template_name='allifmaalshaafiapp/assessment/doctor_assessment_details.html', # Create this template
+        title_map={'default': 'Assessment Details'},)
+
+@allif_base_view_wrapper
 def doctorAssessmentSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=AssessmentsModel.objects.filter((Q(complaints__icontains=allifsearch)|Q(medical_file__customer__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='AssessmentsModel',search_fields_key='AssessmentsModel',
+    template_path='allifmaalshaafiapp/assessments/doctor_assessments.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalshaafiapp/assessments/doctor_assessments.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def doctorAssessmentAdvancedSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Purchase Order Advanced Search Results"
-        allif_data=common_shared_data(request)
-       
-        allifqueryset=[]
-       
-        firstDate=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-        lastDate=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-        largestAmount=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+    return allif_advance_search_handler(request,model_name='AssessmentsModel',advanced_search_config_key='AssessmentsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalshaafiapp/assessments/doctor_assessments.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=AssessmentsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=MedicationsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/triages/triage_data_search_pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                 
-                   "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                # if excel is selected
-                
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                   
-                    }
-                    return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
-            else:
-                searched_data=[]
-              
-                context={
-                    "searched_data":searched_data,
-            
-                }
-                return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-           
-            "title":title,
-           
-            }
-            return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-         
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-def doctorAssessmentDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Prescription Details"
-        allifquery=AssessmentsModel.objects.filter(id=pk).first()
-      
-        context={
-            "allifquery":allifquery,
-            "title":title,
-          
-        }
-        return render(request,'allifmaalshaafiapp/assessment/doctor_assessment_details.html',context)
-    
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_departmental_delete
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def wantToDeleteDoctorAssessment(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=AssessmentsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalshaafiapp/triages/delete_triage_data_confirm.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+    return allif_delete_confirm(request,pk,AssessmentsModel,"Delete this item",
+    'allifmaalshaafiapp/assessments/delete_assessment_confirm.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_universal_delete
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def deleteDoctorAssessment(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        AssessmentsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    return allif_delete_hanlder(request,model_name='AssessmentsModel',
+    pk=pk,success_redirect_url_name='doctorAssessments',app_namespace='allifmaalshaafiapp',)
 
 ####################3 lab test requests ###################
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin
+@allif_base_view_wrapper
 def labTestRequests(request,*allifargs,**allifkwargs):
-    title="Lab Test Requests"
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,}
-        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
+    allif_data=common_shared_data(request)
+    title="Test Requests"
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,LabTestRequestsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
+
+@allif_base_view_wrapper
 def addLabTestRequest(request,pk,*allifargs,**allifkwargs):
-    title="Add Doctor Assessment"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
-        form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.medical_file=allifquery
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "form":form,
-        }
-        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/add_lab_test_request.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.medical_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=AddLabTestRequestForm,
+    title_text="New Test",
+        success_redirect_url_name='addLabTestRequest',
+        template_path='allifmaalshaafiapp/assessments/labtests/requests/add_lab_test_request.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+ 
+@allif_base_view_wrapper
+def editLabTestRequest(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,AddLabTestRequestForm,"Edit",
+    'editLabTestRequest','allifmaalshaafiapp/assessments/labtests/requests/add_lab_test_request.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_is_admin
-def editLabTestRequest(request,pk,*allifargs,**allifkwargs):
-    title="Update Lab Test Details"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=LabTestRequestsModel.objects.filter(id=pk).first()
-        form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddLabTestRequestForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/add_lab_test_request.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
+def labTestRequestDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=LabTestRequestsModel,pk=pk,
+        template_name='allifmaalshaafiapp/assessments/labtests/requests/lab_test_request_details.html', # Create this template
+        title_map={'default': 'Test Details'},)
+
+@allif_base_view_wrapper
 def labTestRequestSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=LabTestRequestsModel.objects.filter((Q(medical_file__icontains=allifsearch)|Q(medical_file__customer__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='LabTestRequestsModel',search_fields_key='LabTestRequestsModel',
+    template_path='allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
-    
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def labTestRequestAdvancedSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Purchase Order Advanced Search Results"
-        allif_data=common_shared_data(request)
-       
-        allifqueryset=[]
-       
-        firstDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-        lastDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-        largestAmount=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+    return allif_advance_search_handler(request,model_name='LabTestRequestsModel',advanced_search_config_key='LabTestRequestsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=MedicationsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/triages/triage_data_search_pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                 
-                   "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                # if excel is selected
-                
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                   
-                    }
-                    return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
-    
-            else:
-                searched_data=[]
-              
-                context={
-                    "searched_data":searched_data,
-            
-                }
-                return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
-    
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-           
-            "title":title,
-           
-            }
-            return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-         
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-def labTestRequestDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Prescription Details"
-        allifquery=LabTestRequestsModel.objects.filter(id=pk).first()
-      
-        context={
-            "allifquery":allifquery,
-            "title":title,
-          
-        }
-        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_request_details.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_departmental_delete
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def wantToDeleteLabTestRequest(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=LabTestRequestsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/delete_lab_test_request_confirm.html',context)
-    
-     
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+    return allif_delete_confirm(request,pk,LabTestRequestsModel,"Delete this item",
+    'allifmaalshaafiapp/assessments/labtests/requests/delete_lab_test_request_confirm.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_universal_delete
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def deleteLabTestRequest(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        LabTestRequestsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    return allif_delete_hanlder(request,model_name='LabTestRequestsModel',
+    pk=pk,success_redirect_url_name='labTestRequests',app_namespace='allifmaalshaafiapp',)
 
-
-#########################3 lab test request results sections ####################3
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin
+#########################3 lab test request results sections ..####################3
+@allif_base_view_wrapper
 def labTestResults(request,*allifargs,**allifkwargs):
-    title="Lab Test Results"
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=LabTestResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=LabTestResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=LabTestResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=LabTestResultsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,}
-        return render(request,'allifmaalshaafiapp/assessments/labtests/results/lab_test_results.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
+    allif_data=common_shared_data(request)
+    title="Test Results"
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,LabTestResultsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalshaafiapp/assessments/labtests/results/lab_test_results.html',context)
+
+@allif_base_view_wrapper
 def addLabTestResult(request,pk,*allifargs,**allifkwargs):
-    title="Add Doctor Assessment"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery=CommonTransactionsModel.objects.filter(id=pk).first()
-        form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.medical_file=allifquery
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "form":form,
-        }
-        return render(request,'allifmaalshaafiapp/assessments/labtests/results/add_lab_test_result.html',context)
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.medical_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=AddLabTestResultForm,
+    title_text="New Test",
+        success_redirect_url_name='addLabTestResult',
+        template_path='allifmaalshaafiapp/assessments/labtests/results/add_lab_test_result.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+ 
+@allif_base_view_wrapper
+def editLabTestResult(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,AddLabTestResultForm,"Edit",
+    'editLabTestResult','allifmaalshaafiapp/assessments/labtests/results/add_lab_test_result.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_is_admin
-def editLabTestResult(request,pk,*allifargs,**allifkwargs):
-    title="Update Lab Test Details"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=LabTestRequestsModel.objects.filter(id=pk).first()
-        form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddLabTestResultForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalshaafiapp/assessments/labtests/requests/add_lab_test_request.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
+def labTestResultDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=LabTestResultsModel,pk=pk,
+        template_name='allifmaalshaafiapp/assessments/labtests/results/lab_test_result_details.html', # Create this template
+        title_map={'default': 'Result Details'},)
+
+@allif_base_view_wrapper
 def labTestResultSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=LabTestResultsModel.objects.filter((Q(medical_file__icontains=allifsearch)|Q(medical_file__customer__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='LabTestResultsModel',search_fields_key='LabTestResultsModel',
+    template_path='allifmaalshaafiapp/assessments/labtests/results/lab_test_results.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalshaafiapp/assessments/labtests/results/lab_test_results.html',context)
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def labTestResultAdvancedSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Purchase Order Advanced Search Results"
-        allif_data=common_shared_data(request)
-       
-        allifqueryset=[]
-       
-        firstDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-        lastDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-        largestAmount=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+    return allif_advance_search_handler(request,model_name='LabTestResultsModel',advanced_search_config_key='LabTestResultsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalshaafiapp/assessments/labtests/results/lab_test_results.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=LabTestRequestsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=MedicationsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/triages/triage_data_search_pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                 
-                   "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                # if excel is selected
-                
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                   
-                    }
-                    return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
-    
-            else:
-                searched_data=[]
-              
-                context={
-                    "searched_data":searched_data,
-            
-                }
-                return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
-    
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-           
-            "title":title,
-           
-            }
-            return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-         
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-def labTestResultDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Prescription Details"
-        allifquery=LabTestResultsModel.objects.filter(id=pk).first()
-      
-        context={
-            "allifquery":allifquery,
-            "title":title,
-          
-        }
-        return render(request,'allifmaalshaafiapp/assessments/labtests/results/lab_test_result_details.html',context)
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_departmental_delete
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def wantToDeleteLabTestResult(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=LabTestResultsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalshaafiapp/assessments/labtests/results/delete_lab_test_result_confirm.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+    return allif_delete_confirm(request,pk,LabTestResultsModel,"Delete this item",
+    'allifmaalshaafiapp/assessments/labtests/results/delete_lab_test_result_confirm.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_universal_delete
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def deleteLabTestResult(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        LabTestRequestsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalshaafiapp:triageData',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-
+    return allif_delete_hanlder(request,model_name='LabTestResultsModel',
+    pk=pk,success_redirect_url_name='labTestResults',app_namespace='allifmaalshaafiapp',)
 
 ############### prescriptions and medications #############
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin
+@allif_base_view_wrapper
 def prescriptions(request,*allifargs,**allifkwargs):
-    title="Medication Prescriptions"
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,}
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/prescriptions.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
-def AddPrescription(request,*allifargs,**allifkwargs):
-    title="Add New Prescription"
-    try:
-        allif_data=common_shared_data(request)
-        form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:prescriptions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "form":form,
-        }
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/add_prescription.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    allif_data=common_shared_data(request)
+    title="Prescriptions"
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,MedicationsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalshaafiapp/medication/prescriptions/prescriptions.html',context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_is_admin
-def EditPrescription(request,pk,*allifargs,**allifkwargs):
-    title="Update Prescription Details"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=MedicationsModel.objects.filter(id=pk).first()
-        form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:prescriptions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddPrescriptionForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/add_prescription.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
+def AddPrescription(request,pk,*allifargs,**allifkwargs):
+    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.medical_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=AddPrescriptionForm,
+    title_text="New Prescription",
+        success_redirect_url_name='AddPrescription',
+        template_path='allifmaalshaafiapp/medication/prescriptions/add_prescription.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+ 
+@allif_base_view_wrapper
+def EditPrescription(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,AddPrescriptionForm,"Edit",
+    'EditPrescription','allifmaalshaafiapp/medication/prescriptions/add_prescription.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
+
+@allif_base_view_wrapper
+def prescriptionDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=MedicationsModel,pk=pk,
+        template_name='allifmaalshaafiapp/medication/prescriptions/prescription_details.html', # Create this template
+        title_map={'default': 'Prescription Details'},)
+
+@allif_base_view_wrapper
 def prescriptionSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=MedicationsModel.objects.filter((Q(description__icontains=allifsearch)|Q(trans_number__number__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='MedicationsModel',search_fields_key='MedicationsModel',
+    template_path='allifmaalshaafiapp/medication/prescriptions/prescriptions.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/prescriptions.html',context)
-    
-     
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
 def prescriptionAdvancedSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Purchase Order Advanced Search Results"
-        allif_data=common_shared_data(request)
-       
-        allifqueryset=[]
-       
-        firstDate=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-        lastDate=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-        largestAmount=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
+    return allif_advance_search_handler(request,model_name='MedicationsModel',advanced_search_config_key='MedicationsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalshaafiapp/medication/prescriptions/prescriptions.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-        scopes=CommonCompanyScopeModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
-
-        current_date=timezone.now().date().today()
-        firstDate=current_date
-        lastDate=current_date
-        largestAmount=0
-        searched_data=[]
-        firstDepo=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first()
-    
-        lastDepo=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last()
-        if firstDepo and lastDepo:
-            firstDate=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).first().date
-            lastDate=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).last().date
-            largestAmount=MedicationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-amount').first().amount
-        else:
-            firstDate=current_date
-            lastDate=current_date
-
-        if request.method=='POST':
-            selected_option=request.POST.get('requiredformat')
-            start_date=request.POST.get('startdate',selected_option) or None
-            end_date=request.POST.get('enddate') or None
-            start_value=request.POST.get('startvalue') or None
-            end_value=request.POST.get('endvalue') or None
-            if start_date!="" or end_date!="" or start_value!="" or end_value!="":
-                searched_data=MedicationsModel.objects.filter(Q(date__gte=start_date or firstDate) & Q(date__lte=end_date or lastDate) & Q(amount__gte=start_value or 0) & Q(amount__lte=end_value or largestAmount) & Q(company=allif_data.get("main_sbscrbr_entity")))
-                #searched_data=CommonShareholderBankDepositsModel.objects.filter(Q(date__gte=start_date or date_today) & Q(company=main_sbscrbr_entity))
-                # if pdf is selected
-                if selected_option=="pdf":
-                    template_path = 'allifmaalcommonapp/purchases/po-search-pdf.html'
-                    allifcontext = {
-                    "searched_data":searched_data,
-                    "title":title,
-                    "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),
-                 
-                   "scopes":scopes,
-                    }
-                    
-                    response = HttpResponse(content_type='application/pdf') # this opens on the same page
-                    response = HttpResponse(content_type='application/doc')
-                    response['Content-Disposition'] = 'filename="purchase-order-advanced-searched-results.pdf"'
-                    template = get_template(template_path)
-                    html = template.render(allifcontext)
-                    try:
-                        pisa_status=pisa.CreatePDF(html, dest=response)
-                    except Exception as ex:
-                        error_context={'error_message': ex,}
-                        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-                    # if error then show some funy view
-                    if pisa_status.err:
-                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-                    return response
-                # if excel is selected
-                
-                else:
-                    searched_data=[]
-                    context = {
-                    "searched_data":searched_data,
-                   
-                    }
-                    return render(request,'allifmaalshaafiapp/medication/prescriptions/prescriptions.html',context)
-                   
-            else:
-                searched_data=[]
-              
-                context={
-                    "searched_data":searched_data,
-            
-                }
-                return render(request,'allifmaalshaafiapp/medication/prescriptions/prescriptions.html',context)
-              
-        else:
-            context={
-            "allifqueryset":allifqueryset,
-           
-            "title":title,
-           
-            }
-            return render(request,'allifmaalshaafiapp/medication/prescriptions/prescriptions.html',context)
-           
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-         
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-def prescriptionDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Prescription Details"
-        allifquery=MedicationsModel.objects.filter(id=pk).first()
-      
-        context={
-            "allifquery":allifquery,
-            "title":title,
-          
-        }
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/prescription_details.html',context)
-    
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_departmental_delete
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def wantToDeletePrescription(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=MedicationsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/delete_prescription_confirm.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+    return allif_delete_confirm(request,pk,MedicationsModel,"Delete this item",
+    'allifmaalshaafiapp/medication/prescriptions/delete_prescription_confirm.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_universal_delete
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def deletePrescription(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        MedicationsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalshaafiapp:prescriptions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
+    return allif_delete_hanlder(request,model_name='MedicationsModel',
+    pk=pk,success_redirect_url_name='prescriptions',app_namespace='allifmaalshaafiapp',)
 
 
 ####################### admissions ##################
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin
+@allif_base_view_wrapper
 def admissions(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
     title="Admissions"
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=AdmissionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=AdmissionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=AdmissionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=AdmissionsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,}
-        return render(request,'allifmaalshaafiapp/medication/admissions/admissions.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
-def addAdmission(request,*allifargs,**allifkwargs):
-    title="Add New Admission"
-    try:
-        allif_data=common_shared_data(request)
-        form=AddAdmissionForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=AddAdmissionForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:admissions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddAdmissionForm(allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "form":form,
-        }
-        return render(request,'allifmaalshaafiapp/medication/admissions/add_admission.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,MedicationsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalshaafiapp/medication/admissions/admissions.html',context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_is_admin
-def EditAdmission(request,allifusr,pk,*allifargs,**allifkwargs):
-    title="Update Prescription Details"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=AdmissionsModel.objects.filter(id=pk).first()
-        form=AddAdmissionForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=AddAdmissionForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:admissions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddAdmissionForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalshaafiapp/medication/admissions/add_admission.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
+def addAdmission(request,pk,*allifargs,**allifkwargs):
+    allifquery=get_object_or_404(AdmissionsModel, id=pk) 
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.medical_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=AddAdmissionForm,
+    title_text="New Admission",
+        success_redirect_url_name='addAdmission',
+        template_path='allifmaalshaafiapp/medication/admissions/add_admission.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+ 
+@allif_base_view_wrapper
+def EditAdmission(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,AddAdmissionForm,"Edit",
+    'EditAdmission','allifmaalshaafiapp/medication/admissions/add_admission.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
+
+@allif_base_view_wrapper
+def admissionDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=AdmissionsModel,pk=pk,
+        template_name='allifmaalshaafiapp/medication/admissions/admission_details.html', # Create this template
+        title_map={'default': 'Admission Details'},)
+
+@allif_base_view_wrapper
 def admissionSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=AdmissionsModel.objects.filter((Q(description__icontains=allifsearch)|Q(trans_number__number__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='AdmissionsModel',search_fields_key='AdmissionsModel',
+    template_path='allifmaalshaafiapp/medication/admissions/admissions.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalshaafiapp/medication/admissions/admissions.html',context)
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-       
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-def admissionDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Prescription Details"
-        allifquery=AdmissionsModel.objects.filter(id=pk).first()
-      
-        context={
-            "allifquery":allifquery,
-            "title":title,
-          
-        }
-        return render(request,'allifmaalshaafiapp/medication/admissions/admission_details.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+@allif_base_view_wrapper
+def addmissionAdvancedSearch(request,*allifargs,**allifkwargs):
+    return allif_advance_search_handler(request,model_name='AdmissionsModel',advanced_search_config_key='AdmissionsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalshaafiapp/medication/admissions/admissions.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_departmental_delete
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def wantToDeleteAdmission(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=AdmissionsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalshaafiapp/medication/admissions/delete_admission_confirm.html',context)
-        
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+    return allif_delete_confirm(request,pk,AdmissionsModel,"Delete this item",
+    'allifmaalshaafiapp/medication/medication/admissions/delete_admission_confirm.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_universal_delete
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def deleteAdmission(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        AdmissionsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalshaafiapp:admissions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    return allif_delete_hanlder(request,model_name='AdmissionsModel',
+    pk=pk,success_redirect_url_name='admissions',app_namespace='allifmaalshaafiapp',)
 
 
 ##################3 medical adminstrations ############
-
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin
+@allif_base_view_wrapper
 def treatments(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
     title="Treatments"
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=MedicalAdministrationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=MedicalAdministrationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=MedicalAdministrationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=MedicalAdministrationsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,}
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/treatments/treatments.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
-def addTreatment(request,*allifargs,**allifkwargs):
-    title="Add and Give New Treatment"
-    try:
-        allif_data=common_shared_data(request)
-        form=AddMedicalAdminstrationForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=AddMedicalAdminstrationForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:treatments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddMedicalAdminstrationForm(allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "form":form,
-        }
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/treatments/add_treatment.html',context)
-    
-        return render(request,'allifmaalshaafiapp/medication/referrals/add_referral.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,MedicalAdministrationsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalshaafiapp/medication/prescriptions/treatments/treatments.html',context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_is_admin
-def EditTreatment(request,allifusr,pk,*allifargs,**allifkwargs):
-    title="Update Treatment Details"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=MedicalAdministrationsModel.objects.filter(id=pk).first()
-        form=AddMedicalAdminstrationForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=AddMedicalAdminstrationForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:treatments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddMedicalAdminstrationForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/treatments/add_treatment.html',context)
-    
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
+def addTreatment(request,pk,*allifargs,**allifkwargs):
+    allifquery=get_object_or_404(MedicalAdministrationsModel, id=pk) 
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.medical_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=AddMedicalAdminstrationForm,
+    title_text="New Treatment",
+        success_redirect_url_name='addTreatment',
+        template_path='allifmaalshaafiapp/medication/prescriptions/treatments/add_treatment.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+ 
+@allif_base_view_wrapper
+def EditTreatment(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,AddMedicalAdminstrationForm,"Edit",
+    'EditTreatment','allifmaalshaafiapp/medication/prescriptions/treatments/add_treatment.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
+
+@allif_base_view_wrapper
+def treatmentDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=MedicalAdministrationsModel,pk=pk,
+        template_name='allifmaalshaafiapp/medication/prescriptions/treatments/treatment_details.html', # Create this template
+        title_map={'default': 'Treatment Details'},)
+
+@allif_base_view_wrapper
 def treatmentSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=MedicalAdministrationsModel.objects.filter((Q(description__icontains=allifsearch)|Q(trans_number__number__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='MedicalAdministrationsModel',search_fields_key='MedicalAdministrationsModel',
+    template_path='allifmaalshaafiapp/medication/prescriptions/treatments/treatments.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/treatments/treatments.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-       
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-def treatmentDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Prescription Details"
-        allifquery=MedicalAdministrationsModel.objects.filter(id=pk).first()
-      
-        context={
-            "allifquery":allifquery,
-            "title":title,
-          
-        }
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/treatments/treatment_details.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+@allif_base_view_wrapper
+def treatmentAdvancedSearch(request,*allifargs,**allifkwargs):
+    return allif_advance_search_handler(request,model_name='MedicalAdministrationsModel',advanced_search_config_key='MedicalAdministrationsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalshaafiapp/medication/prescriptions/treatments/treatments.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_departmental_delete
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def wantToDeleteTreatment(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=MedicalAdministrationsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalshaafiapp/medication/prescriptions/treatments/delete_treatment_confirm.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+    return allif_delete_confirm(request,pk,MedicalAdministrationsModel,"Delete this item",
+    'allifmaalshaafiapp/medication/prescriptions/treatments/delete_treatment_confirm.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_universal_delete
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def deleteTreatment(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        MedicalAdministrationsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalshaafiapp:treatments',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
+    return allif_delete_hanlder(request,model_name='MedicalAdministrationsModel',
+    pk=pk,success_redirect_url_name='treatments',app_namespace='allifmaalshaafiapp',)
+
+
 
 #################3 discharges ##############
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin
+@allif_base_view_wrapper
 def discharges(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
     title="Discharges"
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=DischargesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=DischargesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=DischargesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=DischargesModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,}
-        return render(request,'allifmaalshaafiapp/medication/admissions/discharge/discharges.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
-def addDischarge(request,*allifargs,**allifkwargs):
-    title="Add New Discharge"
-    try:
-        allif_data=common_shared_data(request)
-        form=AddDischargeForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=AddDischargeForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:discharges',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddDischargeForm(allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "form":form,
-        }
-        return render(request,'allifmaalshaafiapp/medication/admissions/discharge/add_discharge.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,DischargesModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalshaafiapp/medication/admissions/discharge/discharges.html',context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_is_admin
-def EditDischarge(request,allifusr,pk,*allifargs,**allifkwargs):
-    title="Update Discharge Details"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=DischargesModel.objects.filter(id=pk).first()
-        form=AddDischargeForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=AddDischargeForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:discharges',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddDischargeForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalshaafiapp/medication/admissions/discharge/add_discharge.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
+def addDischarge(request,pk,*allifargs,**allifkwargs):
+    allifquery=get_object_or_404(DischargesModel, id=pk) 
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.medical_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=AddDischargeForm,
+    title_text="New Discharge",
+        success_redirect_url_name='addTreatment',
+        template_path='allifmaalshaafiapp/medication/admissions/discharge/add_discharge.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+ 
+@allif_base_view_wrapper
+def EditDischarge(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,AddDischargeForm,"Edit",
+    'EditDischarge','allifmaalshaafiapp/medication/admissions/discharge/add_discharge.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
+
+@allif_base_view_wrapper
+def dischargeDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=DischargesModel,pk=pk,
+        template_name='allifmaalshaafiapp/medication/admissions/discharge/discharge_details.html', # Create this template
+        title_map={'default': 'Discharge Details'},)
+
+@allif_base_view_wrapper
 def dischargeSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=DischargesModel.objects.filter((Q(description__icontains=allifsearch)|Q(trans_number__number__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='DischargesModel',search_fields_key='DischargesModel',
+    template_path='allifmaalshaafiapp/medication/admissions/discharge/discharges.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalshaafiapp/medication/admissions/discharge/discharges.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-       
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-def dischargeDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Prescription Details"
-        allifquery=DischargesModel.objects.filter(id=pk).first()
-      
-        context={
-            "allifquery":allifquery,
-            "title":title,
-          
-        }
-        return render(request,'allifmaalshaafiapp/medication/admissions/discharge/discharge_details.html',context)
-    
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+@allif_base_view_wrapper
+def dischargeAdvancedSearch(request,*allifargs,**allifkwargs):
+    return allif_advance_search_handler(request,model_name='DischargesModel',advanced_search_config_key='DischargesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalshaafiapp/medication/admissions/discharge/discharges.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_departmental_delete
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def wantToDeleteDischarge(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=ReferralsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalshaafiapp/medication/admissions/discharge/delete_discharge_confirm.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+    return allif_delete_confirm(request,pk,DischargesModel,"Delete this item",
+    'allifmaalshaafiapp/medication/admissions/discharge/delete_discharge_confirm.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_universal_delete
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def deleteDischarge(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        DischargesModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalshaafiapp:discharges',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-
+    return allif_delete_hanlder(request,model_name='DischargesModel',
+    pk=pk,success_redirect_url_name='discharges',app_namespace='allifmaalshaafiapp',)
 
 
 
 ####################### referals ##################
-
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
-@logged_in_user_is_admin
+@allif_base_view_wrapper
 def referrals(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
     title="Referrals"
-    try:
-        allif_data=common_shared_data(request)
-        if allif_data.get("logged_in_user_has_universal_access")==True:
-            allifqueryset=ReferralsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"))
-        elif allif_data.get("logged_in_user_has_divisional_access")==True:
-            allifqueryset=ReferralsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"))
-        elif allif_data.get("logged_in_user_has_branches_access")==True:
-            allifqueryset=ReferralsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"))
-        elif allif_data.get("logged_in_user_has_departmental_access")==True:
-            allifqueryset=ReferralsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-        else:
-            allifqueryset=[]
-        context={"title":title,"allifqueryset":allifqueryset,}
-        return render(request,'allifmaalshaafiapp/medication/referrals/referrals.html',context)
-    
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_add
-@logged_in_user_is_admin
-def addReferral(request,*allifargs,**allifkwargs):
-    title="Add New Referral"
-    try:
-        allif_data=common_shared_data(request)
-        form=AddReferralForm(allif_data.get("main_sbscrbr_entity"))
-        if request.method=='POST':
-            form=AddReferralForm(allif_data.get("main_sbscrbr_entity"),request.POST)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.company=allif_data.get("main_sbscrbr_entity")
-                obj.division=allif_data.get("logged_user_division")
-                obj.branch=allif_data.get("logged_user_branch")
-                obj.department=allif_data.get("logged_user_department")
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:referrals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-               
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddReferralForm(allif_data.get("main_sbscrbr_entity"))
-        context = {
-            "title":title,
-            "form":form,
-        }
-        return render(request,'allifmaalshaafiapp/medication/referrals/add_referral.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    formats=CommonDocsFormatModel.objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,ReferralsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalshaafiapp/medication/referrals/referrals.html',context)
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_edit
-@logged_in_user_is_admin
-def EditReferral(request,allifusr,pk,*allifargs,**allifkwargs):
-    title="Update Referral Details"
-    try:
-        allif_data=common_shared_data(request)
-        allifquery_update=ReferralsModel.objects.filter(id=pk).first()
-        form=AddReferralForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        if request.method=='POST':
-            form=AddReferralForm(allif_data.get("main_sbscrbr_entity"),request.POST or None, instance=allifquery_update)
-            if form.is_valid():
-                obj=form.save(commit=False)
-                obj.owner=allif_data.get("usernmeslg")
-                obj.save()
-                return redirect('allifmaalshaafiapp:referrals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-            else:
-                error_message=form.errors
-                allifcontext={"error_message":error_message,"title":title,}
-                return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-        else:
-            form=AddReferralForm(allif_data.get("main_sbscrbr_entity"),instance=allifquery_update)
-        context={"title":title,"form":form,"allifquery_update":allifquery_update,}
-        return render(request,'allifmaalshaafiapp/medication/referrals/add_referral.html',context)
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-    
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_can_view
+@allif_base_view_wrapper
+def addReferral(request,pk,*allifargs,**allifkwargs):
+    allifquery=get_object_or_404(ReferralsModel, id=pk) 
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.medical_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=AddReferralForm,
+    title_text="New Discharge",
+        success_redirect_url_name='addTreatment',
+        template_path='allifmaalshaafiapp/medication/referrals/add_referral.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+ 
+@allif_base_view_wrapper
+def EditReferral(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,AddReferralForm,"Edit",
+    'EditReferral','allifmaalshaafiapp/medication/referrals/add_referral.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
+
+@allif_base_view_wrapper
+def referralDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=ReferralsModel,pk=pk,
+        template_name='allifmaalshaafiapp/medication/referrals/referral_details.html', # Create this template
+        title_map={'default': 'Discharge Details'},)
+
+@allif_base_view_wrapper
 def referralSearch(request,*allifargs,**allifkwargs):
-    try:
-        title="Search Results"
-        allif_data=common_shared_data(request)
-        if request.method=='POST':
-            allifsearch=request.POST.get('allifsearchcommonfieldname')
-            searched_data=ReferralsModel.objects.filter((Q(description__icontains=allifsearch)|Q(trans_number__number__icontains=allifsearch)) & Q(company=allif_data.get("main_sbscrbr_entity")))
-        
-        else:
-            searched_data=[]
+    return allif_search_handler(request,model_name='ReferralsModel',search_fields_key='ReferralsModel',
+    template_path='allifmaalshaafiapp/medication/referrals/referrals.html',search_input_name='allifsearchcommonfieldname',)
 
-        context={
-        
-        "title":title,
-        "searched_data":searched_data,
-        
-        }
-        return render(request,'allifmaalshaafiapp/medication/referrals/referrals.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
-       
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-def referralDetails(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        title="Prescription Details"
-        allifquery=ReferralsModel.objects.filter(id=pk).first()
-      
-        context={
-            "allifquery":allifquery,
-            "title":title,
-          
-        }
-        return render(request,'allifmaalshaafiapp/medication/referrals/referral_details.html',context)
-      
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+@allif_base_view_wrapper
+def referalAdvancedSearch(request,*allifargs,**allifkwargs):
+    return allif_advance_search_handler(request,model_name='ReferralsModel',advanced_search_config_key='ReferralsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalshaafiapp/medication/referrals/referrals.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_departmental_delete
-@logged_in_user_can_delete
+@allif_base_view_wrapper
 def wantToDeleteReferral(request,pk,*allifargs,**allifkwargs):
-    try:
-        allifquery=ReferralsModel.objects.filter(id=pk).first()
-        title="Are you sure to delete?"
-        context={
-        "allifquery":allifquery,
-        "title":title,
-        }
-        return render(request,'allifmaalshaafiapp/medication/referrals/delete_referral_confirm.html',context)
-       
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)    
+    return allif_delete_confirm(request,pk,ReferralsModel,"Delete this item",
+    'allifmaalshaafiapp/medication/referrals/delete_referral_confirm.html')
 
-@logged_in_user_must_have_profile
-@subscriber_company_status
-@logged_in_user_is_admin
-@logged_in_user_has_universal_delete
 @logged_in_user_can_delete
+@allif_base_view_wrapper
 def deleteReferral(request,pk,*allifargs,**allifkwargs):
-    try:
-        allif_data=common_shared_data(request)
-        ReferralsModel.objects.filter(id=pk).first().delete()
-        return redirect('allifmaalshaafiapp:referrals',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    return allif_delete_hanlder(request,model_name='ReferralsModel',
+    pk=pk,success_redirect_url_name='referrals',app_namespace='allifmaalshaafiapp',)

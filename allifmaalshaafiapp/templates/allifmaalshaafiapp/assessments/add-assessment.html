@@ -1,0 +1,169 @@
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+ {% block add-form-header-block %}
+  <a href="{% allif_get_single_nav_link_url 'Assets' user_var glblslug %}">Assets</a>
+  <a href="{% allif_get_single_nav_link_url 'AddAsset' user_var glblslug %}">Add Asset</a>
+  {% endblock %}
+   {% block core-tab-col-one %}
+   
+    <tr>
+      <td class="allif-fix-table-col-forms">Category</td>
+      <td>{{form.category}}</td>
+    </tr>
+
+     <tr>
+      <td class="allif-fix-table-col-forms">Staff in charge</td>
+      <td>{{form.employee_in_charge}}</td>
+    </tr>
+
+     <tr>
+      <td class="allif-fix-table-col-forms">Asset A/C</td>
+      <td>{{form.asset_account}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Payment A/C</td>
+      <td>{{form.cost_account}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Supplier</td>
+      <td>{{form.supplier}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Asset Status</td>
+      <td>{{form.asset_status}}</td>
+    </tr>
+    {%endblock%}
+
+    {% block core-tab-col-two %}
+     <tr>
+      <td class="allif-fix-table-col-forms">Name</td>
+      <td>{{form.name}}</td>
+    </tr>
+     <tr>
+        <td class="allif-fix-table-col-forms">Description</td>
+        <td>{{form.description}}</td>
+      </tr>
+
+     <tr>
+      <td class="allif-fix-table-col-forms">Quantity</td>
+      <td>{{form.quantity}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Value</td>
+      <td>{{form.value}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Deposit</td>
+      <td>{{form.deposit}}</td>
+    </tr>
+    
+    {%endblock%}
+
+     {% block standard-tab-col-one %}
+      <tr>
+      <td class="allif-fix-table-col-forms">Salvage Value</td>
+      <td>{{form.salvage_value}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Life Span</td>
+      <td>{{form.lifespan}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Terms</td>
+      <td>{{form.terms}}</td>
+    </tr>
+   
+      <tr>
+      <td class="allif-fix-table-col-forms">Acquired On</td>
+      <td>{{form.acquired}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Depreciation</td>
+      <td>{{form.depreciation}}</td>
+    </tr>
+
+     <tr>
+      <td class="allif-fix-table-col-forms">Expires</td>
+      <td>{{form.expires}}</td>
+    </tr>
+
+     <tr>
+      <td class="allif-fix-table-col-forms">Maker Name</td>
+      <td>{{form.maker_name}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Asset Model</td>
+      <td>{{form.equipment_model}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Manufactured Year</td>
+      <td>{{form.manufactured_year}}</td>
+    </tr>
+    
+    
+    {%endblock%}
+       
+   {% block standard-tab-col-two %}
+  
+    <tr>
+      <td class="allif-fix-table-col-forms">Starting Odometer</td>
+      <td>{{form.starting_odometer}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Primary Meter</td>
+      <td>{{form.primary_meter}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Oil Type</td>
+      <td>{{form.oil_type}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Oil Capacity</td>
+      <td>{{form.oil_capacity}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Balance</td>
+      <td>{{form.balance}}</td>
+    </tr>
+    
+  
+     <tr>
+      <td class="allif-fix-table-col-forms">Energy Usage</td>
+      <td>{{form.energy_usage}}</td>
+    </tr>
+
+     <tr>
+      <td class="allif-fix-table-col-forms">Plate Number</td>
+      <td>{{form.plate_number}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Weight KGs</td>
+      <td>{{form.capacity_kg}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Service Date</td>
+      <td>{{form.last_service_date}}</td>
+    </tr>
+
+    <tr>
+      <td class="allif-fix-table-col-forms">Next Service On</td>
+      <td>{{form.next_service_due}}</td>
+    </tr>
+    
+   
+    {%endblock%}
+
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Assets' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteAssetConfirm.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    {% endblock %}
+
