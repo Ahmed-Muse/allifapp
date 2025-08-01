@@ -187,7 +187,7 @@ def subscriber_company_status(func):
         try:
             allif_data = common_shared_data(request)
             compslg = request.user.usercompany # Assuming usercompany is a slug
-            main_sbscrbr_entity = CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+            main_sbscrbr_entity = CommonCompanyDetailsModel.all_objects.filter(slgfld=compslg).first()
 
             if main_sbscrbr_entity is None:
                 return redirect('allifmaalusersapp:userLogoutPage') # Company not found, force logout
@@ -377,7 +377,7 @@ def logged_in_user_can_approve(func):
         allif_data = common_shared_data(request)
         # Assuming 'logged_in_user_profile' is the profile instance
         if allif_data.get("logged_in_user_profile") and \
-           CommonApproversModel.objects.filter(approvers=allif_data.get("logged_in_user_profile")).exists():
+           CommonApproversModel.all_objects.filter(approvers=allif_data.get("logged_in_user_profile")).exists():
             return func(request, *args, **kwargs)
         else:
             return render(request, 'allifmaalcommonapp/permissions/no_permission.html')

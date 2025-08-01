@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.contrib.contenttypes.models import ContentType
 import logging
 # Import your models (using your 'User' model)
-from .models import User,CommonSectorsModel,CommonBaseModel, CommonTaxParametersModel, CommonAuditLogsModel, CommonCompanyDetailsModel
+from .models import User,CommonSectorsModel,CommonBaseModel, CommonTaxParametersModel, CommonLogsModel, CommonCompanyDetailsModel
 logger = logging.getLogger('allifmaalcommonapp') # Use your app-specific logger
 # --- Helper to get the current request user (Signals often need this) ---
 # Analogy: A "sticky note" attached to the current operation, saying "This was done by User X."
@@ -61,8 +61,8 @@ def log_model_save_event(sender, instance, created, **kwargs):
     elif not created:
         change_message += " (Full update)"
 
-    CommonAuditLogsModel.objects.create(
-        user=user, # Can be None if no user is logged in (e.g., via management command)
+    CommonLogsModel.all_objects.create(
+        owner=user, # Can be None if no user is logged in (e.g., via management command)
         action_type=action_type,
         content_type=content_type,
         object_id=str(instance.pk),
@@ -80,8 +80,8 @@ def log_model_delete_event(sender, instance, **kwargs):
     user = get_current_user()
     content_type = ContentType.objects.get_for_model(instance)
 
-    CommonAuditLogsModel.objects.create(
-        user=user,
+    CommonLogsModel.all_objects.create(
+        owner=user,
         action_type='Deleted',
         content_type=content_type,
         object_id=str(instance.pk),
@@ -97,8 +97,8 @@ def log_user_login(sender, request, user, **kwargs):
     Creates an AuditLog entry when a User successfully logs in.
     """
     content_type = ContentType.objects.get_for_model(user)
-    CommonAuditLogsModel.objects.create(
-        user=user,
+    CommonLogsModel.all_objects.create(
+        owner=user,
         action_type='Login',
         content_type=content_type,
         object_id=str(user.pk),
@@ -133,8 +133,8 @@ def log_user_logout(sender, request, user, **kwargs):
     # It's safer to use the 'user' argument provided by the signal.
     
     content_type = ContentType.objects.get_for_model(user)
-    CommonAuditLogsModel.objects.create(
-        user=user,
+    CommonLogsModel.all_objects.create(
+        owner=user,
         action_type='Logout',
         content_type=content_type,
         object_id=str(user.pk),
@@ -151,14 +151,14 @@ def create_default_sectors_on_first_login(sender, request, user, **kwargs):
     Checks if CommonSectorsModel is empty. If so, creates default sectors.
     This ensures initial setup of core data.
     """
-    if not CommonSectorsModel.objects.exists():
+    if not CommonSectorsModel.all_objects.exists():
         logger.info(f"CommonSectorsModel is empty. Attempting to create default sectors by user {user.email}.")
         created_count = 0
         for sector_data in DEFAULT_SECTORS:
             try:
                 # Use get_or_create to prevent duplicates if multiple users log in simultaneously
                 # or if the signal somehow fires multiple times before the check.
-                sector, created = CommonSectorsModel.objects.get_or_create(
+                sector, created = CommonSectorsModel.all_objects.get_or_create(
                     name=sector_data['name'],
                     defaults={
                         'notes': sector_data.get('notes', ''),
@@ -170,8 +170,8 @@ def create_default_sectors_on_first_login(sender, request, user, **kwargs):
                     logger.info(f"Created default sector: '{sector.name}' by {user.email}.")
                     # Optionally log this to AuditLog as well
                     content_type = ContentType.objects.get_for_model(sector)
-                    CommonAuditLogsModel.objects.create(
-                        user=user,
+                    CommonLogsModel.all_objects.create(
+                        owner=user,
                         action_type='Created_default_sector',
                         content_type=content_type,
                         object_id=str(sector.pk),
@@ -188,7 +188,6 @@ def create_default_sectors_on_first_login(sender, request, user, **kwargs):
             logger.info("No new default sectors were created (they might already exist).")
     else:
         logger.debug(f"CommonSectorsModel already contains data. Skipping default sector creation.")
-
 
 @receiver(post_save, sender=CommonCompanyDetailsModel)
 def send_new_company_notification(sender, instance, created, **kwargs):

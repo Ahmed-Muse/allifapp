@@ -12,7 +12,7 @@ from .constants import *
 from decimal import Decimal
 from django.http.response import HttpResponse, JsonResponse
 import uuid 
-# --- AuditLog Model (for Signals & Logging Examples) ---
+# --- AuditLog Model (for Signals & Logging Examples) ---...
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
@@ -47,185 +47,167 @@ from django.contrib.contenttypes.models import ContentType
 #   19. Tasks
 #   20. Departments
 
-
 # some of the databases may shared 100% like employees while others may be shared partitially like customers.
 # we may have various views for various apps but they may share database
 # 
 # #
 
 # check lenght, ondelete, true/false
-class CommonSectorsModel(models.Model):# this is the company  hospitality logistics
-    name=models.CharField(max_length=30,blank=False,null=False,unique=True,default="Sector Name",db_index=True)
-    notes=models.CharField(max_length=50,blank=True,null=True,default="Sector Comments")
-    owner=models.ForeignKey(User,db_index=True, on_delete=models.SET_NULL,blank=True,null=True,related_name="secownr")
+
+# This manager will now be the default for CommonBaseModel and its inheritors
+class ActiveManager(models.Manager):
+    def get_queryset(self):
+        # Assuming your models have 'status' and 'delete_status' fields
+        #return super().get_queryset().filter(status__in=['Active','Approved','Draft'],delete_status='Deletable')
+        return super().get_queryset().filter(status__in=['Active','Approved','Draft'])
+    def archived(self):
+        """Returns only archived (soft-deleted) objects."""
+        return super().get_queryset().filter(status='Archived')
+
+    def all_with_archived(self):
+        """Returns all objects, including active and archived, without status/delete_status filtering."""
+        return super().get_queryset()
+    
+# --- NEW ADDITION START: Define CompanyFilteredManager (inherits ActiveManager, adds for_company) ---
+class CommonCompanyManager(ActiveManager): # Inherit from ActiveManager
+    """
+    A manager that combines ActiveManager's status filtering with
+    a 'for_company' method to filter querysets by a specific company.
+    This manager should be used for models that have a 'company' ForeignKey.
+    """
+    def for_company(self, company_id):
+        """Filters the queryset for a specific company."""
+        return self.get_queryset().filter(company=company_id)
+
+class SharedModel(models.Model):# this is the company  hospitality logistics
+    name=models.CharField(max_length=30,blank=False,null=False,unique=True,default="Name",db_index=True)
+    notes=models.CharField(max_length=50,blank=True,null=True,default="Notes")
+    owner=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
     date=models.DateField(blank=True,null=True,auto_now_add=True)
-   
+    status=models.CharField(max_length=50, choices=BASE_MODEL_STATUS_CHOICES, default='Active',null=True,blank=True)
+    objects=ActiveManager()
+    all_objects = models.Manager() 
+    class Meta:
+        abstract = True 
+        ordering = ['-date']
+
+class CommonSectorsModel(SharedModel):# this is the company  hospitality logistics
     def __str__(self):
         return self.name
    
-class CommonDocsFormatModel(models.Model):# this is the company  hospitality logistics
-    name=models.CharField(max_length=30,blank=False,null=False,unique=True,default="pdf")
-    notes=models.CharField(max_length=50,blank=True,null=True,default="Write Document Type")
-    owner=models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="docformusr")
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-  
+class CommonDocsFormatModel(SharedModel):# this is the company  hospitality logistics
     def __str__(self):
         return self.name
     
-class CommonDataSortsModel(models.Model):# this is the company  hospitality logistics
-    name=models.CharField(max_length=30,blank=False,null=False,unique=True,default="asc")
-    notes=models.CharField(max_length=50,blank=True,null=True,default="Write Document Type")
-    owner= models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="datsortusr")
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-   
+class CommonDataSortsModel(SharedModel):# this is the company  hospitality logistics
     def __str__(self):
         return self.name
-# this company can be normal companies, hospital, hotels, schools, universities, etc
-#################3 Entity/Company Details ################
-class CommonCompanyDetailsModel(models.Model):# this is the company
-    company=models.CharField(max_length=50,blank=True,null=True,db_index=True)
-    legalName=models.CharField(max_length=50,blank=True,null=True,default="CompanyLegalName")
+
+#############3 base model for companies, divisions, branches, departments, operation year etc.
+class BaseModel(models.Model):
+    owner=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
+    name=models.CharField(max_length=50,blank=True,null=True,default="Name")
+    legalname=models.CharField(max_length=50,blank=True,null=True,default="LegalName")
     address=models.CharField(max_length=50,blank=True,null=True)
-    companyuid=models.CharField(null=True, blank=True, max_length=250,unique=True)
-    companyslug=models.SlugField(max_length=150, unique=True, blank=True, null=True)
+    uidfld=models.CharField(null=True, blank=True, max_length=250,unique=True)
+    slgfld=models.SlugField(max_length=150, unique=True, blank=True, null=True)
     pobox=models.CharField(max_length=50,blank=True,null=True)
     email=models.EmailField(max_length=50,blank=True,null=True)
     website=models.CharField(max_length=50,blank=True,null=True)
     phone1=models.CharField(max_length=50,blank=True,null=True)
     city=models.CharField(max_length=50,blank=True,null=True)
     country=models.CharField(max_length=50,blank=True,null=True)
+    phone=models.CharField(max_length=50,blank=True,null=True)
     phone2=models.CharField(max_length=50,blank=True,null=True)
     logo=models.FileField(upload_to='myfiles/',null=True, blank=True)
-    owner=models.OneToOneField(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="secrlmown")
-    sector=models.ForeignKey(CommonSectorsModel,related_name="secrlmcompcmmnapp",on_delete=models.PROTECT,null=True,blank=False)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    updatedon=models.DateTimeField(blank=True, null=True)
-    created_date=models.DateField(null=True, blank=True)
-    edit_date=models.DateField(null=True, blank=True)
-    can_delete=models.CharField(choices=delete_status, blank=True, null=True,max_length=30,default="undeletable")
     status= models.CharField(choices=entity_status, blank=True, null=True,max_length=30,default="Blocked")
-
+    can_delete=models.CharField(choices=delete_status, blank=True, null=True,max_length=30,default="undeletable")
+    date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    comments=models.TextField(blank=True,null=True, default='Comments')
+    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
+    updated_by=models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
+    
+    description= models.TextField(null=True, blank=True,default='Description')
+    starts=models.DateTimeField(blank=True,null=True,default=timezone.now)
+    ends=models.DateTimeField(blank=True,null=True,default=timezone.now)
+    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
+   
+    objects=ActiveManager()
+    all_objects = models.Manager() 
+    class Meta:
+        abstract = True 
+        ordering = ['-date']
+    
+    def get_slug_source(self):
+        """
+        A helper method to determine the source for the slug.
+        Child models can override this if needed.
+        """
+        if self.legalname:
+            return self.legalname
+        if self.name:
+            return self.name
+        return ""
+    
+    def save(self, *args, **kwargs):
+        if not self.uidfld:
+            self.uidfld = str(uuid4()).split('-')[4]
+        slug_source = self.get_slug_source()
+        if slug_source:
+            self.slgfld = slugify(f'{slug_source} {self.uidfld}')
+        else:
+            self.slgfld = slugify(f'item-{self.uidfld}') # Fallback slug
+        super().save(*args, **kwargs)
+   
+class CommonCompanyDetailsModel(BaseModel):# this is the company
+    company=models.CharField(max_length=50,blank=True,null=True,db_index=True)
+    sector=models.ForeignKey(CommonSectorsModel,related_name="secrlmcompcmmnapp",on_delete=models.PROTECT,null=True,blank=False)
+   
     def __str__(self):
         return str(self.company)
+    """
     def save(self, *args, **kwargs):
-        if self.companyuid is None:
-            self.companyuid=str(uuid4()).split('-')[4]
-            self.companyslug=slugify('{} {}'.format(self.legalName, self.companyuid))
-        self.companyslug=slugify('{} {}'.format(self.legalName, self.companyuid))#this is what generates the slug
-        self.updatedon=timezone.localtime(timezone.now())
+        if self.uidfld is None:
+            self.uidfld=str(uuid4()).split('-')[4]
+            self.slgfld=slugify('{} {}'.format(self.legalname, self.uidfld))
+        self.slgfld=slugify('{} {}'.format(self.legalname, self.uidfld))#this is what generates the slug
+        self.last_updated=timezone.localtime(timezone.now())
         super(CommonCompanyDetailsModel, self).save(*args, **kwargs)
-
+        """
+        
 #######33 Branches --- this is needed if a company has more than one branch ################
-class CommonDivisionsModel(models.Model):# this is the company
+class CommonDivisionsModel(BaseModel):# this is the company
     division=models.CharField(max_length=50,blank=True,null=True)
-    legalname=models.CharField(max_length=50,blank=True,null=True,default="CompanyDvsnLegalName")
-    address=models.CharField(max_length=50,blank=True,null=True)
-    divisionuid=models.CharField(null=True, blank=True, max_length=100,unique=True)
-    divisionslug=models.SlugField(max_length=250, unique=True, blank=True, null=True)
-    pobox=models.CharField(max_length=50,blank=True,null=True)
-    email=models.EmailField(max_length=50,blank=True,null=True)
-    phone=models.CharField(max_length=50,blank=True,null=True)
-    city=models.CharField(max_length=50,blank=True,null=True)
-    owner=models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="owncmpndvsn")
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="dvsncmpny",on_delete=models.CASCADE,null=True,blank=False)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    updatedon=models.DateTimeField(blank=True, null=True)
-    created_date=models.DateField(null=True, blank=True)
-    edit_date=models.DateField(null=True, blank=True)
-    comments=models.TextField(max_length=100, help_text="Enter a brief description of the division",blank=True,null=True)
     class Meta:
         # ensures that the same value is not repeated in the same company
         unique_together = ('company', 'division')
     def __str__(self):
         return str(self.division)
-    def save(self, *args, **kwargs):
-        if self.divisionuid is None:
-            self.divisionuid=str(uuid4()).split('-')[4]
-            self.divisionslug=slugify('{} {}'.format(self.legalname, self.divisionuid))
-        self.divisionslug=slugify('{} {}'.format(self.legalname, self.divisionuid))#this is what generates the slug
-        self.updatedon=timezone.localtime(timezone.now())
-        super(CommonDivisionsModel, self).save(*args, **kwargs)
-
+  
 #######33 Branches --- this is needed if a company has more than one branch ################
-class CommonBranchesModel(models.Model):# this is the company
+class CommonBranchesModel(BaseModel):# this is the company
     branch=models.CharField(max_length=50,blank=True,null=True)
-    legalname=models.CharField(max_length=50,blank=True,null=True,default="CompanyBranchLegalName")
-    address=models.CharField(max_length=50,blank=True,null=True)
-    branchuid =models.CharField(null=True, blank=True, max_length=100,unique=True)
-    branchslug =models.SlugField(max_length=150, unique=True, blank=True, null=True)
-    pobox=models.CharField(max_length=50,blank=True,null=True)
-    email=models.EmailField(max_length=50,blank=True,null=True)
-    phone=models.CharField(max_length=50,blank=True,null=True)
-    city=models.CharField(max_length=50,blank=True,null=True)
-    owner=models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name="owncmpnbrnch")
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="brnchcmpny",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvnscmpny",on_delete=models.SET_NULL,null=True,blank=True)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    updatedon=models.DateTimeField(blank=True, null=True)
-    created_date=models.DateField(null=True, blank=True)
-    edit_date=models.DateField(null=True, blank=True)
-    #class Meta:
-        # ensures that the same value is not repeated in the same company
-        #unique_together = ('branch', 'division','company')
-
     def __str__(self):
         return str(self.branch)
-    def save(self, *args, **kwargs):
-        if self.branchuid is None:
-            self.branchuid=str(uuid4()).split('-')[4]
-            self.branchslug=slugify('{} {}'.format(self.legalname, self.branchuid))
-        self.branchslug=slugify('{} {}'.format(self.legalname, self.branchuid))#this is what generates the slug
-        self.updatedon=timezone.localtime(timezone.now())
-        super(CommonBranchesModel, self).save(*args, **kwargs)
-
+  
 ########################## Common departments ##########################3
-class CommonDepartmentsModel(models.Model):
+class CommonDepartmentsModel(BaseModel):
     department=models.CharField(max_length=50,blank=False,null=True,unique=False)
-    owner=models.ForeignKey(User, on_delete=models.SET_NULL,related_name="usrdprmnt",null=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmpdprmnt",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dpmntdvsn",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="dpmntbrnch",on_delete=models.SET_NULL,null=True,blank=True)
-    comments=models.CharField(null=True, blank=True, max_length=30)
-    pobox=models.CharField(max_length=50,blank=True,null=True)
-    email=models.EmailField(max_length=50,blank=True,null=True)
-    phone=models.CharField(max_length=50,blank=True,null=True)
-    city=models.CharField(max_length=50,blank=True,null=True)
-    date=models.DateField(blank=True,null=True,auto_now_add=True)
-    legalname=models.CharField(max_length=50,blank=True,null=True,default="CompanyDepartmentLegalName")
-    address=models.CharField(max_length=50,blank=True,null=True)
-    departmentuid=models.CharField(null=True, blank=True, max_length=100,unique=True)
-    departmentslug=models.SlugField(max_length=250, unique=True, blank=True, null=True)
-    updatedon=models.DateTimeField(blank=True, null=True)
-    #class Meta:
-        # ensures that the same value is not repeated in the same company
-        #unique_together = ('company', 'division','branch')
     def __str__(self):
         return str(self.department)
-    
-    def save(self, *args, **kwargs):
-        if self.departmentuid is None:
-            self.departmentuid=str(uuid4()).split('-')[4]
-            self.departmentslug=slugify('{} {}'.format(self.legalname, self.departmentuid))
-        self.departmentslug=slugify('{} {}'.format(self.legalname, self.departmentuid))#this is what generates the slug
-        self.updatedon=timezone.localtime(timezone.now())
-        super(CommonDepartmentsModel, self).save(*args, **kwargs)
-
-
-class CommonOperationYearsModel(models.Model):
+ 
+class CommonOperationYearsModel(BaseModel):
     """
     defines the opreational/fiscal/academic year..
     
     """
-    description= models.TextField(null=True, blank=True,default='Description')
-    comments=models.TextField(blank=True,null=True, default='Comments')
-    date=models.DateField(auto_now_add=True,blank=True,null=True)
-    starts=models.DateTimeField(blank=True,null=True,default=timezone.now)
-    ends=models.DateTimeField(blank=True,null=True,default=timezone.now)
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-    updated_by=models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='operation_year_updated')
     year=models.CharField(max_length=50,blank=True,default="Operation Year",null=True,unique=False,help_text="e.g., 2023-2024")
-    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
-    owner=models.ForeignKey(User, related_name="ownr_operation_year",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_operation_year",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_operation_year",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_operation_year",on_delete=models.SET_NULL,null=True,blank=True)
@@ -234,19 +216,12 @@ class CommonOperationYearsModel(models.Model):
     def __str__(self):
         return str(self.year)
     
-class CommonOperationYearTermsModel(models.Model):
+class CommonOperationYearTermsModel(BaseModel):
     """
     this model captures operational year sections like terms, semisters, quarters ...etc
     """
-    name=models.CharField(max_length=30,blank=True,null=True,default="Operation Term")
-    date=models.DateField(auto_now_add=True,blank=True,null=True)
-    description= models.TextField(null=True, blank=True,default='Description')
-    comments=models.TextField(blank=True,null=True, default='Comments')
-    starts=models.DateTimeField(blank=True,null=True,default=timezone.now)
-    ends=models.DateTimeField(blank=True,null=True,default=timezone.now)
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-    updated_by=models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='operation_term_updated')
-    year=models.CharField(max_length=50,blank=True,default="Operation Year",null=True,unique=False,help_text="e.g., 2023-2024")
+   
+    operation_term=models.CharField(max_length=50,blank=True,default="Operation Year",null=True,unique=False,help_text="e.g., 2023-2024")
     
     owner=models.ForeignKey(User, related_name="ownr_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_operation_term",on_delete=models.CASCADE,null=True,blank=True)
@@ -255,39 +230,9 @@ class CommonOperationYearTermsModel(models.Model):
     department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
     
     operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='terms_operation_year')
-   
-   
+
     def __str__(self):
         return str(self.name)
-
-# This manager will now be the default for CommonBaseModel and its inheritors
-class ActiveManager(models.Manager):
-    """
-    A custom manager that returns only objects with status='Active'
-    and delete_status='Deletable' by default.
-    YourModel.objects.all() will always mean "get me the active, non-archived records for this model within the current company context (if for_company is used)".
-    This establishes a clear convention.
-    """
-    def get_queryset(self):
-        # Assuming your models have 'status' and 'delete_status' fields
-        return super().get_queryset().filter(status__in=['Active','Approved','Draft'],delete_status='Deletable')
-   
-    def for_company(self, company_id):
-        """Filters the queryset for a specific company.
-        The for_company method on the default manager makes tenant-specific queries very straightforward and performant.
-        All filtering (active status, company, division, etc.) happens at the database level in a single, optimized SQL query.
-        Django's ORM is highly efficient for chained queries.
-        """
-        # This assumes your model (or its CommonBaseModel) has a 'company' field
-        return self.get_queryset().filter(company=company_id)
-
-    def archived(self):
-        """Returns only archived (soft-deleted) objects."""
-        return super().get_queryset().filter(status='Archived')
-
-    def all_with_archived(self):
-        """Returns all objects, including active and archived, without status/delete_status filtering."""
-        return super().get_queryset()
 
 #############################################################
 # Abstract Base Class for Common Organizational Fields
@@ -327,45 +272,36 @@ class CommonBaseModel(models.Model):
     uuid=models.UUIDField(default=uuid.uuid4, editable=False, unique=True, db_index=True,null=True,blank=True)
     reference=models.CharField(max_length=100, default='reference',blank=True, null=True, db_index=True, help_text="An optional identifier from an external system or an internal reference code.")
     
-    
     # Assign the custom manager as the default manager
     #objects = ActiveManager(): This is the most crucial change. It makes ActiveManager the default manager for CommonBaseModel and all models that inherit from it.
-    objects = ActiveManager() 
+    #objects = ActiveManager() 
+    objects=CommonCompanyManager()
     
     # Provide a manager to access ALL objects, including inactive/archived
     #all_objects = models.Manager(): This provides a fallback. If you ever need to query all records (including inactive or archived ones), you'd use YourModel.all_objects.all().
     all_objects = models.Manager() 
-
+    """
+    resources=models.CharField(blank=True,null=True,max_length=50,default='Resources')
+    constraints=models.CharField(blank=True,null=True,max_length=50,default='Constraints')
+    assumptions=models.CharField(blank=True,null=True,max_length=50,default='Assumptions')
+    exclusions = models.CharField(blank=True,null=True,max_length=50,default='Exclusions')
+    stakeholders = models.CharField(blank=True,null=True,max_length=50,default='Stakeholders')
+    risks=models.CharField(blank=True,null=True,max_length=50,default='Risks')
+    """
     class Meta:
         abstract = True # This is the crucial line that makes it an abstract base class
         ordering = ['-date'] # Your ordering is also here
     #class Meta:
         #ordering = ['-date']
 
-class CommonCompanyScopeModel(CommonBaseModel):# this is the company  hospitality logistics
-    scope_type=models.CharField(max_length=30,choices=SCOPE_TYPES,blank=True,null=True,)
-    scope_resources=models.TextField(blank=True,null=True,help_text="Resources required by this particular scope")
-    scope_constraints=models.TextField(blank=True,null=True,)
-    scope_assumptions=models.TextField(blank=True,null=True)
-    scope_exclusions = models.TextField(blank=True,null=True,help_text="Specific items, features, or activities that are explicitly excluded from this scope.")
-    scope_stakeholders = models.TextField(blank=True,null=True,help_text="Key individuals or groups affected by or having an interest in this scope.")
-    scope_risks=models.TextField(blank=True,null=True,help_text="A summary of identified risks associated with this scope.")
-
+class CommonCompanyScopeModel(CommonBaseModel):# this is the company  hospitality logistic
     def __str__(self):
         return self.name
-
 
 # taxes...
 class CommonTaxParametersModel(CommonBaseModel):
     taxtype=models.CharField(choices=taxoptions, blank=True, max_length=30,default='Default')
     taxrate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,default=0)
-    #tax_resources=models.TextField(blank=True,null=True,help_text="Resources required by this particular scope")
-    #tax_constraints=models.TextField(blank=True,null=True,)
-    #tax_assumptions=models.TextField(blank=True,null=True)
-    #tax_exclusions = models.TextField(blank=True,null=True,help_text="Specific items, features, or activities that are explicitly excluded from this scope.")
-    #tax_stakeholders = models.TextField(blank=True,null=True,help_text="Key individuals or groups affected by or having an interest in this scope.")
-    #tax_risks=models.TextField(blank=True,null=True,help_text="A summary of identified risks associated with this scope.")
-
     def __str__(self):
         return f"{self.name} ({self.taxrate}%)"
 
@@ -384,11 +320,9 @@ class CommonTaxParametersModel(CommonBaseModel):
         ]
 
 
-class CommonAuditLogsModel(CommonBaseModel):
+class CommonLogsModel(CommonBaseModel):
     action_time = models.DateTimeField(default=timezone.now)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    action_type = models.CharField(max_length=50) # e.g., 'CREATED', 'UPDATED', 'DELETED', 'LOGIN'
-    
+    action_type = models.CharField(max_length=50)
     # Generic Foreign Key to link to any model instance
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
     object_id = models.CharField(max_length=255, null=True, blank=True) # Store PK as string
@@ -407,7 +341,7 @@ class CommonAuditLogsModel(CommonBaseModel):
         ]
 
     def __str__(self):
-        return f"{self.action_type} on {self.object_repr} by {self.user.first_name if self.user else 'System'} at {self.action_time.strftime('%Y-%m-%d %H:%M')}"
+        return f"{self.owner.first_name if self.owner else 'System'} at {self.action_time.strftime('%Y-%m-%d %H:%M')}"
 
 
 class CommonSupplierTaxParametersModel(CommonBaseModel):
@@ -478,10 +412,6 @@ class CommonCodesModel(CommonBaseModel):
     
     """
    
-    #class Meta:
-        # ensures that the same value is not repeated in the same company
-        #unique_together = ('company', 'code','name')
-    
     def __str__(self):
         return f"{self.code}: {self.name}:"
 
@@ -506,7 +436,7 @@ class CommonEmployeesModel(CommonBaseModel):
     sysperms=models.CharField(choices=rights, blank=True, null=True,max_length=30,default="staff")
     
     stffslug=models.SlugField(max_length=100, unique=True, blank=True, null=True)
-
+    
     def __str__(self):
         return str(self.firstName)
         
@@ -518,7 +448,6 @@ class CommonEmployeesModel(CommonBaseModel):
         super(CommonEmployeesModel, self).save(*args, **kwargs)
 
 class CommonApproversModel(CommonBaseModel):
-   
     approvers=models.ForeignKey(CommonEmployeesModel,null=True,blank=True, related_name='apprvrusrmbmrs',on_delete=models.SET_NULL) # Users in this group
    
     def __str__(self):
@@ -530,10 +459,7 @@ class CommonGeneralLedgersModel(CommonBaseModel):
         return str(self.description)
 
 class CommonChartofAccountsModel(CommonBaseModel):
-    
-    
     category=models.ForeignKey(CommonGeneralLedgersModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='chaccmrln')
-   
     statement=models.CharField(choices=chart_of_account_statement_type,max_length=20,blank=True,null=True)
     def __str__(self):
         return str(self.description)
@@ -550,23 +476,18 @@ class CommonBanksModel(CommonBaseModel):
 class CommonShareholderBankDepositsModel(CommonBaseModel):
     bank=models.ForeignKey(CommonBanksModel,related_name="depositbankrelnefds",on_delete=models.SET_NULL,blank=False,null=True)
     amount=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
-   
     equity=models.ForeignKey(CommonChartofAccountsModel,related_name="dpscustrlnmdfd",on_delete=models.SET_NULL,blank=True,null=True)
     asset=models.ForeignKey(CommonChartofAccountsModel, blank=True,null=True,on_delete=models.SET_NULL,related_name='coabnkdpasset')
-    
     posting_status=models.CharField(choices=posting_status, default='waiting', max_length=20,blank=True,null=True)
     def __str__(self):
         return '{}'.format(self.description)
 
 ######################3 WITHDRAWALS ############33
 class CommonBankWithdrawalsModel(CommonBaseModel):
-    
     bank=models.ForeignKey(CommonBanksModel,related_name="wthdrbnkrelnm",on_delete=models.SET_NULL,blank=False,null=True)
     amount=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    
     asset=models.ForeignKey(CommonChartofAccountsModel, blank=False,null=True,on_delete=models.SET_NULL,related_name='coabnka')
     bankcoa=models.ForeignKey(CommonChartofAccountsModel, blank=False,null=True,on_delete=models.SET_NULL,related_name='coabnkafrm')
-    
     def __str__(self):
         return '{}'.format(self.description)
 
@@ -585,30 +506,23 @@ class CommonEmailsModel(CommonBaseModel):
 
 #################3 suppliers ################
 class CommonSuppliersModel(CommonBaseModel):
-   
     phone=models.CharField(null=True, blank=True, max_length=30)
     email=models.EmailField(null=True, blank=True, max_length=30)
     city=models.CharField(null=True, blank=True, max_length=30)
     address=models.CharField(null=True, blank=True, max_length=30)
     turnover=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     contact=models.CharField(null=True, blank=True, max_length=30)
-   
     country=models.CharField(null=True, blank=True, max_length=50)
-    
     coverage=models.TextField(max_length=250,blank=True,null=True,default='Insurance')
-  
-  
     def __str__(self):
         return '{}'.format(self.name)
     
 class CommonSupplierPaymentsModel(CommonBaseModel):
     supplier=models.ForeignKey(CommonSuppliersModel,related_name="allifsuprln",on_delete=models.SET_NULL,blank=True,null=True)
     amount=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    
     account=models.ForeignKey(CommonChartofAccountsModel,related_name="amesupayrlnm",on_delete=models.SET_NULL,blank=True,null=True)
     mode=models.ForeignKey(CommonPaymentTermsModel, related_name="supplrpymnterms",on_delete=models.SET_NULL,null=True,blank=True)
     posting_status=models.CharField(choices=posting_status, default='waiting', max_length=100,blank=True,null=True)
-    
     def __str__(self):
         return '{}'.format(self.supplier)
 
@@ -617,7 +531,6 @@ class CommonSupplierStatementsModel(CommonBaseModel):
     debit=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     credit=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
     
-  
     def __str__(self):
         return '{}'.format(self.supplier)
     
@@ -633,23 +546,8 @@ class CommonCustomersModel(CommonBaseModel):
     contact=models.CharField(null=True, blank=True, max_length=30)
     uniqueId=models.CharField(null=True, blank=True, max_length=100)
     customerslug=models.SlugField(max_length=50, unique=True, blank=True, null=True)
-   
     paymentType=models.ForeignKey(CommonPaymentTermsModel, related_name="custmerrpymntrms",on_delete=models.SET_NULL,null=True,blank=True)
-    #..... end.... below fields is special for healthcare entities setup....
-
-    #..... start.... below fields is special for educational setup....
-    #form=models.ForeignKey(CommonFormsModel,on_delete=models.SET_NULL,blank=True,null=True)
-    #className=models.ForeignKey(CommonClassesModel,on_delete=models.SET_NULL,blank=True,null=True)
-    #course_category=models.ForeignKey(CommonCategoriesModel,blank=True,null=True, on_delete=models.CASCADE, related_name='course_enrollments')
-    #operation_year=models.ForeignKey(CommonOperationYearsModel, on_delete=models.CASCADE, related_name='year_enrollments',null=True,blank=True)
-    #term=models.ForeignKey(CommonOperationYearTermsModel, on_delete=models.CASCADE, related_name='term_enrollments',blank=True,null=True)
-    #enrollment_date=models.DateField(auto_now_add=True,blank=True,null=True)
-    #client_status=models.CharField(max_length=4, choices=student_status_choices, default='ENR',blank=True,null=True)
-
-     #..... end.... below fields is special for educational setup....
-    
     country=models.CharField(null=True, blank=True, max_length=50)
-   
     ############################## for medical ######################################
     age=models.CharField(null=True, blank=True, max_length=30)
     nextkin=models.CharField(null=True, blank=True, max_length=30)
@@ -658,27 +556,13 @@ class CommonCustomersModel(CommonBaseModel):
     triaged=models.BooleanField('Mark triaged',default=False,blank=True,null=True)
     seen=models.BooleanField('Mark seen',default=False,blank=True,null=True)
     gender=models.CharField(max_length=25, blank=True, null=True,choices=gender)
-    #date_of_birth=models.DateField(blank=True,null=True)
-    
     blood_group=models.CharField(max_length=3, choices=BLOOD_GROUPS, blank=True, null=True)
-    # Storing allergies/conditions as free text initially, but consider ManyToManyField
-    # to a catalogue of allergies/conditions for structured data later.
-    #known_allergies=models.TextField(blank=True, null=True,help_text="List of known allergies (e.g., Penicillin, Peanuts)")
-    #chronic_conditions = models.TextField(blank=True, null=True,help_text="List of chronic medical conditions (e.g., Diabetes, Hypertension)")
-    
+   
     ############### below hospitality specific fields.... ################3
     document_number = models.CharField(max_length=100, blank=True, null=True, unique=False, help_text="Unique ID for guest")
     nationality=models.CharField(max_length=100, blank=True, null=True)
     def __str__(self) -> str:
         return self.name
-
-    def save(self, *args, **kwargs):
-        if self.uniqueId is None:
-            self.uniqueId = str(uuid4()).split('-')[4]
-            self.customerslug = slugify('{} {}'.format(self.name, self.uniqueId))
-
-        self.customerslug = slugify('{} {}'.format(self.name, self.uniqueId))#this is what generates the slug
-        super(CommonCustomersModel, self).save(*args, **kwargs)
    
 class CommonCustomerPaymentsModel(CommonBaseModel):
     customer=models.ForeignKey(CommonCustomersModel,related_name="allifcustpaymentreltedname",on_delete=models.CASCADE,blank=True,null=True)
@@ -917,6 +801,10 @@ class CommonStocksModel(CommonBaseModel):
     		return str(self.description) # this will show up in the admin area
 
 class CommonSpaceItemsModel(CommonBaseModel):
+    """
+    these are warehouse items that are transfered from one warehouse to another through transfer orders.
+    
+    """
     space=models.ForeignKey(CommonSpacesModel, blank=True, null=True, on_delete=models.CASCADE,related_name='wrhseitms')
     items=models.ForeignKey(CommonStocksModel,blank=False,null=False, on_delete=models.CASCADE,related_name='wrhseitemsstck')
     #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
@@ -937,7 +825,6 @@ class CommonStockTransferOrdersModel(CommonBaseModel):
 class CommonStockTransferOrderItemsModel(CommonBaseModel):
     items=models.ForeignKey(CommonStocksModel,related_name="stcktrnsfordrlns",on_delete=models.CASCADE)
     #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
-   
     trans_ord_items_con=models.ForeignKey(CommonStockTransferOrdersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='poitrelname')
   
     def __str__(self):
@@ -957,9 +844,6 @@ class CommonTransactionsModel(CommonBaseModel):# very important model
     realestate.... can act normal sales order when selling rents, properties, services,renting, monthyly rent payments etc..
     hospitality... can act as guest hosting event, customer orders from restaurents... etc...
     """
-    
-    
-    # general fields,,
     
     employee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="encounters_as_primary_doctor",help_text="The main employee attending this encounter.")
     customer=models.ForeignKey(CommonCustomersModel, on_delete=models.SET_NULL,blank=True,null=True, related_name="custmtransrlnme",help_text="The customer associated with this encounter.")
@@ -988,12 +872,8 @@ class CommonTransactionItemsModel(CommonBaseModel):
     .....
     healthcare... doctor uses this as lab tests... he can select and test for maleria, cbc, typhoid etc....
     """
-    # general fields......
     trans_number=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="mdclrcdobsv", blank=True, null=True,help_text="The encounter this triage record belongs to.")
     items=models.ForeignKey(CommonStocksModel,blank=True,null=True, on_delete=models.CASCADE, related_name="patient_orders",help_text="The type of lab test ordered.")
-    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
-    #unitcost=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
-    #unitprice=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
    
     def __str__(self):
         return str(self.items)
@@ -1016,8 +896,7 @@ class CommonSpaceBookingItemsModel(CommonBaseModel):
     trans_number=models.ForeignKey(CommonTransactionsModel, related_name="trans_bookings_items", on_delete=models.CASCADE, null=True, blank=True)
     space=models.ForeignKey(CommonSpacesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='bookings') # Nullable if room not assigned yet
     space_unit=models.ForeignKey(CommonSpaceUnitsModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='bookings_space_unit') # Nullable if room not assigned yet
-    #quantity=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
-    
+   
     def __str__(self):
         return str(self.space_unit)
     @property
@@ -1040,13 +919,10 @@ class CommonProgressModel(CommonBaseModel):
     """
     
     trans_number=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="vital_signs", blank=True, null=True,help_text="The encounter this vital signs record belongs to.")
-    
     recorded_on = models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of measurement
    
     def __str__(self):
         return str(self.trans_number.customer)
-    
-
     
 ################################## PURCHASES ###########3
 
@@ -1418,74 +1294,3 @@ class CommonContactsModel(models.Model):
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
         return str(self.subject)
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class CommonProgramsModel(CommonBaseModel):# not used...may be deleted
-    """
-    Defines programs that are offered by a particular entity
-    for example:
-    Sales...sales, manufacturing, repairs, services contracts etc.
-    Education...Bachelor of Science in IT, Diploma in Nursing, PhD in MBA etc.
-    Healthcare...General surgery, Maternity, Dental, Checkups etc.
-    Hospitality...Accommodation, outdoor catering, spacing letting(malls/apartments),conferences, events etc
-    Logistics....travelling, tourism, Hajj,Umrah,Cargo, handling, clearing etc
-    Realestate...spacing letting(malls/apartments),property management,property development etc
-    Services...consultancy, financial services, audit, legal, accounting etc..
-    
-    """
-    
-    def __str__(self):
-        return str(self.name)
-
-class CommonServicesModel(CommonBaseModel):# not used for now...may be deleted later
-    
-   
-    """
-    Defines individual courses/subjects/services/goods within a program that are offered by a particular entity
-    for example:
-    Sales...selling of various items, item repairs, consultancy etc
-    Education...sciences, math, electrical current, strenghth of materials, dental surgery etc..
-    Healthcare...general consultations, dental washing, maternity and delivery, heart surgery etc.
-    Hospitality...Accommodation, outdoor catering, room bookings,conferences, events etc
-    Logistics....ticketing, cargo shipment, cargo handling
-    Realestate...letting spaces, building management, BMS
-    Services...consultancy, financial services, auditing, legal services, accounting services etc..
-    
-    
-    """
-    
-    program=models.ForeignKey(CommonProgramsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='coursesprograms')
-   
-    credits=models.DecimalField(max_digits=4,blank=True,null=True, decimal_places=2, default=0.00, help_text="Credit hours for the course")
-   
-    is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
-   
-    unitprice=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    #quantity=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    unitcost=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    
-    normal_range_info=models.CharField(max_length=250, blank=True, null=True,help_text="General normal range information for this test (e.g., '70-110 mg/dL').")
-    unit_of_measure=models.CharField(max_length=50, blank=True, null=True,help_text="Standard unit of measure for the test result (e.g., 'mg/dL', 'cells/mm3').")
-    unit_of_measure=models.ForeignKey(CommonUnitsModel,related_name="unit_of_measure_services",on_delete=models.SET_NULL,null=True,blank=True)
-    
-  
-    def __str__(self):
-        return f"{self.name} ({self.code})"
-    

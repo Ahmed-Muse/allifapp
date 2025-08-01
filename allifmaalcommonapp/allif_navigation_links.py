@@ -66,6 +66,7 @@ allifmaal_sector_specific_links= {
 
 # Define general links accessible to all sectors
 allif_single_access_general_links = [
+    {'name': 'Logs', 'url_name': 'allifmaalcommonapp:commonLogs'},
     {'name': 'Dashboard', 'url_name': 'allifmaalcommonapp:commonSpecificDashboard'},
     {'name': 'Company', 'url_name': 'allifmaalcommonapp:commonCompanyDetailsForClients'},
     {'name': 'HRM', 'url_name': 'allifmaalcommonapp:commonhrm'},
@@ -179,7 +180,7 @@ allif_single_access_general_links = [
      {'name': 'prescriptions', 'url_name': 'allifmaalshaafiapp:prescriptions'},
      {'name': 'MedicalAssessments', 'url_name': 'allifmaalshaafiapp:doctorAssessments'},
      
-  
+    
     
     
     {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},

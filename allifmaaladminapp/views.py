@@ -70,7 +70,7 @@ def adminappUserDetails(request,pk,*allifargs,**allifkwargs):
         title="User Details"
         allifquery=User.objects.filter(id=pk).first()
        
-        allifqueryset=CommonEmployeesModel.objects.filter(username=allifquery).first()
+        allifqueryset=CommonEmployeesModel.all_objects.filter(username=allifquery).first()
         candoall=allifquery.can_do_all
         canadd=allifquery.can_add
         canview=allifquery.can_view
@@ -180,7 +180,7 @@ def adminDeleteCustomerContact(request,pk,*allifargs,**allifkwargs):
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 def adminBlockUnblockEntity(request,pk,*allifargs,**allifkwargs):
     try:
-        allifquery=CommonCompanyDetailsModel.objects.filter(id=pk).first()
+        allifquery=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
         user_var=request.user.usercompany
         usrslg=request.user.customurlslug
         if allifquery.status=="Blocked":

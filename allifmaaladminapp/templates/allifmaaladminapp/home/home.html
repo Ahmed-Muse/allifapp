@@ -27,7 +27,7 @@
       
       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCompanies' user_var glblslug %}">Companies</a></li>
        <li><a class="dropdown-item" href="{% url 'allifmaaladminapp:adminappUsers' user_var glblslug %}">Subscribers</a></li>
-       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:audit_log_list_view' user_var glblslug %}">Audit Logs</a></li>
+       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonLogs' user_var glblslug %}">Audit Logs</a></li>
      
     </div>
       </ul>
@@ -91,9 +91,6 @@
         <li><a class="dropdown-item"href="{% url 'allifmaaladminapp:product_list' %}">Products</a></li>
      
         <li><a class="dropdown-item" href="{% url 'allifmaaladminapp:adminCustomerContacts' user_var glblslug %}">Contacts</a></li>
-    
-          <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPrograms' user_var glblslug %}">Programs</a></li>
-       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonServices' user_var glblslug %}">Services/Subjects</a></li>
     
     </div>
     </ul>

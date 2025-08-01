@@ -1,0 +1,45 @@
+{% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block allif-basic-search-action %}
+    {% url 'allifmaalcommonapp:commonLogSearch' user_var glblslug %}
+  {% endblock %}
+ 
+  {% block advanced-search-action %}
+    {% url 'allifmaalcommonapp:commonLogsAdvancedSearch' user_var glblslug %}
+  {% endblock %}
+  {% block upload-excel-file-action %}
+  
+  {% endblock %}
+  {% block allif-header-links %}
+  <a href="{% allif_get_single_nav_link_url 'Logs' user_var glblslug %}">Logs</a>
+
+  {% endblock %}
+  {% block upload-excel-file %}
+  {%endblock%}
+
+{% block list-table-headers %}
+<td class="allif-fix-table-col">Action Time</td>
+<td class="allif-table-header-td">Action Type</td>
+<td class="allif-table-header-td">User</td>
+<td class="allif-table-header-td">Content Type</td>
+<td class="allif-table-header-td">Object ID</td>
+{% endblock %}
+{% block list-table-content-seciton %}
+<td class="allif-fix-table-col">
+   <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonLogDetails' item.id user_var glblslug %}"> {{item.action_time|naturaltime}} </a>
+</td>
+<td class="allif-table-content-td"> {{item.action_type}} </td>
+<td class="allif-table-content-td"> {{item.owner}}</td>
+<td class="allif-table-content-td"> {{item.content_type}}</td>
+<td class="allif-table-content-td">{{item.object_id}}</td>
+{% endblock %}
+
+{% block list-table-content-seciton-dropdown-links %}
+<a href="{% url 'allifmaalcommonapp:commonLogDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">See Details</a>
+
+{% endblock %}
+ 
+
+
+

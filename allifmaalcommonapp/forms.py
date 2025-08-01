@@ -81,10 +81,10 @@ class CommonAddDataSortsForm(forms.ModelForm):
 class CommonAddCompanyDetailsForm(forms.ModelForm):
     class Meta:
         model = CommonCompanyDetailsModel
-        fields = ['company','legalName','created_date','edit_date','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
+        fields = ['company','legalname','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
         widgets={
             'company':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'legalName':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             #'username':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
 
             'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -108,10 +108,10 @@ class CommonAddCompanyDetailsForm(forms.ModelForm):
 class CommonEditCompanyDetailsFormByAllifAdmin(forms.ModelForm):
     class Meta:
         model = CommonCompanyDetailsModel
-        fields = ['company','legalName','can_delete','created_date','edit_date','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
+        fields = ['company','legalname','can_delete','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
         widgets={
             'company':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'legalName':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             #'username':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
 
             'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -135,10 +135,10 @@ class CommonEditCompanyDetailsFormByAllifAdmin(forms.ModelForm):
 class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
     class Meta:
         model = CommonCompanyDetailsModel
-        fields = ['company','can_delete','legalName','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
+        fields = ['company','can_delete','legalname','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
         widgets={
             'company':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'legalName':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             #'username':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
 
             'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -162,7 +162,7 @@ class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
 class CommonAddDivisionForm(forms.ModelForm):
     class Meta:
         model =CommonDivisionsModel
-        fields = ['division','legalname','comments','created_date','edit_date','phone','email','address','pobox','city']
+        fields = ['division','legalname','comments','phone','email','address','pobox','city']
         widgets={
             'division':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -187,7 +187,7 @@ class CommonAddDivisionForm(forms.ModelForm):
 class CommonAddBranchForm(forms.ModelForm):
     class Meta:
         model =CommonBranchesModel
-        fields = ['branch','division','legalname','created_date','edit_date','phone','email','address','pobox','city']
+        fields = ['branch','division','legalname','phone','email','address','pobox','city']
         widgets={
             'branch':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -207,10 +207,10 @@ class CommonAddBranchForm(forms.ModelForm):
             
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
-        super(CommonAddBranchForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         
-        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-  
+        self.fields['division'].queryset = CommonDivisionsModel.all_objects.filter(company=allifmaalparameter)
+
 class CommonAddDepartmentForm(forms.ModelForm):
     class Meta:
         model = CommonDepartmentsModel
@@ -230,9 +230,9 @@ class CommonAddDepartmentForm(forms.ModelForm):
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super(CommonAddDepartmentForm, self).__init__(*args, **kwargs)
        
-        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset = CommonDivisionsModel.all_objects.filter(company=allifmaalparameter)
         
-        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.all_objects.filter(company=allifmaalparameter)
 # forms.py
 
 
@@ -284,11 +284,11 @@ class CommonAddOperationYearTermForm(forms.ModelForm):
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super(CommonAddOperationYearTermForm, self).__init__(*args, **kwargs)
        
-        self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
+        self.fields['division'].queryset = CommonDivisionsModel.all_objects.filter(company=allifmaalparameter)
+        self.fields['department'].queryset = CommonDepartmentsModel.all_objects.filter(company=allifmaalparameter)
         
-        self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['operation_year'].queryset = CommonOperationYearsModel.objects.filter(company=allifmaalparameter)
+        self.fields['branch'].queryset = CommonBranchesModel.all_objects.filter(company=allifmaalparameter)
+        self.fields['operation_year'].queryset = CommonOperationYearsModel.all_objects.filter(company=allifmaalparameter)
         
      
 
@@ -344,11 +344,11 @@ class CommonBaseForm(forms.ModelForm):
         # This allows child forms to pass their allifmaalparameter (which seems to be a company ID)
         if allifmaalparameter:
             # Filter division, branch, department by the provided company ID
-            self.fields['division'].queryset = CommonDivisionsModel.objects.filter(company_id=allifmaalparameter)
-            self.fields['branch'].queryset = CommonBranchesModel.objects.filter(company_id=allifmaalparameter)
-            self.fields['department'].queryset = CommonDepartmentsModel.objects.filter(company_id=allifmaalparameter)
-            self.fields['operation_year'].queryset = CommonOperationYearsModel.objects.filter(company_id=allifmaalparameter)
-            self.fields['operation_term'].queryset = CommonOperationYearTermsModel.objects.filter(company_id=allifmaalparameter)
+            self.fields['division'].queryset = CommonDivisionsModel.all_objects.filter(company_id=allifmaalparameter)
+            self.fields['branch'].queryset = CommonBranchesModel.all_objects.filter(company_id=allifmaalparameter)
+            self.fields['department'].queryset = CommonDepartmentsModel.all_objects.filter(company_id=allifmaalparameter)
+            self.fields['operation_year'].queryset = CommonOperationYearsModel.all_objects.filter(company_id=allifmaalparameter)
+            self.fields['operation_term'].queryset = CommonOperationYearTermsModel.all_objects.filter(company_id=allifmaalparameter)
             
             # Optionally, you might also want to set the initial company field, or restrict its queryset
             # For instance, if the form is always for a specific company, you might hide the 'company' field
@@ -377,15 +377,8 @@ class CommonAddCompanyScopeForm(CommonBaseForm):
     """
     class Meta(CommonBaseForm.Meta): # Inherit Meta options from CommonBaseForm
         model = CommonCompanyScopeModel # Specify the concrete model for this form
-        
-        # Define fields specific to CommonCompanyScopeModel.
-        # Use CommonBaseForm.Meta.fields to get all inherited fields, then add specific ones.
-        # If you were to completely re-list, it would be:
-        # fields = ['name', 'description', ..., 'scope_type', 'scope_resources', ...]
-        fields = CommonBaseForm.Meta.fields + ['scope_type','scope_resources','scope_constraints','scope_assumptions','scope_exclusions','scope_stakeholders','scope_risks',
-            # If you had new ForeignKey/ManyToManyField specific to ScopeModel, list them here too
-            # e.g., 'sponsor', 'related_scopes' if you had them in your latest model
-        ]
+  
+        fields = CommonBaseForm.Meta.fields + []
         
         # Override or add specific widgets for CommonCompanyScopeModel's own fields.
         # Use **CommonBaseForm.Meta.widgets to bring in all parent widgets.
@@ -546,7 +539,8 @@ class CommonAddStaffProfileForm(CommonBaseForm):
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super().__init__(allifmaalparameter, *args, **kwargs)
         if allifmaalparameter:
-            self.fields['username'].queryset =User.objects.filter(usercompany=allifmaalparameter.companyslug)
+            self.fields['username'].queryset =User.objects.filter(usercompany=allifmaalparameter)
+            self.fields['username'].queryset =User.objects.all()
             
         else:
             self.fields['username'].queryset =User.objects.none()
@@ -1726,47 +1720,3 @@ class CommonAddProgressForm(CommonBaseForm):
         }
   
  
- 
- ###############3 you might delete below is not used so far... ##########3
-
-
-class CommonAddProgramForm(CommonBaseForm):
-    class Meta(CommonBaseForm.Meta):
-        model=CommonProgramsModel
-        fields=CommonBaseForm.Meta.fields + []
-        widgets = {
-        **CommonBaseForm.Meta.widgets,
-      
-        }
-
-
-class CommonAddServiceForm(CommonBaseForm):
-    class Meta(CommonBaseForm.Meta):
-        model=CommonServicesModel
-        fields=CommonBaseForm.Meta.fields + ['unitprice','unitcost','normal_range_info','unit_of_measure','program','credits',]
-        widgets = {
-        **CommonBaseForm.Meta.widgets,
-        
-            'credits':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-           
-            'unitprice':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'unitcost':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-           
-            'normal_range_info':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            
-            'program':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'unit_of_measure':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            
-           
-        
-        }
-    def __init__(self, allifmaalparameter, *args, **kwargs):
-        super().__init__(allifmaalparameter, *args, **kwargs)
-        if allifmaalparameter:
-            self.fields['unit_of_measure'].queryset =CommonUnitsModel.objects.filter(company=allifmaalparameter)
-            self.fields['program'].queryset =CommonProgramsModel.objects.filter(company=allifmaalparameter)
-    
-        else:
-            self.fields['unit_of_measure'].queryset =CommonUnitsModel.objects.none()
-            self.fields['program'].queryset =CommonProgramsModel.objects.none()
-    

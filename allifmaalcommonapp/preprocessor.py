@@ -18,10 +18,10 @@ def allifmaalcommonappglobalVariables(request):
             user_var=request.user.customurlslug
            
             compslg=request.user.usercompany
-            main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
+            main_sbscrbr_entity=CommonCompanyDetailsModel.all_objects.filter(slgfld=compslg).first()
             
             if main_sbscrbr_entity!=None:
-                glblslug=main_sbscrbr_entity.companyslug
+                glblslug=main_sbscrbr_entity.slgfld
                 cmpnysctr=str(main_sbscrbr_entity.sector)
                 
                 return {

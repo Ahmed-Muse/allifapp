@@ -5,13 +5,13 @@ app_name='allifmaalcommonapp'
 urlpatterns = [
 
 ############################ The decision maker ##################################3
-path('common/logs/audit/log/s/list/<str:allifusr>/<str:allifslug>/', views.audit_log_list_view, name="audit_log_list_view"),
-path('For/Testing/Purposes/<str:allifusr>/<str:allifslug>/', views.commonForTesting, name="commonForTesting"),
+path('System/Log/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogs, name="commonLogs"),
+path('Search/Find/Log/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogSearch, name="commonLogSearch"),
+path('Search/Advance/d/Find/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogsAdvancedSearch, name="commonLogsAdvancedSearch"),
+path('Log/s/View/More/<str:pk>/<str:allifusr>/<str:allifslug>/Detail/s/', views.commonLogDetails, name="commonLogDetails"),
+path('Confirm/To/Delete/This/Log/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteLog, name="commonWantToDeleteLog"),
+path('Delete/This/Log/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteLog, name="commonDeleteLog"),
 
- # Audit Logs
-
-
-# --- NEW: API endpoint for feature search ---
 path('api/search-features/<str:allifusr>/<str:allifslug>/', views.search_erp_features, name="search_erp_features"),
 
 path('', views.commonWebsite, name="commonWebsite"),
@@ -45,23 +45,19 @@ path('Companies/<str:allifusr>/<str:allifslug>/', views.commonCompanies, name="c
 path('Company/Settings/Details/For/Subscribers/<str:allifusr>/<str:allifslug>/', views.commonCompanyDetailsForClients, name="commonCompanyDetailsForClients"),
 path('Add/New/Entity/<str:allifusr>/Allifmaal/ERP/System/', views.commonAddnewEntity, name="commonAddnewEntity"),
 path('Edit/Entity/Details/By/Allifmaal/Admin/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditEntityByAllifAdmin, name="commonEditEntityByAllifAdmin"),
-path('Edit/Entity/Details/By/Owners/<slug:allifpk>/<str:allifusr>/<str:allifslug>/Clients/Subscribers/', views.commonEditEntityByClients, name="commonEditEntityByClients"),
+path('Edit/Entity/Details/By/Owners/<str:pk>/<str:allifusr>/<str:allifslug>/Clients/Subscribers/', views.commonEditEntityByClients, name="commonEditEntityByClients"),
 path('Company/Details/For/Allifmaal/Admin/<str:pk>/<str:allifusr>/<str:allifslug>/Only/', views.commonCompanyDetailsForAllifAdmin, name="commonCompanyDetailsForAllifAdmin"),
-path('Delete/Entity/<str:allifslug>/', views.commonDeleteEntity, name="commonDeleteEntity"),
+path('Delete/Entity/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteEntity, name="commonDeleteEntity"),
 path('Search/Results/<str:allifusr>/<str:allifslug>/', views.commonCompanySearch, name="commonCompanySearch"),
 path('Advanced/Search/Results/<str:allifusr>/<str:allifslug>/', views.commonCompanyAdvanceSearch, name="commonCompanyAdvanceSearch"),
 path('Viewing/Company/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Row/', views.commonShowClickedRowCompanyDetails, name="commonShowClickedRowCompanyDetails"),
 path('Want/To/Delete/Entity/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteCompany, name="commonWantToDeleteCompany"),
 
 ################## create default values.... #####################
-
 path('Default/values/Creation/Area/<str:allifusr>/<str:allifslug>/', views.commonDefaultValues, name="commonDefaultValues"),
 path('Allifmaal/Initiate/Create/Default/value/s/Creation/Area/<str:allifusr>/<str:allifslug>/', views.commonAdminCreateDefaultValues, name="commonAdminCreateDefaultValues"),
-
 path('Create/default/Value/s/Default/Data/<str:allifusr>/<str:allifslug>/', views.commonCreateDefaultValues, name="commonCreateDefaultValues"),
-
 path('Delete/All/The/Default/s/value/s/<str:allifusr>/<str:allifslug>/', views.commonDeleteDefaultValues, name="commonDeleteDefaultValues"),
-
 
 ########################3 company scopes ###################
 path('Add/New/Entity/Company/Scopes/<str:allifusr>/<str:allifslug>/', views.commonAddCompanyScope, name="commonAddCompanyScope"),
@@ -85,15 +81,13 @@ path('Edit/Branch/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditBra
 path('Branch/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonBranchDetails, name="commonBranchDetails"),
 path('Want/To/Delete/Branch/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteBranch, name="commonWantToDeleteBranch"),
 path('Delete/Branch/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteBranch, name="commonDeleteBranch"),
-path('Search/For/Branch/<str:allifusr>/<str:allifslug>/', views.commonBranchSearch, name="commonBranchSearch"),
 
 ####################3 company departments #################
 path('Departments/<str:allifusr>/<str:allifslug>/', views.commonDepartments, name="commonDepartments"),
 path('Add/New/Department/<str:allifusr>/<str:allifslug>/', views.commonAddDepartment, name="commonAddDepartment"),
 path('Edit/Department/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Update/', views.commonEditDepartment, name="commonEditDepartment"),
-path('View/Department/<str:allifslug>/<str:allifusr>/<str:allifrandom>/Details/', views.commonDepartmentDetails, name="commonDepartmentDetails"),
+path('View/Department/Detail/s/information<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonDepartmentDetails, name="commonDepartmentDetails"),
 path('Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteDepartment, name="commonDeleteDepartment"),
-path('Search/Departments/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepartmentSearch, name="commonDepartmentSearch"),
 path('Want/To/Delete/Department/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDepartment, name="commonWantToDeleteDepartment"),
 
 ##################################3 EXCEL UPLOAD FUNCTION ###############################
@@ -106,18 +100,14 @@ path('Edit/Currency/Filter/Details/Money/Types/<str:pk>/<str:allifusr>/<str:alli
 path('Delete/Currency/Record/Money/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteCurrency, name="commonDeleteCurrency"),
 path('Want/To/Delete/This/Currency/Record/<str:pk>/<str:allifusr>/<str:allifslug>/Please/Confirm/', views.commonWantToDeleteCurrency, name="commonWantToDeleteCurrency"),
 path('Currency/Money/Used/Search/Find/By/Searching/<str:allifusr>/<str:allifslug>/', views.commonCurrencySearch, name="commonCurrencySearch"),
-
 path('Advanced/Currency/Money/Type/s/Items/Search/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonCurrencyAdvanceSearch, name="commonCurrencyAdvanceSearch"),
-
 path('Convert/Currency/To/pdf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.common_currency_pdf, name="common_currency_pdf"),
-
 
 ################################## Payment Terms ##############
 path('Payment/Terms/Payment/Conditions/<str:allifusr>/<str:allifslug>/', views.commonPaymentTerms, name="commonPaymentTerms"),
 path('Add/New/Payment/Term/Payment/Conditions/<str:allifusr>/<str:allifslug>/', views.commonAddPaymentTerm, name="commonAddPaymentTerm"),
 path('Edit/Payment/Terms/Details/Money/Conditions/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPaymentTerm, name="commonEditPaymentTerm"),
 path('Delete/Payment/Term/s/Money/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeletePaymentTerm, name="commonDeletePaymentTerm"),
-
 path('Want/To/Delete/This/payment/s/Term/s/Record/<str:pk>/<str:allifusr>/<str:allifslug>/Please/Confirm/', views.commonWantToDeletePaymentTerm, name="commonWantToDeletePaymentTerm"),
 ################################## Units ##############
 path('Units/of/measure/<str:allifusr>/<str:allifslug>/', views.commonUnits, name="commonUnits"),
@@ -126,21 +116,20 @@ path('Edit/Unit/Details/Of/Measure/Details/<str:pk>/<str:allifusr>/<str:allifslu
 path('Delete/Unit/Of/Measure/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteUnit, name="commonDeleteUnit"),
 path('Delete/Confirm/Initiate/Unit/Of/Measure/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonConfirmDeleteUnits, name="commonConfirmDeleteUnits"),
 
-
-
-
 ################################## Operation Years ##############
 path('Operation/Years/<str:allifusr>/<str:allifslug>/Fiscals/Academics', views.commonOperationYears, name="commonOperationYears"),
 path('Add/New/Operation/Year/<str:allifusr>/<str:allifslug>/', views.commonAddOperationYear, name="commonAddOperationYear"),
 path('Edit/The/Operation/Year/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditOperationYear, name="commonEditOperationYear"),
 path('Delete/The/Operation/Year/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteOperationYear, name="commonDeleteOperationYear"),
-
+path('Delete/This/Year/Now/Are/You/Sure/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteOperationYear, name="commonWantToDeleteOperationYear"),
 
 ################################## Operation Years terms ##############
 path('Operation/Year/s/Terms/Quarters/<str:allifusr>/<str:allifslug>/Fiscals/Academics', views.commonOperationYearTerms, name="commonOperationYearTerms"),
 path('Add/New/Operation/Year/Term/Quarter/<str:allifusr>/<str:allifslug>/', views.commonAddOperationYearTerm, name="commonAddOperationYearTerm"),
 path('Edit/The/Operation/Year/Term/s/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditOperationYearTerm, name="commonEditOperationYearTerm"),
 path('Delete/The/Operation/Year/Term/S/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteOperationYearTerm, name="commonDeleteOperationYearTerm"),
+path('Delete/This/Term/Now/for/ever/Are/You/Sure/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteOperationYearTerm, name="commonWantToDeleteOperationYearTerm"),
+
 
 ###############3 stocks, programs, subjects categories... ##########################
 path('Common/Main/Categories/<str:allifusr>/<str:allifslug>/List/', views.commonCategories, name="commonCategories"),
@@ -152,8 +141,6 @@ path('Want/To/Delete/Selected/Category/prmntly/<str:pk>/<str:allifusr>/<str:alli
 path('Common/Category/Search/Find/By/Searching/<str:allifusr>/<str:allifslug>/', views.commonCategorySearch, name="commonCategorySearch"),
 
 ######################3 common codes ######################
-
-###############3 stocks, programs, subjects categories... ##########################
 path('Common/Main/Codes/s/<str:allifusr>/<str:allifslug>/List/', views.commonCodes, name="commonCodes"),
 path('Add/New/Common/Main/Code/s/<str:allifusr>/<str:allifslug>/List/', views.commonAddCode, name="commonAddCode"),
 path('Edit/Code/s/s/Main/s/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonEditCode, name="commonEditCode"),
@@ -166,7 +153,6 @@ path('Common/Code/s/s/Search/Find/By/Searching/<str:allifusr>/<str:allifslug>/',
 path('HRM/<str:allifusr>/<str:allifslug>/', views.commonhrm, name="commonhrm"),
 path('Add/New/Staff/User/<str:allifusr>/<str:allifslug>/', views.commonAddUser, name="commonAddUser"),
 path('Logged/In/User/Details/<str:allifusr>/<str:allifslug>/Show/Info/', views.commonLoggedInUserDetails, name="commonLoggedInUserDetails"),
-
 path('View/User/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonUserDetails, name="commonUserDetails"),
 path('Viewing/User/Instant/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Row/', views.commonShowClickedRowUserDetails, name="commonShowClickedRowUserDetails"),
 path('Update/User/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Edit/', views.commonEditUser, name="commonEditUser"),
@@ -213,16 +199,12 @@ path('Approver/Details/Viewing/More/Ifn/<str:pk>/<str:allifusr>/<str:allifslug>/
 ################################### TAXES #########################3
 path('Tax/Parameters/<str:allifusr>/<str:allifslug>/', views.commonTaxParameters, name="commonTaxParameters"),
 path('Add/New/Tax/Parameters/Details/<str:allifusr>/<str:allifslug>/', views.commonAddATaxParameter, name="commonAddATaxParameter"),
-
-
 path('Update/Tax/Parameter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonUpdateTaxDetails, name="CommonUpdateTaxDetails"),
 path('Delete/Tax/Parameter/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonDeleteTaxParameter, name="CommonDeleteTaxParameter"),
-
 path('Tax/Suppliers/Parameters/<str:allifusr>/<str:allifslug>/', views.commonSupplierTaxParameters, name="commonSupplierTaxParameters"),
 path('Update/Tax/Suppliers/Parameter/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonSupplierUpdateTaxDetails, name="CommonSupplierUpdateTaxDetails"),
 path('Delete/Tax/Parameter/Suppliers/Taxes/<str:pk>/<str:allifusr>/<str:allifslug>/', views.CommonSupplierDeleteTaxParameter, name="CommonSupplierDeleteTaxParameter"),
 path('Do/You/u/U/Really/Want/Delete/This/Tax/Parameter/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteTaxParameter, name="commonWantToDeleteTaxParameter"),
-
 path('Add/Supplier/s/Tax/s/Parameter/s/<str:allifusr>/<str:allifslug>/', views.commonAddSupplierTaxParameter, name="commonAddSupplierTaxParameter"),
 path('Are/You/Sure/To/Delete/Supplier/s/Tax/s/Parameter/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteSupplierTaxParameter, name="commonWantToDeleteSupplierTaxParameter"),
 
@@ -250,7 +232,6 @@ path('Chart/of/Accounts/Advanced/Search/<str:allifusr>/<str:allifslug>/', views.
 #################################3 EMAILS AND SMSs ####################
 path('Emails/And/SMSs/<str:allifusr>/<str:allifslug>/', views.commonEmailsAndSMS, name="commonEmailsAndSMS"),
 path('Delete/Bank/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteEmail, name="commonDeleteEmail"),
-
 ###############################3 BANKS ##############
 path('Banks/<str:allifusr>/<str:allifslug>/', views.commonBanks, name="commonBanks"),
 path('Add/New/Bank/<str:allifusr>/<str:allifslug>/', views.commonAddBank, name="commonAddBank"),
@@ -264,19 +245,16 @@ path('Want/To/Delete/Bank/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commo
 path('Bank/Deposits/<str:allifusr>/<str:allifslug>/', views.commonBankShareholderDeposits, name="commonBankShareholderDeposits"),
 path('Add/New/Bank/Deposit/<str:allifusr>/<str:allifslug>/', views.commonAddBankShareholderDeposit, name="commonAddBankShareholderDeposit"),
 path('Edit/Bank/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditBankShareholderDeposit, name="commonEditBankShareholderDeposit"),
-
 path('Delete/Bank/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteBankShareholderDeposit, name="commonDeleteBankShareholderDeposit"),
 path('Search/Bank/Deposit/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonDepositSearch, name="commonDepositSearch"),
 path('Want/To/Delete/Deposit/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteDeposit, name="commonWantToDeleteDeposit"),
 path('Search/Results/Deposits/<str:allifusr>/<str:allifslug>/Advaned/Search/', views.commonDepositAdvanceSearch, name="commonDepositAdvanceSearch"),
-
 path('Post/This/Bank/Deposit/Post/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostShareholderDeposit, name="commonPostShareholderDeposit"),
 
 ####################################3 withdrawals ###########################3
 path('Bank/Withdrawals/<str:allifusr>/<str:allifslug>/', views.commonBankWithdrawals, name="commonBankWithdrawals"),
 path('Add/New/Bank/Withdrawal/<str:allifusr>/<str:allifslug>/', views.commonAddBankWithdrawal, name="commonAddBankWithdrawal"),
 path('Edit/Bank/Withdrawal/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditBankWithdrawal, name="commonEditBankWithdrawal"),
-
 path('Delete/Bank/Withdrawal/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteBankWithdrawal, name="commonDeleteBankWithdrawal"),
 path('Search/Bank/Withdrawals/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonWithdrawalSearch, name="commonWithdrawalSearch"),
 path('Want/To/Delete/Withdrawal/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteWithdrawal, name="commonWantToDeleteWithdrawal"),
@@ -292,12 +270,7 @@ path('Search/Suppliers/<str:allifusr>/<str:allifslug>/Shareholders/', views.comm
 path('Want/To/Delete/Supplier/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteSupplier, name="commonWantToDeleteSupplier"),
 path('Search/Results/Suppliers/<str:allifusr>/<str:allifslug>/', views.commonSupplierAdvanceSearch, name="commonSupplierAdvanceSearch"),
 
-
-
-
 ############################3 CUSTOMERS SECTION ################################### 
-
-###################################### Customers ##########################################################
 path('Customers/<str:allifusr>/<str:allifslug>/', views.commonCustomers, name="commonCustomers"),
 path('Add/Customers/<str:allifusr>/<str:allifslug>/', views.commonAddCustomer, name="commonAddCustomer"),
 path('Edit/Record/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonEditCustomer, name="commonEditCustomer"),
@@ -320,7 +293,6 @@ path('Post/Asset/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.common
 path('Want/To/Delete/This/Asset/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteAsset, name="commonWantToDeleteAsset"),
 path('Asset/s/advance/d/search/detail/s/<str:allifusr>/<str:allifslug>/find/out/', views.commonAssetAdvanceSearch, name="commonAssetAdvanceSearch"),
 
-
 ################################### ASSET DEPRECATION ############33
 path('Depreciate/Asset/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonDepreciateAsset, name="commonDepreciateAsset"),
 
@@ -335,12 +307,9 @@ path('Post/Expense/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostEx
 path('Search/Expense/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonExpenseSearch, name="commonExpenseSearch"),
 path('Expense/s/Advance/d/Search/s/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonExpenseAdvancedSearch, name="commonExpenseAdvancedSearch"),
 
-
-
 #################################### ORDER SECTION... ##################
 path('Transactions/Orders/Events/<str:allifusr>/<str:allifslug>/List/', views.commonTransactions, name="commonTransactions"),
 path('Initiate/New/Transaction/s/Order/s/Events/<str:allifusr>/<str:allifslug>/List/', views.commonNewTransaction, name="commonNewTransaction"),
-
 path('Add/Transaction/s/Order/s/Events/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddTransactionDetails, name="commonAddTransactionDetails"),
 path('Delete/This/Transaction/s/Order/s/Events/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteTransaction, name="commonDeleteTransaction"),
 path('Transaction/s/Detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/View/Details/', views.commonTransactionDetails, name="commonTransactionDetails"),
@@ -349,13 +318,10 @@ path('Transaction/s/Detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/View/Detail
 path('Add/Transactions/Orders/Events/Items/<str:pk>/<str:allifusr>/<str:allifslug>/List/', views.commonAddTransactionItems, name="commonAddTransactionItems"),
 path('Add/Items/To/Transaction/Orders/Events/Item/s/<str:pk>/<str:allifusr>/<str:allifslug>/List/', views.commonEditTransactionItem, name="commonEditTransactionItem"),
 path('Delete/This/Transaction/Orders/Events/Item/s/<str:pk>/<str:allifusr>/<str:allifslug>/List/', views.commonDeleteTransactionItem, name="commonDeleteTransactionItem"),
-
 path('Search/For/Transaction/s/<str:allifusr>/<str:allifslug>/List/', views.commonTransactionsSearch, name="commonTransactionsSearch"),
 path('Advanced/Search/ing/For/Transactions/s/<str:allifusr>/<str:allifslug>/List/', views.commonTransactionAdvanceSearch, name="commonTransactionAdvanceSearch"),
 path('Convert/This/Transaction/To/pdf/document/<str:pk>/<str:allifusr>/<str:allifslug>/List/', views.commonTransactionToPdf, name="commonTransactionToPdf"),
 path('Do/You/Want/Delete/This/Transaction/s/Now/Permently/<str:pk>/<str:allifusr>/<str:allifslug>/List/', views.commonWantToDeleteTransaction, name="commonWantToDeleteTransaction"),
-
-
 
 #################################### Spaces ###########################
 path('Spaces/Physical/Area/s/<str:allifusr>/<str:allifslug>/List/', views.commonSpaces, name="commonSpaces"),
@@ -381,18 +347,14 @@ path('Edit/Space/Item/Booking/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/
 path('Delete/space/booking/s/item/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteSpaceBookingItem, name="commonDeleteSpaceBookingItem"),
 path('Convert/Space/Allocation/to/PDF/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonSpaceAllocationPdf, name="commonSpaceAllocationPdf"),
 
-
 ######################################## stocks ######################3
-
 path('Inventory/Stock/<str:allifusr>/<str:allifslug>/', views.commonStocks, name="commonStocks"),
 path('Add/New/Stock/<str:allifusr>/<str:allifslug>/Inventory/', views.commonAddStockItem, name="commonAddStockItem"),
 path('Edit/Stock/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditStockItem, name="commonEditStockItem"),
 path('Stock/Item/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonStockItemDetails, name="commonStockItemDetails"),
 path('Delete/Stock/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteStockItem, name="commonDeleteStockItem"),
-
 path('Want/To/Delete/This/Stock/Item/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteStockItem, name="commonWantToDeleteStockItem"),
 path('Search/Stock/Item/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonStockItemSearch, name="commonStockItemSearch"),
-
 path('Advanced/Stock/Items/Search/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonStockItemAdvanceSearch, name="commonStockItemAdvanceSearch"),
 
 ######################################3 PURCHASES ###########################################
@@ -404,18 +366,14 @@ path('Add/PO/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddPOIt
 path('Delete/Purchase/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeletePOItem, name="commonDeletePOItem"),
 path('Purchase/Order/Mis/Costs/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPOMiscCost, name="commonPOMiscCost"),
 path('Post/PO/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostPO, name="commonPostPO"),
-
 path('Delete/PO/Misc/Cost/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteMiscCost, name="commonDeleteMiscCost"),
 path('Edit/PO/Misc/Cost/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPOMiscCostDetails, name="commonEditPOMiscCostDetails"),
-
 path('Advanced/Stock/Purchase/Orders/Search/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonPOAdvanceSearch, name="commonPOAdvanceSearch"),
 path('Search/Purchase/Orders/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonPOSearch, name="commonPOSearch"),
 path('Want/To/Delete/Ths/Purchase/Order/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeletePO, name="commonWantToDeletePO"),
-
 path('Edit/Purchase/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditPOItem, name="commonEditPOItem"),
 path('Calculate/Purchase/Order/s/Misc/Costs/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCalculatePOMiscCosts, name="commonCalculatePOMiscCosts"),
 path('Convert/This/Purchase/Order/to/p/d/f/<str:pk>/<str:allifusr>/<str:allifslug>/', views.common_purchase_order_pdf, name="common_purchase_order_pdf"),
-
 
 ################################# warehouse stocks ##############################3
 path('Space/s/e/item/s/relteds/y/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonSpaceItems, name="commonSpaceItems"),
@@ -430,15 +388,11 @@ path('Delete/Transfer/Order/<str:pk>/<str:allifusr>/<str:allifslug>/', views.com
 path('Add/Transfer/Order/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddTransferOrderDetails, name="commonAddTransferOrderDetails"),
 path('Add/Transfer/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddTransferOrderItems, name="commonAddTransferOrderItems"),
 path('Delete/Transfer/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteTransferOrderItem, name="commonDeleteTransferOrderItem"),
-
 path('Post/Transfer/Order/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPostTransferOrder, name="commonPostTransferOrder"),
 path('Advance/d/Search/s/ing/Transfer/Orders/<str:allifusr>/<str:allifslug>/', views.commonTRFAdvanceSearch, name="commonTRFAdvanceSearch"),
-
 path('Convert/Transfer/Order/PDF/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonTransferOrderPdf, name="commonTransferOrderPdf"),
-
 path('Search/Transfer/Orders/<str:allifusr>/<str:allifslug>/Details/', views.commonTransferOrdersSearch, name="commonTransferOrdersSearch"),
 path('Want/To/Delete/Ths/Trnsfr/Order/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteTransferOrder, name="commonWantToDeleteTransferOrder"),
-
 path('Edit/Transfer/Order/Item/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditTransferOrderItem, name="commonEditTransferOrderItem"),
 
 ################################### QUOTATIONS #######################################
@@ -453,7 +407,6 @@ path('Search/For/Quotes/<str:allifusr>/<str:allifslug>/', views.commonSearchAjax
 path('Search/For/Quotes/Quotations/<str:allifusr>/<str:allifslug>/', views.commonQuotesSearch, name="commonQuotesSearch"),
 path('Advanced/Quotations/Search/<str:allifusr>/<str:allifslug>/', views.commonQuoteAdvanceSearch, name="commonQuoteAdvanceSearch"),
 path('Want/To/Delete/This/Quotation/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteQuote, name="commonWantToDeleteQuote"),
-
 path('Edit/Quote/Item/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonEditQuoteItem, name="commonEditQuoteItem"),
 
 ####################################### INVOICES ##################################
@@ -470,9 +423,7 @@ path('Search/For/Invoices/<str:allifusr>/<str:allifslug>/', views.commonSearchAj
 path('Search/For/Invoices//<str:allifusr>/<str:allifslug>/', views.commonInvoicesSearch, name="commonInvoicesSearch"),
 path('Advanced/Invoices/Search/<str:allifusr>/<str:allifslug>/List/Invoices/', views.commonInvoiceAdvanceSearch, name="commonInvoiceAdvanceSearch"),
 path('Want/To/Delete/This/Invoice/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonWantToDeleteInvoice, name="commonWantToDeleteInvoice"),
-
 path('Edit/Invoice/Item/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Now/For/This/Invoice/', views.commonEditInvoiceItem, name="commonEditInvoiceItem"),
-
 
 ########################3 credit notes ################# 
 path('Credit/Notes/<str:allifusr>/<str:allifslug>/', views.commonCreditNotes, name="commonCreditNotes"),
@@ -485,11 +436,9 @@ path('Post/Credit/Note/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonPo
 path('Posted/Credit/Notes/<str:allifusr>/<str:allifslug>/', views.commonPostedCreditNotes, name="commonPostedCreditNotes"),
 path('Credit/Note/To/Pdf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCreditNotePdf, name="commonCreditNotePdf"),
 path('Approve/This/Credit/Note/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonApproveCreditNote, name="commonApproveCreditNote"),
-
 path('Search/For/Credit/Notes//<str:allifusr>/<str:allifslug>/', views.commonCreditNotesSearch, name="commonCreditNotesSearch"),
 path('Advanced/Credit/Notes/Search/<str:allifusr>/<str:allifslug>/List/Invoices/', views.commonCreditNotesAdvanceSearch, name="commonCreditNotesAdvanceSearch"),
 path('Want/To/Delete/This/Credit/Note/Permntly/Now/<str:pk>/<str:allifusr>/<str:allifslug>/Now/', views.commonWantToDeleteCreditNote, name="commonWantToDeleteCreditNote"),
-
 path('Edit/Credit/Note/Item/Details/<str:pk>/<str:allifusr>/<str:allifslug>/Now/For/This/Invoice/', views.commonEditCreditNoteItem, name="commonEditCreditNoteItem"),
 
 #################### Supplier Ledger Entries ##############
@@ -572,7 +521,6 @@ path('Reports/<str:allifusr>/<str:allifslug>/', views.commonMainReports, name="c
 path('Debtors/Report/<str:allifusr>/<str:allifslug>/', views.commonDebtorsReport, name="commonDebtorsReport"),
 path('Creditors/Report/<str:allifusr>/<str:allifslug>/', views.commonCreditorsReportpdf, name="commonCreditorsReportpdf"),
 path('Available/Stock/Report/<str:allifusr>/<str:allifslug>/', views.commonAvailableStockpdf, name="commonAvailableStockpdf"),
-
 #####################################33 shipments... #################3
 
 path('Transits/Transportations/Logistics/<str:allifusr>/<str:allifslug>/', views.commonTransits, name="commonTransits"),
@@ -586,9 +534,7 @@ path('Convert/This/Transits/Transportations/Logistics/To/Pdf/<str:pk>/<str:allif
 path('Delete/Shipments/Items/Transportations/Logistics/Prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteShipmentItem, name="commonDeleteShipmentItem"),
 path('Edit/Shipment/Item/s/Details/Update/Transportations/Logistics/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditShipmentItem, name="commonEditShipmentItem"),
 path('Search/for/Transits/Transportations/Logistics/<str:allifusr>/<str:allifslug>/', views.commonTransitSearch, name="commonTransitSearch"),
-
 path('Shipment/s/Item/s/Detail/s/view/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonShipmentItemDetails, name="commonShipmentItemDetails"),
-
 
 #######################3 progress reports/records ##############3
 path('Progress/s/stages/s/<str:pk>/<str:allifusr>/<str:allifslug>/List/', views.commonProgress, name="commonProgress"),
@@ -600,52 +546,7 @@ path('Progress/ses/s/Details/Viewing/More/Information/<str:pk>/<str:allifusr>/<s
 path('Search/for/Progress/Records/unit/s/<str:allifusr>/<str:allifslug>/', views.commonProgressSearch, name="commonProgressSearch"),
 path('Advanced/Progress/s/Search/s/<str:allifusr>/<str:allifslug>/', views.commonProgressAdvanceSearch, name="commonProgressAdvanceSearch"),
 
-
-
 #########################3 customer contacts #############################################
 path('Contact/Information/Saving/', views.commonCustomerContacts, name="commonCustomerContacts"),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-################# you may consider to delete below if not used ################3
-
-#################### programs #####3###################
-path('Offerred/Programs/Services/<str:allifusr>/<str:allifslug>/Fiscals/Academics', views.commonPrograms, name="commonPrograms"),
-path('Add/New/Program/Services/<str:allifusr>/<str:allifslug>/', views.commonAddProgram, name="commonAddProgram"),
-path('Edit/The/Program/Service/s/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditProgram, name="commonEditProgram"),
-path('Delete/The/Program/Services/S/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteProgram, name="commonDeleteProgram"),
-
-path('Want/Tp/Delete/This/Program/s/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteProgram, name="commonWantToDeleteProgram"),
-path('Program/Information/s/View/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonProgramDetails, name="commonProgramDetails"),
-path('Search/For/Program/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonProgramSearch, name="commonProgramSearch"),
-
- 
-######################## services #####################
-path('Offerred/Services/And/Programs/Services/<str:allifusr>/<str:allifslug>/Fiscals/Academics', views.commonServices, name="commonServices"),
-path('Add/New/Sservice/s/Program/Services/s/<str:allifusr>/<str:allifslug>/', views.commonAddService, name="commonAddService"),
-path('Edit/The/Service/s/Program/s/Service/s/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditService, name="commonEditService"),
-path('Delete/The/Service/s/Program/Services/S/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteService, name="commonDeleteService"),
-
-
-path('Want/Tp/Delete/This/Services/s/available/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteService, name="commonWantToDeleteService"),
-path('Service/s/Information/s/available/View/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonServiceDetails, name="commonServiceDetails"),
-path('Search/For/Services/s/available/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonServiceSearch, name="commonServiceSearch"),
-
-
-
-
 
 ]   

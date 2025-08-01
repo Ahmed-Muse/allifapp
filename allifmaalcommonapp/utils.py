@@ -384,6 +384,33 @@ allif_model_sort_configs = {
         'default_sort_field': '-date',
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
+    
+     'commonlogsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+      
+       'commondivisionsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+      
      
      
      
@@ -474,6 +501,7 @@ allif_model_sort_configs = {
 # --- NEW: Search Configuration Map ---
 # Define which fields are searchable for each model
 allif_search_config_mapping = {
+    'CommonLogsModel': ['name__icontains', 'description__icontains','balance__icontains'],
     'CommonStocksModel': ['description__icontains', 'number__icontains','name__icontains','unitPrice__icontains'],
     'CommonCurrenciesModel': ['name__icontains', 'description__icontains'],
     'CommonCategoriesModel': ['name__icontains', 'description__icontains'],
@@ -998,6 +1026,8 @@ allif_main_models_registry = {
     "CommonTransitItemsModel":CommonTransitItemsModel,
    "CommonProgressModel":CommonProgressModel,
    "AssessmentsModel":AssessmentsModel,
+   "CommonLogsModel":CommonLogsModel,
+   "CommonDivisionsModel":CommonDivisionsModel,
   
    
 }
@@ -1351,7 +1381,7 @@ def allif_filtered_and_sorted_queryset(request: HttpRequest,model_class: type[Mo
     sort_mapping = sort_config.get('sort_mapping', {})
     default_sort_field = sort_config.get('default_sort_field', '-starts')
     default_ui_label = sort_config.get('default_ui_label', 'Default Sort')
-
+    
     """
     do the data filtering here based on the company and other parameters like divisions, branches departments etc.
     """
@@ -2193,9 +2223,9 @@ def allif_common_detail_view(
 
         # Fetch the main object
         if hasattr(model_class, 'all_objects'):
-            allifquery = model_class.objects.filter(pk=pk).first()
+            allifquery = model_class.all_objects.filter(pk=pk).first()
         else:
-            allifquery = model_class.objects.filter(pk=pk).first()
+            allifquery = model_class.all_objects.filter(pk=pk).first()
 
         if not allifquery:
             logger.warning(f"Object of type {model_class.__name__} with PK {pk} not found.")
@@ -2250,7 +2280,7 @@ def allif_common_detail_view(
                     if hasattr(related_model_class, 'company') and allif_data.get('main_sbscrbr_entity'):
                         filter_kwargs['company'] = allif_data['main_sbscrbr_entity']
 
-                    queryset = related_model_class.objects.filter(**filter_kwargs)
+                    queryset = related_model_class.all_objects.filter(**filter_kwargs)
                    
 
                     # Apply prefetch_related if specified
@@ -2333,6 +2363,7 @@ def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_re
 
         # --- NEW ADDITION START: Authorization Check (similar to edit/save) ---
         # Crucial for multi-tenant data segregation
+        """if hasattr(item, 'company') and item.company != allif_data.get('main_sbscrbr_entity'):"""
         if hasattr(item, 'company') and item.company != allif_data.get('main_sbscrbr_entity'):
             logger.warning(f"Unauthorized delete attempt for {model_name} (PK: {pk}) by user {request.user} for company {allif_data.get('main_sbscrbr_entity')}.")
             messages.error(request, f"Access denied to delete {model_name} with ID {pk}.")
@@ -2690,8 +2721,8 @@ def allif_advance_search_handler(
     largestAmount = getattr(largest_item_by_value, value_field, 0) if largest_item_by_value else 0
     largestAmount = max(0, largestAmount) 
 
-    formats = CommonDocsFormatModel.objects.all()
-    scopes = CommonCompanyScopeModel.objects.filter(company=company_id).order_by('-date')[:4] 
+    formats = CommonDocsFormatModel.all_objects.all()
+    scopes = CommonCompanyScopeModel.all_objects.filter(company=company_id).order_by('-date')[:4] 
 
     # --- Process POST/GET request for search parameters ---
     if request.method == 'POST':
@@ -2942,7 +2973,7 @@ def allif_document_pdf_handler(request: HttpRequest,pk: int,document_config_key:
         context = {
             "title": title_prefix,
             "main_sbscrbr_entity": allif_data.get("main_sbscrbr_entity"),
-            "scopes": CommonCompanyScopeModel.objects.filter(company=company_id).order_by('-date')[:4], 
+            "scopes": CommonCompanyScopeModel.all_objects.filter(company=company_id).order_by('-date')[:4], 
             "allifquery": main_document, # The main document object
             "allifqueryset": items_queryset, # The related items (will be None if not configured/found)
             "system_user": allif_data.get("owner_user_object"), 
@@ -3123,13 +3154,13 @@ def allif_excel_upload_handler(
 
                 # Add multi-tenancy fields (company, division, branch, department)
                 if hasattr(model_class, 'company'):
-                    instance_data['company'] = CommonCompanyDetailsModel.objects.get(pk=company_id) # Assuming company ID is PK
+                    instance_data['company'] = CommonCompanyDetailsModel.all_objects.get(pk=company_id) # Assuming company ID is PK
                 if hasattr(model_class, 'division') and allif_data.get("logged_in_user_has_divisional_access"):
-                    instance_data['division'] = CommonDivisionsModel.objects.get(pk=allif_data.get("logged_user_division").id)
+                    instance_data['division'] = CommonDivisionsModel.all_objects.get(pk=allif_data.get("logged_user_division").id)
                 if hasattr(model_class, 'branch') and allif_data.get("logged_in_user_has_branches_access"):
-                    instance_data['branch'] = CommonBranchesModel.objects.get(pk=allif_data.get("logged_user_branch").id)
+                    instance_data['branch'] = CommonBranchesModel.all_objects.get(pk=allif_data.get("logged_user_branch").id)
                 if hasattr(model_class, 'department') and allif_data.get("logged_in_user_has_departmental_access"):
-                    instance_data['department'] = CommonDepartmentsModel.objects.get(pk=allif_data.get("logged_user_department").id)
+                    instance_data['department'] = CommonDepartmentsModel.all_objects.get(pk=allif_data.get("logged_user_department").id)
                 
                 # Try to create/update the instance
                 if not row_errors:
@@ -3206,3 +3237,314 @@ def allif_redirect_based_on_sector(request: HttpRequest, allif_data: dict, redir
 
 # ... (rest of your utils.py code) ...
 
+
+
+# --- Central helper function for Listing and Adding items ---
+def allif_list_add_handler(request, model_class, form_class, template_name, title, redirect_view_name, *allifargs, **allifkwargs):
+    """
+    Handles a view that lists all objects and also contains a form for adding a new one.
+    """
+    allif_data = common_shared_data(request)
+    allifqueryset = model_class.all_objects.all()
+    form = form_class()
+    if request.method == 'POST':
+        form = form_class(request.POST or None)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.owner = allif_data.get("logged_in_user")
+            obj.save()
+            return redirect(redirect_view_name,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        else:
+            error_message = form.errors
+            allifcontext = {"error_message": error_message, "title": title}
+            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
+    context={"title": title,"form": form,"allifqueryset": allifqueryset,}
+    return render(request, template_name, context)
+
+def allif_edit_handler(request, model_class, form_class, pk, template_name, title, redirect_view_name, *allifargs, **allifkwargs):
+    """
+    Handles a view for editing an existing object.
+    """
+    allif_data = common_shared_data(request)
+    allifquery = get_object_or_404(model_class.all_objects, pk=pk)
+    form = form_class(instance=allifquery)
+    
+    if request.method == 'POST':
+        form = form_class(request.POST, instance=allifquery)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.owner = allif_data.get("logged_in_user")
+            obj.save()
+            return redirect(redirect_view_name,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        else:
+            error_message = form.errors
+            allifcontext = {"error_message": error_message, "title": title}
+            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
+    
+    context={'form': form,"allifquery":allifquery,"title": title,}
+    
+    # Check if a queryset for the page is needed for display purposes
+    if 'allifqueryset' in allifkwargs:
+        context['allifqueryset'] = allifkwargs['allifqueryset']
+    
+    return render(request, template_name, context)
+
+# --- Central helper function for Viewing item details ---
+def allif_detail_handler(request, model_class, pk, template_name, title, *allifargs, **allifkwargs):
+    """
+    Fetches a single object and its related queryset for a detail view.
+    """
+    allifquery = get_object_or_404(model_class.all_objects, pk=pk)
+    context = {"allifquery": allifquery,"title": title,}
+
+    if 'related_queryset' in allifkwargs:
+        context['allifqueryset'] = allifkwargs['related_queryset']
+
+    return render(request, template_name, context)
+
+# --- Central helper function for Deleting items ---
+def allif_deleting_hanlder(request, model_class, pk, redirect_view_name, *allifargs, **allifkwargs):
+    """
+    Finds and deletes an object, then redirects.
+    """
+    allif_data = common_shared_data(request)
+    obj = get_object_or_404(model_class.all_objects, pk=pk)
+    obj.delete()
+    return redirect(redirect_view_name,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
+# --- Central helper function for displaying a delete confirmation page ---
+def allif_delete_confirm_handler(request, model_class, pk, template_name, title, *allifargs, **allifkwargs):
+    """
+    Finds an object and displays a confirmation page before deletion.
+    """
+    allifquery = get_object_or_404(model_class.all_objects, pk=pk)
+    context = {"title": title,"allifquery": allifquery,}
+    return render(request, template_name, context)
+
+
+
+
+######################### DIVISIONS, BRANCHES, DEPARTMENTS, OPERATION YEARS, OPERATION TERMS ##################
+def allif_filtered_queryset(model_class, allif_data):
+    """
+    A helper to get a queryset for a given model, filtered based on the
+    user's hierarchical access level (universal, divisional, etc.).
+    """
+    main_company = allif_data.get("main_sbscrbr_entity")
+
+    if allif_data.get("logged_in_user_has_universal_access"):
+        return model_class.all_objects.filter(company=main_company)
+    elif allif_data.get("logged_in_user_has_divisional_access"):
+        return model_class.all_objects.filter(
+            company=main_company,
+            division=allif_data.get("logged_user_division")
+        )
+    elif allif_data.get("logged_in_user_has_branches_access"):
+        return model_class.all_objects.filter(
+            company=main_company,
+            division=allif_data.get("logged_user_division"),
+            branch=allif_data.get("logged_user_branch")
+        )
+    elif allif_data.get("logged_in_user_has_departmental_access"):
+        return model_class.all_objects.filter(
+            company=main_company,
+            division=allif_data.get("logged_user_division"),
+            branch=allif_data.get("logged_user_branch"),
+            department=allif_data.get("logged_user_department")
+        )
+    # If no specific access is found, return an empty queryset
+    return model_class.all_objects.none()
+
+# --- Central helper function for listing objects ---
+def allif_list_view_handler(request, model_class, template_name, title):
+    """
+    Handles a view that lists all objects with access control.
+    """
+    allif_data = common_shared_data(request)
+    allifqueryset = allif_filtered_queryset(model_class, allif_data)
+    
+    context = {
+        "title": title,
+        "allifqueryset": allifqueryset,
+    }
+    return render(request, template_name, context)
+
+# --- Central helper function for Adding items with access control ---
+def allif_add_view_handler(request, model_class, form_class, template_name, title, redirect_view_name, extra_context=None, specific_field_mapping=None):
+    """
+    Handles adding a new object, with access control and dynamic form initialization.
+    'specific_field_mapping' can be used to set specific fields on the model instance before saving.
+    """
+    allif_data = common_shared_data(request)
+    main_company = allif_data.get("main_sbscrbr_entity")
+    
+    # Check if form needs to be initialized with 'company' argument
+    if hasattr(form_class, '__init__') and 'allifmaalparameter' in form_class.__init__.__code__.co_varnames:
+        form = form_class(main_company)
+    else:
+        form = form_class()
+    
+    if request.method == 'POST':
+        if hasattr(form_class, '__init__') and 'allifmaalparameter' in form_class.__init__.__code__.co_varnames:
+            form = form_class(main_company, request.POST, request.FILES)
+        else:
+            form = form_class(request.POST, request.FILES)
+        
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.owner = allif_data.get("logged_in_user")
+            obj.company = main_company
+
+            # Set specific fields if provided
+            if specific_field_mapping:
+                for attr, val in specific_field_mapping.items():
+                    setattr(obj, attr, val)
+
+            obj.save()
+            return redirect(redirect_view_name,
+                            allifusr=allif_data.get("usrslg"),
+                            allifslug=allif_data.get("compslg"))
+        else:
+            error_message = form.errors
+            allifcontext = {"error_message": error_message, "title": title}
+            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
+    
+    context = {
+        "title": title,
+        "form": form,
+    }
+    if extra_context:
+        context.update(extra_context)
+
+    return render(request, template_name, context)
+
+# --- Central helper function for Editing items with access control ---
+def allif_edit_view_handler(request, model_class, form_class, pk, template_name, title, redirect_view_name, extra_context=None):
+    """
+    Handles editing an existing object with access control.
+    """
+    allif_data = common_shared_data(request)
+    main_company = allif_data.get("main_sbscrbr_entity")
+    update_allifquery = get_object_or_404(model_class.all_objects, pk=pk)
+
+    # Check if form needs to be initialized with 'company' argument
+    if hasattr(form_class, '__init__') and 'allifmaalparameter' in form_class.__init__.__code__.co_varnames:
+        form = form_class(main_company, instance=update_allifquery)
+    else:
+        form = form_class(instance=update_allifquery)
+
+    if request.method == 'POST':
+        if hasattr(form_class, '__init__') and 'allifmaalparameter' in form_class.__init__.__code__.co_varnames:
+            form = form_class(main_company, request.POST, request.FILES, instance=update_allifquery)
+        else:
+            form = form_class(request.POST, request.FILES, instance=update_allifquery)
+        
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.owner = allif_data.get("logged_in_user")
+            obj.save()
+            return redirect(redirect_view_name,
+                            allifusr=allif_data.get("usrslg"),
+                            allifslug=allif_data.get("compslg"))
+        else:
+            error_message = form.errors
+            allifcontext = {"error_message": error_message, "title": title}
+            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
+    
+    context = {
+        'title': title,
+        'form': form,
+    }
+    if extra_context:
+        context.update(extra_context)
+    
+    return render(request, template_name, context)
+
+# --- Central helper function for Viewing item details with related objects ---
+def allif_detail_view_handler(request, model_class, pk, template_name, title, related_model=None):
+    """
+    Handles a detail view, fetching a single object and a related queryset based on access control.
+    """
+    allif_data = common_shared_data(request)
+    main_company = allif_data.get("main_sbscrbr_entity")
+
+    allifquery = get_object_or_404(model_class.all_objects, pk=pk)
+    relatedqueryset = None
+
+    if related_model:
+        # Dynamically filter related queryset based on user access
+        related_queryset = allif_filtered_queryset(related_model, allif_data)
+        
+        # Filter the related queryset by the parent object
+        if model_class is CommonDivisionsModel:
+            related_queryset = related_queryset.filter(division=allifquery)
+        elif model_class is CommonBranchesModel:
+            related_queryset = related_queryset.filter(branch=allifquery)
+        elif model_class is CommonDepartmentsModel:
+            related_queryset = related_queryset.filter(department=allifquery)
+
+    context = {
+        "allifquery": allifquery,
+        "title": title,
+        "relatedqueryset": relatedqueryset,
+    }
+    return render(request, template_name, context)
+
+# --- Central helper function for deletion logic ---
+def allif_delete_view_handler(request, model_class, pk, redirect_view_name):
+    """
+    Handles the actual deletion of an object and redirects.
+    """
+    allif_data = common_shared_data(request)
+    obj = get_object_or_404(model_class.all_objects, pk=pk)
+    obj.delete()
+    return redirect(redirect_view_name,
+                    allifusr=allif_data.get("usrslg"),
+                    allifslug=allif_data.get("compslg"))
+
+# --- Central helper function for delete confirmation ---
+def allif_delete_confirm_view_handler(request, model_class, pk, template_name, title):
+    """
+    Displays a confirmation page before deletion.
+    """
+    allifquery = get_object_or_404(model_class.all_objects, pk=pk)
+    context = {
+        "title": title,
+        "allifquery": allifquery,
+    }
+    return render(request, template_name, context)
+
+
+###############3 pdf reports generators for common reports like creditors, debtors, stock etc...########3
+# This is the new centralized function that handles all the repetitive logic.
+def allif_pdf_reports_generator(request, title, filename, template_path, allifqueryset, extra_context=None):
+    allif_data = common_shared_data(request)
+    scopes = CommonCompanyScopeModel.all_objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by('-date')[:4]
+
+    context={"title": title,"scopes": scopes,"main_sbscrbr_entity": allif_data.get("main_sbscrbr_entity"),
+        "allifqueryset": allifqueryset,}
+    if extra_context:
+        context.update(extra_context)
+
+    # Prepare the HttpResponse for the PDF file
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'filename="{filename}"'
+
+    # Render the HTML template
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # Create the PDF using xhtml2pdf
+    try:
+        pisa_status = pisa.CreatePDF(html, dest=response)
+    except Exception as ex:
+        # A more robust error message for the user
+        return HttpResponse(f"Something went wrong while generating the PDF: {ex}")
+
+    # If an error occurred during PDF creation, show a fallback HTML page
+    if pisa_status.err:
+        return HttpResponse(f'We had some errors during PDF creation. HTML: <pre>{html}</pre>')
+        
+    return response
+
+# Refactored views using the new centralized function

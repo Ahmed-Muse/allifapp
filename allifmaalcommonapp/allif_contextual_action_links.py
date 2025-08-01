@@ -160,6 +160,8 @@ allif_sector_contextual_action_require_pk_links= {
     {'name': 'DeleteTriage', 'url_name': 'allifmaalshaafiapp:deleteTriageData', 'requires_pk': True},
     {'name': 'EditTriageData', 'url_name': 'allifmaalshaafiapp:editTriageData', 'requires_pk': True},
    
+    {'name': 'LogDetails', 'url_name': 'allifmaalcommonapp:commonLogDetails', 'requires_pk': True},
+    {'name': 'DeleteLogConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteLog', 'requires_pk': True},
    
   
     ],

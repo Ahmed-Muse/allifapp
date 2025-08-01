@@ -13,8 +13,8 @@ def common_shared_data(request):
     usrslg=request.user.customurlslug
     compslg=request.user.usercompany
     usernmeslg=User.objects.filter(customurlslug=usrslg).first()
-    main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(companyslug=compslg).first()
-    logged_in_user_profile=CommonEmployeesModel.objects.filter(username=logged_in_user,company=main_sbscrbr_entity).first()
+    main_sbscrbr_entity=CommonCompanyDetailsModel.all_objects.filter(slgfld=compslg).first()
+    logged_in_user_profile=CommonEmployeesModel.all_objects.filter(username=logged_in_user,company=main_sbscrbr_entity).first()
     logged_user_division=None
     
     logged_user_branch=None
