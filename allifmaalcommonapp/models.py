@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import register, slugify
 from uuid import uuid4 
+from .middleware import get_current_company # Import the getter function
 #from django.contrib.auth.models import User
 from allifmaalusersapp.models import User
 from django.utils import timezone
@@ -52,37 +53,80 @@ from django.contrib.contenttypes.models import ContentType
 # 
 # #
 
-# check lenght, ondelete, true/false
+"""
+class CommonCompanyManagerOrignial(ActiveManager):
+    def for_company(self, company_id):
+        return self.get_queryset().filter(company=company_id)
+    def get_queryset(self):
+        return super().get_queryset()
+"""
 
-# This manager will now be the default for CommonBaseModel and its inheritors
 class ActiveManager(models.Manager):
     def get_queryset(self):
-        # Assuming your models have 'status' and 'delete_status' fields
-        #return super().get_queryset().filter(status__in=['Active','Approved','Draft'],delete_status='Deletable')
-        return super().get_queryset().filter(status__in=['Active','Approved','Draft'])
+        return super().get_queryset().filter(status__in=['Active', 'Approved', 'Draft'])
+         #return super().get_queryset().filter(status__in=['Active','Approved','Draft'],delete_status='Deletable')
+        
+    # Other methods like 'archived' and 'all_with_archived' remain the same
     def archived(self):
         """Returns only archived (soft-deleted) objects."""
         return super().get_queryset().filter(status='Archived')
 
     def all_with_archived(self):
-        """Returns all objects, including active and archived, without status/delete_status filtering."""
         return super().get_queryset()
-    
-# --- NEW ADDITION START: Define CompanyFilteredManager (inherits ActiveManager, adds for_company) ---
-class CommonCompanyManager(ActiveManager): # Inherit from ActiveManager
+
+class CommonCompanyManager(ActiveManager):
     """
-    A manager that combines ActiveManager's status filtering with
-    a 'for_company' method to filter querysets by a specific company.
-    This manager should be used for models that have a 'company' ForeignKey.
+    A manager that automatically filters by the current company from the
+    request context, in addition to the status filtering from ActiveManager.
+    please try to understand how this wroks and use it later in place of the CompanyManager above...
+    """
     """
     def for_company(self, company_id):
-        """Filters the queryset for a specific company."""
         return self.get_queryset().filter(company=company_id)
+    def get_queryset(self):
+        return super().get_queryset()
+        """
+    
+    def get_queryset(self):
+        # First, apply the status filtering from ActiveManager
+        queryset = super().get_queryset()
+
+        # Get the company_id from the request context via the middleware
+        company_id = get_current_company()
+
+        if company_id:
+            # If a company is found, apply the filter.
+            # This is the "magic" that handles the multitenancy automatically.
+            return queryset.filter(company=company_id)
+        
+        # If no company is found (e.g., pre-login page, management command),
+        # return an empty queryset to prevent data leakage.
+        # This is a critical security measure.
+        # Alternatively, you could raise an error.
+        return queryset.none()
+
+    def for_company(self, company_id):
+        """
+        Keeps your existing for_company method for legacy code.
+        This provides backward compatibility.
+        """
+        return self.get_queryset().filter(company=company_id)
+
+    def unfiltered_all(self):
+        """
+        An escape hatch for super-admins to get all objects,
+        bypassing both company and status filtering.
+        """
+        return super().get_queryset().all()
 
 class SharedModel(models.Model):# this is the company  hospitality logistics
     name=models.CharField(max_length=30,blank=False,null=False,unique=True,default="Name",db_index=True)
     notes=models.CharField(max_length=50,blank=True,null=True,default="Notes")
-    owner=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
+    #owner=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
+    #using string model reference is the best practice for all foreign keys and onetoone relations.
+    owner=models.ForeignKey('allifmaalusersapp.User',on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
+    updated_by=models.ForeignKey('allifmaalusersapp.User',on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
+    # ------------------------------------
     date=models.DateField(blank=True,null=True,auto_now_add=True)
     status=models.CharField(max_length=50, choices=BASE_MODEL_STATUS_CHOICES, default='Active',null=True,blank=True)
     objects=ActiveManager()
@@ -243,8 +287,8 @@ class CommonBaseModel(models.Model):
     Models inheriting from this will get these fields directly in their table.
     Also Use '+' for related_name in abstract base classes to prevent reverse accessor clashes --- The related name will not be created on the related object.
     """
-    owner=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
-    company=models.ForeignKey(CommonCompanyDetailsModel,on_delete=models.CASCADE,null=True,blank=True,related_name='+')
+    owner=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='+',db_index=True)
+    company=models.ForeignKey(CommonCompanyDetailsModel,on_delete=models.CASCADE,null=True,blank=True,related_name='+',db_index=True)
     division=models.ForeignKey(CommonDivisionsModel,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
     branch=models.ForeignKey(CommonBranchesModel,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
     department=models.ForeignKey(CommonDepartmentsModel,on_delete=models.SET_NULL,null=True,blank=True,related_name='+')
@@ -276,10 +320,10 @@ class CommonBaseModel(models.Model):
     #objects = ActiveManager(): This is the most crucial change. It makes ActiveManager the default manager for CommonBaseModel and all models that inherit from it.
     #objects = ActiveManager() 
     objects=CommonCompanyManager()
-    
+    all_objects = models.Manager() 
     # Provide a manager to access ALL objects, including inactive/archived
     #all_objects = models.Manager(): This provides a fallback. If you ever need to query all records (including inactive or archived ones), you'd use YourModel.all_objects.all().
-    all_objects = models.Manager() 
+    
     """
     resources=models.CharField(blank=True,null=True,max_length=50,default='Resources')
     constraints=models.CharField(blank=True,null=True,max_length=50,default='Constraints')
@@ -427,10 +471,10 @@ class CommonEmployeesModel(CommonBaseModel):
     title=models.CharField(max_length=50,blank=True,null=True)
     education=models.CharField(max_length=50,blank=True,null=True)
     
-    salary=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
-    total_salary_paid=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
-    salary_payable=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
-    salary_balance=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=1,default=0)
+    salary=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    total_salary_paid=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,default=0)
+    salary_payable=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
+    salary_balance=models.DecimalField(max_digits=30,blank=False,null=True,decimal_places=2,default=0)
     username=models.OneToOneField(User, on_delete=models.CASCADE,related_name="secrlmmemply",null=True)
     uniqueId=models.CharField(null=True, blank=True, max_length=150)
     sysperms=models.CharField(choices=rights, blank=True, null=True,max_length=30,default="staff")

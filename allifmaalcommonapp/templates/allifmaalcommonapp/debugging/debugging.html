@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tenant Debug Info</title>
+</head>
+<body>
+
+    <h1>Company Name... {{main_sbscrbr_entity}}</h1>
+    <h1>Company Slug ... {{company_slg_str}}</h1>
+    <h1>User Slug ... {{user_slg_str}}</h1>
+    <h3>{{allifquery}}</h3>
+    <p>Is Authenticated: <strong>{{ is_authenticated }}</strong></p>
+    <p>Company ID from User Object: <strong>{{ company_id_from_user }}</strong></p>
+    <p>Company ID from Middleware: <strong>{{ company_id_from_middleware }}</strong></p>
+
+    <h2>What this means:</h2>
+    <ul>
+        <li>If 'Is Authenticated' is 'False', you are not logged in. Log in and try again.</li>
+        <li>If 'Company ID from User Object' shows an 'AttributeError', the user account you are logged in with has no company assigned.</li>
+        <li>If 'Company ID from Middleware' is `None`, and the other two are correct, there is an issue in the middleware itself.</li>
+    </ul>
+</body>
+</html>

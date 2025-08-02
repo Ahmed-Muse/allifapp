@@ -105,6 +105,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
     'allifmaalcommonapp.signals.CurrentUserMiddleware', # Add your custom middleware here
+    'allifmaalcommonapp.middleware.AllifmaalTenantMiddleware',
+    
    
     
 ]

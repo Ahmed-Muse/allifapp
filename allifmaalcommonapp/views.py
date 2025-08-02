@@ -8,6 +8,8 @@ from django.db import IntegrityError, transaction
 from django.core.cache import cache # For caching
 from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,allif_pdf_reports_generator,allif_common_detail_view,allif_main_models_registry,allif_delete_hanlder,allif_common_form_submission_and_save,allif_common_form_edit_and_save,allif_redirect_based_on_sector,allif_delete_confirm,allif_excel_upload_handler,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler,allif_list_add_handler, allif_edit_handler, allif_detail_handler,allif_deleting_hanlder,allif_delete_confirm_handler,allif_list_view_handler,allif_add_view_handler,allif_edit_view_handler,allif_detail_view_handler,allif_delete_view_handler,allif_delete_confirm_view_handler,)
 # ... (existing imports) ...
+
+from .middleware import get_current_company
 from django.http import JsonResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required,permission_required 
@@ -31,6 +33,88 @@ import logging
 logger=logging.getLogger('allifmaalcommonapp')
 logger=logging.getLogger(__name__)
 from .defaults_data import (DEFAULT_COMPANY_SCOPES, DEFAULT_TAXES, DEFAULT_CURRENCIES,DEFAULT_PAYMENT_TERMS, DEFAULT_UNITS_OF_MEASURE,DEFAULT_OPERATION_YEARS, DEFAULT_OPERATION_YEAR_TERMS,DEFAULT_CODES, DEFAULT_CATEGORIES,DEFAULT_GL_ACCOUNT_CATEGORIES, DEFAULT_CHART_OF_ACCOUNTS)
+
+
+
+
+
+
+
+
+
+
+
+
+def commonDebugging(request):
+    try:
+        allif_data=common_shared_data(request)
+        is_authenticated = request.user.is_authenticated
+        company_id_from_user = None
+        allifquery=request.user.usercompany
+        company_id_from_middleware = get_current_company()
+        
+        
+        
+        title='Waiting Page'
+        main_sbscrbr_entity=CommonCompanyDetailsModel.all_objects.filter(company=request.user.company).first()
+        company_slg_str=main_sbscrbr_entity.slgfld
+        user_slg_str=request.user.customurlslug
+        
+        profile=allif_data.get("logged_in_user_profile")
+        print(profile)
+        
+        if request.user.is_authenticated:
+            try:
+                # This is the line that will fail if the company is not set
+                company_id_from_user = request.user.company.id
+                
+                
+            except AttributeError:
+                company_id_from_user = "AttributeError: User has no company assigned."
+        
+        
+            user_is_supper=request.user.is_superuser
+            
+            if allif_data.get("logged_in_user_profile") is not None:
+                
+                context = {
+                'is_authenticated': is_authenticated,
+                'company_id_from_user': company_id_from_user,
+                'company_id_from_middleware': company_id_from_middleware,
+                "allifquery":allifquery,
+                "main_sbscrbr_entity":main_sbscrbr_entity,
+                "company_slg_str":company_slg_str,
+                "user_slg_str":user_slg_str,
+                }
+                return render(request, 'allifmaalcommonapp/debugging/debugging.html', context)
+              
+            else:
+                return redirect('allifmaalcommonapp:commonAddStaffProfile',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        
+        
+        else:
+            return HttpResponse("please login")
+    except Exception as ex:
+        error_context={'error_message': ex,}
+        return render(request,'allifmaalcommonapp/error/error.html',error_context)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
 
 def commonWebsite(request):# this is the landing page...
     try:
@@ -161,9 +245,7 @@ def search_erp_features(request, allifusr, allifslug):
     logger.debug(f"Feature search by {request.user.email} for '{query}' (Sector: {company_sector_name}): found {len(results)} results.")
     return JsonResponse({'features': results})
 
-
 ############################### EMAILS AND SMS ####################
-
 @allif_base_view_wrapper
 def commonEmailsAndSMS(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
@@ -197,10 +279,11 @@ def commonEmailsAndSMS(request,*allifargs,**allifkwargs):
 def commonDeleteEmail(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonEmailsModel',pk=pk,success_redirect_url_name='commonHome')
 
-@allif_base_view_wrapper 
-def CommonDecisionPoint(request, *allifargs, **allifkwargs):
+@login_required(login_url='allifmaalusersapp:userLoginPage') 
+def CommonDecisionPoint_previous(request):
     allif_data = common_shared_data(request)
     company_entity = allif_data.get("main_sbscrbr_entity")
+    
     if not company_entity or not allif_data.get("compslg"):
         # If company entity is not set or company slug is missing, redirect to company creation
         return redirect('allifmaalcommonapp:commonAddnewEntity', allifusr=allif_data.get("usrslg"))
@@ -208,17 +291,61 @@ def CommonDecisionPoint(request, *allifargs, **allifkwargs):
         # Company exists, redirect based on sector to the 'home' type URL
         return allif_redirect_based_on_sector(request, allif_data, 'home')
 
-@allif_base_view_wrapper
+#@login_required(login_url='allifmaalusersapp:userLoginPage')
+def CommonDecisionPoint(request):
+    # This check is now simple and direct.
+    allif_data = common_shared_data(request)
+    compslg=request.user.usercompany
+    usrslg=request.user.customurlslug
+    if request.user.company is None:
+        # The user has no company, so redirect them to the company creation page.
+        # This will be your 'commonAddnewEntity' view.
+        return redirect('allifmaalcommonapp:commonAddnewEntity', allifusr=request.user.customurlslug)
+    else:
+        print("yesssssssssssssssssssssss")
+        #return redirect('allifmaalcommonapp:commonDebugging')
+        return redirect('allifmaalcommonapp:commonHome', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+
+        return redirect('allifmaalcommonapp:commonHome',allifusr=usrslg,allifslug=compslg)
+        # The user has a company. Redirect them to the main dashboard.
+        # Your middleware will have already set the company ID in the background.
+        #return allif_redirect_based_on_sector(request, allif_data, 'home')
+
+    
+#@allif_base_view_wrapper
 def commonHome(request, *allifargs, **allifkwargs):
     allif_data = common_shared_data(request)
+    
+    allif_data.get("logged_in_user_profile")
+    
+    if allif_data.get("logged_in_user_profile") is not None:
+                
+        context = {
+        
+        }
+        return allif_redirect_based_on_sector(request, allif_data, 'home')
+        return render(request, 'allifmaalcommonapp/debugging/debugging.html', context)
+        
+    else:
+        return redirect('allifmaalcommonapp:commonAddStaffProfile',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        
+    
+    
     if request.user.email.endswith("info@allifmaal.com"):
         pass
     company_entity = allif_data.get("main_sbscrbr_entity")
     if company_entity:
-        return allif_redirect_based_on_sector(request, allif_data, 'home')
+        return redirect('allifmaalcommonapp:commonDebugging')
+        return redirect('allifmaalcommonapp:commonBanks', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+        
+        #return allif_redirect_based_on_sector(request, allif_data, 'home')
     else:
-        return redirect('allifmaalcommonapp:CommonDecisionPoint')
+        return render(request,'allifmaaladminapp/error/error.html')
+        return redirect('allifmaalcommonapp:commonHome', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
+
+        return redirect('allifmaalcommonapp:commonDebugging')
     
+
 @allif_base_view_wrapper
 def commonSpecificDashboard(request, *allifargs, **allifkwargs):
     allif_data = common_shared_data(request)
@@ -304,8 +431,6 @@ def commonUploadExcel(request, model_config_key, *allifargs, **allifkwargs):
 
     return allif_excel_upload_handler(request, model_config_key, success_redirect_url_name)
 
-# ... (rest of your views.py) ...
-
 ########################3 currencies ######################
 @allif_base_view_wrapper
 def commonCurrencies(request,*allifargs,**allifkwargs):
@@ -314,7 +439,11 @@ def commonCurrencies(request,*allifargs,**allifkwargs):
     formats=CommonDocsFormatModel.all_objects.all() # Assuming this is needed for the advanced search form
     allifqueryset=allif_filtered_and_sorted_queryset(request, allif_main_models_registry['CommonCurrenciesModel'], allif_data)
     allifqueryset =allif_filtered_and_sorted_queryset(request,CommonCurrenciesModel,allif_data,explicit_scope='all')
-    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    
+    allifqueryset=CommonCurrenciesModel.objects.all()
+    
+    context={"title":title,"allifqueryset":allifqueryset,#"sort_options": allifqueryset.sort_options,
+             "formats":formats,}
     return render(request,'allifmaalcommonapp/currencies/currencies.html',context)
 
 @allif_base_view_wrapper
@@ -334,7 +463,6 @@ def commonWantToDeleteCurrency(request,pk,*allifargs,**allifkwargs):
 def commonDeleteCurrency(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonCurrenciesModel',pk=pk,success_redirect_url_name='commonCurrencies')
 
-
 @allif_base_view_wrapper
 def commonCurrencySearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonCurrenciesModel',search_fields_key='CommonCurrenciesModel',
@@ -353,14 +481,15 @@ def commonCurrencyAdvanceSearch(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def common_currency_pdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCurrenciesModel',)
- 
- 
+from .middleware import get_current_company # Import the getter function
 ########################3 Payment terms ######################
 @allif_base_view_wrapper
 def commonPaymentTerms(request,*allifargs,**allifkwargs):
     title="Payment Terms"
+    print(get_current_company())
     allif_data=common_shared_data(request)
     allifqueryset =allif_filtered_and_sorted_queryset(request,CommonPaymentTermsModel,allif_data)
+    allifqueryset=CommonPaymentTermsModel.objects.all()
     context={"title":title,"allifqueryset":allifqueryset,}
     return render(request,'allifmaalcommonapp/payments/terms/payment_terms.html',context)
 
@@ -405,7 +534,6 @@ def commonDeleteUnit(request,pk,*allifargs,**allifkwargs):
 def commonConfirmDeleteUnits(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonUnitsModel,"Delete this item",'allifmaalcommonapp/units/delete-unit-confirm.html')
 
-   
 ########################################33 categories ####################3
 @allif_base_view_wrapper
 def commonCategories(request,*allifargs,**allifkwargs):
@@ -432,7 +560,6 @@ def commonDeleteCategory(request,pk,*allifargs,**allifkwargs):
 def commonWantToDeleteCategory(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonCategoriesModel,"Delete this item",'allifmaalcommonapp/operations/categories/x-category-cnfrm.html')
 
-
 @allif_base_view_wrapper
 def commonCategorySearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonCategoriesModel',search_fields_key='CommonCategoriesModel',
@@ -442,8 +569,6 @@ def commonCategorySearch(request,*allifargs,**allifkwargs):
 def commonCategoryDetails(request, pk, *allifargs, **allifkwargs):
     return allif_common_detail_view(request,model_class=CommonCategoriesModel,pk=pk,
         template_name='allifmaalcommonapp/operations/categories/category-details.html',)
-
-#############################3 CODES #########################3
 
 ########################################33 codes ####################3
 @allif_base_view_wrapper
@@ -481,9 +606,8 @@ def commonCodeDetails(request, pk, *allifargs, **allifkwargs):
     return allif_common_detail_view(request,model_class=CommonCodesModel,pk=pk,
         template_name='allifmaalcommonapp/operations/codes/code_details.html',)
   
-  
 ############################### .......Entities and companies details........... #########################3#
-@allif_base_view_wrapper
+#@allif_base_view_wrapper
 def commonCompanies(request,*allifargs,**allifkwargs):
     title="Registered Companies"
     allifqueryset=CommonCompanyDetailsModel.all_objects.all()
@@ -499,14 +623,92 @@ def commonCompanies(request,*allifargs,**allifkwargs):
     context={"title":title,"allifqueryset":allifqueryset,"formats":formats,
     }
     return render(request,'allifmaalcommonapp/companies/companies.html',context)
+
+
+def commonAddnewEntity(request, allifusr, *allifargs, **allifkwargs):
+    title = "Entity Registration"
    
-# dont add pre-conditions here like the requirement for the profiles
+    user = request.user # A cleaner way to get the current user
+    print(user.company)
+    main_div='Main Division'
+    main_bran='Main Branch'
+    main_dept='Main Department'
+    allif_data=common_shared_data(request)
+    if user.company is not None:
+        messages.info(request, "You already have a company. Redirecting...")
+        #return allif_redirect_based_on_sector(request, allif_data, 'home')
+        return redirect('allifmaalcommonapp:CommonDecisionPoint')
+
+    if request.method == 'POST':
+        form = CommonAddCompanyDetailsForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                with transaction.atomic():
+                    # 1. Create the new company
+                    new_company = form.save(commit=False)
+                    new_company.owner = user
+                    new_company.legalname = str(f'{new_company.company}+{new_company.address}')
+                    new_company.save()
+                    
+                    new_division=CommonDivisionsModel(division=main_div,company=new_company).save()
+                    new_branch=CommonBranchesModel(branch=main_bran,division=new_division,company=new_company).save()
+                    new_department=CommonDepartmentsModel(department=main_dept,division=new_division,branch=new_branch,company=new_company).save()
+
+                    
+                    # 2. Link the user to the new company
+                    user.company = new_company
+                    user.userdivision=new_division
+                    user.userbranch=new_branch
+                    user.userdepartment=new_department
+                    user.usercompany = 'owner' # Automatically make the creator the owner
+                    user.save(update_fields=['company', 'usercompany'])
+                    
+                   
+                    
+                    
+                    #set the user division, branch and department companyslug
+                   
+                   
+                    # give the user all the permissions since they are the owner of this enttity
+                    user.can_do_all=True
+                    user.can_add=True
+                    user.can_edit=True
+                    user.can_view=True
+                    user.can_delete=True
+                    user.universal_delete=True
+                    user.divisional_delete=True
+                    user.branches_delete=True
+                    user.departmental_delete=True
+                    user.universal_access=True
+                    user.divisional_access=True
+                    user.branches_access=True
+                    user.departmental_access=True
+                    user.can_access_all=True
+                    user.can_access_related=True
+                    user.user_category="admin"
+                    user.save()
+                    
+                        
+                        
+                    messages.success(request, f'Company "{new_company.company}" created successfully!')
+                    return allif_redirect_based_on_sector(request, allif_data, 'home')
+                   
+
+            except Exception as e:
+                messages.error(request, f'An error occurred: {e}')
+    else:
+        form = CommonAddCompanyDetailsForm()
+
+    context = {"form": form, "title": title}
+    return render(request, "allifmaalcommonapp/companies/newentity.html", context)
+
+
 @login_required(login_url='allifmaalusersapp:userLoginPage') 
-def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
+def commonAddnewEntity_previous(request,allifusr,*allifargs,**allifkwargs):
     title="Entity Registration"
     try:
         usrslg=request.user.customurlslug
-        usernmeslg=User.objects.filter(customurlslug=usrslg).first()
+        usernmeslg=User.all_objects.filter(customurlslug=usrslg).first()
         user_var_comp=request.user.usercompany
         # create divisions, branches and department when the company is created to have profile for the new user....
         main_division="Main Division"
@@ -570,7 +772,6 @@ def commonAddnewEntity(request,allifusr,*allifargs,**allifkwargs):
                         
                         if sectorselec is not None:
                             return allif_redirect_based_on_sector(request, allif_data, 'home')
-                           
                         else:
                             form=CommonAddCompanyDetailsForm(request.POST, request.FILES)
                     else:
@@ -602,7 +803,8 @@ def commonCompanyDetailsForClients(request,*allifargs,**allifkwargs):
 def commonEditEntityByAllifAdmin(request,pk,*allifargs,**allifkwargs):
     title="Update Entity Details"
     allif_data=common_shared_data(request)
-    user_var_update=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    #user_var_update=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    user_var_update=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
     form=CommonEditCompanyDetailsFormByAllifAdmin(instance=user_var_update)
     if request.method=='POST':
         form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None,request.FILES, instance=user_var_update)
@@ -625,7 +827,8 @@ def commonEditEntityByAllifAdmin(request,pk,*allifargs,**allifkwargs):
 def commonEditEntityByClients(request,pk,*allifargs,**allifkwargs):
     title="Update Entity Details"
     allif_data=common_shared_data(request)
-    user_var_update=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    #user_var_update=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    user_var_update=CommonCompanyDetailsModel.all_objects.filter(id=pk).first().id
     form=CommonAddByClientCompanyDetailsForm(instance=user_var_update)
     if request.method=='POST':
         form=CommonAddByClientCompanyDetailsForm(request.POST or None,request.FILES, instance=user_var_update)
@@ -647,7 +850,8 @@ def commonEditEntityByClients(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper     
 def commonCompanyDetailsForAllifAdmin(request,pk,*allifargs,**allifkwargs):
     title="Company Details"
-    allifquery=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    #allifquery=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    allifquery=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
     allifqueryset=CommonCompanyScopeModel.all_objects.filter(company=allifquery)
     context={"allifquery":allifquery,"allifqueryset":allifqueryset,"title":title,}
     return render(request,'allifmaalcommonapp/companies/company-details.html',context)
@@ -658,7 +862,8 @@ def commonShowClickedRowCompanyDetails(request,pk,*allifargs,**allifkwargs):
     allifqueryset=CommonCompanyDetailsModel.all_objects.all()
     formats=CommonDocsFormatModel.all_objects.all()
     datasorts=CommonDataSortsModel.all_objects.all()
-    clicked_row_data=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    #clicked_row_data=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    clicked_row_data=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
     context={"clicked_row_data":clicked_row_data,"allifqueryset":allifqueryset,"formats":formats,
         "datasorts":datasorts,
         "title":title,
@@ -668,14 +873,16 @@ def commonShowClickedRowCompanyDetails(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonWantToDeleteCompany(request,pk,*allifargs,**allifkwargs):
     title="Are you sure to delete?"
-    allifquery=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    #allifquery=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    allifquery=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
     context={"allifquery":allifquery,"title":title,}
     return render(request,'allifmaalcommonapp/companies/comp-delete-confirm.html',context)
 
 @allif_base_view_wrapper
 def commonDeleteEntity(request,pk,*allifargs,**allifkwargs):
     title="Are you sure to delete?"
-    allifquery=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    #allifquery=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    allifquery=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
     if allifquery.can_delete=="undeletable":
         context={"allifquery":allifquery,"title":title,}
         return render(request,'allifmaalcommonapp/error/cant_delete.html',context)
@@ -737,7 +944,6 @@ def commonCompanyAdvanceSearch(request,*allifargs, **allifkwargs):
     else:
         context["allifqueryset"] = CommonCompanyDetailsModel.all_objects.all()
         return render(request, 'allifmaalcommonapp/companies/companies.html', context)
-
 
 ######################### DIVISIONS, BRANCHES, DEPARTMENTS, OPERATION YEARS, OPERATION TERMS ##################
 @allif_base_view_wrapper
@@ -889,7 +1095,6 @@ def commonWantToDeleteOperationYearTerm(request, pk, *allifargs, **allifkwargs):
 def commonDeleteOperationYearTerm(request, pk, *allifargs, **allifkwargs):
     return allif_delete_view_handler(request,CommonOperationYearTermsModel, pk, 'allifmaalcommonapp:commonOperationYearTerms')
    
-
 ############################ Creating default values #####################....
 @allif_base_view_wrapper
 def commonDefaultValues(request,*allifargs,**allifkwargs):
@@ -905,8 +1110,6 @@ def commonAdminCreateDefaultValues(request,*allifargs,**allifkwargs):
     
     current_owner = allif_data.get("usernmeslg")
     current_date=timezone.now().date()
-
-    # Use a transaction to ensure all or none are saved cleanly
     with transaction.atomic():
         for data in doc_formats:
             if data['name'] not in CommonDocsFormatModel.all_objects.filter(name=data['name']):
@@ -925,19 +1128,11 @@ def commonAdminCreateDefaultValues(request,*allifargs,**allifkwargs):
                 date=current_date,)
             else:
                 return redirect('allifmaalcommonapp:commonDefaultValues',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-
-    
     return redirect('allifmaalcommonapp:commonDefaultValues',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
 @allif_base_view_wrapper
 def commonCreateDefaultValues(request, *allifargs, **allifkwargs):
-    
-    """
-    Generates ALL default setup values (Units, COA, Taxes, etc.) for a new company.
-    """
     allif_data = common_shared_data(request)
-
-    # --- Retrieve common context data ---
     current_owner = allif_data.get("usernmeslg")
     current_company = allif_data.get("main_sbscrbr_entity")
     current_branch = allif_data.get("logged_user_branch")
@@ -1325,9 +1520,6 @@ def commonCreateDefaultValues(request, *allifargs, **allifkwargs):
                     results['chart_of_accounts']['errors'].append(f"Error creating account '{account_data['code']}': {e}")
                     logger.exception(f"Unexpected error for Account '{account_data['code']}'.")
 
-        # --- END: ONE SINGLE TRANSACTION FOR ALL DEFAULTS ---
-
-        # --- Final User Feedback ---
         total_errors = sum(len(res['errors']) for key, res in results.items() if isinstance(res, dict))
         total_created = sum(res['created'] for key, res in results.items() if isinstance(res, dict))
         total_skipped = sum(res['skipped'] for key, res in results.items() if isinstance(res, dict))
@@ -1360,13 +1552,9 @@ def commonDeleteDefaultValues(request,*allifargs,**allifkwargs):
     company= allif_data.get("main_sbscrbr_entity")
 
     company_name = allif_data.get("main_sbscrbr_entity")
-
-    # --- Initialize counters for feedback ---
     deleted_counts = {}
     skipped_models = []
     error_messages = []
-
-
     # --- Use a single transaction for all deletions ---
     with transaction.atomic():
         
@@ -1378,10 +1566,6 @@ def commonDeleteDefaultValues(request,*allifargs,**allifkwargs):
         deleted_counts['CommonChartofAccountsModel'] = count
         logger.info(f"Deleted {count} CommonChartofAccountsModel entries for {company_name}.")
 
-        # 3. Delete Units
-        # Be careful if CommonUnitsModel has PROTECT and is_system_default logic.
-        # You might need to exclude the system default unit here.
-        # Example: count, _ = CommonUnitsModel.objects.filter(company=company, is_system_default=False).delete()
         count, _ = CommonUnitsModel.all_objects.filter(company=company).delete()
         deleted_counts['CommonUnitsModel'] = count
         logger.info(f"Deleted {count} CommonUnitsModel entries for {company_name}.")
@@ -1464,7 +1648,8 @@ def commonhrm(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Human Resources Management"
     datasorts=CommonDataSortsModel.all_objects.all()
-    allifqueryset=User.objects.filter(usercompany=allif_data.get("compslg")).order_by('-first_name')
+    allifqueryset=User.all_objects.filter(usercompany=allif_data.get("compslg")).order_by('-first_name')
+    allifqueryset=User.objects.all()
     context={"title":title,"allifqueryset":allifqueryset,"datasorts":datasorts,} 
     return render(request,'allifmaalcommonapp/hrm/staff/staff.html',context)     
 
@@ -1472,7 +1657,6 @@ def commonhrm(request,*allifargs,**allifkwargs):
 def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is where a new user is added by the subscriber admin.
     title="New Staff User Registeration"
     allif_data=common_shared_data(request)
-    
     allif_data=common_shared_data(request)
     form=CreateNewCustomUserForm()
     if request.method=='POST':
@@ -1500,11 +1684,49 @@ def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is 
 
     context={"title":title,"form":form,}
     return render(request,"allifmaalcommonapp/hrm/users/adduser.html",context)
-@allif_base_view_wrapper
-def commonEditUser(request,pk,*allifargs,**allifkwargs):
+
+def commonEditUser(request, pk, *allifargs, **allifkwargs):
+    title = "Update User Details"
+    allif_data=common_shared_data(request)
+    user_var_update = get_object_or_404(User, id=pk)
+    
+    uscmpy = request.user.company
+    print(uscmpy, 'pppppppppppppppppppppppppppppppppppp')
+    
+    # Initialize the form for GET requests.
+    if request.method == 'POST':
+        # For a POST request, data is in request.POST.
+        # Pass data and instance, and your custom parameter as a keyword argument.
+        form = UpdateCustomUserForm(request.POST, instance=user_var_update, allifmaalparameter=uscmpy)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            """this is very important line... dont change unless you know what you are doing...."""
+            obj.usercompany = str(allif_data.get("compslg")) # allif_data isn't defined here, fix this logic
+            obj.save()
+            return redirect('allifmaalcommonapp:commonhrm', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg")) # allif_data isn't defined here, fix this logic
+        else:
+            error_message = form.errors
+            allifcontext = {"error_message": error_message, "title": title,}
+            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
+    else:
+        # For a GET request, there is no data, only the instance and your custom parameter.
+        # Pass the custom parameter as a keyword argument.
+        form = UpdateCustomUserForm(instance=user_var_update, allifmaalparameter=uscmpy)
+    
+    allif_data = common_shared_data(request)
+    context = {"title": title, "form": form, "user_var_update": user_var_update,}
+    return render(request, "allifmaalcommonapp/hrm/users/adduser.html", context)
+
+
+#@allif_base_view_wrapper
+def commonEditUser_previous(request,pk,*allifargs,**allifkwargs):
     title="Update User Details"
     user_var_update=get_object_or_404(User, id=pk)
-    form=UpdateCustomUserForm(instance=user_var_update)
+    
+    uscmpy=request.user.company
+    print(uscmpy,'pppppppppppppppppppppppppppppppppppp')
+    
+    form=UpdateCustomUserForm(uscmpy,instance=user_var_update)
     allif_data=common_shared_data(request)
     
     if request.method=='POST':
@@ -1520,7 +1742,7 @@ def commonEditUser(request,pk,*allifargs,**allifkwargs):
             allifcontext={"error_message":error_message,"title":title,}
             return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
     else:
-        form=UpdateCustomUserForm(instance=user_var_update)
+        form=UpdateCustomUserForm(uscmpy,instance=user_var_update)
 
     context={"title":title,"form":form,"user_var_update":user_var_update,}
     return render(request,"allifmaalcommonapp/hrm/users/adduser.html",context)
@@ -1528,7 +1750,7 @@ def commonEditUser(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonUserDetails(request,pk,*allifargs,**allifkwargs):
     title="User Details"
-    allifquery=User.objects.filter(id=pk).first()
+    allifquery=User.all_objects.filter(id=pk).first()
     allifqueryset=CommonEmployeesModel.all_objects.filter(username=allifquery).first()
     candoall=allifquery.can_do_all
     canadd=allifquery.can_add
@@ -1580,7 +1802,7 @@ def commonShowClickedRowUserDetails(request,pk,*allifargs,**allifkwargs):
     title="User Details"
     allif_data=common_shared_data(request)
     clicked_row_data=get_object_or_404(User, id=pk)
-    allifqueryset=User.objects.filter(usercompany=allif_data.get("main_sbscrbr_entity"))
+    allifqueryset=User.all_objects.filter(usercompany=allif_data.get("main_sbscrbr_entity"))
     context={"clicked_row_data":clicked_row_data,"allifqueryset":allifqueryset,"title":title,}
     return render(request,'allifmaalcommonapp/hrm/staff/staff.html',context)
    
@@ -1603,19 +1825,12 @@ def commonUserSearch(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     if request.method=='POST':
         allifsearch=request.POST.get('allifsearchcommonfieldname')
-        searched_data=User.objects.filter((Q(first_name__icontains=allifsearch)|Q(last_name__icontains=allifsearch)) & Q(usercompany=allif_data.get("compslg")))
+        searched_data=User.all_objects.filter((Q(first_name__icontains=allifsearch)|Q(last_name__icontains=allifsearch)) & Q(usercompany=allif_data.get("compslg")))
         context={"title":title,"allifsearch":allifsearch,"searched_data":searched_data,}
     return render(request,'allifmaalcommonapp/hrm/staff/staff.html',context)
             
 
 def handle_user_permission_view(func):
-    """
-    A decorator that handles common logic for user permission views:
-    - Fetches the user object or returns a 404.
-    - Encapsulates the view logic in a try-except block.
-    - Saves the user object after the view logic is executed.
-    - Redirects to the user details page.
-    """
     @wraps(func)
     def wrapper(request, pk, *allifargs, **allifkwargs):
         
@@ -1637,8 +1852,6 @@ def handle_user_permission_view(func):
         return redirect('allifmaalcommonapp:commonUserDetails',pk=user.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
             
     return wrapper
-
-# --- Refactored View Functions using the Decorator ---
 
 @handle_user_permission_view
 @allif_base_view_wrapper
@@ -1695,8 +1908,6 @@ def commonUserCanAccessAll(user, *allifargs, **allifkwargs):
     else:
         user.can_access_all=True
     
-
-
 @handle_user_permission_view
 @allif_base_view_wrapper
 def commonUserCanAccessRelated(user, *allifargs, **allifkwargs):
@@ -1705,7 +1916,6 @@ def commonUserCanAccessRelated(user, *allifargs, **allifkwargs):
         user.can_access_related=False
     else:
         user.can_access_related=True
-
 
 @handle_user_permission_view
 @allif_base_view_wrapper
@@ -1716,7 +1926,6 @@ def commonUserHasUniversalDelete(user, *allifargs, **allifkwargs):
     else:
         user.universal_delete=True
        
-
 @handle_user_permission_view
 @allif_base_view_wrapper
 def commonUserHasDivisionalDelete(user, *allifargs, **allifkwargs):
@@ -1734,7 +1943,6 @@ def commonUserHasBranchesDelete(user, *allifargs, **allifkwargs):
         user.branches_delete=False
     else:
         user.branches_delete=True
-  
 
 @handle_user_permission_view
 @allif_base_view_wrapper
@@ -1754,7 +1962,6 @@ def commonUserHasUniversalAccess(user, *allifargs, **allifkwargs):
     else:
         user.universal_access=True
    
-
 @handle_user_permission_view
 @allif_base_view_wrapper
 def commonUserHasDivisionalAccess(user, *allifargs, **allifkwargs):
@@ -1772,8 +1979,7 @@ def commonUserHasBranchesAccess(user, *allifargs, **allifkwargs):
         user.branches_access=False
     else:
         user.branches_access=True
-        
-
+    
 @handle_user_permission_view
 @allif_base_view_wrapper
 def commonUserHasDepartmentalAccess(user, *allifargs, **allifkwargs):
@@ -1804,7 +2010,6 @@ def commonUserAllifaamlAdmin(request,pk):
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
-
 ###################### staff profiles #####################################
 #@allif_base_view_wrapper
 def commonStaffProfiles(request,*allifargs,**allifkwargs):
@@ -1815,7 +2020,7 @@ def commonStaffProfiles(request,*allifargs,**allifkwargs):
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,}
     return render(request,'allifmaalcommonapp/hrm/profiles/profiles.html',context)
 
-#@allif_base_view_wrapper
+
 def commonAddStaffProfile(request, *allifargs, **allifkwargs):
     return allif_common_form_submission_and_save(request,CommonAddStaffProfileForm,"New Profile","commonStaffProfiles",'allifmaalcommonapp/hrm/profiles/add-staff-profile.html')
 
@@ -1837,15 +2042,12 @@ def commonProfileSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonEmployeesModel',search_fields_key='CommonEmployeesModel',
     template_path='allifmaalcommonapphrm/profiles/profiles.html',search_input_name='allifsearchcommonfieldname',)
 
-
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonStaffProfileDetails(request, pk, *allifargs, **allifkwargs):
     allif_data=common_shared_data(request)
-    allifquery=get_object_or_404(CommonEmployeesModel, id=pk)
-    return allif_common_detail_view(
-        request,
-        model_class=CommonEmployeesModel,
-        pk=pk,
+    #allifquery=get_object_or_404(CommonEmployeesModel, id=pk)
+    allifquery=CommonEmployeesModel.objects.filter(id=pk).first()
+    return allif_common_detail_view(request,model_class=CommonEmployeesModel,pk=pk,
         template_name='allifmaalcommonapp/hrm/profiles/profile-details.html', # Create this template
         title_map={'default': 'Profile Details'},)
 
@@ -1892,9 +2094,6 @@ def commonTaxParameters(request,*allifargs,**allifkwargs):
     allifqueryset = CommonTaxParametersModel.all_objects.filter(company=current_company).select_related(
         'company', 'division', 'branch', 'department', 'owner', 'operation_year', 'operation_term', 'updated_by'
     ).order_by('-date')
-
-    # --- Principle 7: Caching Strategy (Example: Caching latest taxes) ---
-    # Analogy: Keeping frequently used documents on your desk instead of retrieving from archive.
     cache_key = f'latest_taxes_company_{current_company.pk}'
     latest = cache.get(cache_key)
     if not latest:
@@ -1927,9 +2126,7 @@ def CommonDeleteTaxParameter(request,pk,*allifargs,**allifkwargs):
 def commonWantToDeleteTaxParameter(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonTaxParametersModel,"Delete this item",'allifmaalcommonapp/taxes/delete-tax-confirm.html')
 
-
 #####################3 supplier tax parameters ##########
-
 @allif_base_view_wrapper
 def commonSupplierTaxParameters(request,*allifargs,**allifkwargs):
     title="Supplier Tax Parameters"
@@ -1939,9 +2136,6 @@ def commonSupplierTaxParameters(request,*allifargs,**allifkwargs):
     allifqueryset = CommonSupplierTaxParametersModel.all_objects.filter(company=current_company).select_related(
         'company', 'division', 'branch', 'department', 'owner', 'operation_year', 'operation_term', 'updated_by'
     ).order_by('-date')
-
-    # --- Principle 7: Caching Strategy (Example: Caching latest taxes) ---
-    # Analogy: Keeping frequently used documents on your desk instead of retrieving from archive.
     cache_key = f'latest_taxes_company_{current_company.pk}'
     latest = cache.get(cache_key)
     if not latest:
@@ -1974,18 +2168,14 @@ def CommonSupplierDeleteTaxParameter(request,pk,*allifargs,**allifkwargs):
 def commonWantToDeleteSupplierTaxParameter(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonSupplierTaxParametersModel,"Delete this item",'allifmaalcommonapp/taxes/delete-supplier-tax-confirm.html')
 
-
 ################################3 GENERAL LEDGER ACCOUNTS ###########################
 @allif_base_view_wrapper
 def commonGeneralLedgers(request,*allifargs,**allifkwargs):
     title="General Ledger Accounts"
     allif_data=common_shared_data(request)
-    
-    #allifqueryset=allif_filtered_and_sorted_queryset(request, allif_main_models_registry['CommonCurrenciesModel'], allif_data)
     allifqueryset =allif_filtered_and_sorted_queryset(request,CommonGeneralLedgersModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,}
     return render(request,'allifmaalcommonapp/accounts/genledgers.html',context)
-
 
 @allif_base_view_wrapper
 def commonAddGeneralLedger(request, *allifargs, **allifkwargs):
@@ -2116,7 +2306,6 @@ def commonChartofAccAdvanceSearch(request,*allifargs,**allifkwargs):
     return allif_advance_search_handler(request,model_name='CommonChartofAccountsModel',advanced_search_config_key='CommonChartofAccountsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/accounts/chart-of-accs.html', # Template for HTML results
         template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
-        #accounts/coa-search-pdf.html
     )
 
 
@@ -2153,8 +2342,6 @@ def commonClearAcc(request,pk,*allifargs,**allifkwargs):
     acc.save()
     return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
    
-
-
 ############################################# BANKS ##############################3
 #@allif_base_view_wrapper
 def commonBanks(request,*allifargs,**allifkwargs):
@@ -2162,7 +2349,10 @@ def commonBanks(request,*allifargs,**allifkwargs):
     title="Banks"
     allif_data=common_shared_data(request)
     allifqueryset =allif_filtered_and_sorted_queryset(request,CommonBanksModel,allif_data,explicit_scope='all')
-    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,}
+    #allifqueryset=[]
+    allifqueryset=CommonBanksModel.objects.all()
+    context={"title":title,"allifqueryset":allifqueryset,#"sort_options": #allifqueryset.sort_options,
+             }
     return render(request,'allifmaalcommonapp/banks/banks.html',context)
 
 #@allif_base_view_wrapper
@@ -2173,20 +2363,19 @@ def commonAddBank(request, *allifargs, **allifkwargs):
 def commonEditBank(request, pk, *allifargs, **allifkwargs):
     return allif_common_form_edit_and_save(request,pk,CommonAddBankForm,"Edit Bank","commonBanks",'allifmaalcommonapp/banks/add-bank.html')
 
-@allif_base_view_wrapper
+#@allif_base_view_wrapper
 def commonWantToDeleteBank(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonBanksModel,"Delete this item",'allifmaalcommonapp/banks/delete-bank-confirm.html')
 
-@logged_in_user_can_delete
-@allif_base_view_wrapper
+#@logged_in_user_can_delete
+#@allif_base_view_wrapper
 def commonDeleteBank(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonBanksModel',pk=pk,success_redirect_url_name='commonBanks')
 
-@allif_base_view_wrapper
+#@allif_base_view_wrapper
 def commonBankSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonBanksModel',search_fields_key='CommonBanksModel',
     template_path='allifmaalcommonapp/banks/banks.html',search_input_name='allifsearchcommonfieldname',)
-
 
 #@allif_base_view_wrapper
 def commonBankDetails(request, pk, *allifargs, **allifkwargs):
@@ -2220,8 +2409,6 @@ def commonBankDetails(request, pk, *allifargs, **allifkwargs):
         ]
     )
 
-
-    
 ############################################### BANK DEPOSITS ################################
 @allif_base_view_wrapper
 def commonBankShareholderDeposits(request,*allifargs,**allifkwargs):
@@ -2288,10 +2475,8 @@ def commonPostShareholderDeposit(request,pk,*allifargs,**allifkwargs):
     allifquery.save()
     eqtyquery.save()
     return redirect('allifmaalcommonapp:commonBankShareholderDeposits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-      
 
 ############################################### BANK WITHDRAWALS ################################
-
 @allif_base_view_wrapper
 def commonBankWithdrawals(request,*allifargs,**allifkwargs):
     title="Money Withdrawals"
@@ -2330,10 +2515,8 @@ def commonWithdrawalAdvanceSearch(request,*allifargs,**allifkwargs):
     return allif_advance_search_handler(request,model_name='CommonBankWithdrawalsModel',advanced_search_config_key='CommonBankWithdrawalsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/banks/withdrawals/withdrawals.html', # Template for HTML results
         template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
-        #accounts/coa-search-pdf.html
     )
-
-       
+    
 ##############################33 suppliers section ###############3
 @allif_base_view_wrapper
 def commonSuppliers(request,*allifargs,**allifkwargs):
@@ -2355,14 +2538,9 @@ def commonEditSupplier(request, pk, *allifargs, **allifkwargs):
 def commonSupplierDetails(request, pk, *allifargs, **allifkwargs):
     allif_data=common_shared_data(request)
     allifquery=get_object_or_404(CommonSuppliersModel, id=pk)
-    return allif_common_detail_view(
-        request,
-        model_class=CommonSuppliersModel,
-        pk=pk,
-        template_name='allifmaalcommonapp/suppliers/supplier-details.html', # Create this template
-        title_map={'default': 'Supplier Details'},
-       
-    )
+    return allif_common_detail_view(request,model_class=CommonSuppliersModel,pk=pk,
+        template_name='allifmaalcommonapp/suppliers/supplier-details.html',title_map={'default': 'Supplier Details'},
+       )
 
 @allif_base_view_wrapper
 def commonWantToDeleteSupplier(request,pk,*allifargs,**allifkwargs):
@@ -2385,10 +2563,8 @@ def commonSupplierAdvanceSearch(request,*allifargs,**allifkwargs):
     return allif_advance_search_handler(request,model_name='CommonSuppliersModel',advanced_search_config_key='CommonSuppliersModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/suppliers/suppliers.html', # Template for HTML results
         template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
-        #accounts/coa-search-pdf.html
     )
 
-    
 ############################################ CUSTOMERS ######################
 @allif_base_view_wrapper
 def commonCustomers(request,*allifargs,**allifkwargs):
@@ -2451,16 +2627,13 @@ def commonCustomerSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonCustomersModel',search_fields_key='CommonCustomersModel',
     template_path='allifmaalcommonapp/customers/customers.html',search_input_name='allifsearchcommonfieldname',)
 
-
 @allif_base_view_wrapper
 def commonCustomerAdvanceSearch(request,*allifargs,**allifkwargs):
     # This view now simply calls the centralized advanced search handler
     return allif_advance_search_handler(request,model_name='CommonCustomersModel',advanced_search_config_key='CommonCustomersModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/customers/customers.html', # Template for HTML results
         template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
-        #accounts/coa-search-pdf.html
     )
-
 
     ############################ ASSETS ##########################3
 @allif_base_view_wrapper
@@ -2499,14 +2672,12 @@ def commonAssetSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonAssetsModel',search_fields_key='CommonAssetsModel',
     template_path='allifmaalcommonapp/assets/assets.html',search_input_name='allifsearchcommonfieldname',)
 
-
 @allif_base_view_wrapper
 def commonAssetAdvanceSearch(request,*allifargs,**allifkwargs):
     # This view now simply calls the centralized advanced search handler
     return allif_advance_search_handler(request,model_name='CommonAssetsModel',advanced_search_config_key='CommonAssetsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/assets/assets.html', # Template for HTML results
         template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
-        #accounts/coa-search-pdf.html
     )
 
 @allif_base_view_wrapper
@@ -2574,14 +2745,10 @@ def commonPostAsset(request,pk,*allifargs,**allifkwargs):
                 allifquery.status="posted"
                 allifquery.save()
                 return redirect('allifmaalcommonapp:commonAssets',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-
-                
             else:
                 error_message=f"Sorry, please ensure there are enough funds in {cost_acc_selected} to pay for {allifquery} and deposit is not more than total value of the asset"
                 allifcontext={"error_message":error_message,}
                 return render(request,'allifmaalcommonapp/error/error.html',allifcontext)
-                
-            
         elif payment_option=="Credit":
             ##############.... increase the asset account.........########3#####3
             asset_acc=get_object_or_404(CommonChartofAccountsModel, id=asset_value_acc_id.id)
@@ -2604,16 +2771,12 @@ def commonPostAsset(request,pk,*allifargs,**allifkwargs):
             error_message=f"Sorry, correct payment terms"
             allifcontext={"error_message":error_message,}
             return render(request,'allifmaalcommonapp/error/error.html',allifcontext)
-        
-        
     else:
         error_message=f"Sorry, this is already posted"
         allifcontext={"error_message":error_message,}
         return render(request,'allifmaalcommonapp/error/error.html',allifcontext)
     
-
 ############################3 ASSET DEPRECIATIONS #############3
-
 @allif_base_view_wrapper
 def commonDepreciateAsset(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
@@ -2935,7 +3098,6 @@ def commonTransactionsSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonTransactionsModel',search_fields_key='CommonTransactionsModel',
     template_path='allifmaalcommonapp/transactions/transactions.html',search_input_name='allifsearchcommonfieldname',)
 
-
 @allif_base_view_wrapper
 def commonTransactionAdvanceSearch(request,*allifargs,**allifkwargs):
     return allif_advance_search_handler(request,model_name='CommonTransactionsModel',advanced_search_config_key='CommonTransactionsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
@@ -2955,7 +3117,7 @@ def commonNewTransaction(request,*allifargs,**allifkwargs):
     else:
         nmbr= 'TRANS/1'+"/"+str(uuid4()).split('-')[2]
 
-    number=CommonTransactionsModel.all_objects.create(number=nmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+    number=CommonTransactionsModel.all_objects.create(number=nmbr,company=allif_data.get("main_sbscrbr_entity"),owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
     number.save()
     return redirect('allifmaalcommonapp:commonTransactions',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -3007,7 +3169,6 @@ def commonEditTransactionItem(request, pk, *allifargs, **allifkwargs):
     'commonAddTransactionItems','allifmaalcommonapp/transactions/add_trans_items.html',
     redirect_with_pk=True,redirect_pk_value=allifquery,)
 
-
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def commonDeleteTransactionItem(request,pk,*allifargs,**allifkwargs):
@@ -3015,7 +3176,6 @@ def commonDeleteTransactionItem(request,pk,*allifargs,**allifkwargs):
     allifquery=query.trans_number.id
     return allif_delete_hanlder(request,model_name='CommonQuoteItemsModel',
     pk=pk,success_redirect_url_name='commonAddTransactionItems',redirect_with_pk=True,redirect_pk_value=allifquery)
-    
     
 ##############3 Spaces################
 @allif_base_view_wrapper
@@ -3040,7 +3200,6 @@ def commonSpaceDetails(request, pk, *allifargs, **allifkwargs):
     return allif_common_detail_view(request,model_class=CommonSpacesModel,pk=pk,
         template_name='allifmaalcommonapp/spaces/space-details.html', # Create this template
         title_map={'default': 'Space Details'},
-        
         related_data_configs=[
             {
             'context_key': 'allifqueryset', # This will be available in template
@@ -3060,7 +3219,6 @@ def commonWantToDeleteSpace(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonDeleteSpace(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonSpacesModel',pk=pk,success_redirect_url_name='commonSpaces')
-
 
 ################################ SPACE UNITS....####################
 @allif_base_view_wrapper
@@ -3091,30 +3249,25 @@ def commonSpaceUnitDetails(request, pk, *allifargs, **allifkwargs):
 
 @allif_base_view_wrapper
 def commonWantToDeleteSpaceUnit(request,pk,*allifargs,**allifkwargs):
-    return allif_delete_confirm(request,pk,CommonSpaceUnitsModel,"Delete this item",
-                                'allifmaalcommonapp/spaces/units/delete_space_unit_confirm.html')
+    return allif_delete_confirm(request,pk,CommonSpaceUnitsModel,"Delete this item",'allifmaalcommonapp/spaces/units/delete_space_unit_confirm.html')
 
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def commonDeleteSpaceUnit(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonSpaceUnitsModel',pk=pk,success_redirect_url_name='commonSpaceUnits')
 
-
 @allif_base_view_wrapper
 def commonSpaceUnitSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonSpaceUnitsModel',search_fields_key='CommonSpaceUnitsModel',
     template_path='allifmaalcommonapp/spaces/units/space_units.html',search_input_name='allifsearchcommonfieldname',)
-
 
 ######################## space booking items... #####################3
 @allif_base_view_wrapper
 def commonSpaceBookings(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     allifquery=get_object_or_404(CommonTransactionsModel, id=pk)
-    
     title=str(allifquery) +" - "+ "Space Alloctions"
     allifqueryset=CommonSpaceBookingItemsModel.all_objects.filter(trans_number=allifquery)#this line helps to
-   
     context={"allifquery":allifquery,"allifqueryset":allifqueryset,"title":title,}
     return render(request,'allifmaalcommonapp/booking/space_bookings.html',context)
 
@@ -3139,7 +3292,6 @@ def commonAddSpaceBookingItems(request,pk,*allifargs,**allifkwargs):
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
         extra_context=my_extra_context,)
 
-
 @allif_base_view_wrapper
 def commonEditSpaceBookingItem(request, pk, *allifargs, **allifkwargs):
     query=get_object_or_404(CommonSpaceBookingItemsModel, id=pk)
@@ -3152,7 +3304,6 @@ def commonEditSpaceBookingItem(request, pk, *allifargs, **allifkwargs):
 def commonSpaceAllocationPdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonTransactionsModel',)
  
-
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def commonDeleteSpaceBookingItem(request,pk,*allifargs,**allifkwargs):
@@ -3161,7 +3312,6 @@ def commonDeleteSpaceBookingItem(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonSpaceBookingItemsModel',
     pk=pk,success_redirect_url_name='commonAddSpaceBookingItems',redirect_with_pk=True,redirect_pk_value=allifquery)
     
-
 ################### inventory/stock###########3
 @allif_base_view_wrapper
 def commonStocks(request,*allifargs,**allifkwargs):
@@ -3171,7 +3321,6 @@ def commonStocks(request,*allifargs,**allifkwargs):
     allifqueryset =allif_filtered_and_sorted_queryset(request,CommonStocksModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalcommonapp/stocks/stocks.html',context)
-
 
 @allif_base_view_wrapper
 def commonAddStockItem(request, *allifargs, **allifkwargs):
@@ -3212,8 +3361,6 @@ def commonStockItemDetails(request, pk, *allifargs, **allifkwargs):
         template_name='allifmaalcommonapp/stocks/stock-details.html', # Create this template
         title_map={'default': 'Stock Details'},)
 
-
-
 ############################# STOCK PURCHASE ORDERS #####################################
 @allif_base_view_wrapper
 def commonPurchaseOrders(request,*allifargs,**allifkwargs):
@@ -3245,14 +3392,12 @@ def commonPOSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonPurchaseOrdersModel',search_fields_key='CommonPurchaseOrdersModel',
     template_path='allifmaalcommonapp/purchases/purchaseorders.html',search_input_name='allifsearchcommonfieldname',)
 
-
 @allif_base_view_wrapper
 def commonPOAdvanceSearch(request,*allifargs,**allifkwargs):
     return allif_advance_search_handler(request,model_name='CommonPurchaseOrdersModel',advanced_search_config_key='CommonPurchaseOrdersModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/purchases/purchaseorders.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-
-@allif_base_view_wrapper
+#@allif_base_view_wrapper
 def commonNewPurchaseOrder(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     ###### start... UID generation ##################
@@ -3268,7 +3413,7 @@ def commonNewPurchaseOrder(request,*allifargs,**allifkwargs):
     else:
         purchaseNumber= 'PO/1'+"/"+str(currntyear)+"/"+str(uuid4()).split('-')[2]
 
-    newPurchaseOrder= CommonPurchaseOrdersModel.all_objects.create(number=purchaseNumber,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+    newPurchaseOrder= CommonPurchaseOrdersModel.all_objects.create(number=purchaseNumber,company=allif_data.get("main_sbscrbr_entity"),owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
     newPurchaseOrder.save()
     return redirect('allifmaalcommonapp:commonPurchaseOrders',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -3277,12 +3422,9 @@ def commonNewPurchaseOrder(request,*allifargs,**allifkwargs):
 def common_purchase_order_pdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonPurchaseOrdersModel',)
   
-
 @allif_base_view_wrapper
 def commonPOMiscCost(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    #allifquery= get_object_or_404(CommonPurchaseOrdersModel, id=pk)
-    
     allifquery=get_object_or_404(CommonPurchaseOrdersModel, id=pk)
     allifqueryset = CommonPurchaseOrderMiscCostsModel.all_objects.filter(po_misc_cost_con=allifquery)
     queryset=CommonPurchaseOrderItemsModel.all_objects.filter(po_item_con=allifquery)
@@ -3334,14 +3476,12 @@ def commonCalculatePOMiscCosts(request,pk,*allifargs,**allifkwargs):
     for cost in queryset:
         miscCostotal+=cost.purchase_order_misc_cost
     
-    # now assing the values to various columns/attributes
     allifquery.amount=po_total
     allifquery.taxamount=po_tax_amount
     allifquery.misccosts=miscCostotal
     allifquery.grandtotal=po_total+po_tax_amount+miscCostotal
     allifquery.save()
     return redirect('allifmaalcommonapp:commonAddPODetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-
 
 @logged_in_user_can_delete
 @allif_base_view_wrapper
@@ -3350,8 +3490,6 @@ def commonDeleteMiscCost(request,pk,*allifargs,**allifkwargs):
     allifquery=query.po_misc_cost_con.id
     return allif_delete_hanlder(request,model_name='CommonPurchaseOrderMiscCostsModel',
     pk=pk,success_redirect_url_name='commonPOMiscCost',redirect_with_pk=True,redirect_pk_value=allifquery)
-
-
 
 @allif_base_view_wrapper
 def commonEditPOMiscCostDetails(request, pk, *allifargs, **allifkwargs):
@@ -3463,7 +3601,6 @@ def commonPostPO(request,pk,*allifargs,**allifkwargs):
     return redirect('allifmaalcommonapp:commonAddPODetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
 ###########33 purchaser order items
-
 @allif_base_view_wrapper
 def commonAddPOItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
@@ -3498,7 +3635,6 @@ def commonAddPOItems(request,pk,*allifargs,**allifkwargs):
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
         extra_context=my_extra_context,)
  
-
 @allif_base_view_wrapper
 def commonEditPOItem(request, pk, *allifargs, **allifkwargs):
     query=get_object_or_404(CommonPurchaseOrderItemsModel, id=pk)
@@ -3506,7 +3642,6 @@ def commonEditPOItem(request, pk, *allifargs, **allifkwargs):
     return allif_common_form_edit_and_save(request,pk,CommonPOItemAddForm,"Edit PO Item Details",
     'commonAddPOItems','allifmaalcommonapp/purchases/add-po-items.html',
     redirect_with_pk=True,redirect_pk_value=allifquery,)
-
 
 @logged_in_user_can_delete
 @allif_base_view_wrapper
@@ -3516,7 +3651,6 @@ def commonDeletePOItem(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonPurchaseOrderItemsModel',
     pk=pk,success_redirect_url_name='commonAddPOItems',redirect_with_pk=True,redirect_pk_value=allifquery)
     
-
 ############################## TRANSFER ORDERS #######################
 @allif_base_view_wrapper
 def commonTransferOrders(request,*allifargs,**allifkwargs):
@@ -3588,7 +3722,6 @@ def commonEditTransferOrderItem(request, pk, *allifargs, **allifkwargs):
     'commonAddPOItems','allifmaalcommonapp/stocks/transfers/add-transfer-order-item.html',
     redirect_with_pk=True,redirect_pk_value=allifquery,)
 
-
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def commonDeleteTransferOrderItem(request,pk,*allifargs,**allifkwargs):
@@ -3597,7 +3730,6 @@ def commonDeleteTransferOrderItem(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonStockTransferOrderItemsModel',
     pk=pk,success_redirect_url_name='commonAddTransferOrderItems',redirect_with_pk=True,redirect_pk_value=allifquery)
     
-
 @allif_base_view_wrapper   
 def commonNewTransferOrder(request,*allifargs,**allifkwargs):
     try:
@@ -3616,7 +3748,7 @@ def commonNewTransferOrder(request,*allifargs,**allifkwargs):
         else:
             sqnmbr= 'TRNSF/ORD/1'+"/"+str(uuid4()).split('-')[2]
 
-        newQuoteNumber=CommonStockTransferOrdersModel.objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        newQuoteNumber=CommonStockTransferOrdersModel.objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         newQuoteNumber.save()
         return redirect('allifmaalcommonapp:commonTransferOrders',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -3682,8 +3814,6 @@ def commonDeleteSpaceItem(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonSpaceItemsModel',
     pk=pk,success_redirect_url_name='commonAddSpaceItems',redirect_with_pk=True,redirect_pk_value=allifquery)
     
-    
-
 @allif_base_view_wrapper
 def commonPostTransferOrder(request, pk, *allifargs, **allifkwargs):
     allif_data=common_shared_data(request)
@@ -3859,7 +3989,7 @@ def commonNewQuote(request,*allifargs,**allifkwargs):
     else:
         sqnmbr= 'SQ/1'+"/"+str(uuid4()).split('-')[2]
 
-    newQuoteNumber= CommonQuotesModel.all_objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+    newQuoteNumber= CommonQuotesModel.all_objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
     newQuoteNumber.save()
     return redirect('allifmaalcommonapp:commonQuotes',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -3884,10 +4014,6 @@ def commonSearchAjaxQuote(request,*allifargs,**allifkwargs):
             return JsonResponse(allifquery, safe=False)
         else:
             pass
-  
-
-########################### END OF QUOTATION ###############
-
 
 ##########################3 INVOICES #######################333
 @allif_base_view_wrapper
@@ -3933,7 +4059,7 @@ def commonNewInvoice(request,*allifargs,**allifkwargs):
     else:
         invnmbr= 'Inv/1'+"/"+str(currntyear)+"/"+str(uuid4()).split('-')[2]
 
-    newinv= CommonInvoicesModel.all_objects.create(number=invnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+    newinv= CommonInvoicesModel.all_objects.create(number=invnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
     newinv.save()
     return redirect('allifmaalcommonapp:commonInvoices',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -4065,12 +4191,7 @@ def commonPostInvoice(request,pk,*allifargs,**allifkwargs):
             mycustomer.turnover=initial_customer_acc_turnover+item.items.unitPrice
             initial_customer_acc_balance=mycustomer.balance or 0
             mycustomer.balance=initial_customer_acc_balance+item.items.unitPrice
-
             mycustomer.save()
-            
-            #transaction=AllifmaalCustomerStatementModel.objects.create(customer=customer,debit=inv_total,
-                    #comments="Invoice",balance=initial_customer_acc_balance+inv_total)#get the ord
-        
 
             # ......... credit the equity account .........
             equity_acc=CommonChartofAccountsModel.all_objects.filter(description="Equity",company=allif_data.get("main_sbscrbr_entity"),department=allif_data.get("logged_user_department")).first()
@@ -4393,8 +4514,6 @@ def commonCustomerLedgerEntries(request, pk, *allifargs, **allifkwargs):
         ]
     )
 
-
-
 @allif_base_view_wrapper
 def commonStaffLedgerEntries(request, pk, *allifargs, **allifkwargs):
     return allif_common_detail_view(request,model_class=CommonEmployeesModel,pk=pk,
@@ -4409,7 +4528,6 @@ def commonStaffLedgerEntries(request, pk, *allifargs, **allifkwargs):
             }
         ]
     )
-
 
 ##############################3 PAYMENTS #############################
 ######### supplier payments section ############
@@ -4507,18 +4625,15 @@ def commonPostedSupplierPayments(request,*allifargs,**allifkwargs):
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalcommonapp/payments/suppliers/posted-payments.html',context)
 
-
 @allif_base_view_wrapper
 def commonPaySupplierDirect(request, *allifargs, **allifkwargs):
     return allif_common_form_submission_and_save(request,CommonAddSupplierPaymentForm,
     "Supplier Payment Initiations","commonSupplierPayments",'allifmaalcommonapp/payments/suppliers/pay-supplier-directly.html')
 
-#
 ################ SUPPLIER STATEMENTS####################
 @allif_base_view_wrapper
 def commonSupplierStatementpdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonSuppliersModel',)
-
 
 ######################### customer payments #################3
 @allif_base_view_wrapper
@@ -4598,7 +4713,6 @@ def commonPostCustomerPayment(request,pk,*allifargs,**allifkwargs):
         mycust.save()
 
         # debit the asset account where the money from customer is received to
-        
         coa_acc=get_object_or_404(CommonChartofAccountsModel, id=debit_acc.id)
         initial_coa_acc_bal=coa_acc.balance
         coa_acc.balance= Decimal(initial_coa_acc_bal)+Decimal(myamount)
@@ -4622,7 +4736,6 @@ def commonPostedCustomerPayments(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonCustomerStatementpdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCustomersModel',)
-
 
 ########################3 staff salaries #############
 @allif_base_view_wrapper
@@ -4660,7 +4773,6 @@ def commonDeleteSalary(request,pk,*allifargs,**allifkwargs):
 def commonSalarySearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonSalariesModel',search_fields_key='CommonSalariesModel',
     template_path='allifmaalcommonapp/hrm/salaries/salaries.html',search_input_name='allifsearchcommonfieldname',)
-
 
 @allif_base_view_wrapper
 def commonSalaryAdvanceSearch(request,*allifargs,**allifkwargs):
@@ -4716,19 +4828,15 @@ def commonPostSalary(request,pk,*allifargs,**allifkwargs):
         init_salary_balance=allifstaff.salary_balance
         allifstaff.salary_balance=(month_salary-normal_salary)+init_salary_balance
         allifstaff.save()
-
-        #
         allifquery.status="posted"
         allifquery.save()
         return redirect('allifmaalcommonapp:commonSalaries',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-
     else:
 
         messgeone=messages.error(request, 'Please note that either Equity or Salaries or both accounts are missing in the chart of accounts.')
         messgetwo=messages.error(request, 'Add Equity and Salaries accounts in the Equity and Expenses categories respectively, if they are not already there, then post again.')
         
         return render(request,'allifmaalcommonapp/error/error.html')
-        
      
 @allif_base_view_wrapper
 def commonPostedSalaries(request,*allifargs,**allifkwargs):
@@ -4834,7 +4942,6 @@ def commonInvoiceJob(request,pk,*allifargs,**allifkwargs):
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
         extra_context=my_extra_context,)
 
-
 @allif_base_view_wrapper
 def commonJobInvoicePdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonJobsModel',)
@@ -4865,7 +4972,6 @@ def commonDeleteTransit(request,pk,*allifargs,**allifkwargs):
 def commonTransitSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonTransitModel',search_fields_key='CommonTransitModel',
     template_path='allifmaalcommonapp/transport/transits.html',search_input_name='allifsearchcommonfieldname',)
-
 
 @allif_base_view_wrapper
 def commonTransitAdvanceSearch(request,*allifargs,**allifkwargs):
@@ -4903,7 +5009,6 @@ def commonDeleteShipmentItem(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonTransitItemsModel',
     pk=pk,success_redirect_url_name='commonAddShipmentItems',redirect_with_pk=True,redirect_pk_value=allifquery)
 
-
 @allif_base_view_wrapper
 def commonNewTransit(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
@@ -4924,9 +5029,6 @@ def commonNewTransit(request,*allifargs,**allifkwargs):
     newQuoteNumber=CommonTransitModel.all_objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
     newQuoteNumber.save()
     return redirect('allifmaalcommonapp:commonTransits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-
-
-
 
 @allif_base_view_wrapper
 def commonEditShipmentItem(request, pk, *allifargs, **allifkwargs):
@@ -4991,10 +5093,8 @@ def commonCreditorsReportpdf(request, *allifargs, **allifkwargs):
     allif_data = common_shared_data(request)
     allifqueryset = CommonSuppliersModel.objects.filter(balance__gte=1,company=allif_data.get("main_sbscrbr_entity")).order_by('date')
     return allif_pdf_reports_generator(request,title="Creditors List",filename="creditors-list.pdf",
-        template_path='allifmaalcommonapp/reports/creditors-report.html',
-        allifqueryset=allifqueryset
+        template_path='allifmaalcommonapp/reports/creditors-report.html',allifqueryset=allifqueryset
     )
-
 
 @allif_base_view_wrapper
 def commonAvailableStockpdf(request, *allifargs, **allifkwargs):
@@ -5003,8 +5103,7 @@ def commonAvailableStockpdf(request, *allifargs, **allifkwargs):
     allifqueryset = CommonStocksModel.objects.filter(quantity__gte=1,company=allif_data.get("main_sbscrbr_entity")).order_by('date')
 
     return allif_pdf_reports_generator(request,title="Available Stock List",filename="available-stock-report.pdf",
-        template_path='allifmaalcommonapp/reports/available-stock-report.html',
-        allifqueryset=allifqueryset
+        template_path='allifmaalcommonapp/reports/available-stock-report.html',allifqueryset=allifqueryset
     )
 
 ################################## TASKS ###########################################
@@ -5025,7 +5124,6 @@ def commonMarkTaskComplete(request,pk,*allifargs,**allifkwargs):
     if mark_complete.status=="incomplete":
         mark_complete.status="complete"
         mark_complete.save()
-    
     else:
         mark_complete.status="incomplete"
         mark_complete.save()
@@ -5119,7 +5217,7 @@ def commonDeleteProgress(request,pk,*allifargs,**allifkwargs):
     allifquery=query.trans_number.id
     return allif_delete_hanlder(request,model_name='CommonProgressModel',
     pk=pk,success_redirect_url_name='commonProgress',redirect_with_pk=True,redirect_pk_value=allifquery)
-
+    
 ###################3 customer contacts messages ###################3
 def commonCustomerContacts(request):
     try:

@@ -539,8 +539,8 @@ class CommonAddStaffProfileForm(CommonBaseForm):
     def __init__(self, allifmaalparameter, *args, **kwargs):
         super().__init__(allifmaalparameter, *args, **kwargs)
         if allifmaalparameter:
-            self.fields['username'].queryset =User.objects.filter(usercompany=allifmaalparameter)
-            self.fields['username'].queryset =User.objects.all()
+            self.fields['username'].queryset =User.objects.filter(company=allifmaalparameter)
+            #self.fields['username'].queryset =User.objects.all()
             
         else:
             self.fields['username'].queryset =User.objects.none()
@@ -883,16 +883,7 @@ class CommonExpensesAddForm(CommonBaseForm):
           
         }
         
-    def __init__(self, allifmaalparameter, *args, **kwargs):
-        super().__init__(allifmaalparameter, *args, **kwargs)
-        if allifmaalparameter:
-            self.fields['expense_account'].queryset = CommonChartofAccountsModel.objects.filter(company=allifmaalparameter,code__lte=59999,code__gte=49999)
-            self.fields['supplier'].queryset = CommonSuppliersModel.objects.filter(company=allifmaalparameter,)
-     
-        else:
-            self.fields['expense_account'].queryset = CommonChartofAccountsModel.objects.none()
-            self.fields['supplier'].queryset = CommonSuppliersModel.objects.none()
-         
+    
     
     """
     def __init__(self, allifmaalparameter, *args, **kwargs):

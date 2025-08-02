@@ -13,12 +13,25 @@ def allifmaalcommonappglobalVariables(request):
         user = getattr(request, 'user', None)  # Get 'user' if it exists, otherwise None
         is_authenticated = user is not None and user.is_authenticated
         
+        
+        
+        
+        
+        
+        
+       
+    
+        
         if is_authenticated:
             allifapp_logged_user_category=request.user.user_category
+            #user_var=request.user.customurlslug
+            #compslg=request.user.usercompany
+            #main_sbscrbr_entity=CommonCompanyDetailsModel.all_objects.filter(slgfld=compslg).first()
+            
+            main_sbscrbr_entity=CommonCompanyDetailsModel.all_objects.filter(company=request.user.company).first()
+            if main_sbscrbr_entity is not None:
+                compslg=main_sbscrbr_entity.slgfld
             user_var=request.user.customurlslug
-           
-            compslg=request.user.usercompany
-            main_sbscrbr_entity=CommonCompanyDetailsModel.all_objects.filter(slgfld=compslg).first()
             
             if main_sbscrbr_entity!=None:
                 glblslug=main_sbscrbr_entity.slgfld

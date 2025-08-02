@@ -5,7 +5,11 @@ app_name='allifmaalcommonapp'
 urlpatterns = [
 
 ############################ The decision maker ##################################3
+path('Common/Debugging/', views.commonDebugging, name="commonDebugging"),
+
+########################### logs ######################
 path('System/Log/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogs, name="commonLogs"),
+
 path('Search/Find/Log/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogSearch, name="commonLogSearch"),
 path('Search/Advance/d/Find/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogsAdvancedSearch, name="commonLogsAdvancedSearch"),
 path('Log/s/View/More/<str:pk>/<str:allifusr>/<str:allifslug>/Detail/s/', views.commonLogDetails, name="commonLogDetails"),

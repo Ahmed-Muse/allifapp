@@ -1763,6 +1763,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
     user_var = allif_data.get("usrslg")
     glblslug = allif_data.get("compslg")
     ahmedyaremuse="am tesint this gy"
+    #logged_user_div=request.user.userdivision
     # Determine the model class from the form's Meta
     model_class = form_class.Meta.model
     if not model_class:
@@ -1789,9 +1790,10 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
         form = form_class(*form_args, request.POST, instance=allifquery) 
         if form.is_valid():
             obj = form.save(commit=False) # obj is now item_instance with updated data
-            if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
+            #if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
+            if hasattr(obj, 'division'):
                 try:
-                    obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id)
+                    obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id or 1)
                 except Http404:
                     #print(f"WARNING: Division with ID {allif_data.get('logged_user_division').id} not found for {obj.__class__.__name__}.")
                     obj.division = None
@@ -1801,7 +1803,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
             else:
                 pass
             # Branch
-            if hasattr(obj, 'branch') and allif_data.get("logged_user_branch").id:
+            if hasattr(obj, 'branch'):
                 try:
                     obj.branch = get_object_or_404(CommonBranchesModel, pk=allif_data.get("logged_user_branch").id)
                 except Http404:
@@ -1813,7 +1815,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
             else:
                 pass
             # Department
-            if hasattr(obj, 'department') and allif_data.get("logged_user_department").id:
+            if hasattr(obj, 'department'):
                 try:
                     obj.department = get_object_or_404(CommonDepartmentsModel, pk=allif_data.get("logged_user_department").id)
                 except Http404:
@@ -1869,8 +1871,8 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
             
 
             # --- Assign common 'updated_by' field ---
-            if hasattr(obj, 'updated_by') and allif_data.get("usernmeslg"):
-                obj.updated_by = allif_data.get("usernmeslg") # This should be the User object
+            #if hasattr(obj, 'updated_by') and allif_data.get("usernmeslg"):
+                #obj.updated_by = allif_data.get("usernmeslg") # This should be the User object
                 
 
             # --- Execute custom pre-save callback if provided ---

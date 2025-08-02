@@ -57,14 +57,14 @@ def shaafiDashboard(request,*allifargs,**allifkwargs):
 def triageData(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Triage Records"
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,TriagesModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/triage/triage_data.html',context)
 
 @allif_base_view_wrapper
 def AddTriageData(request,pk,*allifargs,**allifkwargs):
-    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery= get_object_or_404(CommonTransactionsModel, id=pk) 
     allifquery_id=allifquery.id
     def transaction_item_pre_save(obj, request, allif_data):
         obj.medical_file=allifquery
@@ -107,20 +107,19 @@ def deleteTriageData(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='TriagesModel',
     pk=pk,success_redirect_url_name='triageData',app_namespace='allifmaalshaafiapp',)
 
-
 ######################### doctor assessments/observations #######################
 @allif_base_view_wrapper
 def doctorAssessments(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Patient Assessments"
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,AssessmentsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/assessments/doctor_assessments.html',context)
 
 @allif_base_view_wrapper
 def addDoctorAssessment(request,pk,*allifargs,**allifkwargs):
-    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery= get_object_or_404(CommonTransactionsModel, id=pk) 
     allifquery_id=allifquery.id
     def transaction_item_pre_save(obj, request, allif_data):
         obj.medical_file=allifquery
@@ -170,14 +169,14 @@ def deleteDoctorAssessment(request,pk,*allifargs,**allifkwargs):
 def labTestRequests(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Test Requests"
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,LabTestRequestsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/assessments/labtests/requests/lab_test_requests.html',context)
 
 @allif_base_view_wrapper
 def addLabTestRequest(request,pk,*allifargs,**allifkwargs):
-    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery= get_object_or_404(CommonTransactionsModel, id=pk) 
     allifquery_id=allifquery.id
     def transaction_item_pre_save(obj, request, allif_data):
         obj.medical_file=allifquery
@@ -227,14 +226,14 @@ def deleteLabTestRequest(request,pk,*allifargs,**allifkwargs):
 def labTestResults(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Test Results"
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,LabTestResultsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/assessments/labtests/results/lab_test_results.html',context)
 
 @allif_base_view_wrapper
 def addLabTestResult(request,pk,*allifargs,**allifkwargs):
-    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery= get_object_or_404(CommonTransactionsModel, id=pk) 
     allifquery_id=allifquery.id
     def transaction_item_pre_save(obj, request, allif_data):
         obj.medical_file=allifquery
@@ -284,14 +283,14 @@ def deleteLabTestResult(request,pk,*allifargs,**allifkwargs):
 def prescriptions(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Prescriptions"
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,MedicationsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/medication/prescriptions/prescriptions.html',context)
 
 @allif_base_view_wrapper
 def AddPrescription(request,pk,*allifargs,**allifkwargs):
-    allifquery=CommonTransactionsModel.all_objects.filter(id=pk).first()
+    allifquery=get_object_or_404(CommonTransactionsModel, id=pk) 
     allifquery_id=allifquery.id
     def transaction_item_pre_save(obj, request, allif_data):
         obj.medical_file=allifquery
@@ -342,7 +341,7 @@ def deletePrescription(request,pk,*allifargs,**allifkwargs):
 def admissions(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Admissions"
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,MedicationsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/medication/admissions/admissions.html',context)
@@ -400,7 +399,7 @@ def deleteAdmission(request,pk,*allifargs,**allifkwargs):
 def treatments(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Treatments"
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,MedicalAdministrationsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/medication/prescriptions/treatments/treatments.html',context)
@@ -452,14 +451,12 @@ def deleteTreatment(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='MedicalAdministrationsModel',
     pk=pk,success_redirect_url_name='treatments',app_namespace='allifmaalshaafiapp',)
 
-
-
 #################3 discharges ##############
 @allif_base_view_wrapper
 def discharges(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Discharges"
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,DischargesModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/medication/admissions/discharge/discharges.html',context)
@@ -511,14 +508,12 @@ def deleteDischarge(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='DischargesModel',
     pk=pk,success_redirect_url_name='discharges',app_namespace='allifmaalshaafiapp',)
 
-
-
 ####################### referals ##################
 @allif_base_view_wrapper
 def referrals(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Referrals"
-    formats=CommonDocsFormatModel.objects.all()
+    formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,ReferralsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/medication/referrals/referrals.html',context)

@@ -1,7 +1,17 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser,UserManager
 from django.template.defaultfilters import slugify
 from uuid import uuid4
+
+class ActiveManager(UserManager):
+    def get_queryset(self):
+        # This will return a QuerySet with all the default UserManager
+        # methods, but with your filter applied.
+        # Your original queryset filter was commented out, so I've
+        # kept the default behavior. If you intended to filter,
+        # you should uncomment and modify the line below.
+        # return super().get_queryset().filter(status__in=['Active', 'Approved', 'Draft'], delete_status='Deletable')
+        return super().get_queryset()
 user_level= [
     ('owner','owner'),
     ('chairman','chairman'),
@@ -25,9 +35,9 @@ class User(AbstractUser):# this is for creating new user... the fields are below
     customurlslug= models.SlugField(max_length=250, unique=True, blank=True, null=True)
     url_unique_id= models.CharField(null=True, blank=True, max_length=250)
     usercompany= models.CharField(max_length=250, blank=True, null=True)
-    userdivision= models.CharField(max_length=250, blank=True, null=True)
-    userbranch= models.CharField(max_length=250, blank=True, null=True)
-    userdepartment= models.CharField(max_length=250, blank=True, null=True)
+    #userdivision= models.CharField(max_length=250, blank=True, null=True)
+    #userbranch= models.CharField(max_length=250, blank=True, null=True)
+    #userdepartment= models.CharField(max_length=250, blank=True, null=True)
     fullNames= models.CharField(max_length=255, null=True,blank=True,default="User Full Names")
     phone=models.CharField(max_length=50,blank=True,null=True)
     peformance_counter=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
@@ -50,7 +60,20 @@ class User(AbstractUser):# this is for creating new user... the fields are below
     can_access_all=models.BooleanField('Can access all',default=False)
     can_access_related=models.BooleanField('Can access only related',default=False)
     allifmaal_admin=models.BooleanField('Can access all',default=False)
-   
+    
+    objects=ActiveManager()
+    all_objects = models.Manager() 
+    
+    #objects = UserManager() # Use the default manager for now to keep it simple.
+    
+    company = models.ForeignKey(
+        'allifmaalcommonapp.CommonCompanyDetailsModel', # Use string reference
+        on_delete=models.SET_NULL,
+        null=True, 
+        blank=True,
+        related_name='allifmaalusersappcompany'
+    )
+    
     def __str__(self):
         return str(self.first_name)#please dont change this unless very necessary....
     def save(self, *args, **kwargs):

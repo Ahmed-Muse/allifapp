@@ -187,7 +187,8 @@ def subscriber_company_status(func):
         try:
             allif_data = common_shared_data(request)
             compslg = request.user.usercompany # Assuming usercompany is a slug
-            main_sbscrbr_entity = CommonCompanyDetailsModel.all_objects.filter(slgfld=compslg).first()
+            #main_sbscrbr_entity = CommonCompanyDetailsModel.all_objects.filter(slgfld=compslg).first()
+            main_sbscrbr_entity =CommonCompanyDetailsModel.all_objects.filter(company=request.user.company).first()
 
             if main_sbscrbr_entity is None:
                 return redirect('allifmaalusersapp:userLogoutPage') # Company not found, force logout

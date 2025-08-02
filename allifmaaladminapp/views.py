@@ -10,7 +10,7 @@ from allifmaalcommonapp.decorators import allifmaal_admin, unauthenticated_user,
 from allifmaalcommonapp.forms import CommonAddSectorForm
 def holdingFunction(request):
     chartaccs_values_list=CommonChartofAccountsModel.objects.all().values_list('description', flat=True)
-    
+    sales_employees = CommonEmployeesModel.objects.all().filter(department__name='Sales')
     #allifqueryset = get_filtered_and_sorted_queryset(request,CommonCurrenciesModel,allif_data,# these only show all records...
             
             #we can also add the extra filtering parameter as below

@@ -34,8 +34,8 @@ def newUserRegistration(request):
         return render(request,'allifmaalusersapp/error/error.html',error_context)
 
 def userLoginPage(request):
-    title="User Login Page"
-    try:
+        title="User Login Page"
+   
         if request.user.is_authenticated:
             return redirect("allifmaalcommonapp:CommonDecisionPoint")
         else:
@@ -53,10 +53,7 @@ def userLoginPage(request):
                 
         context={"form":form,"title":title,}
         return render(request,"allifmaalusersapp/users/user_login.html",context)
-    except Exception as ex:
-        error_context={'error_message': ex,}
-        return render(request,'allifmaalusersapp/error/error.html',error_context)
-        
+   
 def userLogoutPage(request):
     try:
         if request.user.is_authenticated:
@@ -73,7 +70,7 @@ def userLogoutPage(request):
 def editUserDetailsByAdmin(request,allifslug):
     try:
         if request.user.is_authenticated:
-            user=User.objects.filter(customurlslug=allifslug).first()
+            user=User.all_objects.filter(customurlslug=allifslug).first()
             title="Update User Details"
             form=UpdateCustomUserForm(instance=user)
             if request.method=='POST':
@@ -100,7 +97,7 @@ def changeYourUserPassword(request):
                 pass1=request.POST.get('password1')
                 pass2=request.POST.get('password2')
                 if pass2==pass1:
-                    user=User.objects.filter(email=logged_user.email).first()
+                    user=User.all_objects.filter(email=logged_user.email).first()
                     user.set_password(str(pass1))
                     user.save()
                     logout(request)
@@ -120,14 +117,14 @@ def changeYourUserPassword(request):
 @login_required(login_url='allifmaalusersapp:userLoginPage') 
 def changeUserPasswordByAdmin(request,allifslug):
     try:
-        user=User.objects.filter(customurlslug=allifslug).first()
+        user=User.all_objects.filter(customurlslug=allifslug).first()
         title="Change User Password"
         if request.user.is_authenticated:
             if request.method=='POST':
                 pass1=request.POST.get('password1')
                 pass2=request.POST.get('password2')
                 if pass2==pass1:
-                    user=User.objects.filter(email=user.email).first()
+                    user=User.all_objects.filter(email=user.email).first()
                     user.set_password(str(pass1))
                     user.save()
                     return redirect('allifmaalcommonapp:CommonDecisionPoint')
@@ -147,7 +144,7 @@ def changeUserPasswordByAdmin(request,allifslug):
 def changeUserToSupperuserByAdmin(request,allifslug):
     try:
         if request.user.is_authenticated:
-            user=User.objects.filter(customurlslug=allifslug).first()
+            user=User.all_objects.filter(customurlslug=allifslug).first()
             if user.is_staff==True and user.is_superuser==True:
                 user.is_staff=False
                 user.is_superuser=False
@@ -169,7 +166,7 @@ def changeUserToSupperuserByAdmin(request,allifslug):
 def DeleteUserByAdmin(request,allifslug):
     try:
         if request.user.is_authenticated:
-            User.objects.filter(customurlslug=allifslug).first().delete()
+            User.all_objects.filter(customurlslug=allifslug).first().delete()
             return redirect('allifmaalcommonapp:CommonDecisionPoint')
         else:
             return redirect('allifmaalusersapp:userLoginPage')
@@ -186,7 +183,7 @@ def userForgotPassowrd(request):#this requires the user to remember their email 
             secretkey=request.POST.get('secretkey')
             pass1=request.POST.get('password1')
             pass2=request.POST.get('password2')
-            usremail=User.objects.filter(email=accessemail,customurlslug=secretkey).first()
+            usremail=User.all_objects.filter(email=accessemail,customurlslug=secretkey).first()
             if usremail is not None:
                 if pass2==pass1:
                     usremail.set_password(str(pass1))
