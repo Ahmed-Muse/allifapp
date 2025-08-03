@@ -21,7 +21,9 @@ allif_common_form_edit_and_save,allif_redirect_based_on_sector,allif_delete_conf
 #@logged_in_user_must_have_profile
 #@subscriber_company_status
 def shaafiHome(request,*allifargs,**allifkwargs):
-    title="Home : Healthcare"
+    company=request.user.company
+    sector=company.sector
+    title=f"Home : {sector} " +''+ str(company)
     try:
         user_is_supper=request.user.is_superuser
         allif_data=common_shared_data(request)

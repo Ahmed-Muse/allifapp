@@ -1,14 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from allifmaalusersapp.models import User,UserLoginDetailsModel
-from allifmaalcommonapp.models import CommonCompanyDetailsModel
+from allifmaalcommonapp.models import CommonCompanyDetailsModel,CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel
 class CreateNewCustomUserForm(UserCreationForm):#this is used for new user creation
     class Meta:
         model=User
-        fields=['username','peformance_counter','fullNames','phone','first_name','last_name','email','password1','password2','user_category','usercompany',]#all these fields are from django
+        fields=['username','division','branch','department','peformance_counter','fullNames','phone','first_name','last_name','email','password1','password2','user_category']#all these fields are from django
         widgets={
-            'usercompany':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-           
+            
             'user_category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'first_name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'last_name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -34,17 +33,23 @@ class UpdateCustomUserForm(forms.ModelForm):#this updates the user details...
     user_category=forms.Select()
     class Meta:
         model = User
-        fields = ['first_name','peformance_counter', 'company','email','last_name','user_category','usercompany',]
+        fields = ['first_name','division','branch','department','peformance_counter', 'company','email','last_name','user_category']
         widgets={
             'user_category':forms.Select(attrs={'class':'form-control'}),
-            'usercompany':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
           
             'user_category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'first_name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'last_name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'peformance_counter':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'email':forms.EmailInput(attrs={'class':'form-control','placeholder':''}), 
-            'company':forms.Select(attrs={'class':'form-control'}), 
+            
+           'company':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+       
+            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+       
+            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+       
           
            
         }
@@ -58,6 +63,9 @@ class UpdateCustomUserForm(forms.ModelForm):#this updates the user details...
         if allifmaalparameter:
             # Assuming you want to filter companies by the owner of the current user's company
             self.fields['company'].queryset = CommonCompanyDetailsModel.all_objects.filter(owner=allifmaalparameter.owner)
+            self.fields['division'].queryset = CommonDivisionsModel.all_objects.filter(company=allifmaalparameter)
+            self.fields['branch'].queryset = CommonBranchesModel.all_objects.filter(company=allifmaalparameter)
+            self.fields['department'].queryset = CommonDepartmentsModel.all_objects.filter(company=allifmaalparameter)
             
             # below is for admin only if you want to change the organization of the user...
             #self.fields['company'].queryset = CommonCompanyDetailsModel.all_objects.all()

@@ -172,6 +172,10 @@ allif_single_access_general_links = [
     
     {'name': 'Transits', 'url_name': 'allifmaalcommonapp:commonTransits'},
     {'name': 'AddTransit', 'url_name': 'allifmaalcommonapp:commonNewTransit'},
+    {'name': 'Companies', 'url_name': 'allifmaalcommonapp:commonCompanies'},
+    {'name': 'AddCompany', 'url_name': 'allifmaalcommonapp:commonAddnewEntity'},
+    
+    
      
      {'name': 'Creditors', 'url_name': 'allifmaalcommonapp:commonCreditorsReportpdf'},
      {'name': 'Debtors', 'url_name': 'allifmaalcommonapp:commonDebtorsReport'},

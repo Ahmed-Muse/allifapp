@@ -31,7 +31,7 @@ def allifmaal_admin(allif_param_func):
 #########################################################################################3
 def unauthenticated_user(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
-        user_var=request.user.usercompany
+        user_var=request.user.company
         usrslg=request.user.customurlslug
         usr=request.user
         if usr.user_category=="admin":
@@ -46,7 +46,7 @@ def unauthenticated_user(allif_param_func):
 def allowed_users(allowed_roles=[]):
     def user_delete_permissions(allif_param_func):
         def allif_wrapper_func(request,*args,**kwargs):
-            user_var=request.user.usercompany
+            user_var=request.user.company
             usrslg=request.user.customurlslug
             usr=request.user
             print(f"working {allowed_roles}")
@@ -63,7 +63,7 @@ def allowed_users(allowed_roles=[]):
 def unrestrictedCRUD(allowed_roles=[]):
     def user_delete_permissions(allif_param_func):
         def allif_wrapper_func(request,*args,**kwargs):
-            user_var=request.user.usercompany
+            user_var=request.user.company
             usrslg=request.user.customurlslug
             usr=request.user
             print(f"working {allowed_roles}")
@@ -186,7 +186,7 @@ def subscriber_company_status(func):
 
         try:
             allif_data = common_shared_data(request)
-            compslg = request.user.usercompany # Assuming usercompany is a slug
+            compslg = request.user.company # Assuming usercompany is a slug
             #main_sbscrbr_entity = CommonCompanyDetailsModel.all_objects.filter(slgfld=compslg).first()
             main_sbscrbr_entity =CommonCompanyDetailsModel.all_objects.filter(company=request.user.company).first()
 

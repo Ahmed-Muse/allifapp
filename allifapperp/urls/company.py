@@ -14,4 +14,5 @@ urlpatterns = [
     path('users/', include('allifmaalshaafiapp.urls', namespace='allifmaalshaafiapp')),
     path('users/', include('allifmaaladminapp.urls', namespace='allifmaaladminapp')),
      path('users/', include('allifmaalsalesapp.urls', namespace='allifmaalsalesapp')),
+     #path('Allifmaal/Application/For/Users/And/Accounts/Management/', include('allifmaalusersapp.urls')),
 ]

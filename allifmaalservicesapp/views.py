@@ -13,6 +13,7 @@ def servicesHome(request,*allifargs,**allifkwargs):
         context={
             "title":title,
             "user_var":user_var,
+            "user_is_supper":user_is_supper,
         }
         return render(request,"allifmaalservicesapp/home/home.html",context)
     except Exception as ex:

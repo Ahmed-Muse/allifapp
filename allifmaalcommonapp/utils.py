@@ -1344,7 +1344,7 @@ allif_sector_redirect_map= {
         "home": "allifmaalilmapp:ilmHome",
         "dashboard": "allifmaalilmapp:ilmDashboard",
     },
-    "Services": {
+    "Service": {
         "home": "allifmaalservicesapp:servicesHome",
         "dashboard": "allifmaalservicesapp:servicesDashboard",
     },
@@ -1790,10 +1790,12 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
         form = form_class(*form_args, request.POST, instance=allifquery) 
         if form.is_valid():
             obj = form.save(commit=False) # obj is now item_instance with updated data
-            #if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
-            if hasattr(obj, 'division'):
+            if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
+            #if hasattr(obj, 'division'):
+                print(allif_data.get("logged_user_division").id,'kkkkkkkkkkkkkkkkkk')
                 try:
-                    obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id or 1)
+                    #obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id)
+                    obj.division =allif_data.get("logged_user_division")
                 except Http404:
                     #print(f"WARNING: Division with ID {allif_data.get('logged_user_division').id} not found for {obj.__class__.__name__}.")
                     obj.division = None
@@ -1805,7 +1807,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
             # Branch
             if hasattr(obj, 'branch'):
                 try:
-                    obj.branch = get_object_or_404(CommonBranchesModel, pk=allif_data.get("logged_user_branch").id)
+                    obj.branch =allif_data.get("logged_user_branch")
                 except Http404:
                     #print(f"WARNING: Branch with ID {allif_data.get('logged_user_branch').id} not found for {obj.__class__.__name__}.")
                     obj.branch = None
@@ -1817,7 +1819,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
             # Department
             if hasattr(obj, 'department'):
                 try:
-                    obj.department = get_object_or_404(CommonDepartmentsModel, pk=allif_data.get("logged_user_department").id)
+                    obj.department =allif_data.get("logged_user_department")
                 except Http404:
                     #print(f"WARNING: Department with ID {allif_data.get('logged_user_department').id} not found for {obj.__class__.__name__}.")
                     obj.department = None
@@ -1828,7 +1830,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
                 if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
                     try:
                         
-                        obj.operation_year = get_object_or_404(CommonOperationYearsModel, pk=allif_data.get("logged_user_operation_year").id)
+                        obj.operation_year =allif_data.get("logged_user_operation_year")
                     except Http404:
                         #print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
                         obj.operation_year = None
@@ -1844,7 +1846,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
                 if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
                     try:
                         
-                        obj.operation_term = get_object_or_404(CommonOperationYearTermsModel, pk=allif_data.get("logged_user_operation_term").id)
+                        obj.operation_term =allif_data.get("logged_user_operation_term")
                     except Http404:
                         #print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
                         obj.operation_term = None
@@ -2894,8 +2896,6 @@ def allif_advance_search_handler(
             "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity")
         }
         return render(request, template_html_path, context)
-
-
 
 
 

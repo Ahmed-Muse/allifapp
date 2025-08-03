@@ -174,7 +174,7 @@ LOGIN_URL = 'allifmaalusersapp:userLoginPage'
 #AUTO_LOGOUT = {'IDLE_TIME': 60}  # logout after 10 minutes of downtime
 from datetime import timedelta
 AUTO_LOGOUT = {
-    'IDLE_TIME': timedelta(minutes=1),
+    'IDLE_TIME': timedelta(minutes=60),
     'allifmaalusersapp:userLoginPage': True,
     
     'REDIRECT_TO_LOGIN_IMMEDIATELY': False, # Optional: Set to True to redirect immediately

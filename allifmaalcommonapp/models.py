@@ -53,14 +53,6 @@ from django.contrib.contenttypes.models import ContentType
 # 
 # #
 
-"""
-class CommonCompanyManagerOrignial(ActiveManager):
-    def for_company(self, company_id):
-        return self.get_queryset().filter(company=company_id)
-    def get_queryset(self):
-        return super().get_queryset()
-"""
-
 class ActiveManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(status__in=['Active', 'Approved', 'Draft'])
@@ -75,24 +67,12 @@ class ActiveManager(models.Manager):
         return super().get_queryset()
 
 class CommonCompanyManager(ActiveManager):
-    """
-    A manager that automatically filters by the current company from the
-    request context, in addition to the status filtering from ActiveManager.
-    please try to understand how this wroks and use it later in place of the CompanyManager above...
-    """
-    """
-    def for_company(self, company_id):
-        return self.get_queryset().filter(company=company_id)
-    def get_queryset(self):
-        return super().get_queryset()
-        """
-    
     def get_queryset(self):
         # First, apply the status filtering from ActiveManager
         queryset = super().get_queryset()
-
+        
         # Get the company_id from the request context via the middleware
-        company_id = get_current_company()
+        company_id = get_current_company() # this comes from middleware ... very important for structure
 
         if company_id:
             # If a company is found, apply the filter.
@@ -170,7 +150,8 @@ class BaseModel(models.Model):
     comments=models.TextField(blank=True,null=True, default='Comments')
     last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
     updated_by=models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
-    
+    reference=models.CharField(max_length=100, default='reference',blank=True, null=True, db_index=True, help_text="An optional identifier from an external system or an internal reference code.")
+    priority=models.CharField(max_length=50, choices=PRIORITY_LEVELS, default='Normal',null=True,blank=True)
     description= models.TextField(null=True, blank=True,default='Description')
     starts=models.DateTimeField(blank=True,null=True,default=timezone.now)
     ends=models.DateTimeField(blank=True,null=True,default=timezone.now)
@@ -251,7 +232,6 @@ class CommonDepartmentsModel(BaseModel):
 class CommonOperationYearsModel(BaseModel):
     """
     defines the opreational/fiscal/academic year..
-    
     """
     year=models.CharField(max_length=50,blank=True,default="Operation Year",null=True,unique=False,help_text="e.g., 2023-2024")
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_operation_year",on_delete=models.CASCADE,null=True,blank=True)
@@ -266,15 +246,12 @@ class CommonOperationYearTermsModel(BaseModel):
     """
     this model captures operational year sections like terms, semisters, quarters ...etc
     """
-   
     operation_term=models.CharField(max_length=50,blank=True,default="Operation Year",null=True,unique=False,help_text="e.g., 2023-2024")
-    
     owner=models.ForeignKey(User, related_name="ownr_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_operation_term",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
-    
     operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='terms_operation_year')
 
     def __str__(self):
@@ -365,7 +342,6 @@ class CommonTaxParametersModel(CommonBaseModel):
             ("delete_tax_parameter", "Can delete tax parameter"),
         ]
 
-
 class CommonLogsModel(CommonBaseModel):
     action_time = models.DateTimeField(default=timezone.now)
     action_type = models.CharField(max_length=50)
@@ -389,7 +365,6 @@ class CommonLogsModel(CommonBaseModel):
     def __str__(self):
         return f"{self.owner.first_name if self.owner else 'System'} at {self.action_time.strftime('%Y-%m-%d %H:%M')}"
 
-
 class CommonSupplierTaxParametersModel(CommonBaseModel):
     taxtype=models.CharField(choices=taxoptions, blank=True, max_length=30)
     taxrate=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=1,default=0)
@@ -400,12 +375,10 @@ class CommonSupplierTaxParametersModel(CommonBaseModel):
     def clean(self):
         if self.taxrate<0:
             raise ValidationError("Tax Rate cannot be negative")
-      
-        
+       
 class CommonCurrenciesModel(CommonBaseModel):
     def __str__(self):
         return str(self.name)
-
 
 class CommonPaymentTermsModel(CommonBaseModel):
   
@@ -415,7 +388,6 @@ class CommonPaymentTermsModel(CommonBaseModel):
 class CommonUnitsModel(CommonBaseModel):
     def __str__(self):
         return str(self.name)
-
 
 #########################################3 stock, items, services, subjects categories.. ##############################################
 class CommonCategoriesModel(CommonBaseModel):
@@ -460,8 +432,6 @@ class CommonCodesModel(CommonBaseModel):
    
     def __str__(self):
         return f"{self.code}: {self.name}:"
-
-
 
 # #################3 HRM ################    
 class CommonEmployeesModel(CommonBaseModel):
@@ -537,7 +507,6 @@ class CommonBankWithdrawalsModel(CommonBaseModel):
     def __str__(self):
         return '{}'.format(self.description)
 
-
 ########################## Emails and SMSs #########################
 class CommonEmailsModel(CommonBaseModel):
     subject=models.CharField(max_length=255,blank=True,null=True)
@@ -548,7 +517,6 @@ class CommonEmailsModel(CommonBaseModel):
     
     def __str__(self):
         return '{}'.format(self.subject)
-
 
 #################3 suppliers ################
 class CommonSuppliersModel(CommonBaseModel):
@@ -640,7 +608,6 @@ class CommonLedgerEntriesModel(CommonBaseModel): # this is the journal entries..
     def __str__(self):
         return '{}'.format(self.comments)
  
-
 class CommonAssetsModel(CommonBaseModel):
     """
     thi can represent a normal asset to any company...vehicles, equipment, properties etc...
@@ -1248,14 +1215,11 @@ class CommonSalariesModel(CommonBaseModel):
 
 class CommonJobsModel(CommonBaseModel):
     customer=models.ForeignKey(CommonCustomersModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='jobcustrelname')
-   
     job_status=models.CharField(max_length=20, blank=True, null=True,choices=job_status,default="open")
-   
     payment_terms=models.ForeignKey(CommonPaymentTermsModel, related_name="jobpymtn",on_delete=models.SET_NULL,null=True,blank=True)
     currency=models.ForeignKey(CommonCurrenciesModel, related_name="crrncjob",on_delete=models.SET_NULL,null=True,blank=True)
     def __str__(self):
         return str(self.number)
-
 
 class CommonJobItemsModel(CommonBaseModel):
     item=models.ForeignKey(CommonStocksModel, blank=True, null=True, on_delete=models.CASCADE,related_name='itemjobcon')
@@ -1264,11 +1228,9 @@ class CommonJobItemsModel(CommonBaseModel):
     def __str__(self):
         return str(self.item)
     
-
 #################################### shipments.... ###############
 
 class CommonTransitModel(CommonBaseModel):
-    
     carrier=models.ForeignKey(CommonAssetsModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='carrier_related')
     
     expected=models.DateTimeField(null=True, blank=True)
@@ -1301,36 +1263,29 @@ class CommonTransitItemsModel(CommonBaseModel):
     """
     Individual items within a shipment, linked to CommonStocksModel.....
     """
-    
     shipment=models.ForeignKey(CommonTransitModel,blank=True,null=True, on_delete=models.CASCADE, related_name='items')
     items=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='shipment_occurrences')
-    
     unit_of_measure=models.ForeignKey(CommonUnitsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='items_units_shipment')
     expected=models.DateTimeField(null=True, blank=True)
     expires=models.DateTimeField(null=True, blank=True)
     delivered_on=models.DateTimeField(null=True, blank=True)
     consigner= models.ForeignKey(CommonCustomersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='consignerrelated')
     consignee= models.ForeignKey(CommonCustomersModel, blank=True, null=True, on_delete=models.CASCADE,related_name='consigneerelated')
-   
     weight=models.CharField(null=True, blank=True, max_length=50)
-    
     length=models.CharField(null=True, blank=True, max_length=50)
     width=models.CharField(null=True, blank=True, max_length=50)
     height=models.CharField(null=True, blank=True, max_length=50)
     received= models.DateTimeField(null=True, blank=True)
     value=models.CharField(blank=True,null=True,max_length=50)
     rate=models.CharField(blank=True,null=True,max_length=50)
-   
     shipment_status=models.CharField(choices=Shipment_Status,null=True, blank=True, max_length=20,default="Booked")
     origin= models.CharField(null=True, blank=True, max_length=50)
     destination= models.CharField(null=True, blank=True, max_length=50)
- 
     dispatched_by=models.ForeignKey(CommonEmployeesModel,related_name='shipment_dispatched_by_shipment_items', on_delete=models.SET_NULL, null=True, blank=True)
    
     def __str__(self):
         return str(self.items)
      
-
  ##################33 contacts from the website ############3       
 class CommonContactsModel(models.Model):
     name=models.CharField(max_length=50,blank=False,null=True,default="name")

@@ -34,7 +34,7 @@ class User(AbstractUser):# this is for creating new user... the fields are below
     user_category= models.CharField(choices=user_level, default='guest', max_length=250,null=True,blank=True)
     customurlslug= models.SlugField(max_length=250, unique=True, blank=True, null=True)
     url_unique_id= models.CharField(null=True, blank=True, max_length=250)
-    usercompany= models.CharField(max_length=250, blank=True, null=True)
+    
     #userdivision= models.CharField(max_length=250, blank=True, null=True)
     #userbranch= models.CharField(max_length=250, blank=True, null=True)
     #userdepartment= models.CharField(max_length=250, blank=True, null=True)
@@ -72,6 +72,28 @@ class User(AbstractUser):# this is for creating new user... the fields are below
         null=True, 
         blank=True,
         related_name='allifmaalusersappcompany'
+    )
+    
+    division = models.ForeignKey(
+        'allifmaalcommonapp.CommonDivisionsModel', # Use string reference
+        on_delete=models.SET_NULL,
+        null=True, 
+        blank=True,
+        related_name='allifmaalusersappdivision'
+    )
+    branch = models.ForeignKey(
+        'allifmaalcommonapp.CommonBranchesModel', # Use string reference
+        on_delete=models.SET_NULL,
+        null=True, 
+        blank=True,
+        related_name='allifmaalusersappbranch'
+    )
+    department = models.ForeignKey(
+        'allifmaalcommonapp.CommonDepartmentsModel', # Use string reference
+        on_delete=models.SET_NULL,
+        null=True, 
+        blank=True,
+        related_name='allifmaalusersappdepartment'
     )
     
     def __str__(self):

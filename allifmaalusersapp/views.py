@@ -37,7 +37,7 @@ def userLoginPage(request):
         title="User Login Page"
    
         if request.user.is_authenticated:
-            return redirect("allifmaalcommonapp:CommonDecisionPoint")
+            return redirect("allifmaalusersapp:userLogoutPage")
         else:
             form=CustomUserLoginForm()#nthis form is not used...normally html form is used instead in this case.
             if request.method=='POST':
