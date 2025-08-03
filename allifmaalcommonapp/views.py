@@ -36,6 +36,92 @@ from .defaults_data import (DEFAULT_COMPANY_SCOPES, DEFAULT_TAXES, DEFAULT_CURRE
 
 
 
+# allifmaalcommonapp/views.py
+from django.shortcuts import render
+from .models import CommonCompanyDetailsModel
+
+
+def public_website(request):
+    """
+    View for the public-facing website.
+    """
+    return HttpResponse("This is the public website. Welcome!")
+
+def company_website(request, company):
+    """
+    View for a company-specific subdomain.
+    The `company` slug is passed from the URL resolver.
+    """
+    # The middleware has already attached the company object to the request.
+    # We can use it directly.
+    if request.company:
+        return HttpResponse(f"Welcome to the website for {request.company.name}!")
+    else:
+        return HttpResponse("Company not found.")
+
+
+def commonDebugging(request, *allifargs, **allifkwargs):
+    # This is the key change. We check if a company was found from the subdomain.
+    allif_data=common_shared_data(request)
+    is_authenticated = request.user.is_authenticated
+    company_id_from_user = None
+    allifquery=request.user.usercompany
+    company_id_from_middleware = get_current_company()
+    
+    
+    
+    title='Waiting Page'
+    main_sbscrbr_entity=CommonCompanyDetailsModel.all_objects.filter(company=request.user.company).first()
+    company_slg_str=main_sbscrbr_entity.slgfld
+    user_slg_str=request.user.customurlslug
+    
+    profile=allif_data.get("logged_in_user_profile")
+    print(profile)
+        
+    if hasattr(request, 'tenant_company') and request.tenant_company:
+        # We are on a subdomain. Filter by the company from the subdomain.
+        current_company = request.tenant_company
+        # If the user is logged in, you might also want to ensure they belong to this company
+        if request.user.is_authenticated and request.user.company != current_company:
+            # Handle unauthorized access.
+            # You could redirect to a login page for the correct company.
+            pass
+    elif request.user.is_authenticated:
+        # We are on the main domain, so use the company from the logged-in user.
+        # This preserves your existing logic for non-tenant access.
+        current_company = request.user.company
+    else:
+        # Handle non-authenticated access (e.g., redirect to login).
+        current_company = None
+
+    if not current_company:
+        # Handle cases where no company context can be determined.
+        # For example, a public landing page or a redirect to the main login.
+        return render(request, "public_landing_page.html")
+
+    # Your data filtering logic remains almost the same.
+    # The crucial part is that `current_company` is now dynamically set.
+    try:
+        company_details = CommonCompanyDetailsModel.all_objects.get(
+           
+            company=current_company
+        )
+    except CommonCompanyDetailsModel.DoesNotExist:
+        # Handle cases where the specific data doesn't exist for this company.
+        # This is your existing data isolation logic at work.
+        pass
+
+    # Your view logic continues here...
+    context = {
+                'is_authenticated': is_authenticated,
+                'company_id_from_user': company_id_from_user,
+                'company_id_from_middleware': company_id_from_middleware,
+                "allifquery":allifquery,
+                "main_sbscrbr_entity":main_sbscrbr_entity,
+                "company_slg_str":company_slg_str,
+                "user_slg_str":user_slg_str,
+                }
+    return render(request, 'allifmaalcommonapp/debugging/debugging.html', context)
 
 
 
@@ -45,7 +131,7 @@ from .defaults_data import (DEFAULT_COMPANY_SCOPES, DEFAULT_TAXES, DEFAULT_CURRE
 
 
 
-def commonDebugging(request):
+def commonDebugging_tes(request):
     try:
         allif_data=common_shared_data(request)
         is_authenticated = request.user.is_authenticated
@@ -111,12 +197,49 @@ def commonDebugging(request):
 
 
 
+# The existing views you provided.
+def commonWebsite(request):
+    #try:
+        title = "Allifmaal ERP"
+        context = {"title": title}
+        return render(request, 'allifmaalcommonapp/website/website.html', context)
+    #except Exception as ex:
+        #error_context = {'error_message': ex, }
+        #return render(request, 'allifmaalcommonapp/error/web-error.html', error_context)
+
+def commonEngineering(request):
+    try:
+        title = "Allifmaal Engineering"
+        context = {"title": title, }
+        return render(request, 'allifmaalcommonapp/website/engineering.html', context)
+    except Exception as ex:
+        error_context = {'error_message': ex, }
+        return render(request, 'allifmaalcommonapp/error/web-error.html', error_context)
+
+
+# New views to connect with the new URL configurations
+# These views will be called by your hosts.py setup.
+def public_website(request):
+    # This view will be used for the public domain (e.g., localhost:8000)
+    return commonWebsite(request)
+
+def company_website(request, company_slug=None):
+    # This view will be used for company subdomains (e.g., allifmaal.localhost:8000)
+    # The `company_slug` is passed from the hosts.py configuration.
+    try:
+        title = f"Welcome to {company_slug} company site"
+        context = {"title": title, "company_slug": company_slug}
+        return render(request, 'allifmaalcommonapp/website/company_website.html', context)
+    except Exception as ex:
+        error_context = {'error_message': ex, }
+        return render(request, 'allifmaalcommonapp/error/web-error.html', error_context)
 
 
 
 
 
-def commonWebsite(request):# this is the landing page...
+
+def commonWebsite_prevworking(request):# this is the landing page...
     try:
         title="Allifmaal ERP"
         context={"title":title}
@@ -125,7 +248,7 @@ def commonWebsite(request):# this is the landing page...
         error_context={'error_message': ex,}
         return render(request,'allifmaalcommonapp/error/web-error.html',error_context)
 
-def commonEngineering(request):
+def commonEngineering_previ(request):
     try:
         title="Allifmaal Engineering"
         context={"title":title,}
@@ -627,7 +750,7 @@ def commonCompanies(request,*allifargs,**allifkwargs):
 
 def commonAddnewEntity(request, allifusr, *allifargs, **allifkwargs):
     title = "Entity Registration"
-   
+  
     user = request.user # A cleaner way to get the current user
     print(user.company)
     main_div='Main Division'
@@ -1836,6 +1959,7 @@ def handle_user_permission_view(func):
         
         # Fetch the user object at the beginning
         user = get_object_or_404(User, pk=pk)
+        #user=User.all_objects.get(id=pk)
         
         # Call the original view function, passing the user object
         # The view function will modify the user object in place
@@ -1854,7 +1978,6 @@ def handle_user_permission_view(func):
     return wrapper
 
 @handle_user_permission_view
-@allif_base_view_wrapper
 def commonUserCanAddEditViewDelete(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.can_do_all:
@@ -1870,46 +1993,45 @@ def commonUserCanAddEditViewDelete(user, *allifargs, **allifkwargs):
         user.can_edit = True
         user.can_delete = True
 
-@handle_user_permission_view
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserCanAdd(user, *allifargs, **allifkwargs):
     """Toggles the 'can_add' permission."""
     user.can_add = not user.can_add
     user.can_do_all = False
 
-@handle_user_permission_view
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserCanView(user, *allifargs, **allifkwargs):
     """Toggles the 'can_view' permission."""
     user.can_view = not user.can_view
     user.can_do_all = False
 
-@handle_user_permission_view
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserCanEdit(user, *allifargs, **allifkwargs):
     """Toggles the 'can_edit' permission."""
     user.can_edit = not user.can_edit
     user.can_do_all = False
-
-@handle_user_permission_view
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserCanDelete(user, *allifargs, **allifkwargs):
     """Toggles the 'can_delete' permission."""
     user.can_delete = not user.can_delete
     user.can_do_all = False
 
 #####################3  access control for entities and sub entities
-@handle_user_permission_view
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserCanAccessAll(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.can_access_all:
         user.can_access_all=False
     else:
         user.can_access_all=True
-    
-@handle_user_permission_view
+
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserCanAccessRelated(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.can_access_related:
@@ -1917,26 +2039,26 @@ def commonUserCanAccessRelated(user, *allifargs, **allifkwargs):
     else:
         user.can_access_related=True
 
-@handle_user_permission_view
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserHasUniversalDelete(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.universal_delete:
         user.universal_delete=False
     else:
         user.universal_delete=True
-       
-@handle_user_permission_view
+
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserHasDivisionalDelete(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.divisional_delete:
         user.divisional_delete=False
     else:
         user.divisional_delete=True
-   
-@handle_user_permission_view
+
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserHasBranchesDelete(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.branches_delete:
@@ -1944,26 +2066,26 @@ def commonUserHasBranchesDelete(user, *allifargs, **allifkwargs):
     else:
         user.branches_delete=True
 
-@handle_user_permission_view
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserHasDepartmentalDelete(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.departmental_delete:
         user.departmental_delete=False
     else:
         user.departmental_delete=True
-        
-@handle_user_permission_view
+
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserHasUniversalAccess(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.universal_access:
         user.universal_access=False
     else:
         user.universal_access=True
-   
-@handle_user_permission_view
+
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserHasDivisionalAccess(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.divisional_access:
@@ -1971,26 +2093,26 @@ def commonUserHasDivisionalAccess(user, *allifargs, **allifkwargs):
     else:
         user.divisional_access=True
 
-@handle_user_permission_view
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserHasBranchesAccess(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.branches_access:
         user.branches_access=False
     else:
         user.branches_access=True
-    
-@handle_user_permission_view
+
 @allif_base_view_wrapper
+@handle_user_permission_view
 def commonUserHasDepartmentalAccess(user, *allifargs, **allifkwargs):
     """Toggles all permissions at once."""
     if user.departmental_access:
         user.departmental_access=False
     else:
         user.departmental_access=True
-
-@handle_user_permission_view  
+        
 @allif_base_view_wrapper
+#@handle_user_permission_view  
 def commonUserAllifaamlAdmin(request,pk):
     try:
         allif_data=common_shared_data(request)

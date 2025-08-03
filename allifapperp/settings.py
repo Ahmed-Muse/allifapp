@@ -44,7 +44,22 @@ DEBUG = True
     #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #DEBUG = os.environ.get('ALLIF_DJANGO_DEBUG', '')
 #ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','www.allifapp.com','allifapp.com/','127.0.0.1','localhost','http://0.0.0.0:8000/']
-ALLOWED_HOSTS = ['ahmeddove.pythonanywhere.com','www.allifapp.com','allifapp.com','127.0.0.1','localhost','http://0.0.0.0:8000/']
+
+
+ALLOWED_HOSTS=[
+     'ahmeddove.pythonanywhere.com','www.allifapp.com','allifapp.com',
+    '127.0.0.1','localhost','http://0.0.0.0:8000/',
+    'localhost',
+    '127.0.0.1',
+    '.localhost',  # The leading dot makes this a wildcard for all subdomains
+     'allifmaal.localhost',
+    '.allifapp.com'
+    'testserver',
+    # For a production environment, you would use something like:
+    # '.yourdomain.com'
+    # 'www.yourdomain.com'
+    # 'api.yourdomain.com'
+]
 SECRET_KEY ='sfsdfsjljgouduoetoej$%5gkkkjhhytfjh$django-insecure-c8*_cv^aw$^%(*k5zfx1+(svx3yw!448%^=ci6auje3ucz7gvn'
 #SECRET_KEY =allif_get_env_var("ALLIF_DJANGO_SECRET_KEY")
 #EMAIL_BACKEND=allif_get_env_var("ALLIF_EMAIL_BACKEND","email-backend")
@@ -91,11 +106,47 @@ INSTALLED_APPS = [
      "allifmaalservicesapp",
      "allifmaalshaafiapp",
      "allifmaallogisticsapp",
+     
+     ########## django hosts...
+      # ...
+    'django.contrib.sites',  # Required for django-hosts
+    'django_hosts',
+    # ... your other apps
    
   
 ]
 
+ROOT_HOSTCONF = 'allifapperp.hosts' # Path to your hosts.py file
+DEFAULT_HOST = 'public' # Name o
+
+# This is a list of subdomains to be considered "public" and not tenant-specific.
+PUBLIC_SUBDOMAINS = [
+    'www',
+    'localhost',
+    '127',
+    'testserver',
+    # Add any other public subdomains here
+]
+# --- End of Domain Configuration ---
+
+
+# Set the site ID. This can be configured in the admin later.
+SITE_ID = 1
+
+# The URL for your public-facing site.
+
+# A single string for the public domain. Your original setting was a list, which is incorrect.
+PUBLIC_DOMAIN = ['localhost:8000','allifapp.com'] # Change to 'allifapp.com' for production
+
+
+ # Change to 'allifapp.com' for production
+# --- End of Domain Configuration ---
+
+# ... other settings ...
+
+
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware', # Must be first... this is for django hosts...03/08/2025
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -106,19 +157,27 @@ MIDDLEWARE = [
     
     'allifmaalcommonapp.signals.CurrentUserMiddleware', # Add your custom middleware here
     'allifmaalcommonapp.middleware.AllifmaalTenantMiddleware',
-    
-   
+    #'allifmaalcommonapp.domains.CompanySubdomainMiddleware',# this is to create sub domains
+    #'allifmaalcommonapp.domains.CompanySubdomainMiddlewareByDjangoHosts',# this is to create sub domains
+    #'django_auto_logout.middleware.AutoLogoutMiddleware',
     
 ]
 
-ROOT_URLCONF = 'allifapperp.urls'
+#ROOT_URLCONF = 'allifapperp.urls'############ previous working one without sub domains issues.
+# this ROOT_URLCONF = 'allifapperp.urls is replaced now with ROOT_URLCONF = 'allifapperp.urls.public' below...
+# The default URL configuration for the 'public' host.
+ROOT_URLCONF = 'allifapperp.urls.public'
 
+# ... (rest of your settings) ...
+LOGIN_URL = 'allifmaalusersapp:userLoginPage'
 # below is for auto logout when there is inactivity... there is two ways to do it as below.
 #AUTO_LOGOUT = {'IDLE_TIME': 60}  # logout after 10 minutes of downtime
 from datetime import timedelta
 AUTO_LOGOUT = {
-    'IDLE_TIME': timedelta(minutes=60),
+    'IDLE_TIME': timedelta(minutes=1),
     'allifmaalusersapp:userLoginPage': True,
+    
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': False, # Optional: Set to True to redirect immediately
 }
 
 # django_project/settings.py

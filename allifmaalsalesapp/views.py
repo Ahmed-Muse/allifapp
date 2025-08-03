@@ -52,8 +52,7 @@ def salesHome(request,*allifargs,**allifkwargs):
             supplier_payments_total=high_value_supplier_payments.aggregate(Sum('amount'))['amount__sum']
 
             high_peformancing_staff=User.objects.filter(usercompany=request.user.usercompany,peformance_counter__gte=2).order_by('-peformance_counter')[:limit_values]
-            staff_rating=allif_data.get("usernmeslg").peformance_counter
-
+            staff_rating=allif_data.get("usernmeslg")
 
             context={"title":title,"user_is_supper":user_is_supper,
             "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity"),

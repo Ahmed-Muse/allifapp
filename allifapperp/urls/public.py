@@ -8,7 +8,6 @@ from django.conf.urls.static import static
 #end of images
 
 urlpatterns = [
-    path('', include('public.urls')),
     path('admin/', admin.site.urls),# uncomment after migrations
     path('Allifmaal/Application/For/Users/And/Accounts/Management/', include('allifmaalusersapp.urls')),
     path('Allifmaal/ERP/System/Admin/App/', include('allifmaaladminapp.urls')),
@@ -24,5 +23,3 @@ urlpatterns = [
 
 if settings.DEBUG:#if debug which is in development stage only, then add the path below
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#this will enable 
-    
-    

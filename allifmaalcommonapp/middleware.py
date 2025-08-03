@@ -93,3 +93,5 @@ class AllifmaalTenantMiddleware:
         #_thread_locals.company = None
 
         #return response
+
+# allifmaalcommonapp/middleware.py

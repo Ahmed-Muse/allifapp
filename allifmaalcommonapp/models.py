@@ -206,7 +206,9 @@ class BaseModel(models.Model):
 class CommonCompanyDetailsModel(BaseModel):# this is the company
     company=models.CharField(max_length=50,blank=True,null=True,db_index=True)
     sector=models.ForeignKey(CommonSectorsModel,related_name="secrlmcompcmmnapp",on_delete=models.PROTECT,null=True,blank=False)
-   
+     # The admin can toggle whether this company uses a subdomain.
+    use_subdomain = models.BooleanField(default=True)
+    # ... other company fields
     def __str__(self):
         return str(self.company)
     """
