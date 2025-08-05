@@ -1,35 +1,30 @@
 {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
 {% load allif_navigation_tags %}
 {% load humanize %}
-{% block allif-basic-search-action %}
-{% endblock %}
-{% block advanced-search %}{%endblock%}
-{% block upload-excel-file %}{%endblock%}
+{% block allif_header_forms_dropdown%} {%endblock%}
 {% block allif-header-links %}
 <a href="{% allif_get_single_nav_link_url 'OperationYears' user_var glblslug %}">Years</a>
 <a href="{% allif_get_single_nav_link_url 'AddOperationYear' user_var glblslug %}">New Operational Year</a>
-<a href="{% allif_get_single_nav_link_url 'OperationTerms' user_var glblslug %}">Termss</a>
+<a href="{% allif_get_single_nav_link_url 'OperationTerms' user_var glblslug %}">Operation Terms</a>
 <a href="{% allif_get_single_nav_link_url 'AddOperationYearTerm' user_var glblslug %}">New Term</a>
 {% endblock %}
 {% block list-table-headers %}
 <td class="allif-fix-table-col"> Year </td>
-<td class="allif-table-header-td"> Address</td>
+<td class="allif-table-header-td">Description</td>
 <td class="allif-table-header-td"> Created By</td>
 <td class="allif-table-header-td"> Status</td>
 <td class="allif-table-header-td">Date</td>
 {% endblock %}
 {% block list-table-content-seciton %}
-<td class="allif-fix-table-col">
-   <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonDivisionDetails' item.id user_var glblslug %}"> {{item.year}} </a>
-</td>
-<td class="allif-table-content-td"> {{item.address}} </td>
+<td class="allif-fix-table-col"> {{item.year}}</td>
+<td class="allif-table-content-td"> {{item.description}} </td>
 <td class="allif-table-content-td"> {{item.owner}}</td>
 <td class="allif-table-content-td"> {{item.status}}</td>
-<td class="allif-table-content-td">{{item.date}}</td>
+<td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
 {% endblock %}
 
 {% block list-table-content-seciton-dropdown-links %}
-<a href="{% url 'allifmaalcommonapp:commonEditDivision' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+<a href="{% url 'allifmaalcommonapp:commonEditOperationYear' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
 
 {% endblock %}
  

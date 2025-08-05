@@ -2,52 +2,75 @@
   {% load humanize %}
   {% load allif_navigation_tags %}
   {% block add-form-header-block %}
- <a href="{% allif_get_single_nav_link_url 'Divisions' user_var glblslug %}">Divisions</a>
-<a href="{% allif_get_single_nav_link_url 'AddDivision' user_var glblslug %}">New Division</a>
-<a href="{{ allif_contextual_action_links.DivisionDetails.url }}">Division Details</a>
+ <a href="{% allif_get_single_nav_link_url 'Profiles' user_var glblslug %}">Profiles</a>
 
   {%endblock%}
 
   {% block details-table-col-one %}
     <tr>
-      <td class="allif-fix-table-col">Division</td>
-      <td>{{allifquery.division}}</td>
+      <td class="allif-fix-table-col">First Name</td>
+      <td>{{allifquery.firstName}}</td>
     </tr>
       <tr>
-      <td class="allif-fix-table-col">Phone</td>
-      <td>{{allifquery.phone}}</td>
+      <td class="allif-fix-table-col">Middle Name</td>
+      <td>{{allifquery.middleName}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col">Last Name</td>
+      <td>{{allifquery.lastName}}</td>
     </tr>
     
+  <tr>
+    <td class="allif-fix-table-col">User Name</td>
+    <td>{{allifquery.username}}</td>
+  </tr>
+
+  <tr>
+    <td class="allif-fix-table-col">Category</td>
+    <td>{{allifquery.sysperms}}</td>
+  </tr>
   {%endblock%}
 
   {% block details-table-col-two %}
+  
    <tr>
-    <td class="allif-fix-table-col">Email</td>
-    <td>{{allifquery.email}}</td>
+    <td class="allif-fix-table-col">Salary</td>
+    <td>{{allifquery.salary|floatformat:2|intcomma}}</td>
+  </tr>
+
+  <tr>
+    <td class="allif-fix-table-col">Payable Salary</td>
+    <td>{{allifquery.salary_payable|floatformat:2|intcomma}}</td>
   </tr>
   <tr>
-    <td class="allif-fix-table-col">Address</td>
-    <td>{{allifquery.address}}</td>
+    <td class="allif-fix-table-col">Salary Balance</td>
+    <td>{{allifquery.salary_balance|floatformat:2|intcomma}}</td>
   </tr>
+  <tr>
+    <td class="allif-fix-table-col">Salary Paid</td>
+    <td>{{allifquery.total_salary_paid|floatformat:2|intcomma}}</td>
+  </tr>
+
+
   {% endblock %}
   
   {% block core-details-tab-col-one %}
   
    <tr>
-    <td class="allif-fix-table-col">City</td>
-    <td>{{allifquery.city}}</td>
+    <td class="allif-fix-table-col">Education Level</td>
+    <td>{{allifquery.education}}</td>
   </tr>
   <tr>
-    <td class="allif-fix-table-col">Country</td>
-    <td>{{allifquery.country}}</td>
+    <td class="allif-fix-table-col">Title</td>
+    <td>{{allifquery.title}}</td>
   </tr>
   {%endblock%}
 
   {% block core-details-tab-col-two %}
  
   <tr>
-    <td class="allif-fix-table-col">Contact</td>
-    <td>{{allifquery.contact}}</td>
+    <td class="allif-fix-table-col">Gender</td>
+    <td>{{allifquery.gender}}</td>
   </tr>
   
   <tr>
@@ -60,7 +83,7 @@
   {% block allif_sensitive_section_col_one %}
     <tr>
       <td class="allif-fix-table-col">{{allifquery}}</td>
-      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Divisions' user_var glblslug %}">Go Back</a></td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Profiles' user_var glblslug %}">Go Back</a></td>
     </tr>
   {%endblock%}
 
@@ -74,12 +97,11 @@
   {% block allif_sensitive_section_col_two %}
   <tr>
     <td class="allif-fix-table-col">Delet {{allifquery}}</td>
-    <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteDivisionConfirm.url }}">Delete {{allifquery}}</a></td>
+    <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteStaffProfileConfirm.url }}">Delete {{allifquery}}</a></td>
   </tr>
   
   {%endblock%}
 
   {% block item_details_related_items_full_table %} {%endblock%}
   {% block item_details_related_items_full_half_tables %}{%endblock%}
-
 

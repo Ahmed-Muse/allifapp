@@ -207,6 +207,15 @@ allif_single_access_general_links = [
     {'name': 'Defaults', 'url_name': 'allifmaalcommonapp:commonDefaultValues'},
     {'name': 'Accounts', 'url_name': 'allifmaalcommonapp:commonGeneralLedgers'},
     
+    {'name': 'Staff', 'url_name': 'allifmaalcommonapp:commonhrm'},
+    {'name': 'AddUser', 'url_name': 'allifmaalcommonapp:commonAddUser'},
+    
+    {'name': 'Profiles', 'url_name': 'allifmaalcommonapp:commonStaffProfiles'},
+    {'name': 'AddStaffProfile', 'url_name': 'allifmaalcommonapp:commonAddStaffProfile'},
+    
+    
+    
+    
     
     
 ]

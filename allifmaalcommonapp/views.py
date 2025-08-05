@@ -527,6 +527,60 @@ def commonCompanyAdvanceSearch(request,*allifargs, **allifkwargs):
         context["allifqueryset"] = CommonCompanyDetailsModel.all_objects.all()
         return render(request, 'allifmaalcommonapp/companies/companies.html', context)
 
+
+#################33 sectors ##################
+@allif_base_view_wrapper
+def commonSectors(request, *allifargs, **allifkwargs):
+    title = "Main Sectors"
+    return allif_list_add_handler(request, CommonSectorsModel, CommonAddSectorForm, 'allifmaalcommonapp/sectors/sectors.html', title, 'allifmaalcommonapp:commonSectors')
+@allif_base_view_wrapper
+def commonSectorDetails(request, pk, *allifargs, **allifkwargs):
+    title = "Sector Details"
+    allifquery = get_object_or_404(CommonSectorsModel.all_objects, pk=pk)
+    related_queryset = CommonCompanyDetailsModel.all_objects.filter(sector=allifquery)
+    return allif_detail_handler(request, CommonSectorsModel, pk, 'allifmaalcommonapp/sectors/sector-details.html', title, related_queryset=related_queryset)
+@allif_base_view_wrapper  
+def commonEditSector(request, pk, *allifargs, **allifkwargs):
+    title = "Update Sector Details"
+    allifqueryset = CommonSectorsModel.all_objects.all()
+    return allif_edit_handler(request, CommonSectorsModel, CommonAddSectorForm, pk, 'allifmaalcommonapp/sectors/sectors.html', title, 'allifmaalcommonapp:commonSectors', allifqueryset=allifqueryset)
+@allif_base_view_wrapper
+def commonWantToDeleteSector(request, pk, *allifargs, **allifkwargs):
+    title = "Are sure to delete?"
+    return allif_delete_confirm_handler(request, CommonSectorsModel, pk, 'allifmaalcommonapp/sectors/x-sector-confirm.html', title)
+@allif_base_view_wrapper
+def commonSectorDelete(request, pk):
+    return allif_deleting_hanlder(request, CommonSectorsModel, pk, 'allifmaalcommonapp:commonSectors')
+@allif_base_view_wrapper
+def commonLoadContentTest(request):
+    title = "Main Sectors"
+    context={"title": title,}
+    return render(request,'allifmaalcommonapp/sectors/sectors-list.html',context)
+
+################## docs ###############################3
+@allif_base_view_wrapper  
+def commonDocsFormat(request, *allifargs, **allifkwargs):
+    title = "Formats"
+    return allif_list_add_handler(request, CommonDocsFormatModel, CommonAddDocFormatForm, 'allifmaalcommonapp/docformats/docformats.html', title, 'allifmaalcommonapp:commonDocsFormat')
+@allif_base_view_wrapper
+def commonEditDocsFormat(request, pk, *allifargs, **allifkwargs):
+    title = "Update Format"
+    return allif_edit_handler(request, CommonDocsFormatModel, CommonAddDocFormatForm, pk, 'allifmaalcommonapp/docformats/docformats.html', title, 'allifmaalcommonapp:commonDocsFormat')
+@allif_base_view_wrapper   
+def commonDeleteDocsFormat(request, pk, *allifargs, **allifkwargs):
+    return allif_deleting_hanlder(request, CommonDocsFormatModel, pk, 'allifmaalcommonapp:commonDocsFormat')
+@allif_base_view_wrapper
+def commonDataSorts(request, *allifargs, **allifkwargs):
+    title = "Main Filters"
+    return allif_list_add_handler(request, CommonDataSortsModel, CommonAddDataSortsForm, 'allifmaalcommonapp/filters/filters.html', title, 'allifmaalcommonapp:commonDataSorts')
+@allif_base_view_wrapper
+def commonEditDataSort(request, pk, *allifargs, **allifkwargs):
+    title = "Update Filter Details"
+    return allif_edit_handler(request, CommonDataSortsModel, CommonAddDataSortsForm, pk, 'allifmaalcommonapp/filters/filters.html', title, 'allifmaalcommonapp:commonDataSorts')
+@allif_base_view_wrapper
+def commonDeleteDataSort(request, pk):
+    return allif_deleting_hanlder(request, CommonDataSortsModel, pk, 'allifmaalcommonapp:commonDataSorts')
+
 ######################### DIVISIONS, BRANCHES, DEPARTMENTS, OPERATION YEARS, OPERATION TERMS ##################
 @allif_base_view_wrapper
 def commonDivisions(request, *allifargs, **allifkwargs):
@@ -623,23 +677,6 @@ def commonWantToDeleteDepartment(request, pk, *allifargs, **allifkwargs):
 def commonDeleteDepartment(request, pk, *allifargs, **allifkwargs):
     return allif_delete_view_handler(request, CommonDepartmentsModel, pk, 'allifmaalcommonapp:commonDepartments')
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 #######################3 OPERATION YEAR ####################################3
 def commonOperationYears(request, *allifargs, **allifkwargs):
     title = "Operation Years"
@@ -648,6 +685,8 @@ def commonOperationYears(request, *allifargs, **allifkwargs):
 @allif_base_view_wrapper   
 def commonAddOperationYear(request, *allifargs, **allifkwargs):
     title = "New Operational Year"
+    for item in CommonDivisionsModel.all_objects.all():
+        print(item)
     return allif_add_view_handler(request, CommonOperationYearsModel, CommonAddOperationYearForm,
     'allifmaalcommonapp/operations/years/add_year.html', title,'allifmaalcommonapp:commonOperationYears')
 
@@ -1241,60 +1280,6 @@ def commonDeleteCompanyScope(request,pk,*allifargs,**allifkwargs):
 def commonWantToDeleteScope(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonCompanyScopeModel,"Delete this item",'allifmaalcommonapp/scopes/delete-scope-confirm.html')
 
-
-#################33 sectors ##################
-@allif_base_view_wrapper
-def commonSectors(request, *allifargs, **allifkwargs):
-    title = "Main Sectors"
-    return allif_list_add_handler(request, CommonSectorsModel, CommonAddSectorForm, 'allifmaalcommonapp/sectors/sectors.html', title, 'allifmaalcommonapp:commonSectors')
-@allif_base_view_wrapper
-def commonSectorDetails(request, pk, *allifargs, **allifkwargs):
-    title = "Sector Details"
-    allifquery = get_object_or_404(CommonSectorsModel.all_objects, pk=pk)
-    related_queryset = CommonCompanyDetailsModel.all_objects.filter(sector=allifquery)
-    return allif_detail_handler(request, CommonSectorsModel, pk, 'allifmaalcommonapp/sectors/sector-details.html', title, related_queryset=related_queryset)
-@allif_base_view_wrapper  
-def commonEditSector(request, pk, *allifargs, **allifkwargs):
-    title = "Update Sector Details"
-    allifqueryset = CommonSectorsModel.all_objects.all()
-    return allif_edit_handler(request, CommonSectorsModel, CommonAddSectorForm, pk, 'allifmaalcommonapp/sectors/sectors.html', title, 'allifmaalcommonapp:commonSectors', allifqueryset=allifqueryset)
-@allif_base_view_wrapper
-def commonWantToDeleteSector(request, pk, *allifargs, **allifkwargs):
-    title = "Are sure to delete?"
-    return allif_delete_confirm_handler(request, CommonSectorsModel, pk, 'allifmaalcommonapp/sectors/x-sector-confirm.html', title)
-@allif_base_view_wrapper
-def commonSectorDelete(request, pk):
-    return allif_deleting_hanlder(request, CommonSectorsModel, pk, 'allifmaalcommonapp:commonSectors')
-@allif_base_view_wrapper
-def commonLoadContentTest(request):
-    title = "Main Sectors"
-    context={"title": title,}
-    return render(request,'allifmaalcommonapp/sectors/sectors-list.html',context)
-
-################## docs ###############################3
-@allif_base_view_wrapper  
-def commonDocsFormat(request, *allifargs, **allifkwargs):
-    title = "Formats"
-    return allif_list_add_handler(request, CommonDocsFormatModel, CommonAddDocFormatForm, 'allifmaalcommonapp/docformats/docformats.html', title, 'allifmaalcommonapp:commonDocsFormat')
-@allif_base_view_wrapper
-def commonEditDocsFormat(request, pk, *allifargs, **allifkwargs):
-    title = "Update Format"
-    return allif_edit_handler(request, CommonDocsFormatModel, CommonAddDocFormatForm, pk, 'allifmaalcommonapp/docformats/docformats.html', title, 'allifmaalcommonapp:commonDocsFormat')
-@allif_base_view_wrapper   
-def commonDeleteDocsFormat(request, pk, *allifargs, **allifkwargs):
-    return allif_deleting_hanlder(request, CommonDocsFormatModel, pk, 'allifmaalcommonapp:commonDocsFormat')
-@allif_base_view_wrapper
-def commonDataSorts(request, *allifargs, **allifkwargs):
-    title = "Main Filters"
-    return allif_list_add_handler(request, CommonDataSortsModel, CommonAddDataSortsForm, 'allifmaalcommonapp/filters/filters.html', title, 'allifmaalcommonapp:commonDataSorts')
-@allif_base_view_wrapper
-def commonEditDataSort(request, pk, *allifargs, **allifkwargs):
-    title = "Update Filter Details"
-    return allif_edit_handler(request, CommonDataSortsModel, CommonAddDataSortsForm, pk, 'allifmaalcommonapp/filters/filters.html', title, 'allifmaalcommonapp:commonDataSorts')
-@allif_base_view_wrapper
-def commonDeleteDataSort(request, pk):
-    return allif_deleting_hanlder(request, CommonDataSortsModel, pk, 'allifmaalcommonapp:commonDataSorts')
-
 ########################## upload excel function ###########################
 @allif_base_view_wrapper
 def commonUploadExcel(request, model_config_key, *allifargs, **allifkwargs):
@@ -1496,14 +1481,13 @@ def commonhrm(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Human Resources Management"
     datasorts=CommonDataSortsModel.all_objects.all()
-    allifqueryset=User.all_objects.filter(company=request.user.company)
-    #allifqueryset=User.objects.all()
+    allifqueryset=User.objects.filter(company=request.user.company)
     context={"title":title,"allifqueryset":allifqueryset,"datasorts":datasorts,} 
     return render(request,'allifmaalcommonapp/hrm/staff/staff.html',context)     
 
 @allif_base_view_wrapper
-def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is where a new user is added by the subscriber admin.
-    title="New Staff User Registeration"
+def commonAddUser(request,*allifargs,**allifkwargs):#this is where a new user is added by the subscriber admin.
+    title="New Staff"
     allif_data=common_shared_data(request)
     allif_data=common_shared_data(request)
     uservar=request.user.company
@@ -1517,9 +1501,9 @@ def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is 
             obj=form.save(commit=False)
             #this is very important line... dont change unless you know what you are doing....
             obj.company=uservar
-            #obj.division=allif_data.get("usernmeslg").division
-            #obj.branch=allif_data.get("usernmeslg").branch
-            #obj.department=allif_data.get("usernmeslg").department
+            obj.division=allif_data.get("usernmeslg").division
+            obj.branch=allif_data.get("usernmeslg").branch
+            obj.department=allif_data.get("usernmeslg").department
             obj.fullNames=str(f'{fname}+{lname}')#important...used to generate user slug
             obj.save()
             return redirect('allifmaalcommonapp:commonhrm',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
@@ -1533,7 +1517,7 @@ def commonAddUser(request,allifusr,allifslug,*allifargs,**allifkwargs):#this is 
 
     context={"title":title,"form":form,}
     return render(request,"allifmaalcommonapp/hrm/users/adduser.html",context)
-
+@allif_base_view_wrapper
 def commonEditUser(request, pk, *allifargs, **allifkwargs):
     title = "Update User Details"
     allif_data=common_shared_data(request)
@@ -1550,6 +1534,9 @@ def commonEditUser(request, pk, *allifargs, **allifkwargs):
             obj = form.save(commit=False)
             """this is very important line... dont change unless you know what you are doing...."""
             obj.company = uscmpy # allif_data isn't defined here, fix this logic
+            obj.division=allif_data.get("logged_in_user_profile").division
+            obj.branch=allif_data.get("logged_in_user_profile").branch
+            obj.department=allif_data.get("logged_in_user_profile").department
             obj.save()
             return redirect('allifmaalcommonapp:commonhrm', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg")) # allif_data isn't defined here, fix this logic
         else:
@@ -1563,37 +1550,7 @@ def commonEditUser(request, pk, *allifargs, **allifkwargs):
     
     allif_data = common_shared_data(request)
     context = {"title": title, "form": form, "user_var_update": user_var_update,}
-    return render(request, "allifmaalcommonapp/hrm/users/adduser.html", context)
-
-
-#@allif_base_view_wrapper
-def commonEditUser_previous(request,pk,*allifargs,**allifkwargs):
-    title="Update User Details"
-    user_var_update=get_object_or_404(User, id=pk)
-    
-    uscmpy=request.user.company
-    print(uscmpy,'pppppppppppppppppppppppppppppppppppp')
-    
-    form=UpdateCustomUserForm(uscmpy,instance=user_var_update)
-    allif_data=common_shared_data(request)
-    
-    if request.method=='POST':
-        form=UpdateCustomUserForm(request.POST or None, instance=user_var_update)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            """this is very important line... dont change unless you know what you are doing...."""
-            obj.usercompany=str(allif_data.get("compslg"))
-            obj.save()
-            return redirect('allifmaalcommonapp:commonhrm',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-        else:
-            error_message=form.errors
-            allifcontext={"error_message":error_message,"title":title,}
-            return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-    else:
-        form=UpdateCustomUserForm(uscmpy,instance=user_var_update)
-
-    context={"title":title,"form":form,"user_var_update":user_var_update,}
-    return render(request,"allifmaalcommonapp/hrm/users/adduser.html",context)
+    return render(request, "allifmaalcommonapp/hrm/users/edituser.html", context)
 
 @allif_base_view_wrapper
 def commonUserDetails(request,pk,*allifargs,**allifkwargs):
@@ -1670,11 +1627,10 @@ def commonDeleteUser(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonUserSearch(request,*allifargs,**allifkwargs):
     title="Search"
-    allif_data=common_shared_data(request)
     if request.method=='POST':
         allifsearch=request.POST.get('allifsearchcommonfieldname')
-        searched_data=User.all_objects.filter((Q(first_name__icontains=allifsearch)|Q(last_name__icontains=allifsearch)) & Q(usercompany=allif_data.get("compslg")))
-        context={"title":title,"allifsearch":allifsearch,"searched_data":searched_data,}
+        allifqueryset=User.all_objects.filter((Q(first_name__icontains=allifsearch)|Q(last_name__icontains=allifsearch)) & Q(company=request.user.company))
+        context={"title":title,"allifqueryset":allifqueryset,}
     return render(request,'allifmaalcommonapp/hrm/staff/staff.html',context)
             
 
@@ -1858,20 +1814,18 @@ def commonUserAllifaamlAdmin(request,pk):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 ###################### staff profiles #####################################
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonStaffProfiles(request,*allifargs,**allifkwargs):
-   
     title="Staff Profiles"
     allif_data=common_shared_data(request)
     allifqueryset =allif_filtered_and_sorted_queryset(request,CommonEmployeesModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,}
     return render(request,'allifmaalcommonapp/hrm/profiles/profiles.html',context)
 
-
 def commonAddStaffProfile(request, *allifargs, **allifkwargs):
     return allif_common_form_submission_and_save(request,CommonAddStaffProfileForm,"New Profile","commonStaffProfiles",'allifmaalcommonapp/hrm/profiles/add-staff-profile.html')
 
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonEditStaffProfile(request, pk, *allifargs, **allifkwargs):
     return allif_common_form_edit_and_save(request,pk,CommonAddStaffProfileForm,"Edit Bank","commonStaffProfiles",'allifmaalcommonapp/hrm/profiles/add-staff-profile.html')
 
@@ -1887,13 +1841,10 @@ def commonDeleteProfile(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonProfileSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonEmployeesModel',search_fields_key='CommonEmployeesModel',
-    template_path='allifmaalcommonapphrm/profiles/profiles.html',search_input_name='allifsearchcommonfieldname',)
+    template_path='allifmaalcommonapp/hrm/profiles/profiles.html',search_input_name='allifsearchcommonfieldname',)
 
 @allif_base_view_wrapper
 def commonStaffProfileDetails(request, pk, *allifargs, **allifkwargs):
-    allif_data=common_shared_data(request)
-    #allifquery=get_object_or_404(CommonEmployeesModel, id=pk)
-    allifquery=CommonEmployeesModel.objects.filter(id=pk).first()
     return allif_common_detail_view(request,model_class=CommonEmployeesModel,pk=pk,
         template_name='allifmaalcommonapp/hrm/profiles/profile-details.html', # Create this template
         title_map={'default': 'Profile Details'},)

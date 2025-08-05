@@ -2,10 +2,10 @@
 {% extends 'allifmaalcommonapp/ui/general/delete-confirm.html'%}
 {% load allif_navigation_tags %}
 {% block delete-action-decline %}
-<a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Invoices' user_var glblslug %}">No, Dont Delete {{allifquery}}</a>
+<a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Staff' user_var glblslug %}">No, Dont Delete {{allifquery}}</a>
 {% endblock %}
 
 {% block delete-action-confirm %}
-<a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalcommonapp:commonDeleteInvoice' allifquery.id user_var glblslug %}"> Yes, Delete {{allifquery}}</a>
+<a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalcommonapp:commonDeleteUser' allifquery.id user_var glblslug %}"> Yes, Delete {{allifquery}}</a>
 {% endblock %}
      

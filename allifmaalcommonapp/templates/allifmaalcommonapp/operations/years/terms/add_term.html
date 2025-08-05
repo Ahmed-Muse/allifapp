@@ -1,41 +1,41 @@
 {% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
 {% load allif_navigation_tags %}
  {% block add-form-header-block %}
-  <a href="{% allif_get_single_nav_link_url 'Companies' user_var glblslug %}">Companies</a>
+  <a href="{% allif_get_single_nav_link_url 'OperationTerms' user_var glblslug %}">Terms</a>
   {% endblock %}
    {% block core-tab-col-one %}
     <tr>
       <td class="allif-fix-table-col-forms">Division</td>
       <td>{{form.division}}</td>
     </tr>
-      <tr>
-      <td class="allif-fix-table-col-forms">Address</td>
-      <td>{{form.address}}</td>
+     <tr>
+      <td class="allif-fix-table-col-forms">Branch</td>
+      <td>{{form.branch}}</td>
     </tr>
+     
      
     {%endblock%}
 
       {% block core-tab-col-two %}
-     <tr>
-      <td class="allif-fix-table-col-forms">Email</td>
-      <td>{{form.email}}</td>
-    </tr>
     <tr>
-      <td class="allif-fix-table-col-forms">City</td>
-      <td>{{form.city}}</td>
+      <td class="allif-fix-table-col-forms">Department</td>
+      <td>{{form.department}}</td>
     </tr>
-   
+  <tr>
+      <td class="allif-fix-table-col-forms">Year</td>
+      <td>{{form.operation_year}}</td>
+    </tr>
     {%endblock%}
     {% block bottom-fields-col-one %}
      <tr>
-      <td class="allif-fix-table-col-forms">Phone 1</td>
-      <td>{{form.phone1}}</td>
+      <td class="allif-fix-table-col-forms">Operation Term</td>
+      <td>{{form.operation_term}}</td>
     </tr>
     {%endblock%}
     {% block bottom-fields-col-two %}
      <tr>
-      <td class="allif-fix-table-col-forms">Phone 2</td>
-      <td>{{form.phone2}}</td>
+      <td class="allif-fix-table-col-forms">Term Name</td>
+      <td>{{form.name}}</td>
     </tr>
     {%endblock%}
 
@@ -43,12 +43,12 @@
   {% block allif_sensitive_section_col_one %}
     <tr>
       <td class="allif-fix-table-col"> {{allifquery}}</td>
-      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Banks' user_var glblslug %}">Go Back</a></td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'OperationTerms' user_var glblslug %}">Go Back</a></td>
     </tr>
   {% endblock %}
   {% block allif_sensitive_section_col_two %}
     <tr>
       <td class="allif-fix-table-col">Delet {{allifquery}}</td>
-      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.wanttodeletebank.url }}">Delete {{allifquery}}</a></td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteOperationYearTermConfirm.url }}">Delete {{allifquery}}</a></td>
     </tr>
     {% endblock %}

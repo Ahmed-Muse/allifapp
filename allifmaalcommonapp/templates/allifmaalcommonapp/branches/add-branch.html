@@ -1,7 +1,7 @@
 {% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
 {% load allif_navigation_tags %}
  {% block add-form-header-block %}
-  <a href="{% allif_get_single_nav_link_url 'Companies' user_var glblslug %}">Companies</a>
+  <a href="{% allif_get_single_nav_link_url 'Branches' user_var glblslug %}">Branches</a>
   {% endblock %}
    {% block core-tab-col-one %}
     <tr>
@@ -11,6 +11,11 @@
       <tr>
       <td class="allif-fix-table-col-forms">Address</td>
       <td>{{form.address}}</td>
+    </tr>
+
+      <tr>
+      <td class="allif-fix-table-col-forms">Division</td>
+      <td>{{form.division}}</td>
     </tr>
      
     {%endblock%}

@@ -55,7 +55,11 @@ from django.contrib.contenttypes.models import ContentType
 
 class ActiveManager(models.Manager):
     def get_queryset(self):
+        """
+        use this line only when the items will belong to any of the list categories
         return super().get_queryset().filter(status__in=['Active', 'Approved', 'Draft'])
+        """
+        return super().get_queryset()
          #return super().get_queryset().filter(status__in=['Active','Approved','Draft'],delete_status='Deletable')
         
     # Other methods like 'archived' and 'all_with_archived' remain the same
@@ -246,13 +250,13 @@ class CommonOperationYearTermsModel(BaseModel):
     """
     this model captures operational year sections like terms, semisters, quarters ...etc
     """
-    operation_term=models.CharField(max_length=50,blank=True,default="Operation Year",null=True,unique=False,help_text="e.g., 2023-2024")
+    operation_term=models.CharField(max_length=50,blank=True,default="Operation Term",null=True,unique=False,help_text="e.g., 2023-2024")
     owner=models.ForeignKey(User, related_name="ownr_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
     company=models.ForeignKey(CommonCompanyDetailsModel,related_name="cmp_operation_term",on_delete=models.CASCADE,null=True,blank=True)
     division=models.ForeignKey(CommonDivisionsModel,related_name="dvs_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
     branch=models.ForeignKey(CommonBranchesModel,related_name="brnch_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
     department=models.ForeignKey(CommonDepartmentsModel,related_name="dept_operation_term",on_delete=models.SET_NULL,null=True,blank=True)
-    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='terms_operation_year')
+    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.SET_NULL, related_name='terms_operation_year')
 
     def __str__(self):
         return str(self.name)

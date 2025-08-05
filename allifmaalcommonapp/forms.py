@@ -187,7 +187,7 @@ class CommonAddDivisionForm(forms.ModelForm):
             'pobox':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
            'reference':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
           'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-              'phone2':forms.TextInput(attrs={'class':'form-control'}),
+            'phone2':forms.TextInput(attrs={'class':'form-control'}),
             'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
             'starts': DatePickerInput(attrs={'class': 'form-control'}),
             'ends': DatePickerInput(attrs={'class': 'form-control'}),
@@ -216,7 +216,7 @@ class CommonAddBranchForm(forms.ModelForm):
             'branch':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             #'username':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'phone':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'email':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'city':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -315,9 +315,9 @@ class CommonAddOperationYearForm(forms.ModelForm):
 class CommonAddOperationYearTermForm(forms.ModelForm):
     class Meta:
         model=CommonOperationYearTermsModel
-        fields = ['department','branch','division','description','name','comments','starts','ends','operation_year','phone2','reference','status','priority','starts','ends','comments','phone1',]
+        fields = ['department','branch','division','operation_term','description','name','comments','starts','ends','operation_year','phone2','reference','status','priority','starts','ends','comments','phone1',]
         widgets={
-            
+            'operation_term':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),

@@ -1,48 +1,68 @@
 {% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
 {% load allif_navigation_tags %}
  {% block add-form-header-block %}
-  
-<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-<a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}">Add Profile</a>
-
-<a href="{% url 'allifmaalcommonapp:commonStaffProfiles' user_var glblslug %}">Profiles</a>
-
-<a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Staff</a>
-
+  <a href="{% allif_get_single_nav_link_url 'Profiles' user_var glblslug %}">Staff Profiles</a>
+  <a href="{% allif_get_single_nav_link_url 'AddStaffProfile' user_var glblslug %}">New Profile</a>
   {% endblock %}
    {% block core-tab-col-one %}
-    <tr>
-      <td class="allif-fix-table-col-forms">Division</td>
-      <td>{{form.division}}</td>
+     <tr>
+      <td class="allif-fix-table-col-forms">First Name</td>
+      <td>{{form.firstName}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Middle Name</td>
+      <td>{{form.middleName}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Last Name</td>
+      <td>{{form.lastName}}</td>
     </tr>
       <tr>
-      <td class="allif-fix-table-col-forms">Address</td>
-      <td>{{form.address}}</td>
+      <td class="allif-fix-table-col-forms">User Name</td>
+      <td>{{form.username}}</td>
     </tr>
-     
+    
+     <tr>
+      <td class="allif-fix-table-col-forms">Title</td>
+      <td>{{form.title}}</td>
+    </tr>
+    
+    
     {%endblock%}
 
       {% block core-tab-col-two %}
+       <tr>
+      <td class="allif-fix-table-col-forms">Education</td>
+      <td>{{form.education}}</td>
+    </tr>
      <tr>
-      <td class="allif-fix-table-col-forms">Email</td>
-      <td>{{form.email}}</td>
+      <td class="allif-fix-table-col-forms">Salary</td>
+      <td>{{form.salary}}</td>
     </tr>
-    <tr>
-      <td class="allif-fix-table-col-forms">City</td>
-      <td>{{form.city}}</td>
+     <tr>
+      <td class="allif-fix-table-col-forms">Paid Salary</td>
+      <td>{{form.total_salary_paid}}</td>
     </tr>
-   
+     <tr>
+      <td class="allif-fix-table-col-forms">Salary Payable</td>
+      <td>{{form.salary_payable}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Salary Balance</td>
+      <td>{{form.salary_balance}}</td>
+    </tr>
+    
     {%endblock%}
     {% block bottom-fields-col-one %}
      <tr>
-      <td class="allif-fix-table-col-forms">Phone 1</td>
-      <td>{{form.phone1}}</td>
+      <td class="allif-fix-table-col-forms">Category</td>
+      <td>{{form.sysperms}}</td>
     </tr>
     {%endblock%}
     {% block bottom-fields-col-two %}
      <tr>
-      <td class="allif-fix-table-col-forms">Phone 2</td>
-      <td>{{form.phone2}}</td>
+      <td class="allif-fix-table-col-forms">Gender</td>
+      <td>{{form.gender}}</td>
     </tr>
     {%endblock%}
 
@@ -50,13 +70,13 @@
   {% block allif_sensitive_section_col_one %}
     <tr>
       <td class="allif-fix-table-col"> {{allifquery}}</td>
-      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Banks' user_var glblslug %}">Go Back</a></td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Profiles' user_var glblslug %}">Go Back</a></td>
     </tr>
   {% endblock %}
   {% block allif_sensitive_section_col_two %}
     <tr>
       <td class="allif-fix-table-col">Delet {{allifquery}}</td>
-      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.wanttodeletebank.url }}">Delete {{allifquery}}</a></td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteStaffProfileConfirm.url }}">Delete {{allifquery}}</a></td>
     </tr>
     {% endblock %}
 

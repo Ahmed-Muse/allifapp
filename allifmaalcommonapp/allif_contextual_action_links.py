@@ -181,11 +181,16 @@ allif_sector_contextual_action_require_pk_links= {
     {'name': 'DeleteDepartmentConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDepartment', 'requires_pk': True},
     {'name': 'DeleteDepartment', 'url_name': 'allifmaalcommonapp:commonDeleteDepartment', 'requires_pk': True},
     {'name': 'EditOperationYear', 'url_name': 'allifmaalcommonapp:commonEditOperationYear', 'requires_pk': True},
-    {'name': 'EditOperationYear', 'url_name': 'allifmaalcommonapp:commonWantToDeleteOperationYear', 'requires_pk': True},
+    {'name': 'DelteOperationYearConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteOperationYear', 'requires_pk': True},
     {'name': 'DeleteOperationYear', 'url_name': 'allifmaalcommonapp:commonDeleteOperationYear', 'requires_pk': True},
     {'name': 'EditOperationTerm', 'url_name': 'allifmaalcommonapp:commonEditOperationYearTerm', 'requires_pk': True},
     {'name': 'DeleteOperationYearTermConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteOperationYearTerm', 'requires_pk': True},
     {'name': 'DeleteOperationYearTerm', 'url_name': 'allifmaalcommonapp:commonDeleteOperationYearTerm', 'requires_pk': True},
+   
+   {'name': 'EditStaffProfile', 'url_name': 'allifmaalcommonapp:commonEditStaffProfile', 'requires_pk': True},
+   {'name': 'DeleteStaffProfileConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteProfile', 'requires_pk': True},
+   {'name': 'DeleteStaffProfile', 'url_name': 'allifmaalcommonapp:commonDeleteProfile', 'requires_pk': True},
+   {'name': 'StaffProfileDetails', 'url_name': 'allifmaalcommonapp:commonStaffProfileDetails', 'requires_pk': True},
    
   
     ],

@@ -1,28 +1,51 @@
-{% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
-{% load allif_navigation_tags %}
-{% block allif-basic-search-action %}
-{% url 'allifmaalcommonapp:commonUserSearch' user_var glblslug %}
-{% endblock %}
-{% block advanced-search %}{%endblock%}
-{% block upload-excel-file %}{%endblock%}
-{% block allif-header-links %}
- <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">HRM</a>
-    <a href="{% url 'allifmaalusersapp:changeYourUserPassword' %}">Change Password</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddUser' user_var glblslug %}">New Staff</a>
-    <a href="{% url 'allifmaalcommonapp:commonSalaries' user_var glblslug %}">Payroll</a>
-    <a href="{% url 'allifmaalcommonapp:commonStaffProfiles' user_var glblslug %}">Profiles</a>
-    <a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}">New Profile </a>
-    <a href="{% url 'allifmaalcommonapp:commonApprovers' user_var glblslug %}">Approvers </a>
-
-    <a href="{% url 'allifmaalcommonapp:commonSalaries' user_var glblslug %}">Salary Payments</a>
-
-{% endblock %}
-{% block list-table-content-seciton-links %}
-<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonUserDetails' item.id user_var glblslug %}"> {{item.first_name}}</a>
-
-{% endblock %}
-{% block list-table-content-seciton-dropdown-links %}
-<a href="{% url 'allifmaalcommonapp:commonEditUser' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
-{% endblock %}
+  {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block allif-basic-search-action %}
+    {% url 'allifmaalcommonapp:commonUserSearch' user_var glblslug %}
+  {% endblock %}
+ {% block advanced-search %}{%endblock%}
   
+  {% block upload-excel-file-action %}
+  
+  {% endblock %}
+  {% block allif-header-links %}
+  <a href="{% allif_get_single_nav_link_url 'Staff' user_var glblslug %}">Employees</a>
+  <a href="{% allif_get_single_nav_link_url 'AddUser' user_var glblslug %}">New User</a>
+  <a href="{% allif_get_single_nav_link_url 'Profiles' user_var glblslug %}">Staff Profiles</a>
+  <a href="{% allif_get_single_nav_link_url 'Salaries' user_var glblslug %}">Salaries</a>
+  
+  {% endblock %}
+  {% block upload-excel-file %}
+  {%endblock%}
+  {% block list-table-headers %}
+  <td class="allif-fix-table-col"> User Name</td>
+  <td class="allif-table-header-td"> First Name</td>
+  <td class="allif-table-header-td"> Last Name</td>
+  <td class="allif-table-header-td"> Email</td>
+  <td class="allif-table-header-td">Category </td>
+  {% endblock %}
+
+    
+  {% block list-table-content-seciton %}
+  <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonUserDetails' item.id user_var glblslug %}"> {{item.username}} </a>{%endblock%}</td>
+  <td class="allif-table-content-td"> {{item.first_name}} </td>
+  <td class="allif-table-content-td"> {{item.last_name}}</td>
+  <td class="allif-table-content-td"> {{item.email}}</td>
+  <td class="allif-table-content-td"> {{item.user_category}}</td>
+  
+
+  
+  {% endblock %}
+  {% block list-table-content-seciton-dropdown-links %}
+  <a href="{% url 'allifmaalcommonapp:commonEditUser' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+  
+  
+  {% endblock %}
+  
+
+
+
+
+
+

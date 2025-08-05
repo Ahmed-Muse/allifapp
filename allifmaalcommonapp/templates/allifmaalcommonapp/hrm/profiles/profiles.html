@@ -1,26 +1,36 @@
 {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
 {% load allif_navigation_tags %}
+{% load humanize %}
 {% block allif-basic-search-action %}
 {% url 'allifmaalcommonapp:commonProfileSearch' user_var glblslug %}
 {% endblock %}
 {% block advanced-search %}{%endblock%}
 {% block upload-excel-file %}{%endblock%}
 {% block allif-header-links %}
-<a href="{% allif_get_single_nav_link_url 'Categories' user_var glblslug %}">Categories</a>
-<a href="{% allif_get_single_nav_link_url 'AddCategory' user_var glblslug %}">Add Category</a>
- <a class="amel-table-list-identifier">Profiles:</a>
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Employees</a>
-    <a href="{% url 'allifmaalcommonapp:commonStaffProfiles' user_var glblslug %}">Profiles</a>
-    
-    <a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}" >New Profile </a>
-
+ <a href="{% allif_get_single_nav_link_url 'Profiles' user_var glblslug %}">Staff Profiles</a>
+  <a href="{% allif_get_single_nav_link_url 'AddStaffProfile' user_var glblslug %}">New Profile</a>
 {% endblock %}
-{% block list-table-content-seciton-links %}
-<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditStaffProfile' item.id user_var glblslug %}"> {{item.name}}</a>
-
+{% block list-table-headers %}
+<td class="allif-fix-table-col"> First Name </td>
+<td class="allif-table-header-td"> Middle Name</td>
+<td class="allif-table-header-td"> Last Name </td>
+<td class="allif-table-header-td"> Gender</td>
+<td class="allif-table-header-td">Status </td>
 {% endblock %}
+{% block list-table-content-seciton %}
+<td class="allif-fix-table-col">
+   <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStaffProfileDetails' item.id user_var glblslug %}"> {{item.firstName}} </a>
+</td>
+<td class="allif-table-content-td"> {{item.middleName}} </td>
+<td class="allif-table-content-td"> {{item.lastName}}</td>
+<td class="allif-table-content-td"> {{item.gender}}</td>
+<td class="allif-table-content-td">{{item.status}}</td>
+{% endblock %}
+
 {% block list-table-content-seciton-dropdown-links %}
-<a href="{% url 'allifmaalcommonapp:commonEditCategory' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+<a href="{% url 'allifmaalcommonapp:commonEditStaffProfile' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+
+
 {% endblock %}
-  
+ 
+

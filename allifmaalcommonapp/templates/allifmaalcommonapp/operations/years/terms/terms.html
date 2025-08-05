@@ -1,35 +1,31 @@
 {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
 {% load allif_navigation_tags %}
 {% load humanize %}
-{% block allif-basic-search-action %}
-{% endblock %}
-{% block advanced-search %}{%endblock%}
-{% block upload-excel-file %}{%endblock%}
+{% block allif_header_forms_dropdown%} {%endblock%}
 {% block allif-header-links %}
-<a href="{% allif_get_single_nav_link_url 'Divisions' user_var glblslug %}">Divisions</a>
-<a href="{% allif_get_single_nav_link_url 'AddDivision' user_var glblslug %}">New Division</a>
-<a href="{% allif_get_single_nav_link_url 'Branches' user_var glblslug %}">Branches</a>
-<a href="{% allif_get_single_nav_link_url 'Departments' user_var glblslug %}">Departments</a>
+<a href="{% allif_get_single_nav_link_url 'OperationTerms' user_var glblslug %}">Operation Terms</a>
+<a href="{% allif_get_single_nav_link_url 'AddOperationYearTerm' user_var glblslug %}">New Term</a>
+<a href="{% allif_get_single_nav_link_url 'OperationYears' user_var glblslug %}">Operation Years</a>
+<a href="{% allif_get_single_nav_link_url 'AddOperationYear' user_var glblslug %}">Add Operation Year</a>
 {% endblock %}
 {% block list-table-headers %}
-<td class="allif-fix-table-col"> Division </td>
-<td class="allif-table-header-td"> Address</td>
+<td class="allif-fix-table-col"> Operation Year </td>
+<td class="allif-table-header-td"> Operation Term</td>
 <td class="allif-table-header-td"> Created By</td>
 <td class="allif-table-header-td"> Status</td>
 <td class="allif-table-header-td">Date</td>
 {% endblock %}
 {% block list-table-content-seciton %}
-<td class="allif-fix-table-col">
-   <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonDivisionDetails' item.id user_var glblslug %}"> {{item.division}} </a>
+<td class="allif-fix-table-col">{{item.operation_year}}
 </td>
-<td class="allif-table-content-td"> {{item.address}} </td>
+<td class="allif-table-content-td"> {{item.operation_term}} </td>
 <td class="allif-table-content-td"> {{item.owner}}</td>
 <td class="allif-table-content-td"> {{item.status}}</td>
-<td class="allif-table-content-td">{{item.date}}</td>
+<td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
 {% endblock %}
 
 {% block list-table-content-seciton-dropdown-links %}
-<a href="{% url 'allifmaalcommonapp:commonEditDivision' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+<a href="{% url 'allifmaalcommonapp:commonEditOperationYearTerm' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
 
 {% endblock %}
  

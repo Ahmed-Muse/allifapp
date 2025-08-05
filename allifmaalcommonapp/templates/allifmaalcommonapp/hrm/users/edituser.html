@@ -15,41 +15,32 @@
       <td class="allif-fix-table-col-forms">First Name</td>
       <td>{{form.first_name}}</td>
     </tr>
-    <tr>
+      <tr>
       <td class="allif-fix-table-col-forms">Last Name</td>
       <td>{{form.last_name}}</td>
     </tr>
-    
      
     {%endblock%}
 
       {% block core-tab-col-two %}
-     <tr>
-      <td class="allif-fix-table-col-forms">Email</td>
-      <td>{{form.email}}</td>
-    </tr>
+    
      <tr>
       <td class="allif-fix-table-col-forms">User Category</td>
       <td>{{form.user_category}}</td>
     </tr>
 
-     <tr>
-      <td class="allif-fix-table-col-forms">User Name</td>
-      <td>{{form.username}}</td>
-    </tr>
-   
    
     {%endblock%}
     {% block bottom-fields-col-one %}
      <tr>
-      <td class="allif-fix-table-col-forms">Password</td>
-      <td>{{form.password1}}</td>
+      <td class="allif-fix-table-col-forms">Email</td>
+      <td>{{form.email}}</td>
     </tr>
     {%endblock%}
     {% block bottom-fields-col-two %}
      <tr>
-      <td class="allif-fix-table-col-forms">Confirm Password</td>
-      <td>{{form.password2}}</td>
+      <td class="allif-fix-table-col-forms">Username</td>
+      <td>{{form.username}}</td>
     </tr>
     {%endblock%}
 

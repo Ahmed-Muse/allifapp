@@ -453,8 +453,23 @@ allif_model_sort_configs = {
         'default_sort_field': '-date',
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
+    
+    'commonemployeesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
      
-     
+    
+    
+    
     
     
     'commontasksmodel': {
@@ -538,6 +553,7 @@ allif_search_config_mapping = {
       'CommonProgressModel': ['name__icontains', 'description__icontains','number__icontains'],
      'TriagesModel': ['name__icontains', 'description__icontains','number__icontains'],
      'AssessmentsModel': ['name__icontains', 'description__icontains','number__icontains'],
+     'CommonEmployeesModel': ['firstName__icontains', 'description__icontains','number__icontains'],
      
     
     'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
@@ -1028,6 +1044,7 @@ allif_main_models_registry = {
    "AssessmentsModel":AssessmentsModel,
    "CommonLogsModel":CommonLogsModel,
    "CommonDivisionsModel":CommonDivisionsModel,
+   "CommonEmployeesModel":CommonEmployeesModel,
   
    
 }
