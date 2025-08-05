@@ -1,118 +1,35 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+{% load allif_navigation_tags %}
 {% load humanize %}
-{% block title %}
-{{title}}
+{% block allif-basic-search-action %}
 {% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
+{% block advanced-search %}{%endblock%}
+{% block upload-excel-file %}{%endblock%}
+{% block allif-header-links %}
+<a href="{% allif_get_single_nav_link_url 'OperationYears' user_var glblslug %}">Years</a>
+<a href="{% allif_get_single_nav_link_url 'AddOperationYear' user_var glblslug %}">New Operational Year</a>
+<a href="{% allif_get_single_nav_link_url 'OperationTerms' user_var glblslug %}">Termss</a>
+<a href="{% allif_get_single_nav_link_url 'AddOperationYearTerm' user_var glblslug %}">New Term</a>
+{% endblock %}
+{% block list-table-headers %}
+<td class="allif-fix-table-col"> Year </td>
+<td class="allif-table-header-td"> Address</td>
+<td class="allif-table-header-td"> Created By</td>
+<td class="allif-table-header-td"> Status</td>
+<td class="allif-table-header-td">Date</td>
+{% endblock %}
+{% block list-table-content-seciton %}
+<td class="allif-fix-table-col">
+   <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonDivisionDetails' item.id user_var glblslug %}"> {{item.year}} </a>
+</td>
+<td class="allif-table-content-td"> {{item.address}} </td>
+<td class="allif-table-content-td"> {{item.owner}}</td>
+<td class="allif-table-content-td"> {{item.status}}</td>
+<td class="allif-table-content-td">{{item.date}}</td>
+{% endblock %}
+
+{% block list-table-content-seciton-dropdown-links %}
+<a href="{% url 'allifmaalcommonapp:commonEditDivision' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+
+{% endblock %}
  
-  <!--start....main headere-->
-<div class="card-header">
-  <div class="row mt-12" ><!--start....header row-->
-  <div class="col-md-12"><!--start....header column-->
-  <div class="container-fluid amel-content-header">
-  
-    <a class="amel-table-list-identifier">Operation Years:</a>
-    <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-    
-    <a href="{% url 'allifmaalcommonapp:commonAddOperationYear' user_var glblslug %}"> Add New Operation Year </a>
-   
-  <a href="{% url 'allifmaalcommonapp:commonOperationYears' user_var glblslug %}">Operation Years</a>
- <a href="{% url 'allifmaalcommonapp:commonOperationYearTerms' user_var glblslug %}">Terms</a>
-
-
-  </div>
-    </div><!--end....header column-->
-    </div><!--end....header row-->
-  </div><!--end....main headere-->
-  
-    <div class="allifmaincontainer">
-<div class="row mt-12"> <!--start....table row-->
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="table-responsive allif-full-table">
-    <table class="table table-layout">
-      <thead>
-        <tr class="allif-table-header-row">
-        <td class="allif-fix-table-col">Operation Year</td>
-       
-        <td>Starts On</td>
-        <td>Ends On</td>
-        <td>Type</td>
-        <td>Created On</td>
-     
-        <td>Navigate</td>
-        
-        <td> . . . </td>
-        <td></td>
-        </tr>
-        </thead>
-        <tbody class="allif-table-body">
-         
-        
-        {% for item in allifqueryset %} 
-        <tr data-id="{{item.id}}">
-        <td class="allif-fix-table-col"> {{item.year}}</td>
-       
-        
-          <td>
-          {{item.starts|date:'d/m/Y'}}
-         </td>
-         <td>
-          {{item.ends|date:'d/m/Y'}}
-         </td>
-          <td>
-          {{item.is_current}}
-         </td>
-         <td>
-          {{item.date|date:'d/m/Y'}}
-         </td>
-        
-        <td>
-            <div class="dropdown allifmaal-content-dropdown">
-              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
-              <div class="dropdown-content">
-                <a href="{% url 'allifmaalcommonapp:commonEditOperationYear' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
-                
-              </div>
-            </div>
-            <div class="dropdown allif-confirm-action">
-              
-              <a href="{% url 'allifmaalcommonapp:commonOperationYears' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-              <a href="{% url 'allifmaalcommonapp:commonDeleteOperationYear' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-            </div>
-  
-           
-          </td>
-       <td> . . . </td>
-       <td></td>
-      
-  
-    </tr>
-    {% endfor %}
-    
-      </tbody>
-    </table>
-    </div>
-   </div>
-
-</div><!--end....table column-->
-
-</div><!--end....table row-->
-
-</div>
-
-</div>
-  {% block scripts %}
- 
-  {% endblock %}
-  {% endblock %}
-
-
-
-
-
-

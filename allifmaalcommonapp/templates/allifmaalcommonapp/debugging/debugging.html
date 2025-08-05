@@ -1,24 +1,729 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tenant Debug Info</title>
-</head>
-<body>
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load humanize %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+{%endblock%}
+{% block body %}
+<div class="allifmaal-main-container">
 
-    <h1>Company Name... {{main_sbscrbr_entity}}</h1>
-    <h1>Company Slug ... {{company_slg_str}}</h1>
-    <h1>User Slug ... {{user_slg_str}}</h1>
-    <h3>{{allifquery}}</h3>
-    <p>Is Authenticated: <strong>{{ is_authenticated }}</strong></p>
-    <p>Company ID from User Object: <strong>{{ company_id_from_user }}</strong></p>
-    <p>Company ID from Middleware: <strong>{{ company_id_from_middleware }}</strong></p>
+<!--start....main headere-->
+<div class="card-header">
 
-    <h2>What this means:</h2>
-    <ul>
-        <li>If 'Is Authenticated' is 'False', you are not logged in. Log in and try again.</li>
-        <li>If 'Company ID from User Object' shows an 'AttributeError', the user account you are logged in with has no company assigned.</li>
-        <li>If 'Company ID from Middleware' is `None`, and the other two are correct, there is an issue in the middleware itself.</li>
+<div class="row mt-12" ><!--start....header row-->
+
+<div class="col-md-12"><!--start....header column-->
+
+<div class="container-fluid amel-content-header">
+<div class="dropdown allifmaal-content-dropdown">
+  <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  Actions
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <div class="content-dropdown-menu">
+   
+   </div>
+  </ul>
+</div>
+
+<div class="dropdown allifmaal-content-dropdown">
+    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Company Levels
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="content-dropdown-menu">
+      
+  
+    </div>
     </ul>
-</body>
-</html>
+  </div>
+
+</div>
+
+    </div><!--end....header column-->
+  
+  </div><!--end....header row-->
+
+</div><!--end....main headere-->
+
+  <div class="allifmaincontainer">
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">{{allifquery}} Details</div>
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="allif-info-tables">
+      <div class="row"><!--start of row div --->
+  <!--start of column two-->
+  <div class="col-md-4">
+    
+      <!--start of the table here-->
+      <div class="table-responsive">
+      <table class="table table-layout">
+      <tbody>
+        <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{allifquery.company}}</td>
+          </tr>
+      <tr>
+        <td class="allif-fix-table-col">Division</td>
+        <td>{{allifquery.division}}</td>
+        </tr>
+      <tr>
+        <td class="allif-fix-table-col">Email</td>
+        <td>{{allifquery.email}}</td>
+        </tr>
+      <tr>
+        <td class="allif-fix-table-col">Phone</td>
+        <td>{{allifquery.phone}}</td>
+        </tr>
+      
+   
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">City</td>
+            <td>{{allifquery.city}}</td>
+            </tr>
+          <tr>
+            <td class="allif-fix-table-col">Created By</td>
+            <td>{{allifquery.owner}}</td>
+            </tr>
+         
+        <tr>
+            <td class="allif-fix-table-col">P.O.Box</td>
+            <td>{{allifquery.pobox}}</td>
+            </tr>
+         
+          <tr>
+            <td class="allif-fix-table-col">Address</td>
+            <td>{{allifquery.address}}</td>
+            </tr>
+      
+      
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Date</td>
+            <td>{{allifquery.date|date:'d/m/Y'}}</td>
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Last Update</td>
+              <td>{{allifquery.updatedon|date:'d/m/Y'}}</td>
+          
+              </tr>
+                  
+            
+            <tr>
+            <td class="allif-fix-table-col">UID</td>
+            <td>{{allifquery.divisionuid}}</td>
+          
+            </tr>
+            <tr>
+              <td class="allif-fix-table-col">Slug</td>
+              <td>{{allifquery.divisionslug}}</td>
+          
+          </tr> 
+          </tbody>
+          </table>
+  </div>
+    </div>
+    </div><!--end of row div --->
+      
+        </div>
+
+</div><!--end....table row-->
+</div>
+<!--end of table-->
+
+</div><!--end of main container of the page............-->
+
+
+
+<!--end of table-->
+
+<!--end of table-->
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+          <td>Company Name</td>
+          <td>Division Name</td>
+          <td>Created By</td>
+          <td>Email Address</td>
+         
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+       
+        <tr>
+         
+          <td>
+            {{allifquery.division}}
+          </td>
+          <td>{{allifquery.owner}}</td>
+          
+          <td>{{allifquery.email}}</td>
+       
+          </td>
+      </tr>
+      
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+
+
+<div class="row mt-12"> <!--start....table row-->
+  <div class="col-md-12"> <!--start....table column-->
+    <div class="table-content-description"> <a href="" class="allif-table-links"> Branches</a> </div>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Branches</td>
+        <td>Division</td>
+        
+        <td>Owner</td>
+        <td>Date</td>
+       
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in relatedqueryset %} 
+        <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col">
+         
+        <td>{{item.division}}</td>
+        <td>{{item.owner}}</td>
+        <td>{{item.date|date:'d/m/Y'}}</td>
+
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+           
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+          
+          </div>
+
+
+        </td>
+
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row....ok.........-->
+
+<hr>
+
+<div class="allif-single-page-tabs-contents-main-wrapper">
+    <div class="allif-single-page-tab-links-wrapper">
+    <ul class="nav nav-tabs allif-single-page-tab-links-wrapper" >
+
+      <a class="nav-link active allif-single-page-tab-links" id="allif-single-page-tab-one-content-link-one-id" data-bs-toggle="tab"
+       data-bs-target="#allif-single-page-tab-one-content-link" type="button" role="tab" aria-controls="details" aria-selected="true">
+       Table Details
+      </a>
+    
+      <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-two-content-link-two-id" data-bs-toggle="tab"
+        data-bs-target="#allif-single-page-tab-two-content-link" type="button" role="tab" aria-controls="branches" aria-selected="false">
+          Full Tables
+      </a>
+       
+      <a class="nav-link allif-single-page-tab-links" id="allif-single-page-tab-three-content-link-three-id" data-bs-toggle="tab" 
+        data-bs-target="#allif-single-page-tab-three-content-link" type="button" role="tab" aria-controls="additional-info" aria-selected="false">
+          Tabular Forms
+        </a>
+
+      </ul>
+      </div>
+
+
+      <!--start of singple page contents-->
+    <div class="tab-content allif-single-page-tab-content-wrapper" id="allif-single-page-tab-content-wrapper-id">
+
+       <!--START.. Start of show/hide table section one-->
+      <div class="tab-pane allif-single-page-tab-content-pane show active" id="allif-single-page-tab-one-content-link" role="tabpanel" aria-labelledby="allif-single-page-tab-one-content-link-one-id">
+      <div class="row mt-12"> <!--start....table row-->
+      <div class="col-md-12"> <!--start....table column-->
+      <div class="table-details-content-description">{{allifquery}} Details</div>
+        <div class="allif-scroll-table">
+          <div class="row">
+          <div class="col-md-4">
+          <div class="table-responsive">
+          <table class="table table-layout">
+          <tbody>
+            <tr>
+              <td class="allif-fix-table-col">Company</td>
+              <td>{{allifquery.company}}</td>
+            </tr>
+            
+          </tbody>
+          </table>
+          </div>
+          </div>
+          
+        <div class="col-md-4">
+        <div class="allif-details-card table-responsive">
+          <table class="table table-layout">
+            <tbody>
+            <tr>
+                <td class="allif-fix-table-col">City</td>
+                <td>{{allifquery.city}}</td>
+            </tr>
+          
+        </tbody>
+        </table>
+        </div>
+        </div>
+
+      <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+        <tbody>
+        <tr>
+            <td class="allif-fix-table-col">Date</td>
+            <td>{{allifquery.date|date:'d/m/Y'}}</td>
+        </tr>
+          
+      </tbody>
+      </table>
+      </div>
+      </div>
+
+
+      </div>
+      </div>
+      </div>
+      </div></div>
+       <!--END... End of show/hide table more details section one..ok...hree....-->
+
+
+
+ <!--START.. Start of show/hide table section one-->
+      <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-two-content-link" role="tabpanel" aria-labelledby="allif-single-page-tab-two-content-link-two-id">
+      <div class="row mt-12"> <!--start....table row-->
+      <div class="col-md-12"> <!--start....table column-->
+      <div class="table-details-content-description">Full Tables</div>
+        <div class="allif-scroll-table">
+       
+          <div class="table-responsive">
+           <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Branches</td>
+        <td>Division</td>
+        
+        <td>Owner</td>
+        <td>Date</td>
+       
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in relatedqueryset %} 
+        <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col">
+            <a href="" class="allif-table-links">
+            {{item.branch}}
+            </a>
+          </td>
+        <td>{{item.division}}</td>
+        <td>{{item.owner}}</td>
+        <td>{{item.date|date:'d/m/Y'}}</td>
+
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+              <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+            <a href="" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+
+        </td>
+
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+      </div>
+     
+      </div>
+      </div>
+      </div></div>
+       <!--END... End of show/hide table more details section one-->
+
+
+ <!--START.. Start of show/hide table section one-->
+      <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-three-content-link" role="tabpanel" aria-labelledby="allif-single-page-tab-three-content-link-three-id">
+      <div class="row mt-12"> <!--start....table row-->
+      <div class="col-md-12"> <!--start....table column-->
+      <div class="table-details-content-description">Form Tables</div>
+        <div class="allif-scroll-table">
+          <div class="row">
+          <div class="col-md-4">
+          <div class="table-responsive">
+          <table class="table table-layout">
+          <tbody>
+            <tr>
+              <td class="allif-fix-table-col">form</td>
+              <td>{{form.division}}</td>
+            </tr>
+            
+          </tbody>
+          </table>
+          </div>
+          </div>
+          
+        <div class="col-md-4">
+        <div class="allif-details-card table-responsive">
+          <table class="table table-layout">
+            <tbody>
+            <tr>
+                <td class="allif-fix-table-col">City</td>
+                <td>{{form.division}}</td>
+            </tr>
+          
+        </tbody>
+        </table>
+        </div>
+        </div>
+
+      <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+        <table class="table table-layout">
+        <tbody>
+        <tr>
+            <td class="allif-fix-table-col">Date</td>
+            <td>{{form.division}}</td>
+        </tr>
+          
+      </tbody>
+      </table>
+      </div>
+      </div>
+
+
+      </div>
+      </div>
+      </div>
+      </div></div>
+       <!--END... End of show/hide table more details section one-->
+
+        </div>
+
+      </div>
+    <hr>
+
+
+    <div class="container-fluid allif-collapsible-details-section-links-wrapper">
+
+    <a class="dropdown-toggle allif-collapsible-details-section-links" type="button" data-bs-toggle="collapse" 
+      data-bs-target="#allif-collapsible-details-section-one" aria-expanded="false"
+       aria-controls="allif-collapsible-details-section-one">Details Table</a>
+
+    <a class="dropdown-toggle allif-collapsible-details-section-links" type="button" data-bs-toggle="collapse" 
+      data-bs-target="#allif-collapsible-details-section-two" aria-expanded="false"
+       aria-controls="allif-collapsible-details-section-two">Full Table</a>
+
+    <a class="dropdown-toggle allif-collapsible-details-section-links" type="button" data-bs-toggle="collapse" 
+      data-bs-target="#allif-collapsible-details-section-three" aria-expanded="false"
+       aria-controls="allif-collapsible-details-section-three">Form</a>
+    
+
+</div>
+
+  
+    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-one">
+      <div class="row mt-12"> <!--start....table row-->
+      
+        <div class="col-md-12"> <!--start....table column-->
+          <div class="table-details-content-description">{{allifquery}} Details Table</div>
+        <div class="allif-scroll-table">
+        <div class="allif-info-tables">
+        <div class="row"><!--start of row div --->
+        <!--start of column two-->
+        <div class="col-md-4">
+      
+        <!--start of the table here...-->
+        <div class="table-responsive">
+        <table class="table table-layout">
+        <tbody>
+          <tr>
+          <td class="allif-fix-table-col">Company</td>
+          <td>{{allifquery.company}}</td>
+          </tr>
+     
+   
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">City</td>
+            <td>{{allifquery.city}}</td>
+            </tr>
+        
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+          <tr>
+            <td class="allif-fix-table-col">Date</td>
+            <td>{{allifquery.date|date:'d/m/Y'}}</td>
+            </tr>
+           
+          </tbody>
+          </table>
+        </div>
+        </div>
+        </div><!--end of row div --->
+      
+        </div>
+
+        </div><!--end....table row-->
+        </div>
+        <!--end of table-->
+
+        </div><!--end of main container of the page............-->
+
+      </div> 
+            
+     
+    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-two">
+      <div class="row mt-12"> <!--start....table row-->
+      
+        <div class="col-md-12"> <!--start....table column-->
+          <div class="table-details-content-description">{{allifquery}} Full Table</div>
+        <div class="allif-scroll-table">
+        <div class="allif-info-tables">
+        <div class="row"><!--start of row div --->
+        <!--start of column two-->
+        
+        <!--start of the table here...-->
+        <div class="table-responsive">
+           <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+        <td class="allif-fix-table-col">Branches</td>
+        <td>Division</td>
+        
+        <td>Owner</td>
+        <td>Date</td>
+       
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in relatedqueryset %} 
+        <tr data-id="{{item.id}}">
+          <td class="allif-fix-table-col">
+            <a href="" class="allif-table-links">
+            {{item.branch}}
+            </a>
+          </td>
+        <td>{{item.division}}</td>
+        <td>{{item.owner}}</td>
+        <td>{{item.date|date:'d/m/Y'}}</td>
+
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+              <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
+              
+            </div>
+          </div>
+          <div class="dropdown allif-confirm-action">
+            
+            <a href="" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
+            <a href="" id="allif-confirm-delete">Confirm</a>
+          </div>
+
+
+        </td>
+
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+      </div>
+      
+        </div><!--end of row div --->
+      
+        </div>
+
+        </div><!--end....table row-->
+        </div>
+        <!--end of table-->
+
+        </div><!--end of main container of the page............-->
+
+      </div>
+
+    <div class="collapse allif-collapsible-details-section-wrapper" id="allif-collapsible-details-section-three">
+      <div class="row mt-12"> <!--start....table row-->
+      
+        <div class="col-md-12"> <!--start....table column-->
+          <div class="table-details-content-description">{{allifquery}} Form Table</div>
+        <div class="allif-scroll-table">
+        <div class="allif-info-tables">
+        <div class="row"><!--start of row div --->
+        <!--start of column two-->
+        <div class="col-md-4">
+      
+        <!--start of the table here...-->
+        <div class="table-responsive">
+        <table class="table table-layout">
+        <tbody>
+          <tr>
+          <td class="allif-fix-table-col">Name</td>
+          <td>{{form.division}}</td>
+          </tr>
+     
+   
+        </tbody>
+        </table>
+      </div>
+        </div>
+           
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+       <!--start of the table here-->
+       <div class="allif-details-card table-responsive">
+       <table class="table table-layout">
+        <tbody>
+         <tr>
+          <td class="allif-fix-table-col">Address</td>
+          <td>{{form.division}}</td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+          </div>
+    
+    
+     <!--start of column two-->
+     <div class="col-md-4">
+      <div class="allif-details-card table-responsive">
+       <!--start of the table here-->
+       <table class="table table-layout">
+        <tbody>
+           <tr>
+          <td class="allif-fix-table-col">Phone</td>
+          <td>{{form.division}}</td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+        </div>
+        </div><!--end of row div --->
+      
+        </div>
+
+        </div><!--end....table row-->
+        </div>
+        <!--end of table-->
+
+        </div><!--end of main container of the page............-->
+
+            </div>
+        
+    <hr>
+
+    </div>
+
+
+</div>
+  {% block scripts %}
+
+  
+  {% endblock %}
+   {% endblock %}
+   
+
+
+   

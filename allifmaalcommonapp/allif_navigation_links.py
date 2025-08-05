@@ -190,6 +190,25 @@ allif_single_access_general_links = [
     {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},
     {'name': 'Profit & Loss', 'url_name': 'allifmaalcommonapp:commonProfitAndLoss'},
     
+    {'name': 'Divisions', 'url_name': 'allifmaalcommonapp:commonDivisions'},
+    {'name': 'AddDivision', 'url_name': 'allifmaalcommonapp:commonAddDivision'},
+    {'name': 'Branches', 'url_name': 'allifmaalcommonapp:commonBranches'},
+    {'name': 'AddBranch', 'url_name': 'allifmaalcommonapp:commonAddBranch'},
+    {'name': 'Departments', 'url_name': 'allifmaalcommonapp:commonDepartments'},
+    {'name': 'AddDepartment', 'url_name': 'allifmaalcommonapp:commonAddDepartment'},
+    {'name': 'OperationYears', 'url_name': 'allifmaalcommonapp:commonOperationYears'},
+    {'name': 'OperationTerms', 'url_name': 'allifmaalcommonapp:commonOperationYearTerms'},
+    
+     {'name': 'AddOperationYear', 'url_name': 'allifmaalcommonapp:commonAddOperationYear'},
+    
+     {'name': 'AddOperationYearTerm', 'url_name': 'allifmaalcommonapp:commonAddOperationYearTerm'},
+    
+  
+    {'name': 'Defaults', 'url_name': 'allifmaalcommonapp:commonDefaultValues'},
+    {'name': 'Accounts', 'url_name': 'allifmaalcommonapp:commonGeneralLedgers'},
+    
+    
+    
 ]
 
 # Define sector-specific links

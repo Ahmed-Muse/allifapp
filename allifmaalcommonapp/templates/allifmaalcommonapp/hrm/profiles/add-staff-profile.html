@@ -1,22 +1,7 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
- 
-<!--start....main headere-->
-<div class="card-header">
-
-<div class="row mt-12" ><!--start....header row-->
-
-<div class="col-md-12"><!--start....header column-->
-
-<div class="container-fluid amel-content-header">
-
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+ {% block add-form-header-block %}
+  
 <a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
 <a href="{% url 'allifmaalcommonapp:commonAddStaffProfile' user_var glblslug %}">Add Profile</a>
 
@@ -24,185 +9,54 @@
 
 <a href="{% url 'allifmaalcommonapp:commonhrm' user_var glblslug %}">Staff</a>
 
-</div>
-
-    </div><!--end....header column-->
-  
-  </div><!--end....header row-->
-
-</div><!--end....main headere-->
-
-
-  <div class="allifmaincontainer">
-
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit New Profile</div>
-  <form method='POST' action=''>{% csrf_token %}
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-     
-      <tr>
-        <td class="allif-fix-table-col">Division Name</td>
-        <td>{{form.division}}</td>
-    
-        </tr>
-        <tr>
-          <td class="allif-fix-table-col">Branch</td>
-          <td>{{form.branch}}</td>
-      
-          </tr>
-        <tr>
-          <td class="allif-fix-table-col">Department</td>
-          <td>{{form.department}}</td>
-      
-          </tr>
-          <tr>
-            <td class="allif-fix-table-col">Username</td>
-            <td>{{form.username}}</td>
-        
-            </tr>
-            
-           
-          <tr>
-            <td class="allif-fix-table-col">Role</td>
-            <td>{{form.sysperms}}</td>
-        
-            </tr>
-            <tr>
-              <td class="allif-fix-table-col">Gender</td>
-              <td>{{form.gender}}</td>
-          
-              </tr>
-              <tr>
-                <td class="allif-fix-table-col">Staff No.</td>
-                <td>{{form.number}}</td>
-            
-                </tr>
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-        
-            <tr>
-              <td class="allif-fix-table-col">First Name</td>
-              <td>{{form.firstName}}</td>
-          
-              </tr>
-              <tr>
-                <td class="allif-fix-table-col">Middle Name</td>
-                <td>{{form.middleName}}</td>
-            
-                </tr>
-                <tr>
-                  <td class="allif-fix-table-col">Last Name</td>
-                  <td>{{form.lastName}}</td>
-              
-                  </tr>
-                  <tr>
-                    <td class="allif-fix-table-col">Title</td>
-                    <td>{{form.title}}</td>
-                
-                    </tr>
-                    <tr>
-                      <td class="allif-fix-table-col">Education</td>
-                      <td>{{form.education}}</td>
-                  
-                      </tr>
-                       <tr>
-                      <td class="allif-fix-table-col">Operation Year</td>
-                      <td>{{form.operation_year}}</td>
-                  
-                      </tr>
-                       <tr>
-                      <td class="allif-fix-table-col">Operation Term</td>
-                      <td>{{form.operation_term}}</td>
-                  
-                      </tr>
-                     
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Comments</td>
-            <td>{{form.comments}}</td>
-        
-            </tr>
-            <tr>
-              <td class="allif-fix-table-col">Salary</td>
-              <td>{{form.salary}}</td>
-          
-              </tr>
-              <tr>
-                <td class="allif-fix-table-col">Total Salary Paid</td>
-                <td>{{form.total_salary_paid}}</td>
-            
-                </tr>
-                <tr>
-                  <td class="allif-fix-table-col">Salary Payable</td>
-                  <td>{{form.salary_payable}}</td>
-              
-                  </tr>
-                  <tr>
-                    <td class="allif-fix-table-col">Salary Balance</td>
-                    <td>{{form.salary_balance}}</td>
-                
-                    </tr>
-
- 
-            <tr>
-              <td class="allif-fix-table-col"></td>
-              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-          
-              </tr>
-          </tbody>
-          </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-</form>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
-
-
-
-</div>
-
-</div>
-  {% block scripts %}
-
   {% endblock %}
-   {% endblock %}
+   {% block core-tab-col-one %}
+    <tr>
+      <td class="allif-fix-table-col-forms">Division</td>
+      <td>{{form.division}}</td>
+    </tr>
+      <tr>
+      <td class="allif-fix-table-col-forms">Address</td>
+      <td>{{form.address}}</td>
+    </tr>
+     
+    {%endblock%}
+
+      {% block core-tab-col-two %}
+     <tr>
+      <td class="allif-fix-table-col-forms">Email</td>
+      <td>{{form.email}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">City</td>
+      <td>{{form.city}}</td>
+    </tr>
    
+    {%endblock%}
+    {% block bottom-fields-col-one %}
+     <tr>
+      <td class="allif-fix-table-col-forms">Phone 1</td>
+      <td>{{form.phone1}}</td>
+    </tr>
+    {%endblock%}
+    {% block bottom-fields-col-two %}
+     <tr>
+      <td class="allif-fix-table-col-forms">Phone 2</td>
+      <td>{{form.phone2}}</td>
+    </tr>
+    {%endblock%}
+
+    {% block static-form-fields %} {%endblock%}
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Banks' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.wanttodeletebank.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    {% endblock %}
+

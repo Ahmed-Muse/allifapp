@@ -135,13 +135,14 @@ class CommonEditCompanyDetailsFormByAllifAdmin(forms.ModelForm):
 class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
     class Meta:
         model = CommonCompanyDetailsModel
-        fields = ['company','can_delete','legalname','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
+        fields = ['company','status','priority','can_delete','starts','ends','reference','comments','legalname','sector','owner','phone1','email','website', 'logo','address','phone2','pobox','city','country']
         widgets={
             'company':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             #'username':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
 
             'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
             'email':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'city':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'country':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -151,10 +152,19 @@ class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
            
             'pobox':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'phone2':forms.TextInput(attrs={'class':'form-control'}),
+            
             'website':forms.TextInput(attrs={'class':'form-control'}),
             'logo':forms.FileInput(attrs={'class':'form-control'}),
              #'passwrd':forms.TextInput(attrs={'class':'form-control','type':'password'}),
+             
+             
+            'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'starts': DatePickerInput(attrs={'class': 'form-control'}),
+            'ends': DatePickerInput(attrs={'class': 'form-control'}),
+           'phone2':forms.TextInput(attrs={'class':'form-control'}),
+            'status': forms.Select(attrs=SELECT2_ATTRS),
+           'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'priority': forms.Select(attrs=SELECT2_ATTRS),
         
         }
 
@@ -162,7 +172,7 @@ class CommonAddByClientCompanyDetailsForm(forms.ModelForm):
 class CommonAddDivisionForm(forms.ModelForm):
     class Meta:
         model =CommonDivisionsModel
-        fields = ['division','legalname','comments','phone','email','address','pobox','city']
+        fields = ['division','legalname','phone2','reference','status','priority','starts','ends','comments','phone1','email','address','pobox','city']
         widgets={
             'division':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -175,9 +185,23 @@ class CommonAddDivisionForm(forms.ModelForm):
            
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'pobox':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-           
-            'created_date' : DatePickerInput(attrs={'class':'form-control'}),
-            'edit_date' : DatePickerInput(attrs={'class':'form-control'}),
+           'reference':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+          'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+              'phone2':forms.TextInput(attrs={'class':'form-control'}),
+            'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'starts': DatePickerInput(attrs={'class': 'form-control'}),
+            'ends': DatePickerInput(attrs={'class': 'form-control'}),
+           'priority': forms.Select(attrs=SELECT2_ATTRS),
+            'status': forms.Select(attrs=SELECT2_ATTRS),
+            
+             'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'starts': DatePickerInput(attrs={'class': 'form-control'}),
+            'ends': DatePickerInput(attrs={'class': 'form-control'}),
+           'phone2':forms.TextInput(attrs={'class':'form-control'}),
+            'status': forms.Select(attrs=SELECT2_ATTRS),
+           'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'priority': forms.Select(attrs=SELECT2_ATTRS),
+        
             
         }
     #def __init__(self, allifmaalparameter, *args, **kwargs):
@@ -187,23 +211,31 @@ class CommonAddDivisionForm(forms.ModelForm):
 class CommonAddBranchForm(forms.ModelForm):
     class Meta:
         model =CommonBranchesModel
-        fields = ['branch','division','legalname','phone','email','address','pobox','city']
+        fields = ['branch','division','legalname','phone','email','address','pobox','city','phone2','reference','status','priority','starts','ends','comments','phone1',]
         widgets={
             'branch':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'legalname':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             #'username':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-
+'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'phone':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'email':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'city':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
            
-           
+           'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'address':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'pobox':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
            
             'created_date' : DatePickerInput(attrs={'class':'form-control'}),
             'edit_date' : DatePickerInput(attrs={'class':'form-control'}),
+             'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'starts': DatePickerInput(attrs={'class': 'form-control'}),
+            'ends': DatePickerInput(attrs={'class': 'form-control'}),
+           'phone2':forms.TextInput(attrs={'class':'form-control'}),
+            'status': forms.Select(attrs=SELECT2_ATTRS),
+           'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'priority': forms.Select(attrs=SELECT2_ATTRS),
+        
             
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
@@ -214,7 +246,7 @@ class CommonAddBranchForm(forms.ModelForm):
 class CommonAddDepartmentForm(forms.ModelForm):
     class Meta:
         model = CommonDepartmentsModel
-        fields = ['department','branch','division','phone','email','address','city','pobox']
+        fields = ['department','branch','division','phone','email','address','city','pobox','phone2','reference','status','priority','starts','ends','comments','phone1',]
         widgets={
             'department':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'city':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -223,6 +255,16 @@ class CommonAddDepartmentForm(forms.ModelForm):
             'email':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'pobox':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+             'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'starts': DatePickerInput(attrs={'class': 'form-control'}),
+            'ends': DatePickerInput(attrs={'class': 'form-control'}),
+           'phone2':forms.TextInput(attrs={'class':'form-control'}),
+            'status': forms.Select(attrs=SELECT2_ATTRS),
+           'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'priority': forms.Select(attrs=SELECT2_ATTRS),
+        
+        
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -240,9 +282,9 @@ class CommonAddDepartmentForm(forms.ModelForm):
 class CommonAddOperationYearForm(forms.ModelForm):
     class Meta:
         model=CommonOperationYearsModel
-        fields = ['department','branch','division','is_current','description','comments','starts','ends','year']
+        fields = ['department','branch','division','is_current','description','comments','starts','ends','year','phone2','reference','status','priority','starts','ends','comments','phone1',]
         widgets={
-            
+            'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'year':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'starts': DatePickerInput(attrs={'class': 'form-control'}),
@@ -251,7 +293,14 @@ class CommonAddOperationYearForm(forms.ModelForm):
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-           
+             'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'starts': DatePickerInput(attrs={'class': 'form-control'}),
+            'ends': DatePickerInput(attrs={'class': 'form-control'}),
+           'phone2':forms.TextInput(attrs={'class':'form-control'}),
+            'status': forms.Select(attrs=SELECT2_ATTRS),
+           'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'priority': forms.Select(attrs=SELECT2_ATTRS),
+        
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
@@ -266,7 +315,7 @@ class CommonAddOperationYearForm(forms.ModelForm):
 class CommonAddOperationYearTermForm(forms.ModelForm):
     class Meta:
         model=CommonOperationYearTermsModel
-        fields = ['department','branch','division','description','name','comments','starts','ends','operation_year']
+        fields = ['department','branch','division','description','name','comments','starts','ends','operation_year','phone2','reference','status','priority','starts','ends','comments','phone1',]
         widgets={
             
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -278,7 +327,14 @@ class CommonAddOperationYearTermForm(forms.ModelForm):
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-           
+            'comments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'starts': DatePickerInput(attrs={'class': 'form-control'}),
+            'ends': DatePickerInput(attrs={'class': 'form-control'}),
+           'phone2':forms.TextInput(attrs={'class':'form-control'}),
+            'status': forms.Select(attrs=SELECT2_ATTRS),
+           'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'rows': 2}),
+            'priority': forms.Select(attrs=SELECT2_ATTRS),
+        'phone1':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):

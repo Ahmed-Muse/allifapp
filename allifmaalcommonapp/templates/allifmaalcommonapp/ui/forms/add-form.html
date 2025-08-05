@@ -144,7 +144,9 @@
        <!--END... End of show/hide table more details section one-->
     <div class="tab-pane allif-single-page-tab-content-pane show" id="allif-single-page-tab-static-details" role="tabpanel" aria-labelledby="allif-single-page-tab-static-id">
      <div class="allif-forms-table-main-wrapper">
+      {% block static-form-fields %}
     {% include 'allifmaalcommonapp/includes/forms/static-form-fields.html' %}
+    {%endblock%}
      </div>
     </div>
 
@@ -182,7 +184,8 @@
        <!--END... End of show/hide table more details section one-->
     <div class="allif-forms-table-main-wrapper">
     {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-one-section.html' %}
-    {% block bottom-fields-col-one%}
+    
+    {% block bottom-fields-col-one %}
       <tr>
         <td class="allif-fix-table-col-forms">Code</td>
         <td>{{form.code}}</td>
@@ -195,6 +198,7 @@
         <td>{{form.number}}</td>
       </tr>
       {%endblock%}
+
       {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-section.html' %}
       {% include 'allifmaalcommonapp/includes/forms/forms-save-button.html' %}  
       {% include 'allifmaalcommonapp/includes/forms/three-column-forms-table-column-three-last-section.html' %}

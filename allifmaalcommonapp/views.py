@@ -365,80 +365,33 @@ def commonAddnewEntity(request, *allifargs, **allifkwargs):
     context = {"form": form, "title": title,'user_var':user_var,}
     return render(request, "allifmaalcommonapp/companies/newentity.html", context)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @allif_base_view_wrapper   
 def commonCompanyDetailsForClients(request,*allifargs,**allifkwargs):
-    user=request.user
-    allifquery=CommonCompanyDetailsModel.all_objects.filter(owner=user).first()
+    user=request.user.company.id
+    allifquery=CommonCompanyDetailsModel.all_objects.get(id=user)
     title=allifquery
     scopes=CommonCompanyScopeModel.objects.filter(company=allifquery)
     context={"title":title,"allifquery":allifquery,"scopes":scopes,}
     return render(request,'allifmaalcommonapp/companies/company-details-clients.html',context)
     
-@allif_base_view_wrapper   
-def commonEditEntityByAllifAdmin(request,pk,*allifargs,**allifkwargs):
-    title="Update Entity Details"
-    allif_data=common_shared_data(request)
-    #user_var_update=get_object_or_404(CommonCompanyDetailsModel, id=pk)
-    user_var_update=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
-    form=CommonEditCompanyDetailsFormByAllifAdmin(instance=user_var_update)
-    if request.method=='POST':
-        form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None,request.FILES, instance=user_var_update)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.owner=user_var_update.owner
-            obj.save()
-            return redirect('allifmaalcommonapp:commonCompanies',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
-        else:
-            form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None, instance=user_var_update)
-            error_message=form.errors
-            allifcontext={"error_message":error_message,"title":title,}
-            return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
-    else:
-        form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None, instance=user_var_update)
-    context={"title":title,"form":form,}
-    return render(request,'allifmaalcommonapp/companies/edit-entity.html',context)
 
 @allif_base_view_wrapper
 def commonEditEntityByClients(request,pk,*allifargs,**allifkwargs):
     title="Update Entity Details"
     allif_data=common_shared_data(request)
+    user=request.user.company.id
     #user_var_update=get_object_or_404(CommonCompanyDetailsModel, id=pk)
-    user_var_update=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
+    user_var_update=CommonCompanyDetailsModel.all_objects.get(id=user)
+    sector=user_var_update.sector
+    status=user_var_update.status
     form=CommonAddByClientCompanyDetailsForm(instance=user_var_update)
     if request.method=='POST':
         form=CommonAddByClientCompanyDetailsForm(request.POST or None,request.FILES, instance=user_var_update)
         if form.is_valid():
             obj=form.save(commit=False)
-            obj.owner=allif_data.get("logged_in_user")
+            obj.owner=request.user
+            obj.sector=sector
+            obj.status=status
             obj.save()
             return redirect('allifmaalcommonapp:commonCompanyDetailsForClients',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
         else:
@@ -450,6 +403,31 @@ def commonEditEntityByClients(request,pk,*allifargs,**allifkwargs):
         form=CommonAddByClientCompanyDetailsForm(request.POST or None, instance=user_var_update)
     context={"title":title,"form":form,}
     return render(request,'allifmaalcommonapp/companies/edit-entity-client.html',context)
+
+    
+@allif_base_view_wrapper   
+def commonEditEntityByAllifAdmin(request,pk,*allifargs,**allifkwargs):
+    title="Edit"
+    allif_data=common_shared_data(request)
+    #user_var_update=get_object_or_404(CommonCompanyDetailsModel, id=pk)
+    user_var_update=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
+    form=CommonEditCompanyDetailsFormByAllifAdmin(instance=user_var_update)
+    if request.method=='POST':
+        form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None,request.FILES, instance=user_var_update)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            #obj.owner=user_var_update.owner
+            obj.save()
+            return redirect('allifmaalcommonapp:commonCompanies',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+        else:
+            form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None, instance=user_var_update)
+            error_message=form.errors
+            allifcontext={"error_message":error_message,"title":title,}
+            return render(request,'allifmaalcommonapp/error/form-error.html',allifcontext)
+    else:
+        form=CommonEditCompanyDetailsFormByAllifAdmin(request.POST or None, instance=user_var_update)
+    context={"title":title,"form":form,}
+    return render(request,'allifmaalcommonapp/companies/edit-entity.html',context)
 
 @allif_base_view_wrapper     
 def commonCompanyDetailsForAllifAdmin(request,pk,*allifargs,**allifkwargs):
@@ -587,7 +565,7 @@ def commonBranches(request, *allifargs, **allifkwargs):
 def commonAddBranch(request, *allifargs, **allifkwargs):
     title = "New Branch"
     return allif_add_view_handler(request, CommonBranchesModel, CommonAddBranchForm, 'allifmaalcommonapp/branches/add-branch.html', title,'allifmaalcommonapp:commonBranches')
- 
+
 @allif_base_view_wrapper
 def commonEditBranch(request, pk, *allifargs, **allifkwargs):
     title = "Update Branch Details"
@@ -644,6 +622,23 @@ def commonWantToDeleteDepartment(request, pk, *allifargs, **allifkwargs):
 @allif_base_view_wrapper
 def commonDeleteDepartment(request, pk, *allifargs, **allifkwargs):
     return allif_delete_view_handler(request, CommonDepartmentsModel, pk, 'allifmaalcommonapp:commonDepartments')
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 #######################3 OPERATION YEAR ####################################3
 def commonOperationYears(request, *allifargs, **allifkwargs):

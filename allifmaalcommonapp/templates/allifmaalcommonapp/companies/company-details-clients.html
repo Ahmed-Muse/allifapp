@@ -2,51 +2,11 @@
   {% load humanize %}
   {% load allif_navigation_tags %}
   {% block add-form-header-block %}
-
-
-<a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
-
-
-<div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Company Setup
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDivisions' user_var glblslug %}">Divisions</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonBranches' user_var glblslug %}">Branches</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonOperationYears' user_var glblslug %}">Operation Years</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonOperationYearTerms' user_var glblslug %}">Operation Terms</a></li>
-      
-    </div>
-    </ul>
-  </div>
-
-  <div class="dropdown allifmaal-content-dropdown">
-    <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Operation Setups
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonDefaultValues' user_var glblslug %}">Default Values</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCurrencies' user_var glblslug %}">Currencies</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonPaymentTerms' user_var glblslug %}">Payment Terms</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCompanyScopes' user_var glblslug %}">Scopes</a></li>
-      
-      
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTaxParameters' user_var glblslug %}">Taxes</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonUnits' user_var glblslug %}">Measurements</a></li>
-
-       <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCategories' user_var glblslug %}">Categories</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonCodes' user_var glblslug %}">Codes</a></li>
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonGeneralLedgers' user_var glblslug %}">Accounts</a></li>
-    
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a></li>
-    </div>
-    </ul>
-  </div>
-
+  <a href="{% url 'allifmaalcommonapp:commonCompanyDetailsForClients' user_var glblslug %}">Company</a>
+  <a href="{% allif_get_single_nav_link_url 'Divisions' user_var glblslug %}">Divisions</a>
+  <a href="{% allif_get_single_nav_link_url 'Branches' user_var glblslug %}">Branches</a>
+  <a href="{% allif_get_single_nav_link_url 'Departments' user_var glblslug %}">Departments</a>
+  <a href="{% allif_get_single_nav_link_url 'OperationYears' user_var glblslug %}">Years</a>
   {%endblock%}
 
   {% block details-table-col-one %}
@@ -132,12 +92,62 @@
 
     
   {% block allif_sensitive_section_col_one %}
+  <tr>
+      <td class="allif-fix-table-col">Defaults</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Defaults' user_var glblslug %}">Defaults</a></td>
+    </tr>
+
+  <tr>
+      <td class="allif-fix-table-col">Currencies</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Currencies' user_var glblslug %}">Currencies</a></td>
+    </tr>
+
+    <tr>
+      <td class="allif-fix-table-col">Categories</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Categories' user_var glblslug %}">Categories</a></td>
+    </tr>
+
+    <tr>
+      <td class="allif-fix-table-col">Codes</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Codes' user_var glblslug %}">Codes</a></td>
+    </tr>
+
+    <tr>
+      <td class="allif-fix-table-col">Measurements</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'MeasuringUnits' user_var glblslug %}">Units</a></td>
+    </tr>
+
+    <tr>
+      <td class="allif-fix-table-col">Accounts</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Accounts' user_var glblslug %}">Accounts</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+  
+<tr>
+      <td class="allif-fix-table-col">Scopes</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'CompanyScopes' user_var glblslug %}">Services</a></td>
+    </tr>
+<tr>
+      <td class="allif-fix-table-col">Spaces</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Spaces' user_var glblslug %}">Spaces</a></td>
+    </tr>
+
+  <tr>
+      <td class="allif-fix-table-col">Payment Terms</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Payment_Terms' user_var glblslug %}">Payment Terms</a></td>
+    </tr>
+
+    <tr>
+      <td class="allif-fix-table-col">Sales Taxes</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'TaxParameters' user_var glblslug %}">Sales Tax</a></td>
+    </tr>
+  
     <tr>
       <td class="allif-fix-table-col"> {{allifquery}}</td>
       <td><a class="amel-table-list-identifier" href="{% url 'allifmaalcommonapp:commonEditEntityByClients' allifquery.id user_var glblslug %}">Edit {{allifquery}}</a></td>
     </tr>
-  {% endblock %}
-  {% block allif_sensitive_section_col_two %}
+
     <tr>
       <td class="allif-fix-table-col">Delet {{allifquery}}</td>
       <td><a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteCompany' allifquery.id user_var glblslug %}">Delete {{allifquery}}</a></td>

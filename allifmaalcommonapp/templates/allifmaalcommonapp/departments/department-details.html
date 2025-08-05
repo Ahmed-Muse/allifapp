@@ -1,215 +1,85 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
- 
-<!--start....main headere-->
-<div class="card-header">
+  {% extends 'allifmaalcommonapp/ui/details/item-details.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block add-form-header-block %}
+ <a href="{% allif_get_single_nav_link_url 'Departments' user_var glblslug %}">Departments</a>
+<a href="{% allif_get_single_nav_link_url 'AddDepartment' user_var glblslug %}">New Department</a>
+<a href="{{ allif_contextual_action_links.DepartmentDetails.url }}">Department Details</a>
 
-<div class="row mt-12" ><!--start....header row-->
+  {%endblock%}
 
-<div class="col-md-12"><!--start....header column-->
-
-<div class="container-fluid amel-content-header">
-<div class="dropdown allifmaal-content-dropdown">
-  <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  Actions
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <div class="content-dropdown-menu">
-      <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonEditDepartment' allifquery.id user_var glblslug %}">Edit Item</a></li>
-        
-        <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalcommonapp:commonWantToDeleteDepartment' allifquery.id user_var glblslug %}">Delete Item</a></li>
+  {% block details-table-col-one %}
+    <tr>
+      <td class="allif-fix-table-col">Department</td>
+      <td>{{allifquery.department}}</td>
+    </tr>
+      <tr>
+      <td class="allif-fix-table-col">Phone</td>
+      <td>{{allifquery.phone}}</td>
+    </tr>
     
-   </div>
-  </ul>
-</div>
-<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+  {%endblock%}
 
-<a href="{% url 'allifmaalcommonapp:commonDepartments' user_var glblslug %}">Departments</a>
-
-</div>
-
-    </div><!--end....header column-->
+  {% block details-table-col-two %}
+   <tr>
+    <td class="allif-fix-table-col">Email</td>
+    <td>{{allifquery.email}}</td>
+  </tr>
+  <tr>
+    <td class="allif-fix-table-col">Address</td>
+    <td>{{allifquery.address}}</td>
+  </tr>
+  {% endblock %}
   
-  </div><!--end....header row-->
+  {% block core-details-tab-col-one %}
+  
+   <tr>
+    <td class="allif-fix-table-col">City</td>
+    <td>{{allifquery.city}}</td>
+  </tr>
+  <tr>
+    <td class="allif-fix-table-col">Country</td>
+    <td>{{allifquery.country}}</td>
+  </tr>
+  {%endblock%}
 
-</div><!--end....main headere-->
-
-  <div class="allifmaincontainer">
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">{{allifquery}} Details</div>
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-        <tr>
-          <td class="allif-fix-table-col">Company</td>
-          <td>{{allifquery.company}}</td>
-          </tr>
-      <tr>
-        <td class="allif-fix-table-col">Division</td>
-        <td>{{allifquery.division}}</td>
-        </tr>
-
-        <tr>
-          <td class="allif-fix-table-col">Branch</td>
-          <td>{{allifquery.branch}}</td>
-          </tr>
-          <tr>
-            <td class="allif-fix-table-col">Departmetn</td>
-            <td>{{allifquery.department}}</td>
-            </tr>
-      <tr>
-        <td class="allif-fix-table-col">Email</td>
-        <td>{{allifquery.email}}</td>
-        </tr>
-      <tr>
-        <td class="allif-fix-table-col">Phone</td>
-        <td>{{allifquery.phone}}</td>
-        </tr>
-      
-   
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-          <tr>
-            <td class="allif-fix-table-col">City</td>
-            <td>{{allifquery.city}}</td>
-            </tr>
-          <tr>
-            <td class="allif-fix-table-col">Created By</td>
-            <td>{{allifquery.owner}}</td>
-            </tr>
-         
-        <tr>
-            <td class="allif-fix-table-col">P.O.Box</td>
-            <td>{{allifquery.pobox}}</td>
-            </tr>
-         
-          <tr>
-            <td class="allif-fix-table-col">Address</td>
-            <td>{{allifquery.address}}</td>
-            </tr>
-      
-      
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Date</td>
-            <td>{{allifquery.date|date:'d/m/Y'}}</td>
-            </tr>
-            <tr>
-              <td class="allif-fix-table-col">Last Update</td>
-              <td>{{allifquery.updatedon|date:'d/m/Y'}}</td>
-          
-              </tr>
-                  
-            
-            <tr>
-            <td class="allif-fix-table-col">UID</td>
-            <td>{{allifquery.departmentuid}}</td>
-          
-            </tr>
-            <tr>
-              <td class="allif-fix-table-col">Slug</td>
-              <td>{{allifquery.departmentslug}}</td>
-          
-          </tr> 
-          </tbody>
-          </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
-
-
-<!--end of table-->
-
-<!--end of table-->
-<div class="row mt-12"> <!--start....table row-->
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="table-responsive allif-full-table">
-    <table class="table table-layout">
-      <thead>
-        <tr class="allif-table-header-row">
-         
-          <td>Division Name</td>
-          <td>Created By</td>
-          <td>Email Address</td>
-         
-        </tr>
-        </thead>
-        <tbody class="allif-table-body">
-       
-        <tr>
-          <td>
-            
-           {{allifquery.division}}
-           
-          </td>
-         
-          <td>{{allifquery.owner}}</td>
-          
-          <td>{{allifquery.email}}</td>
-       
-          </td>
-      </tr>
-      
-      </tbody>
-    </table>
-    </div>
-   </div>
-
-</div><!--end....table column-->
-
-</div><!--end....table row-->
-
-</div>
-</div>
-  {% block scripts %}
+  {% block core-details-tab-col-two %}
+ 
+  <tr>
+    <td class="allif-fix-table-col">Contact</td>
+    <td>{{allifquery.contact}}</td>
+  </tr>
+  
+  <tr>
+    <td class="allif-fix-table-col">Date</td>
+    <td>{{allifquery.date|date:'d/m/Y'}}</td>
+  </tr>
 
   {% endblock %}
-   {% endblock %}
-   
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col">{{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Departments' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {%endblock%}
+
+  {% block general-details-tab-col-two %}
+  <tr>
+    <td class="allif-fix-table-col">Description</td>
+    <td>{{allifquery.description}}</td>
+  </tr>
+  {% endblock %}
+  
+  {% block allif_sensitive_section_col_two %}
+  <tr>
+    <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+    <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteDepartmentConfirm.url }}">Delete {{allifquery}}</a></td>
+  </tr>
+  
+  {%endblock%}
+
+  {% block item_details_related_items_full_table %} {%endblock%}
+  {% block item_details_related_items_full_half_tables %}{%endblock%}
+
 

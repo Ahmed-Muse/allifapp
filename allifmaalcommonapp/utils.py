@@ -3427,19 +3427,19 @@ def allif_edit_view_handler(request, model_class, form_class, pk, template_name,
     """
     allif_data = common_shared_data(request)
     main_company = allif_data.get("main_sbscrbr_entity")
-    update_allifquery = get_object_or_404(model_class.all_objects, pk=pk)
+    allifquery = get_object_or_404(model_class.all_objects, pk=pk)
 
     # Check if form needs to be initialized with 'company' argument
     if hasattr(form_class, '__init__') and 'allifmaalparameter' in form_class.__init__.__code__.co_varnames:
-        form = form_class(main_company, instance=update_allifquery)
+        form = form_class(main_company, instance=allifquery)
     else:
-        form = form_class(instance=update_allifquery)
+        form = form_class(instance=allifquery)
 
     if request.method == 'POST':
         if hasattr(form_class, '__init__') and 'allifmaalparameter' in form_class.__init__.__code__.co_varnames:
-            form = form_class(main_company, request.POST, request.FILES, instance=update_allifquery)
+            form = form_class(main_company, request.POST, request.FILES, instance=allifquery)
         else:
-            form = form_class(request.POST, request.FILES, instance=update_allifquery)
+            form = form_class(request.POST, request.FILES, instance=allifquery)
         
         if form.is_valid():
             obj = form.save(commit=False)
@@ -3456,6 +3456,7 @@ def allif_edit_view_handler(request, model_class, form_class, pk, template_name,
     context = {
         'title': title,
         'form': form,
+        "allifquery":allifquery,
     }
     if extra_context:
         context.update(extra_context)
@@ -3510,6 +3511,7 @@ def allif_delete_confirm_view_handler(request, model_class, pk, template_name, t
     Displays a confirmation page before deletion.
     """
     allifquery = get_object_or_404(model_class.all_objects, pk=pk)
+    
     context = {
         "title": title,
         "allifquery": allifquery,

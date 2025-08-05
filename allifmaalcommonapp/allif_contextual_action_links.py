@@ -7,6 +7,11 @@ allif_sector_contextual_action_require_pk_links= {
     {'name': 'common_currency_pdf', 'url_name': 'allifmaalcommonapp:common_currency_pdf', 'requires_pk': True},
     {'name': 'commonWantToDeleteCurrency', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCurrency', 'requires_pk': True},
     
+    {'name': 'DivisionDetails', 'url_name': 'allifmaalcommonapp:commonDivisionDetails', 'requires_pk': True},
+    {'name': 'EditDivision', 'url_name': 'allifmaalcommonapp:commonEditDivision', 'requires_pk': True},
+    {'name': 'DeleteDivisionConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDivision', 'requires_pk': True},
+    
+    
     {'name': 'commonWantToDeletePaymentTerm', 'url_name': 'allifmaalcommonapp:commonWantToDeletePaymentTerm', 'requires_pk': True},
     {'name': 'commonDeletePaymentTerm', 'url_name': 'allifmaalcommonapp:commonDeletePaymentTerm', 'requires_pk': True},
     
@@ -162,6 +167,25 @@ allif_sector_contextual_action_require_pk_links= {
    
     {'name': 'LogDetails', 'url_name': 'allifmaalcommonapp:commonLogDetails', 'requires_pk': True},
     {'name': 'DeleteLogConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteLog', 'requires_pk': True},
+   
+    {'name': 'EditDivision', 'url_name': 'allifmaalcommonapp:commonEditDivision', 'requires_pk': True},
+    {'name': 'DivisionDetails', 'url_name': 'allifmaalcommonapp:commonDivisionDetails', 'requires_pk': True},
+    {'name': 'DeleteDivisionConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDivision', 'requires_pk': True},
+    {'name': 'DeleteDivision', 'url_name': 'allifmaalcommonapp:commonDeleteDivision', 'requires_pk': True},
+    {'name': 'DeleteBranch', 'url_name': 'allifmaalcommonapp:commonDeleteBranch', 'requires_pk': True},
+    {'name': 'DeleteBranchConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteBranch', 'requires_pk': True},
+    {'name': 'EditBranch', 'url_name': 'allifmaalcommonapp:commonEditBranch', 'requires_pk': True},
+    {'name': 'BranchDetails', 'url_name': 'allifmaalcommonapp:commonBranchDetails', 'requires_pk': True},
+    {'name': 'EditDepartment', 'url_name': 'allifmaalcommonapp:commonEditDepartment', 'requires_pk': True},
+    {'name': 'DepartmentDetails', 'url_name': 'allifmaalcommonapp:commonDepartmentDetails', 'requires_pk': True},
+    {'name': 'DeleteDepartmentConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDepartment', 'requires_pk': True},
+    {'name': 'DeleteDepartment', 'url_name': 'allifmaalcommonapp:commonDeleteDepartment', 'requires_pk': True},
+    {'name': 'EditOperationYear', 'url_name': 'allifmaalcommonapp:commonEditOperationYear', 'requires_pk': True},
+    {'name': 'EditOperationYear', 'url_name': 'allifmaalcommonapp:commonWantToDeleteOperationYear', 'requires_pk': True},
+    {'name': 'DeleteOperationYear', 'url_name': 'allifmaalcommonapp:commonDeleteOperationYear', 'requires_pk': True},
+    {'name': 'EditOperationTerm', 'url_name': 'allifmaalcommonapp:commonEditOperationYearTerm', 'requires_pk': True},
+    {'name': 'DeleteOperationYearTermConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteOperationYearTerm', 'requires_pk': True},
+    {'name': 'DeleteOperationYearTerm', 'url_name': 'allifmaalcommonapp:commonDeleteOperationYearTerm', 'requires_pk': True},
    
   
     ],
