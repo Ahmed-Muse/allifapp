@@ -1,6 +1,7 @@
   {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
   {% load humanize %}
   {% load allif_navigation_tags %}
+  
   {% block allif-basic-search-action %}
     {% url 'allifmaalcommonapp:commonUserSearch' user_var glblslug %}
   {% endblock %}

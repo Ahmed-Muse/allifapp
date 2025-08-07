@@ -119,7 +119,7 @@ class SharedModel(models.Model):# this is the company  hospitality logistics
         abstract = True 
         ordering = ['-date']
 
-class CommonSectorsModel(SharedModel):# this is the company  hospitality logistics
+class CommonSectorsModel(SharedModel):# this is the company  hospitality logistics,,
     def __str__(self):
         return self.name
    
@@ -149,7 +149,7 @@ class BaseModel(models.Model):
     phone2=models.CharField(max_length=50,blank=True,null=True)
     logo=models.FileField(upload_to='myfiles/',null=True, blank=True)
     status= models.CharField(choices=entity_status, blank=True, null=True,max_length=30,default="Blocked")
-    can_delete=models.CharField(choices=delete_status, blank=True, null=True,max_length=30,default="undeletable")
+    can_delete=models.CharField(choices=delete_status, blank=True, null=True,max_length=30,default="Undeletable")
     date=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     comments=models.TextField(blank=True,null=True, default='Comments')
     last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)

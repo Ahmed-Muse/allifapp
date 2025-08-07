@@ -11,9 +11,13 @@ class DateTimePickerInput(forms.DateTimeInput):#use this wherever you have datet
     input_type='datetime'
 
 class AddTriageDetailsForm(CommonBaseForm):
+    company_filtered_fields = {
+        'staff': CommonEmployeesModel,
+       
+        }
     class Meta(CommonBaseForm.Meta):
         model=TriagesModel
-        fields=CommonBaseForm.Meta.fields + ['staff','description','complaints','weight','height','division','branch','department',
+        fields=CommonBaseForm.Meta.fields + ['staff','description','complaints','weight','height',
                   'blood_pressure_systolic','blood_pressure_diastolic','temperature','pulse_rate',
                   'respiration_rate','oxygen_saturation','past_medical_history','known_chronic_conditions',
                   'current_medication','treatment_plan',
@@ -21,7 +25,7 @@ class AddTriageDetailsForm(CommonBaseForm):
                   'mobility_status','mental_status']
         widgets = {
         **CommonBaseForm.Meta.widgets,
-       'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+       
             'allergies':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'disposition_notes':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'blood_pressure_diastolic':forms.TextInput(attrs={'class':'form-control','placeholder':'in mmHg'}),
@@ -59,26 +63,25 @@ class AddTriageDetailsForm(CommonBaseForm):
         else:
             self.fields['staff'].queryset=CommonEmployeesModel.objects.none()
     """
-    def __init__(self, allifmaalparameter, *args, **kwargs):
-        super().__init__(allifmaalparameter, *args, **kwargs)
-        # Define the map for this specific form's fields and their models
-        field_model_map = {
-            'staff':CommonEmployeesModel,
-            #'supplier': CommonSuppliersModel,
-        }
-        # Call the utility function
-        allif_initialize_form_select_querysets(self, allifmaalparameter, field_model_map)
+    
       
-class AddAssessmentDetailsForm(forms.ModelForm):
-    class Meta:
+class AddAssessmentDetailsForm(CommonBaseForm):
+    company_filtered_fields = {
+        'medical_file': CommonTransactionsModel,
+        'staff': CommonEmployeesModel,
+       
+        }
+     
+    class Meta(CommonBaseForm.Meta):
         model = AssessmentsModel
-        fields = ['medical_file','record_date','staff','description','complaints','weight','height','division','branch','department',
+        fields = CommonBaseForm.Meta.fields + ['medical_file','record_date','staff','complaints','weight','height',
                   'blood_pressure_systolic','blood_pressure_diastolic','temperature','pulse_rate',
                   'respiration_rate','oxygen_saturation','past_medical_history','known_chronic_conditions',
                   'current_medication',
                   'treatment_plan']
         widgets={
-            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            **CommonBaseForm.Meta.widgets,
+            
             'blood_pressure_diastolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'current_medication':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'oxygen_saturation':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -99,33 +102,26 @@ class AddAssessmentDetailsForm(forms.ModelForm):
             'blood_pressure_systolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'past_medical_history':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
            
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-
         } 
-    def __init__(self,allifmaalparameter,*args,**kwargs):
-        super (AddAssessmentDetailsForm,self).__init__(*args,**kwargs) # populates the post
-        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
-       
-        self.fields['staff'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
-
-
+   
 ###########3 lab requests ############3
 
-class AddLabTestRequestForm(forms.ModelForm):
-    class Meta:
+class AddLabTestRequestForm(CommonBaseForm):
+    company_filtered_fields = {
+        'medical_file': CommonTransactionsModel,
+        'items': CommonStocksModel,
+       
+        }
+    
+    class Meta(CommonBaseForm.Meta):
         model = LabTestRequestsModel
-        fields = ['medical_file','date_time','items','description','division','branch','department',
-                  'lab_name','status','priority','specimen','comments',
+        fields = CommonBaseForm.Meta.fields + ['medical_file','date_time','items',
+                  'lab_name','status','priority','specimen','description',
                  ]
         widgets={
+            **CommonBaseForm.Meta.widgets,
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-           
+          
             'date_time' : DatePickerInput(attrs={'class':'form-control'}),
             
             'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -139,31 +135,25 @@ class AddLabTestRequestForm(forms.ModelForm):
             'specimen':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
 
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-
         } 
-    def __init__(self,allifmaalparameter,*args,**kwargs):
-        super (AddLabTestRequestForm,self).__init__(*args,**kwargs) # populates the post
-        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
-       
-        self.fields['items'].queryset=CommonStocksModel.objects.filter(company=allifmaalparameter)
     
 ###############33 lab results #############
 
-class AddLabTestResultForm(forms.ModelForm):
-    class Meta:
+class AddLabTestResultForm(CommonBaseForm):
+    company_filtered_fields = {
+        'medical_file': CommonTransactionsModel,
+        'test_request': LabTestRequestsModel,
+       
+        }
+    
+    class Meta(CommonBaseForm.Meta):
         model = LabTestResultsModel
-        fields = ['medical_file','date_time','results','description','division','branch','department',
-                  'lab_name','comments','test_request',
+        fields = CommonBaseForm.Meta.fields + ['medical_file','date_time','results',
+                  'lab_name','test_request',
                  ]
         widgets={
-            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            **CommonBaseForm.Meta.widgets,
+          
             'results':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             
             'date_time' : DatePickerInput(attrs={'class':'form-control'}),
@@ -175,28 +165,25 @@ class AddLabTestResultForm(forms.ModelForm):
             'lab_name':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
             'test_request':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-           
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-
-        } 
-    def __init__(self,allifmaalparameter,*args,**kwargs):
-        super (AddLabTestResultForm,self).__init__(*args,**kwargs) # populates the post
-        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
        
-        self.fields['test_request'].queryset=LabTestRequestsModel.objects.filter(company=allifmaalparameter)
-        
-class AddPrescriptionForm(forms.ModelForm):
-    class Meta:
+        } 
+   
+class AddPrescriptionForm(CommonBaseForm):
+    company_filtered_fields = {
+        'medical_file': CommonTransactionsModel,
+        'medication': CommonStocksModel,
+        'prescribed_by_doctor': CommonEmployeesModel,
+        'issued_by_pharmacist': CommonEmployeesModel,
+       
+        }
+    
+    class Meta(CommonBaseForm.Meta):
         model = MedicationsModel
-        fields = ['medical_file','is_issued','quantity','via','medication','dosage_form','dosage','division','branch','department',
+        fields = CommonBaseForm.Meta.fields + ['medical_file','is_issued','quantity','via','medication','dosage_form','dosage',
                   'frequency','duration','prescribed_by_doctor','instructions','issued_by_pharmacist',
                   'issued_date_time']
         widgets={
+            **CommonBaseForm.Meta.widgets,
             'frequency':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'issued_date_time' : DatePickerInput(attrs={'class':'form-control'}),
             'instructions':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
@@ -208,31 +195,24 @@ class AddPrescriptionForm(forms.ModelForm):
             'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'via':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'issued_by_pharmacist':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
             'prescribed_by_doctor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-
+            
         } 
-    def __init__(self,allifmaalparameter,*args,**kwargs):
-        super (AddPrescriptionForm,self).__init__(*args,**kwargs) # populates the post
-        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['medication'].queryset =CommonStocksModel.objects.filter(company=allifmaalparameter)
-        self.fields['prescribed_by_doctor'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
-        self.fields['issued_by_pharmacist'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
-        
-
-class AddAdmissionForm(forms.ModelForm):
-    class Meta:
+   
+class AddAdmissionForm(CommonBaseForm):
+    company_filtered_fields = {
+        'admitting_doctor': CommonEmployeesModel,
+       
+        }
+    
+    class Meta(CommonBaseForm.Meta):
         model = AdmissionsModel
-        fields = ['medical_file','ward','bed','admission_date_time','description','division','branch','department',
+        fields = CommonBaseForm.Meta.fields + ['medical_file','ward','bed','admission_date_time',
                   'status','admitting_doctor','reason_for_admission'
                   ]
         widgets={
+            **CommonBaseForm.Meta.widgets,
             'reason_for_admission':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
@@ -241,32 +221,23 @@ class AddAdmissionForm(forms.ModelForm):
             'admitting_doctor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'admission_date_time' : DatePickerInput(attrs={'class':'form-control'}),
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-
+           
         } 
-    def __init__(self,allifmaalparameter,*args,**kwargs):
-        super (AddAdmissionForm,self).__init__(*args,**kwargs) # populates the post
-        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
+   
+class AddMedicalAdminstrationForm(CommonBaseForm):
+    company_filtered_fields = {
+        'medical_file': CommonTransactionsModel,
        
-        self.fields['admitting_doctor'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
-        
-
-class AddMedicalAdminstrationForm(forms.ModelForm):
-    class Meta:
+        }
+    class Meta(CommonBaseForm.Meta):
         model = MedicalAdministrationsModel
-        fields = ['medical_file','prescription','administered_by_nurse',
-                  'dosage_value','dosage_unit','given_on','via','division','branch','department',
-                  'comments',
+        fields = CommonBaseForm.Meta.fields + ['medical_file','prescription','administered_by_nurse',
+                  'dosage_value','dosage_unit','given_on','via',
+                 
                   ]
         widgets={
+            **CommonBaseForm.Meta.widgets,
             'dosage_value':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            
            
             'given_on' : DatePickerInput(attrs={'class':'form-control'}),
           
@@ -280,29 +251,21 @@ class AddMedicalAdminstrationForm(forms.ModelForm):
           
             
             'dosage_unit':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            
-
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-
+           
         } 
-    def __init__(self,allifmaalparameter,*args,**kwargs):
-        super (AddMedicalAdminstrationForm,self).__init__(*args,**kwargs) # populates the post
-        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
+  
+class AddDischargeForm(CommonBaseForm):
+    company_filtered_fields = {
+        'admission': AdmissionsModel,
        
-     
-
-class AddDischargeForm(forms.ModelForm):
-    class Meta:
+        }
+    class Meta(CommonBaseForm.Meta):
         model = DischargesModel
-        fields = ['admission','discharge_diagnosis','discharge_summary',
-                  'medications_at_discharge','follow_up_plan','division','branch','department','recorded_on',
+        fields = CommonBaseForm.Meta.fields + ['admission','discharge_diagnosis','discharge_summary',
+                  'medications_at_discharge','follow_up_plan','recorded_on',
                   ]
         widgets={
+            **CommonBaseForm.Meta.widgets,
             
             'discharge_summary':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
             'discharge_diagnosis':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -310,26 +273,24 @@ class AddDischargeForm(forms.ModelForm):
             'follow_up_plan':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'recorded_on' : DatePickerInput(attrs={'class':'form-control'}),
             'admission':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-
+           
         } 
-    def __init__(self,allifmaalparameter,*args,**kwargs):
-        super (AddDischargeForm,self).__init__(*args,**kwargs) # populates the post
-        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['admission'].queryset=AdmissionsModel.objects.filter(company=allifmaalparameter)
-     
+   
 
-class AddReferralForm(forms.ModelForm):
-    class Meta:
+class AddReferralForm(CommonBaseForm):
+    company_filtered_fields = {
+        'medical_file': CommonTransactionsModel,
+        'referring_doctor':CommonEmployeesModel,
+       
+        }
+    
+    class Meta(CommonBaseForm.Meta):
         model = ReferralsModel
-        fields = ['medical_file','referring_doctor','reason_for_referral','referred_on','referral_type','referred_to_doctor','referred_to_external_organization','division','branch','department',
+        fields = CommonBaseForm.Meta.fields + ['medical_file','referring_doctor','reason_for_referral','referred_on','referral_type','referred_to_doctor','referred_to_external_organization',
                   'status',
                   ]
         widgets={
+            **CommonBaseForm.Meta.widgets,
             'reason_for_referral':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
            
             'referred_on' : DatePickerInput(attrs={'class':'form-control'}),
@@ -341,17 +302,5 @@ class AddReferralForm(forms.ModelForm):
             'referred_to_external_organization':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             
-            
-            'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-
         } 
-    def __init__(self,allifmaalparameter,*args,**kwargs):
-        super (AddReferralForm,self).__init__(*args,**kwargs) # populates the post
-        self.fields['department'].queryset=CommonDepartmentsModel.objects.filter(company=allifmaalparameter)
-        self.fields['division'].queryset =CommonDivisionsModel.objects.filter(company=allifmaalparameter)
-        self.fields['branch'].queryset=CommonBranchesModel.objects.filter(company=allifmaalparameter)
-        self.fields['medical_file'].queryset=CommonTransactionsModel.objects.filter(company=allifmaalparameter)
-       
-        self.fields['referring_doctor'].queryset=CommonEmployeesModel.objects.filter(company=allifmaalparameter)
+  

@@ -3547,7 +3547,7 @@ def commonNewTransferOrder(request,*allifargs,**allifkwargs):
         else:
             sqnmbr= 'TRNSF/ORD/1'+"/"+str(uuid4()).split('-')[2]
 
-        newQuoteNumber=CommonStockTransferOrdersModel.objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+        newQuoteNumber=CommonStockTransferOrdersModel.objects.create(number=sqnmbr,company=request.user.company,owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
         newQuoteNumber.save()
         return redirect('allifmaalcommonapp:commonTransferOrders',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -4107,7 +4107,7 @@ def commonNewCreditNote(request,*allifargs,**allifkwargs):
     else:
         invnmbr= 'CRD/NTE/1'+"/"+str(currntyear)+"/"+str(uuid4()).split('-')[2]
 
-    newinv=CommonCreditNotesModel.all_objects.create(number=invnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+    newinv=CommonCreditNotesModel.all_objects.create(number=invnmbr,company=request.user.company,owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
     newinv.save()
     return redirect('allifmaalcommonapp:commonCreditNotes',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
@@ -4656,7 +4656,7 @@ def commonJobs(request,*allifargs,**allifkwargs):
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalcommonapp/jobs/jobs.html',context)
 
-@allif_base_view_wrapper
+#@allif_base_view_wrapper
 def commonNewJobs(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     current_datetime=timezone.now().date().today()
@@ -4669,7 +4669,7 @@ def commonNewJobs(request,*allifargs,**allifkwargs):
         jobNo= 'Job/'+str(uuid4()).split('-')[1]+'/'+str(last_obj_incremented)+'/'+str(job_year)
     else:
         jobNo= 'First/Job/'+str(uuid4()).split('-')[1]
-    newJobRef=CommonJobsModel.all_objects.create(number=jobNo,description="Job Description",company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg") or None,
+    newJobRef=CommonJobsModel.all_objects.create(number=jobNo,description="Job Description",company=request.user.company,owner=request.user or None,
                 division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
     newJobRef.save()
     return redirect('allifmaalcommonapp:commonJobs',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
@@ -4813,7 +4813,7 @@ def commonNewTransit(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     
     ###### start... UID generation ##################
-    allifquery=CommonTransitModel.all_objects.filter(company=allif_data.get("main_sbscrbr_entity"))
+    allifquery=CommonTransitModel.all_objects.filter(company=request.user.company)
     unque=str(uuid4()).split('-')[2]
     nmbr=int(allifquery.count())+int(1)
     currntyear=timezone.now().date().today().year
@@ -4825,7 +4825,7 @@ def commonNewTransit(request,*allifargs,**allifkwargs):
     else:
         sqnmbr= 'SHP/1'+"/"+str(uuid4()).split('-')[2]
 
-    newQuoteNumber=CommonTransitModel.all_objects.create(number=sqnmbr,company=allif_data.get("main_sbscrbr_entity"),owner=allif_data.get("usernmeslg"),division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+    newQuoteNumber=CommonTransitModel.all_objects.create(number=sqnmbr,company=request.user.company,owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
     newQuoteNumber.save()
     return redirect('allifmaalcommonapp:commonTransits',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 

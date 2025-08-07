@@ -192,6 +192,25 @@ allif_sector_contextual_action_require_pk_links= {
    {'name': 'DeleteStaffProfile', 'url_name': 'allifmaalcommonapp:commonDeleteProfile', 'requires_pk': True},
    {'name': 'StaffProfileDetails', 'url_name': 'allifmaalcommonapp:commonStaffProfileDetails', 'requires_pk': True},
    
+   
+   
+   {'name': 'EditGeneralLedger', 'url_name': 'allifmaalcommonapp:commonEditGeneralLedger', 'requires_pk': True},
+   {'name': 'GeneralLedgerDetails', 'url_name': 'allifmaalcommonapp:commonGeneralLedgerDetails', 'requires_pk': True},
+   {'name': 'SynchGeneralLedger', 'url_name': 'allifmaalcommonapp:commonSynchGLAccount', 'requires_pk': True},
+   {'name': 'DeleteGeneralLedgerConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteGenLedger', 'requires_pk': True},
+   
+   {'name': 'EditChartOfAccount', 'url_name': 'allifmaalcommonapp:commonEditChartofAccount', 'requires_pk': True},
+   {'name': 'ChartOfAccountDetails', 'url_name': 'allifmaalcommonapp:commonChartofAccountDetails', 'requires_pk': True},
+   {'name': 'ClearChartOfAccount', 'url_name': 'allifmaalcommonapp:commonClearAcc', 'requires_pk': True},
+   {'name': 'DeleteChartOfAccountConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCoA', 'requires_pk': True},
+   
+   
+   
+       
+     
+  
+  
+    
   
     ],
     
