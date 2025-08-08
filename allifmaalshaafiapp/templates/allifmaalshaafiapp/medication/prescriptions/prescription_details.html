@@ -1,265 +1,78 @@
-{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
+  {% extends 'allifmaalcommonapp/ui/details/item-details.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block add-form-header-block %}
+   <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
+  <a href="{% allif_get_single_nav_link_url 'triagedata' user_var glblslug %}">Triage</a>
+  <a href="{% allif_get_single_nav_link_url 'MedicalAssessments' user_var glblslug %}">Assessments</a>
+  <a href="{% allif_get_single_nav_link_url 'LabTests' user_var glblslug %}">Lab Tests</a>
+  <a href="{% allif_get_single_nav_link_url 'LabResults' user_var glblslug %}">Results</a>
+  <a href="{% allif_get_single_nav_link_url 'prescriptions' user_var glblslug %}">Prescriptions</a>
+   <a href="{{ allif_contextual_action_links.AddTreatment.url }}">New Medicine Adminstration</a>
+ 
+  {%endblock%}
 
-<div class="allifmaal-main-container">
-  
-<!--start....main headere-->
-<div class="card-header">
-
-<div class="row mt-12" ><!--start....header row-->
-
-<div class="col-md-12"><!--start....header column-->
-
-<div class="container-fluid amel-content-header">
-<div class="dropdown allifmaal-content-dropdown">
-  <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  Actions
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <div class="content-dropdown-menu">
-
-    
-      <li><a class="dropdown-item" href="{% url 'allifmaalshaafiapp:EditPrescription' allifquery.id  user_var glblslug %}">Edit Item</a></li>
-         <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonTransactionToPdf' allifquery.id user_var glblslug %}">Download</a></li>
-      <li><a class="dropdown-item body-delete-link" href="{% url 'allifmaalshaafiapp:wantToDeletePrescription' allifquery.id user_var glblslug %}">Delete Prescription</a></li>
-   
-   </div>
-  </ul>
-</div>
-
-<a href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
-<a href="{% url 'allifmaalcommonapp:commonSpaces' user_var glblslug %}">Spaces</a>
-<a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}">Space Units</a>
-</div>
-
-    </div><!--end....header column-->
-  
-  </div><!--end....header row-->
- </div>
-    <div class="allifmaincontainer">
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">{{allifquery}} Details</div>
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
+  {% block details-table-col-one %}
+    <tr>
+      <td class="allif-fix-table-col">Medicine</td>
+      <td>{{allifquery.medication}}</td>
+    </tr>
       <tr>
-        <td class="allif-fix-table-col">Division</td>
-        <td>{{allifquery.division}}</td>
+      <td class="allif-fix-table-col">Taken Via</td>
+      <td>{{allifquery.via}}</td>
+    </tr>
     
-        </tr>
-        
-        <tr>
-          <td class="allif-fix-table-col">Branch</td>
-          <td>{{allifquery.branch}}</td>
-      
-          </tr>
-            <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td>{{allifquery.department}}</td>
-        
-            </tr>
-        <tr>
-          <td class="allif-fix-table-col">Patient</td>
-          <td>{{allifquery.medical_file}}</td>
-      
-          </tr>
-         <tr>
-            <td class="allif-fix-table-col">Medication</td>
-            <td>{{allifquery.medication}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Dosage From</td>
-            <td>{{allifquery.dosage_form}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Dosage</td>
-            <td>{{allifquery.dosage}}</td>
-        
-            </tr>
-       
-             <tr>
-            <td class="allif-fix-table-col">Via</td>
-            <td>{{allifquery.via}}</td>
-        
-            </tr>
-            
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-         
-           <tr>
-            <td class="allif-fix-table-col">Instructions</td>
-            <td>{{allifquery.instructions}}</td>
-        
-            </tr>
-              <tr>
-            <td class="allif-fix-table-col">Quantity</td>
-            <td>{{allifquery.quantity}}</td>
-        
-            </tr>
-            
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
+  {%endblock%}
+
+  {% block details-table-col-two %}
   <tr>
-            <td class="allif-fix-table-col">Frequency</td>
-            <td>{{allifquery.frequency}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Duration</td>
-            <td>{{allifquery.duration}}</td>
-        
-            </tr>
-           
-           <tr>
-            <td class="allif-fix-table-col">Prescribed By</td>
-            <td>{{allifquery.prescribed_by_doctor}}</td>
-         
-            </tr>
-               <tr>
-            <td class="allif-fix-table-col">Issued By</td>
-            <td>{{allifquery.issued_by_pharmacist}}</td>
-        
-            </tr>
-       
-           <tr>
-            <td class="allif-fix-table-col">Status</td>
-            <td>{{allifquery.is_issued}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">Issued On</td>
-            <td>{{allifquery.issued_date_time}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">Issued On</td>
-            <td>{{allifquery.issued_date_time}}</td>
-        
-            </tr>
-          </tbody>
-          </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-
-<div class="row mt-12"> <!--start....table row-->
-  <div class="col-md-12"> <!--start....table column-->
-    <div class="allif-scroll-table">
-      <div class="table-responsive allif-full-table">
-      <table class="table table-layout">
-        <thead>
-          <tr class="allif-table-header-row">
-          <td class="allif-fix-table-col">Stock Item</td>
-          <td>Quantity</td>
-         
-          <td>Navigate</td>
-          
-          <td> . . . </td>
-          <td></td>
-          </tr>
-          </thead>
-          <tbody class="allif-table-body">
-           
-          
-          {% for item in allifqueryset %} 
-          <tr data-id="{{item.id}}">
-          <td class="allif-fix-table-col"><a class="allif-table-links" href="">{{item.description}}</a></td>
-          
-            <td>
-            {{item.quantity}}
-           </td>
-           
-          <td>
-            <div class="dropdown allifmaal-content-dropdown">
-              <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
-              <div class="dropdown-content">
-                <a href="" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-                <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
-                
-              </div>
-            </div>
-            <div class="dropdown allif-confirm-action">
-              
-              <a href="{% url 'allifmaalcommonapp:commonSpaceUnits' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-              <a href="{% url 'allifmaalcommonapp:commonDeleteSpaceUnit' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-            </div>
+    <td class="allif-fix-table-col">Description</td>
+    <td>{{allifquery.description}}</td>
+  </tr>
+ 
+   <tr>
+    <td class="allif-fix-table-col">Quantity</td>
+    <td>{{allifquery.quantity|floatformat:2|intcomma}}</td>
+  </tr>
   
-           
-          </td>
-  
-         <td> . . . </td>
-         <td></td>
-        </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-      </div>
-     </div>
-
-</div><!--end....table column-->
-
-</div><!--end....table row-->
-
-
-</div>
-
-</div>
-  {% block scripts %}
-
   {% endblock %}
-   {% endblock %}
-   
+  
+  {% block core-details-tab-col-one %}
+   <tr>
+    <td class="allif-fix-table-col">Dosage</td>
+    <td>{{allifquery.dosage}}</td>
+  </tr>
+  {%endblock%}
 
+  {% block core-details-tab-col-two %}
+  <tr>
+    <td class="allif-fix-table-col">Dosage Form</td>
+    <td>{{allifquery.dosage_form}}</td>
+  </tr>
+  {% endblock %}
 
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col">{{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'prescriptions' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {%endblock%}
 
+  {% block general-details-tab-col-two %}
+  <tr>
+    <td class="allif-fix-table-col">Description</td>
+    <td>{{allifquery.description}}</td>
+  </tr>
+  {% endblock %}
+  
+  {% block allif_sensitive_section_col_two %}
+  <tr>
+    <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+    <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeletePrescriptionConfirm.url }}">Delete {{allifquery}}</a></td>
+  </tr>
+  {%endblock%}
 
+  {% block item_details_related_items_full_table %} {%endblock%}
+  {% block item_details_related_items_full_half_tables %}{%endblock%}
 
-
-
-
-
-
+ 

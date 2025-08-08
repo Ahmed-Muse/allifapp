@@ -1,310 +1,78 @@
-{% extends 'allifmaalshaafiapp/base/uimainbase/shaafibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+
+ {% block add-form-header-block %}
+  <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
+  <a href="{% allif_get_single_nav_link_url 'triagedata' user_var glblslug %}">Triage</a>
+  <a href="{% allif_get_single_nav_link_url 'MedicalAssessments' user_var glblslug %}">Assessments</a>
+  <a href="{% allif_get_single_nav_link_url 'LabTests' user_var glblslug %}">Lab Tests</a>
+  <a href="{% allif_get_single_nav_link_url 'LabResults' user_var glblslug %}">Results</a>
+  <a href="{% allif_get_single_nav_link_url 'prescriptions' user_var glblslug %}">Prescriptions</a>
+ 
 {% endblock %}
-{% block style %}
+{% block details-table-col-one %}
+ <tr>
+    <td class="allif-fix-table-col">Customer</td>
+    <td>{{allifquery.medical_file.customer}}</td>
+  </tr>
+
 {%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
- 
-<!--start....main headere-->
-<div class="card-header">
+{% block details-table-col-two %}
+ <tr>
+    <td class="allif-fix-table-col">Ward </td>
+    <td>{{allifquery.ward}}</td>
+  </tr>
+{%endblock%}
+   {% block core-tab-col-one %}
+   <tr>
+        <td class="allif-fix-table-col-forms">Reasons</td>
+        <td>{{form.description}}</td>
+      </tr>
 
-<div class="row mt-12" ><!--start....header row-->
-
-<div class="col-md-12"><!--start....header column-->
-
-<div class="container-fluid amel-content-header">
-
-  <a class="amel-table-list-identifier">Add New Prescriptions:</a>
-
-  <a href="{% url 'allifmaalshaafiapp:prescriptions' user_var glblslug %}">Prescriptions</a>
-
-</div>
-
-    </div><!--end....header column-->
-  
-  </div><!--end....header row-->
-
-</div><!--end....main headere-->
-
-
-  <div class="allifmaincontainer">
-{% if allifquery_update %}
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Edit {{allifquery}} Warehouse Details</div>
-  <form method='POST' action=''>{% csrf_token %}
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-
-      <tr>
-        <td class="allif-fix-table-col">Division</td>
-        <td>{{form.division}}</td>
-    
-        </tr>
-        
-        <tr>
-          <td class="allif-fix-table-col">Branch</td>
-          <td>{{form.branch}}</td>
-      
-          </tr>
-       
-             <tr>
-          <td class="allif-fix-table-col">Medical File</td>
-          <td>{{form.medical_file}}</td>
-      
-          </tr>
-
-     
-             <tr>
-            <td class="allif-fix-table-col">Ward</td>
-            <td>{{form.ward}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Bed</td>
-            <td>{{form.bed}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">By Doctor</td>
-            <td>{{form.admitting_doctor}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Status</td>
-            <td>{{form.status}}</td>
-        
-            </tr>
-            
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-        
-          <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td>{{form.department}}</td>
-        
-            </tr>
-          <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">Reasons For Admission</td>
-            <td>{{form.reason_for_admission}}</td>
-        
-            </tr>
- 
-           
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-            <tr>
-            <td class="allif-fix-table-col">Admission Date</td>
-            <td>{{form.admission_date_time}}</td>
-        
-            </tr>
-           
-             <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
-        
-            </tr>
-            
-          
-            <tr>
-              <td class="allif-fix-table-col">Action</td>
-              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-          
-              </tr>
-          </tbody>
-          </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-
-<div class="error-body">
-  <p>{{error_message}}</p>
-  </div>
-</form>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-{% else %}
-
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit New General Ledger Account</div>
-  <form method='POST' action=''>{% csrf_token %}
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-        <tr>
-          <td class="allif-fix-table-col">Medical File</td>
-          <td>{{form.medical_file}}</td>
-      
-          </tr>
-
-     
-             <tr>
-            <td class="allif-fix-table-col">Ward</td>
-            <td>{{form.ward}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Bed</td>
-            <td>{{form.bed}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">By Doctor</td>
-            <td>{{form.admitting_doctor}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Status</td>
-            <td>{{form.status}}</td>
-        
-            </tr>
-            
-           
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-          <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">Reasons For Admission</td>
-            <td>{{form.reason_for_admission}}</td>
-        
-            </tr>
-     <tr>
-            <td class="allif-fix-table-col">Admission Date</td>
-            <td>{{form.admission_date_time}}</td>
-        
-            </tr>
-           
-             <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
-        
-            </tr>
-            
-      
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-       
-             <tr>
-            <td class="allif-fix-table-col">Admission Date</td>
-            <td>{{form.admission_date_time}}</td>
-        
-            </tr>
-           
-             <tr>
-            <td class="allif-fix-table-col">Description</td>
-            <td>{{form.description}}</td>
-        
-            </tr>
-            
-          
-        <tr>
-          <td class="allif-fix-table-col">Action</td>
-          <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-      
-          </tr>
-      </tbody>
-      </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-
-<div class="error-body">
-  <p>{{error_message}}</p>
-  </div>
-</form>
-<!--end of table-->
-
-
-
-</div><!--end of main container of the page....-->
-
-{% endif %}
-
-
-</div>
-
-</div>
-  {% block scripts %}
-
-  {% endblock %}
-   {% endblock %}
    
+    {%endblock%}
+
+    {% block core-tab-col-two %}
+    <tr>
+      <td class="allif-fix-table-col-forms">Admitting Dr</td>
+      <td>{{form.admitting_doctor}}</td>
+    </tr>
+   
+    {%endblock%}
+ {% block standard-tab-col-one %}
+   
+ {%endblock%}
+ {% block standard-tab-col-two %}
+ 
+ {%endblock%}
+    
+
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'prescriptions' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeletePrescriptionConfirm.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    
+    {% endblock %}
+
+     {% block bottom-fields-col-one %}
+     <tr>
+      <td class="allif-fix-table-col-forms">Ward</td>
+      <td>{{form.ward}}</td>
+    </tr>
+     {%endblock%}
+       {% block bottom-fields-col-two %}
+        <tr>
+      <td class="allif-fix-table-col-forms">Bed</td>
+      <td>{{form.bed}}</td>
+    </tr>
+     {%endblock%}
+
+    

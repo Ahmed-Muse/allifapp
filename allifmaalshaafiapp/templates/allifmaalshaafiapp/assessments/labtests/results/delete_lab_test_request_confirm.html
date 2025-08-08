@@ -1,0 +1,11 @@
+{% extends 'allifmaalcommonapp/ui/general/delete-confirm.html'%}
+{% load allif_navigation_tags %}
+
+{% block delete-action-decline %}
+<a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'prescriptions' user_var glblslug %}">No, Dont Delete {{allifquery}}</a>
+{% endblock %}
+
+{% block delete-action-confirm %}
+<a class="amel-table-list-identifier body-delete-link" href="{% url 'allifmaalshaafiapp:deletePrescription' allifquery.id user_var glblslug %}"> Yes, Delete {{allifquery}}</a>
+{% endblock %}
+     

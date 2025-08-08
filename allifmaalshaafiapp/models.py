@@ -97,17 +97,15 @@ class LabTestRequestsModel(CommonBaseModel):
     Represents a request from a healthcare professional for one or more laboratory tests.
     """
   
-    description=models.CharField(max_length=50, help_text="Type of referral (Internal or External).",blank=True,null=True)
+    
     items=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="items_lab_test_requests",)
-    date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient admission.")
-  
-    medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.SET_NULL, related_name="medical_file_lab_test_requests", blank=True, null=True,)
-    status=models.CharField(max_length=50,choices=LAB_TEST_STATUSES,default='Pending',help_text="Current status of the lab order.")
-    priority=models.CharField(max_length=50,choices=PRIORITY_LEVELS,default='Pending',help_text="Current status of the lab order.")
+    
+    medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="medical_file_lab_test_requests", blank=True, null=True,)
+   
     lab_name=models.ForeignKey(CommonSpacesModel, on_delete=models.SET_NULL, related_name="lab_name_lab_test_requests", blank=True, null=True,)
     specimen=models.CharField(max_length=50,choices=SPECIMEN_TYPE,default='Blood',help_text="Current status of the lab order.")
 
-    comments = models.TextField(blank=True, null=True,help_text="Additional instructions or clinical notes for the laboratory.")
+    test_status=models.CharField(max_length=50,choices=LAB_TEST_STATUSES,default='Ordered',help_text="Current status of the lab order.")
 
     def __str__(self):
         return str(self.medical_file)
@@ -117,21 +115,11 @@ class LabTestResultsModel(CommonBaseModel):
     Stores the results for a specific test item from a laboratory order.
     """
   
-    results=models.CharField(max_length=50,blank=True,null=True,default='Results')
-    description=models.CharField(max_length=50,blank=True,null=True,default='Results')
-    date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient admission.")
-  
-    medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.SET_NULL, related_name="medical_file_lab_test_requests_results", blank=True, null=True,)
+    test_request=models.ForeignKey(LabTestRequestsModel, on_delete=models.CASCADE, related_name="test_lab_test_requests_results", blank=True, null=True,)
    
-    test_request=models.ForeignKey(LabTestRequestsModel, on_delete=models.SET_NULL, related_name="test_lab_test_requests_results", blank=True, null=True,)
-    
-    lab_name=models.ForeignKey(CommonSpacesModel, on_delete=models.SET_NULL, related_name="lab_name_lab_test_requests_results", blank=True, null=True,)
    
-    comments = models.TextField(blank=True, null=True,help_text="Additional instructions or clinical notes for the laboratory.")
-
-
     def __str__(self):
-        return str(self.results)
+        return str(self.test_request.medical_file)
       
        
 class MedicationsModel(CommonBaseModel):# prescriptions...
@@ -154,15 +142,8 @@ class MedicationsModel(CommonBaseModel):# prescriptions...
     
     prescribed_by_doctor=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="issued_prescriptions",help_text="The doctor who issued this prescription.")
     
-  
-    instructions=models.TextField(blank=True, null=True,help_text="Patient-specific instructions for medication use.")
-   
     issued_by_pharmacist=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="dispensed_prescriptions",help_text="The pharmacist who dispensed the medication (if dispensed).")
-    issued_date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time when the prescription was dispensed.")
-
-    prescription_date_time=models.DateTimeField(auto_now_add=True, blank=True, null=True) # Renamed 'date' to specific, auto_now_add
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-    
+   
     def __str__(self):
         return str(self.medication)
 
@@ -173,24 +154,17 @@ class AdmissionsModel(CommonBaseModel):
     """
    
     admitting_doctor=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="admitted_patients",)
-    date_time=models.DateTimeField(blank=True, null=True, auto_now_add=True,help_text="Date and time of patient admission.")
-    reason_for_admission=models.TextField(max_length=250,blank=True, null=True,help_text="The primary reason for patient admission.")
+   
     ward=models.ForeignKey(CommonSpacesModel, on_delete=models.CASCADE, related_name="admissions", blank=True, null=True,help_text="The ward to which the patient is admitted.")
     bed=models.ForeignKey(CommonSpaceUnitsModel, on_delete=models.CASCADE, related_name="admissions", blank=True, null=True,help_text="The specific bed allocated to the patient.")
-    status=models.CharField(max_length=100, choices=ADMISSION_STATUSES, default='ADM',help_text="Current status of the admission (e.g., Admitted, Discharged).")
-    admission_date_time=models.DateTimeField(blank=True, null=True,help_text="Date and time of patient discharge (if applicable).")
     
     medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.SET_NULL, related_name="mdcladmnss", blank=True, null=True,)
-    date_created=models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
+   
     def __str__(self):
         return str(self.medical_file)
 
 
 class MedicalAdministrationsModel(CommonBaseModel):
- 
-    medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="medication_administrations", blank=True, null=True,help_text="The encounter this medication administration belongs to.")
-    # Link to the prescription this administration fulfills (optional, but good for tracking)
     prescription=models.ForeignKey(MedicationsModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="administrations",help_text="The prescription being administered (optional)." )
     
     administered_by_nurse=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="administered_medications",help_text="The nurse or staff member who administered the medication.")
@@ -201,10 +175,9 @@ class MedicalAdministrationsModel(CommonBaseModel):
   
     administration_date_time = models.DateTimeField(auto_now_add=True, blank=True, null=True) # Renamed 'date', auto_now_add
     given_on = models.DateTimeField(blank=True, null=True) # Keep if 'given_on' is the actual time of administration
-    last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
    
     def __str__(self):
-        return str(self.medical_file)
+        return str(self.prescription)
 
 class DischargesModel(CommonBaseModel):
     #For inpatients, a summary at discharge.
@@ -213,11 +186,9 @@ class DischargesModel(CommonBaseModel):
     discharge_diagnosis=models.CharField(null=True, blank=True,max_length=250)
     medications_at_discharge=models.CharField(null=True, blank=True,max_length=250)
     follow_up_plan=models.CharField(null=True, blank=True,max_length=250)
-    recorded_on = models.DateTimeField(blank=True, null=True) # Keep if 'recorded_on' is the actual time of note-taking
-    last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
-
+   
     def __str__(self):
-        return str(self.patient)
+        return str(self.admission)
 
 
 class ReferralsModel(CommonBaseModel):
@@ -226,23 +197,15 @@ class ReferralsModel(CommonBaseModel):
     Records a patient referral to another doctor, department, or external organization.
     """
     
-    reason_for_referral=models.CharField(null=True, blank=True,max_length=250, help_text="The reason for the referral.")
-   
     referring_doctor=models.ForeignKey(CommonEmployeesModel,help_text="The doctor issuing the referral.",related_name="referring_doctor",on_delete=models.SET_NULL,null=True,blank=True)
-    referred_on=models.DateField(blank=True, null=True)
-    
+   
     medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="referrals_medfile", blank=True, null=True,help_text="The encounter this referral belongs to.")
     
-    referral_type=models.CharField(max_length=10, choices=REFERRAL_TYPES, default='INT',help_text="Type of referral (Internal or External).")
+    referral_type=models.CharField(max_length=10, choices=REFERRAL_TYPES, default='INT',help_text="Type of referral (Internal or External).",blank=True,null=True)
     referred_to_doctor=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="received_referrals",help_text="The doctor to whom the patient is referred (if internal).")
     
     # If external, you might link to CommonSuppliersModel or create a specific ExternalHealthcareProviderModel
     referred_to_external_organization = models.ForeignKey(CommonSuppliersModel, on_delete=models.SET_NULL, blank=True, null=True,help_text="Name of the external organization/clinic referred to (if external referral).")
-    status=models.CharField( max_length=10, choices=REFERRAL_STATUSES, default='PEND',help_text="Current status of the referral.")
-
-    referral_date_time=models.DateTimeField(auto_now_add=True, blank=True, null=True) # Renamed 'date', auto_now_add
-    
-    last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-
+   
     def __str__(self):
         return str(self.medical_file)

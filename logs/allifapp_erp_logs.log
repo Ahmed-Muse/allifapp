@@ -9117,3 +9117,793 @@ INFO 2025-08-07 08:02:43,410 autoreload 46044 6764 C:\am\allifapp\allifapperp\al
 INFO 2025-08-07 08:02:47,184 autoreload 42264 32344 Watching for file changes with StatReloader
 INFO 2025-08-07 08:03:30,917 autoreload 42264 32344 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
 INFO 2025-08-07 08:03:32,919 autoreload 43760 47816 Watching for file changes with StatReloader
+INFO 2025-08-08 07:13:27,730 autoreload 8364 41660 Watching for file changes with StatReloader
+WARNING 2025-08-08 07:15:50,154 allif_navigation_tags 8364 47696 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-08 08:27:58,758 autoreload 8364 41660 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 08:28:01,729 autoreload 37572 13992 Watching for file changes with StatReloader
+INFO 2025-08-08 08:28:26,442 autoreload 37572 13992 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 08:28:27,706 autoreload 43144 42740 Watching for file changes with StatReloader
+INFO 2025-08-08 08:52:39,608 autoreload 43144 42740 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 08:52:41,604 autoreload 26632 36368 Watching for file changes with StatReloader
+INFO 2025-08-08 08:56:40,617 autoreload 26632 36368 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 08:56:42,457 autoreload 29836 43544 Watching for file changes with StatReloader
+INFO 2025-08-08 08:57:48,589 autoreload 29836 43544 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 08:57:50,509 autoreload 30236 17528 Watching for file changes with StatReloader
+INFO 2025-08-08 09:02:52,318 autoreload 30236 17528 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 09:02:53,859 autoreload 44140 22084 Watching for file changes with StatReloader
+INFO 2025-08-08 09:05:29,164 autoreload 44140 22084 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 09:05:30,763 autoreload 47996 36176 Watching for file changes with StatReloader
+INFO 2025-08-08 09:11:02,756 autoreload 47996 36176 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:11:04,260 autoreload 19112 36988 Watching for file changes with StatReloader
+INFO 2025-08-08 09:14:43,101 autoreload 19112 36988 C:\am\allifapp\allifapperp\allifmaaladminapp\urls.py changed, reloading.
+INFO 2025-08-08 09:14:44,668 autoreload 27080 43416 Watching for file changes with StatReloader
+INFO 2025-08-08 09:15:04,368 autoreload 27080 43416 C:\am\allifapp\allifapperp\allifmaaladminapp\urls.py changed, reloading.
+INFO 2025-08-08 09:15:06,450 autoreload 17772 41396 Watching for file changes with StatReloader
+INFO 2025-08-08 09:15:58,304 autoreload 17772 41396 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:15:59,899 autoreload 22972 43952 Watching for file changes with StatReloader
+INFO 2025-08-08 09:16:16,838 autoreload 22972 43952 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:16:18,215 autoreload 46368 20536 Watching for file changes with StatReloader
+INFO 2025-08-08 09:16:37,741 autoreload 46368 20536 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:16:39,087 autoreload 20052 47584 Watching for file changes with StatReloader
+ERROR 2025-08-08 09:18:03,576 log 20052 24196 Internal Server Error: /Allifmaal/ERP/System/Admin/App/chart-of-account/add/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaaladminapp\views.py", line 25, in add_coa_page
+    form = CommonAddDocFormatForm(allifmaalparameter=allifmaalparameter)
+TypeError: BaseModelForm.__init__() got an unexpected keyword argument 'allifmaalparameter'
+WARNING 2025-08-08 09:18:03,800 log 20052 24196 Not Found: /favicon.ico
+WARNING 2025-08-08 09:18:37,023 allif_navigation_tags 20052 24196 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-08 09:19:33,416 autoreload 20052 47584 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:19:35,969 autoreload 24488 46368 Watching for file changes with StatReloader
+ERROR 2025-08-08 09:19:39,255 log 24488 42592 Internal Server Error: /Allifmaal/ERP/System/Admin/App/chart-of-account/add/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaaladminapp\views.py", line 26, in add_coa_page
+    return render(request, 'allifmaaladmin/test.html', {'form': form})
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: allifmaaladmin/test.html
+INFO 2025-08-08 09:19:59,756 autoreload 24488 46368 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:20:01,967 autoreload 36076 32752 Watching for file changes with StatReloader
+WARNING 2025-08-08 09:20:10,596 allif_navigation_tags 36076 12084 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-08 09:20:18,324 allif_navigation_tags 36076 12084 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-08 09:20:41,507 allif_navigation_tags 36076 12084 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-08 09:20:42,462 allif_navigation_tags 36076 12084 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-08 09:21:19,794 allif_navigation_tags 36076 12084 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-08 09:21:20,804 allif_navigation_tags 36076 12084 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+ERROR 2025-08-08 09:22:08,415 log 36076 12084 Internal Server Error: /Allifmaal/ERP/System/Admin/App/chart-of-account/add/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'allifmaaladmin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaaladminapp\views.py", line 26, in add_coa_page
+    return render(request, 'test.html', {'form': form})
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'allifmaaladmin' is not a registered namespace
+WARNING 2025-08-08 09:22:40,740 allif_navigation_tags 36076 12084 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-08 09:22:56,220 allif_navigation_tags 36076 12084 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-08 09:24:00,706 autoreload 36076 32752 C:\am\allifapp\allifapperp\allifmaalcommonapp\admin.py changed, reloading.
+INFO 2025-08-08 09:24:03,070 autoreload 46704 19428 Watching for file changes with StatReloader
+ERROR 2025-08-08 09:24:21,566 log 46704 27532 Internal Server Error: /Allifmaal/ERP/System/Admin/App/chart-of-account/save/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaaladminapp\views.py", line 36, in save_coa_ajax
+    form = CommonCustomerAddForm(request.POST, allifmaalparameter=allifmaalparameter)
+TypeError: CommonBaseForm.__init__() got multiple values for argument 'allifmaalparameter'
+ERROR 2025-08-08 09:25:13,666 log 46704 27532 Internal Server Error: /Allifmaal/ERP/System/Admin/App/chart-of-account/save/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaaladminapp\views.py", line 36, in save_coa_ajax
+    form = CommonCustomerAddForm(request.POST, allifmaalparameter=allifmaalparameter)
+TypeError: CommonBaseForm.__init__() got multiple values for argument 'allifmaalparameter'
+ERROR 2025-08-08 09:25:41,228 log 46704 27532 Internal Server Error: /Allifmaal/ERP/System/Admin/App/chart-of-account/save/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaaladminapp\views.py", line 36, in save_coa_ajax
+    form = CommonCustomerAddForm(request.POST, allifmaalparameter=allifmaalparameter)
+TypeError: CommonBaseForm.__init__() got multiple values for argument 'allifmaalparameter'
+INFO 2025-08-08 09:28:16,308 autoreload 46704 19428 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:28:18,871 autoreload 42856 10628 Watching for file changes with StatReloader
+ERROR 2025-08-08 09:28:51,052 log 42856 27408 Internal Server Error: /Allifmaal/ERP/System/Admin/App/chart-of-account/save/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaaladminapp\views.py", line 38, in save_coa_ajax
+    form =  CommonCustomerAddForm(request.POST, allifmaalparameter=allifmaalparameter)
+TypeError: CommonBaseForm.__init__() got multiple values for argument 'allifmaalparameter'
+INFO 2025-08-08 09:32:32,736 autoreload 42856 10628 C:\am\allifapp\allifapperp\allifmaaladminapp\urls.py changed, reloading.
+INFO 2025-08-08 09:32:35,625 autoreload 15356 46172 Watching for file changes with StatReloader
+INFO 2025-08-08 09:33:09,179 autoreload 15356 46172 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:33:11,246 autoreload 21568 23980 Watching for file changes with StatReloader
+INFO 2025-08-08 09:34:13,182 autoreload 21568 23980 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:34:15,096 autoreload 952 41868 Watching for file changes with StatReloader
+INFO 2025-08-08 09:34:19,831 autoreload 952 41868 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:34:22,221 autoreload 16084 35612 Watching for file changes with StatReloader
+INFO 2025-08-08 09:36:19,002 autoreload 16084 35612 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-08 09:36:21,945 autoreload 46564 27336 Watching for file changes with StatReloader
+ERROR 2025-08-08 09:36:41,916 log 46564 28440 Internal Server Error: /Allifmaal/ERP/System/Admin/App/sector/add/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'allifmaaladmin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaaladminapp\views.py", line 25, in add_sector_page
+    return render(request, 'test.html', {'form': form})
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'allifmaaladmin' is not a registered namespace
+WARNING 2025-08-08 09:37:03,151 log 46564 28440 Bad Request: /Allifmaal/ERP/System/Admin/App/sector/save-ajax/
+WARNING 2025-08-08 09:37:09,552 log 46564 28440 Bad Request: /Allifmaal/ERP/System/Admin/App/sector/save-ajax/
+WARNING 2025-08-08 09:37:20,351 log 46564 28440 Bad Request: /Allifmaal/ERP/System/Admin/App/sector/save-ajax/
+WARNING 2025-08-08 09:37:26,494 log 46564 28440 Bad Request: /Allifmaal/ERP/System/Admin/App/sector/save-ajax/
+WARNING 2025-08-08 10:10:18,798 utils 46564 10676 Object of type TriagesModel with PK 5 not found.
+WARNING 2025-08-08 10:10:41,006 utils 46564 10676 Object of type TriagesModel with PK 5 not found.
+INFO 2025-08-08 10:14:33,028 autoreload 46564 27336 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 10:14:34,245 autoreload 27148 35516 Watching for file changes with StatReloader
+INFO 2025-08-08 10:14:39,104 autoreload 27148 35516 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 10:14:40,288 autoreload 35528 16180 Watching for file changes with StatReloader
+INFO 2025-08-08 10:17:16,537 autoreload 35528 16180 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 10:17:17,729 autoreload 9760 18968 Watching for file changes with StatReloader
+INFO 2025-08-08 10:17:31,628 autoreload 9760 18968 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 10:17:32,781 autoreload 37088 46612 Watching for file changes with StatReloader
+INFO 2025-08-08 10:18:15,677 autoreload 37088 46612 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 10:18:16,815 autoreload 40060 29476 Watching for file changes with StatReloader
+INFO 2025-08-08 10:22:08,283 autoreload 40060 29476 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 10:22:09,579 autoreload 30928 8028 Watching for file changes with StatReloader
+INFO 2025-08-08 10:23:15,629 autoreload 30928 8028 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 10:23:17,044 autoreload 35140 38896 Watching for file changes with StatReloader
+INFO 2025-08-08 10:23:38,570 autoreload 35140 38896 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 10:23:40,091 autoreload 14156 44756 Watching for file changes with StatReloader
+INFO 2025-08-08 10:26:54,796 autoreload 14156 44756 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 10:26:56,100 autoreload 41888 25252 Watching for file changes with StatReloader
+INFO 2025-08-08 10:29:24,582 autoreload 41888 25252 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 10:29:25,906 autoreload 29216 31272 Watching for file changes with StatReloader
+INFO 2025-08-08 10:34:05,738 autoreload 29216 31272 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 10:34:07,260 autoreload 32844 35096 Watching for file changes with StatReloader
+INFO 2025-08-08 10:34:36,190 autoreload 32844 35096 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 10:34:37,311 autoreload 45376 27852 Watching for file changes with StatReloader
+INFO 2025-08-08 10:36:27,318 autoreload 45376 27852 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 10:36:28,441 autoreload 46572 12864 Watching for file changes with StatReloader
+INFO 2025-08-08 10:40:01,552 autoreload 46572 12864 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 10:40:02,692 autoreload 46504 16688 Watching for file changes with StatReloader
+INFO 2025-08-08 10:42:39,802 autoreload 46504 16688 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 10:42:41,004 autoreload 46668 23260 Watching for file changes with StatReloader
+INFO 2025-08-08 10:48:12,515 autoreload 46668 23260 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 10:48:13,554 autoreload 42580 9272 Watching for file changes with StatReloader
+INFO 2025-08-08 10:53:00,821 autoreload 42580 9272 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 10:53:01,699 autoreload 47632 11464 Watching for file changes with StatReloader
+INFO 2025-08-08 10:57:55,202 autoreload 47632 11464 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 10:57:57,055 autoreload 44132 40060 Watching for file changes with StatReloader
+INFO 2025-08-08 11:02:51,152 autoreload 44132 40060 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 11:02:52,057 autoreload 11880 45328 Watching for file changes with StatReloader
+INFO 2025-08-08 11:11:14,597 autoreload 11880 45328 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-08 11:11:15,677 autoreload 34096 45468 Watching for file changes with StatReloader
+WARNING 2025-08-08 11:33:15,342 allif_navigation_tags 34096 36536 General navigation link with name 'Assessments' not found in allif_single_access_general_links.
+INFO 2025-08-08 11:33:44,627 autoreload 34096 45468 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 11:33:46,450 autoreload 37004 43088 Watching for file changes with StatReloader
+INFO 2025-08-08 11:33:57,904 autoreload 37004 43088 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 11:33:58,906 autoreload 12512 23888 Watching for file changes with StatReloader
+INFO 2025-08-08 11:39:19,152 autoreload 12512 23888 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-08 11:39:20,145 autoreload 47264 30544 Watching for file changes with StatReloader
+INFO 2025-08-08 11:44:23,050 autoreload 31444 38772 Watching for file changes with StatReloader
+INFO 2025-08-08 11:46:25,916 autoreload 31444 38772 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 11:46:27,010 autoreload 27068 46808 Watching for file changes with StatReloader
+INFO 2025-08-08 11:46:53,922 autoreload 26936 44604 Watching for file changes with StatReloader
+INFO 2025-08-08 11:47:22,339 autoreload 41620 43844 Watching for file changes with StatReloader
+INFO 2025-08-08 11:50:14,646 autoreload 41620 43844 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 11:50:15,849 autoreload 18156 47096 Watching for file changes with StatReloader
+INFO 2025-08-08 11:53:58,203 autoreload 18156 47096 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 11:53:59,430 autoreload 47300 29872 Watching for file changes with StatReloader
+INFO 2025-08-08 11:56:28,662 autoreload 47300 29872 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 11:56:29,862 autoreload 20748 37524 Watching for file changes with StatReloader
+INFO 2025-08-08 12:01:36,244 autoreload 20748 37524 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 12:01:37,444 autoreload 44292 35528 Watching for file changes with StatReloader
+WARNING 2025-08-08 12:03:51,583 allif_navigation_tags 44292 37396 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-08 12:04:55,887 allif_navigation_tags 44292 37396 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-08 12:05:36,508 allif_navigation_tags 44292 37396 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-08 12:19:17,086 autoreload 44292 35528 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 12:19:18,353 autoreload 8436 8816 Watching for file changes with StatReloader
+INFO 2025-08-08 12:19:22,407 autoreload 8436 8816 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 12:19:23,524 autoreload 36872 43688 Watching for file changes with StatReloader
+INFO 2025-08-08 12:19:39,221 autoreload 36872 43688 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 12:19:40,332 autoreload 34160 9500 Watching for file changes with StatReloader
+INFO 2025-08-08 12:19:57,903 autoreload 34160 9500 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 12:19:59,173 autoreload 39852 25984 Watching for file changes with StatReloader
+INFO 2025-08-08 12:20:53,852 autoreload 44188 45784 Watching for file changes with StatReloader
+INFO 2025-08-08 12:22:46,922 autoreload 44188 45784 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 12:22:48,386 autoreload 28736 47828 Watching for file changes with StatReloader
+INFO 2025-08-08 12:23:10,516 autoreload 23964 38080 Watching for file changes with StatReloader
+INFO 2025-08-08 12:25:48,475 autoreload 23964 38080 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 12:25:49,663 autoreload 34424 46248 Watching for file changes with StatReloader
+INFO 2025-08-08 12:26:27,167 autoreload 34424 46248 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 12:26:28,409 autoreload 44568 23044 Watching for file changes with StatReloader
+INFO 2025-08-08 12:28:01,558 autoreload 44568 23044 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 12:28:02,949 autoreload 45004 43828 Watching for file changes with StatReloader
+INFO 2025-08-08 13:50:59,901 autoreload 45004 43828 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 13:51:01,353 autoreload 23428 27856 Watching for file changes with StatReloader
+INFO 2025-08-08 13:51:07,256 autoreload 23428 27856 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 13:51:08,288 autoreload 27020 22364 Watching for file changes with StatReloader
+INFO 2025-08-08 13:52:54,977 autoreload 23260 13760 Watching for file changes with StatReloader
+WARNING 2025-08-08 13:54:07,616 allif_navigation_tags 23260 47828 General navigation link with name 'TestResults' not found in allif_single_access_general_links.
+WARNING 2025-08-08 13:54:11,866 allif_navigation_tags 23260 47828 General navigation link with name 'TestResults' not found in allif_single_access_general_links.
+INFO 2025-08-08 13:59:51,657 autoreload 23260 13760 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 13:59:53,040 autoreload 5904 42072 Watching for file changes with StatReloader
+INFO 2025-08-08 14:16:54,182 autoreload 5904 42072 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 14:16:55,375 autoreload 37756 26848 Watching for file changes with StatReloader
+INFO 2025-08-08 14:17:47,116 autoreload 37756 26848 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 14:17:48,572 autoreload 38772 26984 Watching for file changes with StatReloader
+INFO 2025-08-08 14:20:06,152 autoreload 38772 26984 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 14:20:07,577 autoreload 10928 24500 Watching for file changes with StatReloader
+INFO 2025-08-08 14:20:18,035 autoreload 952 8964 Watching for file changes with StatReloader
+INFO 2025-08-08 14:21:12,740 autoreload 952 8964 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 14:21:13,992 autoreload 45984 38060 Watching for file changes with StatReloader
+INFO 2025-08-08 14:21:22,713 autoreload 26204 35012 Watching for file changes with StatReloader
+INFO 2025-08-08 14:22:14,057 autoreload 16188 30264 Watching for file changes with StatReloader
+INFO 2025-08-08 14:24:25,900 autoreload 16188 30264 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 14:24:27,313 autoreload 13816 37992 Watching for file changes with StatReloader
+INFO 2025-08-08 14:25:58,502 autoreload 46360 5252 Watching for file changes with StatReloader
+INFO 2025-08-08 14:26:34,811 autoreload 46360 5252 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 14:26:36,177 autoreload 30764 12156 Watching for file changes with StatReloader
+INFO 2025-08-08 14:28:02,782 autoreload 30764 12156 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 14:28:04,068 autoreload 24156 42668 Watching for file changes with StatReloader
+INFO 2025-08-08 14:28:16,770 autoreload 24156 42668 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 14:28:17,899 autoreload 26332 5504 Watching for file changes with StatReloader
+INFO 2025-08-08 14:31:04,470 autoreload 26332 5504 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 14:31:05,770 autoreload 26716 24440 Watching for file changes with StatReloader
+INFO 2025-08-08 14:32:37,253 autoreload 26716 24440 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 14:32:38,388 autoreload 17944 1812 Watching for file changes with StatReloader
+ERROR 2025-08-08 15:03:35,512 utils 17944 39088 Failed to reverse URL 'allifmaalcommonapp:addLabTestResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '3'}: Reverse for 'addLabTestResult' not found. 'addLabTestResult' is not a valid view function or pattern name.
+WARNING 2025-08-08 15:05:07,897 allif_navigation_tags 17944 39088 General navigation link with name 'TestResults' not found in allif_single_access_general_links.
+WARNING 2025-08-08 15:05:12,525 allif_navigation_tags 17944 39088 General navigation link with name 'TestResults' not found in allif_single_access_general_links.
+WARNING 2025-08-08 15:05:20,257 allif_navigation_tags 17944 39088 General navigation link with name 'TestResults' not found in allif_single_access_general_links.
+WARNING 2025-08-08 15:05:22,880 allif_navigation_tags 17944 39088 General navigation link with name 'TestResults' not found in allif_single_access_general_links.
+INFO 2025-08-08 15:10:36,769 autoreload 17944 1812 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 15:10:38,087 autoreload 31416 23984 Watching for file changes with StatReloader
+INFO 2025-08-08 15:14:03,158 autoreload 31416 23984 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 15:14:04,622 autoreload 36244 33308 Watching for file changes with StatReloader
+INFO 2025-08-08 15:21:26,995 autoreload 36244 33308 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-08 15:21:28,405 autoreload 47660 27800 Watching for file changes with StatReloader
+INFO 2025-08-08 15:27:20,564 autoreload 47660 27800 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 15:27:21,747 autoreload 47000 43836 Watching for file changes with StatReloader
+INFO 2025-08-08 15:34:23,094 autoreload 47000 43836 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 15:34:24,555 autoreload 17272 42764 Watching for file changes with StatReloader
+INFO 2025-08-08 15:51:57,376 autoreload 17272 42764 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 15:51:58,699 autoreload 40628 11972 Watching for file changes with StatReloader
+INFO 2025-08-08 15:52:33,811 autoreload 40628 11972 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 15:52:35,204 autoreload 12512 45004 Watching for file changes with StatReloader
+ERROR 2025-08-08 15:54:10,801 utils 12512 36536 Failed to reverse URL 'allifmaalcommonapp:addLabTestResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '11'}: Reverse for 'addLabTestResult' not found. 'addLabTestResult' is not a valid view function or pattern name.
+WARNING 2025-08-08 15:58:32,360 allif_navigation_tags 12512 36536 General navigation link with name 'Prescriptions' not found in allif_single_access_general_links.
+WARNING 2025-08-08 15:58:47,885 allif_navigation_tags 12512 36536 General navigation link with name 'Medications' not found in allif_single_access_general_links.
+INFO 2025-08-08 15:59:17,918 autoreload 12512 45004 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 15:59:19,138 autoreload 10900 39668 Watching for file changes with StatReloader
+INFO 2025-08-08 16:19:43,115 autoreload 10900 39668 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 16:19:44,574 autoreload 404 43920 Watching for file changes with StatReloader
+INFO 2025-08-08 16:20:52,417 autoreload 404 43920 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-08 16:20:53,670 autoreload 45700 24144 Watching for file changes with StatReloader
+INFO 2025-08-08 16:24:50,683 autoreload 45700 24144 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 16:24:51,913 autoreload 23260 31700 Watching for file changes with StatReloader
+INFO 2025-08-08 16:28:20,164 autoreload 23260 31700 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 16:28:21,457 autoreload 45524 32836 Watching for file changes with StatReloader
+INFO 2025-08-08 16:29:07,264 autoreload 45524 32836 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-08 16:29:08,648 autoreload 12856 20988 Watching for file changes with StatReloader
+INFO 2025-08-08 16:30:04,069 autoreload 12856 20988 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 16:30:05,239 autoreload 10920 24224 Watching for file changes with StatReloader
+INFO 2025-08-08 16:30:31,514 autoreload 10920 24224 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 16:30:32,891 autoreload 37156 35320 Watching for file changes with StatReloader
+INFO 2025-08-08 16:33:02,442 autoreload 37156 35320 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 16:33:03,783 autoreload 10244 43356 Watching for file changes with StatReloader
+INFO 2025-08-08 16:34:24,658 autoreload 10244 43356 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 16:34:25,880 autoreload 13992 46800 Watching for file changes with StatReloader
+INFO 2025-08-08 16:36:29,641 autoreload 41228 45052 Watching for file changes with StatReloader
+INFO 2025-08-08 16:36:57,456 autoreload 34352 42432 Watching for file changes with StatReloader
+INFO 2025-08-08 16:37:37,327 autoreload 34352 42432 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 16:37:38,731 autoreload 36332 13624 Watching for file changes with StatReloader
+INFO 2025-08-08 16:39:01,765 autoreload 36332 13624 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 16:39:03,009 autoreload 37180 40644 Watching for file changes with StatReloader
+INFO 2025-08-08 16:40:36,495 autoreload 37180 40644 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 16:40:37,665 autoreload 41188 15032 Watching for file changes with StatReloader
+INFO 2025-08-08 16:45:30,520 autoreload 41188 15032 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 16:45:32,027 autoreload 20820 3828 Watching for file changes with StatReloader
+INFO 2025-08-08 16:50:02,542 autoreload 20820 3828 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-08 16:50:03,899 autoreload 47568 16132 Watching for file changes with StatReloader
+INFO 2025-08-08 16:51:24,204 autoreload 47568 16132 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 16:51:25,691 autoreload 34176 45124 Watching for file changes with StatReloader
+INFO 2025-08-08 16:52:04,155 autoreload 34176 45124 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 16:52:05,591 autoreload 2232 18536 Watching for file changes with StatReloader
+INFO 2025-08-08 16:57:22,608 autoreload 2232 18536 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 16:57:23,978 autoreload 22096 13628 Watching for file changes with StatReloader
+INFO 2025-08-08 17:04:22,449 autoreload 22096 13628 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 17:04:23,714 autoreload 23004 18464 Watching for file changes with StatReloader
+INFO 2025-08-08 17:04:32,075 autoreload 23004 18464 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 17:04:33,338 autoreload 46800 48108 Watching for file changes with StatReloader
+INFO 2025-08-08 17:04:50,188 autoreload 6108 23632 Watching for file changes with StatReloader
+INFO 2025-08-08 17:05:21,125 autoreload 6108 23632 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 17:05:22,321 autoreload 27600 32176 Watching for file changes with StatReloader
+INFO 2025-08-08 17:05:48,145 autoreload 27600 32176 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 17:05:49,227 autoreload 2040 28292 Watching for file changes with StatReloader
+INFO 2025-08-08 17:06:47,921 autoreload 2040 28292 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-08 17:06:49,184 autoreload 5072 25084 Watching for file changes with StatReloader
+INFO 2025-08-08 17:12:12,245 autoreload 5072 25084 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 17:12:13,520 autoreload 12048 41972 Watching for file changes with StatReloader
+INFO 2025-08-08 17:12:17,477 autoreload 12048 41972 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 17:12:18,429 autoreload 15572 22232 Watching for file changes with StatReloader
+INFO 2025-08-08 17:12:27,781 autoreload 15572 22232 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 17:12:29,273 autoreload 33008 41252 Watching for file changes with StatReloader
+INFO 2025-08-08 17:12:49,584 autoreload 33008 41252 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-08 17:12:51,011 autoreload 24388 34160 Watching for file changes with StatReloader
+INFO 2025-08-08 17:14:28,001 autoreload 24388 34160 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:14:29,410 autoreload 36404 1752 Watching for file changes with StatReloader
+INFO 2025-08-08 17:14:55,796 autoreload 36404 1752 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:14:56,976 autoreload 10068 17232 Watching for file changes with StatReloader
+INFO 2025-08-08 17:16:24,153 autoreload 10068 17232 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:16:25,590 autoreload 37148 35740 Watching for file changes with StatReloader
+INFO 2025-08-08 17:19:56,402 autoreload 37148 35740 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-08 17:19:57,663 autoreload 37040 45896 Watching for file changes with StatReloader
+INFO 2025-08-08 17:20:57,660 autoreload 37040 45896 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:20:58,787 autoreload 14320 47728 Watching for file changes with StatReloader
+INFO 2025-08-08 17:22:14,783 autoreload 14320 47728 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 17:22:15,944 autoreload 37148 36308 Watching for file changes with StatReloader
+INFO 2025-08-08 17:22:52,429 autoreload 15032 4416 Watching for file changes with StatReloader
+INFO 2025-08-08 17:23:49,323 autoreload 15032 4416 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:23:50,798 autoreload 41064 7440 Watching for file changes with StatReloader
+INFO 2025-08-08 17:24:28,888 autoreload 41064 7440 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:24:30,184 autoreload 31640 15800 Watching for file changes with StatReloader
+INFO 2025-08-08 17:25:07,057 autoreload 31640 15800 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:25:08,518 autoreload 48068 44060 Watching for file changes with StatReloader
+INFO 2025-08-08 17:25:43,662 autoreload 48068 44060 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:25:44,880 autoreload 21352 2040 Watching for file changes with StatReloader
+INFO 2025-08-08 17:26:04,450 autoreload 12868 16500 Watching for file changes with StatReloader
+INFO 2025-08-08 17:26:44,987 autoreload 12868 16500 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:26:46,410 autoreload 22160 28980 Watching for file changes with StatReloader
+INFO 2025-08-08 17:28:17,102 autoreload 22160 28980 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 17:28:18,503 autoreload 37236 23080 Watching for file changes with StatReloader
+INFO 2025-08-08 17:28:32,990 autoreload 33088 14536 Watching for file changes with StatReloader
+INFO 2025-08-08 17:31:40,781 autoreload 33088 14536 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:31:42,126 autoreload 37992 37844 Watching for file changes with StatReloader
+INFO 2025-08-08 17:32:02,611 autoreload 37992 37844 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 17:32:03,854 autoreload 7440 45212 Watching for file changes with StatReloader
+WARNING 2025-08-08 18:08:24,134 allif_navigation_tags 7440 8364 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-08 18:08:41,957 allif_navigation_tags 7440 8364 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-08 18:08:54,940 allif_navigation_tags 7440 8364 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-08 18:09:13,511 allif_navigation_tags 7440 8364 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-08 18:18:10,697 autoreload 7440 45212 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-08 18:18:12,167 autoreload 30008 13428 Watching for file changes with StatReloader
+INFO 2025-08-08 18:18:16,050 autoreload 30008 13428 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-08 18:18:17,138 autoreload 36192 44780 Watching for file changes with StatReloader
+WARNING 2025-08-08 18:57:50,254 allif_navigation_tags 36192 9360 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-08 18:58:01,290 allif_navigation_tags 36192 9360 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-08 19:00:28,749 allif_navigation_tags 36192 9360 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-08 19:17:44,089 allif_navigation_tags 36192 42528 General navigation link with name 'Assesments' not found in allif_single_access_general_links.
+WARNING 2025-08-08 19:17:57,383 allif_navigation_tags 36192 42528 General navigation link with name 'Assessments' not found in allif_single_access_general_links.
+INFO 2025-08-08 19:20:21,766 autoreload 36192 44780 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 19:20:23,126 autoreload 18108 46020 Watching for file changes with StatReloader
+INFO 2025-08-08 19:25:19,191 autoreload 18108 46020 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 19:25:20,566 autoreload 42320 28872 Watching for file changes with StatReloader
+INFO 2025-08-08 19:25:34,184 autoreload 36524 13600 Watching for file changes with StatReloader
+INFO 2025-08-08 19:29:52,930 autoreload 36524 13600 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 19:29:54,303 autoreload 7316 48412 Watching for file changes with StatReloader
+INFO 2025-08-08 19:30:02,781 autoreload 7316 48412 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 19:30:04,262 autoreload 48352 38540 Watching for file changes with StatReloader
+INFO 2025-08-08 20:06:44,468 autoreload 48352 38540 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 20:06:45,920 autoreload 43040 16364 Watching for file changes with StatReloader
+INFO 2025-08-08 20:23:25,270 autoreload 43040 16364 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 20:23:26,359 autoreload 48880 35420 Watching for file changes with StatReloader
+INFO 2025-08-08 21:00:41,183 autoreload 25480 49124 Watching for file changes with StatReloader
+INFO 2025-08-08 21:01:58,530 autoreload 25480 49124 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 21:01:59,909 autoreload 10600 15404 Watching for file changes with StatReloader
+INFO 2025-08-08 21:02:09,882 autoreload 10600 15404 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 21:02:11,429 autoreload 34216 47544 Watching for file changes with StatReloader
+ERROR 2025-08-08 21:05:29,843 utils 34216 41112 Failed to reverse URL 'allifmaalcommonapp:addLabTestResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '6'}: Reverse for 'addLabTestResult' not found. 'addLabTestResult' is not a valid view function or pattern name.
+INFO 2025-08-08 21:13:28,731 autoreload 34216 47544 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 21:13:30,139 autoreload 49288 16400 Watching for file changes with StatReloader
+INFO 2025-08-08 21:16:10,910 autoreload 49288 16400 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 21:16:12,075 autoreload 23380 30256 Watching for file changes with StatReloader
+INFO 2025-08-08 21:17:48,788 autoreload 23380 30256 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 21:17:50,312 autoreload 22096 5072 Watching for file changes with StatReloader
+INFO 2025-08-08 21:19:41,683 autoreload 22096 5072 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 21:19:43,109 autoreload 49528 48540 Watching for file changes with StatReloader
+ERROR 2025-08-08 21:22:25,700 utils 49528 25316 Failed to reverse URL 'allifmaalcommonapp:addLabTestResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '13'}: Reverse for 'addLabTestResult' not found. 'addLabTestResult' is not a valid view function or pattern name.
+INFO 2025-08-08 21:23:49,705 autoreload 49528 48540 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 21:23:50,941 autoreload 43772 28928 Watching for file changes with StatReloader
+INFO 2025-08-08 21:24:18,438 autoreload 43772 28928 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 21:24:19,704 autoreload 49920 42344 Watching for file changes with StatReloader
+INFO 2025-08-08 21:26:14,024 autoreload 49920 42344 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 21:26:15,167 autoreload 22156 29704 Watching for file changes with StatReloader
+INFO 2025-08-08 21:26:17,867 autoreload 22156 29704 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 21:26:18,886 autoreload 48788 44556 Watching for file changes with StatReloader
+INFO 2025-08-08 21:26:54,843 autoreload 39844 28872 Watching for file changes with StatReloader
+ERROR 2025-08-08 21:40:48,151 utils 39844 38080 Failed to reverse URL 'allifmaalcommonapp:addLabTestResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '13'}: Reverse for 'addLabTestResult' not found. 'addLabTestResult' is not a valid view function or pattern name.
+ERROR 2025-08-08 21:43:43,402 utils 39844 38080 Critical error in allif_common_detail_view for MedicationsModel (PK: None): Field 'id' expected a number but got 'None'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'None'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 2466, in allif_common_detail_view
+    allifquery = model_class.all_objects.filter(pk=pk).first()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'None'.
+ERROR 2025-08-08 21:44:31,477 utils 39844 38080 Critical error in allif_common_detail_view for MedicationsModel (PK: None): Field 'id' expected a number but got 'None'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'None'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 2466, in allif_common_detail_view
+    allifquery = model_class.all_objects.filter(pk=pk).first()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'None'.
+WARNING 2025-08-08 21:45:08,989 utils 39844 38080 Object of type MedicationsModel with PK 5 not found.
+WARNING 2025-08-08 21:46:10,216 utils 39844 38080 Object of type MedicationsModel with PK 5 not found.
+INFO 2025-08-08 21:48:01,091 autoreload 39844 28872 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 21:48:02,486 autoreload 22452 44604 Watching for file changes with StatReloader
+WARNING 2025-08-08 21:48:05,969 utils 22452 48448 Object of type MedicationsModel with PK 5 not found.
+INFO 2025-08-08 21:48:14,942 autoreload 22452 44604 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-08 21:48:16,110 autoreload 17756 43772 Watching for file changes with StatReloader
+INFO 2025-08-08 21:49:54,968 autoreload 17756 43772 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 21:49:56,085 autoreload 26256 46808 Watching for file changes with StatReloader
+WARNING 2025-08-08 21:50:00,867 utils 26256 29272 Object of type MedicationsModel with PK 5 not found.
+WARNING 2025-08-08 21:50:05,612 utils 26256 29272 Object of type MedicationsModel with PK 5 not found.
+WARNING 2025-08-08 21:51:11,719 utils 26256 29272 Object of type MedicationsModel with PK 5 not found.
+WARNING 2025-08-08 21:51:20,861 utils 26256 29272 Object of type MedicationsModel with PK 5 not found.
+INFO 2025-08-08 21:59:29,879 autoreload 26256 46808 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 21:59:31,286 autoreload 46840 44128 Watching for file changes with StatReloader
+INFO 2025-08-08 22:02:03,453 autoreload 46840 44128 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:02:04,763 autoreload 50068 21752 Watching for file changes with StatReloader
+INFO 2025-08-08 22:02:58,302 autoreload 50068 21752 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:02:59,718 autoreload 22176 3040 Watching for file changes with StatReloader
+INFO 2025-08-08 22:03:08,169 autoreload 22176 3040 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:03:09,692 autoreload 16952 36216 Watching for file changes with StatReloader
+ERROR 2025-08-08 22:03:43,111 utils 16952 48816 Failed to reverse URL 'allifmaalcommonapp:addLabTestResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '13'}: Reverse for 'addLabTestResult' not found. 'addLabTestResult' is not a valid view function or pattern name.
+INFO 2025-08-08 22:12:47,413 autoreload 16952 36216 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:12:48,692 autoreload 43256 36404 Watching for file changes with StatReloader
+INFO 2025-08-08 22:20:52,718 autoreload 43256 36404 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:20:53,950 autoreload 42192 47408 Watching for file changes with StatReloader
+INFO 2025-08-08 22:21:53,170 autoreload 42192 47408 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:21:54,706 autoreload 43432 10788 Watching for file changes with StatReloader
+INFO 2025-08-08 22:22:05,720 autoreload 43432 10788 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:22:07,035 autoreload 8660 16360 Watching for file changes with StatReloader
+INFO 2025-08-08 22:26:16,656 autoreload 8660 16360 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 22:26:17,935 autoreload 31884 36016 Watching for file changes with StatReloader
+ERROR 2025-08-08 22:27:00,094 utils 31884 39456 Critical error in allif_common_detail_view for MedicationsModel (PK: Anaale Geedi): Field 'id' expected a number but got 'Anaale Geedi'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'Anaale Geedi'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 2466, in allif_common_detail_view
+    allifquery = model_class.all_objects.filter(pk=pk).first()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'Anaale Geedi'.
+INFO 2025-08-08 22:37:56,789 autoreload 31884 36016 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:37:58,078 autoreload 42608 2808 Watching for file changes with StatReloader
+INFO 2025-08-08 22:45:24,437 autoreload 42608 2808 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:45:25,692 autoreload 36996 43164 Watching for file changes with StatReloader
+INFO 2025-08-08 22:49:40,787 autoreload 36996 43164 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 22:49:42,272 autoreload 8436 26464 Watching for file changes with StatReloader
+INFO 2025-08-08 22:49:51,499 autoreload 8436 26464 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 22:49:52,520 autoreload 39336 26904 Watching for file changes with StatReloader
+INFO 2025-08-08 22:51:18,786 autoreload 39336 26904 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 22:51:20,004 autoreload 49180 25984 Watching for file changes with StatReloader
+INFO 2025-08-08 22:51:38,551 autoreload 48552 49216 Watching for file changes with StatReloader
+INFO 2025-08-08 22:52:16,933 autoreload 48552 49216 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 22:52:18,172 autoreload 18464 25984 Watching for file changes with StatReloader
+ERROR 2025-08-08 22:53:38,244 utils 18464 48516 Failed to reverse URL 'allifmaalcommonapp:addLabTestResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '13'}: Reverse for 'addLabTestResult' not found. 'addLabTestResult' is not a valid view function or pattern name.
+INFO 2025-08-08 22:58:59,068 autoreload 18464 25984 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 22:59:00,712 autoreload 39724 24196 Watching for file changes with StatReloader
+INFO 2025-08-08 23:04:28,702 autoreload 39724 24196 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 23:04:29,952 autoreload 10372 48612 Watching for file changes with StatReloader
+INFO 2025-08-08 23:06:56,523 autoreload 10372 48612 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 23:06:57,965 autoreload 47568 42916 Watching for file changes with StatReloader
+INFO 2025-08-08 23:19:32,334 autoreload 47568 42916 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 23:19:33,760 autoreload 40828 46932 Watching for file changes with StatReloader
+INFO 2025-08-08 23:23:03,566 autoreload 40828 46932 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 23:23:04,796 autoreload 50080 43172 Watching for file changes with StatReloader
+INFO 2025-08-08 23:23:22,416 autoreload 50080 43172 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 23:23:23,791 autoreload 41396 47568 Watching for file changes with StatReloader
+INFO 2025-08-08 23:23:43,101 autoreload 41396 47568 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 23:23:44,382 autoreload 38832 35788 Watching for file changes with StatReloader
+WARNING 2025-08-08 23:35:33,896 utils 38832 49116 Object of type DischargesModel with PK 6 not found.
+WARNING 2025-08-08 23:36:19,956 utils 38832 49116 Object of type DischargesModel with PK 6 not found.
+WARNING 2025-08-08 23:37:27,345 utils 38832 49116 Object of type DischargesModel with PK 6 not found.
+WARNING 2025-08-08 23:38:46,869 utils 38832 28588 Object of type DischargesModel with PK 6 not found.
+WARNING 2025-08-08 23:39:28,359 utils 38832 28588 Object of type DischargesModel with PK 6 not found.
+INFO 2025-08-08 23:47:30,698 autoreload 38832 35788 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 23:47:31,975 autoreload 49096 19844 Watching for file changes with StatReloader
+INFO 2025-08-08 23:48:11,027 autoreload 49096 19844 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-08 23:48:12,153 autoreload 21180 48732 Watching for file changes with StatReloader
+INFO 2025-08-08 23:51:04,040 autoreload 21180 48732 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 23:51:05,470 autoreload 17548 27076 Watching for file changes with StatReloader
+INFO 2025-08-08 23:51:53,342 autoreload 17548 27076 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-08 23:51:54,289 autoreload 38024 14976 Watching for file changes with StatReloader
+INFO 2025-08-08 23:53:36,142 autoreload 38920 40348 Watching for file changes with StatReloader
+INFO 2025-08-08 23:55:30,448 autoreload 38920 40348 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-08 23:55:31,583 autoreload 10816 28648 Watching for file changes with StatReloader
+INFO 2025-08-08 23:55:40,433 autoreload 10816 28648 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 23:55:41,822 autoreload 49276 16360 Watching for file changes with StatReloader
+INFO 2025-08-08 23:56:02,345 autoreload 49548 41028 Watching for file changes with StatReloader
+INFO 2025-08-08 23:56:11,913 autoreload 49548 41028 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-08 23:56:13,157 autoreload 16044 32112 Watching for file changes with StatReloader
+INFO 2025-08-08 23:56:51,325 autoreload 16044 32112 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-08 23:56:52,555 autoreload 49908 9252 Watching for file changes with StatReloader
+INFO 2025-08-09 00:00:58,242 autoreload 49908 9252 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-09 00:00:59,501 autoreload 22284 48452 Watching for file changes with StatReloader
+INFO 2025-08-09 00:01:25,980 autoreload 22284 48452 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-09 00:01:27,264 autoreload 41164 49032 Watching for file changes with StatReloader
+INFO 2025-08-09 00:08:18,757 autoreload 41164 49032 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-09 00:08:20,393 autoreload 31496 48016 Watching for file changes with StatReloader
+ERROR 2025-08-09 00:08:36,789 utils 31496 12660 Critical error in allif_common_detail_view for MedicationsModel (PK: Anaale Geedi): Field 'id' expected a number but got 'Anaale Geedi'.
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 'Anaale Geedi'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 2466, in allif_common_detail_view
+    allifquery = model_class.all_objects.filter(pk=pk).first()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<6 lines>...
+        summarize=summarize,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+        "Field '%s' expected a number but got %r." % (self.name, value),
+    ) from e
+ValueError: Field 'id' expected a number but got 'Anaale Geedi'.
+INFO 2025-08-09 00:13:06,986 autoreload 31496 48016 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-09 00:13:08,741 autoreload 44984 18268 Watching for file changes with StatReloader

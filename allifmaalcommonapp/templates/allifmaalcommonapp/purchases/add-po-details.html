@@ -31,33 +31,11 @@
   </div>
 
 
-  <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
-  <a href="{{ allif_contextual_action_links.commonTransactionDetails.url }}">Transaction Details</a>
-  <a href="{{ allif_contextual_action_links.potopdf.url }}">Download</a>
+  <a href="{% allif_get_single_nav_link_url 'PurchaseOrders' user_var glblslug %}">Purchase Orders</a>
+  
   <a href="{{ allif_contextual_action_links.pomiscosts.url }}">Misc. Costs</a>
  
   
- 
-{% if 'commonAddTransactionDetails' in allif_contextual_action_links %}
-    <a href="{{ allif_contextual_action_links.commonAddTransactionDetails.url }}">Refresh</a>
- 
-{% endif %}
-
-{% if 'AddTriageData' in allif_contextual_action_links %}
-
-<a href="{% url 'allifmaalshaafiapp:triageData' user_var glblslug %}">Triage Records</a>
-  <a class="action-button" href="{{ allif_contextual_action_links.AddTriageData.url }}">Add Triage</a>
-  <a class="action-button" href="{{ allif_contextual_action_links.addDoctorAssessment.url }}"> Add Doctor Assessment</a>
-{% else %}
-{% endif %}
-
-{% if 'addExamDetails' in allif_contextual_action_links %} {# Example for a new action name #}
-
-<a class="action-button" href="{{ allif_contextual_action_links.addExamDetails.url }}">New Examination</a>
- 
-{% else %}
-{% endif %}
-
 {% endblock %}
 
    {% block core-tab-col-one %}

@@ -204,8 +204,40 @@ allif_sector_contextual_action_require_pk_links= {
    {'name': 'ClearChartOfAccount', 'url_name': 'allifmaalcommonapp:commonClearAcc', 'requires_pk': True},
    {'name': 'DeleteChartOfAccountConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCoA', 'requires_pk': True},
    
+   {'name': 'DeleteAssessmentConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteDoctorAssessment', 'requires_pk': True},
+   {'name': 'DeleteAssessment', 'url_name': 'allifmaalshaafiapp:deleteDoctorAssessment', 'requires_pk': True},
+   {'name': 'DeleteLabTestConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteLabTestRequest', 'requires_pk': True},
+   {'name': 'DeleteLabTest', 'url_name': 'allifmaalshaafiapp:deleteLabTestRequest', 'requires_pk': True},
+   {'name': 'DeleteLabResultConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteLabTestResult', 'requires_pk': True},
+   {'name': 'DeleteLabResult', 'url_name': 'allifmaalshaafiapp:deleteLabTestResult', 'requires_pk': True},
+   {'name': 'DeletePrescriptionConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeletePrescription', 'requires_pk': True},
+   {'name': 'DeletePrescription', 'url_name': 'allifmaalshaafiapp:deletePrescription', 'requires_pk': True},
+   {'name': 'DeleteAdmissionConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteAdmission', 'requires_pk': True},
+   {'name': 'DeleteAddmission', 'url_name': 'allifmaalshaafiapp:deleteAdmission', 'requires_pk': True},
+   {'name': 'DeleteTreatmentConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteTreatment', 'requires_pk': True},
+   {'name': 'DeleteTreatment', 'url_name': 'allifmaalshaafiapp:deleteTreatment', 'requires_pk': True},
+   {'name': 'DeleteDischargeConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteDischarge', 'requires_pk': True},
+   {'name': 'DeleteDischarge', 'url_name': 'allifmaalshaafiapp:deleteDischarge', 'requires_pk': True},
+   {'name': 'DeleteReferralConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteReferral', 'requires_pk': True},
+   {'name': 'DeleteReferral', 'url_name': 'allifmaalshaafiapp:deleteReferral', 'requires_pk': True},
+  {'name': 'AddLabTest', 'url_name': 'allifmaalshaafiapp:addLabTestRequest', 'requires_pk': True},
+   {'name': 'AddPrescription', 'url_name': 'allifmaalshaafiapp:AddPrescription', 'requires_pk': True},
+   {'name': 'AddAdmission', 'url_name': 'allifmaalshaafiapp:addAdmission', 'requires_pk': True},
+   {'name': 'AddTreatment', 'url_name': 'allifmaalshaafiapp:addTreatment', 'requires_pk': True},
+   {'name': 'AddDischarge', 'url_name': 'allifmaalshaafiapp:addDischarge', 'requires_pk': True},
    
+   {'name': 'AddReferal', 'url_name': 'allifmaalshaafiapp:addReferral', 'requires_pk': True},
+   {'name': 'AddAssessment', 'url_name': 'allifmaalshaafiapp:addDoctorAssessment', 'requires_pk': True},
+  
    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
        
      
   

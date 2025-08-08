@@ -36,6 +36,18 @@ allifmaal_sector_specific_links= {
         {'name': 'Patients', 'url_name': 'allifmaalcommonapp:commonCustomers'}, 
         {'name': 'Triage', 'url_name': 'allifmaalshaafiapp:triageData'}, 
         {'name': 'Assessments', 'url_name': 'allifmaalshaafiapp:doctorAssessments'},
+        {'name': 'Lab Tests', 'url_name': 'allifmaalshaafiapp:labTestRequests'},
+        
+        {'name': 'Lab Results', 'url_name': 'allifmaalshaafiapp:labTestResults'},
+        {'name': 'Prescriptions', 'url_name': 'allifmaalshaafiapp:prescriptions'},
+        {'name': 'Medications', 'url_name': 'allifmaalshaafiapp:treatments'},
+        {'name': 'Admissions', 'url_name': 'allifmaalshaafiapp:admissions'},
+        {'name': 'Discharges', 'url_name': 'allifmaalshaafiapp:discharges'},
+        {'name': 'Referals', 'url_name': 'allifmaalshaafiapp:referrals'},
+        
+        
+        
+      
       
     ],
     'Education': [
@@ -182,9 +194,17 @@ allif_single_access_general_links = [
      {'name': 'AvailableStock', 'url_name': 'allifmaalcommonapp:commonAvailableStockpdf'},
      {'name': 'triagedata', 'url_name': 'allifmaalshaafiapp:triageData'},
      {'name': 'prescriptions', 'url_name': 'allifmaalshaafiapp:prescriptions'},
-     {'name': 'MedicalAssessments', 'url_name': 'allifmaalshaafiapp:doctorAssessments'},
-     
     
+     
+     {'name': 'LabTests', 'url_name': 'allifmaalshaafiapp:labTestRequests'},
+     {'name': 'LabResults', 'url_name': 'allifmaalshaafiapp:labTestResults'},
+     {'name': 'Treatments', 'url_name': 'allifmaalshaafiapp:treatments'},
+     
+     {'name': 'Admissions', 'url_name': 'allifmaalshaafiapp:admissions'},
+     {'name': 'Discharges', 'url_name': 'allifmaalshaafiapp:discharges'},
+     {'name': 'Referrals', 'url_name': 'allifmaalshaafiapp:referrals'},
+     {'name': 'MedicalAssessments', 'url_name': 'allifmaalshaafiapp:doctorAssessments'},
+   
     
     
     {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},

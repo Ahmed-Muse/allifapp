@@ -8,6 +8,34 @@ from allifmaalcommonapp.decorators import allifmaal_admin, unauthenticated_user,
 # Create your views here.
 
 from allifmaalcommonapp.forms import CommonAddSectorForm
+# your_app/views.py
+from django.shortcuts import render
+from django.http import JsonResponse
+
+# allifmaaladmin/views.py
+from django.shortcuts import render
+from django.http import JsonResponse
+from allifmaalcommonapp.forms import CommonCustomerAddForm
+
+def add_sector_page(request):
+    """
+    Renders the HTML page containing the CommonAddSectorForm.
+    """
+    form = CommonAddSectorForm()
+    return render(request, 'test.html', {'form': form})
+def save_sector_ajax(request):
+    if request.method == 'POST':
+        form = CommonAddSectorForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'message': 'Sector saved automatically!', 'status': 'success'})
+        else:
+            # Return form errors so we can display them on the page
+            return JsonResponse({'errors': form.errors, 'status': 'error'}, status=400)
+    
+    return JsonResponse({'message': 'Invalid request method.'}, status=405)
+
 def holdingFunction(request):
     chartaccs_values_list=CommonChartofAccountsModel.objects.all().values_list('description', flat=True)
     sales_employees = CommonEmployeesModel.objects.all().filter(department__name='Sales')

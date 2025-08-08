@@ -113,7 +113,7 @@ def deleteTriageData(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def doctorAssessments(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    title="Patient Assessments"
+    title="Assessments"
     formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,AssessmentsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
@@ -140,12 +140,6 @@ def editDoctorAssessment(request, pk, *allifargs, **allifkwargs):
     redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
 @allif_base_view_wrapper
-def doctorAssessmentDetails(request, pk, *allifargs, **allifkwargs):
-    return allif_common_detail_view(request,model_class=AssessmentsModel,pk=pk,
-        template_name='allifmaalshaafiapp/assessment/doctor_assessment_details.html', # Create this template
-        title_map={'default': 'Assessment Details'},)
-
-@allif_base_view_wrapper
 def doctorAssessmentSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='AssessmentsModel',search_fields_key='AssessmentsModel',
     template_path='allifmaalshaafiapp/assessments/doctor_assessments.html',search_input_name='allifsearchcommonfieldname',)
@@ -170,7 +164,7 @@ def deleteDoctorAssessment(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def labTestRequests(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
-    title="Test Requests"
+    title="Lab Test Requests"
     formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,LabTestRequestsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
@@ -192,7 +186,7 @@ def addLabTestRequest(request,pk,*allifargs,**allifkwargs):
  
 @allif_base_view_wrapper
 def editLabTestRequest(request, pk, *allifargs, **allifkwargs):
-    return allif_common_form_edit_and_save(request,pk,AddLabTestRequestForm,"Edit",
+    return allif_common_form_edit_and_save(request,pk,AddLabTestRequestForm,"Edit Test",
     'editLabTestRequest','allifmaalshaafiapp/assessments/labtests/requests/add_lab_test_request.html',
     redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
@@ -227,29 +221,34 @@ def deleteLabTestRequest(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def labTestResults(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
+ 
     title="Test Results"
     formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,LabTestResultsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/assessments/labtests/results/lab_test_results.html',context)
 
+    
 @allif_base_view_wrapper
 def addLabTestResult(request,pk,*allifargs,**allifkwargs):
-    allifquery= get_object_or_404(CommonTransactionsModel, id=pk) 
-    allifquery_id=allifquery.id
+    allif_data=common_shared_data(request)
+    allifquery=get_object_or_404(LabTestRequestsModel, id=pk)
+    allifqueryset=LabTestResultsModel.all_objects.filter(test_request=allifquery)
+   
     def transaction_item_pre_save(obj, request, allif_data):
-        obj.medical_file=allifquery
-    my_extra_context={"allifquery":allifquery,}
+        obj.test_request=allifquery
+    my_extra_context={"allifquery":allifquery,"allifqueryset": allifqueryset}
     return allif_common_form_submission_and_save(request,form_class=AddLabTestResultForm,
-    title_text="New Test",
-        success_redirect_url_name='addLabTestResult',
+        title_text="Lab Test Results",
+        success_redirect_url_name='addLabTestResult', # This URL expects a PK
         template_path='allifmaalshaafiapp/assessments/labtests/results/add_lab_test_result.html',
-        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
-        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
+        extra_context=my_extra_context)
+    
  
 @allif_base_view_wrapper
 def editLabTestResult(request, pk, *allifargs, **allifkwargs):
-    return allif_common_form_edit_and_save(request,pk,AddLabTestResultForm,"Edit",
+    return allif_common_form_edit_and_save(request,pk,AddLabTestResultForm,"Edit Result",
     'editLabTestResult','allifmaalshaafiapp/assessments/labtests/results/add_lab_test_result.html',
     redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
@@ -290,23 +289,25 @@ def prescriptions(request,*allifargs,**allifkwargs):
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/medication/prescriptions/prescriptions.html',context)
 
+
 @allif_base_view_wrapper
 def AddPrescription(request,pk,*allifargs,**allifkwargs):
-    allifquery=get_object_or_404(CommonTransactionsModel, id=pk) 
-    allifquery_id=allifquery.id
+    allifquery=get_object_or_404(CommonTransactionsModel, id=pk)
+    allifqueryset=MedicationsModel.all_objects.filter(medical_file=allifquery)
+   
     def transaction_item_pre_save(obj, request, allif_data):
         obj.medical_file=allifquery
-    my_extra_context={"allifquery":allifquery,}
+    my_extra_context={"allifquery":allifquery,"allifqueryset": allifqueryset}
     return allif_common_form_submission_and_save(request,form_class=AddPrescriptionForm,
-    title_text="New Prescription",
-        success_redirect_url_name='AddPrescription',
+        title_text="New Prescription",
+        success_redirect_url_name='addLabTestResult', # This URL expects a PK
         template_path='allifmaalshaafiapp/medication/prescriptions/add_prescription.html',
-        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
-        extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
- 
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
+        extra_context=my_extra_context)
+    
 @allif_base_view_wrapper
 def EditPrescription(request, pk, *allifargs, **allifkwargs):
-    return allif_common_form_edit_and_save(request,pk,AddPrescriptionForm,"Edit",
+    return allif_common_form_edit_and_save(request,pk,AddPrescriptionForm,"Edit Prescription",
     'EditPrescription','allifmaalshaafiapp/medication/prescriptions/add_prescription.html',
     redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
@@ -337,20 +338,19 @@ def deletePrescription(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='MedicationsModel',
     pk=pk,success_redirect_url_name='prescriptions',app_namespace='allifmaalshaafiapp',)
 
-
 ####################### admissions ##################
 @allif_base_view_wrapper
 def admissions(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Admissions"
     formats=CommonDocsFormatModel.all_objects.all()
-    allifqueryset =allif_filtered_and_sorted_queryset(request,MedicationsModel,allif_data,explicit_scope='all')
+    allifqueryset =allif_filtered_and_sorted_queryset(request,AdmissionsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/medication/admissions/admissions.html',context)
 
 @allif_base_view_wrapper
 def addAdmission(request,pk,*allifargs,**allifkwargs):
-    allifquery=get_object_or_404(AdmissionsModel, id=pk) 
+    allifquery=get_object_or_404(CommonTransactionsModel, id=pk) 
     allifquery_id=allifquery.id
     def transaction_item_pre_save(obj, request, allif_data):
         obj.medical_file=allifquery
@@ -364,7 +364,7 @@ def addAdmission(request,pk,*allifargs,**allifkwargs):
  
 @allif_base_view_wrapper
 def EditAdmission(request, pk, *allifargs, **allifkwargs):
-    return allif_common_form_edit_and_save(request,pk,AddAdmissionForm,"Edit",
+    return allif_common_form_edit_and_save(request,pk,AddAdmissionForm,"Edit Admission",
     'EditAdmission','allifmaalshaafiapp/medication/admissions/add_admission.html',
     redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
@@ -375,7 +375,7 @@ def admissionDetails(request, pk, *allifargs, **allifkwargs):
         title_map={'default': 'Admission Details'},)
 
 @allif_base_view_wrapper
-def admissionSearch(request,*allifargs,**allifkwargs):
+def admissionSearch(request,*allifargs,**allifkwargs): 
     return allif_search_handler(request,model_name='AdmissionsModel',search_fields_key='AdmissionsModel',
     template_path='allifmaalshaafiapp/medication/admissions/admissions.html',search_input_name='allifsearchcommonfieldname',)
 
@@ -387,7 +387,7 @@ def addmissionAdvancedSearch(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def wantToDeleteAdmission(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,AdmissionsModel,"Delete this item",
-    'allifmaalshaafiapp/medication/medication/admissions/delete_admission_confirm.html')
+    'allifmaalshaafiapp/medication/admissions/delete_admission_confirm.html')
 
 @logged_in_user_can_delete
 @allif_base_view_wrapper
@@ -408,10 +408,10 @@ def treatments(request,*allifargs,**allifkwargs):
 
 @allif_base_view_wrapper
 def addTreatment(request,pk,*allifargs,**allifkwargs):
-    allifquery=get_object_or_404(MedicalAdministrationsModel, id=pk) 
+    allifquery=get_object_or_404(MedicationsModel, id=pk) 
     allifquery_id=allifquery.id
     def transaction_item_pre_save(obj, request, allif_data):
-        obj.medical_file=allifquery
+        obj.prescription=allifquery
     my_extra_context={"allifquery":allifquery,}
     return allif_common_form_submission_and_save(request,form_class=AddMedicalAdminstrationForm,
     title_text="New Treatment",
@@ -465,10 +465,10 @@ def discharges(request,*allifargs,**allifkwargs):
 
 @allif_base_view_wrapper
 def addDischarge(request,pk,*allifargs,**allifkwargs):
-    allifquery=get_object_or_404(DischargesModel, id=pk) 
+    allifquery=get_object_or_404(AdmissionsModel, id=pk) 
     allifquery_id=allifquery.id
     def transaction_item_pre_save(obj, request, allif_data):
-        obj.medical_file=allifquery
+        obj.admission=allifquery
     my_extra_context={"allifquery":allifquery,}
     return allif_common_form_submission_and_save(request,form_class=AddDischargeForm,
     title_text="New Discharge",
@@ -516,27 +516,29 @@ def referrals(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Referrals"
     formats=CommonDocsFormatModel.all_objects.all()
+    
     allifqueryset =allif_filtered_and_sorted_queryset(request,ReferralsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaalshaafiapp/medication/referrals/referrals.html',context)
 
 @allif_base_view_wrapper
 def addReferral(request,pk,*allifargs,**allifkwargs):
-    allifquery=get_object_or_404(ReferralsModel, id=pk) 
+    allifquery=get_object_or_404(CommonTransactionsModel, id=pk) 
+   
     allifquery_id=allifquery.id
     def transaction_item_pre_save(obj, request, allif_data):
         obj.medical_file=allifquery
     my_extra_context={"allifquery":allifquery,}
     return allif_common_form_submission_and_save(request,form_class=AddReferralForm,
-    title_text="New Discharge",
-        success_redirect_url_name='addTreatment',
+    title_text="New Referral",
+        success_redirect_url_name='addReferral',
         template_path='allifmaalshaafiapp/medication/referrals/add_referral.html',
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
         extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
  
 @allif_base_view_wrapper
 def EditReferral(request, pk, *allifargs, **allifkwargs):
-    return allif_common_form_edit_and_save(request,pk,AddReferralForm,"Edit",
+    return allif_common_form_edit_and_save(request,pk,AddReferralForm,"Edit Referral",
     'EditReferral','allifmaalshaafiapp/medication/referrals/add_referral.html',
     redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaalshaafiapp',)
 
@@ -544,7 +546,7 @@ def EditReferral(request, pk, *allifargs, **allifkwargs):
 def referralDetails(request, pk, *allifargs, **allifkwargs):
     return allif_common_detail_view(request,model_class=ReferralsModel,pk=pk,
         template_name='allifmaalshaafiapp/medication/referrals/referral_details.html', # Create this template
-        title_map={'default': 'Discharge Details'},)
+        title_map={'default': 'Referral Details'},)
 
 @allif_base_view_wrapper
 def referralSearch(request,*allifargs,**allifkwargs):
@@ -559,10 +561,11 @@ def referalAdvancedSearch(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def wantToDeleteReferral(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,ReferralsModel,"Delete this item",
-    'allifmaalshaafiapp/medication/referrals/delete_referral_confirm.html')
+    'allifmaalshaafiapp/medication/referrals/delete_referral.html')
 
 @logged_in_user_can_delete
 @allif_base_view_wrapper
 def deleteReferral(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='ReferralsModel',
     pk=pk,success_redirect_url_name='referrals',app_namespace='allifmaalshaafiapp',)
+

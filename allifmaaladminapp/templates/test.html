@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Sector</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; background-color: #f4f7f6; }
+        .container { max-width: 600px; margin: auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .form-control { width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 4px; }
+        .message-container { padding: 1rem; margin-bottom: 1rem; border-radius: 4px; }
+        .success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+        .hidden { display: none; }
+        .form-errors { color: red; font-size: 0.8rem; margin-top: 0.25rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Add New Sector (Auto-Saving)</h1>
+        
+        <!-- This container displays status messages to the user -->
+        <div id="message-container" class="message-container hidden"></div>
+
+        <!-- The form no longer needs a submit button -->
+        <form id="sector-form" method="post" action="{% url 'allifmaaladminapp:save_sector_ajax' %}">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <p>
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <span class="form-errors">{{ error }}</span>
+                    {% endfor %}
+                </p>
+            {% endfor %}
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('sector-form');
+            const messageContainer = document.getElementById('message-container');
+            let isSaving = false; // Prevents multiple save requests at once
+
+            // Attach a blur event listener to all form inputs
+            form.querySelectorAll('input, textarea, select').forEach(field => {
+                field.addEventListener('blur', function() {
+                    // Only auto-save if the form has a value
+                    if (formHasData()) {
+                        saveForm();
+                    }
+                });
+            });
+
+            // Function to check if the form has any data to save
+            function formHasData() {
+                const formData = new FormData(form);
+                for (let [key, value] of formData.entries()) {
+                    if (key !== 'csrfmiddlewaretoken' && value.trim() !== '') {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // The main auto-save function
+            function saveForm() {
+                if (isSaving) {
+                    return; // Don't save if a save is already in progress
+                }
+                isSaving = true;
+
+                // Display a "Saving..." message
+                messageContainer.textContent = 'Saving...';
+                messageContainer.className = 'message-container success';
+                messageContainer.classList.remove('hidden');
+
+                const formData = new FormData(form);
+                const url = form.action;
+
+                fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                    }
+                })
+                .then(response => {
+                    isSaving = false;
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return response.json().then(errorData => {
+                        throw errorData;
+                    });
+                })
+                .then(data => {
+                    messageContainer.textContent = data.message;
+                    messageContainer.className = 'message-container success';
+                    
+                    // You might want to fade this message after a few seconds
+                    setTimeout(() => messageContainer.classList.add('hidden'), 3000);
+                })
+                .catch(errorData => {
+                    messageContainer.textContent = 'An error occurred. Please check the fields below.';
+                    messageContainer.className = 'message-container error';
+
+                    if (errorData.errors) {
+                        // Clear existing errors
+                        document.querySelectorAll('.form-errors').forEach(el => el.textContent = '');
+                        // Display new errors
+                        for (const fieldName in errorData.errors) {
+                            const fieldErrors = errorData.errors[fieldName];
+                            const field = document.querySelector(`[name="${fieldName}"]`);
+                            if (field) {
+                                let errorElement = field.nextElementSibling;
+                                if (!errorElement || !errorElement.classList.contains('form-errors')) {
+                                    errorElement = document.createElement('span');
+                                    errorElement.classList.add('form-errors');
+                                    field.parentNode.insertBefore(errorElement, field.nextElementSibling);
+                                }
+                                errorElement.textContent = fieldErrors.join(' ');
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

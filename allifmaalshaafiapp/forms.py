@@ -67,14 +67,14 @@ class AddTriageDetailsForm(CommonBaseForm):
       
 class AddAssessmentDetailsForm(CommonBaseForm):
     company_filtered_fields = {
-        'medical_file': CommonTransactionsModel,
+        #'medical_file': CommonTransactionsModel,
         'staff': CommonEmployeesModel,
        
         }
      
     class Meta(CommonBaseForm.Meta):
         model = AssessmentsModel
-        fields = CommonBaseForm.Meta.fields + ['medical_file','record_date','staff','complaints','weight','height',
+        fields = CommonBaseForm.Meta.fields + ['record_date','staff','complaints','weight','height',
                   'blood_pressure_systolic','blood_pressure_diastolic','temperature','pulse_rate',
                   'respiration_rate','oxygen_saturation','past_medical_history','known_chronic_conditions',
                   'current_medication',
@@ -96,8 +96,7 @@ class AddAssessmentDetailsForm(CommonBaseForm):
             'complaints':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
             'weight':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'height':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-           
+            
          
             'blood_pressure_systolic':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'past_medical_history':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -108,30 +107,25 @@ class AddAssessmentDetailsForm(CommonBaseForm):
 
 class AddLabTestRequestForm(CommonBaseForm):
     company_filtered_fields = {
-        'medical_file': CommonTransactionsModel,
+        'lab_name': CommonSpacesModel,
         'items': CommonStocksModel,
        
         }
     
     class Meta(CommonBaseForm.Meta):
         model = LabTestRequestsModel
-        fields = CommonBaseForm.Meta.fields + ['medical_file','date_time','items',
-                  'lab_name','status','priority','specimen','description',
+        fields = CommonBaseForm.Meta.fields + ['items','lab_name','specimen','test_status',
                  ]
         widgets={
             **CommonBaseForm.Meta.widgets,
-            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-          
-            'date_time' : DatePickerInput(attrs={'class':'form-control'}),
-            
+           
             'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
           
-            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            
+          
             'lab_name':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
-            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'priority':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'test_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
             'specimen':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
 
@@ -140,32 +134,14 @@ class AddLabTestRequestForm(CommonBaseForm):
 ###############33 lab results #############
 
 class AddLabTestResultForm(CommonBaseForm):
-    company_filtered_fields = {
-        'medical_file': CommonTransactionsModel,
-        'test_request': LabTestRequestsModel,
-       
-        }
-    
+   
     class Meta(CommonBaseForm.Meta):
         model = LabTestResultsModel
-        fields = CommonBaseForm.Meta.fields + ['medical_file','date_time','results',
-                  'lab_name','test_request',
-                 ]
+        fields = CommonBaseForm.Meta.fields + []
         widgets={
             **CommonBaseForm.Meta.widgets,
-          
-            'results':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            
-            'date_time' : DatePickerInput(attrs={'class':'form-control'}),
-            
-            'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-          
-            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            
-            'lab_name':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+         
            
-            'test_request':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-       
         } 
    
 class AddPrescriptionForm(CommonBaseForm):
@@ -179,20 +155,20 @@ class AddPrescriptionForm(CommonBaseForm):
     
     class Meta(CommonBaseForm.Meta):
         model = MedicationsModel
-        fields = CommonBaseForm.Meta.fields + ['medical_file','is_issued','quantity','via','medication','dosage_form','dosage',
-                  'frequency','duration','prescribed_by_doctor','instructions','issued_by_pharmacist',
-                  'issued_date_time']
+        fields = CommonBaseForm.Meta.fields + ['is_issued','quantity','via','medication','dosage_form','dosage',
+                  'frequency','duration','prescribed_by_doctor','issued_by_pharmacist',
+                  ]
         widgets={
             **CommonBaseForm.Meta.widgets,
             'frequency':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'issued_date_time' : DatePickerInput(attrs={'class':'form-control'}),
-            'instructions':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
+           
             'dosage':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'dosage_form':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'medication':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'quantity':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'duration':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
             'via':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'issued_by_pharmacist':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             
@@ -203,35 +179,31 @@ class AddPrescriptionForm(CommonBaseForm):
 class AddAdmissionForm(CommonBaseForm):
     company_filtered_fields = {
         'admitting_doctor': CommonEmployeesModel,
+        'ward': CommonSpacesModel,
+        'bed': CommonSpaceUnitsModel,
        
         }
     
     class Meta(CommonBaseForm.Meta):
         model = AdmissionsModel
-        fields = CommonBaseForm.Meta.fields + ['medical_file','ward','bed','admission_date_time',
-                  'status','admitting_doctor','reason_for_admission'
+        fields = CommonBaseForm.Meta.fields + ['ward','bed','admitting_doctor',
+                                              
                   ]
         widgets={
             **CommonBaseForm.Meta.widgets,
-            'reason_for_admission':forms.Textarea(attrs={'class':'form-control','placeholder':''}),
-            'description':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+           
             'ward':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'bed':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'admitting_doctor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            'admission_date_time' : DatePickerInput(attrs={'class':'form-control'}),
            
         } 
    
 class AddMedicalAdminstrationForm(CommonBaseForm):
-    company_filtered_fields = {
-        'medical_file': CommonTransactionsModel,
-       
-        }
+   
     class Meta(CommonBaseForm.Meta):
         model = MedicalAdministrationsModel
-        fields = CommonBaseForm.Meta.fields + ['medical_file','prescription','administered_by_nurse',
+        fields = CommonBaseForm.Meta.fields + ['administered_by_nurse',
                   'dosage_value','dosage_unit','given_on','via',
                  
                   ]
@@ -242,11 +214,8 @@ class AddMedicalAdminstrationForm(CommonBaseForm):
             'given_on' : DatePickerInput(attrs={'class':'form-control'}),
           
             'administered_by_nurse':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+         
             
-            'prescription':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            
-           
-            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'via':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
           
             
@@ -261,8 +230,8 @@ class AddDischargeForm(CommonBaseForm):
         }
     class Meta(CommonBaseForm.Meta):
         model = DischargesModel
-        fields = CommonBaseForm.Meta.fields + ['admission','discharge_diagnosis','discharge_summary',
-                  'medications_at_discharge','follow_up_plan','recorded_on',
+        fields = CommonBaseForm.Meta.fields + ['discharge_diagnosis','discharge_summary',
+                  'medications_at_discharge','follow_up_plan',
                   ]
         widgets={
             **CommonBaseForm.Meta.widgets,
@@ -272,7 +241,6 @@ class AddDischargeForm(CommonBaseForm):
             'medications_at_discharge':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'follow_up_plan':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'recorded_on' : DatePickerInput(attrs={'class':'form-control'}),
-            'admission':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
            
         } 
    
@@ -281,13 +249,16 @@ class AddReferralForm(CommonBaseForm):
     company_filtered_fields = {
         'medical_file': CommonTransactionsModel,
         'referring_doctor':CommonEmployeesModel,
+        'referred_to_doctor':CommonEmployeesModel,
+        'referred_to_external_organization':CommonSuppliersModel,
        
         }
     
     class Meta(CommonBaseForm.Meta):
         model = ReferralsModel
-        fields = CommonBaseForm.Meta.fields + ['medical_file','referring_doctor','reason_for_referral','referred_on','referral_type','referred_to_doctor','referred_to_external_organization',
-                  'status',
+        fields = CommonBaseForm.Meta.fields + ['referring_doctor','referral_type',
+                                               'referred_to_doctor','referred_to_external_organization',
+                 
                   ]
         widgets={
             **CommonBaseForm.Meta.widgets,
@@ -295,7 +266,7 @@ class AddReferralForm(CommonBaseForm):
            
             'referred_on' : DatePickerInput(attrs={'class':'form-control'}),
             
-            'medical_file':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
             'referring_doctor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'referral_type':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'referred_to_doctor':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),

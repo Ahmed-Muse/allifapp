@@ -26,4 +26,10 @@ path('add/dynamic_form_view/', views.dynamic_form_view, name='dynamic_form_view'
 
 path('products/', views.product_list, name='product_list'),
 
+
+  path('sector/add/', views.add_sector_page, name='add_sector_page'),
+    
+    # URL for the AJAX endpoint to save the form data. This is a POST request.
+    path('sector/save-ajax/', views.save_sector_ajax, name='save_sector_ajax'),
+
 ]   

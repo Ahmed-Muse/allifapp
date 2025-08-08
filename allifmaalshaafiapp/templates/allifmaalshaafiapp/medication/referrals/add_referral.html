@@ -1,280 +1,67 @@
-{% extends 'allifmaalshaafiapp/base/uimainbase/shaafibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+
+ {% block add-form-header-block %}
+<a href="{% allif_get_single_nav_link_url 'Referrals' user_var glblslug %}">Referrals</a>
+ 
 {% endblock %}
-{% block style %}
+{% block details-table-col-one %}
+ <tr>
+    <td class="allif-fix-table-col">Customer</td>
+    <td>{{allifquery.medical_file.customer}}</td>
+  </tr>
+
 {%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
- 
-<!--start....main headere-->
-<div class="card-header">
-
-<div class="row mt-12" ><!--start....header row-->
-
-<div class="col-md-12"><!--start....header column-->
-
-<div class="container-fluid amel-content-header">
-
-  <a class="amel-table-list-identifier">Add New Prescriptions:</a>
-
-  <a href="{% url 'allifmaalshaafiapp:prescriptions' user_var glblslug %}">Prescriptions</a>
-
-</div>
-
-    </div><!--end....header column-->
+{% block details-table-col-two %}
+ <tr>
+    <td class="allif-fix-table-col">Test For </td>
+    <td>{{allifquery.items}}</td>
+  </tr>
+{%endblock%}
+   {% block core-tab-col-one %}
   
-  </div><!--end....header row-->
+    <tr>
+        <td class="allif-fix-table-col-forms">Referral Reasons</td>
+        <td>{{form.description}}</td>
+      </tr>
 
-</div><!--end....main headere-->
-
-
-  <div class="allifmaincontainer">
-{% if allifquery_update %}
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Edit {{allifquery}} Warehouse Details</div>
-  <form method='POST' action=''>{% csrf_token %}
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
-    
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-
-      <tr>
-        <td class="allif-fix-table-col">Division</td>
-        <td>{{form.division}}</td>
-    
-        </tr>
-        
-        <tr>
-          <td class="allif-fix-table-col">Branch</td>
-          <td>{{form.branch}}</td>
-      
-          </tr>
-        <tr>
-          <td class="allif-fix-table-col">Medical File</td>
-          <td>{{form.medical_file}}</td>
-      
-          </tr>
-
-        <tr>
-            <td class="allif-fix-table-col">Referring Doctor</td>
-            <td>{{form.referring_doctor}}</td>
-        
-            </tr>
-            
-             <tr>
-            <td class="allif-fix-table-col">Referred On</td>
-            <td>{{form.referred_on}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Referal Type</td>
-            <td>{{form.referral_type}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Referred To</td>
-            <td>{{form.referred_to_doctor}}</td>
-        
-            </tr>
-            
-           
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-        
-          <tr>
-            <td class="allif-fix-table-col">Department</td>
-            <td>{{form.department}}</td>
-        
-            </tr>
-         <tr>
-            <td class="allif-fix-table-col">Referral Reasons</td>
-            <td>{{form.reason_for_referral}}</td>
-        
-            </tr>
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-            <tr>
-            <td class="allif-fix-table-col">Refer Externally</td>
-            <td>{{form.referred_to_external_organization}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">Status</td>
-            <td>{{form.status}}</td>
-        
-            </tr>
-            <tr>
-              <td class="allif-fix-table-col">Action</td>
-              <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-          
-              </tr>
-          </tbody>
-          </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-
-<div class="error-body">
-  <p>{{error_message}}</p>
-  </div>
-</form>
-<!--end of table-->
-
-</div><!--end of main container of the page....-->
-{% else %}
-
-<div class="row mt-12"> <!--start....table row-->
-  <div class="table-details-content-description">Add/Edit New General Ledger Account</div>
-  <form method='POST' action=''>{% csrf_token %}
-  <div class="col-md-12"> <!--start....table column-->
-  <div class="allif-scroll-table">
-    <div class="allif-info-tables">
-      <div class="row"><!--start of row div --->
-  <!--start of column two-->
-  <div class="col-md-4">
- 
-      <!--start of the table here-->
-      <div class="table-responsive">
-      <table class="table table-layout">
-      <tbody>
-        <tr>
-          <td class="allif-fix-table-col">Medical File</td>
-          <td>{{form.medical_file}}</td>
-      
-          </tr>
-
-        <tr>
-            <td class="allif-fix-table-col">Referring Doctor</td>
-            <td>{{form.referring_doctor}}</td>
-        
-            </tr>
-            
-             <tr>
-            <td class="allif-fix-table-col">Referred On</td>
-            <td>{{form.referred_on}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Referal Type</td>
-            <td>{{form.referral_type}}</td>
-        
-            </tr>
-             <tr>
-            <td class="allif-fix-table-col">Referred To</td>
-            <td>{{form.referred_to_doctor}}</td>
-        
-            </tr>
-            
-           
-        </tbody>
-        </table>
-      </div>
-        </div>
-           
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-       <!--start of the table here-->
-       <div class="allif-details-card table-responsive">
-       <table class="table table-layout">
-        <tbody>
-           <tr>
-            <td class="allif-fix-table-col">Referral Reasons</td>
-            <td>{{form.reason_for_referral}}</td>
-        
-            </tr>
-         
-          </tbody>
-          </table>
-          </div>
-          </div>
-    
-    
-     <!--start of column two-->
-     <div class="col-md-4">
-      <div class="allif-details-card table-responsive">
-       <!--start of the table here-->
-       <table class="table table-layout">
-        <tbody>
-           <tr>
-            <td class="allif-fix-table-col">Refer Externally</td>
-            <td>{{form.referred_to_external_organization}}</td>
-        
-            </tr>
-        <tr>
-            <td class="allif-fix-table-col">Status</td>
-            <td>{{form.status}}</td>
-        
-            </tr>
-            
-        <tr>
-          <td class="allif-fix-table-col">Action</td>
-          <td> <input type="submit" value='Save' class="btn btn-success allifmaal-submit-btn"></td>
-      
-          </tr>
-      </tbody>
-      </table>
-  </div>
-    </div>
-    </div><!--end of row div --->
-      
-        </div>
-
-</div><!--end....table row-->
-</div>
-
-<div class="error-body">
-  <p>{{error_message}}</p>
-  </div>
-</form>
-<!--end of table-->
-
-
-
-</div><!--end of main container of the page....-->
-
-{% endif %}
-
-
-</div>
-
-</div>
-  {% block scripts %}
-
-  {% endblock %}
-   {% endblock %}
+    <tr>
+      <td class="allif-fix-table-col-forms">Referring Dr</td>
+      <td>{{form.referring_doctor}}</td>
+    </tr>
    
+    {%endblock%}
+
+    {% block core-tab-col-two %}
+   <tr>
+      <td class="allif-fix-table-col-forms">Referral Type</td>
+      <td>{{form.referral_type}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">Referred to Dr</td>
+      <td>{{form.referred_to_doctor}}</td>
+    </tr>
+    <tr>
+      <td class="allif-fix-table-col-forms">Referred to External</td>
+      <td>{{form.referred_to_external_organization}}</td>
+    </tr>
+
+
+    {%endblock%}
+
+    
+
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Referrals' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteReferralConfirm.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    
+    {% endblock %}

@@ -21,14 +21,14 @@ path('Doctor/Assessment/s/Observation/s/<str:allifusr>/<str:allifslug>/', views.
 path('Add/New/Doctor/Assessment/s/Observations//Records/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addDoctorAssessment, name="addDoctorAssessment"),
 path('Edit/Update/Doctor/assessment/s/observations/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editDoctorAssessment, name="editDoctorAssessment"),
 path('Search/For/Doctor/Assessment/s/observation/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.doctorAssessmentSearch, name="doctorAssessmentSearch"),
-path('Doctor/Assessment/s/Observation/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.doctorAssessmentDetails, name="doctorAssessmentDetails"),
+
 path('Do/You/u/Really/Want/to/Delete/This/Doctor/assessment/s/observation/s/data/record/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteDoctorAssessment, name="wantToDeleteDoctorAssessment"),
 path('Delete/This/Doctor/assessment/s/observations/s/Data/Record/s/info/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteDoctorAssessment, name="deleteDoctorAssessment"),
 path('Doctor/assessment/observations/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.doctorAssessmentAdvancedSearch, name="doctorAssessmentAdvancedSearch"),
 
 #############################3 lab test requests ################
 path('Laboratory/test/s/request/s/<str:allifusr>/<str:allifslug>/', views.labTestRequests, name="labTestRequests"),
-path('Add/New/Lab/s/Test/s/request/s/<str:allifusr>/<str:allifslug>/', views.addLabTestRequest, name="addLabTestRequest"),
+path('Add/New/Lab/s/Test/s/request/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addLabTestRequest, name="addLabTestRequest"),
 path('Edit/Update/Lab/test/request/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editLabTestRequest, name="editLabTestRequest"),
 path('Search/For/lab/test/request/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.labTestRequestSearch, name="labTestRequestSearch"),
 path('Lab/test/request/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.labTestRequestDetails, name="labTestRequestDetails"),
@@ -38,7 +38,7 @@ path('Lab/Test/s/Request/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<st
 
 #####################33 lab test request results #################3
 path('Laboratory/test/s/results/s/<str:allifusr>/<str:allifslug>/', views.labTestResults, name="labTestResults"),
-path('Add/New/Lab/s/Test/s/results/s/<str:allifusr>/<str:allifslug>/', views.addLabTestResult, name="addLabTestResult"),
+path('Add/New/Lab/s/Test/s/results/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addLabTestResult, name="addLabTestResult"),
 path('Edit/Update/Lab/test/results/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editLabTestResult, name="editLabTestResult"),
 path('Search/For/lab/test/results/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.labTestResultSearch, name="labTestResultSearch"),
 path('Lab/test/results/info/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.labTestResultDetails, name="labTestResultDetails"),
@@ -48,7 +48,7 @@ path('Lab/Test/s/Result/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str
 
 ################# prescriptions #####################
 path('Prescriptions/<str:allifusr>/<str:allifslug>/', views.prescriptions, name="prescriptions"),
-path('Add/New/Prescriptions/<str:allifusr>/<str:allifslug>/', views.AddPrescription, name="AddPrescription"),
+path('Add/New/Prescriptions/<str:pk>/<str:allifusr>/<str:allifslug>/', views.AddPrescription, name="AddPrescription"),
 path('Edit/Update/Prescription/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.EditPrescription, name="EditPrescription"),
 path('Search/For/Prescriptions/Details/<str:allifusr>/<str:allifslug>/', views.prescriptionSearch, name="prescriptionSearch"),
 path('Prescription/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.prescriptionDetails, name="prescriptionDetails"),
@@ -59,7 +59,7 @@ path('Prescription/s/Advance/d/Search/s/<str:allifusr>/<str:allifslug>/', views.
 
 ######################3 treatments and medical adminstrations ##########3
 path('medical/adminstrations/treatments/s/of/clients/s/<str:allifusr>/<str:allifslug>/', views.treatments, name="treatments"),
-path('Add/New/Treatment/s/medication/s/<str:allifusr>/<str:allifslug>/', views.addTreatment, name="addTreatment"),
+path('Add/New/Treatment/s/medication/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addTreatment, name="addTreatment"),
 path('Edit/Update/treatment/medication/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.EditTreatment, name="EditTreatment"),
 path('Search/For/treatment/medication/s/Details/<str:allifusr>/<str:allifslug>/', views.treatmentSearch, name="treatmentSearch"),
 path('treatment/medication/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.treatmentDetails, name="treatmentDetails"),
@@ -71,7 +71,7 @@ path('advanced/treatment/s/search/e/s/<str:allifusr>/<str:allifslug>/', views.tr
 
 #####################3 admissions ##############
 path('Admission/patient/s/<str:allifusr>/<str:allifslug>/', views.admissions, name="admissions"),
-path('Add/New/admission/s/medication/s/<str:allifusr>/<str:allifslug>/', views.addAdmission, name="addAdmission"),
+path('Add/New/admission/s/medication/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addAdmission, name="addAdmission"),
 path('Edit/Update/admission/s/medication/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.EditAdmission, name="EditAdmission"),
 path('Search/For/admission/medication/s/Details/<str:allifusr>/<str:allifslug>/', views.admissionSearch, name="admissionSearch"),
 path('admission/s/medication/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.admissionDetails, name="admissionDetails"),
@@ -82,10 +82,10 @@ path('Admission/s/Advanced/Search/es/<str:allifusr>/<str:allifslug>/', views.add
 
 ################## discharges ##########################
 path('Discharge/s/s/s/of/patients/clients/s/<str:allifusr>/<str:allifslug>/', views.discharges, name="discharges"),
-path('Add/New/Discharge/s/s/hospitalization/s/<str:allifusr>/<str:allifslug>/', views.addDischarge, name="addDischarge"),
+path('Add/New/Discharge/s/s/hospitalization/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addDischarge, name="addDischarge"),
 path('Edit/Update/discharge/medication/hospitalization/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.EditDischarge, name="EditDischarge"),
 path('Search/For/discharge/s/medication/s/Details/<str:allifusr>/<str:allifslug>/', views.dischargeSearch, name="dischargeSearch"),
-path('discharge/s/hospitalization/s/Details/Information/s/<str:int>/<str:allifusr>/<str:allifslug>/', views.dischargeDetails, name="dischargeDetails"),
+path('discharge/s/hospitalization/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.dischargeDetails, name="dischargeDetails"),
 path('Do/You/u/Really/Want/to/Delete/The/selected/discharge/s/hospitalization/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteDischarge, name="wantToDeleteDischarge"),
 path('Delete/This/Discharge/s/now/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteDischarge, name="deleteDischarge"),
 path('advanced/discharge/s/searches/<str:allifusr>/<str:allifslug>/', views.dischargeAdvancedSearch, name="dischargeAdvancedSearch"),
@@ -93,7 +93,7 @@ path('advanced/discharge/s/searches/<str:allifusr>/<str:allifslug>/', views.disc
 
 #####################3 referals ##############
 path('Referals/s/of/clients/s/<str:allifusr>/<str:allifslug>/', views.referrals, name="referrals"),
-path('Add/New/referral/s/medication/s/<str:allifusr>/<str:allifslug>/', views.addReferral, name="addReferral"),
+path('Add/New/referral/s/medication/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addReferral, name="addReferral"),
 path('Edit/Update/referral/s/medication/s/details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.EditReferral, name="EditReferral"),
 path('Search/For/referral/s/medication/s/Details/<str:allifusr>/<str:allifslug>/', views.referralSearch, name="referralSearch"),
 path('Referral/s/medication/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.referralDetails, name="referralDetails"),

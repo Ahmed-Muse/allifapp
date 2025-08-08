@@ -32,17 +32,17 @@
    
   {% endblock %}
 
-    
   {% block list-table-content-seciton %}
   <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.medical_file.customer.id user_var glblslug %}">{{item.medical_file.customer}}</a></td>
   <td class="allif-table-content-td">
   <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.medical_file.id user_var glblslug %}">{{item.medical_file.number}}</a></td>
-  <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:triageDataDetails' item.id user_var glblslug %}"> {{item.blood_pressure_systolic}}/{{item.blood_pressure_diastolic}}</a></td>
+  <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:editDoctorAssessment' item.id user_var glblslug %}"> {{item.blood_pressure_systolic}}/{{item.blood_pressure_diastolic}}</a></td>
   <td class="allif-table-content-td">{{item.temperature}}</td>
   <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
   <td class="allif-table-content-td">{{item.status}}</td>
   {% endblock %}
   {% block list-table-content-seciton-dropdown-links %}
-  <a href="{% url 'allifmaalshaafiapp:editTriageData' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Record</a>
-  <a href="{% url 'allifmaalshaafiapp:AddTriageData' item.medical_file.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Add Triage</a>
+  <a href="{% url 'allifmaalshaafiapp:editDoctorAssessment' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Record</a>
+  
   {% endblock %}
+  

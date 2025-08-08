@@ -1,0 +1,50 @@
+  {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block allif-basic-search-action %}
+    {% url 'allifmaalshaafiapp:labTestResultSearch' user_var glblslug %}
+  {% endblock %}
+
+  {% block advanced-search-action %}
+    {% url 'allifmaalshaafiapp:labTestResultAdvancedSearch' user_var glblslug %}
+  {% endblock %}
+  {% block upload-excel-file-action %}
+  
+  {% endblock %}
+  {% block allif-header-links %}
+   <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
+  <a href="{% allif_get_single_nav_link_url 'triagedata' user_var glblslug %}">Triage</a>
+  <a href="{% allif_get_single_nav_link_url 'MedicalAssessments' user_var glblslug %}">Assessments</a>
+  <a href="{% allif_get_single_nav_link_url 'prescriptions' user_var glblslug %}">Prescriptions</a>
+  <a href="{% allif_get_single_nav_link_url 'LabResults' user_var glblslug %}">Results</a>
+ 
+  {% endblock %}
+  {% block upload-excel-file %}
+  {%endblock%}
+  {% block list-table-headers %}
+ 
+  <td class="allif-fix-table-col">Patient</td>
+
+  <td class="allif-table-header-td">Test For</td>
+  <td class="allif-table-header-td">Result</td>
+  
+  <td class="allif-table-header-td">Date</td>
+ 
+  {% endblock %}
+
+  {% block list-table-content-seciton %}
+  <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.test_request.medical_file.customer.id user_var glblslug %}">{{item.test_request.medical_file.customer}}</a></td>
+
+ 
+  <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:editLabTestRequest' item.test_request.id user_var glblslug %}"> {{item.test_request.items}}</a></td>
+  <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:editLabTestResult' item.id user_var glblslug %}">{{item.name}}</a></td>
+
+  
+  <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
+  
+  {% endblock %}
+  {% block list-table-content-seciton-dropdown-links %}
+  <a href="{% url 'allifmaalshaafiapp:editLabTestResult' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Record</a>
+  
+  {% endblock %}
+  

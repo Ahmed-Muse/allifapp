@@ -1,245 +1,46 @@
-{% extends 'allifmaalshaafiapp/base/uimainbase/shaafibase.html'%}
-{% load humanize %}
-{% block title %}
-{{title}}
-{% endblock %}
-{% block style %}
-{%endblock%}
-{% block body %}
-<div class="allifmaal-main-container">
-<!--start....main headere-->
-<div class="card-header">
-
-  <div class="row mt-12" ><!--start....header row-->
+  {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block allif-basic-search-action %}
+    {% url 'allifmaalshaafiapp:treatmentSearch' user_var glblslug %}
+  {% endblock %}
+ 
+  {% block advanced-search-action %}
+    {% url 'allifmaalshaafiapp:treatmentAdvancedSearch' user_var glblslug %}
+  {% endblock %}
+  {% block upload-excel-file-action %}
   
-  <div class="col-md-12"><!--start....header column-->
+  {% endblock %}
+  {% block allif-header-links %}
+   <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
+  <a href="{% allif_get_single_nav_link_url 'triagedata' user_var glblslug %}">Triage</a>
+  <a href="{% allif_get_single_nav_link_url 'MedicalAssessments' user_var glblslug %}">Assessments</a>
+  <a href="{% allif_get_single_nav_link_url 'prescriptions' user_var glblslug %}">Prescriptions</a>
   
-  <div class="container-fluid amel-content-header">
-    <div class="dropdown allifmaal-content-dropdown">
-      <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Open Filters
-      </a>  
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <div class="content-dropdown-menu">
-          
-        <li><a class="dropdown-item">Looking for something?</a></li>
-        <a class="dropdown-item" href="{% url 'allifmaalshaafiapp:prescriptions' user_var glblslug %}">Clear Search</a>
-          
-        <form method='POST' action="{% url 'allifmaalshaafiapp:prescriptionSearch' user_var glblslug %}">{% csrf_token %}
-        
-          <input type="text" id="allifsearchcommonfield" name="allifsearchcommonfieldname" class="form-control allifsearchcommonfieldclasstwo"
-          placeholder="Type Here ...">
-        
-          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-          </form>
-          <hr>
-          <li><a class="dropdown-item">Select Ordering Option</a></li>
-        <form method='POST' action="{% url 'allifmaalshaafiapp:prescriptions' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-      
-        <div>
-        <select name="requiredformat" class="form-control">
-          {% for item in datasorts %}
-          <option>{{item.name}}</option>
-            
-           {% endfor %}
-           
-          </select>
-          </div>
-          <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-      
-      </form>
-      <hr>
-      <li><a class="dropdown-item">Advanced Searching</a></li>
-      <form method='POST' action="{% url 'allifmaalshaafiapp:prescriptionAdvancedSearch' user_var glblslug %}" enctype="multipart/form-data">{% csrf_token %}
-        
-        <div>
-          <label>Start Date</label>
-          <input type="date" class="form-control" name="startdate" placeholder="Starting Balance">
-        </div>
-        <div>
-          <label>End Date</label>
-          <input type="date" class="form-control" name="enddate" placeholder="Ending Balance">
-        </div>
-
-        <div>
-          <label>Start Value</label>
-          <input type="text" class="form-control" name="startvalue" placeholder="">
-        </div>
-        <div>
-          <label>End Value</label>
-          <input type="text" class="form-control" name="endvalue" placeholder="">
-        </div>
-        
-        
-        <div>
-          <label >Select Option</label>
-          <select name="requiredformat" class="form-control">
-            {% for item in formats %}
-            <option>{{item.name}}</option>
-            
-         {% endfor %}
-         
-        </select>
-        </div>
-  
-        
-        <button type="submit" class="btn allifmaal-submit-btn">Submit</button>
-    
-    </form>
-    <hr>
-      
-      </div>
-      </ul>
-    </div>
-    <a class="amel-table-list-identifier">Prescriptions:</a>
-   
-    <a href="{% url 'allifmaalshaafiapp:shaafiHome' user_var glblslug %}">Home</a>
-    <a href="{% url 'allifmaalshaafiapp:addTreatment' user_var glblslug %}">New Treatment</a>
-   
-  </div>
-  
-      </div><!--end....header column-->
-    
-    </div><!--end....header row-->
-  
-  </div><!--end....main headere-->
-<div class="allifmaincontainer">
-<div class="row mt-12"> <!--start....table row-->
-<div class="col-md-12"> <!--start....table column-->
-    
-  
-  <div class="allif-scroll-table">
-    <div class="table-responsive allif-full-table">
-    <table class="table table-layout">
-      <thead>
-        <tr class="allif-table-header-row">
-        <td class="allif-fix-table-col">Quote No.</td>
-        <td>Customer</td>
-        <td>Value</td>
-        <td>Stage</td>
-        <td>Date</td>
-        <td>Owner</td>
-      
-        <td>Navigate</td>
-        
-        <td> . . . </td>
-        <td></td>
-        </tr>
-        </thead>
-        <tbody class="allif-table-body">
-         
-        
-        {% for item in allifqueryset %} 
-        <tr data-id="{{item.id}}">
-        <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:treatmentDetails' item.id user_var glblslug %}">{{item.medical_file}}</a></td>
-       
-            <td>
-            {{item.customer}}
-          </td>
-          <td>
-            <a href="" class="body-delete-link">{{item.total|floatformat:2|intcomma}}</a>
-          </td>
-          <td>
-            {{item.prospect}}
-          </td>
-        
-          <td>
-            {{item.date|date:'d/m/Y'}}
-          </td>
-          <td>
-            {{item.owner}}
-          </td>
-    
-         <td>
-          <div class="dropdown allifmaal-content-dropdown">
-            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
-            <div class="dropdown-content">
-              <a href="{% url 'allifmaalshaafiapp:EditTreatment' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-             
-              
-              <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
-              
-            </div>
-          </div>
-          <div class="dropdown allif-confirm-action">
-            
-            <a href="{% url 'allifmaalshaafiapp:treatments' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-            <a href="{% url 'allifmaalshaafiapp:deleteTreatment' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-          </div>
-
-         
-        </td>
-       <td> . . . </td>
-       <td></td>
-      
-  
-    </tr>
-    {% endfor %}
-    {% if searched_data %}
-    {% for item in searched_data %}
-    <tr data-id="{{item.id}}">
-      <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddQuoteDetails' item.id user_var glblslug %}">{{item.number}}</a></td>
-     
-          <td>
-          {{item.customer}}
-        </td>
-        <td>
-          <a href="{% url 'allifmaalcommonapp:commonAddQuoteItems' item.id user_var glblslug %}" class="body-delete-link">{{item.total|floatformat:2|intcomma}}</a>
-        </td>
-        <td>
-          {{item.prospect}}
-        </td>
-      
-        <td>
-          {{item.date|date:'d/m/Y'}}
-        </td>
-        <td>
-          {{item.owner}}
-        </td>
-  
-       <td>
-        <div class="dropdown allifmaal-content-dropdown">
-          <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Options</a>
-          <div class="dropdown-content">
-            <a href="{% url 'allifmaalcommonapp:commonAddQuoteDetails' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
-            <a href="{% url 'allifmaalcommonapp:commonQuoteToPdf' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Download</a>
-            
-            
-            <a href="#" onclick="confirmDelete(this)" class="dropdown-item" id="allif-table-drop-item-link-delete">Delete Item</a>
-            
-          </div>
-        </div>
-        <div class="dropdown allif-confirm-action">
-          
-          <a href="{% url 'allifmaalcommonapp:commonQuotes' user_var glblslug %}" id="allif-table-drop-item-link">No</a><span><strong> | </strong></span>
-          <a href="{% url 'allifmaalcommonapp:commonDeleteQuote' item.id user_var glblslug %}" id="allif-confirm-delete">Confirm</a>
-        </div>
-
-       
-      </td>
-     <td> . . . </td>
-     <td></td>
-    
-
-  </tr>
-    {% endfor %}
-      {%endif %}
-
-      </tbody>
-    </table>
-    </div>
-   </div>
-
-
-  
-  </div><!--end....table column-->
-  </div>
-
-</div><!--end of main container of the page....-->
-</div>
-  {% block scripts %}
  
   {% endblock %}
-  
-   {% endblock %}
+  {% block upload-excel-file %}
+  {%endblock%}
+  {% block list-table-headers %}
+ 
+  <td class="allif-fix-table-col">Patient</td>
+  <td class="allif-table-header-td">Medicine</td>
+  <td class="allif-table-header-td">Via</td>
+  <td class="allif-table-header-td">Recorded On</td>
+  <td class="allif-table-header-td">Status</td>
    
+  {% endblock %}
+
+  {% block list-table-content-seciton %}
+  <td class="allif-fix-table-col"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.prescription.medical_file.customer.id user_var glblslug %}">{{item.prescription.medical_file.customer}}</a></td>
+ 
+  <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalshaafiapp:prescriptionDetails' item.prescription.id user_var glblslug %}"> {{item.prescription}}</a></td>
+  <td class="allif-table-content-td">{{item.via}}</td>
+  <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
+  <td class="allif-table-content-td">{{item.status}}</td>
+  {% endblock %}
+  {% block list-table-content-seciton-dropdown-links %}
+  <a href="{% url 'allifmaalshaafiapp:EditTreatment' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Record</a>
+  
+  {% endblock %}
+  

@@ -30,20 +30,24 @@
 
 
   <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
-  <a href="{{ allif_contextual_action_links.commonTransactionDetails.url }}">Transaction Details</a>
  
-{% if 'commonAddTransactionDetails' in allif_contextual_action_links %}
-    <a href="{{ allif_contextual_action_links.commonAddTransactionDetails.url }}">Refresh</a>
- 
-{% endif %}
-
 {% if 'AddTriageData' in allif_contextual_action_links %}
-
-<a href="{% url 'allifmaalshaafiapp:triageData' user_var glblslug %}">Triage Records</a>
   <a class="action-button" href="{{ allif_contextual_action_links.AddTriageData.url }}">Add Triage</a>
-  <a class="action-button" href="{{ allif_contextual_action_links.addDoctorAssessment.url }}"> Add Doctor Assessment</a>
-{% else %}
+  <a class="action-button" href="{{ allif_contextual_action_links.AddAssessment.url }}">Add Assessment</a>
+  <a class="action-button" href="{{ allif_contextual_action_links.AddLabTest.url }}">New Lab Test</a>
+  <a class="action-button" href="{{ allif_contextual_action_links.AddAdmission.url }}">Admit</a>
+ 
+
+<a class="action-button" href="{{ allif_contextual_action_links.AddReferal.url }}">Refer</a>
+
+  {% else %}
 {% endif %}
+
+{% if 'commonAddTransactionDetails' in allif_contextual_action_links %}
+    <a href="{{ allif_contextual_action_links.AddPrescription.url }}">New Prescription</a>
+   
+{% endif %}
+
 
 {% if 'addExamDetails' in allif_contextual_action_links %} {# Example for a new action name #}
 
@@ -51,7 +55,7 @@
  
 {% else %}
 {% endif %}
-
+<a href="{{ allif_contextual_action_links.AddLabTest.url }}"> Add Lab Test</a>
 {% endblock %}
 
    {% block core-tab-col-one %}
@@ -107,12 +111,48 @@
 
 
   {% block allif_sensitive_section_col_one %}
-    <tr>
+  <tr>
       <td class="allif-fix-table-col"> {{allifquery}}</td>
       <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Go Back</a></td>
     </tr>
+  {% if 'AddTriageData' in allif_contextual_action_links %}
+
+    <tr>
+      <td class="allif-fix-table-col"> Record New Triage for {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{{ allif_contextual_action_links.AddTriageData.url }}">Add Triage</a></td>
+    </tr>
+
+ <tr>
+      <td class="allif-fix-table-col"> New Assessment {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{{ allif_contextual_action_links.AddAssessment.url }}">Add Assessment</a></td>
+    </tr>
+     
+     <tr>
+      <td class="allif-fix-table-col"> New Lab Test for {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{{ allif_contextual_action_links.AddLabTest.url }}">Request New Lab Test</a></td>
+    </tr>
+
+    {%endif%}
   {% endblock %}
   {% block allif_sensitive_section_col_two %}
+  
+     <tr>
+      <td class="allif-fix-table-col"> Discharge {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{{ allif_contextual_action_links.AddDischarge.url }}">New Discharge</a></td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col"> Refer {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{{ allif_contextual_action_links.AddReferal.url }}">New Referral</a></td>
+    </tr>
+
+  
+    {% if 'commonAddTransactionDetails' in allif_contextual_action_links %}
+    <tr>
+      <td class="allif-fix-table-col"> New Prescription for {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{{ allif_contextual_action_links.AddPrescription.url }}">New Prescription</a></td>
+    </tr>
+    {%endif%}
+
     <tr>
       <td class="allif-fix-table-col">Delet {{allifquery}}</td>
       <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteTransactionConfirm.url }}">Delete {{allifquery}}</a></td>

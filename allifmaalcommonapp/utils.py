@@ -467,7 +467,91 @@ allif_model_sort_configs = {
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
      
-    
+    'labtestrequestsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+    'labTestresultsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+    'medicationsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+    'admissionsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+    'medicaladministrationsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+    'dischargesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+    'referralsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
     
     
     
@@ -558,6 +642,19 @@ allif_search_config_mapping = {
     
     'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
     'CommonTasksModel': ['name__icontains', 'description__icontains'], # Example
+    
+    'LabTestRequestsModel': ['name__icontains', 'description__icontains'],
+    'LabTestResultsModel': ['name__icontains', 'description__icontains'],
+    'MedicationsModel': ['name__icontains', 'description__icontains'],
+    'AdmissionsModel': ['name__icontains', 'description__icontains'],
+    'MedicalAdministrationsModel': ['name__icontains', 'description__icontains'],
+    'DischargesModel': ['name__icontains', 'description__icontains'],
+    'ReferralsModel': ['name__icontains', 'description__icontains'],
+    
+    
+    
+    
+    
     #'TriagesModel': ['medical_file__customer__icontains', 'pain_level__icontains'], # Example
     # Add configurations for other models as needed
 }
@@ -951,14 +1048,123 @@ allif_advanced_search_configs = {
     
     
     },
+
+'LabTestRequestsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+'LabTestResultsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+'MedicationsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+'AdmissionsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+'MedicalAdministrationsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+'DischargesModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+'ReferralsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
      
      
      
-     
-     
-     
-     
-     
+
     
     
     
@@ -1045,6 +1251,19 @@ allif_main_models_registry = {
    "CommonLogsModel":CommonLogsModel,
    "CommonDivisionsModel":CommonDivisionsModel,
    "CommonEmployeesModel":CommonEmployeesModel,
+   
+    "LabTestRequestsModel":LabTestRequestsModel,
+    "LabTestResultsModel":LabTestResultsModel,
+    "MedicationsModel":MedicationsModel,
+    "AdmissionsModel":AdmissionsModel,
+    "MedicalAdministrationsModel":MedicalAdministrationsModel,
+    "DischargesModel":DischargesModel,
+    "ReferralsModel":ReferralsModel,
+     
+     
+     
+     
+     
   
    
 }
