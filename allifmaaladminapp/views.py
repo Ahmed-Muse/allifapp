@@ -209,7 +209,7 @@ def adminDeleteCustomerContact(request,pk,*allifargs,**allifkwargs):
 def adminBlockUnblockEntity(request,pk,*allifargs,**allifkwargs):
     try:
         allifquery=CommonCompanyDetailsModel.all_objects.filter(id=pk).first()
-        user_var=request.user.usercompany
+        user_var=request.user.company
         usrslg=request.user.customurlslug
         if allifquery.status=="Blocked":
                 allifquery.status="Unblocked"

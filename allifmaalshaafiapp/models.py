@@ -92,36 +92,6 @@ class AssessmentsModel(CommonBaseModel):# very important model
         return str(self.medical_file)
 
 
-class LabTestRequestsModel(CommonBaseModel):
-    """
-    Represents a request from a healthcare professional for one or more laboratory tests.
-    """
-  
-    
-    items=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="items_lab_test_requests",)
-    
-    medical_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="medical_file_lab_test_requests", blank=True, null=True,)
-   
-    lab_name=models.ForeignKey(CommonSpacesModel, on_delete=models.SET_NULL, related_name="lab_name_lab_test_requests", blank=True, null=True,)
-    specimen=models.CharField(max_length=50,choices=SPECIMEN_TYPE,default='Blood',help_text="Current status of the lab order.")
-
-    test_status=models.CharField(max_length=50,choices=LAB_TEST_STATUSES,default='Ordered',help_text="Current status of the lab order.")
-
-    def __str__(self):
-        return str(self.medical_file)
-    
-class LabTestResultsModel(CommonBaseModel):
-    """
-    Stores the results for a specific test item from a laboratory order.
-    """
-  
-    test_request=models.ForeignKey(LabTestRequestsModel, on_delete=models.CASCADE, related_name="test_lab_test_requests_results", blank=True, null=True,)
-   
-   
-    def __str__(self):
-        return str(self.test_request.medical_file)
-      
-       
 class MedicationsModel(CommonBaseModel):# prescriptions...
     """
     Represents an actual prescription of medication  and otherprescriptions issued by a doctor for a patient.

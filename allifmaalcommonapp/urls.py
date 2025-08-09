@@ -9,15 +9,12 @@ path('Common/Debugging/', views.commonDebugging, name="commonDebugging"),
 
 ########################### logs ######################
 path('System/Log/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogs, name="commonLogs"),
-
 path('Search/Find/Log/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogSearch, name="commonLogSearch"),
 path('Search/Advance/d/Find/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogsAdvancedSearch, name="commonLogsAdvancedSearch"),
 path('Log/s/View/More/<str:pk>/<str:allifusr>/<str:allifslug>/Detail/s/', views.commonLogDetails, name="commonLogDetails"),
 path('Confirm/To/Delete/This/Log/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteLog, name="commonWantToDeleteLog"),
 path('Delete/This/Log/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteLog, name="commonDeleteLog"),
-
 path('api/search-features/<str:allifusr>/<str:allifslug>/', views.search_erp_features, name="search_erp_features"),
-
 path('', views.commonWebsite, name="commonWebsite"),
 path('Engineering/', views.commonEngineering, name="commonEngineering"),
 path('Decision/Making/Point/', views.CommonDecisionPoint, name="CommonDecisionPoint"),
@@ -133,7 +130,6 @@ path('Add/New/Operation/Year/Term/Quarter/<str:allifusr>/<str:allifslug>/', view
 path('Edit/The/Operation/Year/Term/s/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditOperationYearTerm, name="commonEditOperationYearTerm"),
 path('Delete/The/Operation/Year/Term/S/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteOperationYearTerm, name="commonDeleteOperationYearTerm"),
 path('Delete/This/Term/Now/for/ever/Are/You/Sure/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteOperationYearTerm, name="commonWantToDeleteOperationYearTerm"),
-
 
 ###############3 stocks, programs, subjects categories... ##########################
 path('Common/Main/Categories/<str:allifusr>/<str:allifslug>/List/', views.commonCategories, name="commonCategories"),
@@ -283,8 +279,6 @@ path('Delete/Record/<str:pk>/<str:allifusr>/<str:allifslug>/Details/Permntly/', 
 path('Search/Customers/<str:allifusr>/<str:allifslug>/Shareholders/', views.commonCustomerSearch, name="commonCustomerSearch"),
 path('Search/Results/Customers/<str:allifusr>/<str:allifslug>/', views.commonCustomerAdvanceSearch, name="commonCustomerAdvanceSearch"),
 path('Want/To/Delete/This/Customer/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteCustomer, name="commonWantToDeleteCustomer"),
-
-################################ assets #######################
 
 ##############################3############# Main Assets #############################################
 path('Assets/<str:allifusr>/<str:allifslug>/', views.commonAssets, name="commonAssets"),
@@ -550,7 +544,29 @@ path('Progress/ses/s/Details/Viewing/More/Information/<str:pk>/<str:allifusr>/<s
 path('Search/for/Progress/Records/unit/s/<str:allifusr>/<str:allifslug>/', views.commonProgressSearch, name="commonProgressSearch"),
 path('Advanced/Progress/s/Search/s/<str:allifusr>/<str:allifslug>/', views.commonProgressAdvanceSearch, name="commonProgressAdvanceSearch"),
 
+############################# Exams #######################
+
+#############################3 lab test requests ################
+path('Test/s/Evaluation/s/Exam/s/request/s/<str:allifusr>/<str:allifslug>/', views.commonTests, name="commonTests"),
+path('Add/New/Test/s/Examination/s/request/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddTest, name="commonAddTest"),
+path('Edit/Update/Test/Request/s/Detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditTest, name="commonEditTest"),
+path('Search/For/Test/s/Request/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.commonTestSearch, name="commonTestSearch"),
+path('Test/Request/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonTestDetails, name="commonTestDetails"),
+path('Do/You/u/Really/Want/to/Delete/This/Test/Request/s/data/record/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteTest, name="commonWantToDeleteTest"),
+path('Delete/This/Test/s/request/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteTest, name="commonDeleteTest"),
+path('Test/s/Request/s/data/info/s/Advance/d/Data/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.commonTestAdvancedSearch, name="commonTestAdvancedSearch"),
+
+#####################33 lab test request results #################3
+path('Test/s/Results/s/List/<str:allifusr>/<str:allifslug>/', views.commonResults, name="commonResults"),
+path('Add/New/Test/s/result/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonAddResult, name="commonAddResult"),
+path('Edit/Update/Test/Results/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditResult, name="commonEditResult"),
+path('Search/For/Test/S/result/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.commonResultSearch, name="commonResultSearch"),
+path('Test/s/results/info/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonResultDetails, name="commonResultDetails"),
+path('Do/You/u/Really/Want/to/Delete/This/Test/result/s/s/data/record/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonWantToDeleteResult, name="commonWantToDeleteResult"),
+path('Delete/This/Test/Result/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonDeleteResult, name="commonDeleteResult"),
+path('Test/s/Result/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.commonResultAdvancedSearch, name="commonResultAdvancedSearch"),
+
 #########################3 customer contacts #############################################
 path('Contact/Information/Saving/', views.commonCustomerContacts, name="commonCustomerContacts"),
 
-]   
+] 

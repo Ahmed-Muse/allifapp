@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from allifmaalusersapp.models import User,UserLoginDetailsModel
-from allifmaalcommonapp.models import CommonCompanyDetailsModel,CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel
+from allifmaalcommonapp.models import CommonOperationYearsModel,CommonOperationYearTermsModel,CommonCompanyDetailsModel,CommonDivisionsModel,CommonBranchesModel,CommonDepartmentsModel
 class CreateNewCustomUserForm(UserCreationForm):#this is used for new user creation
     password1 = forms.CharField(
         label="Password",
@@ -65,7 +65,7 @@ class UpdateCustomUserForm(forms.ModelForm):#this updates the user details...
     user_category=forms.Select()
     class Meta:
         model = User
-        fields = ['first_name','username','division','branch','department','peformance_counter', 'company','email','last_name','user_category']
+        fields = ['first_name','username','division','branch','department','peformance_counter', 'company','email','last_name','user_category','operation_year','operation_term']
         widgets={
             'user_category':forms.Select(attrs={'class':'form-control'}),
           
@@ -82,6 +82,8 @@ class UpdateCustomUserForm(forms.ModelForm):#this updates the user details...
        
             'department':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
        
+            'operation_year':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
+            'operation_term':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
         }
      # Pass custom arguments as keyword arguments and handle them separately.
     def __init__(self, *args, **kwargs):
@@ -96,6 +98,9 @@ class UpdateCustomUserForm(forms.ModelForm):#this updates the user details...
             self.fields['division'].queryset = CommonDivisionsModel.all_objects.filter(company=allifmaalparameter)
             self.fields['branch'].queryset = CommonBranchesModel.all_objects.filter(company=allifmaalparameter)
             self.fields['department'].queryset = CommonDepartmentsModel.all_objects.filter(company=allifmaalparameter)
+            
+            self.fields['operation_year'].queryset = CommonOperationYearsModel.all_objects.filter(company=allifmaalparameter)
+            self.fields['operation_term'].queryset = CommonOperationYearTermsModel.all_objects.filter(company=allifmaalparameter)
             
             # below is for admin only if you want to change the organization of the user...
             #self.fields['company'].queryset = CommonCompanyDetailsModel.all_objects.all()

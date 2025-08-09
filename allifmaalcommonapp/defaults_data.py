@@ -58,7 +58,6 @@ DEFAULT_OPERATION_YEARS = [
     {'year': 'Current Year', 'comments': 'Represents the current active operating year.'},
 ]
 
-# Define default Operation Year Terms (e.g., Fiscal Quarters/Terms)
 # 'operation_year_name' will be used to link to the DEFAULT_OPERATION_YEARS
 DEFAULT_OPERATION_YEAR_TERMS = [
     {'operation_year_name': 'Operation Year One', 'name': 'Term One', 'comments': 'First term of Operation Year One'},

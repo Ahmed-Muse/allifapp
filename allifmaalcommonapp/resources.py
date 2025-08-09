@@ -1,5 +1,5 @@
 from import_export import resources
-from .models import *
+from .models import CommonCompanyDetailsModel,CommonShareholderBankDepositsModel,CommonBankWithdrawalsModel
 
 class commonCompanyResource(resources.ModelResource):
     class Meta:

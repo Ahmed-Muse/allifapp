@@ -2,6 +2,25 @@
 ############ below is for teh common orders/transactions model... can be applied there....
 
 ##################3 start of used options#####################3
+STATUS_CHOICES = [
+    ('Draft', 'Draft'),            # Created but not yet finalized or submitted
+    ('Processing', 'Processing'),
+    ('Available', 'Available'),
+    ('Ordered', 'Ordered'),
+    ('Pending', 'Pending'),        # Awaiting approval, payment, or action
+    ('Active', 'Active'),          # The item, order, or service is in progress
+    ('Completed', 'Completed'),    # The task or process is finished successfully
+    ('Collected', 'Collected'),
+    ('Cancelled', 'Cancelled'),    # The order or process has been terminated
+    ('On_Hold', 'On Hold'),        # Temporarily suspended or paused
+    ('Passed', 'Passed'),
+    ('Failed', 'Failed'),          # The process did not complete successfully
+    ('Cancelled', 'Cancelled'),
+    ('Validated', 'Validated'),
+    ('Preparing', 'Preparing'),
+    ('Lost', 'Lost'),
+]
+
 
 PROPERTY_TYPES = [
         ('Residential', 'Residential'),
@@ -36,20 +55,8 @@ PROPERTY_UNIT_TYPES = [
         ('Other', 'Other'),
     ]
 
-
 # Lab Test Statuses
-LAB_TEST_STATUSES = [
-    ('Ordered', 'Ordered'),
-    ('Collected', 'Sample Collected'),
-    ('Processing', 'Under Processing'),
-    ('Completed', 'Completed'),
-    ('Validated', 'Validated'),
-    ('Resulted', 'Results Available'),
-    ('Pending', 'Pending Collection'),
-    ('Cancelled', 'Cancelled'),
-    ('Lost', 'Lost'),
-  
-]
+
 PRIORITY_LEVELS = [
     ('Normal', 'Normal'),
     ('High', 'High'),
@@ -132,12 +139,7 @@ SCOPE_TYPES = [
         ('Other', 'Other')
     ]
     
-        
-
-
-
-
-
+      
 ###########################################################
 
 item_state = [
@@ -156,14 +158,7 @@ DrugUnits = [
     ('Mililiters','Mililiters'),
    
     ]
-    
-
-
-
-
-
-#############################################################################
-
+   
 
 COMMON_EVENT_TYPES = [
     ('SALES_ORDER', 'Sales Order'),
@@ -254,6 +249,7 @@ APPOINTMENT_STATUSES = [
     ('CAN', 'Cancelled'),
     ('NS', 'No Show'),
 ]
+
 
 # Admission Statuses
 ADMISSION_STATUSES = [
@@ -439,18 +435,15 @@ BOOKING_STATUS_CHOICES = [
         ('CANCEL', 'Cancelled'),
         ('NOSHOW', 'No Show')
     ]
-STATUS_CHOICES = [
-        ('AVAIL', 'Available'),
-        ('OCC', 'Occupied'),
-        ('RESERVED', 'Reserved'),
-        ('CLEAN', 'Needs Cleaning'),
-    ]
+
 ORDER_STATUS_CHOICES = [
         ('PEND', 'Pending'),
         ('PREP', 'Preparing'),
         ('SERVED', 'Served'),
         ('COMP', 'Completed'), # Ready for billing
         ('CANCEL', 'Cancelled')
+        
+        
     ]
 
 STATUS_CHOICES_STATE = [
@@ -461,6 +454,18 @@ STATUS_CHOICES_STATE = [
         ('CANCEL', 'Cancelled')
     ]
 
+LAB_TEST_STATUSES = [
+    ('Ordered', 'Ordered'),
+    ('Collected', 'Sample Collected'),
+    ('Processing', 'Under Processing'),
+    ('Completed', 'Completed'),
+    ('Validated', 'Validated'),
+    ('Resulted', 'Results Available'),
+    ('Pending', 'Pending Collection'),
+    ('Cancelled', 'Cancelled'),
+    ('Lost', 'Lost'),
+  
+]
 ####################3 education ###########3
 student_status_choices = [('ENR', 'Enrolled'), ('DROP', 'Dropped'), ('COMP', 'Completed')]
 day_of_week_choices = [
@@ -481,8 +486,6 @@ PROPERTY_STATUS_TYPES = [
      ('ACT', 'Active'), ('PEND', 'Pending'), ('SOLD', 'Sold'),
     ('RENTED', 'Rented'), ('OFFMKT', 'Off Market'), ('CANC', 'Cancelled')
                          ]
-
-
 
 ###############3 vehicles ################
 

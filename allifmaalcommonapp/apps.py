@@ -5,9 +5,6 @@ class AllifmaalcommonappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'allifmaalcommonapp'
 
-# allifmaalcommonapp/apps.py
-# allifmaalcommonapp/apps.py
-
 from django.apps import AppConfig
 
 class AllifmaalCommonAppConfig(AppConfig):

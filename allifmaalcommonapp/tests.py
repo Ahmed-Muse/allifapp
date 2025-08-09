@@ -67,11 +67,6 @@ class CommonWebsiteViewTest(TestCase):
         self.assertEqual(str(response.context['error_message']), 'Test exception')  # Adjust this based on the actual exception message
 
 
-
-    
-       
-       
-
 class CommonWebsiteViewTest(TestCase):
 
     def setUp(self):

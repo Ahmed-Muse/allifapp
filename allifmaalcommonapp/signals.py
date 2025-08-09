@@ -120,8 +120,6 @@ def send_new_company_notification(sender, instance, created, **kwargs):
         # send_welcome_email(instance.email, instance.company)
 
 
-
-
 # --- NEW: Signal Receiver for User Logout ---
 @receiver(user_logged_out, sender=User) # Sender is your custom User model
 def log_user_logout(sender, request, user, **kwargs):

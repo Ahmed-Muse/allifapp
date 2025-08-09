@@ -11,26 +11,14 @@ def common_shared_data(request):
     """
     logged_in_user=request.user
     usrslg=request.user.customurlslug
-    #compslg=request.user.usercompany
-    #usernmeslg=User.objects.filter(customurlslug=usrslg).first()
-    #main_sbscrbr_entity=CommonCompanyDetailsModel.objects.filter(slgfld=compslg).first()
-    #logged_in_user_profile=CommonEmployeesModel.objects.filter(username=logged_in_user,company=main_sbscrbr_entity).first()
-    
+   
     compslg='allifmal'
-    
-    
     
     main_sbscrbr_entity=CommonCompanyDetailsModel.all_objects.filter(company=request.user.company).first()
     if main_sbscrbr_entity is not None:
         compslg=main_sbscrbr_entity.slgfld
     usernmeslg=request.user.customurlslug
     logged_in_user_profile=CommonEmployeesModel.objects.filter(username=logged_in_user,company=main_sbscrbr_entity).first()
-    
-    
-    
-    
-    
-    
     
     logged_user_division=None
     

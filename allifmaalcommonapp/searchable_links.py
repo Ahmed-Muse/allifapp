@@ -1,4 +1,3 @@
-# your_project_root/configs/navigation_links.py
 
 # Define general links accessible to all sectors
 # Each dictionary should have 'name', 'url_name', and 'description' (optional but good for search)

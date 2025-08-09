@@ -3,7 +3,6 @@ from django.db import models
 from allifmaalcommonapp.models import (CommonCompanyDetailsModel,CommonBaseModel, CommonTransitModel,CommonCustomersModel,CommonDivisionsModel, CommonBranchesModel, CommonDepartmentsModel,)
 
 
-    
 class PassengersModel(CommonBaseModel):
     
     # you may change these two below for manytomany field in future

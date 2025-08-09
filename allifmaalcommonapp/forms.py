@@ -1,10 +1,4 @@
-from django import forms
 from .models import *
-from allifmaalcommonapp.utils import allif_initialize_form_select_querysets 
-
-
-# forms.py
-
 from django import forms
 from django.forms.widgets import DateInput # Or your specific DatePickerInput import
 # from some_app.widgets import DatePickerInput # Example if DatePickerInput is custom
@@ -210,7 +204,7 @@ class CommonAddOperationYearForm(BaseForm):
         'division': forms.Select(attrs=SELECT2_ATTRS),
         'branch': forms.Select(attrs=SELECT2_ATTRS),
         'department': forms.Select(attrs=SELECT2_ATTRS),
-        'department':forms.TextInput(attrs={'class':'form-control','placeholder':''}),  
+        
         'year':forms.TextInput(attrs={'class':'form-control','placeholder':''}),  
         }
     def __init__(self, allifmaalparameter, *args, **kwargs):
@@ -1056,6 +1050,7 @@ class CommonAddInvoiceItemsForm(CommonBaseForm):
         }
   
 
+
 class CommonAddSupplierPaymentForm(CommonBaseForm):
     company_filtered_fields = {
         'account': CommonChartofAccountsModel,
@@ -1077,6 +1072,7 @@ class CommonAddSupplierPaymentForm(CommonBaseForm):
             
           # the css class that we are passing
         }
+   
    
 class CommonAddCustomerPaymentForm(CommonBaseForm):
     company_filtered_fields = {
@@ -1156,6 +1152,7 @@ class CommonAddTransactionItemForm(CommonBaseForm):
         }
     
 class CommonAddJobDetailsForm(CommonBaseForm):
+    
     company_filtered_fields = {
         'customer': CommonCustomersModel,
         'currency': CommonCurrenciesModel,
@@ -1172,7 +1169,9 @@ class CommonAddJobDetailsForm(CommonBaseForm):
         'currency':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
         }
     
+    
 class CommonAddJobItemsForm(CommonBaseForm):
+    
     company_filtered_fields = {
         'items': CommonStocksModel,
         }
@@ -1185,7 +1184,9 @@ class CommonAddJobItemsForm(CommonBaseForm):
         'item':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }
   
+  
 class CommonAddTasksForm(CommonBaseForm):
+    
     company_filtered_fields = {
         'assignedto': CommonEmployeesModel,
         }
@@ -1201,6 +1202,7 @@ class CommonAddTasksForm(CommonBaseForm):
         'task_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
         'assignedto':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
         }
+   
    
 class CommonAddTransitDetailsForm(CommonBaseForm):
     company_filtered_fields = {
@@ -1246,6 +1248,7 @@ class CommonAddTransitDetailsForm(CommonBaseForm):
             'delivery_confirmation_date_time':DatePickerInput(attrs={'class':'form-control'}),
         }
 
+
 class CommonAddTransitItemsForm(CommonBaseForm):
     company_filtered_fields = {
         'unit_of_measure': CommonUnitsModel,
@@ -1261,6 +1264,7 @@ class CommonAddTransitItemsForm(CommonBaseForm):
                   'consigner','consignee','weight','length','width','height','received','value','rate',
                   'shipment_status','destination','origin',
                   ]
+        
         widgets = {
         **CommonBaseForm.Meta.widgets,
             'origin':forms.TextInput(attrs={'class':'form-control'}),
@@ -1285,6 +1289,7 @@ class CommonAddTransitItemsForm(CommonBaseForm):
             'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }
    
+   
 ################################### PROGRESS REPORTING/RECORDINGS .....################
 class CommonAddProgressForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
@@ -1292,7 +1297,45 @@ class CommonAddProgressForm(CommonBaseForm):
         fields=CommonBaseForm.Meta.fields + []
         widgets = {
         **CommonBaseForm.Meta.widgets,
-      
         }
-  
- 
+
+
+#############################3 EXAMINATIONS ###################
+class CommonAddTestForm(CommonBaseForm):
+    company_filtered_fields = {
+        'space': CommonSpacesModel,
+        'items': CommonStocksModel,
+       
+        }
+    
+    class Meta(CommonBaseForm.Meta):
+        model = CommonAssessmentsModel
+        fields = CommonBaseForm.Meta.fields + ['items','space','specimen','test_status',
+                 ]
+        widgets={
+            **CommonBaseForm.Meta.widgets,
+           
+            'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+          
+          
+            'space':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+            'test_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+            'specimen':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+           
+
+        } 
+    
+###############33results #############
+
+class CommonAddResultForm(CommonBaseForm):
+    class Meta(CommonBaseForm.Meta):
+        model = CommonResultsModel
+        fields = CommonBaseForm.Meta.fields + []
+        widgets={
+            **CommonBaseForm.Meta.widgets,
+         
+           
+        } 
+   

@@ -1,0 +1,53 @@
+  {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block allif-basic-search-action %}
+    {% url 'allifmaalcommonapp:commonTestSearch' user_var glblslug %}
+  {% endblock %}
+
+  {% block advanced-search-action %}
+  {% url 'allifmaalcommonapp:commonTestAdvancedSearch' user_var glblslug %}
+  {% endblock %}
+  {% block upload-excel-file-action %}
+  
+  {% endblock %}
+  {% block allif-header-links %}
+  <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
+  <a href="{% allif_get_single_nav_link_url 'Tests' user_var glblslug %}">Evaluations</a>
+  <a href="{% allif_get_single_nav_link_url 'Results' user_var glblslug %}">Results</a>
+  
+  {% endblock %}
+  {% block upload-excel-file %}
+  {%endblock%}
+  {% block list-table-headers %}
+ 
+  <td class="allif-fix-table-col">Client</td>
+  <td class="allif-table-header-td">Reference No.</td>
+  <td class="allif-table-header-td">Test For</td>
+  <td class="allif-table-header-td">Test Status</td>
+  <td class="allif-table-header-td">Results</td>
+  <td class="allif-table-header-td">Date</td>
+ 
+   
+  {% endblock %}
+
+  {% block list-table-content-seciton %}
+  <td class="allif-fix-table-col">
+    <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.trans_file.customer.id user_var glblslug %}">
+        {{item.trans_file}}</a>
+    </td>
+  <td class="allif-table-content-td">
+  <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.trans_file.id user_var glblslug %}">{{item.trans_file.number}}</a></td>
+  <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditTest' item.id user_var glblslug %}"> {{item.items}}</a></td>
+  <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditTest' item.id user_var glblslug %}">{{item.test_status}}</a></td>
+  <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddResult' item.id user_var glblslug %}">Results</a></td>
+
+  
+  <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
+ 
+  {% endblock %}
+  {% block list-table-content-seciton-dropdown-links %}
+  <a href="{% url 'allifmaalcommonapp:commonEditTest' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Record</a>
+  
+  {% endblock %}
+  

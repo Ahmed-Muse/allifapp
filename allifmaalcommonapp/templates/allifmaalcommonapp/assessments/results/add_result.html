@@ -1,0 +1,98 @@
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+
+ {% block add-form-header-block %}
+<a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
+  <a href="{% allif_get_single_nav_link_url 'Tests' user_var glblslug %}">Evaluations</a>
+  <a href="{% allif_get_single_nav_link_url 'Results' user_var glblslug %}">Results</a>
+{% endblock %}
+{% block details-table-col-one %}
+ <tr>
+    <td class="allif-fix-table-col">Client</td>
+    <td>{{allifquery.test_request.trans_file.customer}}</td>
+  </tr>
+
+{%endblock%}
+{% block details-table-col-two %}
+ <tr>
+    <td class="allif-fix-table-col">Test For </td>
+    <td>{{allifquery.test_request.items}}</td>
+  </tr>
+{%endblock%}
+   {% block core-tab-col-one %}
+  
+    <tr>
+      <td class="allif-fix-table-col-forms">Results</td>
+      <td>{{form.name}}</td>
+    </tr>
+    
+    {%endblock%}
+
+    {% block core-tab-col-two %}
+    
+     <tr>
+        <td class="allif-fix-table-col-forms">Description</td>
+        <td>{{form.description}}</td>
+      </tr>
+    
+    {%endblock%}
+
+    
+
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Results' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteResultConfirm.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    
+    {% endblock %}
+
+    
+{% block item_details_related_items_full_table %}
+  <div class="allif-full-table-content-main-wrapper">
+      {% include 'allifmaalcommonapp/includes/tables/full-table-header-upper-section.html' %}
+
+      {% block list-table-headers %}
+        <td class="allif-fix-table-col"> Item</td>
+        <td class="allif-fix-table-col"> Quantity</td>
+        <td class="allif-table-header-td"> Origin</td>
+        <td class="allif-table-header-td"> Destination </td>
+        <td class="allif-table-header-td"> Status</td>
+         {% endblock %}
+        <td class="allif-table-header-td">Navigate</td>
+      {% include 'allifmaalcommonapp/includes/tables/full-table-header-lower-section.html' %}
+      
+      {% for item in allifqueryset %}  
+        <tr data-id="{{item.id}}" class="allif-table-header-content-row">
+        {% block list-table-content-seciton %}
+        <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}
+          <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditResult' item.id user_var glblslug %}"> {{item.name}} </a>{%endblock%}</td>
+        <td class="allif-table-content-td"> {{item.quantity}} </td>
+        <td class="allif-table-content-td"> {{item.origin}}</td>
+         <td class="allif-table-content-td"> {{item.destination}}</td>
+        <td class="allif-table-content-td"> <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditResult' item.id user_var glblslug %}">{{item.shipment_status}} </a></td>
+        {% endblock %}
+        <td class="allif-table-content-td">
+           
+        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
+
+        {% block list-table-content-seciton-dropdown-links %}
+        <a href="" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+        {% endblock %}
+
+        {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
+        </td>
+    </tr>
+      {% endfor %}
+    {% include 'allifmaalcommonapp/includes/tables/full-table-last-section.html' %}
+
+      </div>
+{%endblock%}
+

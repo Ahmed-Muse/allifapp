@@ -9907,3 +9907,1672 @@ Traceback (most recent call last):
 ValueError: Field 'id' expected a number but got 'Anaale Geedi'.
 INFO 2025-08-09 00:13:06,986 autoreload 31496 48016 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
 INFO 2025-08-09 00:13:08,741 autoreload 44984 18268 Watching for file changes with StatReloader
+INFO 2025-08-09 16:59:11,747 autoreload 28824 12364 Watching for file changes with StatReloader
+INFO 2025-08-09 17:02:51,445 autoreload 28824 12364 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 17:02:53,313 autoreload 17320 40772 Watching for file changes with StatReloader
+INFO 2025-08-09 17:03:58,217 autoreload 17320 40772 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 17:03:59,991 autoreload 40536 38948 Watching for file changes with StatReloader
+INFO 2025-08-09 17:05:28,399 autoreload 40536 38948 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-09 17:05:29,904 autoreload 40560 22952 Watching for file changes with StatReloader
+INFO 2025-08-09 17:05:40,300 autoreload 46452 12768 Watching for file changes with StatReloader
+INFO 2025-08-09 17:06:10,311 autoreload 46452 12768 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-09 17:06:11,791 autoreload 38408 46580 Watching for file changes with StatReloader
+INFO 2025-08-09 17:06:23,271 autoreload 38408 46580 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-09 17:06:24,784 autoreload 44380 10584 Watching for file changes with StatReloader
+INFO 2025-08-09 17:06:46,170 autoreload 44380 10584 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-09 17:06:47,768 autoreload 40348 39256 Watching for file changes with StatReloader
+INFO 2025-08-09 17:07:51,883 autoreload 40348 39256 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 17:07:53,101 autoreload 40408 7244 Watching for file changes with StatReloader
+INFO 2025-08-09 17:07:58,032 autoreload 40408 7244 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 17:07:59,420 autoreload 45960 40848 Watching for file changes with StatReloader
+INFO 2025-08-09 17:09:36,722 autoreload 45960 40848 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 17:09:38,031 autoreload 39236 4376 Watching for file changes with StatReloader
+INFO 2025-08-09 17:11:27,025 autoreload 39236 4376 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 17:11:28,436 autoreload 39820 49876 Watching for file changes with StatReloader
+INFO 2025-08-09 17:18:39,292 autoreload 39820 49876 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 17:18:40,222 autoreload 21880 5768 Watching for file changes with StatReloader
+INFO 2025-08-09 17:19:15,845 autoreload 21880 5768 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 17:19:16,981 autoreload 39668 48556 Watching for file changes with StatReloader
+INFO 2025-08-09 17:21:43,981 autoreload 39668 48556 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-09 17:21:44,930 autoreload 39844 49760 Watching for file changes with StatReloader
+INFO 2025-08-09 17:22:06,874 autoreload 39844 49760 C:\am\allifapp\allifapperp\allifmaalcommonapp\middleware.py changed, reloading.
+INFO 2025-08-09 17:22:07,797 autoreload 50084 48264 Watching for file changes with StatReloader
+INFO 2025-08-09 17:22:58,716 autoreload 50084 48264 C:\am\allifapp\allifapperp\allifmaalcommonapp\signals.py changed, reloading.
+INFO 2025-08-09 17:22:59,699 autoreload 22156 44620 Watching for file changes with StatReloader
+INFO 2025-08-09 17:25:44,443 autoreload 22156 44620 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-08-09 17:25:45,335 autoreload 48940 43668 Watching for file changes with StatReloader
+INFO 2025-08-09 17:26:33,717 autoreload 48940 43668 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-09 17:26:34,697 autoreload 30464 42872 Watching for file changes with StatReloader
+INFO 2025-08-09 17:26:49,618 autoreload 30464 42872 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-09 17:26:50,577 autoreload 44240 47072 Watching for file changes with StatReloader
+INFO 2025-08-09 17:27:08,411 autoreload 44240 47072 C:\am\allifapp\allifapperp\allifmaalcommonapp\allifutils.py changed, reloading.
+INFO 2025-08-09 17:27:09,527 autoreload 43644 45948 Watching for file changes with StatReloader
+INFO 2025-08-09 17:27:24,041 autoreload 43644 45948 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:27:25,044 autoreload 50172 40156 Watching for file changes with StatReloader
+INFO 2025-08-09 17:28:34,049 autoreload 50172 40156 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:28:35,205 autoreload 2612 49492 Watching for file changes with StatReloader
+INFO 2025-08-09 17:31:05,103 autoreload 2612 49492 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:31:05,972 autoreload 15124 48908 Watching for file changes with StatReloader
+INFO 2025-08-09 17:32:24,459 autoreload 15124 48908 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:32:25,177 autoreload 41444 29060 Watching for file changes with StatReloader
+INFO 2025-08-09 17:33:32,547 autoreload 41444 29060 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:33:33,189 autoreload 10372 20580 Watching for file changes with StatReloader
+INFO 2025-08-09 17:35:14,251 autoreload 10372 20580 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:35:15,004 autoreload 18956 22368 Watching for file changes with StatReloader
+INFO 2025-08-09 17:41:54,129 autoreload 18956 22368 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:41:54,623 autoreload 364 47256 Watching for file changes with StatReloader
+INFO 2025-08-09 17:42:03,891 autoreload 364 47256 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:42:04,958 autoreload 8032 45328 Watching for file changes with StatReloader
+INFO 2025-08-09 17:42:30,328 autoreload 8032 45328 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-08-09 17:42:31,324 autoreload 32988 27748 Watching for file changes with StatReloader
+INFO 2025-08-09 17:42:40,685 autoreload 32988 27748 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-08-09 17:42:41,653 autoreload 32760 49324 Watching for file changes with StatReloader
+INFO 2025-08-09 17:42:44,491 autoreload 32760 49324 C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py changed, reloading.
+INFO 2025-08-09 17:42:45,473 autoreload 48112 37164 Watching for file changes with StatReloader
+INFO 2025-08-09 17:43:17,736 autoreload 48112 37164 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:43:18,844 autoreload 46556 43000 Watching for file changes with StatReloader
+INFO 2025-08-09 17:43:27,086 autoreload 46556 43000 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 17:43:28,303 autoreload 25956 10412 Watching for file changes with StatReloader
+INFO 2025-08-09 17:44:00,622 autoreload 25956 10412 C:\am\allifapp\allifapperp\allifmaalcommonapp\defaults_data.py changed, reloading.
+INFO 2025-08-09 17:44:01,784 autoreload 28764 39992 Watching for file changes with StatReloader
+INFO 2025-08-09 17:49:16,478 autoreload 28764 39992 C:\am\allifapp\allifapperp\allifmaalilmapp\models.py changed, reloading.
+INFO 2025-08-09 17:49:17,369 autoreload 33928 11304 Watching for file changes with StatReloader
+INFO 2025-08-09 17:52:08,771 autoreload 33928 11304 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-09 17:52:09,795 autoreload 16512 20672 Watching for file changes with StatReloader
+ERROR 2025-08-09 17:54:37,620 utils 16512 33068 Failed to reverse URL 'allifmaalcommonapp:addLabTestResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '6'}: Reverse for 'addLabTestResult' not found. 'addLabTestResult' is not a valid view function or pattern name.
+INFO 2025-08-09 17:57:34,387 autoreload 16512 20672 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-09 17:57:35,409 autoreload 48112 23260 Watching for file changes with StatReloader
+INFO 2025-08-09 17:57:41,410 autoreload 48112 23260 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-09 17:57:42,357 autoreload 34936 20820 Watching for file changes with StatReloader
+INFO 2025-08-09 18:12:39,331 autoreload 34936 20820 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 18:12:40,310 autoreload 32312 32044 Watching for file changes with StatReloader
+INFO 2025-08-09 18:12:54,743 autoreload 32312 32044 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 18:12:55,961 autoreload 26752 48224 Watching for file changes with StatReloader
+INFO 2025-08-09 18:13:18,807 autoreload 26752 48224 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 18:13:20,576 autoreload 24004 48684 Watching for file changes with StatReloader
+INFO 2025-08-09 18:28:20,278 autoreload 24004 48684 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 18:28:22,100 autoreload 45108 9432 Watching for file changes with StatReloader
+INFO 2025-08-09 18:28:32,796 autoreload 45108 9432 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 18:28:33,805 autoreload 8892 48436 Watching for file changes with StatReloader
+INFO 2025-08-09 18:29:07,904 autoreload 45068 48856 Watching for file changes with StatReloader
+INFO 2025-08-09 18:29:19,575 autoreload 45068 48856 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 18:29:20,801 autoreload 18500 28832 Watching for file changes with StatReloader
+INFO 2025-08-09 18:35:21,704 autoreload 18500 28832 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 18:35:23,360 autoreload 48832 48496 Watching for file changes with StatReloader
+INFO 2025-08-09 18:46:37,940 autoreload 48832 48496 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 18:46:39,666 autoreload 11608 22352 Watching for file changes with StatReloader
+INFO 2025-08-09 18:46:57,004 autoreload 11608 22352 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 18:46:58,075 autoreload 35340 41848 Watching for file changes with StatReloader
+INFO 2025-08-09 18:47:48,573 autoreload 35340 41848 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-09 18:47:49,638 autoreload 46756 36840 Watching for file changes with StatReloader
+INFO 2025-08-09 18:47:57,225 autoreload 46756 36840 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 18:47:58,269 autoreload 45448 36640 Watching for file changes with StatReloader
+INFO 2025-08-09 19:00:24,446 autoreload 45448 36640 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-09 19:00:25,994 autoreload 21800 48108 Watching for file changes with StatReloader
+INFO 2025-08-09 19:01:30,788 autoreload 21800 48108 C:\am\allifapp\allifapperp\allifmaalshaafiapp\forms.py changed, reloading.
+INFO 2025-08-09 19:01:31,901 autoreload 39496 47260 Watching for file changes with StatReloader
+INFO 2025-08-09 19:04:23,024 autoreload 39496 47260 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-09 19:04:24,063 autoreload 19960 40112 Watching for file changes with StatReloader
+INFO 2025-08-09 19:05:06,095 autoreload 19960 40112 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-09 19:05:07,144 autoreload 27092 12032 Watching for file changes with StatReloader
+INFO 2025-08-09 19:08:18,863 autoreload 27092 12032 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 19:08:19,980 autoreload 33028 32556 Watching for file changes with StatReloader
+INFO 2025-08-09 19:19:35,801 autoreload 33028 32556 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 19:19:36,990 autoreload 15668 38720 Watching for file changes with StatReloader
+INFO 2025-08-09 19:20:09,644 autoreload 15668 38720 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 19:20:10,821 autoreload 42532 25232 Watching for file changes with StatReloader
+INFO 2025-08-09 19:24:17,709 autoreload 42532 25232 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 19:24:18,630 autoreload 26608 41212 Watching for file changes with StatReloader
+INFO 2025-08-09 19:24:42,430 autoreload 26608 41212 C:\am\allifapp\allifapperp\allifmaalshaafiapp\urls.py changed, reloading.
+INFO 2025-08-09 19:24:43,434 autoreload 16860 49780 Watching for file changes with StatReloader
+INFO 2025-08-09 19:32:24,894 autoreload 16860 49780 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-08-09 19:32:25,916 autoreload 16704 30496 Watching for file changes with StatReloader
+INFO 2025-08-09 19:38:38,442 autoreload 16704 30496 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-08-09 19:38:39,438 autoreload 36992 10044 Watching for file changes with StatReloader
+INFO 2025-08-09 19:57:28,684 autoreload 36992 10044 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 19:57:30,235 autoreload 32552 24980 Watching for file changes with StatReloader
+INFO 2025-08-09 20:00:01,929 autoreload 32552 24980 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 20:00:03,500 autoreload 48656 40464 Watching for file changes with StatReloader
+INFO 2025-08-09 20:03:10,599 autoreload 48656 40464 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 20:03:11,942 autoreload 29196 14608 Watching for file changes with StatReloader
+INFO 2025-08-09 20:08:11,108 autoreload 29196 14608 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 20:08:12,848 autoreload 30236 13768 Watching for file changes with StatReloader
+INFO 2025-08-09 20:09:37,518 autoreload 30236 13768 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-08-09 20:09:39,277 autoreload 2220 22384 Watching for file changes with StatReloader
+INFO 2025-08-09 20:11:20,059 autoreload 2220 22384 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-09 20:11:21,545 autoreload 50080 46644 Watching for file changes with StatReloader
+WARNING 2025-08-09 20:11:29,355 log 50080 41616 Not Found: /Allifmaal/ERP/System/Healthcare/App/Laboratory/test/s/results/s/user-full-names-df03ff542026/nice-hotels2116-82d0be643d75/
+WARNING 2025-08-09 20:11:29,471 log 50080 41616 Not Found: /favicon.ico
+INFO 2025-08-09 20:12:10,371 autoreload 50080 46644 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-09 20:12:11,940 autoreload 36968 24484 Watching for file changes with StatReloader
+INFO 2025-08-09 20:13:27,026 autoreload 36968 24484 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-09 20:13:28,608 autoreload 49380 20108 Watching for file changes with StatReloader
+INFO 2025-08-09 20:15:44,145 autoreload 49380 20108 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-08-09 20:15:45,704 autoreload 29320 11740 Watching for file changes with StatReloader
+INFO 2025-08-09 20:21:51,226 autoreload 29320 11740 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-09 20:21:52,700 autoreload 8548 28908 Watching for file changes with StatReloader
+INFO 2025-08-09 20:23:04,185 autoreload 8548 28908 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-08-09 20:23:05,953 autoreload 43748 41168 Watching for file changes with StatReloader
+INFO 2025-08-09 20:26:03,587 autoreload 43748 41168 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-09 20:26:05,085 autoreload 35952 29472 Watching for file changes with StatReloader
+WARNING 2025-08-09 20:44:18,532 allif_navigation_tags 35952 24324 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:44:18,533 allif_navigation_tags 35952 24324 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:44:33,502 allif_navigation_tags 35952 24324 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:44:33,503 allif_navigation_tags 35952 24324 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:46:18,927 allif_navigation_tags 35952 24324 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:46:18,927 allif_navigation_tags 35952 24324 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:46:18,959 allif_navigation_tags 35952 24324 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+INFO 2025-08-09 20:47:32,799 autoreload 35952 29472 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-09 20:47:34,549 autoreload 11552 12272 Watching for file changes with StatReloader
+INFO 2025-08-09 20:47:57,184 autoreload 11552 12272 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 20:47:59,012 autoreload 43772 19056 Watching for file changes with StatReloader
+WARNING 2025-08-09 20:48:01,678 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:48:01,678 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:48:01,729 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:48:14,811 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:48:14,811 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:48:14,835 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:48:16,620 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:48:16,621 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:49:59,610 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:49:59,610 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:10,363 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:10,363 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:16,714 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:16,715 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:16,748 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:19,324 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:19,324 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:19,345 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:22,081 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:22,082 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:24,982 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:24,982 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:25,002 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:32,544 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:50:50,086 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:03,328 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:03,328 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:07,408 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:07,408 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:07,436 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:15,104 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:15,104 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:15,122 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:17,594 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:17,594 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:29,609 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:51:29,609 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:53:19,901 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:53:19,901 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:53:21,408 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:53:21,408 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:53:35,288 allif_navigation_tags 43772 38824 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:54:41,372 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:54:41,373 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:56:30,927 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:56:30,928 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:56:31,711 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:56:31,711 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:56:51,873 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:56:51,874 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:57:18,486 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:57:18,486 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:57:25,813 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:57:25,813 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:58:14,279 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:58:14,279 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:58:30,386 allif_navigation_tags 43772 38824 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:58:30,386 allif_navigation_tags 43772 38824 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 20:59:20,408 autoreload 43772 19056 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 20:59:22,248 autoreload 30772 36584 Watching for file changes with StatReloader
+WARNING 2025-08-09 20:59:24,949 allif_navigation_tags 30772 41368 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:59:24,950 allif_navigation_tags 30772 41368 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:59:48,347 allif_navigation_tags 30772 41368 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 20:59:48,347 allif_navigation_tags 30772 41368 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 20:59:58,922 autoreload 30772 36584 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 21:00:00,987 autoreload 31272 18808 Watching for file changes with StatReloader
+WARNING 2025-08-09 21:00:03,536 allif_navigation_tags 31272 21636 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:00:03,536 allif_navigation_tags 31272 21636 General navigation link with name 'Results' not found in allif_single_access_general_links.
+ERROR 2025-08-09 21:00:03,692 log 31272 21636 Internal Server Error: /Test/s/Evaluation/s/Exam/s/request/s/user-full-names-df03ff542026/nice-hotels2116-82d0be643d75/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 4216, in commonTests
+    return render(request,'allifmaalcommonapp/assessments/tests/tests.html',context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonCustomerDetails' with arguments '('', 'user-full-names-df03ff542026', 'nice-hotels2116-82d0be643d75')' not found. 1 pattern(s) tried: ['View/Record/(?P<pk>[^/]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/Details/\\Z']
+INFO 2025-08-09 21:00:35,398 autoreload 31272 18808 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 21:00:37,279 autoreload 31028 43064 Watching for file changes with StatReloader
+WARNING 2025-08-09 21:00:51,755 allif_navigation_tags 31028 46604 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:00:51,756 allif_navigation_tags 31028 46604 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:00:54,615 allif_navigation_tags 31028 46604 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:00:54,616 allif_navigation_tags 31028 46604 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 21:01:05,512 autoreload 31028 43064 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 21:01:07,381 autoreload 47460 37924 Watching for file changes with StatReloader
+WARNING 2025-08-09 21:01:11,830 allif_navigation_tags 47460 42292 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:01:11,831 allif_navigation_tags 47460 42292 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 21:01:51,170 autoreload 47460 37924 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 21:01:53,085 autoreload 28840 48176 Watching for file changes with StatReloader
+WARNING 2025-08-09 21:01:57,287 allif_navigation_tags 28840 30020 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:01:57,287 allif_navigation_tags 28840 30020 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 21:02:43,804 autoreload 28840 48176 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 21:02:45,485 autoreload 44124 36052 Watching for file changes with StatReloader
+INFO 2025-08-09 21:02:56,901 autoreload 44124 36052 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 21:02:58,556 autoreload 21372 37448 Watching for file changes with StatReloader
+WARNING 2025-08-09 21:04:29,132 allif_navigation_tags 21372 48980 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:04:29,133 allif_navigation_tags 21372 48980 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 21:07:35,873 autoreload 21372 37448 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 21:07:37,714 autoreload 24248 6712 Watching for file changes with StatReloader
+WARNING 2025-08-09 21:07:46,874 allif_navigation_tags 24248 25048 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:07:46,875 allif_navigation_tags 24248 25048 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 21:07:52,242 autoreload 24248 6712 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 21:07:55,091 autoreload 40848 46352 Watching for file changes with StatReloader
+WARNING 2025-08-09 21:08:32,552 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:08:32,553 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:08:41,451 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:08:41,452 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:08:41,498 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:08:53,662 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:08:53,662 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:17,141 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:17,142 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:17,184 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:20,728 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:20,728 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:27,855 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:27,856 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:27,919 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:29,529 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:29,530 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:35,665 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:35,665 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:43,280 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:43,281 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:46,367 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:46,368 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:46,415 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:51,190 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:51,191 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:51,232 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:55,614 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:10:55,615 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:00,701 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:00,701 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:00,752 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:06,298 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:06,298 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:06,347 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:09,194 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:09,195 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:36,059 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:36,059 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:44,351 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:44,351 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:51,538 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:51,539 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:51,592 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:58,646 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:58,646 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:11:58,694 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:01,011 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:01,012 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:29,491 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:29,492 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:29,533 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:30,711 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:30,712 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:35,554 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:35,555 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:41,965 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:41,966 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:42,011 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:44,273 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:44,274 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:44,330 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:46,098 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:12:46,099 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:13:40,573 allif_navigation_tags 40848 13568 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:13:40,573 allif_navigation_tags 40848 13568 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 21:14:45,804 autoreload 40848 46352 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 21:14:47,839 autoreload 3588 25932 Watching for file changes with StatReloader
+WARNING 2025-08-09 21:14:50,535 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:14:50,536 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:14:52,723 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:14:52,724 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:14:54,767 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:14:54,768 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:14:54,852 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:03,476 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:03,477 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:07,972 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:07,973 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:08,004 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:43,889 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:43,890 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:43,924 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:53,509 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:15:53,510 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:13,250 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:13,251 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:13,285 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:25,199 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:25,200 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:28,990 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:28,990 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:29,037 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:32,019 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:32,019 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:33,617 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:33,617 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:33,662 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+ERROR 2025-08-09 21:17:38,894 utils 3588 676 Failed to reverse URL 'allifmaalshaafiapp:commonEditResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '1'}: Reverse for 'commonEditResult' not found. 'commonEditResult' is not a valid view function or pattern name.
+WARNING 2025-08-09 21:17:44,376 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:44,377 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:52,525 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:52,525 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:56,383 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:56,384 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:17:56,417 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+ERROR 2025-08-09 21:18:01,231 utils 3588 676 Failed to reverse URL 'allifmaalshaafiapp:commonEditResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '1'}: Reverse for 'commonEditResult' not found. 'commonEditResult' is not a valid view function or pattern name.
+WARNING 2025-08-09 21:18:04,093 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:18:04,094 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:18:15,291 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:18:15,292 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:18:19,766 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:18:19,767 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:18:21,707 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:18:21,708 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:18:21,745 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+ERROR 2025-08-09 21:18:39,225 utils 3588 676 Failed to reverse URL 'allifmaalshaafiapp:commonEditResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '1'}: Reverse for 'commonEditResult' not found. 'commonEditResult' is not a valid view function or pattern name.
+WARNING 2025-08-09 21:18:53,981 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:18:53,982 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:03,791 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:03,791 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:07,354 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:07,355 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:07,394 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:09,580 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:09,581 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:11,703 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:11,705 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:11,739 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:14,337 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:14,338 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:14,370 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:41,377 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:41,378 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:41,431 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:50,227 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:50,228 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:50,282 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:57,598 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:19:57,599 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:20:06,627 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:20:06,628 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:20:06,659 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:20:08,810 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:20:08,810 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:21:07,693 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:21:07,694 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:21:19,361 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:21:19,361 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:21:19,403 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:21:57,016 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:21:57,017 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:21:57,055 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:06,025 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:06,028 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:06,070 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:07,953 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:07,954 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:12,013 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:12,013 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:12,053 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:26,400 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:26,402 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:26,436 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:30,676 allif_navigation_tags 3588 676 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:22:30,676 allif_navigation_tags 3588 676 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:43:17,816 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:43:17,816 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:43:26,090 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:43:26,090 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:43:26,132 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:43:29,349 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:43:29,349 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:43:29,389 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+ERROR 2025-08-09 21:43:37,626 utils 3588 33828 Failed to reverse URL 'allifmaalshaafiapp:commonEditResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '2'}: Reverse for 'commonEditResult' not found. 'commonEditResult' is not a valid view function or pattern name.
+WARNING 2025-08-09 21:43:41,508 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:43:41,508 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:02,494 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:02,494 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:08,311 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:08,311 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:08,351 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:12,334 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:12,335 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:12,359 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:17,023 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:17,023 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:17,066 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:33,232 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:33,233 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:33,261 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:37,819 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:37,819 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:39,808 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:39,809 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:44,465 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:44:44,466 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:45:08,262 allif_navigation_tags 3588 33828 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:45:08,263 allif_navigation_tags 3588 33828 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 21:45:33,981 autoreload 3588 25932 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-09 21:45:35,370 autoreload 18648 26056 Watching for file changes with StatReloader
+INFO 2025-08-09 21:46:09,983 autoreload 18648 26056 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-09 21:46:11,422 autoreload 36984 20704 Watching for file changes with StatReloader
+WARNING 2025-08-09 21:46:12,999 allif_navigation_tags 36984 2120 General navigation link with name 'Tests' not found in allif_single_access_general_links.
+WARNING 2025-08-09 21:46:12,999 allif_navigation_tags 36984 2120 General navigation link with name 'Results' not found in allif_single_access_general_links.
+INFO 2025-08-09 21:47:11,164 autoreload 36984 20704 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-09 21:47:12,366 autoreload 5052 47000 Watching for file changes with StatReloader
+ERROR 2025-08-09 21:48:04,812 utils 5052 37092 Failed to reverse URL 'allifmaalshaafiapp:commonEditResult' with kwargs {'allifusr': 'user-full-names-df03ff542026', 'allifslug': 'nice-hotels2116-82d0be643d75', 'pk': '4'}: Reverse for 'commonEditResult' not found. 'commonEditResult' is not a valid view function or pattern name.
+INFO 2025-08-09 21:48:29,168 autoreload 5052 47000 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 21:48:30,755 autoreload 23100 42016 Watching for file changes with StatReloader
+INFO 2025-08-09 21:49:47,439 autoreload 23100 42016 C:\am\allifapp\allifapperp\allifmaalilmapp\models.py changed, reloading.
+INFO 2025-08-09 21:49:48,626 autoreload 14264 4472 Watching for file changes with StatReloader
+INFO 2025-08-09 21:50:18,329 autoreload 14264 4472 C:\am\allifapp\allifapperp\allifmaalilmapp\views.py changed, reloading.
+INFO 2025-08-09 21:50:19,802 autoreload 14124 47680 Watching for file changes with StatReloader
+INFO 2025-08-09 21:50:47,946 autoreload 14124 47680 C:\am\allifapp\allifapperp\allifmaalilmapp\views.py changed, reloading.
+INFO 2025-08-09 21:50:49,301 autoreload 24724 40336 Watching for file changes with StatReloader
+INFO 2025-08-09 21:51:04,309 autoreload 24724 40336 C:\am\allifapp\allifapperp\allifmaalilmapp\urls.py changed, reloading.
+INFO 2025-08-09 21:51:05,497 autoreload 33416 46740 Watching for file changes with StatReloader
+INFO 2025-08-09 21:51:16,436 autoreload 33416 46740 C:\am\allifapp\allifapperp\allifmaalilmapp\forms.py changed, reloading.
+INFO 2025-08-09 21:51:18,016 autoreload 44832 43040 Watching for file changes with StatReloader
+INFO 2025-08-09 21:51:26,311 autoreload 44832 43040 C:\am\allifapp\allifapperp\allifmaalilmapp\models.py changed, reloading.
+INFO 2025-08-09 21:51:27,465 autoreload 5628 49760 Watching for file changes with StatReloader
+INFO 2025-08-09 21:53:52,118 autoreload 5628 49760 C:\am\allifapp\allifapperp\allifmaalcommonapp\preprocessor.py changed, reloading.
+INFO 2025-08-09 21:53:53,222 autoreload 46188 20704 Watching for file changes with StatReloader
+INFO 2025-08-09 21:54:26,023 autoreload 46188 20704 C:\am\allifapp\allifapperp\allifmaalcommonapp\resources.py changed, reloading.
+INFO 2025-08-09 21:54:27,093 autoreload 19448 29688 Watching for file changes with StatReloader
+INFO 2025-08-09 21:54:46,075 autoreload 19448 29688 C:\am\allifapp\allifapperp\allifmaalcommonapp\searchable_links.py changed, reloading.
+INFO 2025-08-09 21:54:47,737 autoreload 44768 20740 Watching for file changes with StatReloader
+INFO 2025-08-09 21:55:23,717 autoreload 44768 20740 C:\am\allifapp\allifapperp\allifmaalcommonapp\resources.py changed, reloading.
+INFO 2025-08-09 21:55:24,654 autoreload 22368 28612 Watching for file changes with StatReloader
+INFO 2025-08-09 21:55:32,969 autoreload 22368 28612 C:\am\allifapp\allifapperp\allifmaalcommonapp\apps.py changed, reloading.
+INFO 2025-08-09 21:55:33,989 autoreload 19248 25260 Watching for file changes with StatReloader
+INFO 2025-08-09 21:56:30,689 autoreload 19248 25260 C:\am\allifapp\allifapperp\allifmaalilmapp\forms.py changed, reloading.
+INFO 2025-08-09 21:56:31,747 autoreload 6756 18252 Watching for file changes with StatReloader
+INFO 2025-08-09 21:56:42,026 autoreload 6756 18252 C:\am\allifapp\allifapperp\allifmaalilmapp\urls.py changed, reloading.
+INFO 2025-08-09 21:56:43,037 autoreload 34832 29260 Watching for file changes with StatReloader
+INFO 2025-08-09 21:57:32,305 autoreload 34832 29260 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-08-09 21:57:33,401 autoreload 49484 43232 Watching for file changes with StatReloader
+INFO 2025-08-09 21:59:38,870 autoreload 49484 43232 C:\am\allifapp\allifapperp\allifmaalshaafiapp\models.py changed, reloading.
+INFO 2025-08-09 21:59:39,801 autoreload 14360 18968 Watching for file changes with StatReloader
+INFO 2025-08-09 22:02:07,732 autoreload 48480 31344 Watching for file changes with StatReloader
+WARNING 2025-08-09 22:02:59,696 allif_navigation_tags 48480 24496 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-09 22:03:29,245 allif_navigation_tags 48480 24496 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-09 22:03:44,663 allif_navigation_tags 48480 24496 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-09 22:07:06,468 autoreload 41372 41116 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:07:35,309 log 41372 2040 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+ERROR 2025-08-09 22:07:39,420 log 41372 2040 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-08-09 22:09:50,837 autoreload 41372 41116 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:09:52,380 autoreload 44672 47524 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:09:54,357 log 44672 22864 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-08-09 22:10:05,912 autoreload 44672 47524 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:10:07,222 autoreload 39584 40244 Watching for file changes with StatReloader
+INFO 2025-08-09 22:10:27,529 autoreload 39584 40244 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:10:28,997 autoreload 38244 24440 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:10:31,025 log 38244 46832 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+ERROR 2025-08-09 22:10:33,644 log 38244 46832 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+ERROR 2025-08-09 22:10:36,074 log 38244 46832 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-08-09 22:11:22,197 autoreload 38244 24440 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:11:23,385 autoreload 2764 34236 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:11:27,426 log 2764 47812 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-08-09 22:11:40,897 autoreload 2888 46168 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:11:44,908 log 2888 36648 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-08-09 22:12:04,751 autoreload 46576 22332 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:12:51,514 log 46576 36560 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-08-09 22:14:13,423 autoreload 46576 22332 C:\am\allifapp\allifapperp\allifmaalcommonapp\preprocessor.py changed, reloading.
+INFO 2025-08-09 22:14:14,721 autoreload 42668 40668 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:14:16,471 log 42668 12608 Internal Server Error: /Decision/Making/Point/
+Traceback (most recent call last):
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 101, in _wrapped_view
+    return view_function(request, *args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 265, in CommonDecisionPoint
+    compslg=request.user.company.slgfld
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'slgfld'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py", line 111, in _wrapped_view
+    return render(request, 'allifmaalcommonapp/error/error.html', error_context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 208, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 177, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'commonHome' with arguments '('', '')' not found. 1 pattern(s) tried: ['Home/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-08-09 22:15:48,037 autoreload 42668 40668 C:\am\allifapp\allifapperp\allifmaalcommonapp\preprocessor.py changed, reloading.
+INFO 2025-08-09 22:15:49,297 autoreload 49896 25336 Watching for file changes with StatReloader
+INFO 2025-08-09 22:17:32,491 autoreload 49896 25336 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:17:33,615 autoreload 5560 22468 Watching for file changes with StatReloader
+INFO 2025-08-09 22:18:20,660 autoreload 5560 22468 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:18:22,021 autoreload 11660 31164 Watching for file changes with StatReloader
+INFO 2025-08-09 22:21:15,198 autoreload 11660 31164 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:21:16,603 autoreload 42752 44288 Watching for file changes with StatReloader
+INFO 2025-08-09 22:22:12,458 autoreload 42752 44288 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:22:13,924 autoreload 1692 3128 Watching for file changes with StatReloader
+INFO 2025-08-09 22:23:36,315 autoreload 1692 3128 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:23:37,487 autoreload 49260 38080 Watching for file changes with StatReloader
+WARNING 2025-08-09 22:24:44,645 allif_navigation_tags 49260 23876 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-09 22:25:16,118 autoreload 49260 38080 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:25:17,335 autoreload 192 27472 Watching for file changes with StatReloader
+INFO 2025-08-09 22:25:40,923 autoreload 192 27472 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:25:42,232 autoreload 37812 2888 Watching for file changes with StatReloader
+INFO 2025-08-09 22:27:47,552 autoreload 37812 2888 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:27:49,160 autoreload 12736 49536 Watching for file changes with StatReloader
+INFO 2025-08-09 22:28:10,486 autoreload 34400 36848 Watching for file changes with StatReloader
+INFO 2025-08-09 22:29:02,248 autoreload 34400 36848 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:29:03,363 autoreload 48568 13932 Watching for file changes with StatReloader
+INFO 2025-08-09 22:29:27,959 autoreload 48568 13932 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:29:29,146 autoreload 12048 31280 Watching for file changes with StatReloader
+INFO 2025-08-09 22:29:41,192 autoreload 12048 31280 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:29:42,334 autoreload 47380 3456 Watching for file changes with StatReloader
+INFO 2025-08-09 22:32:11,729 autoreload 47380 3456 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:32:13,154 autoreload 2536 30676 Watching for file changes with StatReloader
+WARNING 2025-08-09 22:32:44,252 allif_navigation_tags 2536 39668 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-09 22:32:53,205 allif_navigation_tags 2536 39668 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-09 22:32:54,410 allif_navigation_tags 2536 39668 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-09 22:33:05,787 allif_navigation_tags 2536 39668 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-09 22:33:19,706 allif_navigation_tags 2536 39668 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-09 22:33:23,363 allif_navigation_tags 2536 39668 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-09 22:34:32,775 autoreload 2536 30676 C:\am\allifapp\allifapperp\allifmaaladminapp\views.py changed, reloading.
+INFO 2025-08-09 22:34:33,944 autoreload 17364 47780 Watching for file changes with StatReloader
+WARNING 2025-08-09 22:34:44,172 allif_navigation_tags 17364 35132 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-09 22:34:47,575 allif_navigation_tags 17364 35132 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-09 22:39:08,941 autoreload 17364 47780 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-09 22:39:10,411 autoreload 9468 1460 Watching for file changes with StatReloader
+INFO 2025-08-09 22:41:26,828 autoreload 9468 1460 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:41:28,382 autoreload 5140 22644 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:41:38,187 log 5140 46780 Internal Server Error: /Edit/Currency/Filter/Details/Money/Types/14/user-full-names-73c6864f8e82/shaafi-hospital2116-b020f9076123/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1328, in commonEditCurrency
+    return allif_common_form_edit_and_save(request,pk,CommonAddCurrencyForm,"Edit Currency","commonCurrencies",'allifmaalcommonapp/currencies/add-currency.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1760, in allif_common_form_edit_and_save
+    if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+INFO 2025-08-09 22:43:58,065 autoreload 5140 22644 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:43:59,440 autoreload 44152 5808 Watching for file changes with StatReloader
+INFO 2025-08-09 22:44:17,867 autoreload 44152 5808 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:44:19,266 autoreload 27004 49800 Watching for file changes with StatReloader
+INFO 2025-08-09 22:49:40,858 autoreload 27004 49800 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:49:42,624 autoreload 28324 32748 Watching for file changes with StatReloader
+INFO 2025-08-09 22:50:33,799 autoreload 28324 32748 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:50:34,988 autoreload 28044 27908 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:51:50,619 log 28044 44904 Internal Server Error: /Add/New/Staff/Profile/Details/user-full-names-73c6864f8e82/test-cmpany2116-bc202e49d8b9/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+    ~~~~~~~~^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+MySQLdb.IntegrityError: (1062, "Duplicate entry '15' for key 'allifmaalcommonapp_commonemployeesmodel.username_id'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1827, in commonAddStaffProfile
+    return allif_common_form_submission_and_save(request,CommonAddStaffProfileForm,"New Profile","commonStaffProfiles",'allifmaalcommonapp/hrm/profiles/add-staff-profile.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 2030, in allif_common_form_submission_and_save
+    obj.save()
+    ~~~~~~~~^^
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py", line 468, in save
+    super(CommonEmployeesModel, self).save(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+    ~~~~~~~~^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+django.db.utils.IntegrityError: (1062, "Duplicate entry '15' for key 'allifmaalcommonapp_commonemployeesmodel.username_id'")
+INFO 2025-08-09 22:54:27,368 autoreload 36116 33808 Watching for file changes with StatReloader
+WARNING 2025-08-09 22:55:44,571 allif_navigation_tags 36116 48788 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-09 22:55:48,707 allif_navigation_tags 36116 48788 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-09 22:59:11,709 autoreload 36116 33808 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-09 22:59:13,437 autoreload 49132 33376 Watching for file changes with StatReloader
+ERROR 2025-08-09 22:59:15,518 log 49132 4472 Internal Server Error: /Edit/Staff/Profile/Details/16/user-full-names-124b0e8a40ce/rayxaan-hospital2116-8c30d64e286b/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1831, in commonEditStaffProfile
+    return allif_common_form_edit_and_save(request,pk,CommonAddStaffProfileForm,"Edit Profile","commonStaffProfiles",'allifmaalcommonapp/hrm/profiles/add-staff-profile.html')
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py", line 1760, in allif_common_form_edit_and_save
+    if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+INFO 2025-08-09 23:00:25,266 autoreload 49132 33376 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 23:00:26,638 autoreload 30448 42252 Watching for file changes with StatReloader
+INFO 2025-08-09 23:01:22,917 autoreload 30448 42252 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 23:01:24,243 autoreload 37044 28708 Watching for file changes with StatReloader
+INFO 2025-08-09 23:03:37,542 autoreload 37044 28708 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 23:03:38,933 autoreload 13140 41048 Watching for file changes with StatReloader
+INFO 2025-08-09 23:06:57,221 autoreload 13140 41048 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-09 23:06:58,530 autoreload 20988 28180 Watching for file changes with StatReloader
+INFO 2025-08-09 23:08:22,203 autoreload 20988 28180 C:\am\allifapp\allifapperp\allifmaalusersapp\models.py changed, reloading.
+INFO 2025-08-09 23:08:23,317 autoreload 29404 5032 Watching for file changes with StatReloader
+INFO 2025-08-09 23:09:59,132 autoreload 20540 37688 Watching for file changes with StatReloader
+INFO 2025-08-09 23:11:14,471 autoreload 20540 37688 C:\am\allifapp\allifapperp\allifmaalusersapp\forms.py changed, reloading.
+INFO 2025-08-09 23:11:15,913 autoreload 29256 15380 Watching for file changes with StatReloader
+INFO 2025-08-09 23:12:14,336 autoreload 29256 15380 C:\am\allifapp\allifapperp\allifmaalusersapp\forms.py changed, reloading.
+INFO 2025-08-09 23:12:15,719 autoreload 25920 47208 Watching for file changes with StatReloader
+INFO 2025-08-09 23:14:05,705 autoreload 25920 47208 C:\am\allifapp\allifapperp\allifmaalusersapp\forms.py changed, reloading.
+INFO 2025-08-09 23:14:07,082 autoreload 28820 14392 Watching for file changes with StatReloader
+INFO 2025-08-09 23:17:19,366 autoreload 28820 14392 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 23:17:20,819 autoreload 42176 33624 Watching for file changes with StatReloader
+INFO 2025-08-09 23:20:12,549 autoreload 42176 33624 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 23:20:13,967 autoreload 41692 29052 Watching for file changes with StatReloader
+INFO 2025-08-09 23:22:18,842 autoreload 41692 29052 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-09 23:22:20,569 autoreload 27000 18188 Watching for file changes with StatReloader
+ERROR 2025-08-09 23:29:47,027 log 27000 27832 Internal Server Error: /Company/Divisions/user-full-names-124b0e8a40ce/rayxaan-hospital2116-8c30d64e286b/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\sessions\backends\base.py", line 187, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\mysql\base.py", line 247, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\connections.py", line 200, in __init__
+    super().__init__(*args, **kwargs2)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+MySQLdb.OperationalError: (1049, "Unknown database 'allifmysqlcommondb'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\middleware.py", line 28, in __call__
+    if request.user.is_authenticated:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\functional.py", line 266, in inner
+    self._setup()
+    ~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\functional.py", line 419, in _setup
+    self._wrapped = self._setupfunc()
+                    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\middleware.py", line 25, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\middleware.py", line 11, in get_user
+    request._cached_user = auth.get_user(request)
+                           ~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 191, in get_user
+    user_id = _get_user_session_key(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 60, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+                                               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\sessions\backends\base.py", line 53, in __getitem__
+    return self._session[key]
+           ^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\sessions\backends\base.py", line 192, in _get_session
+    self._session_cache = self.load()
+                          ~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\sessions\backends\db.py", line 42, in load
+    s = self._get_session_from_db()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\sessions\backends\db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        session_key=self.session_key, expire_date__gt=timezone.now()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 330, in cursor
+    return self._cursor()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 306, in _cursor
+    self.ensure_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 288, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 289, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\mysql\base.py", line 247, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\MySQLdb\connections.py", line 200, in __init__
+    super().__init__(*args, **kwargs2)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: (1049, "Unknown database 'allifmysqlcommondb'")
+INFO 2025-08-09 23:32:17,338 autoreload 27000 18188 C:\am\allifapp\allifapperp\allifapperp\settings.py changed, reloading.
+INFO 2025-08-09 23:32:18,661 autoreload 15844 27360 Watching for file changes with StatReloader

@@ -26,8 +26,6 @@ def allifmaal_admin(allif_param_func):
     return allif_wrapper_func
 
 
-
-
 #########################################################################################3
 def unauthenticated_user(allif_param_func):
     def allif_wrapper_func(request,*args,**kwargs):
@@ -112,11 +110,6 @@ def allif_view_exception_handler(view_function):
             # Ensure the path to your error template is correct
             return render(request, 'allifmaalcommonapp/error/error.html', error_context)
     return _wrapped_view
-
-
-
-
-
 
 
 # C:\am\allifapp\allifapperp\allifmaalcommonapp\decorators.py
@@ -383,7 +376,6 @@ def logged_in_user_can_approve(func):
         else:
             return render(request, 'allifmaalcommonapp/permissions/no_permission.html')
     return wrapper
-
 
 
 # --- Base Combined Decorator (for universal checks) ---

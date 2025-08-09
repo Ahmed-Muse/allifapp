@@ -13,6 +13,7 @@ from allifmaalshaafiapp.models import *
 from django.db.models import QuerySet, Model, Q # Ensure Q is imported for complex lookups
 from django.db import IntegrityError
 
+from typing import Optional, Callable # Make sure these are imported
 import logging
 
 logger = logging.getLogger(__name__)
@@ -467,7 +468,7 @@ allif_model_sort_configs = {
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
      
-    'labtestrequestsmodel': { # Key should be consistent, e.g., model._meta.model_name
+    'commonassessmentsmodel': { # Key should be consistent, e.g., model._meta.model_name
         'sort_mapping': {
             "Name Ascending": "name",
             "Name Descending": "-name",
@@ -479,13 +480,13 @@ allif_model_sort_configs = {
         'default_sort_field': '-date',
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
-    'labTestresultsmodel': { # Key should be consistent, e.g., model._meta.model_name
+    'commonresultsmodel': { # Key should be consistent, e.g., model._meta.model_name
         'sort_mapping': {
             "Name Ascending": "name",
             "Name Descending": "-name",
             "Description Ascending": "description",
             "Description Descending": "-description",
-            
+       
            
         },
         'default_sort_field': '-date',
@@ -643,8 +644,8 @@ allif_search_config_mapping = {
     'CommonExpensesModel': ['description__icontains', 'amount__icontains', 'supplier__name__icontains'], # Example
     'CommonTasksModel': ['name__icontains', 'description__icontains'], # Example
     
-    'LabTestRequestsModel': ['name__icontains', 'description__icontains'],
-    'LabTestResultsModel': ['name__icontains', 'description__icontains'],
+    'CommonAssessmentsModel': ['name__icontains', 'description__icontains'],
+    'CommonResultsModel': ['name__icontains', 'description__icontains'],
     'MedicationsModel': ['name__icontains', 'description__icontains'],
     'AdmissionsModel': ['name__icontains', 'description__icontains'],
     'MedicalAdministrationsModel': ['name__icontains', 'description__icontains'],
@@ -652,6 +653,7 @@ allif_search_config_mapping = {
     'ReferralsModel': ['name__icontains', 'description__icontains'],
     
     
+     
     
     
     
@@ -1049,7 +1051,7 @@ allif_advanced_search_configs = {
     
     },
 
-'LabTestRequestsModel': {
+'CommonAssessmentsModel': {
         'date_field': 'starts', # Name of the date field in CommonStocksModel
         'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
         'default_order_by_date': '-starts', # Default ordering for finding first/last date
@@ -1065,7 +1067,7 @@ allif_advanced_search_configs = {
     
     
     },
-'LabTestResultsModel': {
+'CommonResultsModel': {
         'date_field': 'starts', # Name of the date field in CommonStocksModel
         'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
         'default_order_by_date': '-starts', # Default ordering for finding first/last date
@@ -1078,7 +1080,7 @@ allif_advanced_search_configs = {
         {'field': 'balance', 'label': 'Balance'},
         {'field': 'date', 'label': 'Date'},
         ]
-    
+     
     
     },
 'MedicationsModel': {
@@ -1252,13 +1254,14 @@ allif_main_models_registry = {
    "CommonDivisionsModel":CommonDivisionsModel,
    "CommonEmployeesModel":CommonEmployeesModel,
    
-    "LabTestRequestsModel":LabTestRequestsModel,
-    "LabTestResultsModel":LabTestResultsModel,
+   
     "MedicationsModel":MedicationsModel,
     "AdmissionsModel":AdmissionsModel,
     "MedicalAdministrationsModel":MedicalAdministrationsModel,
     "DischargesModel":DischargesModel,
     "ReferralsModel":ReferralsModel,
+    "CommonResultsModel":CommonResultsModel,
+    "CommonAssessmentsModel":CommonAssessmentsModel,
      
      
      
@@ -1687,278 +1690,6 @@ def allif_filtered_and_sorted_queryset(request: HttpRequest,model_class: type[Mo
 
     return queryset
 
-
-
-# --- NEW UTILITY FUNCTION FOR FORM QUERYSET INITIALIZATION ---
-def allif_initialize_form_select_querysets(form_instance: forms.Form, allifmaalparameter: str, field_model_map: dict):
-    """
-    Initializes querysets for Select/ModelChoiceFields in a form based on a parameter.
-    ...Explanation of allif_initialize_form_select_querysets:
-
-    form_instance: The actual form object being initialized (self from your __init__ method).
-
-    allifmaalparameter: Your allifmaalparameter (likely the company ID).
-
-    field_model_map: This is the key. It's a dictionary that tells the function which form field corresponds to which Django Model.
-
-    Example: {'items': CommonStocksModel, 'trans_number': CommonTransactionsModel}
-
-    Logic:
-
-    If allifmaalparameter exists, it iterates through the field_model_map and sets the queryset for each field to Model.objects.filter(company=allifmaalparameter).
-
-    If allifmaalparameter does not exist, it sets the queryset for each field to Model.objects.none().
-
-    It includes checks (if field_name in form_instance.fields and isinstance(...)) to make it more robust, ensuring it only tries to set querysets on valid ModelChoiceFields that actually exist in the form.
-
-    Args:
-        form_instance (forms.Form): The instance of the Django form.
-        allifmaalparameter (str): The parameter (e.g., company ID) to filter by.
-        field_model_map (dict): A dictionary where keys are field names (strings)
-                                and values are the Django Model classes (e.g., CommonStocksModel).
-                                Example: {'items': CommonStocksModel, 'trans_number': CommonTransactionsModel}
-    """
-    if allifmaalparameter:
-        for field_name, model_class in field_model_map.items():
-            if field_name in form_instance.fields:
-                # Check if the field is indeed a ModelChoiceField or similar
-                if isinstance(form_instance.fields[field_name], (forms.ModelChoiceField, forms.ModelMultipleChoiceField)):
-                    form_instance.fields[field_name].queryset = model_class.objects.filter(company=allifmaalparameter)
-                else:
-                    pass
-                    #print(f"WARNING: Field '{field_name}' in form is not a ModelChoiceField/ModelMultipleChoiceField. Skipping queryset initialization.")
-            else:
-                pass
-                #print(f'WARNING: Field '{field_name}' not found in form fields. Skipping queryset initialization.')
-    else:
-        for field_name, model_class in field_model_map.items():
-            if field_name in form_instance.fields:
-                if isinstance(form_instance.fields[field_name], (forms.ModelChoiceField, forms.ModelMultipleChoiceField)):
-                    form_instance.fields[field_name].queryset = model_class.objects.none()
-            # No need for else here, if field not in form_instance.fields, it's already skipped
-
-
-# --- NEW: Generic Form Submission and Save Logic Function ---
-#@logged_in_user_must_have_profile
-#@logged_in_user_can_view
-def allif_common_form_submission_and_save____checkwithotherfunctionthendelete(request,form_class: type[forms.ModelForm],title_text: str, 
-    success_redirect_url_name: str, # for the redirection url
-    template_path: str,# function specific template
-    
-    # New optional parameter for custom pre-save logic
-    pre_save_callback: Optional[callable] = None, # argument. This callback will be a function that
-    # the calling view provides to perform any model-specific assignments before the object is saved.
-    
-    
-    # New optional parameter for initial data (for GET request forms)
-    initial_data: Optional[dict] = None,
-    # New optional parameter for extra form arguments (for form __init__)
-    extra_form_args: Optional[list] = None,
-    extra_context: Optional[dict] = None,
-    
-    # NEW OPTIONAL PARAMETER FOR REDIRECTION LOGIC
-    redirect_with_pk: bool = False, # Set to True if the success_redirect_url_name expects a 'pk' argument
-    # --- NEW ADDITION START: Parameter for the PK value to use in redirect ---
-    redirect_pk_value: Optional[int] = None, # <--- NEW: The specific PK to use for redirection if redirect_with_pk is True
-    # --- NEW ADDITION END ---
-    
-    ):
-    
-    """
-    Helper function to encapsulate the common logic for processing form submissions
-    and saving new items, including custom pre-save assignments.
-
-    Args:
-        request (HttpRequest): The HttpRequest object.
-        form_class (type[forms.ModelForm]): The specific ModelForm class to use.
-        title_text (str): The title for the page.
-        success_redirect_url_name (str): The Django URL name to redirect to on successful form submission.
-        template_path (str): The path to the template to render.
-        pre_save_callback (callable, optional): A function (obj, request, allif_data) -> None
-                                                that performs model-specific assignments before obj.save().
-        initial_data (dict, optional): Initial data for the form on GET request.
-        extra_form_args (list, optional): Additional positional arguments to pass to form_class.__init__.
-    """
-    allif_data = common_shared_data(request)
-    company_id = allif_data.get("main_sbscrbr_entity").id
-    user_var = allif_data.get("usrslg")
-    glblslug = allif_data.get("compslg")
-    print(f"DEBUG UTILS: 4. allif_common_form_submission_and_save received extra_context keys: {(extra_context or {}).keys()}")
-
-    # Prepare form arguments for __init__
-    form_args = [company_id] # Default first argument for your forms
-    if extra_form_args:
-        form_args.extend(extra_form_args)
-
-    if request.method == 'POST':
-        form = form_class(*form_args, request.POST) 
-        if form.is_valid():
-            obj = form.save(commit=False)
-            
-            # --- Assign common fields from allif_data (fetching FK instances) ---
-            # These fields are expected to be on CommonBaseModel and inherited by 'obj'
-            
-            # Company
-            if hasattr(obj, 'company') and company_id:
-                try:
-                    obj.company = get_object_or_404(CommonCompanyDetailsModel, pk=company_id)
-                except Http404: # More specific exception for get_object_or_404
-                    #print(f"WARNING: Company with ID {company_id} not found for {obj.__class__.__name__}.")
-                    obj.company = None 
-                except Exception as e:
-                    #print(f"ERROR: Failed to retrieve company with ID {company_id}: {e}")
-                    obj.company = None
-            else:
-                pass
-            # Division
-            if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
-                try:
-                    obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id)
-                except Http404:
-                    #print(f"WARNING: Division with ID {allif_data.get('logged_user_division').id} not found for {obj.__class__.__name__}.")
-                    obj.division = None
-                except Exception as e:
-                    #print(f"ERROR: Failed to retrieve division with ID {allif_data.get('logged_user_division').id}: {e}")
-                    obj.division = None
-            else:
-                pass
-            # Branch
-            if hasattr(obj, 'branch') and allif_data.get("logged_user_branch").id:
-                try:
-                    obj.branch = get_object_or_404(CommonBranchesModel, pk=allif_data.get("logged_user_branch").id)
-                except Http404:
-                    #print(f"WARNING: Branch with ID {allif_data.get('logged_user_branch').id} not found for {obj.__class__.__name__}.")
-                    obj.branch = None
-                except Exception as e:
-                    #print(f"ERROR: Failed to retrieve branch with ID {allif_data.get('logged_user_branch').id}: {e}")
-                    obj.branch = None
-            else:
-                pass
-            # Department
-            if hasattr(obj, 'department') and allif_data.get("logged_user_department").id:
-                try:
-                    obj.department = get_object_or_404(CommonDepartmentsModel, pk=allif_data.get("logged_user_department").id)
-                except Http404:
-                    #print(f"WARNING: Department with ID {allif_data.get('logged_user_department').id} not found for {obj.__class__.__name__}.")
-                    obj.department = None
-                except Exception as e:
-                    #print(f"ERROR: Failed to retrieve department with ID {allif_data.get('logged_user_department').id}: {e}")
-                    obj.department = None
-            if allif_data.get("logged_user_operation_year"):
-                if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
-                    try:
-                        
-                        obj.operation_year = get_object_or_404(CommonOperationYearsModel, pk=allif_data.get("logged_user_operation_year").id)
-                    except Http404:
-                        #print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
-                        obj.operation_year = None
-                        raise Http404("Unauthorized: Item does not belong to your company or access denied.")
-                    except Exception as e:
-                        #print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
-                        obj.operation_year = None
-                else:
-                    pass
-            else:
-                pass
-            if allif_data.get("logged_user_operation_term"):
-                if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
-                    try:
-                        
-                        obj.operation_term = get_object_or_404(CommonOperationYearTermsModel, pk=allif_data.get("logged_user_operation_term").id)
-                    except Http404:
-                        #print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
-                        obj.operation_term = None
-                    except Exception as e:
-                        #print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
-                        obj.operation_term = None
-                else:
-                    pass
-            else:
-                pass
-                    
-            # Owner (assuming 'usernmeslg' in allif_data is the User object)
-            if hasattr(obj, 'owner') and allif_data.get("usernmeslg"):
-                try:
-                    obj.owner=allif_data.get("usernmeslg") # This should be the User object
-                except Http404:
-                    #print(f"WARNING: User {allif_data.get("usernmeslg")} not found for {obj.__class__.__name__}.")
-                    obj.owner = None
-                except Exception as e:
-                    #print(f"ERROR: Failed to retrieve User {allif_data.get("usernmeslg")}: {e}")
-                    obj.owner = None
-            else:
-                pass
-            # --- Execute custom pre-save callback if provided ---
-            if pre_save_callback:
-                try:
-                    pre_save_callback(obj, request, allif_data)
-                except Exception as e:
-                    #print(f"ERROR: Pre-save callback failed for {obj.__class__.__name__}: {e}")
-                    # You might want to add a user-facing error message here
-                    form.add_error(None, f"An internal error occurred during custom processing: {e}")
-                    # Re-render the form with errors
-                    context = {
-                        "form": form,
-                        "title": title_text,
-                        "user_var": allif_data.get("usrslg"),
-                        "glblslug": allif_data.get("compslg"),
-                        "error_message": form.errors, # Pass form errors
-                    }
-                    return render(request, template_path, context)
-
-            else:
-                pass
-            obj.save() # Finally save the object after all assignments
-            
-            # --- NEW ADDITION START: Dynamic Redirection Logic (using redirect_pk_value) ---
-            # Initialize kwargs with the standard user and company slugs
-            redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
-            
-            # Conditionally add 'pk' to kwargs ONLY if redirect_with_pk is True
-            # AND if a redirect_pk_value has been provided.
-            if redirect_with_pk and redirect_pk_value is not None:
-                redirect_kwargs['pk'] = redirect_pk_value # Use the explicitly provided PK for redirection
-            elif redirect_with_pk and redirect_pk_value is None:
-                # This is a warning/error case: redirect_with_pk is True but no value was given.
-                # Fallback to obj.pk, but log a warning.
-                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk ({obj.pk}).")
-                redirect_kwargs['pk'] = obj.pk
-            
-            try:
-                # Attempt to reverse the URL with the dynamically built kwargs
-                final_redirect_url = reverse(f'allifmaalcommonapp:{success_redirect_url_name}', kwargs=redirect_kwargs)
-            except NoReverseMatch as e:
-                # If reverse fails (e.g., due to missing/extra arguments for the URL pattern),
-                # log the error and provide a fallback redirect.
-                logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
-                messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
-                # Fallback to a generic home page if redirection fails
-                return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
-
-            return redirect(final_redirect_url)
-            # --- NEW ADDITION END ---
-            
-            # Redirect to the specified list URL with user and company slugs....previous...........
-            #return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}',kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")}))
-        else:
-            # Form is invalid, render with errors
-            error_message = form.errors
-            allifcontext = {"error_message": error_message, "title": title_text}
-            return render(request, 'allifmaalcommonapp/error/form-error.html', allifcontext)
-    else:
-        # GET request, initialize empty form
-        form = form_class(*form_args, initial=initial_data)
-
-    context = {
-        "form": form,
-        "title": title_text,
-        "user_var": allif_data.get("usrslg"), 
-        "glblslug": allif_data.get("compslg"), 
-    }
-    return render(request, template_path, context)
-
-
-
 # --- NEW: Generic Edit Item LOGIC Function ---
 def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.ModelForm],title_text: str, 
     success_redirect_url_name: str, 
@@ -1968,7 +1699,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
     extra_form_args: Optional[list] = None,
     extra_context: Optional[dict] = None, # For passing additional context to template
     
-    # NEW OPTIONAL PARAMETER FOR REDIRECTION LOGIC
+    # NEW OPTIONAL PARAMETER FOR REDIRECTION LOGIC...
     redirect_with_pk: bool = False, # Set to True if the success_redirect_url_name expects a 'pk' argument
     # --- NEW ADDITION START: Parameter for the PK value to use in redirect ---
     redirect_pk_value: Optional[int] = None, # <--- NEW: The specific PK to use for redirection if redirect_with_pk is True
@@ -2026,12 +1757,12 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
         form = form_class(*form_args, request.POST, instance=allifquery) 
         if form.is_valid():
             obj = form.save(commit=False) # obj is now item_instance with updated data
-            if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
-            #if hasattr(obj, 'division'):
-                print(allif_data.get("logged_user_division").id,'kkkkkkkkkkkkkkkkkk')
+            #if hasattr(obj, 'division') and allif_data.get("logged_user_division").id:
+            if hasattr(obj, 'division'):
                 try:
                     #obj.division = get_object_or_404(CommonDivisionsModel, pk=allif_data.get("logged_user_division").id)
                     obj.division =allif_data.get("logged_user_division")
+                    obj.division=request.user.division
                 except Http404:
                     #print(f"WARNING: Division with ID {allif_data.get('logged_user_division').id} not found for {obj.__class__.__name__}.")
                     obj.division = None
@@ -2044,6 +1775,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
             if hasattr(obj, 'branch'):
                 try:
                     obj.branch =allif_data.get("logged_user_branch")
+                    obj.branch=request.user.branch
                 except Http404:
                     #print(f"WARNING: Branch with ID {allif_data.get('logged_user_branch').id} not found for {obj.__class__.__name__}.")
                     obj.branch = None
@@ -2056,48 +1788,49 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
             if hasattr(obj, 'department'):
                 try:
                     obj.department =allif_data.get("logged_user_department")
+                    obj.department=request.user.department
                 except Http404:
                     #print(f"WARNING: Department with ID {allif_data.get('logged_user_department').id} not found for {obj.__class__.__name__}.")
                     obj.department = None
                 except Exception as e:
                     #print(f"ERROR: Failed to retrieve department with ID {allif_data.get('logged_user_department').id}: {e}")
                     obj.department = None
-            if allif_data.get("logged_user_operation_year"):
-                if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
-                    try:
-                        
-                        obj.operation_year =allif_data.get("logged_user_operation_year")
-                    except Http404:
-                        #print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
-                        obj.operation_year = None
-                        raise Http404("Unauthorized: Item does not belong to your company or access denied.")
-                    except Exception as e:
-                        #print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
-                        obj.operation_year = None
-                else:
-                    pass
+            #if allif_data.get("logged_user_operation_year"):
+            if hasattr(obj, 'operation_year'):
+                try:
+                    
+                    obj.operation_year =allif_data.get("logged_user_operation_year")
+                    obj.operation_year=request.user.operation_year
+                except Http404:
+                    #print(f"WARNING: Operation year with ID {allif_data.get('logged_user_operation_year').id} not found for {obj.__class__.__name__}.")
+                    obj.operation_year = None
+                    raise Http404("Unauthorized: Item does not belong to your company or access denied.")
+                except Exception as e:
+                    #print(f"ERROR: Failed to retrieve operation year with ID {allif_data.get('logged_user_operation_year').id}: {e}")
+                    obj.operation_year = None
             else:
                 pass
-            if allif_data.get("logged_user_operation_term"):
-                if hasattr(obj, 'operation_term') and allif_data.get("logged_user_operation_term").id:
-                    try:
-                        
-                        obj.operation_term =allif_data.get("logged_user_operation_term")
-                    except Http404:
-                        #print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
-                        obj.operation_term = None
-                    except Exception as e:
-                        #print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
-                        obj.operation_term = None
-                else:
-                    pass
+            
+            #if allif_data.get("logged_user_operation_term"):
+            if hasattr(obj, 'operation_term'):
+                try:
+                    
+                    obj.operation_term =allif_data.get("logged_user_operation_term")
+                    obj.operation_term=request.user.operation_term
+                except Http404:
+                    #print(f"WARNING: Operation term with ID {allif_data.get('logged_user_operation_term').id} not found for {obj.__class__.__name__}.")
+                    obj.operation_term = None
+                except Exception as e:
+                    #print(f"ERROR: Failed to retrieve operation term with ID {allif_data.get('logged_user_operation_term').id}: {e}")
+                    obj.operation_term = None
             else:
                 pass
+           
                     
             # Owner (assuming 'usernmeslg' in allif_data is the User object)
-            if hasattr(obj, 'owner') and allif_data.get("usernmeslg"):
+            if hasattr(obj, 'owner'):
                 try:
-                    obj.owner=allif_data.get("usernmeslg") # This should be the User object
+                    obj.owner=request.user # This should be the User object
                 except Http404:
                     #print(f"WARNING: User {allif_data.get("usernmeslg")} not found for {obj.__class__.__name__}.")
                     obj.owner = None
@@ -2153,29 +1886,7 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
 
             return redirect(final_redirect_url)
             # --- NEW ADDITION END ---
-            
-            """
-            messages.success(request, f"{title_text} created successfully!")
-            redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
-            if redirect_with_pk and redirect_pk_value is not None:
-                redirect_kwargs['pk'] = redirect_pk_value
-            elif redirect_with_pk and redirect_pk_value is None:
-                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk ({obj.pk}).")
-                redirect_kwargs['pk'] = obj.pk
-            try:
-                final_redirect_url = reverse(f'allifmaalcommonapp:{success_redirect_url_name}', kwargs=redirect_kwargs)
-            except NoReverseMatch as e:
-                logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
-                messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
-                return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
-            return redirect(final_redirect_url)
-            """
-           
-            
-            #return redirect(
-                #reverse(f'allifmaalcommonapp:{success_redirect_url_name}', 
-                        #kwargs={'allifusr': allif_data.get("usrslg"), 'allifslug': allif_data.get("compslg")})
-            #)
+         
         else:
             # Form is invalid, render with errors
             error_message = form.errors
@@ -2215,16 +1926,6 @@ def allif_common_form_edit_and_save(request,pk: int,form_class: type[forms.Model
         **(extra_context or {}) # Include extra_context here
     }
     return render(request, template_path, context)
-
-#.... before de
-
-# C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py
-
-# ... (Your existing imports) ...
-from django.urls import reverse, NoReverseMatch # Make sure this is imported
-from typing import Optional, Callable # Make sure these are imported
-
-# ... (Your existing model imports, logger, common_shared_data, etc.) ...
 
 def allif_common_form_submission_and_save(
     request,
@@ -2353,25 +2054,7 @@ def allif_common_form_submission_and_save(
 
             return redirect(final_redirect_url)
             # --- NEW ADDITION END ---
-            
-            
-            """
-            messages.success(request, f"{title_text} created successfully!")
-            redirect_kwargs = {'allifusr': user_var, 'allifslug': glblslug}
-            if redirect_with_pk and redirect_pk_value is not None:
-                redirect_kwargs['pk'] = redirect_pk_value
-            elif redirect_with_pk and redirect_pk_value is None:
-                logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk ({obj.pk}).")
-                redirect_kwargs['pk'] = obj.pk
-            
-            try:
-                final_redirect_url = reverse(f'allifmaalcommonapp:{success_redirect_url_name}', kwargs=redirect_kwargs)
-            except NoReverseMatch as e:
-                logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
-                messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
-                return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_var, 'allifslug': glblslug}))
-            return redirect(final_redirect_url)
-            """
+        
         else:
             # Form is invalid, render with errors
             messages.error(request, "Please correct the errors below.") # Use Django messages
@@ -2407,17 +2090,6 @@ def allif_common_form_submission_and_save(
     return render(request, template_path, context)
 
 
-
-
-# ... (your existing ALLIF_MODEL_REGISTRY, EXCEL_UPLOAD_CONFIGS, etc.) ...
-# C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py
-
-# ... (existing imports, ensure logging, HttpRequest, HttpResponse, messages are imported) ...
-from django.db.models import QuerySet # Import QuerySet for type hinting
-
-logger = logging.getLogger(__name__)
-
-# ... (your existing ALLIF_MODEL_REGISTRY, EXCEL_UPLOAD_CONFIGS, etc.) ...
 
 # --- NEW: Generic Detail View Helper Function with Related Items ---
 def allif_common_detail_view(
@@ -2658,34 +2330,6 @@ def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_re
 
     return redirect(final_redirect_url)
     # --- NEW ADDITION END ---
-
-
-"""
-    if not model_class:
-        raise Http404(f"Model '{model_name}' not found in mapping.")
-
-    item = get_object_or_404(model_class.all_objects, pk=pk)
-
-    item.delete()
-    
-    redirect_kwargs = {'allifusr': user_slug, 'allifslug': company_slug}
-    if redirect_with_pk and redirect_pk_value is not None:
-        redirect_kwargs['pk'] = redirect_pk_value
-    elif redirect_with_pk and redirect_pk_value is None:
-        logger.warning(f"redirect_with_pk is True for '{success_redirect_url_name}' but no redirect_pk_value was provided. Falling back to obj.pk .")
-        #redirect_kwargs['pk'] = obj.pk
-    
-    try:
-        final_redirect_url = reverse(f'allifmaalcommonapp:{success_redirect_url_name}', kwargs=redirect_kwargs)
-    except NoReverseMatch as e:
-        logger.error(f"Failed to reverse URL '{success_redirect_url_name}' with kwargs {redirect_kwargs}: {e}")
-        messages.error(request, f"Successfully created, but failed to redirect. Please check URL configuration or 'redirect_with_pk' flag for '{success_redirect_url_name}'.")
-        return redirect(reverse('allifmaalcommonapp:commonHome', kwargs={'allifusr': user_slug, 'allifslug':company_slug}))
-
-    return redirect(final_redirect_url)
-    #return redirect(reverse(f'allifmaalcommonapp:{success_redirect_url_name}',kwargs={'allifusr': user_slug, 'allifslug': company_slug}))
-
-"""
 
 # --- NEW: Centralized Search Handler ---
 def allif_search_handler(request: HttpRequest,model_name: str,search_fields_key: str, # Key to look up in SEARCH_CONFIGS
@@ -3069,14 +2713,7 @@ def allif_advance_search_handler(
         "main_sbscrbr_entity":allif_data.get("main_sbscrbr_entity")
     }
 
-    # --- Conditional Output (HTML or PDF) ---
-    #print(f"DEBUG: Advanced Search - selected_option: '{selected_option}', template_pdf_path: '{template_pdf_path}'")
-    #if selected_option == "pdf" and template_pdf_path:
-        #print(f"DEBUG: Advanced Search - PDF option selected and template_pdf_path is valid. Calling allif_generate_pdf_response.")
-        #return allif_generate_pdf_response( template_pdf_path,context,filename=f"{advanced_search_config_key.lower()}-advanced-search-results.pdf")
-    #else:
-        #print(f"DEBUG: Advanced Search - HTML option selected or template_pdf_path is invalid. Rendering HTML template: '{template_html_path}'")
-        #return render(request, template_html_path, context)
+  
 
      # --- Conditional Output (HTML, PDF, or Excel) ---
     if selected_option == "pdf" and template_pdf_path:
@@ -3558,9 +3195,6 @@ def allif_delete_confirm_handler(request, model_class, pk, template_name, title,
     allifquery = get_object_or_404(model_class.all_objects, pk=pk)
     context = {"title": title,"allifquery": allifquery,}
     return render(request, template_name, context)
-
-
-
 
 ######################### DIVISIONS, BRANCHES, DEPARTMENTS, OPERATION YEARS, OPERATION TERMS ##################
 def allif_filtered_queryset(model_class, allif_data):

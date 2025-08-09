@@ -10,8 +10,6 @@ allif_sector_contextual_action_require_pk_links= {
     {'name': 'DivisionDetails', 'url_name': 'allifmaalcommonapp:commonDivisionDetails', 'requires_pk': True},
     {'name': 'EditDivision', 'url_name': 'allifmaalcommonapp:commonEditDivision', 'requires_pk': True},
     {'name': 'DeleteDivisionConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDivision', 'requires_pk': True},
-    
-    
     {'name': 'commonWantToDeletePaymentTerm', 'url_name': 'allifmaalcommonapp:commonWantToDeletePaymentTerm', 'requires_pk': True},
     {'name': 'commonDeletePaymentTerm', 'url_name': 'allifmaalcommonapp:commonDeletePaymentTerm', 'requires_pk': True},
     
@@ -193,6 +191,16 @@ allif_sector_contextual_action_require_pk_links= {
    {'name': 'StaffProfileDetails', 'url_name': 'allifmaalcommonapp:commonStaffProfileDetails', 'requires_pk': True},
    
    
+      
+    
+   
+   {'name': 'AddTest', 'url_name': 'allifmaalcommonapp:commonAddTest', 'requires_pk': True},
+   {'name': 'TestDetails', 'url_name': 'allifmaalcommonapp:commonTestDetails', 'requires_pk': True},
+   {'name': 'DeleteTestConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTest', 'requires_pk': True},
+   {'name': 'AddResult', 'url_name': 'allifmaalcommonapp:commonAddResult', 'requires_pk': True},
+   {'name': 'ResultDetails', 'url_name': 'allifmaalcommonapp:commonResultDetails', 'requires_pk': True},
+   {'name': 'DeleteResultConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteResult', 'requires_pk': True},
+   
    
    {'name': 'EditGeneralLedger', 'url_name': 'allifmaalcommonapp:commonEditGeneralLedger', 'requires_pk': True},
    {'name': 'GeneralLedgerDetails', 'url_name': 'allifmaalcommonapp:commonGeneralLedgerDetails', 'requires_pk': True},
@@ -206,10 +214,7 @@ allif_sector_contextual_action_require_pk_links= {
    
    {'name': 'DeleteAssessmentConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteDoctorAssessment', 'requires_pk': True},
    {'name': 'DeleteAssessment', 'url_name': 'allifmaalshaafiapp:deleteDoctorAssessment', 'requires_pk': True},
-   {'name': 'DeleteLabTestConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteLabTestRequest', 'requires_pk': True},
-   {'name': 'DeleteLabTest', 'url_name': 'allifmaalshaafiapp:deleteLabTestRequest', 'requires_pk': True},
-   {'name': 'DeleteLabResultConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteLabTestResult', 'requires_pk': True},
-   {'name': 'DeleteLabResult', 'url_name': 'allifmaalshaafiapp:deleteLabTestResult', 'requires_pk': True},
+   
    {'name': 'DeletePrescriptionConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeletePrescription', 'requires_pk': True},
    {'name': 'DeletePrescription', 'url_name': 'allifmaalshaafiapp:deletePrescription', 'requires_pk': True},
    {'name': 'DeleteAdmissionConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteAdmission', 'requires_pk': True},
@@ -220,7 +225,7 @@ allif_sector_contextual_action_require_pk_links= {
    {'name': 'DeleteDischarge', 'url_name': 'allifmaalshaafiapp:deleteDischarge', 'requires_pk': True},
    {'name': 'DeleteReferralConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteReferral', 'requires_pk': True},
    {'name': 'DeleteReferral', 'url_name': 'allifmaalshaafiapp:deleteReferral', 'requires_pk': True},
-  {'name': 'AddLabTest', 'url_name': 'allifmaalshaafiapp:addLabTestRequest', 'requires_pk': True},
+
    {'name': 'AddPrescription', 'url_name': 'allifmaalshaafiapp:AddPrescription', 'requires_pk': True},
    {'name': 'AddAdmission', 'url_name': 'allifmaalshaafiapp:addAdmission', 'requires_pk': True},
    {'name': 'AddTreatment', 'url_name': 'allifmaalshaafiapp:addTreatment', 'requires_pk': True},

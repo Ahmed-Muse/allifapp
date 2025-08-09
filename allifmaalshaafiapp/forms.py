@@ -1,7 +1,6 @@
 from django import forms
 from .models import *
 from allifmaalcommonapp.forms import CommonBaseForm
-from allifmaalcommonapp.utils import allif_initialize_form_select_querysets
 ############################# start of datepicker customization ##############################
 class DatePickerInput(forms.DateInput):#use this class whereever you have a date and it will give you the calender
     input_type='date'#
@@ -104,7 +103,7 @@ class AddAssessmentDetailsForm(CommonBaseForm):
         } 
    
 ###########3 lab requests ############3
-
+"""
 class AddLabTestRequestForm(CommonBaseForm):
     company_filtered_fields = {
         'lab_name': CommonSpacesModel,
@@ -130,9 +129,9 @@ class AddLabTestRequestForm(CommonBaseForm):
            
 
         } 
-    
+"""
 ###############33 lab results #############
-
+"""
 class AddLabTestResultForm(CommonBaseForm):
    
     class Meta(CommonBaseForm.Meta):
@@ -143,7 +142,7 @@ class AddLabTestResultForm(CommonBaseForm):
          
            
         } 
-   
+"""
 class AddPrescriptionForm(CommonBaseForm):
     company_filtered_fields = {
         'medical_file': CommonTransactionsModel,

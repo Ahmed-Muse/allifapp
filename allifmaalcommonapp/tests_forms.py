@@ -76,14 +76,6 @@ class CommonAddSectorFormTest(TestCase):
 
 
 
-
-
-
-
-
-
-
-
 class ItemFormTest(TestCase):
 
     def test_item_form_valid(self):

@@ -30,11 +30,12 @@
 
 
   <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}">Transactions</a>
+  <a class="action-button" href="{{ allif_contextual_action_links.AddTest.url }}">New Test</a>
  
 {% if 'AddTriageData' in allif_contextual_action_links %}
   <a class="action-button" href="{{ allif_contextual_action_links.AddTriageData.url }}">Add Triage</a>
   <a class="action-button" href="{{ allif_contextual_action_links.AddAssessment.url }}">Add Assessment</a>
-  <a class="action-button" href="{{ allif_contextual_action_links.AddLabTest.url }}">New Lab Test</a>
+  
   <a class="action-button" href="{{ allif_contextual_action_links.AddAdmission.url }}">Admit</a>
  
 

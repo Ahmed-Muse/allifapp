@@ -262,11 +262,12 @@ def commonDeleteEmail(request,pk,*allifargs,**allifkwargs):
 @allif_view_exception_handler
 @login_required(login_url='allifmaalusersapp:userLoginPage')
 def CommonDecisionPoint(request):
-    compslg=request.user.company.slgfld
+    
     usrslg=request.user.customurlslug
     if request.user.company is None:
         return redirect('allifmaalcommonapp:commonAddnewEntity', allifusr=usrslg)
     else:
+        compslg=request.user.company.slgfld
         return redirect('allifmaalcommonapp:commonHome', allifusr=usrslg, allifslug=compslg)
 
 @allif_view_exception_handler
@@ -297,10 +298,11 @@ def commonCompanies(request,*allifargs,**allifkwargs):
     context={"title":title,"allifqueryset":allifqueryset,"formats":formats,}
     return render(request,'allifmaalcommonapp/companies/companies.html',context)
 
-@allif_view_exception_handler
+#@allif_view_exception_handler
 def commonAddnewEntity(request, *allifargs, **allifkwargs):
     title = "Entity Registration"
     user = request.user # A cleaner way to get the current user
+    
     user_var=request.user
     main_div='Main Division'
     main_bran='Main Branch'
@@ -334,8 +336,8 @@ def commonAddnewEntity(request, *allifargs, **allifkwargs):
                     user.division=new_division
                     user.branch=new_branch
                     user.department=new_department
-                    user.usercompany = str(new_company)
-                    user.save(update_fields=['company', 'usercompany','division','branch','department'])
+                    
+                    user.save(update_fields=['company','division','branch','department'])
                     
                     user.can_do_all=True
                     user.can_add=True
@@ -1534,9 +1536,9 @@ def commonEditUser(request, pk, *allifargs, **allifkwargs):
             obj = form.save(commit=False)
             """this is very important line... dont change unless you know what you are doing...."""
             obj.company = uscmpy # allif_data isn't defined here, fix this logic
-            obj.division=allif_data.get("logged_in_user_profile").division
-            obj.branch=allif_data.get("logged_in_user_profile").branch
-            obj.department=allif_data.get("logged_in_user_profile").department
+            #obj.division=allif_data.get("logged_in_user_profile").division
+            #obj.branch=allif_data.get("logged_in_user_profile").branch
+            #obj.department=allif_data.get("logged_in_user_profile").department
             obj.save()
             return redirect('allifmaalcommonapp:commonhrm', allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg")) # allif_data isn't defined here, fix this logic
         else:
@@ -1633,7 +1635,6 @@ def commonUserSearch(request,*allifargs,**allifkwargs):
         context={"title":title,"allifqueryset":allifqueryset,}
     return render(request,'allifmaalcommonapp/hrm/staff/staff.html',context)
             
-
 def handle_user_permission_view(func):
     @wraps(func)
     def wrapper(request, pk, *allifargs, **allifkwargs):
@@ -1814,7 +1815,7 @@ def commonUserAllifaamlAdmin(request,pk):
         return render(request,'allifmaalcommonapp/error/error.html',error_context)
 
 ###################### staff profiles #####################################
-@allif_base_view_wrapper
+#@allif_base_view_wrapper
 def commonStaffProfiles(request,*allifargs,**allifkwargs):
     title="Staff Profiles"
     allif_data=common_shared_data(request)
@@ -1825,9 +1826,9 @@ def commonStaffProfiles(request,*allifargs,**allifkwargs):
 def commonAddStaffProfile(request, *allifargs, **allifkwargs):
     return allif_common_form_submission_and_save(request,CommonAddStaffProfileForm,"New Profile","commonStaffProfiles",'allifmaalcommonapp/hrm/profiles/add-staff-profile.html')
 
-@allif_base_view_wrapper
+#@allif_base_view_wrapper
 def commonEditStaffProfile(request, pk, *allifargs, **allifkwargs):
-    return allif_common_form_edit_and_save(request,pk,CommonAddStaffProfileForm,"Edit Bank","commonStaffProfiles",'allifmaalcommonapp/hrm/profiles/add-staff-profile.html')
+    return allif_common_form_edit_and_save(request,pk,CommonAddStaffProfileForm,"Edit Profile","commonStaffProfiles",'allifmaalcommonapp/hrm/profiles/add-staff-profile.html')
 
 @allif_base_view_wrapper
 def commonWantToDeleteProfile(request,pk,*allifargs,**allifkwargs):
@@ -2026,7 +2027,6 @@ def commonSynchGLAccount(request,pk,*allifargs,**allifkwargs):
     return redirect('allifmaalcommonapp:commonGeneralLedgers',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
    
 ####################### chart of accounts ########################
-
 @allif_base_view_wrapper
 def commonChartofAccounts(request,*allifargs,**allifkwargs):
     title="Chart of Accounts"
@@ -2072,7 +2072,6 @@ def commonChartofAccounts(request,*allifargs,**allifkwargs):
             }
     return render(request,'allifmaalcommonapp/accounts/chart-of-accs.html',context)
 
-
 @allif_base_view_wrapper
 def commonAddChartofAccount(request, *allifargs, **allifkwargs):
     return allif_common_form_submission_and_save(request,CommonAddChartofAccountForm,"Add New Account","commonChartofAccounts",'allifmaalcommonapp/accounts/add-coa.html')
@@ -2090,7 +2089,6 @@ def commonWantToDeleteCoA(request,pk,*allifargs,**allifkwargs):
 def commonDeleteChartofAccount(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonChartofAccountsModel',pk=pk,success_redirect_url_name='commonChartofAccounts')
 
-
 @allif_base_view_wrapper
 def commonChartofAccountSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonChartofAccountsModel',search_fields_key='CommonChartofAccountsModel',
@@ -2105,7 +2103,6 @@ def commonChartofAccAdvanceSearch(request,*allifargs,**allifkwargs):
         template_html_path='allifmaalcommonapp/accounts/chart-of-accs.html', # Template for HTML results
         template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html', # <-- CRITICAL: Pass the PDF template path
     )
-
 
 @allif_base_view_wrapper
 def commonChartofAccountDetails(request, pk, *allifargs, **allifkwargs):
@@ -2141,7 +2138,7 @@ def commonClearAcc(request,pk,*allifargs,**allifkwargs):
     return redirect('allifmaalcommonapp:commonChartofAccounts',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
    
 ############################################# BANKS ##############################3
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonBanks(request,*allifargs,**allifkwargs):
    
     title="Banks"
@@ -2153,29 +2150,29 @@ def commonBanks(request,*allifargs,**allifkwargs):
              }
     return render(request,'allifmaalcommonapp/banks/banks.html',context)
 
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonAddBank(request, *allifargs, **allifkwargs):
     return allif_common_form_submission_and_save(request,CommonAddBankForm,"Add Bank","commonBanks",'allifmaalcommonapp/banks/add-bank.html')
 
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonEditBank(request, pk, *allifargs, **allifkwargs):
     return allif_common_form_edit_and_save(request,pk,CommonAddBankForm,"Edit Bank","commonBanks",'allifmaalcommonapp/banks/add-bank.html')
 
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonWantToDeleteBank(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonBanksModel,"Delete this item",'allifmaalcommonapp/banks/delete-bank-confirm.html')
 
-#@logged_in_user_can_delete
-#@allif_base_view_wrapper
+@logged_in_user_can_delete
+@allif_base_view_wrapper
 def commonDeleteBank(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonBanksModel',pk=pk,success_redirect_url_name='commonBanks')
 
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonBankSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonBanksModel',search_fields_key='CommonBanksModel',
     template_path='allifmaalcommonapp/banks/banks.html',search_input_name='allifsearchcommonfieldname',)
 
-#@allif_base_view_wrapper
+@allif_base_view_wrapper
 def commonBankDetails(request, pk, *allifargs, **allifkwargs):
     allif_data=common_shared_data(request)
     allifquery= get_object_or_404(CommonBanksModel, id=pk)
@@ -2790,7 +2787,6 @@ def commonDepreciateAsset(request,pk,*allifargs,**allifkwargs):
         return redirect('allifmaalcommonapp:commonAssetDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
 ############################################### EXPENSES ################################
-
 @allif_base_view_wrapper
 def commonExpenses(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
@@ -2957,7 +2953,6 @@ def commonAddTransactionItems(request,pk,*allifargs,**allifkwargs):
         template_path='allifmaalcommonapp/transactions/add_trans_items.html',
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
         extra_context=my_extra_context,)
-
 
 @allif_base_view_wrapper
 def commonEditTransactionItem(request, pk, *allifargs, **allifkwargs):
@@ -3216,7 +3211,6 @@ def commonNewPurchaseOrder(request,*allifargs,**allifkwargs):
     newPurchaseOrder.save()
     return redirect('allifmaalcommonapp:commonPurchaseOrders',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-
 @allif_base_view_wrapper
 def common_purchase_order_pdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonPurchaseOrdersModel',)
@@ -3298,7 +3292,6 @@ def commonEditPOMiscCostDetails(request, pk, *allifargs, **allifkwargs):
     'ommonPOMiscCost','allifmaalcommonapp/purchases/add-po-misc-costs.html',
     redirect_with_pk=True,redirect_pk_value=allifquery,)
     
-    
 @allif_base_view_wrapper
 def commonPostPO(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
@@ -3321,7 +3314,6 @@ def commonPostPO(request,pk,*allifargs,**allifkwargs):
     else:
         return HttpResponse("Please fill the missing fields")
         
-    
     ################# ...start of  misc costs...credit the service provider account....###################
     misc_costs=CommonPurchaseOrderMiscCostsModel.all_objects.filter(po_misc_cost_con=allifquery)
     
@@ -3337,8 +3329,6 @@ def commonPostPO(request,pk,*allifargs,**allifkwargs):
             misc_cost_supplier.save()
         
     ################### end of misc costs ###############
-
-    
     if allifquery.posting_po_status=="waiting":
         allifquery.posting_po_status="posted"
         allifquery.save()
@@ -3359,7 +3349,6 @@ def commonPostPO(request,pk,*allifargs,**allifkwargs):
         apportioned_misc_unit_cost=(item_unit_cost/po_amount)*po_misccosts
         actual_item_unit_cost=apportioned_misc_unit_cost+item_unit_cost
         
-        
         #we need to calculate the weighted unit cost
         #products=CommonStocksModel.objects.filter(description=item.items).first()
        
@@ -3372,7 +3361,6 @@ def commonPostPO(request,pk,*allifargs,**allifkwargs):
         products.standardUnitCost=item.items.unitcost
         products.quantity=total_new_quantity
         
-        
         # deal with buying price --- get weighted buying price
         existing_item_unit_buying_price=item.items.buyingPrice
         weighted_new_buying_price=(existing_item_unit_buying_price*existing_item_unit_quantity+quantity*item_unit_cost)/(total_new_quantity or 1)
@@ -3382,7 +3370,6 @@ def commonPostPO(request,pk,*allifargs,**allifkwargs):
         products.unitPrice=applied_uplift*weighted_new_unit_cost
         products.save()
 
-        
         #....... debit item inventory account .............
         inventory_acc_id=item.items.inventory_account
         if inventory_acc_id !=None:
@@ -3512,7 +3499,6 @@ def commonAddTransferOrderItems(request,pk,*allifargs,**allifkwargs):
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
         extra_context=my_extra_context,)
  
-
 @allif_base_view_wrapper
 def commonEditTransferOrderItem(request, pk, *allifargs, **allifkwargs):
     query=get_object_or_404(CommonStockTransferOrderItemsModel, id=pk)
@@ -3574,11 +3560,9 @@ def commonSpaceItems(request, pk, *allifargs, **allifkwargs):
             'filter_field': 'space', # Field on CommonInvoiceItemsModel that links to CommonInvoicesModel
             'order_by': ['number'], # Order the items
             #'prefetch_related': ['product'], # If CommonInvoiceItemsModel has a 'product' ForeignKey, prefetch it
-            },
-            
+            },  
         ]
     )
-
 
 @allif_base_view_wrapper
 def commonAddSpaceItems(request,pk,*allifargs,**allifkwargs):
@@ -3595,7 +3579,6 @@ def commonAddSpaceItems(request,pk,*allifargs,**allifkwargs):
         template_path='allifmaalcommonapp/spaces/items/add-space-items.html',
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
         extra_context=my_extra_context,)
-
 
 @allif_base_view_wrapper
 def commonEditSpaceItem(request, pk, *allifargs, **allifkwargs):
@@ -3681,7 +3664,6 @@ def commonPostTransferOrder(request, pk, *allifargs, **allifkwargs):
                 messages.error(request, f"'{item_line.items.number}' is not in {transfer_order.from_store.name}")
                 return redirect('allifmaalcommonapp:commonAddTransferOrderDetails', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
         
-            
         return redirect('allifmaalcommonapp:commonAddTransferOrderDetails', pk=transfer_order.id, allifusr=allif_data.get("usrslg"), allifslug=allif_data.get("compslg"))
     
 ######################### QUOTATION #########################
@@ -3716,18 +3698,15 @@ def commonQuotesSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonQuotesModel',search_fields_key='CommonQuotesModel',
     template_path='allifmaalcommonapp/quotes/quotes.html',search_input_name='allifsearchcommonfieldname',)
 
-
 @allif_base_view_wrapper
 def commonQuoteAdvanceSearch(request,*allifargs,**allifkwargs):
     return allif_advance_search_handler(request,model_name='CommonQuotesModel',advanced_search_config_key='CommonQuotesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/quotes/quotes.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
 
-
 @allif_base_view_wrapper
 def commonQuoteToPdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonQuotesModel',)
   
-
 @allif_base_view_wrapper
 def commonAddQuoteItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
@@ -3862,7 +3841,6 @@ def commonNewInvoice(request,*allifargs,**allifkwargs):
     newinv.save()
     return redirect('allifmaalcommonapp:commonInvoices',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-
 @allif_base_view_wrapper
 def commonAddInvoiceItems(request,pk,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
@@ -3884,8 +3862,6 @@ def commonAddInvoiceItems(request,pk,*allifargs,**allifkwargs):
             invoice_line_tax+=line.invoice_tax_amount
             invitemscost+=line.items.unitcost
             
-
-
     allifquery.total=allifquerysettotal
     allifquery.taxAmount=invoice_line_tax
     allifquery.discountAmount=discounttoal
@@ -3895,7 +3871,6 @@ def commonAddInvoiceItems(request,pk,*allifargs,**allifkwargs):
     allifquery.invoice_gross_profit=Decimal(allifquerysettotal-discounttoal or 0)-Decimal(invitemscost or 0)
     allifquery.save()
 
-  
     def transaction_item_pre_save(obj, request, allif_data):
         obj.allifinvitemconnector=allifquery
     my_extra_context={"allifquery":allifquery,"allifqueryset": allifqueryset}
@@ -3905,7 +3880,6 @@ def commonAddInvoiceItems(request,pk,*allifargs,**allifkwargs):
         template_path='allifmaalcommonapp/invoices/add-inv-items.html',
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
         extra_context=my_extra_context,)
-
 
 @allif_base_view_wrapper
 def commonEditInvoiceItem(request, pk, *allifargs, **allifkwargs):
@@ -3980,10 +3954,7 @@ def commonPostInvoice(request,pk,*allifargs,**allifkwargs):
             else:
                 return HttpResponse("Please ensure invoice details are filled and that all items have been linked to the Chart of Accounts")
 
-                
-
             #increase customer turnover
-           
             mycustomer= get_object_or_404(CommonCustomersModel, id=customer_id)
             initial_customer_acc_turnover=mycustomer.turnover or 0
             
@@ -4000,8 +3971,7 @@ def commonPostInvoice(request,pk,*allifargs,**allifkwargs):
                 equity_acc.save()
             else:
                 return HttpResponse("Please add equity account")
-                
-
+            
             ######## change invoice status
             allifquery.posting_inv_status="posted"
             allifquery.save()
@@ -4017,7 +3987,6 @@ def commonPostInvoice(request,pk,*allifargs,**allifkwargs):
                 
             else:
                 return HttpResponse("Please add profit account")
-                
     else:
         return HttpResponse("Please select a customer")
         
@@ -4040,12 +4009,10 @@ def commonInvoicesSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonInvoicesModel',search_fields_key='CommonInvoicesModel',
     template_path='allifmaalcommonapp/invoices/invoices.html',search_input_name='allifsearchcommonfieldname',)
 
-
 @allif_base_view_wrapper
 def commonInvoiceAdvanceSearch(request,*allifargs,**allifkwargs):
     return allif_advance_search_handler(request,model_name='CommonInvoicesModel',advanced_search_config_key='CommonInvoicesModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
         template_html_path='allifmaalcommonapp/invoices/invoices.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
-
 
 @allif_base_view_wrapper
 def commonInvoiceToPdf(request, pk, *allifargs, **allifkwargs):
@@ -4127,7 +4094,6 @@ def commonAddCreditNoteItems(request,pk,*allifargs,**allifkwargs):
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
         extra_context=my_extra_context,)
 
-
 @allif_base_view_wrapper
 def commonEditCreditNoteItem(request, pk, *allifargs, **allifkwargs):
     query=get_object_or_404(CommonCreditNoteItemsModel, id=pk) 
@@ -4136,14 +4102,12 @@ def commonEditCreditNoteItem(request, pk, *allifargs, **allifkwargs):
     'commonAddCreditNoteItems','allifmaalcommonapp/creditnotes/add_credit_note_items.html',
     redirect_with_pk=True,redirect_pk_value=allifquery,)
    
- 
 @allif_base_view_wrapper
 def commonDeleteCreditNoteItem(request,pk,*allifargs,**allifkwargs):
     query=get_object_or_404(CommonCreditNoteItemsModel, id=pk)
     allifquery=query.credit_note.id
     return allif_delete_hanlder(request,model_name='CommonCreditNoteItemsModel',
     pk=pk,success_redirect_url_name='commonAddCreditNoteItems',redirect_with_pk=True,redirect_pk_value=allifquery)
-
 
 @allif_base_view_wrapper   
 def commonPostCreditNote(request,pk,*allifargs,**allifkwargs):
@@ -4185,14 +4149,11 @@ def commonPostCreditNote(request,pk,*allifargs,**allifkwargs):
                 income_acc.balance=initial_income_bal + per_line_selling_price
                 income_acc.save()
 
-                
             else:
                 messages.warning(request,"Please ensure credit note details are filled and that all items have been linked to the Chart of Accounts")
                 return redirect('allifmaalcommonapp:commonAddCreditNoteDetails',pk=allifquery.id,allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
-            
             #increase customer turnover
-            
             mycustomer=get_object_or_404(CommonCustomersModel, id=customer_id)
             initial_customer_acc_turnover=mycustomer.turnover or 0
             
@@ -4243,6 +4204,127 @@ def commonCreditNotesAdvanceSearch(request,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonCreditNotePdf(request, pk, *allifargs, **allifkwargs):
     return allif_document_pdf_handler(request,pk=pk,document_config_key='CommonCreditNotesModel',)
+
+####################3 TESTS.... ###################
+@allif_base_view_wrapper
+def commonTests(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
+   
+    title="Tests"
+    formats=CommonDocsFormatModel.all_objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonAssessmentsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/assessments/tests/tests.html',context)
+
+@allif_base_view_wrapper
+def commonAddTest(request,pk,*allifargs,**allifkwargs):
+    allifquery= get_object_or_404(CommonTransactionsModel, id=pk) 
+    allifquery_id=allifquery.id
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.trans_file=allifquery
+    my_extra_context={"allifquery":allifquery,}
+    return allif_common_form_submission_and_save(request,form_class=CommonAddTestForm,
+    title_text="New Test",
+        success_redirect_url_name='commonAddTest',
+        template_path='allifmaalcommonapp/assessments/tests/add_test.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        extra_context=my_extra_context)
+ 
+@allif_base_view_wrapper
+def commonEditTest(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonAddTestForm,"Edit Test",
+    'commonEditTest','allifmaalcommonapp/assessments/tests/add_test.html',
+    redirect_with_pk=True,redirect_pk_value=pk,)
+
+@allif_base_view_wrapper
+def commonTestDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=CommonAssessmentsModel,pk=pk,
+        template_name='allifmaalcommonapp/assessments/tests/test_details.html', # Create this template
+        title_map={'default': 'Test Details'},)
+
+@allif_base_view_wrapper
+def commonTestSearch(request,*allifargs,**allifkwargs):
+    return allif_search_handler(request,model_name='CommonAssessmentsModel',search_fields_key='CommonAssessmentsModel',
+    template_path='allifmaalcommonapp/assessments/tests/tests.html',search_input_name='allifsearchcommonfieldname',)
+
+@allif_base_view_wrapper
+def commonTestAdvancedSearch(request,*allifargs,**allifkwargs):
+    return allif_advance_search_handler(request,model_name='CommonAssessmentsModel',advanced_search_config_key='CommonAssessmentsModell', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/assessments/tests/tests.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
+
+@allif_base_view_wrapper
+def commonWantToDeleteTest(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonAssessmentsModel,"Delete this item",
+    'allifmaalcommonapp/assessments/tests/delete_test_confirm.html')
+
+@logged_in_user_can_delete
+@allif_base_view_wrapper
+def commonDeleteTest(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_hanlder(request,model_name='CommonAssessmentsModel',
+    pk=pk,success_redirect_url_name='commonTests')
+
+#########################3 lab test request results sections ..####################3
+@allif_base_view_wrapper
+def commonResults(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
+    tests=CommonAssessmentsModel.objects.all()
+    
+    title="Results"
+    formats=CommonDocsFormatModel.all_objects.all()
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonResultsModel,allif_data,explicit_scope='all')
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
+    return render(request,'allifmaalcommonapp/assessments/results/results.html',context)
+
+    
+@allif_base_view_wrapper
+def commonAddResult(request,pk,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
+    allifquery=get_object_or_404(CommonAssessmentsModel, id=pk)
+    allifqueryset=CommonResultsModel.all_objects.filter(test_request=allifquery)
+   
+    def transaction_item_pre_save(obj, request, allif_data):
+        obj.test_request=allifquery
+    my_extra_context={"allifquery":allifquery,"allifqueryset": allifqueryset}
+    return allif_common_form_submission_and_save(request,form_class=CommonAddResultForm,
+        title_text="Add Result",
+        success_redirect_url_name='commonAddResult', # This URL expects a PK
+        template_path='allifmaalcommonapp/assessments/results/add_result.html',
+        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
+        extra_context=my_extra_context)
+    
+ 
+@allif_base_view_wrapper
+def commonEditResult(request, pk, *allifargs, **allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonAddResultForm,"Edit Result",
+    'commonEditResult','allifmaalcommonapp/assessments/results/add_result.html',
+    redirect_with_pk=True,redirect_pk_value=pk)
+
+@allif_base_view_wrapper
+def commonResultDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=CommonResultsModel,pk=pk,
+        template_name='allifmaalcommonapp/assessments/results/result_details.html', # Create this template
+        title_map={'default': 'Result Details'},)
+
+@allif_base_view_wrapper
+def commonResultSearch(request,*allifargs,**allifkwargs):
+    return allif_search_handler(request,model_name='CommonResultsModel',search_fields_key='CommonResultsModel',
+    template_path='allifmaalcommonapp/assessments/results/results.html',search_input_name='allifsearchcommonfieldname',)
+
+@allif_base_view_wrapper
+def commonResultAdvancedSearch(request,*allifargs,**allifkwargs):
+    return allif_advance_search_handler(request,model_name='CommonResultsModel',advanced_search_config_key='CommonResultsModel', # Key for ADVANCED_SEARCH_CONFIGS in utils.py
+        template_html_path='allifmaalcommonapp/assessments/results/results.html',template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html')
+
+@allif_base_view_wrapper
+def commonWantToDeleteResult(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonResultsModel,"Delete this item",
+    'allifmaalcommonapp/assessments/results/delete_result_confirm.html')
+
+@logged_in_user_can_delete
+@allif_base_view_wrapper
+def commonDeleteResult(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_hanlder(request,model_name='CommonResultsModel',
+    pk=pk,success_redirect_url_name='commonResults')
 
 ################# general ledger entris #############
 @allif_base_view_wrapper
@@ -4460,7 +4542,6 @@ def commonTopUpCustomerAccount(request,pk,*allifargs,**allifkwargs):
         pre_save_callback=customer_payment_pre_save,
         initial_data=initial_form_data,)
     
-
 @allif_base_view_wrapper
 def commonWantToDeleteCustomerPayment(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonCustomerPaymentsModel,"Delete this item",
@@ -4928,6 +5009,7 @@ def commonMarkTaskComplete(request,pk,*allifargs,**allifkwargs):
         mark_complete.save()
     return redirect('allifmaalcommonapp:commonTasks',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
+
 @allif_base_view_wrapper
 def commonCompletedTasks(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
@@ -4945,6 +5027,7 @@ def commonEditTask(request,pk,*allifargs,**allifkwargs):
 @allif_base_view_wrapper
 def commonDeleteTask(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonTasksModel',pk=pk,success_redirect_url_name='commonTasks')
+
 
 ########################## progress reporting/recording#################################3
 @allif_base_view_wrapper
@@ -4970,10 +5053,12 @@ def commonProgress(request, pk, *allifargs, **allifkwargs):
 def commonWantToDeleteProgress(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonProgressModel,"Delete this item",'allifmaalcommonapp/records/progress/delete_progress_confirm.html')
 
+
 @allif_base_view_wrapper
 def commonProgressSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonProgressModel',search_fields_key='CommonProgressModel',
     template_path='allifmaalcommonapp/records/progress/progress.html',search_input_name='allifsearchcommonfieldname',)
+
 
 @allif_base_view_wrapper
 def commonProgressAdvanceSearch(request,*allifargs,**allifkwargs):
@@ -4996,6 +5081,7 @@ def commonAddProgress(request,pk,*allifargs,**allifkwargs):
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
         extra_context=my_extra_context,)
 
+
 @allif_base_view_wrapper
 def commonEditProgress(request, pk, *allifargs, **allifkwargs):
     query= get_object_or_404(CommonProgressModel, id=pk) 
@@ -5017,6 +5103,7 @@ def commonDeleteProgress(request,pk,*allifargs,**allifkwargs):
     return allif_delete_hanlder(request,model_name='CommonProgressModel',
     pk=pk,success_redirect_url_name='commonProgress',redirect_with_pk=True,redirect_pk_value=allifquery)
     
+
 ###################3 customer contacts messages ###################3
 def commonCustomerContacts(request):
     try:

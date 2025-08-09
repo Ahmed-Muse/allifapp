@@ -940,9 +940,46 @@ class CommonProgressModel(CommonBaseModel):
    
     def __str__(self):
         return str(self.trans_number.customer)
-    
-################################## PURCHASES ###########3
 
+
+#################################### EXAMINATIONS ##########################
+
+
+class CommonAssessmentsModel(CommonBaseModel):
+    """
+    This is actual examination/testing of various entities like students, patients, items, etc
+    Sales... item testing...like the health status of the item is tested.
+    Healthcare... this can be like lab tests like blood tests, urine tests, stool tests etc...
+    Education... this can be like exams, cats, etc...
+    Service... this can be item tests...
+    Hospitality... item tests etc
+    logistics... service tests... like asking customers how you are doing in certain areas and grade it...
+    Realestate... item/service tests...
+    
+    Represents a request from a healthcare professional for one or more laboratory tests.
+    """
+  
+    
+    items=models.ForeignKey(CommonStocksModel, on_delete=models.SET_NULL, null=True, blank=True,related_name="items_test",)
+    trans_file=models.ForeignKey(CommonTransactionsModel, on_delete=models.CASCADE, related_name="file_requests", blank=True, null=True,)
+    space=models.ForeignKey(CommonSpacesModel, on_delete=models.SET_NULL, related_name="space_lab_test_requests", blank=True, null=True,)
+    specimen=models.CharField(max_length=50,choices=SPECIMEN_TYPE,default='Blood',help_text="Current status of the lab order.")
+
+    test_status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='Ordered',help_text="Current status of the lab order.")
+
+    def __str__(self):
+        return str(self.trans_file)
+    
+class CommonResultsModel(CommonBaseModel):
+    """
+    Stores the results for a specific test item.
+    """
+    test_request=models.ForeignKey(CommonAssessmentsModel, on_delete=models.CASCADE, related_name="test_lab_test_requests_results", blank=True, null=True,)
+   
+    def __str__(self):
+        return str(self.test_request.trans_file)
+      
+################################## PURCHASES ###########3
 class CommonPurchaseOrdersModel(CommonBaseModel):
     class Status(models.TextChoices): # <--- Define choices using TextChoices
         DRAFT = 'Draft', 'Draft'
@@ -1233,7 +1270,6 @@ class CommonJobItemsModel(CommonBaseModel):
         return str(self.item)
     
 #################################### shipments.... ###############
-
 class CommonTransitModel(CommonBaseModel):
     carrier=models.ForeignKey(CommonAssetsModel, blank=True, null=True, on_delete=models.SET_NULL,related_name='carrier_related')
     

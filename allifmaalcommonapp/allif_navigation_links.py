@@ -19,11 +19,17 @@ allifmaal_general_links = [
     {'name': 'Procurement', 'url_name': 'allifmaalcommonapp:commonPurchaseOrders'},
     {'name': 'Quotations', 'url_name': 'allifmaalcommonapp:commonQuotes'},
     {'name': 'Invoices', 'url_name': 'allifmaalcommonapp:commonInvoices'},
+    {'name': 'Tests', 'url_name': 'allifmaalcommonapp:commonTests'},
+    {'name': 'Results', 'url_name': 'allifmaalcommonapp:commonResults'},
     
     {'name': 'Ledgers', 'url_name': 'allifmaalcommonapp:commonLedgerEntries'},
     {'name': 'Payments', 'url_name': 'allifmaalcommonapp:commonCustomerPayments'},
     {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},
     {'name': 'Profit & Loss', 'url_name': 'allifmaalcommonapp:commonProfitAndLoss'},
+    
+    
+    
+    
     
 ]
 
@@ -36,19 +42,14 @@ allifmaal_sector_specific_links= {
         {'name': 'Patients', 'url_name': 'allifmaalcommonapp:commonCustomers'}, 
         {'name': 'Triage', 'url_name': 'allifmaalshaafiapp:triageData'}, 
         {'name': 'Assessments', 'url_name': 'allifmaalshaafiapp:doctorAssessments'},
-        {'name': 'Lab Tests', 'url_name': 'allifmaalshaafiapp:labTestRequests'},
-        
-        {'name': 'Lab Results', 'url_name': 'allifmaalshaafiapp:labTestResults'},
+        {'name': 'Tests', 'url_name': 'allifmaalcommonapp:commonTests'},
+    {'name': 'Results', 'url_name': 'allifmaalcommonapp:commonResults'},
         {'name': 'Prescriptions', 'url_name': 'allifmaalshaafiapp:prescriptions'},
         {'name': 'Medications', 'url_name': 'allifmaalshaafiapp:treatments'},
         {'name': 'Admissions', 'url_name': 'allifmaalshaafiapp:admissions'},
         {'name': 'Discharges', 'url_name': 'allifmaalshaafiapp:discharges'},
         {'name': 'Referals', 'url_name': 'allifmaalshaafiapp:referrals'},
-        
-        
-        
-      
-      
+     
     ],
     'Education': [
         {'name': 'Students', 'url_name': 'allifmaalcommonapp:commonCustomers'},
@@ -205,8 +206,6 @@ allif_single_access_general_links = [
      {'name': 'Referrals', 'url_name': 'allifmaalshaafiapp:referrals'},
      {'name': 'MedicalAssessments', 'url_name': 'allifmaalshaafiapp:doctorAssessments'},
    
-    
-    
     {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},
     {'name': 'Profit & Loss', 'url_name': 'allifmaalcommonapp:commonProfitAndLoss'},
     
@@ -237,6 +236,9 @@ allif_single_access_general_links = [
     {'name': 'AddGeneralLedger', 'url_name': 'allifmaalcommonapp:commonAddGeneralLedger'},
     {'name': 'ChartOfAccounts', 'url_name': 'allifmaalcommonapp:commonChartofAccounts'},
     {'name': 'AddChartOfAccount', 'url_name': 'allifmaalcommonapp:commonAddChartofAccount'},
+    
+     {'name': 'Tests', 'url_name': 'allifmaalcommonapp:commonTests'},
+    {'name': 'Results', 'url_name': 'allifmaalcommonapp:commonResults'},
     
     
     

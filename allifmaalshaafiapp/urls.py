@@ -26,26 +26,6 @@ path('Do/You/u/Really/Want/to/Delete/This/Doctor/assessment/s/observation/s/data
 path('Delete/This/Doctor/assessment/s/observations/s/Data/Record/s/info/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteDoctorAssessment, name="deleteDoctorAssessment"),
 path('Doctor/assessment/observations/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.doctorAssessmentAdvancedSearch, name="doctorAssessmentAdvancedSearch"),
 
-#############################3 lab test requests ################
-path('Laboratory/test/s/request/s/<str:allifusr>/<str:allifslug>/', views.labTestRequests, name="labTestRequests"),
-path('Add/New/Lab/s/Test/s/request/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addLabTestRequest, name="addLabTestRequest"),
-path('Edit/Update/Lab/test/request/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editLabTestRequest, name="editLabTestRequest"),
-path('Search/For/lab/test/request/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.labTestRequestSearch, name="labTestRequestSearch"),
-path('Lab/test/request/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.labTestRequestDetails, name="labTestRequestDetails"),
-path('Do/You/u/Really/Want/to/Delete/This/lab/test/request/s/data/record/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteLabTestRequest, name="wantToDeleteLabTestRequest"),
-path('Delete/This/lab/test/request/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteLabTestRequest, name="deleteLabTestRequest"),
-path('Lab/Test/s/Request/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.labTestRequestAdvancedSearch, name="labTestRequestAdvancedSearch"),
-
-#####################33 lab test request results #################3
-path('Laboratory/test/s/results/s/<str:allifusr>/<str:allifslug>/', views.labTestResults, name="labTestResults"),
-path('Add/New/Lab/s/Test/s/results/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addLabTestResult, name="addLabTestResult"),
-path('Edit/Update/Lab/test/results/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editLabTestResult, name="editLabTestResult"),
-path('Search/For/lab/test/results/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.labTestResultSearch, name="labTestResultSearch"),
-path('Lab/test/results/info/s/Details/Information/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.labTestResultDetails, name="labTestResultDetails"),
-path('Do/You/u/Really/Want/to/Delete/This/lab/test/results/s/data/record/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteLabTestResult, name="wantToDeleteLabTestResult"),
-path('Delete/This/lab/test/result/s/Permanently/<str:pk>/<str:allifusr>/<str:allifslug>/', views.deleteLabTestResult, name="deleteLabTestResult"),
-path('Lab/Test/s/Result/s/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/', views.labTestResultAdvancedSearch, name="labTestResultAdvancedSearch"),
-
 ################# prescriptions #####################
 path('Prescriptions/<str:allifusr>/<str:allifslug>/', views.prescriptions, name="prescriptions"),
 path('Add/New/Prescriptions/<str:pk>/<str:allifusr>/<str:allifslug>/', views.AddPrescription, name="AddPrescription"),

@@ -95,6 +95,21 @@ class User(AbstractUser):# this is for creating new user... the fields are below
         blank=True,
         related_name='allifmaalusersappdepartment'
     )
+   
+    operation_year = models.ForeignKey(
+        'allifmaalcommonapp.CommonOperationYearsModel', # Use string reference
+        on_delete=models.SET_NULL,
+        null=True, 
+        blank=True,
+        related_name='allifmaalusersappoperationyear'
+    )
+    operation_term = models.ForeignKey(
+        'allifmaalcommonapp.CommonOperationYearTermsModel', # Use string reference
+        on_delete=models.SET_NULL,
+        null=True, 
+        blank=True,
+        related_name='allifmaalusersappoperationterm'
+    )
     
     def __str__(self):
         return str(self.first_name)#please dont change this unless very necessary....
