@@ -238,8 +238,6 @@ DATABASES = {
         #'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",}
         #'PASSWORD': 'hidden',
        
-
-
         ######################3 BELOW DATABASE IS FOR PRODUCTION ############3
 
         ################# comment out this section during deployment... it is for development ############
@@ -402,7 +400,9 @@ STATIC_URL = '/static/'## This is the URL prefix for static files (e.g., yoursit
 
 #This constructs the absolute path to the static folder located directly within in project's root.
 #This is the absolute path to a directory where python manage.py collectstatic will gather all static files from your project (from STATICFILES_DIRS and from each app's static/ directory) into one place for deployment. You typically don't serve files directly from STATIC_ROOT in development.
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#.............. START...PRODUCTION............... UNCOMMENT ON PRODUCTION...
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static') # this is for production....
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -425,5 +425,4 @@ STATICFILES_DIRS=[
 MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
 #PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
 MEDIA_URL='/media/'#fetch images/media using this path when viewing through the browser...this folder will be created automatically when we upload the first image
-
 

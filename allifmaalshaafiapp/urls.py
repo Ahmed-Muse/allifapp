@@ -18,7 +18,7 @@ path('Triage/data/info/s/Advance/d/Search/ing/s/<str:allifusr>/<str:allifslug>/'
 
 ###################### doctor assessments ##############3
 path('Doctor/Assessment/s/Observation/s/<str:allifusr>/<str:allifslug>/', views.doctorAssessments, name="doctorAssessments"),
-path('Add/New/Doctor/Assessment/s/Observations//Records/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addDoctorAssessment, name="addDoctorAssessment"),
+path('Add/New/Doctor/Assessment/s/Observations/Records/<str:pk>/<str:allifusr>/<str:allifslug>/', views.addDoctorAssessment, name="addDoctorAssessment"),
 path('Edit/Update/Doctor/assessment/s/observations/s/detail/s/<str:pk>/<str:allifusr>/<str:allifslug>/', views.editDoctorAssessment, name="editDoctorAssessment"),
 path('Search/For/Doctor/Assessment/s/observation/s/Data/Record/s/info/s/Details/<str:allifusr>/<str:allifslug>/', views.doctorAssessmentSearch, name="doctorAssessmentSearch"),
 

@@ -197,8 +197,7 @@ allif_single_access_general_links = [
      {'name': 'prescriptions', 'url_name': 'allifmaalshaafiapp:prescriptions'},
     
      
-     {'name': 'LabTests', 'url_name': 'allifmaalshaafiapp:labTestRequests'},
-     {'name': 'LabResults', 'url_name': 'allifmaalshaafiapp:labTestResults'},
+    
      {'name': 'Treatments', 'url_name': 'allifmaalshaafiapp:treatments'},
      
      {'name': 'Admissions', 'url_name': 'allifmaalshaafiapp:admissions'},

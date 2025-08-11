@@ -191,8 +191,6 @@ allif_sector_contextual_action_require_pk_links= {
    {'name': 'StaffProfileDetails', 'url_name': 'allifmaalcommonapp:commonStaffProfileDetails', 'requires_pk': True},
    
    
-      
-    
    
    {'name': 'AddTest', 'url_name': 'allifmaalcommonapp:commonAddTest', 'requires_pk': True},
    {'name': 'TestDetails', 'url_name': 'allifmaalcommonapp:commonTestDetails', 'requires_pk': True},
