@@ -60,7 +60,7 @@ allifmaal_sector_specific_links= {
     'Hospitality': [
        
     ],
-    'Real Estate': [
+    'Realestate': [
         
     ],
     'Logistics': [

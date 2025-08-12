@@ -7,7 +7,7 @@ from .models import *
 from .forms import *
 from django.db.models import Q
 def ilmHome(request,*allifargs,**allifkwargs):
-    title="Home : Healthcare"
+    title="Home : Education"
     try:
         user_is_supper=request.user.is_superuser
         allif_data=common_shared_data(request)

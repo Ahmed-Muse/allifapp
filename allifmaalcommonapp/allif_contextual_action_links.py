@@ -1,6 +1,262 @@
 # myerpapp/configs/contextual_actions.py
 
-allif_sector_contextual_action_require_pk_links= {
+# myerpapp/configs/contextual_actions.py
+
+# This dictionary holds all the contextual actions for different company sectors.
+# The 'General' key contains actions common to all sectors.
+# Each other key (e.g., 'Healthcare') contains actions specific to that sector.
+# The 'name' is the display name for the link, 'url_name' is the Django URL pattern name,
+# and 'requires_pk' indicates if a primary key is needed to resolve the URL.
+allif_sector_contextual_action_require_pk_links = {
+    # General links that apply to all sectors
+    
+    'General': [
+        {'name': 'common_currency_pdf', 'url_name': 'allifmaalcommonapp:common_currency_pdf', 'requires_pk': True},
+        {'name': 'commonWantToDeleteCurrency', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCurrency', 'requires_pk': True},
+        
+        {'name': 'DivisionDetails', 'url_name': 'allifmaalcommonapp:commonDivisionDetails', 'requires_pk': True},
+        {'name': 'EditDivision', 'url_name': 'allifmaalcommonapp:commonEditDivision', 'requires_pk': True},
+        {'name': 'DeleteDivisionConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDivision', 'requires_pk': True},
+        {'name': 'commonWantToDeletePaymentTerm', 'url_name': 'allifmaalcommonapp:commonWantToDeletePaymentTerm', 'requires_pk': True},
+        {'name': 'commonDeletePaymentTerm', 'url_name': 'allifmaalcommonapp:commonDeletePaymentTerm', 'requires_pk': True},
+        
+        {'name': 'commonConfirmDeleteUnits', 'url_name': 'allifmaalcommonapp:commonConfirmDeleteUnits', 'requires_pk': True},
+        {'name': 'commonDeleteUnit', 'url_name': 'allifmaalcommonapp:commonDeleteUnit', 'requires_pk': True},
+        
+        {'name': 'commonWantToDeleteCategory', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCategory', 'requires_pk': True},
+        {'name': 'commonDeleteCategory', 'url_name': 'allifmaalcommonapp:commonDeleteCategory', 'requires_pk': True},
+        
+        {'name': 'commonWantToDeleteCode', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCode', 'requires_pk': True},
+        {'name': 'commonDeleteCode', 'url_name': 'allifmaalcommonapp:commonDeleteCode', 'requires_pk': True},
+        
+        {'name': 'commonWantToDeleteScope', 'url_name': 'allifmaalcommonapp:commonWantToDeleteScope', 'requires_pk': True},
+        {'name': 'commonDeleteCompanyScope', 'url_name': 'allifmaalcommonapp:commonDeleteCompanyScope', 'requires_pk': True},
+        
+        {'name': 'commonWantToDeleteApprover', 'url_name': 'allifmaalcommonapp:commonWantToDeleteApprover', 'requires_pk': True},
+        {'name': 'commonDeleteApprover', 'url_name': 'allifmaalcommonapp:commonDeleteApprover', 'requires_pk': True},
+        
+        {'name': 'CommonDeleteTaxParameter', 'url_name': 'allifmaalcommonapp:CommonDeleteTaxParameter', 'requires_pk': True},
+        {'name': 'commonWantToDeleteTaxParameter', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTaxParameter', 'requires_pk': True},
+    
+        {'name': 'commonWantToDeleteSupplierTaxParameter', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSupplierTaxParameter', 'requires_pk': True},
+        {'name': 'CommonSupplierDeleteTaxParameter', 'url_name': 'allifmaalcommonapp:CommonSupplierDeleteTaxParameter', 'requires_pk': True},
+        
+        {'name': 'wanttodeletebank', 'url_name': 'allifmaalcommonapp:commonWantToDeleteBank', 'requires_pk': True},
+        {'name': 'commonDeleteBank', 'url_name': 'allifmaalcommonapp:commonDeleteBank', 'requires_pk': True},
+        
+        {'name': 'DeleteDeposit', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDeposit', 'requires_pk': True},
+    
+        {'name': 'DeleteWithdrawal', 'url_name': 'allifmaalcommonapp:commonWantToDeleteWithdrawal', 'requires_pk': True},
+        
+        {'name': 'DeleteSupplierConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSupplier', 'requires_pk': True},
+    
+        {'name': 'DeleteSupplier', 'url_name': 'allifmaalcommonapp:commonDeleteSupplier', 'requires_pk': True},
+        
+        {'name': 'DeleteCustomerConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCustomer', 'requires_pk': True},
+    
+        {'name': 'DeleteCustomer', 'url_name': 'allifmaalcommonapp:commonDeleteSupplier', 'requires_pk': True},
+        
+        {'name': 'TopUpCustomerAccount', 'url_name': 'allifmaalcommonapp:commonTopUpCustomerAccount', 'requires_pk': True},
+        {'name': 'CustomerLedgers', 'url_name': 'allifmaalcommonapp:commonCustomerLedgerEntries', 'requires_pk': True},
+        
+        {'name': 'DeleteAssetConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteAsset', 'requires_pk': True},
+        {'name': 'DeleteAsset', 'url_name': 'allifmaalcommonapp:commonDeleteAsset', 'requires_pk': True},
+        
+        {'name': 'DeleteExpenseConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteExpense', 'requires_pk': True},
+        {'name': 'DeleteExpense', 'url_name': 'allifmaalcommonapp:commonDeleteExpense', 'requires_pk': True},
+        
+        {'name': 'DeleteTransactionConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTransaction', 'requires_pk': True},
+        {'name': 'DeleteTransaction', 'url_name': 'allifmaalcommonapp:commonDeleteTransaction', 'requires_pk': True},
+        
+        {'name': 'commonAddTransactionDetails', 'url_name': 'allifmaalcommonapp:commonAddTransactionDetails', 'requires_pk': True},
+        
+        {'name': 'commonTransactionDetails', 'url_name': 'allifmaalcommonapp:commonTransactionDetails', 'requires_pk': True},
+        
+        {'name': 'DeleteSpaceConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSpace', 'requires_pk': True},
+        
+        {'name': 'DeleteSpace', 'url_name': 'allifmaalcommonapp:commonDeleteSpace', 'requires_pk': True},
+        
+        {'name': 'DeleteSpaceUnitConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSpaceUnit', 'requires_pk': True},
+        {'name': 'DeleteSpaceUnit', 'url_name': 'allifmaalcommonapp:commonDeleteSpaceUnit', 'requires_pk': True},
+        
+        {'name': 'DeleteStockItemConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteStockItem', 'requires_pk': True},
+        {'name': 'DeleteStockItem', 'url_name': 'allifmaalcommonapp:commonDeleteStockItem', 'requires_pk': True},
+        
+        {'name': 'DeletePurchaseOrderConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeletePO', 'requires_pk': True},
+        {'name': 'DeletePurchaseOrder', 'url_name': 'allifmaalcommonapp:commonDeletePO', 'requires_pk': True},
+        {'name': 'potopdf', 'url_name': 'allifmaalcommonapp:common_purchase_order_pdf', 'requires_pk': True},
+        {'name': 'pomiscosts', 'url_name': 'allifmaalcommonapp:commonPOMiscCost', 'requires_pk': True},
+        
+        {'name': 'DeleteTransferOrderConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTransferOrder', 'requires_pk': True},
+        {'name': 'DeleteTransferOrder', 'url_name': 'allifmaalcommonapp:commonDeleteTransferOrder', 'requires_pk': True},
+        {'name': 'trfpdf', 'url_name': 'allifmaalcommonapp:commonTransferOrderPdf', 'requires_pk': True},
+        
+        {'name': 'quotepdf', 'url_name': 'allifmaalcommonapp:commonQuoteToPdf', 'requires_pk': True},
+        {'name': 'addquotedetails', 'url_name': 'allifmaalcommonapp:commonAddQuoteDetails', 'requires_pk': True},
+        {'name': 'addquoteitems', 'url_name': 'allifmaalcommonapp:commonAddQuoteItems', 'requires_pk': True},
+        
+        {'name': 'DeleteQuoteConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteQuote', 'requires_pk': True},
+        {'name': 'DeleteQuote', 'url_name': 'allifmaalcommonapp:commonDeleteQuote', 'requires_pk': True},
+        
+        {'name': 'InvoiceDetails', 'url_name': 'allifmaalcommonapp:commonAddInvoiceDetails', 'requires_pk': True},
+        {'name': 'DeleteInvoice', 'url_name': 'allifmaalcommonapp:commonDeleteInvoice', 'requires_pk': True},
+        {'name': 'DeleteInvoiceConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteInvoice', 'requires_pk': True},
+        {'name': 'PostInvoice', 'url_name': 'allifmaalcommonapp:commonPostInvoice', 'requires_pk': True},
+        {'name': 'invoicepdf', 'url_name': 'allifmaalcommonapp:commonInvoiceToPdf', 'requires_pk': True},
+        
+        {'name': 'CreditNotePdf', 'url_name': 'allifmaalcommonapp:commonCreditNotePdf', 'requires_pk': True},
+        {'name': 'PostCreditNote', 'url_name': 'allifmaalcommonapp:commonPostCreditNote', 'requires_pk': True},
+        {'name': 'AddCNDetails', 'url_name': 'allifmaalcommonapp:commonAddCreditNoteDetails', 'requires_pk': True},
+        {'name': 'DeleteCreditNote', 'url_name': 'allifmaalcommonapp:commonDeleteCreditNote', 'requires_pk': True},
+        {'name': 'DeleteCreditNoteConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCreditNote', 'requires_pk': True},
+    
+        {'name': 'StaffLedgerEntries', 'url_name': 'allifmaalcommonapp:commonStaffLedgerEntries', 'requires_pk': True},
+        {'name': 'CustomerLedgerEntries', 'url_name': 'allifmaalcommonapp:commonCustomerLedgerEntries', 'requires_pk': True},
+        
+        {'name': 'SupplierLedgerEntries', 'url_name': 'allifmaalcommonapp:commonSupplierLedgerEntries', 'requires_pk': True},
+        {'name': 'DeleteLedgerEntryConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteLedgerEntry', 'requires_pk': True},
+        {'name': 'DeleteLedgerEntry', 'url_name': 'allifmaalcommonapp:commonDeleteLedgerEntry', 'requires_pk': True},
+        
+        {'name': 'PaySupplier', 'url_name': 'allifmaalcommonapp:commonPaySupplier', 'requires_pk': True},
+        {'name': 'DeleteSupplierPaymentConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSupplierPayment', 'requires_pk': True},
+        {'name': 'DeleteSupplierPayment', 'url_name': 'allifmaalcommonapp:commonDeleteSupplierPayment', 'requires_pk': True},
+        {'name': 'SupplierPaymentDetails', 'url_name': 'allifmaalcommonapp:commonSupplierPaymentDetails', 'requires_pk': True},
+        
+        {'name': 'PostSupplierPayment', 'url_name': 'allifmaalcommonapp:commonPostSupplierPayment', 'requires_pk': True},
+        
+        {'name': 'SupplierPaymentPdf', 'url_name': 'allifmaalcommonapp:commonSupplierStatementpdf', 'requires_pk': True},
+        
+        {'name': 'DeleteCustomerPayment', 'url_name': 'allifmaalcommonapp:commonDeleteCustomerPayment', 'requires_pk': True},
+        
+        {'name': 'CustomerPaymentDetails', 'url_name': 'allifmaalcommonapp:commonCustomerPaymentDetails', 'requires_pk': True},
+        
+        {'name': 'PostCustomerPayment', 'url_name': 'allifmaalcommonapp:commonPostCustomerPayment', 'requires_pk': True},
+        
+        {'name': 'CustomerStatementPdf', 'url_name': 'allifmaalcommonapp:commonCustomerStatementpdf', 'requires_pk': True},
+        
+        {'name': 'DeleteCustomerPaymentConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCustomerPayment', 'requires_pk': True},
+        
+        {'name': 'SalaryDetails', 'url_name': 'allifmaalcommonapp:commonSalaryDetails', 'requires_pk': True},
+        {'name': 'EditSalary', 'url_name': 'allifmaalcommonapp:commonEditSalaryDetails', 'requires_pk': True},
+        {'name': 'PostSalary', 'url_name': 'allifmaalcommonapp:commonPostSalary', 'requires_pk': True},
+        
+        {'name': 'DeleteSalaryConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteSalary', 'requires_pk': True},
+        
+        {'name': 'DeleteJobConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteJob', 'requires_pk': True},
+        {'name': 'DeleteJob', 'url_name': 'allifmaalcommonapp:commonDeleteJob', 'requires_pk': True},
+        {'name': 'AddJobDetails', 'url_name': 'allifmaalcommonapp:commonAddJobDetails', 'requires_pk': True},
+        {'name': 'InvoiceJob', 'url_name': 'allifmaalcommonapp:commonInvoiceJob', 'requires_pk': True},
+        {'name': 'JobInvoicePdf', 'url_name': 'allifmaalcommonapp:commonJobInvoicePdf', 'requires_pk': True},
+        {'name': 'JobTransactionPdf', 'url_name': 'allifmaalcommonapp:commonJobTransactionReportpdf', 'requires_pk': True},
+        {'name': 'AddJobItems', 'url_name': 'allifmaalcommonapp:commonAddJobItems', 'requires_pk': True},
+        
+        {'name': 'DeleteTransitConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTransit', 'requires_pk': True},
+        {'name': 'DeleteTransit', 'url_name': 'allifmaalcommonapp:commonDeleteTransit', 'requires_pk': True},
+        {'name': 'AddTransitDetails', 'url_name': 'allifmaalcommonapp:commonAddTransitDetails', 'requires_pk': True},
+        {'name': 'AddShipmentItems', 'url_name': 'allifmaalcommonapp:commonAddShipmentItems', 'requires_pk': True},
+        {'name': 'TransitPdf', 'url_name': 'allifmaalcommonapp:commonTransitToPdf', 'requires_pk': True},
+        
+        {'name': 'TransitItemDetails', 'url_name': 'allifmaalcommonapp:commonShipmentItemDetails', 'requires_pk': True},
+        {'name': 'DeleteShipmentItem', 'url_name': 'allifmaalcommonapp:commonDeleteShipmentItem', 'requires_pk': True},
+        {'name': 'DeleteProgressConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteProgress', 'requires_pk': True},
+        {'name': 'AddProgress', 'url_name': 'allifmaalcommonapp:commonAddProgress', 'requires_pk': True},
+        
+        {'name': 'LogDetails', 'url_name': 'allifmaalcommonapp:commonLogDetails', 'requires_pk': True},
+        {'name': 'DeleteLogConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteLog', 'requires_pk': True},
+        
+        #{'name': 'EditDivision', 'url_name': 'allifmaalcommonapp:commonEditDivision', 'requires_pk': True},
+        #{'name': 'DivisionDetails', 'url_name': 'allifmaalcommonapp:commonDivisionDetails', 'requires_pk': True},
+        #{'name': 'DeleteDivisionConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDivision', 'requires_pk': True},
+        {'name': 'DeleteDivision', 'url_name': 'allifmaalcommonapp:commonDeleteDivision', 'requires_pk': True},
+        {'name': 'DeleteBranch', 'url_name': 'allifmaalcommonapp:commonDeleteBranch', 'requires_pk': True},
+        {'name': 'DeleteBranchConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteBranch', 'requires_pk': True},
+        {'name': 'EditBranch', 'url_name': 'allifmaalcommonapp:commonEditBranch', 'requires_pk': True},
+        {'name': 'BranchDetails', 'url_name': 'allifmaalcommonapp:commonBranchDetails', 'requires_pk': True},
+        {'name': 'EditDepartment', 'url_name': 'allifmaalcommonapp:commonEditDepartment', 'requires_pk': True},
+        {'name': 'DepartmentDetails', 'url_name': 'allifmaalcommonapp:commonDepartmentDetails', 'requires_pk': True},
+        {'name': 'DeleteDepartmentConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteDepartment', 'requires_pk': True},
+        {'name': 'DeleteDepartment', 'url_name': 'allifmaalcommonapp:commonDeleteDepartment', 'requires_pk': True},
+        {'name': 'EditOperationYear', 'url_name': 'allifmaalcommonapp:commonEditOperationYear', 'requires_pk': True},
+        {'name': 'DelteOperationYearConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteOperationYear', 'requires_pk': True},
+        {'name': 'DeleteOperationYear', 'url_name': 'allifmaalcommonapp:commonDeleteOperationYear', 'requires_pk': True},
+        {'name': 'EditOperationTerm', 'url_name': 'allifmaalcommonapp:commonEditOperationYearTerm', 'requires_pk': True},
+        {'name': 'DeleteOperationYearTermConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteOperationYearTerm', 'requires_pk': True},
+        {'name': 'DeleteOperationYearTerm', 'url_name': 'allifmaalcommonapp:commonDeleteOperationYearTerm', 'requires_pk': True},
+        
+        {'name': 'EditStaffProfile', 'url_name': 'allifmaalcommonapp:commonEditStaffProfile', 'requires_pk': True},
+        {'name': 'DeleteStaffProfileConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteProfile', 'requires_pk': True},
+        {'name': 'DeleteStaffProfile', 'url_name': 'allifmaalcommonapp:commonDeleteProfile', 'requires_pk': True},
+        {'name': 'StaffProfileDetails', 'url_name': 'allifmaalcommonapp:commonStaffProfileDetails', 'requires_pk': True},
+        
+        {'name': 'AddTest', 'url_name': 'allifmaalcommonapp:commonAddTest', 'requires_pk': True},
+        {'name': 'TestDetails', 'url_name': 'allifmaalcommonapp:commonTestDetails', 'requires_pk': True},
+        {'name': 'DeleteTestConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteTest', 'requires_pk': True},
+        {'name': 'AddResult', 'url_name': 'allifmaalcommonapp:commonAddResult', 'requires_pk': True},
+        {'name': 'ResultDetails', 'url_name': 'allifmaalcommonapp:commonResultDetails', 'requires_pk': True},
+        {'name': 'DeleteResultConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteResult', 'requires_pk': True},
+        
+        {'name': 'EditGeneralLedger', 'url_name': 'allifmaalcommonapp:commonEditGeneralLedger', 'requires_pk': True},
+        {'name': 'GeneralLedgerDetails', 'url_name': 'allifmaalcommonapp:commonGeneralLedgerDetails', 'requires_pk': True},
+        {'name': 'SynchGeneralLedger', 'url_name': 'allifmaalcommonapp:commonSynchGLAccount', 'requires_pk': True},
+        {'name': 'DeleteGeneralLedgerConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteGenLedger', 'requires_pk': True},
+        
+        {'name': 'EditChartOfAccount', 'url_name': 'allifmaalcommonapp:commonEditChartofAccount', 'requires_pk': True},
+        {'name': 'ChartOfAccountDetails', 'url_name': 'allifmaalcommonapp:commonChartofAccountDetails', 'requires_pk': True},
+        {'name': 'ClearChartOfAccount', 'url_name': 'allifmaalcommonapp:commonClearAcc', 'requires_pk': True},
+        {'name': 'DeleteChartOfAccountConfirm', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCoA', 'requires_pk': True},
+    ],
+     'Sales': [
+        # Add sales specific links here
+    ],
+    # Sector-specific links
+    'Healthcare': [
+        {'name': 'AddTriageData', 'url_name': 'allifmaalshaafiapp:AddTriageData', 'requires_pk': True},
+        {'name': 'addDoctorAssessment', 'url_name': 'allifmaalshaafiapp:addDoctorAssessment', 'requires_pk': True},
+        {'name': 'DeleteAssessmentConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteDoctorAssessment', 'requires_pk': True},
+        {'name': 'DeleteAssessment', 'url_name': 'allifmaalshaafiapp:deleteDoctorAssessment', 'requires_pk': True},
+        {'name': 'DeletePrescriptionConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeletePrescription', 'requires_pk': True},
+        {'name': 'DeletePrescription', 'url_name': 'allifmaalshaafiapp:deletePrescription', 'requires_pk': True},
+        {'name': 'DeleteAdmissionConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteAdmission', 'requires_pk': True},
+        {'name': 'DeleteAddmission', 'url_name': 'allifmaalshaafiapp:deleteAdmission', 'requires_pk': True},
+        {'name': 'DeleteTreatmentConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteTreatment', 'requires_pk': True},
+        {'name': 'DeleteTreatment', 'url_name': 'allifmaalshaafiapp:deleteTreatment', 'requires_pk': True},
+        {'name': 'DeleteDischargeConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteDischarge', 'requires_pk': True},
+        {'name': 'DeleteDischarge', 'url_name': 'allifmaalshaafiapp:deleteDischarge', 'requires_pk': True},
+        {'name': 'DeleteReferralConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteReferral', 'requires_pk': True},
+        {'name': 'DeleteReferral', 'url_name': 'allifmaalshaafiapp:deleteReferral', 'requires_pk': True},
+        {'name': 'AddPrescription', 'url_name': 'allifmaalshaafiapp:AddPrescription', 'requires_pk': True},
+        {'name': 'AddAdmission', 'url_name': 'allifmaalshaafiapp:addAdmission', 'requires_pk': True},
+        {'name': 'AddTreatment', 'url_name': 'allifmaalshaafiapp:addTreatment', 'requires_pk': True},
+        {'name': 'AddDischarge', 'url_name': 'allifmaalshaafiapp:addDischarge', 'requires_pk': True},
+        {'name': 'AddReferal', 'url_name': 'allifmaalshaafiapp:addReferral', 'requires_pk': True},
+        {'name': 'AddAssessment', 'url_name': 'allifmaalshaafiapp:addDoctorAssessment', 'requires_pk': True},
+        {'name': 'DeleteTriageConfirm', 'url_name': 'allifmaalshaafiapp:wantToDeleteTriageData', 'requires_pk': True},
+        {'name': 'DeleteTriage', 'url_name': 'allifmaalshaafiapp:deleteTriageData', 'requires_pk': True},
+        {'name': 'EditTriageData', 'url_name': 'allifmaalshaafiapp:editTriageData', 'requires_pk': True},
+    ],
+    
+    'Education': [
+        {'name': 'addExamDetails', 'url_name': 'allifmaalilmapp:addExamDetails', 'requires_pk': True},
+    ],
+     'Hospitality': [
+        # Add sales specific links here
+    ],
+    
+    'RealEstate': [
+        # Add real estate specific links here
+    ],
+     'logistics': [
+        # Add sales specific links here
+    ],
+    
+    'Service': [
+        # Add sales specific links here
+    ],
+}
+
+
+"""
+allif_sector_contextual_action_require_pk_links___waswrokingforhealthcareasgeneral= {
     'Healthcare': [
     {'name': 'AddTriageData', 'url_name': 'allifmaalshaafiapp:AddTriageData', 'requires_pk': True},
     {'name': 'addDoctorAssessment', 'url_name': 'allifmaalshaafiapp:addDoctorAssessment', 'requires_pk': True},
@@ -259,3 +515,5 @@ allif_sector_contextual_action_require_pk_links= {
 } # <--- REMOVE THE TRAILING COMMA HERE!
 
 #{% url 'allifmaalcommonapp:common_currency_pdf' allifquery.id user_var glblslug %}
+
+"""

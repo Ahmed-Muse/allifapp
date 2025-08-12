@@ -3504,7 +3504,7 @@ def commonEditTransferOrderItem(request, pk, *allifargs, **allifkwargs):
     query=get_object_or_404(CommonStockTransferOrderItemsModel, id=pk)
     allifquery=query.trans_ord_items_con.id
     return allif_common_form_edit_and_save(request,pk,CommonAddTransferOrderItemForm,"Edit Item",
-    'commonAddPOItems','allifmaalcommonapp/stocks/transfers/add-transfer-order-item.html',
+    'commonAddTransferOrderItems','allifmaalcommonapp/stocks/transfers/add-transfer-order-item.html',
     redirect_with_pk=True,redirect_pk_value=allifquery,)
 
 @logged_in_user_can_delete

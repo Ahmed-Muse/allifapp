@@ -1957,7 +1957,7 @@ def allif_common_form_submission_and_save(
     user_var = allif_data.get("usrslg")
     glblslug = allif_data.get("compslg")
 
-    print(f"DEBUG UTILS: 4. allif_common_form_submission_and_save received extra_context keys: {(extra_context or {}).keys()}")
+    #print(f"DEBUG UTILS: 4. allif_common_form_submission_and_save received extra_context keys: {(extra_context or {}).keys()}")
 
     # Prepare form arguments for __init__
     form_args = [company_id] # Default first argument for your forms
@@ -2067,9 +2067,9 @@ def allif_common_form_submission_and_save(
                 "glblslug": glblslug,
                 **(extra_context or {}) # Crucially, include extra_context here
             }
-            print(f"DEBUG UTILS: 6. Context for form validation error (invalid POST): {context.keys()}")
-            print(f"DEBUG UTILS:    - allifquery in invalid POST context: {context.get('allifquery')}")
-            print(f"DEBUG UTILS:    - allifqueryset in invalid POST context: {context.get('allifqueryset')}")
+            #print(f"DEBUG UTILS: 6. Context for form validation error (invalid POST): {context.keys()}")
+            #print(f"DEBUG UTILS:    - allifquery in invalid POST context: {context.get('allifquery')}")
+            #print(f"DEBUG UTILS:    - allifqueryset in invalid POST context: {context.get('allifqueryset')}")
             return render(request, template_path, context) # Render original template_path
             # --- NEW ADDITION END ---
     else:
@@ -2083,9 +2083,9 @@ def allif_common_form_submission_and_save(
         "glblslug": glblslug, 
         **(extra_context or {}) # Include extra_context here
     }
-    print(f"DEBUG UTILS: 7. Final context for {template_path} (GET request): {context.keys()}")
-    print(f"DEBUG UTILS:    - allifquery in final GET context: {context.get('allifquery')}")
-    print(f"DEBUG UTILS:    - allifqueryset in final GET context: {context.get('allifqueryset')}")
+    #print(f"DEBUG UTILS: 7. Final context for {template_path} (GET request): {context.keys()}")
+    #print(f"DEBUG UTILS:    - allifquery in final GET context: {context.get('allifquery')}")
+    #print(f"DEBUG UTILS:    - allifqueryset in final GET context: {context.get('allifqueryset')}")
     # --- NEW ADDITION END ---
     return render(request, template_path, context)
 
@@ -2296,7 +2296,8 @@ def allif_delete_hanlder(request: HttpRequest,model_name: str,pk: int,success_re
 
         item_display_name = str(item) # Get a string representation before deleting
         item.delete()
-        messages.success(request, f"{model_name} '{item_display_name}' deleted successfully!")
+        #messages.success(request, f"{model_name} '{item_display_name}' deleted successfully!")
+        messages.success(request, f"{item_display_name} deleted successfully!")
 
     except Http404:
         messages.error(request, f"{model_name} with ID {pk} not found.")

@@ -353,9 +353,9 @@ def addDischarge(request,pk,*allifargs,**allifkwargs):
     my_extra_context={"allifquery":allifquery,}
     return allif_common_form_submission_and_save(request,form_class=AddDischargeForm,
     title_text="New Discharge",
-        success_redirect_url_name='addTreatment',
+        success_redirect_url_name='discharges',
         template_path='allifmaalshaafiapp/medication/admissions/discharge/add_discharge.html',
-        pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=allifquery_id,
+        pre_save_callback=transaction_item_pre_save,
         extra_context=my_extra_context,app_namespace='allifmaalshaafiapp',)
  
 @allif_base_view_wrapper

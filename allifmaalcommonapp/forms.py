@@ -479,6 +479,10 @@ class CommonAddSupplierForm(CommonBaseForm):
         }
 
 class CommonCustomerAddForm(CommonBaseForm):
+    company_filtered_fields = {
+        'paymentType': CommonPaymentTermsModel,
+      
+        }
     class Meta(CommonBaseForm.Meta):
         model=CommonCustomersModel
         fields=CommonBaseForm.Meta.fields + ['uid','seen','register','triaged','phone','email',
@@ -549,7 +553,8 @@ class CommonAssetsAddForm(CommonBaseForm):
         'asset_account': CommonChartofAccountsModel,
         'cost_account': CommonChartofAccountsModel,
         'supplier': CommonSuppliersModel,
-        'categiry': CommonCategoriesModel,
+        'category': CommonCategoriesModel,
+        'terms': CommonPaymentTermsModel,
         }
     
     class Meta(CommonBaseForm.Meta):
@@ -557,9 +562,10 @@ class CommonAssetsAddForm(CommonBaseForm):
         fields=CommonBaseForm.Meta.fields + ['supplier','current_value','salvage_value','depreciated_by',
                                              'depreciation','terms','asset_account','cost_account',
                                              'quantity','value','lifespan',
-                                            'acquired','category','employee_in_charge','expires','deposit','asset_status',
-                                            'next_service_due','last_service_date','capacity_kg','plate_number','energy_usage','oil_capacity','oil_type',
-                                            'primary_meter','starting_odometer','manufactured_year','equipment_model','maker_name'
+                            'acquired','category','employee_in_charge','expires','deposit','asset_status',
+    'next_service_due','last_service_date','capacity_kg',
+    'plate_number','energy_usage','oil_capacity','oil_type',
+                'primary_meter','starting_odometer','manufactured_year','equipment_model','maker_name'
                   
                   ]
         widgets = {
@@ -678,7 +684,7 @@ class CommonAddTransferOrderItemForm(CommonBaseForm):
         }
     class Meta(CommonBaseForm.Meta):
         model=CommonStockTransferOrderItemsModel
-        fields=CommonBaseForm.Meta.fields + ['items','quantity','trans_ord_items_con']
+        fields=CommonBaseForm.Meta.fields + ['items','quantity']
         widgets = {
         **CommonBaseForm.Meta.widgets,
             'items':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
@@ -765,6 +771,7 @@ class CommonStockItemAddForm(CommonBaseForm):
         'taxrate': CommonTaxParametersModel,
         'warehouse': CommonSpacesModel,
         'category': CommonCategoriesModel,
+        'units': CommonUnitsModel,
         }
     class Meta(CommonBaseForm.Meta):
         model=CommonStocksModel
@@ -881,6 +888,7 @@ class CommonPOMiscCostAddForm(CommonBaseForm):
 class CommonAddSpaceForm(CommonBaseForm):
     company_filtered_fields = {
         'asset': CommonAssetsModel,
+        'emplyee_in_charge': CommonEmployeesModel,
         }
     class Meta(CommonBaseForm.Meta):
         model=CommonSpacesModel
@@ -918,6 +926,7 @@ class CommonAddSpaceForm(CommonBaseForm):
 class CommonAddSpaceUnitForm(CommonBaseForm):
     company_filtered_fields = {
         'space': CommonSpacesModel,
+        'emplyee_in_charge': CommonEmployeesModel,
         }
     class Meta(CommonBaseForm.Meta):
         model=CommonSpaceUnitsModel

@@ -9,10 +9,13 @@ def realestateHome(request,*allifargs,**allifkwargs):
        
         user_role=user_var.allifmaal_admin
         user_is_supper=request.user.is_superuser
+        user_is_supper=request.user.is_superuser
        
         context={
             "title":title,
             "user_var":user_var,
+            "user_is_supper":user_is_supper,
+            "user_role":user_role,
            
         }
         return render(request,"allifmaalrealestateapp/home/home.html",context)
