@@ -19066,3 +19066,13 @@ WARNING 2025-08-12 21:19:16,063 allif_navigation_tags 36456 22008 Could not reso
 WARNING 2025-08-12 21:19:18,150 allif_navigation_tags 36456 22008 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
 WARNING 2025-08-12 21:20:18,801 allif_navigation_tags 36456 22008 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
 WARNING 2025-08-12 21:20:24,839 allif_navigation_tags 36456 22008 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-13 07:30:06,726 autoreload 29956 49572 Watching for file changes with StatReloader
+WARNING 2025-08-13 07:30:40,437 allif_navigation_tags 29956 10264 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-13 07:31:00,111 allif_navigation_tags 29956 10264 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-13 07:31:10,703 allif_navigation_tags 29956 30880 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-13 07:41:52,278 autoreload 29956 49572 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-13 07:41:53,826 autoreload 16400 41792 Watching for file changes with StatReloader
+INFO 2025-08-13 07:46:43,062 autoreload 16400 41792 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-13 07:46:44,642 autoreload 30192 47048 Watching for file changes with StatReloader
+INFO 2025-08-13 07:47:38,054 autoreload 30192 47048 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-13 07:47:39,626 autoreload 13600 48232 Watching for file changes with StatReloader

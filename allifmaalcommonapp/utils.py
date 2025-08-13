@@ -1971,13 +1971,13 @@ def allif_common_form_submission_and_save(
             
             # --- Assign common fields from allif_data (fetching FK instances) ---
             if hasattr(obj, 'company') and allif_data.get("main_sbscrbr_entity"):
-                obj.company = allif_data.get("main_sbscrbr_entity")
+                obj.company = allif_data.get("main_sbscrbr_entity") if allif_data.get("main_sbscrbr_entity") else request.user.company
             if hasattr(obj, 'division') and allif_data.get("logged_user_division"):
-                obj.division = allif_data.get("logged_user_division")
+                obj.division = allif_data.get("logged_user_division") if allif_data.get("logged_user_division") else request.user.division
             if hasattr(obj, 'branch') and allif_data.get("logged_user_branch"):
-                obj.branch = allif_data.get("logged_user_branch")
+                obj.branch = allif_data.get("logged_user_branch") if  allif_data.get("logged_user_branch") else request.user.branch
             if hasattr(obj, 'department') and allif_data.get("logged_user_department"):
-                obj.department = allif_data.get("logged_user_department")
+                obj.department = allif_data.get("logged_user_department") if allif_data.get("logged_user_department") else request.user.department
             if allif_data.get("logged_user_operation_year"):
                 if hasattr(obj, 'operation_year') and allif_data.get("logged_user_operation_year").id:
                     try:
