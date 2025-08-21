@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from allifmaalcommonapp.allifutils import common_shared_data
 from allifmaalcommonapp.decorators import subscriber_company_status,logged_in_user_must_have_profile
 from allifmaalcommonapp.decorators import *
-from allifmaalcommonapp.models import CommonCompanyScopeModel,CommonDataSortsModel
+from allifmaalcommonapp.models import CommonCompanyScopeModel,CommonDataSortsModel,CommonExpensesModel
 # Create your views here...20200 lines...
 from .models import *
 from django.template.loader import get_template
@@ -24,11 +24,23 @@ def shaafiHome(request,*allifargs,**allifkwargs):
     company=request.user.company
     sector=company.sector
     title=f"Home : {sector} " +''+ str(company)
+    
     try:
         user_is_supper=request.user.is_superuser
         allif_data=common_shared_data(request)
+        user_company=request.user.company
+        expenses=CommonExpensesModel.objects.all()
+        card_one_numner=CommonCustomersModel.objects.all().filter(status='active').count()
+        spaces=CommonSpacesModel.objects.all().count()
+        space_units=CommonSpaceUnitsModel.objects.all().count()
         if allif_data.get("logged_in_user_profile") is not None:
-            context={"title":title,"user_is_supper":user_is_supper,}
+            context={"title":title,"user_is_supper":user_is_supper,
+                     "user_var":request.user,
+                     "user_company":user_company,
+                     "spaces":spaces,
+                     "space_units":space_units,
+                     "expenses":expenses,
+                     "card_one_numner":card_one_numner,}
             return render(request,"allifmaalshaafiapp/home/home.html",context)
         else:
             return redirect('allifmaalcommonapp:commonAddStaffProfile',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))

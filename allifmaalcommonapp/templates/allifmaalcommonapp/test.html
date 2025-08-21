@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Real Estate Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Chart.js for graphs and analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        /* Sidebar Styling */
+        #sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hidden by default */
+            height: 100%;
+            transition: left 0.3s ease-in-out;
+            z-index: 1050;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            padding-top: 20px;
+        }
+
+        /* Class to show the sidebar when the toggle button is clicked */
+        #sidebar.show-sidebar {
+            left: 0;
+        }
+
+        /* Sidebar header and menu items */
+        .sidebar-header {
+            padding: 20px 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative; /* For positioning the close button */
+        }
+
+        .sidebar-menu li a {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+        .sidebar-menu li a:hover {
+            background-color: #495057;
+        }
+
+        .sidebar-menu li a i {
+            font-size: 1.5rem;
+            min-width: 50px; /* Gives icon space */
+        }
+        
+        .sidebar-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        /* Main Content and Backdrop */
+        #content {
+            padding: 20px;
+            min-height: 100vh;
+            margin-left: 0; /* Initially no margin */
+            transition: margin-left 0.3s ease-in-out;
+        }
+        
+        /* Pushes content when the sidebar is visible */
+        #content.shift-content {
+            margin-left: 250px;
+        }
+        
+        #backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            display: none;
+        }
+
+        /* Card and Chart Styling */
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-card {
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-container {
+            flex-grow: 1;
+            position: relative;
+            min-height: 250px;
+        }
+
+        /* Dashboard specific styling */
+        .analytics-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-rented { border-color: #0d6efd; }
+        .card-vacant { border-color: #dc3545; }
+        .card-due-maintenance { border-color: #ffc107; }
+        .card-under-maintenance { border-color: #0dcaf0; }
+        .card-under-construction { border-color: #6c757d; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <h3>ERP System</h3>
+            <button id="sidebar-close-btn" class="btn-close btn-close-white position-absolute top-0 end-0 m-3"></button>
+        </div>
+        <ul class="list-unstyled components sidebar-menu">
+            <li>
+                <a href="#">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <!-- Building Collapse Menu -->
+            <li>
+                <a href="#buildingsSubmenu" data-bs-toggle="collapse" class="dropdown-toggle collapsed-arrow">
+                    <i class="bi bi-buildings"></i>
+                    <span>Buildings</span>
+                </a>
+                <ul class="collapse list-unstyled" id="buildingsSubmenu">
+                    <li><a href="#">Apartments</a></li>
+                    <li><a href="#">Upcoming Projects</a></li>
+                    <li><a href="#">Building Map</a></li>
+                </ul>
+            </li>
+            <!-- Tenants Collapse Menu -->
+            <li>
+                <a href="#tenantsSubmenu" data-bs-toggle="collapse" class="dropdown-toggle collapsed-arrow">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Tenants</span>
+                </a>
+                <ul class="collapse list-unstyled" id="tenantsSubmenu">
+                    <li><a href="#">Leases</a></li>
+                    <li><a href="#">Payments</a></li>
+                    <li><a href="#">Communications</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bi bi-file-earmark-bar-graph"></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bi bi-gear-fill"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Backdrop for closing sidebar on mobile -->
+    <div id="backdrop"></div>
+
+    <!-- Main Content Area -->
+    <div id="content">
+        <!-- Top Horizontal Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded-4 shadow-sm mb-4">
+            <div class="container-fluid">
+                <!-- Sidebar toggle button -->
+                <button type="button" id="sidebar-toggle" class="btn btn-primary me-2">
+                    <i class="bi bi-list"></i>
+                </button>
+                <a class="navbar-brand ms-3 d-none d-md-block" href="#">Real Estate Dashboard</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <!-- Additional top nav links can go here -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Messages</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-bell-fill"></i> Alerts
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarUserDropdown">
+                                <li><a class="dropdown-item" href="#">New Lease Alert</a></li>
+                                <li><a class="dropdown-item" href="#">Payment Overdue</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">View All</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ms-auto me-3">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle fs-4"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarProfileDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Dashboard Analytics Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="analytics-card card-rented">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-house-door-fill text-primary fs-2 me-3"></i>
+                        <div>
+                            <h5 class="card-title text-muted fw-bold text-uppercase mb-0">Rented Units</h5>
+                            <h2 class="display-5 fw-bold text-primary" id="rented-count">350</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="analytics-card card-vacant">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-building text-danger fs-2 me-3"></i>
+                        <div>
+                            <h5 class="card-title text-muted fw-bold text-uppercase mb-0">Vacant Units</h5>
+                            <h2 class="display-5 fw-bold text-danger" id="vacant-count">150</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="analytics-card card-due-maintenance">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-tools text-warning fs-2 me-3"></i>
+                        <div>
+                            <h5 class="card-title text-muted fw-bold text-uppercase mb-0">Due for Maintenance</h5>
+                            <h2 class="display-5 fw-bold text-warning" id="due-maintenance-count">25</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="analytics-card card-under-maintenance">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-wrench text-info fs-2 me-3"></i>
+                        <div>
+                            <h5 class="card-title text-muted fw-bold text-uppercase mb-0">Under Maintenance</h5>
+                            <h2 class="display-5 fw-bold text-info" id="under-maintenance-count">15</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+        <!-- Charts and Reports Section -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-12 col-lg-6">
+                <div class="card chart-card p-4">
+                    <h5 class="card-title fw-bold">Apartment Status Breakdown</h5>
+                    <p class="text-muted">A comprehensive view of rented vs. vacant properties.</p>
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <div class="card chart-card p-4">
+                    <h5 class="card-title fw-bold">Project Status Overview</h5>
+                    <p class="text-muted">Breakdown of properties in different project stages.</p>
+                    <div class="chart-container">
+                        <canvas id="projectsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity Table -->
+        <div class="card p-4">
+            <h5 class="card-title fw-bold mb-3">Recent Activity</h5>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Activity Type</th>
+                            <th scope="col">Apartment / Building</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>New Lease Signed</td>
+                            <td>Unit 4B, Central Towers</td>
+                            <td><span class="badge bg-success">Rented</span></td>
+                            <td>2025-08-18</td>
+                        </tr>
+                        <tr>
+                            <td>Maintenance Request</td>
+                            <td>Unit 2C, Lakeside Condos</td>
+                            <td><span class="badge bg-warning">Due for Maintenance</span></td>
+                            <td>2025-08-17</td>
+                        </tr>
+                        <tr>
+                            <td>Construction Update</td>
+                            <td>Future Tower 3, Skyline Towers</td>
+                            <td><span class="badge bg-secondary">Under Construction</span></td>
+                            <td>2025-08-16</td>
+                        </tr>
+                        <tr>
+                            <td>Apartment Vacated</td>
+                            <td>Unit 7A, Park Avenue</td>
+                            <td><span class="badge bg-danger">Vacant</span></td>
+                            <td>2025-08-15</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.getElementById('sidebar-toggle');
+            const closeButton = document.getElementById('sidebar-close-btn');
+            const backdrop = document.getElementById('backdrop');
+            const content = document.getElementById('content');
+
+            // Function to show the sidebar
+            const showSidebar = () => {
+                sidebar.classList.add('show-sidebar');
+                content.classList.add('shift-content');
+                backdrop.style.display = 'block';
+            };
+            
+            // Function to hide the sidebar
+            const hideSidebar = () => {
+                sidebar.classList.remove('show-sidebar');
+                content.classList.remove('shift-content');
+                backdrop.style.display = 'none';
+            };
+
+            // Event listeners
+            if (toggleButton) {
+                toggleButton.addEventListener('click', showSidebar);
+            }
+            if (closeButton) {
+                closeButton.addEventListener('click', hideSidebar);
+            }
+            if (backdrop) {
+                backdrop.addEventListener('click', hideSidebar);
+            }
+
+            // Sample data for charts
+            const statusData = {
+                labels: ['Rented', 'Vacant'],
+                datasets: [{
+                    label: 'Apartment Status',
+                    data: [350, 150],
+                    backgroundColor: ['#0d6efd', '#dc3545'],
+                    hoverOffset: 4
+                }]
+            };
+
+            const projectsData = {
+                labels: ['Due for Maintenance', 'Under Maintenance', 'Under Construction'],
+                datasets: [{
+                    label: 'Projects',
+                    data: [25, 15, 12],
+                    backgroundColor: ['#ffc107', '#0dcaf0', '#6c757d'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            };
+
+            // Chart configurations
+            const statusChartConfig = {
+                type: 'doughnut',
+                data: statusData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            };
+
+            const projectsChartConfig = {
+                type: 'bar',
+                data: projectsData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            };
+
+            // Render charts
+            new Chart(document.getElementById('statusChart'), statusChartConfig);
+            new Chart(document.getElementById('projectsChart'), projectsChartConfig);
+
+        });
+    </script>
+</body>
+</html>

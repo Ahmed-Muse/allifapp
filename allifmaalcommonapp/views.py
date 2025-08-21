@@ -95,6 +95,10 @@ def commonDebugging(request, *allifargs, **allifkwargs):
                 }
     return render(request, 'allifmaalcommonapp/debugging/debugging.html', context)
 
+def test(request):
+    context= {}
+    return render(request, 'allifmaalcommonapp/test.html', context)
+
 def commonWebsite(request):
     try:
         title = "Allifmaal ERP"

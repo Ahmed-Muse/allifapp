@@ -1,0 +1,1078 @@
+{% extends 'allifmaalcommonapp/base/uimainbase/allifmaaluibase.html'%}
+{% load static %}
+{% load allif_navigation_tags %}
+{% block title %}
+{% load humanize %}
+{{title}}
+{% endblock %}
+{% block style %}
+  
+{%endblock%}
+   
+{% block body %}
+   
+<div class="allifmaal-main-container">
+  
+<div class="allifmaincontainer">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+    <style>
+        
+        /* Dashboard specific styling */
+        .analytics-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-rented { border-color: #0d6efd; }
+        .card-vacant { border-color: #dc3545; }
+        .card-due-maintenance { border-color: #ffc107; }
+        .card-under-maintenance { border-color: #0dcaf0; }
+        .card-under-construction { border-color: #6c757d; }
+      
+       
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 6px solid #3182ce;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .allif-info-card-heading{
+            font-size:1em;
+            text-align: left;
+            font-weight: bold;
+            
+        }
+.allif-info-cards-main-wrapper{
+    margin-top: 0.1px;
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+   
+   
+    
+}
+    .allif_dashboard_spacer{
+        margin-top: 1em;
+        margin-bottom: 1em;
+        height: 2px;
+        background-color: #16b101; /* Light background for spacing */
+    }
+
+.allif_dashboard_card_header {
+  background-color: #f6f7f8;
+  color: #212529; /* Changed to a dark color for visibility */
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15); /* A subtle blue shadow */
+}
+.allif_graph_main_wrapper{
+    background-color: #f8f7f6;
+}
+
+    </style>
+    
+
+    
+<div>
+        <!-- Top Horizontal Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded-4 shadow-sm mb-4">
+            <div class="container-fluid">
+              
+                <a class="navbar-brand ms-3 d-none d-md-block" href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}"> <strong> {{user_company}}</strong> Dashboard</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <!-- Additional top nav links can go here -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Dashboard</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-bell-fill"></i> Alerts
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarUserDropdown">
+                                <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Informations</a></li>
+                                <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonHome' user_var glblslug %}">Notifications</a></li>
+                               
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ms-auto me-3">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle fs-4"> {{user_var}} </i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarProfileDropdown">
+                            <li><a class="dropdown-item" href="{% url 'allifmaalcommonapp:commonLoggedInUserDetails' user_var glblslug %}">A/C Details</a></li>
+                          
+                            <li><a class="dropdown-item" href="{% url 'allifmaalusersapp:userLogoutPage' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+</div>
+
+        
+        <!-- Dashboard Analytics Cards -->
+        <div class="allif-info-cards-main-wrapper row g-4 mb-4">
+            <div class="col-md-6 col-lg-2">
+                <div class="analytics-card card-rented">
+                {% block allif_info_card_one %}
+                    <div class="allif-info-card-heading">Buildings</div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-house-door-fill text-primary fs-2 me-3"></i>
+                        <div>
+                        <a href="{% allif_get_single_nav_link_url 'Spaces' user_var glblslug %}">{{card_one_numner}}</a>
+                           
+                        </div>
+                    </div>
+                    {%endblock%}
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-2">
+                <div class="analytics-card card-vacant">
+                    <div class="allif-info-card-heading">Units</div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-building text-danger fs-2 me-3"></i>
+                        <div>
+                           
+                            <a href="{% allif_get_single_nav_link_url 'SpaceUnits' user_var glblslug %}">{{space_units}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="col-md-6 col-lg-2">
+                <div class="analytics-card card-due-maintenance">
+                    <div class="allif-info-card-heading">Rented Units</div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-lock text-warning fs-2 me-3"></i>
+                        <div>
+                           
+                            <a href="">344</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-2">
+                <div class="analytics-card card-under-maintenance">
+                     <div class="allif-info-card-heading">Vacant Units</div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-door-open text-info fs-2 me-3"></i>
+                        <div>
+                           
+                            <a href="">344</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-md-6 col-lg-2">
+                <div class="analytics-card card-under-maintenance">
+                     <div class="allif-info-card-heading">Tenants</div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-person text-secondary fs-2 me-3"></i>
+                        <div>
+                           
+                            <a href="">344</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-md-6 col-lg-2">
+                <div class="analytics-card card-under-maintenance">
+                     <div class="allif-info-card-heading">Need Service</div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-tools text-sucess fs-2 me-3"></i>
+                        <div>
+                          
+                            <a href="">344</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+  
+
+
+
+<div class="allif_dashboard_spacer"></div>
+
+
+      <div class=" card allif-full-table-content-main-wrapper">
+      {% include 'allifmaalcommonapp/includes/tables/full-table-header-upper-section.html' %}
+
+      {% block list-table-headers %}
+        <td class="allif-fix-table-col"> Name </td>
+        <td class="allif-table-header-td"> Description</td>
+        <td class="allif-table-header-td"> Date </td>
+        <td class="allif-table-header-td"> Status</td>
+         {% endblock %}
+        <td class="allif-table-header-td">Navigate</td>
+      {% include 'allifmaalcommonapp/includes/tables/full-table-header-lower-section.html' %}
+      
+      {% for item in expenses %}  
+        <tr data-id="{{item.id}}" class="allif-table-header-content-row">
+        {% block list-table-content-seciton %}
+        <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}<a class="allif-table-links" href=""> {{item.name}} Unit 4, Cimra Plaza </a>{%endblock%}</td>
+        <td class="allif-table-content-td"> {{item.description}}<span class="badge bg-danger">Vacant</span> </td>
+        <td class="allif-table-content-td"> {{item.date|date:'d/m/Y'}}<span class="badge bg-success">Rented</span></td>
+        <td class="allif-table-content-td"> {{item.status}}<span class="badge bg-secondary">Active</span></td>
+        {% endblock %}
+        <td class="allif-table-content-td">
+           
+        {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
+
+        {% block list-table-content-seciton-dropdown-links %}
+        <a href="" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+        {% endblock %}
+
+        {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
+        </td>
+    </tr>
+      {% endfor %}
+    {% include 'allifmaalcommonapp/includes/tables/full-table-last-section.html' %}
+
+      </div>
+   
+
+
+<div class="allif_dashboard_spacer"></div>
+    <!--start of first row-->
+    <div class="row mt-4" >
+        <div class="col-md-4">
+            <div class="card">
+                <div class="allif_dashboard_card_header card-header">
+                  Main Company Assets {{assets_tot_val|floatformat:2|intcomma}}
+                </div>
+             
+                <div class="col-md-12">
+                    <div class="allif_graph_main_wrapper column">
+                      
+                      <canvas id="chartone" width="400" height="300"></canvas>
+                              <script>
+                                  var ctx33 = document.getElementById('chartone').getContext('2d');
+                                  var chartone = new Chart(ctx33, {
+                                      type: 'doughnut',
+
+                                      data: {
+                                        labels: [{% for items in expenses %} '{{items.description|truncatewords:2}}', {% endfor %}],
+
+                                          datasets: [{
+                                            
+                                              label: 'Current Prospects',
+                                              data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                              backgroundColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                                  
+                                              ],
+                                              borderColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                              ],
+                                              borderWidth: 1
+                                          }]
+                                      },
+                                      options: {
+                                          scales: {
+                                              yAxes: [{
+                                                  ticks: {
+                                                      beginAtZero: true
+                                                  }
+                                              }]
+                                          }
+                                      }
+                                  });
+                              </script>
+                    </div>
+                    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+        
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="allif_dashboard_card_header card-header">
+                    Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
+                </div>
+                
+                 
+
+                <div class="col-md-12">
+                    <div class="allif_graph_main_wrapper column">
+                      
+                      <canvas id="charttwo" width="400" height="300"></canvas>
+                              <script>
+                                  var ctx3 = document.getElementById('charttwo').getContext('2d');
+                                  var charttwo = new Chart(ctx3, {
+                                      type: 'bar',
+
+                                      data: {
+                                        labels: [{% for items in expenses %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
+
+                                          datasets: [{
+                                            
+                                              label: 'Current Prospects',
+                                              data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                              backgroundColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                                  
+                                              ],
+                                              borderColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                              ],
+                                              borderWidth: 1
+                                          }]
+                                      },
+                                      options: {
+                                          scales: {
+                                              yAxes: [{
+                                                  ticks: {
+                                                      beginAtZero: true
+                                                  }
+                                              }]
+                                          }
+                                      }
+                                  });
+                              </script>
+                    </div>
+                    </div>
+
+
+                    </div></div>
+                    
+                    <div class="col-md-4">
+                    <div class="card">
+                    <div class="allif_dashboard_card_header card-header">
+                    Posted Invoices {{total_value_of_latest_posted_invoices|floatformat:2|intcomma}}
+                    </div>
+                    
+                        <div class="allif_graph_main_wrapper column">
+                          
+                          <canvas id="chartthree" width="150" height="100"></canvas>
+                                  <script>
+                                      var ctx5 = document.getElementById('chartthree').getContext('2d');
+                                      var chartthree = new Chart(ctx5, {
+                                          type: 'pie',
+                                          data: {
+                                              labels: [{% for items in expenses %} '{{items.name}}', {% endfor %}],
+                                              datasets: [{
+                                                  label: 'Latest Posted Invoices',
+                                                  data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                                  
+                                                  backgroundColor: [
+                                                  'rgb(2, 7, 174,0.5)',
+                                                'rgb(35, 150, 92,1)',
+                                                  
+                                                  'rgb(2, 7, 0,1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                                  ],
+                                                  borderColor: [
+                                                'rgb(2, 7, 174,1)',
+                                                'rgb(35, 150, 92,1)',
+                                                  
+                                                  'rgb(2, 7, 0,1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                              ],
+                                                  borderWidth: 1
+                                              }]
+                                          },
+                                          options: {
+                                              scales: {
+                                                  yAxes: [{
+                                                      ticks: {
+                                                          beginAtZero: true
+                                                      }
+                                                  }]
+                                              }
+                                          }
+                                      });
+                                  </script>
+                        </div>
+                        </div>
+
+            </div>
+        </div>
+
+<div class="allif_dashboard_spacer"></div>
+         <!--start of first row-->
+    <div class="row mt-4" >
+        <div class="col-md-4">
+            <div class="card">
+                <div class="allif_dashboard_card_header card-header">
+                  Main Company Assets {{assets_tot_val|floatformat:2|intcomma}}
+                </div>
+             
+                <div class="col-md-12">
+                    <div class="allif_graph_main_wrapper column">
+                      
+                      <canvas id="chartfour" width="400" height="300"></canvas>
+                              <script>
+                                  var ctx33 = document.getElementById('chartfour').getContext('2d');
+                                  var chartfour = new Chart(ctx33, {
+                                      type: 'line',
+
+                                      data: {
+                                        labels: [{% for items in expenses %} '{{items.description|truncatewords:2}}', {% endfor %}],
+
+                                          datasets: [{
+                                            
+                                              label: 'Current Prospects',
+                                              data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                              backgroundColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                                  
+                                              ],
+                                              borderColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                              ],
+                                              borderWidth: 1
+                                          }]
+                                      },
+                                      options: {
+                                          scales: {
+                                              yAxes: [{
+                                                  ticks: {
+                                                      beginAtZero: true
+                                                  }
+                                              }]
+                                          }
+                                      }
+                                  });
+                              </script>
+                    </div>
+                    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+        
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="allif_dashboard_card_header card-header">
+                    Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
+                </div>
+                
+                 
+
+                <div class="col-md-12">
+                    <div class="allif_graph_main_wrapper column">
+                      
+                      <canvas id="chartfive" width="400" height="300"></canvas>
+                              <script>
+                                  var ctx3 = document.getElementById('chartfive').getContext('2d');
+                                  var chartfive = new Chart(ctx3, {
+                                      type: 'radar',
+
+                                      data: {
+                                        labels: [{% for items in expenses %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
+
+                                          datasets: [{
+                                            
+                                              label: 'Current Prospects',
+                                              data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                              backgroundColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                                  
+                                              ],
+                                              borderColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                              ],
+                                              borderWidth: 1
+                                          }]
+                                      },
+                                      options: {
+                                          scales: {
+                                              yAxes: [{
+                                                  ticks: {
+                                                      beginAtZero: true
+                                                  }
+                                              }]
+                                          }
+                                      }
+                                  });
+                              </script>
+                    </div>
+                    </div>
+
+
+                    </div></div>
+                    
+                    <div class="col-md-4">
+                    <div class="card">
+                    <div class="allif_dashboard_card_header card-header">
+                    Posted Invoices {{total_value_of_latest_posted_invoices|floatformat:2|intcomma}}
+                    </div>
+                    
+                        <div class="allif_graph_main_wrapper column">
+                          
+                          <canvas id="chartsix" width="150" height="100"></canvas>
+                                  <script>
+                                      var ctx5 = document.getElementById('chartsix').getContext('2d');
+                                      var chartsix = new Chart(ctx5, {
+                                          type: 'polarArea',
+                                          data: {
+                                              labels: [{% for items in expenses %} '{{items.name}}', {% endfor %}],
+                                              datasets: [{
+                                                  label: 'Latest Posted Invoices',
+                                                  data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                                  
+                                                  backgroundColor: [
+                                                  'rgb(2, 7, 174,0.5)',
+                                                'rgb(35, 150, 92,1)',
+                                                  
+                                                  'rgb(2, 7, 0,1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                                  ],
+                                                  borderColor: [
+                                                'rgb(2, 7, 174,1)',
+                                                'rgb(35, 150, 92,1)',
+                                                  
+                                                  'rgb(2, 7, 0,1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                              ],
+                                                  borderWidth: 1
+                                              }]
+                                          },
+                                          options: {
+                                              scales: {
+                                                  yAxes: [{
+                                                      ticks: {
+                                                          beginAtZero: true
+                                                      }
+                                                  }]
+                                              }
+                                          }
+                                      });
+                                  </script>
+                        </div>
+                        </div>
+
+            </div>
+        </div>
+
+
+        <div class="allif_dashboard_spacer"></div>
+               
+<div class="row mt-12" >
+
+          <div class="col-md-4">
+          <div class="card">
+          <div class="card-header allif-dashboard-card-header">
+           Prospects: <span><strong>{{quotes_total|floatformat:2|intcomma}}</strong></span>
+          </div>
+      
+          <div class="col-md-12">
+          <div class="column allif-dashboard-card-body">
+          
+        <div class="allif-scroll-table">
+          <div class="table-responsive allif-full-table">
+          <table class="table table-layout">
+            <thead>
+              <tr class="allif-table-header-row">
+              <td>Number</td>
+              <td>Value</td>
+              <td>Date</td>
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+              {% for item in expenses1 %} 
+              <tr data-id="{{item.id}}">
+              <td><a class="allif-table-links" href="">{{item.number}}</a></td>
+              <td>
+                {{item.total|floatformat:2|intcomma}}
+              </td>
+              <td>{{item.date|date:'d/m/Y'}}</td>
+        
+          </tr>
+          {% endfor %}
+          
+            </tbody>
+          </table>
+          </div>
+         </div>
+      
+    
+      </div>
+      </div>
+      
+      
+      </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card">
+        <div class="card-header allif-dashboard-card-header">
+          Premium Customers: <span><strong>{{customers_turnover|floatformat:2|intcomma}}</strong></span>
+        </div>
+    
+        <div class="col-md-12">
+        <div class="column allif-dashboard-card-body">
+        
+    
+      <div class="allif-scroll-table">
+        <div class="table-responsive allif-full-table">
+        <table class="table table-layout">
+          <thead>
+            <tr class="allif-table-header-row">
+            <td>Customers</td>
+            <td>Turnover</td>
+            </tr>
+            </thead>
+            <tbody class="allif-table-body">
+             
+            
+            {% for item in allifqueryset_customers %} 
+            <tr data-id="{{item.id}}">
+            <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+           
+            <td>
+              {{item.turnover|floatformat:2|intcomma}}
+            </td>
+        </tr>
+        {% endfor %}
+        
+          </tbody>
+        </table>
+        </div>
+       </div>
+    
+    
+    </div>
+    </div>
+    
+    
+    </div>
+    </div>
+    
+      
+    <div class="col-md-4">
+        <div class="card">
+        <div class="card-header allif-dashboard-card-header">
+          Premium Suppliers: <span> <strong>{{suppliers_turnover|floatformat:2|intcomma}}</strong></span>
+        </div>
+     
+        <div class="col-md-12">
+        <div class="column allif-dashboard-card-body">
+        
+    
+      <div class="allif-scroll-table">
+        <div class="table-responsive allif-full-table">
+        <table class="table table-layout">
+          <thead>
+            <tr class="allif-table-header-row">
+            <td>Suppliers</td>
+           
+            <td>Turnover</td>
+        
+            </tr>
+            </thead>
+            <tbody class="allif-table-body">
+             
+            
+            {% for item in allifqueryset_suppliers %} 
+            <tr data-id="{{item.id}}">
+            <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+           
+            <td>
+              {{item.turnover|floatformat:2|intcomma}}
+            </td>
+        </tr>
+        {% endfor %}
+        
+          </tbody>
+        </table>
+        </div>
+       </div>
+    
+    
+    </div>
+    </div>
+    
+    
+    </div>
+    </div>
+    
+      </div>
+      
+      <!--end of first row-->
+      
+      <!--start of second row-->
+     <div class="allif_dashboard_spacer"></div>
+       <!--start of first row-->
+       <div class="row mt-12" >
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Premium Stock Items <span>: <strong>{{gold_items_value|floatformat:2|intcomma}}</strong></span> 
+            </div>
+         
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Item</td>
+               
+                <td>Sold Units</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in gold_items %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.description}}</a></td>
+               
+               
+            <td>
+              {{item.total_units_sold|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+       
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Top Debtors <span>: <strong>{{customers_balances|floatformat:2|intcomma}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Customer</td>
+               
+                <td>Balance</td>
+            
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in allifqueryset_debtors %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+                  
+            <td>
+              {{item.balance|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+            <div class="card-header allif-dashboard-card-header">
+              Top Creditors <span>: <strong>{{suppliers_balances|floatformat:2|intcomma}}</strong></span>
+            </div>
+        
+            <div class="col-md-12">
+            <div class="column allif-dashboard-card-body">
+            
+      
+          <div class="allif-scroll-table">
+            <div class="table-responsive allif-full-table">
+            <table class="table table-layout">
+              <thead>
+                <tr class="allif-table-header-row">
+                <td>Supplier</td>
+               
+                <td>Balance</td>
+             
+                </tr>
+                </thead>
+                <tbody class="allif-table-body">
+                 
+                
+                {% for item in allifqueryset_creditors %} 
+                <tr data-id="{{item.id}}">
+                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
+               
+                <td>
+              {{item.balance|floatformat:2|intcomma}}
+            </td>
+            </tr>
+            {% endfor %}
+            
+              </tbody>
+            </table>
+            </div>
+           </div>
+        
+      
+        </div>
+        </div>
+        
+        
+        </div>
+        </div>
+        
+      </div>
+      
+           
+    
+</div><!--end of main container of the page-->
+
+<div class="allif_dashboard_spacer"></div>
+</div>
+
+
+
+
+   {% endblock %}

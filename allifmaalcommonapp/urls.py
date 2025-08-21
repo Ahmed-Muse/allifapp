@@ -6,7 +6,7 @@ urlpatterns = [
 
 ############################ The decision maker ##################################3
 path('Common/Debugging/', views.commonDebugging, name="commonDebugging"),
-
+path('testing/exprementing/s/', views.test, name="test"),
 ########################### logs ######################
 path('System/Log/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogs, name="commonLogs"),
 path('Search/Find/Log/s/Detail/s/<str:allifusr>/<str:allifslug>/', views.commonLogSearch, name="commonLogSearch"),
