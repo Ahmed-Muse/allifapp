@@ -14,7 +14,7 @@ class CreateNewCustomUserForm(UserCreationForm):#this is used for new user creat
     
     class Meta:
         model=User
-        fields=['username','division','branch','department','peformance_counter','fullNames','phone','first_name','last_name','email','password1','password2','user_category']#all these fields are from django
+        fields=['username','division','branch','department','performance_counter','fullNames','phone','first_name','last_name','email','password1','password2','user_category']#all these fields are from django
         widgets={
             
             'user_category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
@@ -24,7 +24,7 @@ class CreateNewCustomUserForm(UserCreationForm):#this is used for new user creat
             'password1':forms.PasswordInput(attrs={'class':'form-control','placeholder':''}),
             'password2':forms.PasswordInput(attrs={'class':'form-control','placeholder':''}),
             'email':forms.EmailInput(attrs={'class':'form-control','placeholder':''}),  
-            'peformance_counter':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'performance_counter':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
              'division':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'branch':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
        
@@ -65,14 +65,14 @@ class UpdateCustomUserForm(forms.ModelForm):#this updates the user details...
     user_category=forms.Select()
     class Meta:
         model = User
-        fields = ['first_name','username','division','branch','department','peformance_counter', 'company','email','last_name','user_category','operation_year','operation_term']
+        fields = ['first_name','username','division','branch','department','performance_counter', 'company','email','last_name','user_category','operation_year','operation_term']
         widgets={
             'user_category':forms.Select(attrs={'class':'form-control'}),
           
             'user_category':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2'}),
             'first_name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'last_name':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
-            'peformance_counter':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'performance_counter':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'email':forms.EmailInput(attrs={'class':'form-control','placeholder':''}), 
             'username':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
            'company':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),

@@ -29,6 +29,10 @@ allif_sector_contextual_action_require_pk_links = {
         {'name': 'commonWantToDeleteCode', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCode', 'requires_pk': True},
         {'name': 'commonDeleteCode', 'url_name': 'allifmaalcommonapp:commonDeleteCode', 'requires_pk': True},
         
+        
+        {'name': 'commonWantToDeleteStaffCat', 'url_name': 'allifmaalcommonapp:commonWantToDeleteStaffCat', 'requires_pk': True},
+       
+        
         {'name': 'commonWantToDeleteScope', 'url_name': 'allifmaalcommonapp:commonWantToDeleteScope', 'requires_pk': True},
         {'name': 'commonDeleteCompanyScope', 'url_name': 'allifmaalcommonapp:commonDeleteCompanyScope', 'requires_pk': True},
         

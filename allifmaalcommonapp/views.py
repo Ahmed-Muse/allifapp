@@ -1480,6 +1480,46 @@ def commonCodeSearch(request,*allifargs,**allifkwargs):
 def commonCodeDetails(request, pk, *allifargs, **allifkwargs):
     return allif_common_detail_view(request,model_class=CommonCodesModel,pk=pk,
         template_name='allifmaalcommonapp/operations/codes/code_details.html',)
+
+
+
+############################### Staff Categories.....#################3
+
+########################################33 codes ####################3
+@allif_base_view_wrapper
+def commonStaffCats(request,*allifargs,**allifkwargs):
+    title="Staff Categories"
+    allif_data=common_shared_data(request)
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonStaffCategoriesModel,allif_data)
+    context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,}
+    return render(request,'allifmaalcommonapp/hrm/categories/staff_cats.html',context)
+
+@allif_base_view_wrapper
+def commonAddStaffCat(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonAddStaffCateogryForm,"New Staff Category","commonStaffCats",'allifmaalcommonapp/hrm/categories/add_staff_cat.html')
+
+@allif_base_view_wrapper
+def commonEditStaffCat(request,pk,*allifargs,**allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonAddStaffCateogryForm,"Edit Staff Category","commonStaffCats",'allifmaalcommonapp/hrm/categories/add_staff_cat.html')
+
+@allif_base_view_wrapper
+def commonDeleteStaffCat(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_hanlder(request,model_name='CommonStaffCategoriesModel',pk=pk,success_redirect_url_name='commonStaffCats')
+
+@allif_base_view_wrapper
+def commonWantToDeleteStaffCat(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonStaffCategoriesModel,"Delete this item",'allifmaalcommonapp/hrm/categories/delete-staff-cat-confirm.html')
+
+@allif_base_view_wrapper
+def commonStaffCatSearch(request,*allifargs,**allifkwargs):
+    return allif_search_handler(request,model_name='CommonStaffCategoriesModel',search_fields_key='CommonStaffCategoriesModel',
+        template_path='allifmaalcommonapp/hrm/categories/staff_cats.html', # The template to render results
+        search_input_name='allifsearchcommonfieldname', )
+@allif_base_view_wrapper
+def commonStaffCatDetails(request, pk, *allifargs, **allifkwargs):
+    return allif_common_detail_view(request,model_class=CommonStaffCategoriesModel,pk=pk,
+        template_name='allifmaalcommonapp/hrm/categories/staff_cat_details.html',)
+    
     
 #################################...HRM....... System users ..........#####################################
 @allif_base_view_wrapper
@@ -1507,9 +1547,9 @@ def commonAddUser(request,*allifargs,**allifkwargs):#this is where a new user is
             obj=form.save(commit=False)
             #this is very important line... dont change unless you know what you are doing....
             obj.company=uservar
-            obj.division=allif_data.get("usernmeslg").division
-            obj.branch=allif_data.get("usernmeslg").branch
-            obj.department=allif_data.get("usernmeslg").department
+            obj.division=request.user.division
+            obj.branch=request.user.branch
+            obj.department=request.user.department
             obj.fullNames=str(f'{fname}+{lname}')#important...used to generate user slug
             obj.save()
             return redirect('allifmaalcommonapp:commonhrm',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
@@ -2035,33 +2075,33 @@ def commonSynchGLAccount(request,pk,*allifargs,**allifkwargs):
 def commonChartofAccounts(request,*allifargs,**allifkwargs):
     title="Chart of Accounts"
     allif_data=common_shared_data(request)
-    formats=CommonDocsFormatModel.all_objects.all() # Assuming this is needed for the advanced search form
-    allif_data=common_shared_data(request)
-        
-    prospects=CommonQuotesModel.all_objects.filter(prospect="Likely").order_by('-total','-date')[:15]
-    posted_invoices=CommonInvoicesModel.all_objects.filter(posting_inv_status="posted").order_by('-invoice_total','-date')[:7]
-    no_of_prospects=CommonQuotesModel.all_objects.filter(prospect="Likely").count()
+    formats=CommonDocsFormatModel.objects.all() # Assuming this is needed for the advanced search form
     
-    total_value_of_prospects=CommonQuotesModel.all_objects.filter(prospect="Likely").aggregate(Sum('total'))['total__sum']
+        
+    prospects=CommonQuotesModel.objects.filter(prospect="Likely").order_by('-total','-date')[:15]
+    posted_invoices=CommonInvoicesModel.objects.filter(posting_inv_status="posted").order_by('-invoice_total','-date')[:7]
+    no_of_prospects=CommonQuotesModel.objects.filter(prospect="Likely").count()
+    
+    total_value_of_prospects=CommonQuotesModel.objects.filter(prospect="Likely").aggregate(Sum('total'))['total__sum']
     total_value_of_latest_posted_invoices=CommonInvoicesModel.all_objects.filter(posting_inv_status="posted").aggregate(Sum('invoice_total'))['invoice_total__sum']
     
-    debtors=CommonCustomersModel.all_objects.filter(balance__gt=2).order_by('-balance')[:7]
-    creditors=CommonSuppliersModel.all_objects.filter(balance__gt=2).order_by('-balance')[:8]
+    debtors=CommonCustomersModel.objects.filter(balance__gt=2).order_by('-balance')[:7]
+    creditors=CommonSuppliersModel.objects.filter(balance__gt=2).order_by('-balance')[:8]
     
     debtor_total_balance=CommonCustomersModel.all_objects.filter(balance__gt=2).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
-    gold_customers=CommonCustomersModel.all_objects.all().order_by('-turnover')[:15]
-    main_assets=CommonAssetsModel.all_objects.filter(value__gt=0).order_by('-value')[:10]
+    gold_customers=CommonCustomersModel.objects.all().order_by('-turnover')[:15]
+    main_assets=CommonAssetsModel.objects.filter(value__gt=0).order_by('-value')[:10]
     
     gold_customers_turnover=CommonCustomersModel.all_objects.all().aggregate(Sum('turnover'))['turnover__sum']
     
-    formats=CommonDocsFormatModel.all_objects.all()
-    datasorts=CommonDataSortsModel.all_objects.all()
+    formats=CommonDocsFormatModel.objects.all()
+    datasorts=CommonDataSortsModel.objects.all()
     form=CommonFilterCOAForm(allif_data.get("main_sbscrbr_entity"))
-    allifqueryset=CommonChartofAccountsModel.all_objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by("code")
-    assets_tot_val=CommonChartofAccountsModel.all_objects.filter(code__lte=19999 or 0,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
-    liablts_tot_val=CommonChartofAccountsModel.all_objects.filter(code__gt=19999 or 0,code__lte=29999 or 0,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+    allifqueryset=CommonChartofAccountsModel.objects.filter(company=allif_data.get("main_sbscrbr_entity")).order_by("code")
+    assets_tot_val=CommonChartofAccountsModel.objects.filter(code__lte=19999 or 0,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+    liablts_tot_val=CommonChartofAccountsModel.objects.filter(code__gt=19999 or 0,code__lte=29999 or 0,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
     creditors_total_balance=CommonSuppliersModel.all_objects.filter(balance__gt=2,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
-    equity_tot_val=CommonChartofAccountsModel.all_objects.filter(code__gt=29999 or 0,code__lte=39999 or 0,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+    equity_tot_val=CommonChartofAccountsModel.objects.filter(code__gt=29999 or 0,code__lte=39999 or 0,company=allif_data.get("main_sbscrbr_entity")).order_by('-balance').aggregate(Sum('balance'))['balance__sum']
     sum_liablts_and_equity=Decimal(liablts_tot_val or 0)+Decimal(equity_tot_val or 0)+Decimal(creditors_total_balance or 0)
     form=CommonFilterCOAForm(allif_data.get("main_sbscrbr_entity"))
     allifqueryset =allif_filtered_and_sorted_queryset(request,CommonChartofAccountsModel,allif_data,explicit_scope='all')
@@ -2120,13 +2160,13 @@ def commonSelectedRelatedAccs(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     if request.method=="GET":
         selectedoption=request.GET.get('allifidforselecteditem')
-        selectedcategoryid=CommonGeneralLedgersModel.all_objects.filter(pk=selectedoption,company=allif_data.get("main_sbscrbr_entity")).first()
+        selectedcategoryid=CommonGeneralLedgersModel.objects.filter(pk=selectedoption,company=allif_data.get("main_sbscrbr_entity")).first()
         catid=selectedcategoryid.id
-        allifquery=CommonChartofAccountsModel.all_objects.filter(category=catid,company=allif_data.get("main_sbscrbr_entity"))#this is a queryset that will be sent to the backend.
-        allifqueryrelatedlist=list(CommonChartofAccountsModel.all_objects.filter(category=catid,company=allif_data.get("main_sbscrbr_entity")))#this is a list
+        allifquery=CommonChartofAccountsModel.objects.filter(category=catid,company=allif_data.get("main_sbscrbr_entity"))#this is a queryset that will be sent to the backend.
+        allifqueryrelatedlist=list(CommonChartofAccountsModel.objects.filter(category=catid,company=allif_data.get("main_sbscrbr_entity")))#this is a list
         serialized_data = serialize("json", allifqueryrelatedlist)
         myjsondata= json.loads(serialized_data)
-        allifqueryset=list(CommonChartofAccountsModel.all_objects.filter(category=catid,company=allif_data.get("main_sbscrbr_entity")).values("category","description","id","code","balance"))
+        allifqueryset=list(CommonChartofAccountsModel.objects.filter(category=catid,company=allif_data.get("main_sbscrbr_entity")).values("category","description","id","code","balance"))
         allifrelatedserlized= json.loads(serialize('json', allifquery))#this is a list
         mystringjsondata=json.dumps(allifrelatedserlized)#this is string
         return JsonResponse(allifqueryset,safe=False)
@@ -2261,13 +2301,13 @@ def commonPostShareholderDeposit(request,pk,*allifargs,**allifkwargs):
     chartaccasset=allifquery.asset
     chartacceqty=allifquery.equity
     ########### increase the asset account
-    query=CommonChartofAccountsModel.all_objects.filter(id=chartaccasset.id).first()
+    query=CommonChartofAccountsModel.objects.filter(id=chartaccasset.id).first()
     initial_bank_balnce=query.balance
     query.balance=initial_bank_balnce+Decimal(amount)
     query.save()
 
     ############ increase equity account ##############
-    eqtyquery=CommonChartofAccountsModel.all_objects.filter(id=chartacceqty.id).first()
+    eqtyquery=CommonChartofAccountsModel.objects.filter(id=chartacceqty.id).first()
     initial_bank_balnce=eqtyquery.balance
     eqtyquery.balance=initial_bank_balnce+Decimal(amount)
     allifquery.status="posted"
@@ -4579,7 +4619,7 @@ def commonCustomerPaymentDetails(request, pk, *allifargs, **allifkwargs):
 @allif_base_view_wrapper
 def commonReceiveCustomerMoney(request, *allifargs, **allifkwargs):
     return allif_common_form_submission_and_save(request,CommonAddCustomerPaymentForm,"Receipt Customer Money",
-    "commonTaxParameters",'allifmaalcommonapp/payments/customers/receive-customer-money.html')
+    "commonCustomerPayments",'allifmaalcommonapp/payments/customers/receive-customer-money.html')
 
 @allif_base_view_wrapper
 def commonPostCustomerPayment(request,pk,*allifargs,**allifkwargs):

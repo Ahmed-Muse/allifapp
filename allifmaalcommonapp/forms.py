@@ -332,12 +332,13 @@ class CommonAddStaffProfileForm(CommonBaseForm):
     # The parent's __init__ will see this new dictionary and filter these fields.
     company_filtered_fields = {
         'username':User,
+        'staff_cat':CommonStaffCategoriesModel,
         }
     
     class Meta(CommonBaseForm.Meta):
         model = CommonEmployeesModel
         fields = CommonBaseForm.Meta.fields + ['firstName','lastName','middleName','gender','department','title','education',
-                  'salary','total_salary_paid','salary_payable','salary_balance','username','sysperms']
+                  'salary','total_salary_paid','salary_payable','salary_balance','username','sysperms','staff_cat']
         widgets = {
             **CommonBaseForm.Meta.widgets,
              'operation_year': forms.Select(attrs=SELECT2_ATTRS), # Assuming operation_year is a ForeignKey
@@ -353,6 +354,7 @@ class CommonAddStaffProfileForm(CommonBaseForm):
             'gender':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'username':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'sysperms':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            'staff_cat':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
        
         }
       
@@ -709,6 +711,15 @@ class CommonAddApproverForm(CommonBaseForm):
 class CommonAddCodeForm(CommonBaseForm):
     class Meta(CommonBaseForm.Meta):
         model=CommonCodesModel
+        fields=CommonBaseForm.Meta.fields + []
+        widgets = {
+        **CommonBaseForm.Meta.widgets,
+            
+        }
+
+class CommonAddStaffCateogryForm(CommonBaseForm):
+    class Meta(CommonBaseForm.Meta):
+        model=CommonStaffCategoriesModel
         fields=CommonBaseForm.Meta.fields + []
         widgets = {
         **CommonBaseForm.Meta.widgets,

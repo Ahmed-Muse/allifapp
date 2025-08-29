@@ -21207,3 +21207,375 @@ INFO 2025-08-21 22:25:26,983 autoreload 36080 1964 C:\am\allifapp\allifapperp\al
 INFO 2025-08-21 22:25:28,388 autoreload 43616 17184 Watching for file changes with StatReloader
 WARNING 2025-08-21 22:28:23,384 allif_navigation_tags 43616 34660 General navigation link with name 'Patients' not found in allif_single_access_general_links.
 WARNING 2025-08-21 22:29:25,850 allif_navigation_tags 43616 34660 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-21 22:30:21,251 autoreload 15500 38408 Watching for file changes with StatReloader
+WARNING 2025-08-21 22:40:07,580 allif_navigation_tags 15500 48236 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-21 22:41:26,502 autoreload 15500 38408 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-21 22:41:27,684 autoreload 32356 18804 Watching for file changes with StatReloader
+INFO 2025-08-21 22:41:47,597 autoreload 32356 18804 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-21 22:41:48,778 autoreload 47804 14912 Watching for file changes with StatReloader
+INFO 2025-08-21 22:42:29,339 autoreload 47804 14912 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-21 22:42:30,529 autoreload 18456 41732 Watching for file changes with StatReloader
+WARNING 2025-08-21 22:42:56,798 allif_navigation_tags 18456 35712 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-21 22:52:44,653 allif_navigation_tags 18456 38684 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-26 09:09:03,409 autoreload 22960 14104 Watching for file changes with StatReloader
+WARNING 2025-08-26 09:10:01,831 allif_navigation_tags 22960 45640 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-26 09:10:30,990 allif_navigation_tags 22960 45640 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-26 09:46:33,106 autoreload 22960 14104 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-26 09:46:34,635 autoreload 27016 32784 Watching for file changes with StatReloader
+INFO 2025-08-26 10:09:29,109 autoreload 27016 32784 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-26 10:09:30,286 autoreload 42292 32520 Watching for file changes with StatReloader
+INFO 2025-08-26 10:09:52,264 autoreload 42292 32520 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-26 10:09:53,329 autoreload 38464 47544 Watching for file changes with StatReloader
+INFO 2025-08-26 10:10:51,875 autoreload 38464 47544 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-26 10:10:53,003 autoreload 2716 30268 Watching for file changes with StatReloader
+INFO 2025-08-26 10:11:16,174 autoreload 2716 30268 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-26 10:11:17,375 autoreload 17548 16436 Watching for file changes with StatReloader
+INFO 2025-08-26 10:12:19,392 autoreload 17548 16436 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-26 10:12:20,484 autoreload 49876 25316 Watching for file changes with StatReloader
+INFO 2025-08-26 10:12:24,706 autoreload 49876 25316 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-26 10:12:25,797 autoreload 51048 48976 Watching for file changes with StatReloader
+INFO 2025-08-26 10:15:33,646 autoreload 51048 48976 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-26 10:15:36,013 autoreload 15992 35956 Watching for file changes with StatReloader
+INFO 2025-08-26 10:21:48,775 autoreload 15992 35956 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-08-26 10:21:49,879 autoreload 16828 37448 Watching for file changes with StatReloader
+INFO 2025-08-26 10:22:49,863 autoreload 16828 37448 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-08-26 10:22:50,971 autoreload 49404 45156 Watching for file changes with StatReloader
+INFO 2025-08-26 10:22:56,480 autoreload 49404 45156 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-08-26 10:22:57,652 autoreload 15156 33904 Watching for file changes with StatReloader
+INFO 2025-08-26 10:32:11,078 autoreload 15156 33904 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-26 10:32:12,474 autoreload 3872 36760 Watching for file changes with StatReloader
+INFO 2025-08-26 10:33:30,533 autoreload 3872 36760 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-26 10:33:31,604 autoreload 35156 43532 Watching for file changes with StatReloader
+INFO 2025-08-26 10:33:44,091 autoreload 35156 43532 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-26 10:33:45,281 autoreload 29680 15156 Watching for file changes with StatReloader
+INFO 2025-08-26 10:34:48,024 autoreload 29680 15156 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-08-26 10:34:49,276 autoreload 41788 46520 Watching for file changes with StatReloader
+INFO 2025-08-26 10:35:56,463 autoreload 41788 46520 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-08-26 10:35:57,532 autoreload 23692 13740 Watching for file changes with StatReloader
+INFO 2025-08-26 10:36:30,034 autoreload 3872 47484 Watching for file changes with StatReloader
+INFO 2025-08-26 10:39:36,118 autoreload 3872 47484 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-26 10:39:38,204 autoreload 38684 34900 Watching for file changes with StatReloader
+INFO 2025-08-26 10:40:23,147 autoreload 38684 34900 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-26 10:40:24,580 autoreload 19348 34052 Watching for file changes with StatReloader
+INFO 2025-08-26 10:42:19,531 autoreload 19348 34052 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-26 10:42:21,054 autoreload 20872 51116 Watching for file changes with StatReloader
+INFO 2025-08-26 10:43:13,913 autoreload 20872 51116 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-26 10:43:15,427 autoreload 12104 30776 Watching for file changes with StatReloader
+INFO 2025-08-26 10:43:36,236 autoreload 12104 30776 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-26 10:43:37,710 autoreload 33000 38088 Watching for file changes with StatReloader
+INFO 2025-08-26 10:44:28,117 autoreload 33000 38088 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-08-26 10:44:29,690 autoreload 43456 28928 Watching for file changes with StatReloader
+INFO 2025-08-26 10:48:12,345 autoreload 43456 28928 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-26 10:48:13,921 autoreload 11316 1340 Watching for file changes with StatReloader
+INFO 2025-08-26 10:48:33,180 autoreload 46980 35652 Watching for file changes with StatReloader
+INFO 2025-08-26 10:50:00,057 autoreload 46980 35652 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-26 10:50:01,531 autoreload 44928 41112 Watching for file changes with StatReloader
+INFO 2025-08-26 10:51:25,459 autoreload 44928 41112 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-26 10:51:26,784 autoreload 34304 26672 Watching for file changes with StatReloader
+INFO 2025-08-26 10:54:59,968 autoreload 34304 26672 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-26 10:55:01,070 autoreload 5404 51396 Watching for file changes with StatReloader
+ERROR 2025-08-26 10:55:05,312 log 5404 37776 Internal Server Error: /Add/New/Staff/User/user-full-names-dcf07a9ce477/shaafi-hospital2116-afee37289c51/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py", line 1550, in commonAddUser
+    obj.division=allif_data.get("usernmeslg").division
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'division'
+WARNING 2025-08-26 10:55:05,457 log 5404 37776 Not Found: /favicon.ico
+INFO 2025-08-26 10:56:04,467 autoreload 5404 51396 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-26 10:56:05,563 autoreload 45760 33024 Watching for file changes with StatReloader
+INFO 2025-08-26 10:56:18,428 autoreload 45760 33024 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-26 10:56:19,894 autoreload 50752 29300 Watching for file changes with StatReloader
+INFO 2025-08-26 11:03:16,250 autoreload 50752 29300 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-26 11:03:17,353 autoreload 51648 51548 Watching for file changes with StatReloader
+INFO 2025-08-26 11:03:57,984 autoreload 51648 51548 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-26 11:03:59,302 autoreload 33576 51304 Watching for file changes with StatReloader
+INFO 2025-08-26 11:06:15,936 autoreload 33576 51304 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-26 11:06:17,384 autoreload 24460 50036 Watching for file changes with StatReloader
+WARNING 2025-08-26 11:06:38,991 allif_navigation_tags 24460 47948 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-26 11:06:54,072 allif_navigation_tags 24460 47948 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-26 11:07:41,062 autoreload 24460 50036 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-26 11:07:42,814 autoreload 21540 51728 Watching for file changes with StatReloader
+INFO 2025-08-28 07:42:25,593 autoreload 27164 27148 Watching for file changes with StatReloader
+WARNING 2025-08-28 09:04:57,928 allif_navigation_tags 27164 41976 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-29 17:12:39,935 autoreload 28928 25068 Watching for file changes with StatReloader
+WARNING 2025-08-29 17:35:41,743 allif_navigation_tags 28928 16764 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-29 17:39:49,438 autoreload 28928 25068 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-29 17:39:51,858 autoreload 24300 39052 Watching for file changes with StatReloader
+INFO 2025-08-29 18:23:22,779 autoreload 24300 39052 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-29 18:23:24,896 autoreload 11656 2716 Watching for file changes with StatReloader
+INFO 2025-08-29 18:31:42,121 autoreload 47544 34664 Watching for file changes with StatReloader
+WARNING 2025-08-29 19:30:00,465 allif_navigation_tags 47544 26400 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 19:30:06,922 allif_navigation_tags 47544 26400 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 19:32:00,914 allif_navigation_tags 47544 26400 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 19:32:05,800 allif_navigation_tags 47544 26400 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 19:41:37,114 autoreload 47544 34664 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 19:41:39,205 autoreload 53156 51912 Watching for file changes with StatReloader
+INFO 2025-08-29 19:42:02,962 autoreload 53156 51912 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 19:42:04,228 autoreload 42904 14916 Watching for file changes with StatReloader
+INFO 2025-08-29 19:43:11,212 autoreload 42904 14916 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 19:43:12,513 autoreload 39356 29556 Watching for file changes with StatReloader
+INFO 2025-08-29 19:44:23,383 autoreload 39356 29556 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 19:44:24,668 autoreload 28396 28316 Watching for file changes with StatReloader
+INFO 2025-08-29 19:44:28,778 autoreload 28396 28316 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 19:44:30,079 autoreload 25376 9560 Watching for file changes with StatReloader
+WARNING 2025-08-29 19:44:41,623 allif_navigation_tags 25376 40312 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 19:44:45,657 allif_navigation_tags 25376 40312 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 19:46:21,788 autoreload 25376 9560 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 19:46:23,323 autoreload 24736 52608 Watching for file changes with StatReloader
+WARNING 2025-08-29 19:46:40,845 allif_navigation_tags 24736 52260 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 19:46:46,368 allif_navigation_tags 24736 52260 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 19:46:58,363 allif_navigation_tags 24736 52260 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 19:47:03,379 allif_navigation_tags 24736 52260 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 19:47:16,545 autoreload 24736 52608 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 19:47:17,894 autoreload 12600 38624 Watching for file changes with StatReloader
+INFO 2025-08-29 19:49:32,466 autoreload 12600 38624 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 19:49:33,753 autoreload 30176 49288 Watching for file changes with StatReloader
+WARNING 2025-08-29 19:50:15,558 allif_navigation_tags 30176 32964 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 19:50:20,799 allif_navigation_tags 30176 32964 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 19:56:08,503 autoreload 30176 49288 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-29 19:56:10,172 autoreload 15752 40160 Watching for file changes with StatReloader
+INFO 2025-08-29 19:58:17,911 autoreload 15752 40160 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-29 19:58:19,509 autoreload 51304 400 Watching for file changes with StatReloader
+INFO 2025-08-29 20:00:12,891 autoreload 51304 400 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:00:14,465 autoreload 49212 45912 Watching for file changes with StatReloader
+INFO 2025-08-29 20:01:44,559 autoreload 49212 45912 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:01:46,070 autoreload 22096 5640 Watching for file changes with StatReloader
+INFO 2025-08-29 20:01:58,864 autoreload 22096 5640 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:02:00,348 autoreload 48908 36824 Watching for file changes with StatReloader
+INFO 2025-08-29 20:02:21,565 autoreload 48908 36824 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:02:23,026 autoreload 16708 44572 Watching for file changes with StatReloader
+INFO 2025-08-29 20:05:33,728 autoreload 16708 44572 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:05:35,353 autoreload 44740 38364 Watching for file changes with StatReloader
+INFO 2025-08-29 20:05:50,835 autoreload 44740 38364 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:05:52,273 autoreload 21132 19424 Watching for file changes with StatReloader
+INFO 2025-08-29 20:09:58,939 autoreload 21132 19424 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 20:10:00,374 autoreload 22760 31828 Watching for file changes with StatReloader
+INFO 2025-08-29 20:13:52,787 autoreload 22760 31828 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:13:54,170 autoreload 10076 10828 Watching for file changes with StatReloader
+INFO 2025-08-29 20:14:30,432 autoreload 10076 10828 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:14:31,714 autoreload 44744 52784 Watching for file changes with StatReloader
+INFO 2025-08-29 20:15:18,841 autoreload 44744 52784 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:15:20,366 autoreload 14808 38624 Watching for file changes with StatReloader
+INFO 2025-08-29 20:16:13,813 autoreload 14808 38624 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:16:15,225 autoreload 11852 39448 Watching for file changes with StatReloader
+INFO 2025-08-29 20:17:38,609 autoreload 11852 39448 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:17:40,042 autoreload 51336 42444 Watching for file changes with StatReloader
+INFO 2025-08-29 20:18:55,172 autoreload 51336 42444 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:18:56,511 autoreload 44108 8432 Watching for file changes with StatReloader
+INFO 2025-08-29 20:19:05,133 autoreload 44108 8432 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:19:06,471 autoreload 23912 21324 Watching for file changes with StatReloader
+WARNING 2025-08-29 20:25:59,210 allif_navigation_tags 23912 38640 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 20:26:16,037 allif_navigation_tags 23912 38640 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 20:27:34,240 allif_navigation_tags 23912 38640 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 20:27:41,177 allif_navigation_tags 23912 38640 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 20:27:55,014 allif_navigation_tags 23912 38640 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 20:31:41,529 allif_navigation_tags 23912 38640 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 20:33:30,143 autoreload 23912 21324 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:33:31,669 autoreload 52484 53048 Watching for file changes with StatReloader
+INFO 2025-08-29 20:34:17,987 autoreload 52484 53048 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:34:19,385 autoreload 43408 41752 Watching for file changes with StatReloader
+INFO 2025-08-29 20:34:43,960 autoreload 43408 41752 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 20:34:45,355 autoreload 52072 46884 Watching for file changes with StatReloader
+INFO 2025-08-29 20:38:43,192 autoreload 52072 46884 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-29 20:38:44,489 autoreload 38384 26984 Watching for file changes with StatReloader
+WARNING 2025-08-29 20:53:12,205 allif_navigation_tags 38384 44108 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 20:56:16,697 allif_navigation_tags 38384 44108 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 20:56:21,613 allif_navigation_tags 38384 44108 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 20:57:39,521 autoreload 38384 26984 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 20:57:41,005 autoreload 34456 32556 Watching for file changes with StatReloader
+INFO 2025-08-29 20:58:25,882 autoreload 34456 32556 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 20:58:27,431 autoreload 41848 43916 Watching for file changes with StatReloader
+INFO 2025-08-29 21:08:29,703 autoreload 41848 43916 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 21:08:31,312 autoreload 25344 6448 Watching for file changes with StatReloader
+INFO 2025-08-29 21:11:35,205 autoreload 25344 6448 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-29 21:11:36,915 autoreload 15992 8256 Watching for file changes with StatReloader
+INFO 2025-08-29 21:12:26,465 autoreload 15992 8256 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 21:12:27,983 autoreload 43524 39592 Watching for file changes with StatReloader
+INFO 2025-08-29 21:12:43,562 autoreload 43524 39592 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 21:12:45,064 autoreload 45464 4588 Watching for file changes with StatReloader
+INFO 2025-08-29 21:12:59,176 autoreload 45464 4588 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-29 21:13:00,654 autoreload 41848 49628 Watching for file changes with StatReloader
+INFO 2025-08-29 21:13:35,171 autoreload 41848 49628 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-29 21:13:36,654 autoreload 41420 13676 Watching for file changes with StatReloader
+INFO 2025-08-29 21:24:01,777 autoreload 41420 13676 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 21:24:03,187 autoreload 50816 31756 Watching for file changes with StatReloader
+WARNING 2025-08-29 21:24:07,398 allif_navigation_tags 50816 3232 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 21:26:53,883 allif_navigation_tags 50816 3232 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 21:27:47,243 autoreload 50816 31756 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 21:27:48,790 autoreload 18380 22656 Watching for file changes with StatReloader
+INFO 2025-08-29 21:29:29,275 autoreload 18380 22656 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 21:29:30,761 autoreload 32248 31612 Watching for file changes with StatReloader
+INFO 2025-08-29 21:29:43,382 autoreload 32248 31612 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 21:29:44,917 autoreload 32844 45364 Watching for file changes with StatReloader
+WARNING 2025-08-29 21:52:50,928 allif_navigation_tags 32844 41484 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 21:53:04,835 allif_navigation_tags 32844 41484 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 22:00:45,633 autoreload 32844 45364 C:\am\allifapp\allifapperp\allifmaalcommonapp\constants.py changed, reloading.
+INFO 2025-08-29 22:00:47,298 autoreload 10756 6236 Watching for file changes with StatReloader
+INFO 2025-08-29 22:02:41,572 autoreload 10756 6236 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 22:02:43,011 autoreload 32248 39272 Watching for file changes with StatReloader
+INFO 2025-08-29 22:04:18,809 autoreload 32248 39272 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 22:04:20,395 autoreload 53136 13400 Watching for file changes with StatReloader
+WARNING 2025-08-29 22:07:03,676 allif_navigation_tags 53136 14224 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-29 22:08:53,455 autoreload 53136 13400 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 22:08:55,023 autoreload 32916 38208 Watching for file changes with StatReloader
+INFO 2025-08-29 22:09:24,493 autoreload 32916 38208 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 22:09:25,893 autoreload 52080 28024 Watching for file changes with StatReloader
+INFO 2025-08-29 22:09:33,254 autoreload 52080 28024 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 22:09:34,612 autoreload 10764 516 Watching for file changes with StatReloader
+INFO 2025-08-29 22:10:22,214 autoreload 10764 516 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 22:10:23,768 autoreload 21724 52852 Watching for file changes with StatReloader
+WARNING 2025-08-29 22:10:41,221 allif_navigation_tags 21724 132 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-29 22:11:13,174 autoreload 21724 52852 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 22:11:14,677 autoreload 32852 2868 Watching for file changes with StatReloader
+WARNING 2025-08-29 22:11:40,149 allif_navigation_tags 32852 22720 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-29 22:12:04,093 autoreload 32852 2868 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 22:12:05,478 autoreload 44348 41556 Watching for file changes with StatReloader
+WARNING 2025-08-29 22:15:10,894 allif_navigation_tags 44348 22720 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 22:16:15,119 allif_navigation_tags 44348 22720 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 22:19:32,803 allif_navigation_tags 44348 22720 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 22:19:55,390 allif_navigation_tags 44348 22720 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 22:20:20,028 allif_navigation_tags 44348 22720 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 22:20:50,504 allif_navigation_tags 44348 22720 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 22:22:09,767 allif_navigation_tags 44348 22720 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 22:22:52,184 allif_navigation_tags 44348 22720 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 22:24:50,288 autoreload 44348 41556 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:24:51,757 autoreload 5032 24048 Watching for file changes with StatReloader
+INFO 2025-08-29 22:27:19,725 autoreload 5032 24048 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:27:21,366 autoreload 38640 51520 Watching for file changes with StatReloader
+INFO 2025-08-29 22:31:11,924 autoreload 38640 51520 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:31:13,535 autoreload 23952 50804 Watching for file changes with StatReloader
+INFO 2025-08-29 22:39:51,284 autoreload 23952 50804 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:39:52,950 autoreload 23764 14120 Watching for file changes with StatReloader
+INFO 2025-08-29 22:40:28,546 autoreload 23764 14120 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:40:30,178 autoreload 25300 29200 Watching for file changes with StatReloader
+INFO 2025-08-29 22:40:40,371 autoreload 25300 29200 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:40:41,936 autoreload 40644 24856 Watching for file changes with StatReloader
+INFO 2025-08-29 22:42:01,838 autoreload 40644 24856 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:42:03,256 autoreload 38588 36560 Watching for file changes with StatReloader
+INFO 2025-08-29 22:44:27,172 autoreload 38588 36560 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:44:28,608 autoreload 4308 44580 Watching for file changes with StatReloader
+INFO 2025-08-29 22:47:16,406 autoreload 4308 44580 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-08-29 22:47:17,893 autoreload 29436 9792 Watching for file changes with StatReloader
+INFO 2025-08-29 22:50:57,202 autoreload 29436 9792 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-29 22:50:58,796 autoreload 37336 25880 Watching for file changes with StatReloader
+INFO 2025-08-29 22:52:32,971 autoreload 37336 25880 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:52:34,530 autoreload 20412 32908 Watching for file changes with StatReloader
+WARNING 2025-08-29 22:52:47,191 allif_navigation_tags 20412 12508 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-29 22:54:40,415 autoreload 20412 32908 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-29 22:54:41,969 autoreload 34524 47296 Watching for file changes with StatReloader
+INFO 2025-08-29 22:54:50,028 autoreload 34524 47296 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-08-29 22:54:51,381 autoreload 46764 48016 Watching for file changes with StatReloader
+INFO 2025-08-29 22:55:57,111 autoreload 46764 48016 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:55:58,576 autoreload 14164 48612 Watching for file changes with StatReloader
+INFO 2025-08-29 22:57:19,139 autoreload 14164 48612 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 22:57:20,726 autoreload 46840 46312 Watching for file changes with StatReloader
+WARNING 2025-08-29 22:59:22,074 allif_navigation_tags 46840 676 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 22:59:36,709 allif_navigation_tags 46840 676 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 22:59:48,091 allif_navigation_tags 46840 676 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 23:00:01,423 allif_navigation_tags 46840 676 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-29 23:00:13,459 allif_navigation_tags 46840 676 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+INFO 2025-08-29 23:02:04,829 autoreload 46840 46312 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 23:02:06,490 autoreload 25568 3040 Watching for file changes with StatReloader
+INFO 2025-08-29 23:08:43,201 autoreload 25568 3040 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-29 23:08:44,878 autoreload 42512 52996 Watching for file changes with StatReloader
+INFO 2025-08-29 23:09:40,308 autoreload 42512 52996 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 23:09:41,690 autoreload 45124 48320 Watching for file changes with StatReloader
+INFO 2025-08-29 23:10:17,883 autoreload 45124 48320 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 23:10:19,344 autoreload 50892 29732 Watching for file changes with StatReloader
+INFO 2025-08-29 23:10:42,423 autoreload 50892 29732 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 23:10:43,823 autoreload 29360 22816 Watching for file changes with StatReloader
+INFO 2025-08-29 23:13:29,305 autoreload 29360 22816 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-29 23:13:30,706 autoreload 49220 33388 Watching for file changes with StatReloader
+INFO 2025-08-29 23:15:35,519 autoreload 49220 33388 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-29 23:15:37,173 autoreload 45024 45516 Watching for file changes with StatReloader
+INFO 2025-08-29 23:28:36,770 autoreload 45024 45516 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-08-29 23:28:38,698 autoreload 22388 29480 Watching for file changes with StatReloader
+INFO 2025-08-29 23:31:50,230 autoreload 22388 29480 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 23:31:52,185 autoreload 48708 53752 Watching for file changes with StatReloader
+INFO 2025-08-29 23:32:38,399 autoreload 48708 53752 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 23:32:40,229 autoreload 25928 10104 Watching for file changes with StatReloader
+WARNING 2025-08-29 23:36:17,784 allif_navigation_tags 25928 52492 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-29 23:36:23,574 allif_navigation_tags 25928 52492 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 23:38:56,739 autoreload 25928 10104 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 23:38:58,504 autoreload 28948 53892 Watching for file changes with StatReloader
+INFO 2025-08-29 23:39:32,061 autoreload 28948 53892 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-29 23:39:33,884 autoreload 45028 18980 Watching for file changes with StatReloader
+WARNING 2025-08-29 23:39:55,946 allif_navigation_tags 45028 53012 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-29 23:40:33,759 autoreload 45028 18980 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 23:40:35,530 autoreload 49204 53380 Watching for file changes with StatReloader
+INFO 2025-08-29 23:41:05,907 autoreload 49204 53380 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-29 23:41:07,684 autoreload 48656 3352 Watching for file changes with StatReloader
+INFO 2025-08-30 00:08:53,706 autoreload 48656 3352 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:08:55,722 autoreload 45884 12408 Watching for file changes with StatReloader
+WARNING 2025-08-30 00:11:34,449 allif_navigation_tags 45884 28616 General navigation link with name 'Payments' not found in allif_single_access_general_links.
+WARNING 2025-08-30 00:12:15,329 allif_navigation_tags 45884 28616 General navigation link with name 'Payments' not found in allif_single_access_general_links.
+WARNING 2025-08-30 00:12:31,815 allif_navigation_tags 45884 28616 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-30 00:12:33,520 allif_navigation_tags 45884 28616 General navigation link with name 'Payments' not found in allif_single_access_general_links.
+INFO 2025-08-30 00:15:43,555 autoreload 45884 12408 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:15:45,848 autoreload 25132 47828 Watching for file changes with StatReloader
+INFO 2025-08-30 00:15:59,243 autoreload 25132 47828 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:16:01,126 autoreload 53496 11620 Watching for file changes with StatReloader
+WARNING 2025-08-30 00:16:04,917 allif_navigation_tags 53496 46684 General navigation link with name 'Payments' not found in allif_single_access_general_links.
+WARNING 2025-08-30 00:16:58,163 allif_navigation_tags 53496 46684 General navigation link with name 'Payments' not found in allif_single_access_general_links.
+WARNING 2025-08-30 00:17:02,647 allif_navigation_tags 53496 46684 General navigation link with name 'Payments' not found in allif_single_access_general_links.
+WARNING 2025-08-30 00:17:16,681 allif_navigation_tags 53496 46684 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-30 00:17:19,965 allif_navigation_tags 53496 46684 General navigation link with name 'Payments' not found in allif_single_access_general_links.
+WARNING 2025-08-30 00:17:28,680 allif_navigation_tags 53496 46684 General navigation link with name 'Payments' not found in allif_single_access_general_links.
+WARNING 2025-08-30 00:18:48,887 allif_navigation_tags 53496 46684 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-08-30 00:19:34,374 allif_navigation_tags 53496 46684 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-30 00:20:46,700 autoreload 53496 11620 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-30 00:20:48,534 autoreload 30152 32320 Watching for file changes with StatReloader
+INFO 2025-08-30 00:20:57,386 autoreload 30152 32320 C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py changed, reloading.
+INFO 2025-08-30 00:20:59,340 autoreload 1860 52940 Watching for file changes with StatReloader
+WARNING 2025-08-30 00:22:06,848 allif_navigation_tags 1860 47316 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-08-30 00:22:12,061 allif_navigation_tags 1860 47316 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-30 00:42:59,763 autoreload 1860 52940 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:43:01,764 autoreload 44108 30568 Watching for file changes with StatReloader
+INFO 2025-08-30 00:46:20,255 autoreload 44108 30568 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:46:22,057 autoreload 40800 15800 Watching for file changes with StatReloader
+INFO 2025-08-30 00:46:47,029 autoreload 40800 15800 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:46:49,045 autoreload 47604 19444 Watching for file changes with StatReloader
+INFO 2025-08-30 00:48:37,254 autoreload 47604 19444 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:48:39,075 autoreload 30152 18972 Watching for file changes with StatReloader
+INFO 2025-08-30 00:49:00,713 autoreload 30152 18972 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:49:02,603 autoreload 13220 51116 Watching for file changes with StatReloader
+INFO 2025-08-30 00:49:08,866 autoreload 13220 51116 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:49:10,479 autoreload 19992 20580 Watching for file changes with StatReloader
+INFO 2025-08-30 00:57:59,837 autoreload 19992 20580 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:58:01,470 autoreload 52856 26952 Watching for file changes with StatReloader
+INFO 2025-08-30 00:59:18,843 autoreload 52856 26952 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:59:20,582 autoreload 19440 45464 Watching for file changes with StatReloader
+INFO 2025-08-30 00:59:35,923 autoreload 19440 45464 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 00:59:37,917 autoreload 54224 52784 Watching for file changes with StatReloader
+INFO 2025-08-30 01:03:14,068 autoreload 54224 52784 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:03:16,111 autoreload 46088 45124 Watching for file changes with StatReloader
+INFO 2025-08-30 01:06:37,784 autoreload 46088 45124 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:06:39,742 autoreload 23800 42264 Watching for file changes with StatReloader
+INFO 2025-08-30 01:07:26,465 autoreload 23800 42264 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:07:28,252 autoreload 46788 51488 Watching for file changes with StatReloader
+INFO 2025-08-30 01:07:43,006 autoreload 46788 51488 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:07:44,985 autoreload 38528 51564 Watching for file changes with StatReloader
+INFO 2025-08-30 01:13:53,862 autoreload 38528 51564 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:13:55,687 autoreload 26664 14296 Watching for file changes with StatReloader
+INFO 2025-08-30 01:14:52,060 autoreload 26664 14296 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:14:54,043 autoreload 33500 45472 Watching for file changes with StatReloader
+INFO 2025-08-30 01:15:29,708 autoreload 33500 45472 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:15:31,717 autoreload 35756 21724 Watching for file changes with StatReloader
+INFO 2025-08-30 01:16:10,524 autoreload 35756 21724 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:16:12,539 autoreload 31072 9460 Watching for file changes with StatReloader
+INFO 2025-08-30 01:21:01,277 autoreload 31072 9460 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:21:03,911 autoreload 32096 13244 Watching for file changes with StatReloader
+INFO 2025-08-30 01:21:16,878 autoreload 32096 13244 C:\am\allifapp\allifapperp\allifmaalusersapp\models.py changed, reloading.
+INFO 2025-08-30 01:21:19,500 autoreload 46212 53732 Watching for file changes with StatReloader
+INFO 2025-08-30 01:21:24,887 autoreload 46212 53732 C:\am\allifapp\allifapperp\allifmaalusersapp\models.py changed, reloading.
+INFO 2025-08-30 01:21:26,517 autoreload 31628 49744 Watching for file changes with StatReloader
+INFO 2025-08-30 01:22:29,164 autoreload 47912 14916 Watching for file changes with StatReloader
+INFO 2025-08-30 01:23:21,105 autoreload 11612 12716 Watching for file changes with StatReloader
+INFO 2025-08-30 01:24:06,271 autoreload 15572 19444 Watching for file changes with StatReloader
+WARNING 2025-08-30 01:26:23,704 allif_navigation_tags 15572 52428 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-08-30 01:26:56,375 autoreload 15572 19444 C:\am\allifapp\allifapperp\allifmaalrealestateapp\views.py changed, reloading.
+INFO 2025-08-30 01:26:58,596 autoreload 13400 17576 Watching for file changes with StatReloader

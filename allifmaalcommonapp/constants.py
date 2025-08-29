@@ -8,7 +8,8 @@ STATUS_CHOICES = [
     ('Available', 'Available'),
     ('Ordered', 'Ordered'),
     ('Pending', 'Pending'),        # Awaiting approval, payment, or action
-    ('Active', 'Active'),          # The item, order, or service is in progress
+    ('Active', 'Active'),  
+    ('Emergency', 'Emergency'),# The item, order, or service is in progress
     ('Completed', 'Completed'),    # The task or process is finished successfully
     ('Collected', 'Collected'),
     ('Cancelled', 'Cancelled'),    # The order or process has been terminated
@@ -34,10 +35,15 @@ FLOOR_CHOICES = [(i, str(i)) for i in range(1, 30)]
 CURRENT_STATUS_CHOICES = [
         ('Available', 'Available'),
         ('Occupied', 'Occupied'),
-        ('Maintenance', 'Maintenance'),
-        ('Sale', 'For Sale'), ('Rent', 'For Rent'), ('Development', 'For Development'),
-      ('Pending', 'Pending'), ('Sold', 'Sold'),
-    ('Rented', 'Rented'), ('Cancelled', 'Cancelled')
+        ('Maintenance', 'Under Maintenance'),
+        ('Construction', 'Under Construction'),
+        ('Sale', 'For Sale'),
+        ('Rent', 'For Rent'),
+        ('Development', 'For Development'),
+        ('Pending', 'Pending'),
+        ('Sold', 'Sold'),
+        ('Rented', 'Rented'),
+        ('Cancelled', 'Cancelled')
     ]
 
 delete_status= [
@@ -124,6 +130,8 @@ TRIAGE_DISPOSITION_CHOICES = [
 BASE_MODEL_STATUS_CHOICES= [
     ('Draft', 'Draft'),
     ('Active', 'Active'),
+    ('Waiting', 'Waiting'),
+    ('Emergency', 'Emergency'),
     ('Pending', 'Pending'),
     ('Approved', 'Approved'),
     ('Archived', 'Archived'),

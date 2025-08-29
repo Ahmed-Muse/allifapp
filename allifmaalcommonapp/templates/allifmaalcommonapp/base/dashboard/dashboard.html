@@ -34,11 +34,12 @@
             transform: translateY(-5px);
         }
 
-        .card-rented { border-color: #0d6efd; }
-        .card-vacant { border-color: #dc3545; }
-        .card-due-maintenance { border-color: #ffc107; }
-        .card-under-maintenance { border-color: #0dcaf0; }
-        .card-under-construction { border-color: #6c757d; }
+        .allif-info-card-one { border-color: #0d6efd; }
+        .allif-info-card-two { border-color: #dc3545; }
+        .allif-info-card-three { border-color: #ffc107; }
+        .allif-info-card-four { border-color: #0dcaf0; }
+        .allif-info-card-five { border-color: #6c757d; }
+        .allif-info-card-six { border-color: #f84cf2; }
       
        
         .card {
@@ -90,6 +91,44 @@
     background-color: #f8f7f6;
 }
 
+
+.col-lg-2-custom {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  @media (max-width: 992px) {
+    .col-lg-2-custom {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+
+  .analytics-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+  }
+
+  .allif-info-card-heading {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .analytics-card a {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .analytics-card a:hover {
+    text-decoration: underline;
+  }
+
     </style>
     
 
@@ -137,105 +176,107 @@
         </nav>
 </div>
 
-        
-        <!-- Dashboard Analytics Cards -->
-        <div class="allif-info-cards-main-wrapper row g-4 mb-4">
-            <div class="col-md-6 col-lg-2">
-                <div class="analytics-card card-rented">
-                {% block allif_info_card_one %}
-                    <div class="allif-info-card-heading">Buildings</div>
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-house-door-fill text-primary fs-2 me-3"></i>
-                        <div>
-                        <a href="{% allif_get_single_nav_link_url 'Spaces' user_var glblslug %}">{{card_one_numner}}</a>
-                           
-                        </div>
-                    </div>
-                    {%endblock%}
 
-                </div>
-            </div>
 
-            <div class="col-md-6 col-lg-2">
-                <div class="analytics-card card-vacant">
-                    <div class="allif-info-card-heading">Units</div>
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-building text-danger fs-2 me-3"></i>
-                        <div>
-                           
-                            <a href="{% allif_get_single_nav_link_url 'SpaceUnits' user_var glblslug %}">{{space_units}}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            
-
-            <div class="col-md-6 col-lg-2">
-                <div class="analytics-card card-due-maintenance">
-                    <div class="allif-info-card-heading">Rented Units</div>
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-lock text-warning fs-2 me-3"></i>
-                        <div>
-                           
-                            <a href="">344</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-2">
-                <div class="analytics-card card-under-maintenance">
-                     <div class="allif-info-card-heading">Vacant Units</div>
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-door-open text-info fs-2 me-3"></i>
-                        <div>
-                           
-                            <a href="">344</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-             <div class="col-md-6 col-lg-2">
-                <div class="analytics-card card-under-maintenance">
-                     <div class="allif-info-card-heading">Tenants</div>
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-person text-secondary fs-2 me-3"></i>
-                        <div>
-                           
-                            <a href="">344</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-             <div class="col-md-6 col-lg-2">
-                <div class="analytics-card card-under-maintenance">
-                     <div class="allif-info-card-heading">Need Service</div>
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-tools text-sucess fs-2 me-3"></i>
-                        <div>
-                          
-                            <a href="">344</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+<!-- Dashboard Analytics Cards -->
+<div class="allif-info-cards-main-wrapper row g-4 mb-4">
+  <!-- Card 1: Buildings -->
+  <div class="col-md-6 col-lg-2-custom">
+    <div class="analytics-card allif-info-card-one">
+      {% block allif_info_card_one %}
+      <div class="allif-info-card-heading">Buildings</div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-house-door-fill text-primary fs-2 me-3"></i>
+        <div>
+          <a href="{% allif_get_single_nav_link_url 'Spaces' user_var glblslug %}">{{value_card_one}}</a>
         </div>
+      </div>
+      {% endblock %}
+    </div>
+  </div>
 
-  
+  <!-- Card 2: Units -->
+  <div class="col-md-6 col-lg-2-custom">
+    <div class="analytics-card allif-info-card-two">
+      {% block allif_info_card_two %}
+      <div class="allif-info-card-heading">Units</div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-building text-danger fs-2 me-3"></i>
+        <div>
+          <a href="{% allif_get_single_nav_link_url 'SpaceUnits' user_var glblslug %}">{{value_card_two}}</a>
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+  </div>
+
+  <!-- Card 3: Rented Units -->
+  <div class="col-md-6 col-lg-2-custom">
+    <div class="analytics-card allif-info-card-three">
+      {% block allif_info_card_three %}
+      <div class="allif-info-card-heading">Rented Units</div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-lock text-warning fs-2 me-3"></i>
+        <div>
+          <a href="{% allif_get_single_nav_link_url 'SpaceUnits' user_var glblslug %}">{{value_card_three}}</a>
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+  </div>
+
+  <!-- Card 4: Vacant Units -->
+  <div class="col-md-6 col-lg-2-custom">
+    <div class="analytics-card allif-info-card-four">
+      {% block allif_info_card_four %}
+      <div class="allif-info-card-heading">Vacant Units</div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-door-open text-info fs-2 me-3"></i>
+        <div>
+          <a href="{% allif_get_single_nav_link_url 'SpaceUnits' user_var glblslug %}">{{value_card_four}}</a>
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+  </div>
+
+  <!-- Card 5: Tenants -->
+  <div class="col-md-6 col-lg-2-custom">
+    <div class="analytics-card allif-info-card-five">
+      {% block allif_info_card_five %}
+      <div class="allif-info-card-heading">Tenants</div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-person text-secondary fs-2 me-3"></i>
+        <div>
+          <a href="{% allif_get_single_nav_link_url 'Clients' user_var glblslug %}">{{value_card_five}}</a>
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+  </div>
+</div>
 
 
+{% block allif_dashboard_full_table %}
 
 <div class="allif_dashboard_spacer"></div>
 
+<div class=" card allif-full-table-content-main-wrapper">
+<div class="row mt-12"> <!--start....table row-->
+  <div class="table-details-content-description">
+    {% block allif_dashboard_full_table_main_header %}
+    Vacant Units
+    {% endblock %}
+  
+  </div>
+<div class="col-md-12"> <!--start....table column-->
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout" id="sortable-table">
+      <thead class="allif-table-header-wrapper">
+        <tr class="allif-table-header-row">
 
-      <div class=" card allif-full-table-content-main-wrapper">
-      {% include 'allifmaalcommonapp/includes/tables/full-table-header-upper-section.html' %}
-
-      {% block list-table-headers %}
+      {% block allif_dashboard_full_table_headers %}
         <td class="allif-fix-table-col"> Name </td>
         <td class="allif-table-header-td"> Description</td>
         <td class="allif-table-header-td"> Date </td>
@@ -244,20 +285,20 @@
         <td class="allif-table-header-td">Navigate</td>
       {% include 'allifmaalcommonapp/includes/tables/full-table-header-lower-section.html' %}
       
-      {% for item in expenses %}  
+      {% for item in full_table_values %}  
         <tr data-id="{{item.id}}" class="allif-table-header-content-row">
-        {% block list-table-content-seciton %}
-        <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}<a class="allif-table-links" href=""> {{item.name}} Unit 4, Cimra Plaza </a>{%endblock%}</td>
+        {% block allif_dashboard_full_table_content %}
+        <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceUnitDetails' item.id user_var glblslug %}"> {{item.name}} - {{item.space}} </a>{%endblock%}</td>
         <td class="allif-table-content-td"> {{item.description}}<span class="badge bg-danger">Vacant</span> </td>
-        <td class="allif-table-content-td"> {{item.date|date:'d/m/Y'}}<span class="badge bg-success">Rented</span></td>
-        <td class="allif-table-content-td"> {{item.status}}<span class="badge bg-secondary">Active</span></td>
+        <td class="allif-table-content-td"> {{item.date|date:'d/m/Y'}}</td>
+        <td class="allif-table-content-td"> {{item.current_status}}</td>
         {% endblock %}
         <td class="allif-table-content-td">
            
         {% include 'allifmaalcommonapp/includes/tables/full-table-dropdown-upper-section.html' %}
 
-        {% block list-table-content-seciton-dropdown-links %}
-        <a href="" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+        {% block allif_dashboard_full_table_content_dropdown_links %}
+        <a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">New Allocation</a>
         {% endblock %}
 
         {% include 'allifmaalcommonapp/includes/tables/full-table-lower-section.html' %}
@@ -267,16 +308,172 @@
     {% include 'allifmaalcommonapp/includes/tables/full-table-last-section.html' %}
 
       </div>
+      {%endblock%}
+
+
+  
+
+    
+
+{% block allif_dashboard_half_tables %}
+<div class="allif_dashboard_spacer"></div>
+<div class="row mt-12"> <!--start....table row-->
+  <div class="row">
+    
+  <div class="col-md-6"> <!--start....table column-->
+    <div class="table-content-description">
+      {% block allif_dashboard_half_table_one_header %}
+       <a href="" class="allif-table-links"> Under Maintenance </a> 
+      {% endblock %}
+      </div>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+          {% block allif_dashboard_half_table_one_headers %}
+        <td class="allif-fix-table-col">Unit</td>
+        <td>Building</td>
+        <td>Date</td>
+       {%endblock%}
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+        
+        {% for item in half_table_one_values %} 
+        <tr data-id="{{item.id}}">
+          {% block allif_dashboard_half_table_one_content %}
+          <td class="allif-fix-table-col">
+            <a href="{% url 'allifmaalcommonapp:commonSpaceUnitDetails' item.id user_var glblslug %}" class="allif-table-links">
+            {{item.name}}
+            </a>
+           </td>
+          <td>
+            {{item.space}}
+           </td>
+        
+        
+         <td>
+          {{item.date|date:'d/m/Y'}}
+         </td>
+         {%endblock%}
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+              {% block allif_dashboard_half_table_one_content_dropdown_links %}
+              <a href="{% url 'allifmaalcommonapp:commonEditSpaceUnit' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              {%endblock%}
+             
+            </div>
+          </div>
+      
+        </td>
+
+      
+       
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+<div class="col-md-6"> <!--start....table column-->
+  <div class="table-content-description">  {% block allif_dashboard_half_table_two_header %}
+       <a href="" class="allif-table-links"> Under Construction </a> 
+      {% endblock %} </div>
+  <div class="allif-scroll-table">
+    <div class="table-responsive allif-full-table">
+    <table class="table table-layout">
+      <thead>
+        <tr class="allif-table-header-row">
+          {% block allif_dashboard_half_table_two_headers %}
+        <td class="allif-fix-table-col">Unit</td>
+        <td>Building</td>
+        <td>Date</td>
+        {%endblock%}
+       
+        <td>Navigate</td>
+        <td> . . . </td>
+        <td></td>
+        </tr>
+        </thead>
+        <tbody class="allif-table-body">
+         
+           
+        {% for item in half_table_two_values %} 
+        <tr data-id="{{item.id}}">
+          {% block allif_dashboard_half_table_two_content %}
+          <td class="allif-fix-table-col">
+            <a href="{% url 'allifmaalcommonapp:commonSpaceUnitDetails' item.id user_var glblslug %}" class="allif-table-links">
+            {{item.name}}
+            </a>
+           </td>
+          <td>
+            {{item.space}}
+           </td>
+        
+        
+         <td>
+          {{item.date|date:'d/m/Y'}}
+         </td>
+         {%endblock%}
+        <td>
+          <div class="dropdown allifmaal-content-dropdown">
+            <a href="#" onclick="showDropdown(event, this)" class="dropdown-toggle dropdown-item" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{open_link}}</a>
+            <div class="dropdown-content">
+              {% block allif_dashboard_half_table_two_content_dropdown_links %}
+              <a href="{% url 'allifmaalcommonapp:commonEditSpaceUnit' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+              {%endblock%}
+              
+            </div>
+          </div>
+       
+
+        </td>
+
+      
+       
+       <td> . . . </td>
+       <td></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+   </div>
+
+</div><!--end....table column-->
+
+</div><!--end....table row-->
+</div>
+{%endblock%}
+
    
 
-
+{% block allif_charts %}
 <div class="allif_dashboard_spacer"></div>
     <!--start of first row-->
     <div class="row mt-4" >
         <div class="col-md-4">
             <div class="card">
                 <div class="allif_dashboard_card_header card-header">
-                  Main Company Assets {{assets_tot_val|floatformat:2|intcomma}}
+                  {% block allif_header_chart_one %}
+                  Main Company Assets 
+                  <a href="{% allif_get_single_nav_link_url 'Assets' user_var glblslug %}" class="allif-table-links">
+                  
+                  {{chart_one_total|floatformat:2|intcomma}}
+                  </a>
+                  {% endblock %}
                 </div>
              
                 <div class="col-md-12">
@@ -289,14 +486,14 @@
                                       type: 'doughnut',
 
                                       data: {
-                                        labels: [{% for items in expenses %} '{{items.description|truncatewords:2}}', {% endfor %}],
+                                        labels: {% block allif_item_chart_one %} [{% for items in chart_one_values %} '{{items.name|truncatewords:2}}', {% endfor %}], {% endblock%}
 
                                           datasets: [{
                                             
                                               label: 'Current Prospects',
-                                              data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                              data: {% block allif_figure_chart_one %} [{% for items in chart_one_values %} {{items.value}}, {% endfor %}], {% endblock %}
                                               backgroundColor: [
-                                                'rgb(2, 7, 174)',
+                                                'rgb(20, 70, 174)',
                                                 'rgb(35, 150, 92)',
                                                   
                                                   'rgb(2, 7, 0)',
@@ -316,7 +513,7 @@
                                                   
                                               ],
                                               borderColor: [
-                                                'rgb(2, 7, 174)',
+                                                'rgb(2, 0, 174)',
                                                 'rgb(35, 150, 92)',
                                                   
                                                   'rgb(2, 7, 0)',
@@ -363,7 +560,12 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="allif_dashboard_card_header card-header">
-                    Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
+                    {% block allif_header_chart_two %}
+                  Main Expenses <a href="{% allif_get_single_nav_link_url 'Expenses' user_var glblslug %}" class="allif-table-links">
+                  
+                  {{chart_two_total|floatformat:2|intcomma}}
+                  </a>
+                  {% endblock %}
                 </div>
                 
                  
@@ -378,14 +580,14 @@
                                       type: 'bar',
 
                                       data: {
-                                        labels: [{% for items in expenses %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
+                                        labels: {% block allif_item_chart_two %} [{% for items in chart_two_values %} '{{items.customer.name|truncatewords:2}}', {% endfor %}], {% endblock%}
 
                                           datasets: [{
                                             
                                               label: 'Current Prospects',
-                                              data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                              data: {% block allif_figure_chart_two %} [{% for items in chart_two_values %} {{items.amount}}, {% endfor %}], {% endblock %}
                                               backgroundColor: [
-                                                'rgb(2, 7, 174)',
+                                                'rgb(20, 70, 174)',
                                                 'rgb(35, 150, 92)',
                                                   
                                                   'rgb(2, 7, 0)',
@@ -446,7 +648,12 @@
                     <div class="col-md-4">
                     <div class="card">
                     <div class="allif_dashboard_card_header card-header">
-                    Posted Invoices {{total_value_of_latest_posted_invoices|floatformat:2|intcomma}}
+                   {% block allif_header_chart_three %}
+                  Posted Invoices: <a href="{% allif_get_single_nav_link_url 'Invoices' user_var glblslug %}" class="allif-table-links">
+                  
+                  {{chart_three_total|floatformat:2|intcomma}}
+                  </a>
+                  {% endblock %}
                     </div>
                     
                         <div class="allif_graph_main_wrapper column">
@@ -457,10 +664,10 @@
                                       var chartthree = new Chart(ctx5, {
                                           type: 'pie',
                                           data: {
-                                              labels: [{% for items in expenses %} '{{items.name}}', {% endfor %}],
+                                              labels:{% block allif_item_chart_three %} [{% for items in chart_three_values %} '{{items.name}}', {% endfor %}], {% endblock %}
                                               datasets: [{
                                                   label: 'Latest Posted Invoices',
-                                                  data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                                  data: {% block allif_figure_chart_three %}[{% for items in chart_three_values %} {{items.total}}, {% endfor %}], {% endblock %}
                                                   
                                                   backgroundColor: [
                                                   'rgb(2, 7, 174,0.5)',
@@ -526,7 +733,12 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="allif_dashboard_card_header card-header">
-                  Main Company Assets {{assets_tot_val|floatformat:2|intcomma}}
+                 {% block allif_header_chart_four %}
+                  Cash Collected <a href="{% allif_get_single_nav_link_url 'CustomerPayments' user_var glblslug %}" class="allif-table-links">
+                  
+                  {{chart_four_total|floatformat:2|intcomma}}
+                  </a>
+                  {% endblock %}
                 </div>
              
                 <div class="col-md-12">
@@ -536,15 +748,15 @@
                               <script>
                                   var ctx33 = document.getElementById('chartfour').getContext('2d');
                                   var chartfour = new Chart(ctx33, {
-                                      type: 'line',
+                                      type: 'bar',
 
                                       data: {
-                                        labels: [{% for items in expenses %} '{{items.description|truncatewords:2}}', {% endfor %}],
+                                        labels: {% block allif_item_chart_four %} [{% for items in chart_four_values %} '{{items.description|truncatewords:2}}', {% endfor %}], {% endblock%}
 
                                           datasets: [{
                                             
                                               label: 'Current Prospects',
-                                              data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                              data: {% block allif_figure_chart_four %} [{% for items in chart_four_values %} {{items.amount}}, {% endfor %}], {% endblock %}
                                               backgroundColor: [
                                                 'rgb(2, 7, 174)',
                                                 'rgb(35, 150, 92)',
@@ -613,7 +825,12 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="allif_dashboard_card_header card-header">
-                    Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
+                   {% block allif_header_chart_five %}
+                  Main Debtors <a href="{% allif_get_single_nav_link_url 'Customers' user_var glblslug %}" class="allif-table-links">
+                  
+                  {{chart_five_total|floatformat:2|intcomma}}
+                  </a>
+                  {% endblock %}
                 </div>
                 
                  
@@ -625,15 +842,15 @@
                               <script>
                                   var ctx3 = document.getElementById('chartfive').getContext('2d');
                                   var chartfive = new Chart(ctx3, {
-                                      type: 'radar',
+                                      type: 'bar',
 
                                       data: {
-                                        labels: [{% for items in expenses %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
+                                        labels: {% block allif_item_chart_five %} [{% for items in chart_five_values %} '{{items.customer.name|truncatewords:2}}', {% endfor %}], {% endblock%}
 
                                           datasets: [{
                                             
                                               label: 'Current Prospects',
-                                              data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                              data: {% block allif_figure_chart_five %} [{% for items in chart_five_values %} {{items.balance}}, {% endfor %}], {% endblock %}
                                               backgroundColor: [
                                                 'rgb(2, 7, 174)',
                                                 'rgb(35, 150, 92)',
@@ -696,7 +913,12 @@
                     <div class="col-md-4">
                     <div class="card">
                     <div class="allif_dashboard_card_header card-header">
-                    Posted Invoices {{total_value_of_latest_posted_invoices|floatformat:2|intcomma}}
+                   {% block allif_header_chart_six %}
+                  Main Creditors <a href="{% allif_get_single_nav_link_url 'Suppliers' user_var glblslug %}" class="allif-table-links">
+                  
+                  {{chart_six_total|floatformat:2|intcomma}}
+                  </a>
+                  {% endblock %}
                     </div>
                     
                         <div class="allif_graph_main_wrapper column">
@@ -705,12 +927,12 @@
                                   <script>
                                       var ctx5 = document.getElementById('chartsix').getContext('2d');
                                       var chartsix = new Chart(ctx5, {
-                                          type: 'polarArea',
+                                          type: 'bar',
                                           data: {
-                                              labels: [{% for items in expenses %} '{{items.name}}', {% endfor %}],
+                                              labels: {% block allif_item_chart_six %} [{% for items in chart_six_values %} '{{items.name}}', {% endfor %}], {% endblock %}
                                               datasets: [{
                                                   label: 'Latest Posted Invoices',
-                                                  data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                                  data: {% block allif_figure_chart_six %} [{% for items in chart_six_values %} {{items.balance}}, {% endfor %}], {% endblock %}
                                                   
                                                   backgroundColor: [
                                                   'rgb(2, 7, 174,0.5)',
@@ -769,16 +991,24 @@
 
             </div>
         </div>
+        {% endblock %}
 
 
-        <div class="allif_dashboard_spacer"></div>
-               
-<div class="row mt-12" >
+  {% block allif_dashboard_small_tables_row_one %}
+    <div class="allif_dashboard_spacer"></div>
+                
+  <div class="row mt-12" >
 
           <div class="col-md-4">
           <div class="card">
           <div class="card-header allif-dashboard-card-header">
-           Prospects: <span><strong>{{quotes_total|floatformat:2|intcomma}}</strong></span>
+            {% block allif_dashboard_small_table_one_title %}
+           Top Staff: 
+           <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+                  
+            {{total_small_table_one|floatformat:2|intcomma}}
+                  </a>
+           {% endblock %}
           </div>
       
           <div class="col-md-12">
@@ -789,22 +1019,26 @@
           <table class="table table-layout">
             <thead>
               <tr class="allif-table-header-row">
-              <td>Number</td>
-              <td>Value</td>
+                {% block allif_dashboard_small_table_one_headers %}
+              <td>Staff</td>
+              <td>Ratings</td>
               <td>Date</td>
+              {% endblock %}
               </tr>
               </thead>
               <tbody class="allif-table-body">
-              {% for item in expenses1 %} 
+              {% block allif_dashboard_small_table_one_content %}
+              {% for item in small_table_one_values %} 
               <tr data-id="{{item.id}}">
-              <td><a class="allif-table-links" href="">{{item.number}}</a></td>
+              <td><a class="allif-table-links" href="">{{item.first_name}}</a></td>
               <td>
-                {{item.total|floatformat:2|intcomma}}
+                {{item.performance_counter|floatformat:2|intcomma}}
               </td>
               <td>{{item.date|date:'d/m/Y'}}</td>
         
           </tr>
           {% endfor %}
+          {% endblock %}
           
             </tbody>
           </table>
@@ -822,7 +1056,11 @@
       <div class="col-md-4">
         <div class="card">
         <div class="card-header allif-dashboard-card-header">
-          Premium Customers: <span><strong>{{customers_turnover|floatformat:2|intcomma}}</strong></span>
+          Premium Customers: 
+           <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+                  
+            {{total_small_table_two|floatformat:2|intcomma}}
+                  </a>
         </div>
     
         <div class="col-md-12">
@@ -841,7 +1079,7 @@
             <tbody class="allif-table-body">
              
             
-            {% for item in allifqueryset_customers %} 
+            {% for item in small_table_two_values %} 
             <tr data-id="{{item.id}}">
             <td><a class="allif-table-links" href="">{{item.name}}</a></td>
            
@@ -868,7 +1106,10 @@
     <div class="col-md-4">
         <div class="card">
         <div class="card-header allif-dashboard-card-header">
-          Premium Suppliers: <span> <strong>{{suppliers_turnover|floatformat:2|intcomma}}</strong></span>
+          Premium Suppliers: <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+                  
+            {{total_small_table_three|floatformat:2|intcomma}}
+                  </a>
         </div>
      
         <div class="col-md-12">
@@ -889,7 +1130,7 @@
             <tbody class="allif-table-body">
              
             
-            {% for item in allifqueryset_suppliers %} 
+            {% for item in small_table_three_values %} 
             <tr data-id="{{item.id}}">
             <td><a class="allif-table-links" href="">{{item.name}}</a></td>
            
@@ -913,17 +1154,20 @@
     </div>
     
       </div>
+      {%endblock%}
       
       <!--end of first row-->
-      
-      <!--start of second row-->
+      {% block allif_dashboard_tables_two %}
      <div class="allif_dashboard_spacer"></div>
        <!--start of first row-->
        <div class="row mt-12" >
         <div class="col-md-4">
             <div class="card">
             <div class="card-header allif-dashboard-card-header">
-              Premium Stock Items <span>: <strong>{{gold_items_value|floatformat:2|intcomma}}</strong></span> 
+              Premium Stock Items : <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+                  
+            {{total_small_table_four|floatformat:2|intcomma}}
+                  </a>
             </div>
          
             <div class="col-md-12">
@@ -944,7 +1188,7 @@
                 <tbody class="allif-table-body">
                  
                 
-                {% for item in gold_items %} 
+                {% for item in small_table_four_values %} 
                 <tr data-id="{{item.id}}">
                 <td><a class="allif-table-links" href="">{{item.description}}</a></td>
                
@@ -972,7 +1216,10 @@
         <div class="col-md-4">
             <div class="card">
             <div class="card-header allif-dashboard-card-header">
-              Top Debtors <span>: <strong>{{customers_balances|floatformat:2|intcomma}}</strong></span>
+              Top Items Stockouts : <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+                  
+            {{total_small_table_five|floatformat:2|intcomma}}
+                  </a>
             </div>
         
             <div class="col-md-12">
@@ -993,7 +1240,7 @@
                 <tbody class="allif-table-body">
                  
                 
-                {% for item in allifqueryset_debtors %} 
+                {% for item in small_table_five_values %} 
                 <tr data-id="{{item.id}}">
                 <td><a class="allif-table-links" href="">{{item.name}}</a></td>
                   
@@ -1019,7 +1266,10 @@
         <div class="col-md-4">
             <div class="card">
             <div class="card-header allif-dashboard-card-header">
-              Top Creditors <span>: <strong>{{suppliers_balances|floatformat:2|intcomma}}</strong></span>
+              Prospects  <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+                  
+            {{total_small_table_six|floatformat:2|intcomma}}
+                  </a>
             </div>
         
             <div class="col-md-12">
@@ -1040,7 +1290,7 @@
                 <tbody class="allif-table-body">
                  
                 
-                {% for item in allifqueryset_creditors %} 
+                {% for item in small_table_six_values %} 
                 <tr data-id="{{item.id}}">
                 <td><a class="allif-table-links" href="">{{item.name}}</a></td>
                
@@ -1065,7 +1315,9 @@
         
       </div>
       
-           
+           {% endblock %}
+
+
     
 </div><!--end of main container of the page-->
 

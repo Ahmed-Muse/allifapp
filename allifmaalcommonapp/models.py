@@ -298,7 +298,7 @@ class CommonBaseModel(models.Model):
     #If your uniqueId is intended to be a UUID, consider switching its type to models.UUIDField.
     uuid=models.UUIDField(default=uuid.uuid4, editable=False, unique=True, db_index=True,null=True,blank=True)
     reference=models.CharField(max_length=100, default='reference',blank=True, null=True, db_index=True, help_text="An optional identifier from an external system or an internal reference code.")
-    
+    ratings=models.DecimalField(max_digits=30,decimal_places=2,blank=True,null=True,default=0.00)
     # Assign the custom manager as the default manager
     #objects = ActiveManager(): This is the most crucial change. It makes ActiveManager the default manager for CommonBaseModel and all models that inherit from it.
     #objects = ActiveManager() 
@@ -437,6 +437,21 @@ class CommonCodesModel(CommonBaseModel):
     def __str__(self):
         return f"{self.code}: {self.name}:"
 
+###################3 comon codes ##############
+class CommonStaffCategoriesModel(CommonBaseModel):
+    """
+    this defines the codes used by various entities.....
+    sales...codes of various items...
+    healthcare...codes of various places, items, staff, wards, rooms, equipment etc
+    logistics...codes of airports, cities, items, passengers etc..
+    realestates...codes of properties, places, items, equipment etc
+    education... codes of places, items, machines, equipment, student registeration numbers etc.
+    
+    """
+   
+    def __str__(self):
+        return str(self.name)
+
 # #################3 HRM ################    
 class CommonEmployeesModel(CommonBaseModel):
     
@@ -456,6 +471,8 @@ class CommonEmployeesModel(CommonBaseModel):
     sysperms=models.CharField(choices=rights, blank=True, null=True,max_length=30,default="staff")
     
     stffslug=models.SlugField(max_length=100, unique=True, blank=True, null=True)
+    staff_cat=models.ForeignKey(CommonStaffCategoriesModel,null=True,blank=True, related_name='prof_staff_cats',on_delete=models.SET_NULL) # Users in this group
+   
     
     def __str__(self):
         return str(self.firstName)

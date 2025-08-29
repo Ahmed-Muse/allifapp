@@ -10,10 +10,11 @@ from django.db.models import Q
 from xhtml2pdf import pisa
 from django.utils import timezone
 from django.shortcuts import render
+from django.db.models import Count,Min,Max,Avg,Sum,Q
 from .forms import *
 from django.db.models import Q
 from allifmaalcommonapp.utils import allif_filtered_and_sorted_queryset # Import the new helper function
-from allifmaalcommonapp.models import CommonDocsFormatModel
+from allifmaalcommonapp.models import CommonDocsFormatModel,CommonAssetsModel,CommonInvoicesModel,CommonCustomerPaymentsModel
 from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,allif_common_detail_view,allif_main_models_registry,allif_delete_hanlder,allif_common_form_submission_and_save,
 allif_common_form_edit_and_save,allif_redirect_based_on_sector,allif_delete_confirm,allif_excel_upload_handler,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler)
 # ... (existing imports) ...
@@ -26,21 +27,86 @@ def shaafiHome(request,*allifargs,**allifkwargs):
     title=f"Home : {sector} " +''+ str(company)
     
     try:
+        value_card_one=CommonTransactionsModel.objects.filter(status='Waiting').count()
+        value_card_two=TriagesModel.objects.all().filter(status='active').count()
+        value_card_three=AdmissionsModel.objects.all().filter(status='active').count()
+        value_card_four=CommonEmployeesModel.objects.all().filter(staff_cat__name='Doctor').count()
+        value_card_five=CommonEmployeesModel.objects.all().filter(staff_cat__name='Nurse').count()
+        
+        full_table_values=CommonTransactionsModel.objects.filter(status='Emergency')
+        half_table_one_values=CommonCustomersModel.objects.filter(triaged=False).order_by('-name','-date')[:10]
+        half_table_two_values=CommonCustomersModel.objects.filter(seen=False).order_by('-name','-date')[:10]
+        
+        
+        
+        
+        chart_one_values=CommonAssetsModel.objects.all().order_by('-value','-date')[:10]
+        chart_two_values=CommonExpensesModel.objects.all().order_by('-amount','-date')[:10]
+        chart_three_values=CommonInvoicesModel.objects.filter(posting_inv_status='posted').order_by('-total','-date')[:10]
+        chart_four_values=CommonCustomerPaymentsModel.objects.all().order_by('-amount','-date')[:10]
+        chart_five_values=CommonCustomersModel.objects.filter(balance__gte=1).order_by('-balance','-date')[:10]
+        chart_six_values=CommonSuppliersModel.objects.filter(balance__gte=1).order_by('-balance','-date')[:10]
+        
+        chart_one_total=CommonAssetsModel.objects.all().order_by('-value').aggregate(Sum('value'))['value__sum']
+        chart_two_total=CommonExpensesModel.objects.all().order_by('-amount').aggregate(Sum('amount'))['amount__sum']
+        chart_three_total=CommonInvoicesModel.objects.all().order_by('-total').aggregate(Sum('total'))['total__sum']
+        chart_four_total=CommonCustomerPaymentsModel.objects.all().order_by('-amount').aggregate(Sum('amount'))['amount__sum']
+        chart_five_total=CommonCustomersModel.objects.all().order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+        chart_six_total=CommonSuppliersModel.objects.all().order_by('-balance').aggregate(Sum('balance'))['balance__sum']
+       
+        
+        expenses=CommonExpensesModel.objects.all()  
+        
+        
+        
+        user_var=request.user
+       
+        user_role=user_var.allifmaal_admin
+        user_is_supper=request.user.is_superuser
+        user_is_supper=request.user.is_superuser
+        user_company=request.user.company
+        spaces=CommonSpacesModel.objects.all().count()
+        space_units=CommonSpaceUnitsModel.objects.all().count()
+        
+      
+       
+        
         user_is_supper=request.user.is_superuser
         allif_data=common_shared_data(request)
         user_company=request.user.company
         expenses=CommonExpensesModel.objects.all()
-        card_one_numner=CommonCustomersModel.objects.all().filter(status='active').count()
-        spaces=CommonSpacesModel.objects.all().count()
-        space_units=CommonSpaceUnitsModel.objects.all().count()
+        
+       
         if allif_data.get("logged_in_user_profile") is not None:
             context={"title":title,"user_is_supper":user_is_supper,
                      "user_var":request.user,
                      "user_company":user_company,
-                     "spaces":spaces,
-                     "space_units":space_units,
+                     
+                    
                      "expenses":expenses,
-                     "card_one_numner":card_one_numner,}
+                        "value_card_one":value_card_one,
+                        "value_card_two":value_card_two,
+                        "value_card_three":value_card_three,
+                        "value_card_four":value_card_four,
+                        "value_card_five":value_card_five,
+                        "full_table_values":full_table_values,
+                        "half_table_one_values":half_table_one_values,
+                        "half_table_two_values":half_table_two_values,
+                        "chart_one_values":chart_one_values,
+                        "chart_two_values":chart_two_values,
+                        "chart_three_values":chart_three_values,
+                        "chart_four_values":chart_four_values,
+                        "chart_five_values":chart_five_values,
+                        "chart_six_values":chart_six_values,
+                        "chart_one_total":chart_one_total,
+                        "chart_two_total":chart_two_total,
+                        "chart_three_total":chart_three_total,
+                        "chart_four_total":chart_four_total,
+                        "chart_five_total":chart_five_total,
+                        "chart_six_total":chart_six_total,
+                       
+                     
+                     }
             return render(request,"allifmaalshaafiapp/home/home.html",context)
         else:
             return redirect('allifmaalcommonapp:commonAddStaffProfile',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))

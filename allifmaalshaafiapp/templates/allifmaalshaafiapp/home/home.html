@@ -1,13 +1,143 @@
 {% extends 'allifmaalcommonapp/base/dashboard/dashboard.html'%}
 {% load allif_navigation_tags %}
+{% load humanize %}
 
 {% block allif_info_card_one %}
-<div class="allif-info-card-heading">Waiting</div>
+<div class="allif-info-card-heading">Waiting Patients</div>
 <div class="d-flex align-items-center">
     <i class="bi bi-person text-primary fs-2 me-3"></i>
     <div>
-    <a href="{% allif_get_single_nav_link_url 'Customers' user_var glblslug %}">{{card_one_numner}}</a>
+    <a href="{% allif_get_single_nav_link_url 'Customers' user_var glblslug %}">{{value_card_one}}</a>
         
     </div>
 </div>
 {%endblock%}
+
+{% block allif_info_card_two %}
+<div class="allif-info-card-heading">Triage</div>
+<div class="d-flex align-items-center">
+    <i class="bi bi-heart-pulse text-danger fs-2 me-3"></i>
+    <div>
+        
+        <a href="{% allif_get_single_nav_link_url 'triagedata' user_var glblslug %}">{{value_card_two}}</a>
+    </div>
+</div>
+{%endblock%}
+
+{% block allif_info_card_three %}
+<div class="allif-info-card-heading">Admissions</div>
+<div class="d-flex align-items-center">
+    <i class="bi bi-hospital text-danger fs-2 me-3"></i>
+    <div>
+        
+        <a href="{% allif_get_single_nav_link_url 'Admissions' user_var glblslug %}">{{value_card_three}}</a>
+    </div>
+</div>
+{%endblock%}
+
+
+{% block allif_info_card_four %}
+<div class="allif-info-card-heading">Available Doctors</div>
+<div class="d-flex align-items-center">
+    <i class="bi bi-person-heart text-danger fs-2 me-3"></i>
+    <div>
+        
+        <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}">{{value_card_four}}</a>
+    </div>
+</div>
+{%endblock%}
+
+{% block allif_info_card_five %}
+<div class="allif-info-card-heading">Emergencies</div>
+<div class="d-flex align-items-center">
+    <i class="bi bi-person-heart text-danger fs-2 me-3"></i>
+    <div>
+        
+        <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}">{{value_card_five}}</a>
+    </div>
+</div>
+{%endblock%}
+
+{% block allif_dashboard_full_table_main_header %}
+Emergencies
+{% endblock %}
+
+{% block allif_dashboard_full_table_headers %}
+<td class="allif-fix-table-col">UID </td>
+<td class="allif-table-header-td">Name</td>
+<td class="allif-table-header-td"> Date </td>
+<td class="allif-table-header-td"> Status</td>
+{% endblock %}
+
+{% block allif_dashboard_full_table_content %}
+<td class="allif-fix-table-col">{% block list-table-content-seciton-links %}<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransactionDetails' item.id user_var glblslug %}"> {{item.number}} </a>{%endblock%}</td>
+<td class="allif-table-content-td"> {{item.customer}}<span class="badge bg-danger">Emergency</span> </td>
+<td class="allif-table-content-td"> {{item.date|date:'d/m/Y'}}</td>
+<td class="allif-table-content-td"> {{item.status}}</td>
+{% endblock %}
+
+{% block allif_dashboard_full_table_content_dropdown_links %}
+<a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Transactions</a>
+<a href="{% allif_get_single_nav_link_url 'Transactions' user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Do Checkup</a>
+{% endblock %}
+
+{% block allif_dashboard_half_table_one_header %}
+<a href="" class="allif-table-links">Waiting for Triage</a> 
+{% endblock %}
+     
+{% block allif_dashboard_half_table_one_headers %}
+<td class="allif-fix-table-col">Name</td>
+<td>Age</td>
+<td>Date</td>
+{%endblock%}
+       
+{% block allif_dashboard_half_table_one_content %}
+<td class="allif-fix-table-col">
+<a href="{% url 'allifmaalcommonapp:commonEditCustomer' item.id user_var glblslug %}" class="allif-table-links">
+{{item.name}}
+</a>
+</td>
+<td>
+{{item.age}}
+</td>
+
+<td>
+{{item.date|date:'d/m/Y'}}
+</td>
+{%endblock%}
+        
+{% block allif_dashboard_half_table_one_content_dropdown_links %}
+<a href="{% url 'allifmaalcommonapp:commonEditCustomer' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Change Status</a>
+{%endblock%}
+
+
+{% block allif_dashboard_half_table_two_header %}
+<a href="" class="allif-table-links">Waiting for Doctor</a> 
+{% endblock %}
+     
+{% block allif_dashboard_half_table_two_headers %}
+<td class="allif-fix-table-col">Name</td>
+<td>Age</td>
+<td>Date</td>
+{%endblock%}
+       
+       
+{% block allif_dashboard_half_table_two_content %}
+<td class="allif-fix-table-col">
+<a href="{% url 'allifmaalcommonapp:commonEditCustomer' item.id user_var glblslug %}" class="allif-table-links">
+{{item.name}}
+</a>
+</td>
+<td>
+{{item.age}}
+</td>
+
+<td>
+{{item.date|date:'d/m/Y'}}
+</td>
+{%endblock%}
+       
+{% block allif_dashboard_half_table_two_content_dropdown_links %}
+<a href="{% url 'allifmaalcommonapp:commonEditCustomer' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Change Status</a>
+{%endblock%}
+         

@@ -112,6 +112,24 @@ allif_model_sort_configs = {
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
      
+      'commonstaffcategoriesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     
+     
+     
+     
+     
      'commonbanksmodel': { # Key should be consistent, e.g., model._meta.model_name
         'sort_mapping': {
             "Name Ascending": "name",
@@ -606,6 +624,8 @@ allif_search_config_mapping = {
     'CommonCurrenciesModel': ['name__icontains', 'description__icontains'],
     'CommonCategoriesModel': ['name__icontains', 'description__icontains'],
     'CommonCodesModel': ['name__icontains', 'description__icontains'],
+    'CommonStaffCategoriesModel': ['name__icontains', 'description__icontains'],
+    
     'CommonChartofAccountsModel': ['name__icontains', 'description__icontains'],
     'CommonBanksModel': ['name__icontains', 'description__icontains','balance__icontains'],
     
@@ -1262,7 +1282,7 @@ allif_main_models_registry = {
     "ReferralsModel":ReferralsModel,
     "CommonResultsModel":CommonResultsModel,
     "CommonAssessmentsModel":CommonAssessmentsModel,
-     
+     "CommonStaffCategoriesModel":CommonStaffCategoriesModel,
      
      
      

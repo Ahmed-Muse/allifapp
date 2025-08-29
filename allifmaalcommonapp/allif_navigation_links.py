@@ -100,6 +100,9 @@ allif_single_access_general_links = [
     {'name': 'Codes', 'url_name': 'allifmaalcommonapp:commonCodes'},
     {'name': 'AddCode', 'url_name': 'allifmaalcommonapp:commonAddCode'},
     
+    {'name': 'StaffCats', 'url_name': 'allifmaalcommonapp:commonStaffCats'},
+    {'name': 'AddStaffCat', 'url_name': 'allifmaalcommonapp:commonAddStaffCat'},
+    
     {'name': 'CompanyScopes', 'url_name': 'allifmaalcommonapp:commonCompanyScopes'},
     {'name': 'AddScope', 'url_name': 'allifmaalcommonapp:commonAddCompanyScope'},
     

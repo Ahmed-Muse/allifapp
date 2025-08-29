@@ -1,0 +1,18 @@
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+ {% block add-form-header-block %}
+  <a href="{% allif_get_single_nav_link_url 'StaffCats' user_var glblslug %}">Staff Categories</a>
+  <a href="{% allif_get_single_nav_link_url 'AddStaffCat' user_var glblslug %}">Add New Staff Category</a>
+  {% endblock %}
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'StaffCats' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delete {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.commonWantToDeleteStaffCat.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    {% endblock %}

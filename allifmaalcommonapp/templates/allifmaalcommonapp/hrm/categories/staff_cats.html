@@ -1,0 +1,20 @@
+{% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+{% load allif_navigation_tags %}
+{% block allif-basic-search-action %}
+{% url 'allifmaalcommonapp:commonStaffCatSearch' user_var glblslug %}
+{% endblock %}
+{% block advanced-search %}{%endblock%}
+{% block upload-excel-file %}{%endblock%}
+{% block allif-header-links %}
+<a href="{% allif_get_single_nav_link_url 'StaffCats' user_var glblslug %}">Staff Categories</a>
+<a href="{% allif_get_single_nav_link_url 'AddStaffCat' user_var glblslug %}">Add Staff Category</a>
+{% endblock %}
+{% block list-table-content-seciton-links %}
+<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStaffCatDetails' item.id user_var glblslug %}"> {{item.name}}</a>
+
+{% endblock %}
+{% block list-table-content-seciton-dropdown-links %}
+<a href="{% url 'allifmaalcommonapp:commonEditStaffCat' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+{% endblock %}
+  
+  

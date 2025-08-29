@@ -148,6 +148,16 @@ path('Delete/Code/s/Details/prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/prmn
 path('Main/Code/s/Details/Information/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonCodeDetails, name="commonCodeDetails"),
 path('Want/To/Delete/Selected/Code/4/ever/prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteCode, name="commonWantToDeleteCode"),
 path('Common/Code/s/s/Search/Find/By/Searching/<str:allifusr>/<str:allifslug>/', views.commonCodeSearch, name="commonCodeSearch"),
+
+
+######################## staff categories...#########3
+path('Staff/Employees/Categorie/s/<str:allifusr>/<str:allifslug>/List/', views.commonStaffCats, name="commonStaffCats"),
+path('Add/New/Staff/Employee/Category/<str:allifusr>/<str:allifslug>/List/', views.commonAddStaffCat, name="commonAddStaffCat"),
+path('Edit/Staff/Employee/s/Category/s/<str:pk>/<str:allifusr>/<str:allifslug>/Details/', views.commonEditStaffCat, name="commonEditStaffCat"),
+path('Delete/Staff/Employee/s/Category/Details/prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/prmntly/', views.commonDeleteStaffCat, name="commonDeleteStaffCat"),
+path('Employee/staff/Category/Details/Inf/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonStaffCatDetails, name="commonStaffCatDetails"),
+path('Want/To/Delete/Selected/Staff/Employee/Category/4/ever/prmntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonWantToDeleteStaffCat, name="commonWantToDeleteStaffCat"),
+path('Search/Find/Staff/Employee/Category/<str:allifusr>/<str:allifslug>/', views.commonStaffCatSearch, name="commonStaffCatSearch"),
  
 ############################ HRM ##################################3
 path('HRM/<str:allifusr>/<str:allifslug>/', views.commonhrm, name="commonhrm"),
