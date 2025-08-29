@@ -14,7 +14,7 @@ from django.db.models import Count,Min,Max,Avg,Sum,Q
 from .forms import *
 from django.db.models import Q
 from allifmaalcommonapp.utils import allif_filtered_and_sorted_queryset # Import the new helper function
-from allifmaalcommonapp.models import CommonDocsFormatModel,CommonAssetsModel,CommonInvoicesModel,CommonCustomerPaymentsModel
+from allifmaalcommonapp.models import CommonDocsFormatModel,CommonQuotesModel,CommonAssetsModel,CommonInvoicesModel,CommonCustomerPaymentsModel
 from allifmaalcommonapp.utils import  (allif_filtered_and_sorted_queryset,allif_common_detail_view,allif_main_models_registry,allif_delete_hanlder,allif_common_form_submission_and_save,
 allif_common_form_edit_and_save,allif_redirect_based_on_sector,allif_delete_confirm,allif_excel_upload_handler,allif_search_handler, allif_advance_search_handler,allif_document_pdf_handler)
 # ... (existing imports) ...
@@ -54,6 +54,22 @@ def shaafiHome(request,*allifargs,**allifkwargs):
         chart_five_total=CommonCustomersModel.objects.all().order_by('-balance').aggregate(Sum('balance'))['balance__sum']
         chart_six_total=CommonSuppliersModel.objects.all().order_by('-balance').aggregate(Sum('balance'))['balance__sum']
        
+        
+        small_table_one_values=User.objects.filter(company=request.user.company,performance_counter__gte=0).order_by('-performance_counter')[:10]
+        small_table_two_values=CommonCustomersModel.objects.all().order_by('-turnover')[:10]
+        small_table_three_values=CommonSuppliersModel.objects.all().order_by('-turnover')[:10]
+        
+        small_table_four_values=CommonStocksModel.objects.all().order_by('-ratings')[:10]
+        small_table_five_values=CommonStocksModel.objects.filter(quantity=0,ratings__gte=0).order_by('-ratings')[:10]
+        small_table_six_values=CommonQuotesModel.objects.filter(prospect='Likely').order_by('-total')[:10]
+        
+        total_small_table_one=User.objects.filter(company=request.user.company,performance_counter__gte=2).count()
+        total_small_table_two=CommonCustomersModel.objects.all().order_by('-turnover').aggregate(Sum('turnover'))['turnover__sum']
+        total_small_table_three=CommonSuppliersModel.objects.all().order_by('-turnover').aggregate(Sum('turnover'))['turnover__sum']
+        total_small_table_four=CommonStocksModel.objects.all().order_by('-ratings').aggregate(Sum('ratings'))['ratings__sum']
+        total_small_table_five=CommonStocksModel.objects.filter(quantity=0,ratings__gte=0).order_by('-ratings').aggregate(Sum('ratings'))['ratings__sum']
+        total_small_table_six=CommonQuotesModel.objects.filter(prospect='Likely').order_by('-total').aggregate(Sum('total'))['total__sum']
+        
         
         expenses=CommonExpensesModel.objects.all()  
         
@@ -104,6 +120,18 @@ def shaafiHome(request,*allifargs,**allifkwargs):
                         "chart_four_total":chart_four_total,
                         "chart_five_total":chart_five_total,
                         "chart_six_total":chart_six_total,
+                        "small_table_one_values":small_table_one_values,
+                        "small_table_two_values":small_table_two_values,
+                        "small_table_three_values":small_table_three_values,
+                        "small_table_four_values":small_table_four_values,
+                        "small_table_five_values":small_table_five_values,
+                        "small_table_six_values":small_table_six_values,
+                        "total_small_table_one":total_small_table_one,
+                        "total_small_table_two":total_small_table_two,
+                        "total_small_table_three":total_small_table_three,
+                        "total_small_table_four":total_small_table_four,
+                        "total_small_table_five":total_small_table_five,
+                        "total_small_table_six":total_small_table_six,
                        
                      
                      }

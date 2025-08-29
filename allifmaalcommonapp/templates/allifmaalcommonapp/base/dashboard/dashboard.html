@@ -1020,9 +1020,10 @@
             <thead>
               <tr class="allif-table-header-row">
                 {% block allif_dashboard_small_table_one_headers %}
-              <td>Staff</td>
-              <td>Ratings</td>
-              <td>Date</td>
+             
+              <td class="allif-table-header-td"> Staff</td>
+            <td class="allif-table-header-td">Ratings </td>
+          
               {% endblock %}
               </tr>
               </thead>
@@ -1030,12 +1031,10 @@
               {% block allif_dashboard_small_table_one_content %}
               {% for item in small_table_one_values %} 
               <tr data-id="{{item.id}}">
-              <td><a class="allif-table-links" href="">{{item.first_name}}</a></td>
-              <td>
-                {{item.performance_counter|floatformat:2|intcomma}}
+              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.first_name}}</a></td>
+              <td class="allif-table-content-td">{{item.performance_counter|floatformat:2|intcomma}}
               </td>
-              <td>{{item.date|date:'d/m/Y'}}</td>
-        
+            
           </tr>
           {% endfor %}
           {% endblock %}
@@ -1071,24 +1070,26 @@
         <div class="table-responsive allif-full-table">
         <table class="table table-layout">
           <thead>
-            <tr class="allif-table-header-row">
-            <td>Customers</td>
-            <td>Turnover</td>
-            </tr>
-            </thead>
-            <tbody class="allif-table-body">
+           <tr class="allif-table-header-row">
+                {% block allif_dashboard_small_table_two_headers %}
              
+              <td class="allif-table-header-td"> Customer</td>
+            <td class="allif-table-header-td">Turnover </td>
+          
+              {% endblock %}
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+              {% block allif_dashboard_small_table_two_content %}
+              {% for item in small_table_two_values %} 
+              <tr data-id="{{item.id}}">
+              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td class="allif-table-content-td">{{item.turnover|floatformat:2|intcomma}}
+              </td>
             
-            {% for item in small_table_two_values %} 
-            <tr data-id="{{item.id}}">
-            <td><a class="allif-table-links" href="">{{item.name}}</a></td>
-           
-            <td>
-              {{item.turnover|floatformat:2|intcomma}}
-            </td>
-        </tr>
-        {% endfor %}
-        
+          </tr>
+          {% endfor %}
+          {% endblock %}
           </tbody>
         </table>
         </div>
@@ -1120,26 +1121,26 @@
         <div class="table-responsive allif-full-table">
         <table class="table table-layout">
           <thead>
-            <tr class="allif-table-header-row">
-            <td>Suppliers</td>
-           
-            <td>Turnover</td>
-        
-            </tr>
-            </thead>
-            <tbody class="allif-table-body">
+           <tr class="allif-table-header-row">
+                {% block allif_dashboard_small_table_three_headers %}
              
+              <td class="allif-table-header-td">Supplier</td>
+            <td class="allif-table-header-td">Turnover  </td>
+          
+              {% endblock %}
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+              {% block allif_dashboard_small_table_three_content %}
+              {% for item in small_table_three_values %} 
+              <tr data-id="{{item.id}}">
+              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td class="allif-table-content-td">{{item.turnover|floatformat:2|intcomma}}
+              </td>
             
-            {% for item in small_table_three_values %} 
-            <tr data-id="{{item.id}}">
-            <td><a class="allif-table-links" href="">{{item.name}}</a></td>
-           
-            <td>
-              {{item.turnover|floatformat:2|intcomma}}
-            </td>
-        </tr>
-        {% endfor %}
-        
+          </tr>
+          {% endfor %}
+          {% endblock %}
           </tbody>
         </table>
         </div>
@@ -1178,27 +1179,26 @@
             <div class="table-responsive allif-full-table">
             <table class="table table-layout">
               <thead>
-                <tr class="allif-table-header-row">
-                <td>Item</td>
-               
-                <td>Sold Units</td>
+               <tr class="allif-table-header-row">
+                {% block allif_dashboard_small_table_four_headers %}
+             
+              <td class="allif-table-header-td"> Item</td>
+            <td class="allif-table-header-td">Ratings </td>
+          
+              {% endblock %}
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+              {% block allif_dashboard_small_table_four_content %}
+              {% for item in small_table_four_values %} 
+              <tr data-id="{{item.id}}">
+              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td class="allif-table-content-td">{{item.ratings|floatformat:2|intcomma}}
+              </td>
             
-                </tr>
-                </thead>
-                <tbody class="allif-table-body">
-                 
-                
-                {% for item in small_table_four_values %} 
-                <tr data-id="{{item.id}}">
-                <td><a class="allif-table-links" href="">{{item.description}}</a></td>
-               
-               
-            <td>
-              {{item.total_units_sold|floatformat:2|intcomma}}
-            </td>
-            </tr>
-            {% endfor %}
-            
+          </tr>
+          {% endfor %}
+          {% endblock %}
               </tbody>
             </table>
             </div>
@@ -1230,26 +1230,26 @@
             <div class="table-responsive allif-full-table">
             <table class="table table-layout">
               <thead>
-                <tr class="allif-table-header-row">
-                <td>Customer</td>
-               
-                <td>Balance</td>
+              <tr class="allif-table-header-row">
+                {% block allif_dashboard_small_table_five_headers %}
+             
+              <td class="allif-table-header-td"> Item</td>
+            <td class="allif-table-header-td">Ratings </td>
+          
+              {% endblock %}
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+              {% block allif_dashboard_small_table_five_content %}
+              {% for item in small_table_five_values %} 
+              <tr data-id="{{item.id}}">
+              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td class="allif-table-content-td">{{item.ratings|floatformat:2|intcomma}}
+              </td>
             
-                </tr>
-                </thead>
-                <tbody class="allif-table-body">
-                 
-                
-                {% for item in small_table_five_values %} 
-                <tr data-id="{{item.id}}">
-                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
-                  
-            <td>
-              {{item.balance|floatformat:2|intcomma}}
-            </td>
-            </tr>
-            {% endfor %}
-            
+          </tr>
+          {% endfor %}
+          {% endblock %}
               </tbody>
             </table>
             </div>
@@ -1280,26 +1280,26 @@
             <div class="table-responsive allif-full-table">
             <table class="table table-layout">
               <thead>
-                <tr class="allif-table-header-row">
-                <td>Supplier</td>
-               
-                <td>Balance</td>
+               <tr class="allif-table-header-row">
+                {% block allif_dashboard_small_table_six_headers %}
              
-                </tr>
-                </thead>
-                <tbody class="allif-table-body">
-                 
-                
-                {% for item in small_table_six_values %} 
-                <tr data-id="{{item.id}}">
-                <td><a class="allif-table-links" href="">{{item.name}}</a></td>
-               
-                <td>
-              {{item.balance|floatformat:2|intcomma}}
-            </td>
-            </tr>
-            {% endfor %}
+              <td class="allif-table-header-td">Number</td>
+            <td class="allif-table-header-td">Value </td>
+          
+              {% endblock %}
+              </tr>
+              </thead>
+              <tbody class="allif-table-body">
+              {% block allif_dashboard_small_table_six_content %}
+              {% for item in small_table_six_values %} 
+              <tr data-id="{{item.id}}">
+              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.number}}</a></td>
+              <td class="allif-table-content-td">{{item.total|floatformat:2|intcomma}}
+              </td>
             
+          </tr>
+          {% endfor %}
+          {% endblock %}
               </tbody>
             </table>
             </div>
