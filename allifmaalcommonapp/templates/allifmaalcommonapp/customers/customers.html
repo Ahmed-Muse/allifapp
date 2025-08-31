@@ -28,7 +28,7 @@
   <td class="allif-table-header-td">Date </td>
   {% endblock %}
 
-    
+ 
   {% block list-table-content-seciton %}
   <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.id user_var glblslug %}"> {{item.name}} </a>{%endblock%}</td>
   <td class="allif-table-content-td"> {{item.phone}} </td>

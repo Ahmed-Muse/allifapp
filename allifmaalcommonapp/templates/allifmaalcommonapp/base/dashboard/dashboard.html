@@ -1011,6 +1011,11 @@
            {% endblock %}
           </div>
       
+           
+        
+    
+
+
           <div class="col-md-12">
           <div class="column allif-dashboard-card-body">
           
@@ -1031,7 +1036,7 @@
               {% block allif_dashboard_small_table_one_content %}
               {% for item in small_table_one_values %} 
               <tr data-id="{{item.id}}">
-              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.first_name}}</a></td>
+              <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonUserDetails' item.id user_var glblslug %}">{{item.first_name}}</a></td>
               <td class="allif-table-content-td">{{item.performance_counter|floatformat:2|intcomma}}
               </td>
             
@@ -1056,7 +1061,7 @@
         <div class="card">
         <div class="card-header allif-dashboard-card-header">
           Premium Customers: 
-           <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+           <a href="{% allif_get_single_nav_link_url 'Customers' user_var glblslug %}" class="allif-table-links">
                   
             {{total_small_table_two|floatformat:2|intcomma}}
                   </a>
@@ -1083,7 +1088,7 @@
               {% block allif_dashboard_small_table_two_content %}
               {% for item in small_table_two_values %} 
               <tr data-id="{{item.id}}">
-              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonCustomerDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
               <td class="allif-table-content-td">{{item.turnover|floatformat:2|intcomma}}
               </td>
             
@@ -1107,7 +1112,7 @@
     <div class="col-md-4">
         <div class="card">
         <div class="card-header allif-dashboard-card-header">
-          Premium Suppliers: <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+          Premium Suppliers: <a href="{% allif_get_single_nav_link_url 'Suppliers' user_var glblslug %}" class="allif-table-links">
                   
             {{total_small_table_three|floatformat:2|intcomma}}
                   </a>
@@ -1134,7 +1139,7 @@
               {% block allif_dashboard_small_table_three_content %}
               {% for item in small_table_three_values %} 
               <tr data-id="{{item.id}}">
-              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSupplierDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
               <td class="allif-table-content-td">{{item.turnover|floatformat:2|intcomma}}
               </td>
             
@@ -1165,7 +1170,7 @@
         <div class="col-md-4">
             <div class="card">
             <div class="card-header allif-dashboard-card-header">
-              Premium Stock Items : <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+              Premium Stock Items : <a href="{% allif_get_single_nav_link_url 'Stocks' user_var glblslug %}" class="allif-table-links">
                   
             {{total_small_table_four|floatformat:2|intcomma}}
                   </a>
@@ -1192,7 +1197,7 @@
               {% block allif_dashboard_small_table_four_content %}
               {% for item in small_table_four_values %} 
               <tr data-id="{{item.id}}">
-              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
               <td class="allif-table-content-td">{{item.ratings|floatformat:2|intcomma}}
               </td>
             
@@ -1216,7 +1221,7 @@
         <div class="col-md-4">
             <div class="card">
             <div class="card-header allif-dashboard-card-header">
-              Top Items Stockouts : <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+              Top Items Stockouts : <a href="{% allif_get_single_nav_link_url 'Stocks' user_var glblslug %}" class="allif-table-links">
                   
             {{total_small_table_five|floatformat:2|intcomma}}
                   </a>
@@ -1243,7 +1248,7 @@
               {% block allif_dashboard_small_table_five_content %}
               {% for item in small_table_five_values %} 
               <tr data-id="{{item.id}}">
-              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.name}}</a></td>
+              <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonStockItemDetails' item.id user_var glblslug %}">{{item.name}}</a></td>
               <td class="allif-table-content-td">{{item.ratings|floatformat:2|intcomma}}
               </td>
             
@@ -1266,7 +1271,7 @@
         <div class="col-md-4">
             <div class="card">
             <div class="card-header allif-dashboard-card-header">
-              Prospects  <a href="{% allif_get_single_nav_link_url 'HRM' user_var glblslug %}" class="allif-table-links">
+              Prospects  <a href="{% allif_get_single_nav_link_url 'Quotes' user_var glblslug %}" class="allif-table-links">
                   
             {{total_small_table_six|floatformat:2|intcomma}}
                   </a>
@@ -1293,7 +1298,7 @@
               {% block allif_dashboard_small_table_six_content %}
               {% for item in small_table_six_values %} 
               <tr data-id="{{item.id}}">
-              <td class="allif-table-content-td"><a class="allif-table-links" href="">{{item.number}}</a></td>
+              <td class="allif-table-content-td"><a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddQuoteDetails' item.id user_var glblslug %}">{{item.number}}</a></td>
               <td class="allif-table-content-td">{{item.total|floatformat:2|intcomma}}
               </td>
             

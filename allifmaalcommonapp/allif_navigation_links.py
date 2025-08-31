@@ -9,7 +9,7 @@ allifmaal_general_links = [
     {'name': 'Customers', 'url_name': 'allifmaalcommonapp:commonCustomers'},
     {'name': 'Suppliers', 'url_name': 'allifmaalcommonapp:commonSuppliers'},
     {'name': 'Currencies', 'url_name': 'allifmaalcommonapp:commonCurrencies'},
-  
+    {'name': 'Spaces', 'url_name': 'allifmaalcommonapp:commonSpaces'},
     {'name': 'Assets', 'url_name': 'allifmaalcommonapp:commonAssets'},
     {'name': 'Expenses', 'url_name': 'allifmaalcommonapp:commonExpenses'},
     {'name': 'Stocks', 'url_name': 'allifmaalcommonapp:commonStocks'},
@@ -61,6 +61,10 @@ allifmaal_sector_specific_links= {
        
     ],
     'Realestate': [
+        {'name': 'Properties', 'url_name': 'allifmaalcommonapp:commonSpaces'},
+         {'name': 'Units', 'url_name': 'allifmaalcommonapp:commonSpaceUnits'},
+        {'name': 'Tenants', 'url_name': 'allifmaalcommonapp:commonCustomers'},
+        
         
     ],
     'Logistics': [
