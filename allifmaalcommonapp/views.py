@@ -239,7 +239,7 @@ def commonEmailsAndSMS(request,*allifargs,**allifkwargs):
     muse='allifmaalengineering@gmail.com'
     subject = title
     message = f'Thank you for creating an account!'
-    email_sender=allif_data.get("usernmeslg").email #'ahmedmusadir@gmail.com'
+    email_sender=request.user.email #'ahmedmusadir@gmail.com'
     recipient_list = [ahmed,muse]
     send_mail(subject, message, email_sender, recipient_list)# uncomment to send emails.
     email=CommonEmailsModel(subject=subject,message=message,recipient=recipient_list,sender=email_sender,company=allif_data.get("main_sbscrbr_entity"))
@@ -3035,6 +3035,10 @@ def commonEditSpace(request, pk, *allifargs, **allifkwargs):
     return allif_common_form_edit_and_save(request,pk,CommonAddSpaceForm,"Edit Space","commonSpaces",'allifmaalcommonapp/spaces/add-space.html')
 @allif_base_view_wrapper
 def commonSpaceDetails(request, pk, *allifargs, **allifkwargs):
+    allifquery=get_object_or_404(CommonSpacesModel, id=pk)
+    allifquery.occupancy_rate=(allifquery.taken_units or 0)/(allifquery.number_of_units or 1)*100
+    allifquery.save()
+    
     return allif_common_detail_view(request,model_class=CommonSpacesModel,pk=pk,
         template_name='allifmaalcommonapp/spaces/space-details.html', # Create this template
         title_map={'default': 'Space Details'},

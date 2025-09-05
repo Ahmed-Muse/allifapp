@@ -709,7 +709,9 @@ class CommonSpacesModel(CommonBaseModel):
    
     asset=models.ForeignKey(CommonAssetsModel, related_name="asset_space", on_delete=models.SET_NULL, null=True, blank=True)
    
-    number_of_units=models.CharField(max_length=50,blank=True,null=True)
+    number_of_units=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2,default=0.00)
+    taken_units=models.DecimalField(max_digits=10,blank=True,null=True, decimal_places=2,default=0.00)
+    occupancy_rate=models.DecimalField(max_digits=5, decimal_places=2,default=0.00, blank=True, null=True, help_text="Occupancy rate as a percentage")
     
     space_type=models.CharField(max_length=250,blank=True,null=True, choices=PROPERTY_TYPES, default='AVAIL')
     space_floor=models.PositiveSmallIntegerField(choices=FLOOR_CHOICES, blank=True, null=True)
@@ -762,6 +764,7 @@ class CommonSpaceUnitsModel(CommonBaseModel):
     
     capacity=models.CharField(max_length=100,blank=True,null=True)
     emplyee_in_charge=models.ForeignKey(CommonEmployeesModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='speces_units_staff')
+    customer=models.ForeignKey(CommonCustomersModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='speces_units_customer')
    
     unit_type=models.CharField(max_length=10,blank=True,null=True, choices=PROPERTY_UNIT_TYPES)
     
@@ -832,7 +835,7 @@ class CommonStocksModel(CommonBaseModel):
         #unique_together = ('company', 'number', 'warehouse')
         
     def __str__(self):
-    		return str(self.description) # this will show up in the admin area
+    		return str(self.name) # this will show up in the admin area
 
 class CommonSpaceItemsModel(CommonBaseModel):
     """

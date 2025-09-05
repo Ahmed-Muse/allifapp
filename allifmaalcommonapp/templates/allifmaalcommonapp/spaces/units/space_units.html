@@ -13,8 +13,8 @@
 {% endblock %}
 {% block list-table-headers %}
 <td class="allif-fix-table-col"> Unit Name </td>
-<td class="allif-table-header-td"> Main Space</td>
-<td class="allif-table-header-td"> Description </td>
+<td class="allif-table-header-td"> Property</td>
+<td class="allif-table-header-td"> Tenant </td>
 <td class="allif-table-header-td"> Status</td>
 
 {% endblock %}
@@ -23,8 +23,8 @@
    <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceUnitDetails' item.id user_var glblslug %}"> {{item.name}} </a>
 </td>
 <td class="allif-table-content-td"> {{item.space}} </td>
-<td class="allif-table-content-td"> {{item.description}}</td>
-<td class="allif-table-content-td"> {{item.status}}</td>
+<td class="allif-table-content-td"> {{item.customer}}</td>
+<td class="allif-table-content-td"> {{item.current_status}}</td>
 
 {% endblock %}
 

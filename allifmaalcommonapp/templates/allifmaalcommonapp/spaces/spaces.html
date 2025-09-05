@@ -1,18 +1,43 @@
 {% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
 {% load allif_navigation_tags %}
-{% block allif_header_forms_dropdown%}
+{% load humanize %}
+{% block allif-basic-search-action %}
+{% url 'allifmaalcommonapp:commonSpaceUnitSearch' user_var glblslug %}
 {% endblock %}
-
+{% block advanced-search %}{%endblock%}
+{% block upload-excel-file %}{%endblock%}
 {% block allif-header-links %}
 <a href="{% allif_get_single_nav_link_url 'Spaces' user_var glblslug %}">Spaces</a>
 <a href="{% allif_get_single_nav_link_url 'AddSpace' user_var glblslug %}">New Space</a>
 <a href="{% allif_get_single_nav_link_url 'SpaceUnits' user_var glblslug %}">Space Units</a>
 <a href="{% allif_get_single_nav_link_url 'AddSpaceUnit' user_var glblslug %}">New Space Unit</a>
 {% endblock %}
-{% block list-table-content-seciton-links %}
-<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceDetails' item.id user_var glblslug %}"> {{item.name}}</a>
+{% block list-table-headers %}
+<td class="allif-fix-table-col">Property Name</td>
+<td class="allif-table-header-td"> No. of Units</td>
+<td class="allif-table-header-td"> Type</td>
+<td class="allif-table-header-td"> Occupancy Rate</td>
+<td class="allif-table-header-td"> Status</td>
+
 {% endblock %}
+{% block list-table-content-seciton %}
+<td class="allif-fix-table-col">
+   <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonSpaceDetails' item.id user_var glblslug %}"> {{item.name}} </a>
+</td>
+<td class="allif-table-content-td"> {{item.number_of_units}} </td>
+<td class="allif-table-content-td"> {{item.space_type}}</td>
+{% if item.occupancy_rate >= 50 %}
+<td class="allif-table-content-td"> <span class="badge bg-success">{{item.occupancy_rate}}% </span></td>
+{% else %}
+<td class="allif-table-content-td">  <span class="badge bg-danger">{{item.occupancy_rate}}% </span> </td>
+{% endif %}
+<td class="allif-table-content-td"> {{item.current_status}}</td>
+
+{% endblock %}
+
 {% block list-table-content-seciton-dropdown-links %}
-<a href="{% url 'allifmaalcommonapp:commonEditSpace' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+<a href="{% url 'allifmaalcommonapp:commonEditSpace' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Item</a>
+
 {% endblock %}
-  
+ 
+

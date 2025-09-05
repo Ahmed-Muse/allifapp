@@ -903,7 +903,7 @@ class CommonAddSpaceForm(CommonBaseForm):
         }
     class Meta(CommonBaseForm.Meta):
         model=CommonSpacesModel
-        fields=CommonBaseForm.Meta.fields + ['asset','emplyee_in_charge','number_of_units',
+        fields=CommonBaseForm.Meta.fields + ['asset','emplyee_in_charge','number_of_units','taken_units',
                   'capacity','amenities',
                   'max_occupancy','monthly_rent','base_price_per_night',
                   'current_status','name','space_floor','space_type','number_of_bedrooms',
@@ -911,6 +911,7 @@ class CommonAddSpaceForm(CommonBaseForm):
         widgets = {
         **CommonBaseForm.Meta.widgets,
         'number_of_units':forms.TextInput(attrs={'class':'form-control'}),
+        'taken_units':forms.TextInput(attrs={'class':'form-control'}),
         'number_of_bedrooms':forms.TextInput(attrs={'class':'form-control'}),
         'number_of_bathrooms':forms.TextInput(attrs={'class':'form-control'}),
         'contact_phone':forms.TextInput(attrs={'class':'form-control'}),
@@ -938,10 +939,11 @@ class CommonAddSpaceUnitForm(CommonBaseForm):
     company_filtered_fields = {
         'space': CommonSpacesModel,
         'emplyee_in_charge': CommonEmployeesModel,
+        'customer': CommonCustomersModel,
         }
     class Meta(CommonBaseForm.Meta):
         model=CommonSpaceUnitsModel
-        fields=CommonBaseForm.Meta.fields + ['space','number','unitcost','unitprice','area_sqm','rooms','washrooms','unit_type',
+        fields=CommonBaseForm.Meta.fields + ['space','number','customer','unitcost','unitprice','area_sqm','rooms','washrooms','unit_type',
                   'emplyee_in_charge','capacity','amenities','max_occupancy','monthly_rent','base_price_per_night','current_status','name','space_floor','space_type',
                  ]
         widgets = {
@@ -971,7 +973,7 @@ class CommonAddSpaceUnitForm(CommonBaseForm):
         'emplyee_in_charge':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         'unit_type':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         'space':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
-            
+        'customer':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
           # the css class that we are passing
         }
   

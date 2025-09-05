@@ -64,9 +64,9 @@
     <tbody>
     {% for item in allifqueryset %}
     <tr>
-    <td colspan="5">{{item.description}}</td>
+    <td colspan="5">{{item.items.name}}</td>
     <td colspan="2">{{item.quantity|floatformat:2|intcomma}}</td>
-    <td colspan="2"> {{item.description.unitPrice|floatformat:2|intcomma}}</td>
+    <td colspan="2"> {{item.items.unitPrice|floatformat:2|intcomma}}</td>
     <td colspan="3">{{item.invoice_selling_price|floatformat:2|intcomma}}</td>
     
     </tr>
