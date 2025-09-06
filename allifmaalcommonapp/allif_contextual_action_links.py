@@ -249,13 +249,18 @@ allif_sector_contextual_action_require_pk_links = {
     'RealEstate': [
         # Add real estate specific links here
     ],
-     'logistics': [
-        # Add sales specific links here
+     'Logistics': [
+        # Add sales specific links here 
+        {'name': 'deleteFlightConfirm', 'url_name': 'allifmaallogisticsapp:wantToDeleteFlight', 'requires_pk': True},
+        {'name': 'deleteFlightTicketConfirm', 'url_name': 'allifmaallogisticsapp:wantToDeleteFlightTicket', 'requires_pk': True},
+      
+  
     ],
     
     'Service': [
         # Add sales specific links here
     ],
+   
 }
 
 
@@ -491,7 +496,7 @@ allif_sector_contextual_action_require_pk_links___waswrokingforhealthcareasgener
    
    {'name': 'AddReferal', 'url_name': 'allifmaalshaafiapp:addReferral', 'requires_pk': True},
    {'name': 'AddAssessment', 'url_name': 'allifmaalshaafiapp:addDoctorAssessment', 'requires_pk': True},
-  
+   
    
  
  

@@ -4,7 +4,7 @@
  {% block add-form-header-block %}
 
 <a href="{% allif_get_single_nav_link_url 'Transits' user_var glblslug %}">Transports</a>
-<a href="{{ allif_contextual_action_links.AddTransitDetails.url }}">Shipment Details</a>
+<a href="{{ allif_contextual_action_links.AddTransitDetails.url }}">Flight Details</a>
 <a href="{{ allif_contextual_action_links.AddShipmentItems.url }}">Add Items</a>
 <a href="{{ allif_contextual_action_links.TransitPdf.url }}">Download Shipment</a>
  
@@ -126,14 +126,13 @@
   {% block allif_sensitive_section_col_one %}
     <tr>
       <td class="allif-fix-table-col"> {{allifquery}}</td>
-      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Transits' user_var glblslug %}">Go Back</a></td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'flights' user_var glblslug %}">Go Back</a></td>
     </tr>
   {% endblock %}
   {% block allif_sensitive_section_col_two %}
     <tr>
       <td class="allif-fix-table-col">Delet {{allifquery}}</td>
-      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteTransitConfirm.url }}">Delete {{allifquery}}</a></td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.deleteFlightConfirm.url }}">Delete {{allifquery}}</a></td>
     </tr>
     
     {% endblock %}
-

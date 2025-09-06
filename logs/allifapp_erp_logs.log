@@ -29513,3 +29513,88 @@ INFO 2025-09-06 18:40:42,963 autoreload 36532 37028 C:\am\allifapp\allifapperp\a
 INFO 2025-09-06 18:40:44,429 autoreload 24492 46580 Watching for file changes with StatReloader
 INFO 2025-09-06 18:42:01,828 autoreload 24492 46580 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
 INFO 2025-09-06 18:42:03,171 autoreload 29608 47436 Watching for file changes with StatReloader
+INFO 2025-09-06 20:26:30,704 autoreload 30092 31300 Watching for file changes with StatReloader
+INFO 2025-09-06 20:35:29,023 autoreload 30092 31300 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-06 20:35:30,688 autoreload 8028 46532 Watching for file changes with StatReloader
+INFO 2025-09-06 20:35:37,574 autoreload 8028 46532 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-06 20:35:39,167 autoreload 32864 4892 Watching for file changes with StatReloader
+WARNING 2025-09-06 20:35:54,254 allif_navigation_tags 32864 16868 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:35:58,545 allif_navigation_tags 32864 16868 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:36:00,666 allif_navigation_tags 32864 16868 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:36:06,969 allif_navigation_tags 32864 16868 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+INFO 2025-09-06 20:37:06,449 autoreload 32864 4892 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 20:37:08,348 autoreload 34908 30336 Watching for file changes with StatReloader
+WARNING 2025-09-06 20:37:11,720 allif_navigation_tags 34908 15740 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:37:26,129 allif_navigation_tags 34908 15740 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+INFO 2025-09-06 20:39:01,432 autoreload 34908 30336 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 20:39:03,057 autoreload 34996 4736 Watching for file changes with StatReloader
+WARNING 2025-09-06 20:39:06,121 allif_navigation_tags 34996 44624 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:39:40,713 allif_navigation_tags 34996 44624 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:40:02,862 allif_navigation_tags 34996 44624 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:40:06,081 allif_navigation_tags 34996 44624 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:40:25,788 allif_navigation_tags 34996 44624 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:40:28,015 allif_navigation_tags 34996 44624 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:40:45,076 allif_navigation_tags 34996 44624 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:40:47,260 allif_navigation_tags 34996 44624 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+WARNING 2025-09-06 20:40:51,683 allif_navigation_tags 34996 44624 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+INFO 2025-09-06 20:41:22,231 autoreload 34996 4736 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-06 20:41:24,052 autoreload 48692 38888 Watching for file changes with StatReloader
+WARNING 2025-09-06 20:41:28,093 allif_navigation_tags 48692 39892 General navigation link with name 'flightTickets' not found in allif_single_access_general_links.
+INFO 2025-09-06 20:41:58,908 autoreload 48692 38888 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-06 20:42:00,647 autoreload 25612 27724 Watching for file changes with StatReloader
+INFO 2025-09-06 20:42:36,650 autoreload 25612 27724 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 20:42:38,438 autoreload 6044 31864 Watching for file changes with StatReloader
+INFO 2025-09-06 20:42:49,673 autoreload 6044 31864 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 20:42:51,292 autoreload 43876 39768 Watching for file changes with StatReloader
+INFO 2025-09-06 20:44:59,399 autoreload 43876 39768 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-06 20:45:01,301 autoreload 4896 10988 Watching for file changes with StatReloader
+INFO 2025-09-06 20:45:22,476 autoreload 8956 28432 Watching for file changes with StatReloader
+ERROR 2025-09-06 20:45:32,581 utils 8956 45716 Failed to reverse URL 'allifmaalcommonapp:addFlightDetails' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 2}: Reverse for 'addFlightDetails' not found. 'addFlightDetails' is not a valid view function or pattern name.
+ERROR 2025-09-06 20:46:27,109 utils 8956 45716 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 2}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-06 20:47:37,084 autoreload 8956 28432 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 20:47:39,156 autoreload 4556 28328 Watching for file changes with StatReloader
+ERROR 2025-09-06 20:47:47,135 utils 4556 38048 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 2}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-06 20:49:35,412 autoreload 4556 28328 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-06 20:49:37,275 autoreload 50044 35332 Watching for file changes with StatReloader
+ERROR 2025-09-06 20:49:41,057 utils 50044 42708 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 2}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+ERROR 2025-09-06 20:50:00,193 utils 50044 42708 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 2}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-06 20:50:52,707 autoreload 50044 35332 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 20:50:54,677 autoreload 42504 28980 Watching for file changes with StatReloader
+INFO 2025-09-06 20:55:36,181 autoreload 42504 28980 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-09-06 20:55:37,893 autoreload 38708 4448 Watching for file changes with StatReloader
+INFO 2025-09-06 20:58:35,233 autoreload 38708 4448 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-09-06 20:58:37,165 autoreload 30128 17036 Watching for file changes with StatReloader
+INFO 2025-09-06 20:59:20,411 autoreload 30128 17036 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-09-06 20:59:22,428 autoreload 46676 35296 Watching for file changes with StatReloader
+WARNING 2025-09-06 20:59:29,958 allif_navigation_tags 46676 45376 General navigation link with name 'flight' not found in allif_single_access_general_links.
+INFO 2025-09-06 21:01:51,511 autoreload 46676 35296 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:01:53,482 autoreload 16284 35712 Watching for file changes with StatReloader
+INFO 2025-09-06 21:02:28,619 autoreload 16284 35712 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:02:30,524 autoreload 40648 21652 Watching for file changes with StatReloader
+ERROR 2025-09-06 21:02:40,603 utils 40648 43452 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 2}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-06 21:03:19,378 autoreload 40648 21652 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:03:21,218 autoreload 28864 49260 Watching for file changes with StatReloader
+INFO 2025-09-06 21:03:36,398 autoreload 28864 49260 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:03:38,162 autoreload 42476 35696 Watching for file changes with StatReloader
+INFO 2025-09-06 21:03:47,726 autoreload 42476 35696 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:03:49,456 autoreload 32148 44648 Watching for file changes with StatReloader
+ERROR 2025-09-06 21:04:02,366 utils 32148 40232 Failed to reverse URL 'allifmaalcommonapp:addFlightDetails' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 3}: Reverse for 'addFlightDetails' not found. 'addFlightDetails' is not a valid view function or pattern name.
+ERROR 2025-09-06 21:04:19,784 utils 32148 40232 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 3}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+ERROR 2025-09-06 21:04:28,570 utils 32148 40232 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 3}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+ERROR 2025-09-06 21:04:37,597 utils 32148 40232 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 3}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+ERROR 2025-09-06 21:04:45,212 utils 32148 40232 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 3}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-06 21:05:19,114 autoreload 32148 44648 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:05:20,864 autoreload 17612 14796 Watching for file changes with StatReloader
+ERROR 2025-09-06 21:05:27,395 utils 17612 32228 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 3}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-06 21:06:55,518 autoreload 17612 14796 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:06:57,630 autoreload 12668 19224 Watching for file changes with StatReloader
+ERROR 2025-09-06 21:07:04,917 utils 12668 23612 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 3}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-06 21:08:14,855 autoreload 12668 19224 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:08:16,607 autoreload 34748 44648 Watching for file changes with StatReloader
+ERROR 2025-09-06 21:08:40,813 utils 34748 49684 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-62450edbbe44', 'allifslug': 'demo-companyhodo-souk-7e90d4c23323', 'pk': 3}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-06 21:09:12,636 autoreload 34748 44648 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:09:14,362 autoreload 29200 21384 Watching for file changes with StatReloader
+INFO 2025-09-06 21:10:23,155 autoreload 29200 21384 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-06 21:10:24,902 autoreload 16544 39960 Watching for file changes with StatReloader
+INFO 2025-09-06 21:13:59,106 autoreload 16544 39960 C:\am\allifapp\allifapperp\allifapperp\settings.py changed, reloading.
+INFO 2025-09-06 21:14:00,632 autoreload 43828 30692 Watching for file changes with StatReloader

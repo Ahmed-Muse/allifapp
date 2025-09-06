@@ -51,14 +51,14 @@ class AddFlightTicketDetailsForm(CommonBaseForm):
     }
     class Meta(CommonBaseForm.Meta):
         model=TicketsModel
-        fields=CommonBaseForm.Meta.fields + ['flight','passenger','passport','nationality','seat_number',
+        fields=CommonBaseForm.Meta.fields + ['passenger','passport','nationality','seat_number',
                     'price','tax_amount','total_amount','travel_date','booking_date',
                     'ticket_status','origin','destination','ticket_type','payment',
                     'luggage','children']
         widgets = {
         **CommonBaseForm.Meta.widgets,
        
-            'flight':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
+            
             'passenger':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'passport':forms.ClearableFileInput(attrs={'class':'form-control','placeholder':''}),
             'nationality':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),  

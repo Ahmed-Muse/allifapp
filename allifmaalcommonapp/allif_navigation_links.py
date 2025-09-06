@@ -257,6 +257,14 @@ allif_single_access_general_links = [
      {'name': 'Tests', 'url_name': 'allifmaalcommonapp:commonTests'},
     {'name': 'Results', 'url_name': 'allifmaalcommonapp:commonResults'},
     
+    #logistcsapp #specific
+    {'name': 'flights', 'url_name': 'allifmaallogisticsapp:flights'},
+    {'name': 'newFlight', 'url_name': 'allifmaallogisticsapp:newFlight'},
+    {'name': 'flightTickets', 'url_name': 'allifmaallogisticsapp:flightTickets'},
+    {'name': 'addFlightTicket', 'url_name': 'allifmaallogisticssapp:addFlightTicket'},    
+    
+
+    
     
     
     

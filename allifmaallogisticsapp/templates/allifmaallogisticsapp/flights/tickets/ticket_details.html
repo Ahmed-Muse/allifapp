@@ -2,7 +2,8 @@
   {% load humanize %}
   {% load allif_navigation_tags %}
   {% block add-form-header-block %}
- <a href="{% allif_get_single_nav_link_url 'Transits' user_var glblslug %}">Transport</a>
+  <a href="{% allif_get_single_nav_link_url 'flights' user_var glblslug %}">Flights</a>
+ <a href="{% allif_get_single_nav_link_url 'flightTickets' user_var glblslug %}">Tickets</a>
 
   {%endblock%}
 

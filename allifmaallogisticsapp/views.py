@@ -54,6 +54,8 @@ def logisticsDashboard(request,*allifargs,**allifkwargs):
 def flights(request,*allifargs,**allifkwargs):
     allif_data=common_shared_data(request)
     title="Flights"
+    test=FlightsModel.all_objects.all()
+    print(test)
     formats=CommonDocsFormatModel.all_objects.all()
     allifqueryset =allif_filtered_and_sorted_queryset(request,FlightsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
@@ -72,12 +74,12 @@ def newFlight(request,*allifargs,**allifkwargs):
     ###### End... UID generation ##################
 
     if allifquery:
-        sqnmbr='FLT'+"/"+str(allifuid)
+        item_no='FLT'+"/"+str(allifuid)
     else:
-        sqnmbr= 'FLT/1'+"/"+str(uuid4()).split('-')[2]
+        item_no= 'FLT/1'+"/"+str(uuid4()).split('-')[2]
 
-    newQuoteNumber=CommonTransitModel.all_objects.create(number=sqnmbr,company=request.user.company,owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
-    newQuoteNumber.save()
+    new_item_obj=FlightsModel.all_objects.create(number=item_no,company=request.user.company,owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+    new_item_obj.save()
     return redirect('allifmaallogisticsapp:flights',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
 @allif_base_view_wrapper
@@ -105,7 +107,7 @@ def addFlightDetails(request, pk, *allifargs, **allifkwargs):
     allifquery=get_object_or_404(FlightsModel, id=pk)
     return allif_common_form_edit_and_save(request,pk,AddFlightDetailsForm,"Flight Details",
     'addFlightDetails','allifmaallogisticsapp/flights/add_flight_details.html',
-    redirect_with_pk=True,redirect_pk_value=pk,)
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaallogisticsapp',)
 
 
 @allif_base_view_wrapper
@@ -115,10 +117,11 @@ def flightpdf(request, pk, *allifargs, **allifkwargs):
 ##########################3 TICKETS #########################
 @allif_base_view_wrapper
 def flightTickets(request,*allifargs,**allifkwargs):
+   
     allif_data=common_shared_data(request)
     title="Tickets"
     formats=CommonDocsFormatModel.all_objects.all()
-    allifqueryset =allif_filtered_and_sorted_queryset(request,FlightsModel,allif_data,explicit_scope='all')
+    allifqueryset =allif_filtered_and_sorted_queryset(request,TicketsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaallogisticsapp/flights/tickets/tickets.html',context)
 @allif_base_view_wrapper
@@ -139,22 +142,25 @@ def addFlightTickets(request,pk,*allifargs,**allifkwargs):
 
 @allif_base_view_wrapper
 def wantToDeleteFlightTicket(request,pk,*allifargs,**allifkwargs):
-    return allif_delete_confirm(request,pk,TicketsModel,"Delete this item",'allifmaallogisticsapp/flights/delete-flight-confirm.html')
+    return allif_delete_confirm(request,pk,TicketsModel,"Delete this item",'allifmaallogisticsapp/flights/tickets/delete-ticket-confirm.html')
 
 @allif_base_view_wrapper
 def deleteFlightTicket(request,pk,*allifargs,**allifkwargs):
     query=get_object_or_404(TicketsModel, id=pk)
     allifquery=query.flight.id
     return allif_delete_hanlder(request,model_name='TicketsModel',
-    pk=pk,success_redirect_url_name='addFlightTickets',redirect_with_pk=True,redirect_pk_value=allifquery)
+    pk=pk,success_redirect_url_name='flightTickets',redirect_with_pk=True,redirect_pk_value=allifquery)
+
+
 
 @allif_base_view_wrapper
 def editFlightTicket(request, pk, *allifargs, **allifkwargs):
     query=get_object_or_404(TicketsModel, id=pk) 
-    allifquery=query.shipment.id
+    allifquery=query.flight.id
+    print(allifquery)
     return allif_common_form_edit_and_save(request,pk,AddFlightTicketDetailsForm,"Edit Item",
-    'addFlightTickets','allifmaallogisticsapp/flights/tickets/add_tickets.html',
-    redirect_with_pk=True,redirect_pk_value=allifquery,)
+    'editFlightTicket','allifmaallogisticsapp/flights/tickets/add_tickets.html',
+    redirect_with_pk=True,redirect_pk_value=allifquery,app_namespace='allifmaallogisticsapp',)
    
 @allif_base_view_wrapper
 def flightTicketDetails(request, pk, *allifargs, **allifkwargs):

@@ -2,18 +2,18 @@
   {% load humanize %}
   {% load allif_navigation_tags %}
   {% block allif-basic-search-action %}
-    {% url 'allifmaalcommonapp:commonTransitSearch' user_var glblslug %}
+    {% url 'allifmaallogisticsapp:flightTicketSearch' user_var glblslug %}
   {% endblock %}
- 
+
   {% block advanced-search-action %}
-    {% url 'allifmaalcommonapp:commonTransitAdvanceSearch' user_var glblslug %}
+    {% url 'allifmaallogisticsapp:flightTicketAdvanceSearch' user_var glblslug %}
   {% endblock %}
   {% block upload-excel-file-action %}
   
   {% endblock %}
   {% block allif-header-links %}
-  <a href="{% allif_get_single_nav_link_url 'Transits' user_var glblslug %}">Transportations</a>
- <a href="{% allif_get_single_nav_link_url 'AddTransit' user_var glblslug %}">New Transport</a>
+  <a href="{% allif_get_single_nav_link_url 'flights' user_var glblslug %}">Flights</a>
+  <a href="{% allif_get_single_nav_link_url 'flightTickets' user_var glblslug %}">Tickets</a>
  
   {% endblock %}
   {% block upload-excel-file %}
@@ -31,7 +31,7 @@
     
   {% block list-table-content-seciton %}
   <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}
-  <a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonAddTransitDetails' item.id user_var glblslug %}"> {{item.number}} </a>{%endblock%}</td>
+  <a class="allif-table-links" href="{% url 'allifmaallogisticsapp:flightTicketDetails' item.id user_var glblslug %}"> {{item.number}} </a>{%endblock%}</td>
   
   <td class="allif-table-content-td"> {{item.origin}} </td>
   <td class="allif-table-content-td">{{item.destination}}</td>
@@ -40,7 +40,7 @@
   <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
   {% endblock %}
   {% block list-table-content-seciton-dropdown-links %}
-  <a href="{% url 'allifmaalcommonapp:commonAddShipmentItems' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Shipment Items</a>
+  <a href="{% url 'allifmaallogisticsapp:editFlightTicket' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Shipment Items</a>
   
   
   {% endblock %}
