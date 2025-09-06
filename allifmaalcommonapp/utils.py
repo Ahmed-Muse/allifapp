@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.db.models import QuerySet, Model # Import Model
 from django.http import HttpRequest
 import datetime
+from allifmaallogisticsapp.models import FlightsModel, TicketsModel # Import your models here
 from typing import Optional # Import Optional for type hinting
 from .models import *
 from allifmaalshaafiapp.models import *
@@ -570,6 +571,35 @@ allif_model_sort_configs = {
         'default_sort_field': '-date',
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
+    
+    
+    ################3 logistics app models ##################3
+    'flightsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
+     'ticketsmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+     
      
     
     
@@ -671,6 +701,10 @@ allif_search_config_mapping = {
     'MedicalAdministrationsModel': ['name__icontains', 'description__icontains'],
     'DischargesModel': ['name__icontains', 'description__icontains'],
     'ReferralsModel': ['name__icontains', 'description__icontains'],
+    
+    ############3 logistics app models ##############
+    'FlightsModel': ['name__icontains', 'description__icontains'],
+    'TicketsModel': ['name__icontains', 'description__icontains'],
     
     
      
@@ -1183,6 +1217,42 @@ allif_advanced_search_configs = {
     
     
     },
+
+# logistics app models##############
+
+'FlightsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+'TicketsModel': {
+        'date_field': 'starts', # Name of the date field in CommonStocksModel
+        'value_field': 'balance', # Name of the quantity/value field in CommonStocksModel
+        'default_order_by_date': '-starts', # Default ordering for finding first/last date
+        'default_order_by_value': '-balance', # Default ordering for finding largest value
+        'excel_fields': [
+        {'field': 'name', 'label': 'Name'},
+        {'field': 'number', 'label': 'Number'},
+        {'field': 'code', 'label': 'Code'},
+        {'field': 'description', 'label': 'Description'},
+        {'field': 'balance', 'label': 'Balance'},
+        {'field': 'date', 'label': 'Date'},
+        ]
+    
+    
+    },
+
      
      
      
@@ -1283,6 +1353,8 @@ allif_main_models_registry = {
     "CommonResultsModel":CommonResultsModel,
     "CommonAssessmentsModel":CommonAssessmentsModel,
      "CommonStaffCategoriesModel":CommonStaffCategoriesModel,
+    "FlightsModel":FlightsModel,
+    "TicketsModel":TicketsModel,
      
      
      
@@ -1451,6 +1523,27 @@ allif_main_document_pdf_configuration= {
     },
     
     
+    ############logistics app models##############
+    'FlightsModel': { # Key for Purchase Orders
+        'main_model': 'FlightsModel', 
+        #'items_model': 'CommonTransitItemsModel', # This is an optional key now
+        #'items_related_field': 'shipment', # This is an optional key now
+        'title': 'Flight Details',
+        'filename_prefix': 'FLIGHT',
+        'template_path': 'allifmaallogisticsapp/flights/flight_details_pdf.html', 
+       
+    },
+    'TicketsModel': { # Key for Purchase Orders
+        'main_model': 'TicketsModel', 
+        #'items_model': 'CommonTransitItemsModel', # This is an optional key now
+        #'items_related_field': 'shipment', # This is an optional key now
+        'title': 'Ticket Details',
+        'filename_prefix': 'TICKET',
+        'template_path': 'allifmaallogisticsapp/flights/tickets/ticket_details_pdf.html', 
+       
+    },
+    
+    
     
 }
 
@@ -1587,7 +1680,7 @@ allif_excel_upload_configs= {
 
 
 allif_sector_redirect_map= {
-    "Sales": {
+    "Distribution": {
         "home": "allifmaalsalesapp:salesHome",
         "dashboard": "allifmaalsalesapp:salesDashboard",
     },

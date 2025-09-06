@@ -122,6 +122,7 @@ class SharedModel(models.Model):# this is the company  hospitality logistics
 class CommonSectorsModel(SharedModel):# this is the company  hospitality logistics,,
     def __str__(self):
         return self.name
+
    
 class CommonDocsFormatModel(SharedModel):# this is the company  hospitality logistics
     def __str__(self):
@@ -190,7 +191,7 @@ class BaseModel(models.Model):
    
 class CommonCompanyDetailsModel(BaseModel):# this is the company
     company=models.CharField(max_length=50,blank=True,null=True,db_index=True)
-    sector=models.ForeignKey(CommonSectorsModel,related_name="secrlmcompcmmnapp",on_delete=models.PROTECT,null=True,blank=False)
+    sector=models.ForeignKey(CommonSectorsModel,related_name="secrlmcompcmmnapp",on_delete=models.PROTECT,null=False,blank=False,default=1)
      # The admin can toggle whether this company uses a subdomain.
     use_subdomain = models.BooleanField(default=True)
     # ... other company fields
@@ -263,6 +264,7 @@ class CommonOperationYearTermsModel(BaseModel):
 
 #############################################################
 # Abstract Base Class for Common Organizational Fields
+
 class CommonBaseModel(models.Model):
     """
     An abstract base class that provides common organizational fields
@@ -284,8 +286,8 @@ class CommonBaseModel(models.Model):
     starts=models.DateTimeField(blank=True,null=True,default=timezone.now)
     ends=models.DateTimeField(blank=True,null=True,default=timezone.now)
     last_updated=models.DateTimeField(auto_now=True, blank=True, null=True)
-    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='+')
-    operation_term=models.ForeignKey(CommonOperationYearTermsModel,blank=True,null=True, on_delete=models.CASCADE, related_name='+')
+    operation_year=models.ForeignKey(CommonOperationYearsModel,blank=True,null=True, on_delete=models.SET_NULL, related_name='+')
+    operation_term=models.ForeignKey(CommonOperationYearTermsModel,blank=True,null=True, on_delete=models.SET_NULL, related_name='+')
    
     updated_by=models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
     #is_current=models.CharField(choices=operation_year_options,max_length=50,blank=True,null=True,default="Current")
@@ -392,6 +394,9 @@ class CommonPaymentTermsModel(CommonBaseModel):
 class CommonUnitsModel(CommonBaseModel):
     def __str__(self):
         return str(self.name)
+class CommonCountriesModel(CommonBaseModel):# this is the company  hospitality logistics,,
+    def __str__(self):
+        return self.name
 
 #########################################3 stock, items, services, subjects categories.. ##############################################
 class CommonCategoriesModel(CommonBaseModel):

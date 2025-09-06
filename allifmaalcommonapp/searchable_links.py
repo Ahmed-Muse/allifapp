@@ -57,8 +57,8 @@ allifmaal_sector_specific_links = {
         {'name': 'Room Management', 'url_name': 'allifmaalhospitalityapp:room_management', 'description': 'Oversee room availability and status.'},
         {'name': 'Guest Services', 'url_name': 'allifmaalhospitalityapp:guest_services', 'description': 'Handle guest requests and amenities.'},
     ],
-    'Real Estate': [
-        {'name': 'Properties', 'url_name': 'allifmaalrealestateapp:properties', 'description': 'Manage property listings and details.'},
+    'Realestate': [
+        {'name': 'Properties', 'url_name': 'allifmaalcommonapp:commonSpaces', 'description': 'Manage property listings and details.'},
         {'name': 'Leases', 'url_name': 'allifmaalrealestateapp:leases', 'description': 'Administer lease agreements.'},
         {'name': 'Client Portfolios', 'url_name': 'allifmaalrealestateapp:client_portfolios', 'description': 'Manage client property portfolios.'},
     ],

@@ -1,0 +1,139 @@
+{% extends 'allifmaalcommonapp/ui/forms/add-form.html'%}
+{% load allif_navigation_tags %}
+
+ {% block add-form-header-block %}
+
+<a href="{% allif_get_single_nav_link_url 'Transits' user_var glblslug %}">Transports</a>
+<a href="{{ allif_contextual_action_links.AddTransitDetails.url }}">Shipment Details</a>
+<a href="{{ allif_contextual_action_links.AddShipmentItems.url }}">Add Items</a>
+<a href="{{ allif_contextual_action_links.TransitPdf.url }}">Download Shipment</a>
+ 
+{% endblock %}
+
+   {% block core-tab-col-one %}
+    <tr>
+      <td class="allif-fix-table-col-forms">Name</td>
+      <td>{{form.name}}</td>
+    </tr>
+     <tr>
+        <td class="allif-fix-table-col-forms">Description</td>
+        <td>{{form.description}}</td>
+      </tr>
+    
+    {%endblock%}
+
+    {% block core-tab-col-two %}
+     <tr>
+      <td class="allif-fix-table-col-forms">Origin</td>
+      <td>{{form.origin}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Destination</td>
+      <td>{{form.destination}}</td>
+    </tr>
+    
+    {%endblock%}
+
+     {% block standard-tab-col-one %}
+     
+     <tr>
+      <td class="allif-fix-table-col-forms">Customer</td>
+      <td>{{form.customer}}</td>
+    </tr>
+   
+     <tr>
+      <td class="allif-fix-table-col-forms">Exit Warehouse</td>
+      <td>{{form.exit_warehouse}}</td>
+    </tr>
+ 
+      <tr>
+      <td class="allif-fix-table-col-forms">Entry Warehouse</td>
+      <td>{{form.entry_warehouse}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Status</td>
+      <td>{{form.transit_status}}</td>
+    </tr>
+
+     <tr>
+      <td class="allif-fix-table-col-forms">Carrier</td>
+      <td>{{form.carrier}}</td>
+    </tr>
+    
+     <tr>
+      <td class="allif-fix-table-col-forms">Received On</td>
+      <td>{{form.received_on}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Expected On</td>
+      <td>{{form.expected}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Route</td>
+      <td>{{form.via}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Dispatched By</td>
+      <td>{{form.dispatched_by}}</td>
+    </tr>
+    
+    
+    {%endblock%}
+       
+   {% block standard-tab-col-two %}
+    <tr>
+      <td class="allif-fix-table-col-forms">Received By</td>
+      <td>{{form.received_by}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Delivery Confirmed By Staff</td>
+      <td>{{form.delivery_confirmed_by_employee}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Delivery Confirm By Customer</td>
+      <td>{{form.delivery_confirmed_by_customer}}</td>
+    </tr>
+    
+    
+    <tr>
+      <td class="allif-fix-table-col-forms">Supplier</td>
+      <td>{{form.supplier}}</td>
+    </tr>
+    
+     <tr>
+      <td class="allif-fix-table-col-forms">Delivery Notes</td>
+      <td>{{form.delivery_notes}}</td>
+    </tr>
+   
+    <tr>
+      <td class="allif-fix-table-col-forms">Payment Mode</td>
+      <td>{{form.terms}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Currency</td>
+      <td>{{form.currency}}</td>
+    </tr>
+
+     <tr>
+      <td class="allif-fix-table-col-forms">Delivery Date</td>
+      <td>{{form.delivery_confirmation_date_time}}</td>
+    </tr>
+       
+       
+    {%endblock%}
+
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col"> {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Transits' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {% endblock %}
+  {% block allif_sensitive_section_col_two %}
+    <tr>
+      <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+      <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteTransitConfirm.url }}">Delete {{allifquery}}</a></td>
+    </tr>
+    
+    {% endblock %}
+

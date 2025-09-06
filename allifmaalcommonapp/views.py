@@ -39,7 +39,7 @@ def commonDebugging(request, *allifargs, **allifkwargs):
     allif_data=common_shared_data(request)
     is_authenticated = request.user.is_authenticated
     company_id_from_user = None
-    allifquery=request.user.usercompany
+    allifquery=request.user.company
     company_id_from_middleware = get_current_company()
     
     title='Waiting Page'
@@ -126,9 +126,11 @@ def commonLogs(request,*allifargs,**allifkwargs):
     allifqueryset= CommonLogsModel.all_objects.all()
     formats=CommonDocsFormatModel.all_objects.all()
     current_company = allif_data.get("main_sbscrbr_entity")
+    current_company = request.user.company
+    
     base_query = CommonLogsModel.all_objects.select_related('user', 'content_type')
     if current_company:
-        audit_logs =base_query.filter(Q(owner__usercompany=current_company.company) | Q(owner__isnull=True)).order_by('-action_time')[:50]
+        audit_logs =base_query.filter(Q(company=current_company) | Q(owner__isnull=True)).order_by('-action_time')[:50]
     else:
         audit_logs = base_query.filter(owner__isnull=True).order_by('-action_time')[:100]
         logger.warning(f"No current company found for user {request.user.email} in audit log view. Showing only system logs.")
@@ -5153,6 +5155,7 @@ def commonDeleteProgress(request,pk,*allifargs,**allifkwargs):
     
 
 ###################3 customer contacts messages ###################3
+
 def commonCustomerContacts(request):
     try:
         if request.method=='POST':

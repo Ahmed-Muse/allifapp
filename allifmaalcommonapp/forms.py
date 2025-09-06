@@ -1231,6 +1231,16 @@ class CommonAddTransitDetailsForm(CommonBaseForm):
         'exit_warehouse': CommonSpacesModel,
         'entry_warehouse': CommonSpacesModel,
         'supplier': CommonSuppliersModel,
+        'customer': CommonCustomersModel,
+        'carrier': CommonAssetsModel,
+        'delivery_confirmed_by_employee': CommonEmployeesModel,
+        'dispatched_by': CommonEmployeesModel,
+        'received_by': CommonEmployeesModel,
+        
+        'delivery_confirmed_by_customer': CommonCustomersModel,
+        'supplier': CommonSuppliersModel,
+        'terms': CommonPaymentTermsModel,
+        'currency': CommonCurrenciesModel,
         }
      
     class Meta(CommonBaseForm.Meta):
@@ -1277,6 +1287,7 @@ class CommonAddTransitItemsForm(CommonBaseForm):
         'items': CommonStocksModel,
         'consigner': CommonCustomersModel,
         'consignee': CommonCustomersModel,
+        'dispatched_by': CommonEmployeesModel,
         }
     
     class Meta(CommonBaseForm.Meta):

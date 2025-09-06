@@ -31,6 +31,8 @@ allifmaal_general_links = [
     
     
     
+    
+    
 ]
 
 # Define sector-specific links
@@ -43,21 +45,26 @@ allifmaal_sector_specific_links= {
         {'name': 'Triage', 'url_name': 'allifmaalshaafiapp:triageData'}, 
         {'name': 'Assessments', 'url_name': 'allifmaalshaafiapp:doctorAssessments'},
         {'name': 'Tests', 'url_name': 'allifmaalcommonapp:commonTests'},
-    {'name': 'Results', 'url_name': 'allifmaalcommonapp:commonResults'},
+        {'name': 'Results', 'url_name': 'allifmaalcommonapp:commonResults'},
         {'name': 'Prescriptions', 'url_name': 'allifmaalshaafiapp:prescriptions'},
         {'name': 'Medications', 'url_name': 'allifmaalshaafiapp:treatments'},
         {'name': 'Admissions', 'url_name': 'allifmaalshaafiapp:admissions'},
         {'name': 'Discharges', 'url_name': 'allifmaalshaafiapp:discharges'},
         {'name': 'Referals', 'url_name': 'allifmaalshaafiapp:referrals'},
+        
      
     ],
     'Education': [
         {'name': 'Students', 'url_name': 'allifmaalcommonapp:commonCustomers'},
-        {'name': 'Examinations', 'url_name': 'allifmaalilmapp:examinations'},
-        {'name': 'Exam Results', 'url_name': 'allifmaalilmapp:examResults'},
-      
+        {'name': 'Exams', 'url_name': 'allifmaalcommonapp:commonTests'},
+        {'name': 'Dormitories', 'url_name': 'allifmaalcommonapp:commonSpaces'},
+        {'name': 'Rooms/Beds', 'url_name': 'allifmaalcommonapp:commonSpaceUnits'},
     ],
     'Hospitality': [
+         {'name': 'Guests', 'url_name': 'allifmaalcommonapp:commonCustomers'},
+        
+        {'name': 'Properties', 'url_name': 'allifmaalcommonapp:commonSpaces'},
+        {'name': 'Rooms', 'url_name': 'allifmaalcommonapp:commonSpaceUnits'},
        
     ],
     'Realestate': [
@@ -68,9 +75,13 @@ allifmaal_sector_specific_links= {
         
     ],
     'Logistics': [
+        {'name': 'Shipments', 'url_name': 'allifmaalcommonapp:commonTransits'},
+        {'name': 'Flights', 'url_name': 'allifmaallogisticsapp:flights'},
+        {'name': 'Tickets', 'url_name': 'allifmaallogisticsapp:flightTickets'},
        
     ],
     'Service': [
+        {'name': 'Customers', 'url_name': 'allifmaalcommonapp:commonCustomers'},
        
     ],
     # You can also have a 'default' or 'fallback' set of links if 'else' is important

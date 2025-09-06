@@ -50,6 +50,40 @@ delete_status= [
     ('Undeletable','Undeletable'),
     ('Deletable', 'Deletable'),
     ]
+flight_status= [
+    ('Scheduled','Scheduled'),
+    ('Delayed', 'Delayed'),
+    ('Cancelled', 'Cancelled'),
+    ('In-Flight', 'In-Flight'),
+    ('Landed', 'Landed'),
+    ('Boarding', 'Boarding'),
+    ('On-Time', 'On-Time'),
+    ('Diverted', 'Diverted'),
+    ('Unknown', 'Unknown'),
+    ]
+Flight_Ticket_Type= [
+    ('Economy','Economy'),
+    ('Business', 'Business'),
+    ('First-Class', 'First-Class'),
+    ('Premium-Economy', 'Premium-Economy'),
+    ('Charter', 'Charter'),
+    ('Other', 'Other'),
+    ]
+Flight_Ticket_Status= [
+    ('Booked','Booked'),
+    ('Checked-In', 'Checked-In'),
+    ('Cancelled', 'Cancelled'),
+    ('Boarded', 'Boarded'),
+    ('No-Show', 'No-Show'),
+    ('Completed', 'Completed'),
+    ('Refunded', 'Refunded'),
+    ('Pending', 'Pending'),
+    ('Confirmed', 'Confirmed'),
+    ('Waitlisted', 'Waitlisted'),
+    ('Other', 'Other'),
+    
+]
+
 
 PROPERTY_UNIT_TYPES = [
         ('Apartment', 'Apartment'),

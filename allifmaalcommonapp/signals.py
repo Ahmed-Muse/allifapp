@@ -15,11 +15,11 @@ logger = logging.getLogger('allifmaalcommonapp') # Use your app-specific logger
 # --- Default Sectors to Create ---
 # You can customize this list
 DEFAULT_SECTORS = [
-    {'name': 'Sales', 'notes': 'Serves sales and general distribution'},
+    {'name': 'Distribution', 'notes': 'Serves sales and general distribution'},
     {'name': 'Healthcare', 'notes': 'Hospitals, clinics, medical services'},
     {'name': 'Education', 'notes': 'Schools, universities, training centers'},
     {'name': 'Hospitality', 'notes': 'Hotels, restaurants, tourism'},
-    {'name': 'Real Estate', 'notes': 'Property management, sales, development'},
+    {'name': 'Realestate', 'notes': 'Property management, sales, development'},
     {'name': 'Logistics', 'notes': 'Transportation, warehousing, supply chain'},
     {'name': 'Service', 'notes': 'Consulting, IT services, maintenance'},
 ]

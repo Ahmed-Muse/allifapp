@@ -1,0 +1,132 @@
+  {% extends 'allifmaalcommonapp/ui/details/item-details.html'%}
+  {% load humanize %}
+  {% load allif_navigation_tags %}
+  {% block add-form-header-block %}
+ <a href="{% allif_get_single_nav_link_url 'Transits' user_var glblslug %}">Transport</a>
+
+  {%endblock%}
+
+  {% block details-table-col-one %}
+    <tr>
+      <td class="allif-fix-table-col">Name</td>
+      <td>{{allifquery.name}}</td>
+    </tr>
+      <tr>
+      <td class="allif-fix-table-col">Description</td>
+      <td>{{allifquery.description}}</td>
+    </tr>
+     <tr>
+    <td class="allif-fix-table-col">Origin</td>
+    <td>{{allifquery.origin}}</td>
+  </tr>
+  {%endblock%}
+
+  {% block details-table-col-two %}
+  <tr>
+    <td class="allif-fix-table-col">Destination</td>
+    <td>{{allifquery.destination}}</td>
+  </tr>
+ 
+   <tr>
+    <td class="allif-fix-table-col">Value</td>
+    <td>{{allifquery.value|floatformat:2|intcomma}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Consigner</td>
+    <td>{{allifquery.consigner}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Consignee</td>
+    <td>{{allifquery.consignee}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Items</td>
+    <td>{{allifquery.items}}</td>
+  </tr>
+  {% endblock %}
+  
+  {% block core-details-tab-col-one %}
+  <tr>
+    <td class="allif-fix-table-col">Quantity</td>
+    <td>{{allifquery.quantity}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Expected On</td>
+    <td>{{allifquery.expected}}</td>
+  </tr>
+  <tr>
+    <td class="allif-fix-table-col">Expires</td>
+    <td>{{allifquery.expires}}</td>
+  </tr>
+  {%endblock%}
+
+  {% block core-details-tab-col-two %}
+ 
+  <tr>
+    <td class="allif-fix-table-col">Rate</td>
+    <td>{{allifquery.rate}}</td>
+  </tr>
+  <tr>
+    <td class="allif-fix-table-col">Unit of Measure</td>
+    <td>{{allifquery.unit_of_measure}}</td>
+  </tr>
+  <tr>
+    <td class="allif-fix-table-col">Date</td>
+    <td>{{allifquery.date|date:'d/m/Y'}}</td>
+  </tr>
+  <tr>
+    <td class="allif-fix-table-col">Dispatched By</td>
+    <td>{{allifquery.dispatched_by}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Length</td>
+    <td>{{allifquery.length}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Width</td>
+    <td>{{allifquery.width}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Height</td>
+    <td>{{allifquery.height}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Weight</td>
+    <td>{{allifquery.weight}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Delivered On</td>
+    <td>{{allifquery.delivered_on}}</td>
+  </tr>
+   <tr>
+    <td class="allif-fix-table-col">Item Status</td>
+    <td>{{allifquery.shipment_status}}</td>
+  </tr>
+
+  
+
+  {% endblock %}
+
+  {% block allif_sensitive_section_col_one %}
+    <tr>
+      <td class="allif-fix-table-col">{{allifquery}}</td>
+      <td><a class="amel-table-list-identifier" href="{% allif_get_single_nav_link_url 'Transits' user_var glblslug %}">Go Back</a></td>
+    </tr>
+  {%endblock%}
+
+  {% block general-details-tab-col-two %}
+  <tr>
+    <td class="allif-fix-table-col">Description</td>
+    <td>{{allifquery.description}}</td>
+  </tr>
+  {% endblock %}
+  
+  {% block allif_sensitive_section_col_two %}
+  <tr>
+    <td class="allif-fix-table-col">Delet {{allifquery}}</td>
+    <td><a class="amel-table-list-identifier body-delete-link" href="{{ allif_contextual_action_links.DeleteShipmentItem.url }}">Delete {{allifquery}}</a></td>
+  </tr>
+  {%endblock%}
+
+  {% block item_details_related_items_full_table %} {%endblock%}
+  {% block item_details_related_items_full_half_tables %}{%endblock%}
