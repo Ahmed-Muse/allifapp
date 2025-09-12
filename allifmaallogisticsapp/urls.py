@@ -16,6 +16,9 @@ path('Logistics/Search/Flights/<str:allifusr>/<str:allifslug>/', views.flightSea
 path('Logistics/Advance/Search/Flights/<str:allifusr>/<str:allifslug>/', views.flightAdvanceSearch, name="flightAdvanceSearch"),
 
 path('Logistics/Flights/Tickets/<str:allifusr>/<str:allifslug>/', views.flightTickets, name="flightTickets"),
+path('Logistics/Generate/New/Flight/Ticket/<str:allifusr>/<str:allifslug>/', views.newFlightTicket, name="newFlightTicket"),
+
+
 path('Logistics/Add/Flight/Tickets/<int:pk>/<str:allifusr>/<str:allifslug>/', views.addFlightTickets, name="addFlightTickets"),
 path('Logistics/Want/To/Delete/This/Flight/Ticket/<int:pk>/<str:allifusr>/<str:allifslug>/', views.wantToDeleteFlightTicket, name="wantToDeleteFlightTicket"),
 path('Logistics/Delete/This/Flight/Ticket/<int:pk>/<str:allifusr>/<str:allifslug>/', views.deleteFlightTicket, name="deleteFlightTicket"),
@@ -23,6 +26,8 @@ path('Logistics/Edit/This/Flight/Ticket/<int:pk>/<str:allifusr>/<str:allifslug>/
 path('Logistics/Flight/Ticket/Details/<int:pk>/<str:allifusr>/<str:allifslug>/', views.flightTicketDetails, name="flightTicketDetails"),
 path('Logistics/Search/Flight/Tickets/<str:allifusr>/<str:allifslug>/', views.flightTicketSearch, name="flightTicketSearch"),
 path('Logistics/Advance/Search/Flight/Tickets/<str:allifusr>/<str:allifslug>/', views.flightTicketAdvanceSearch, name="flightTicketAdvanceSearch"),
+
+path('Logistics/Flight/Ticket/To/PDF/<int:pk>/<str:allifusr>/<str:allifslug>/', views.flightTicketPdf, name="flightTicketPdf"),
 
 ]  
 

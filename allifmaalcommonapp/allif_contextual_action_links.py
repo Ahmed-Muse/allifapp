@@ -23,13 +23,19 @@ allif_sector_contextual_action_require_pk_links = {
         {'name': 'commonConfirmDeleteUnits', 'url_name': 'allifmaalcommonapp:commonConfirmDeleteUnits', 'requires_pk': True},
         {'name': 'commonDeleteUnit', 'url_name': 'allifmaalcommonapp:commonDeleteUnit', 'requires_pk': True},
         
+         {'name': 'commonConfirmDeleteCountry', 'url_name': 'allifmaalcommonapp:commonConfirmDeleteCountry', 'requires_pk': True},
+        {'name': 'commonDeleteCountry', 'url_name': 'allifmaalcommonapp:commonDeleteCountry', 'requires_pk': True},
+        
+         {'name': 'commonConfirmDeleteCarrier', 'url_name': 'allifmaalcommonapp:commonConfirmDeleteCarrier', 'requires_pk': True},
+        {'name': 'commonDeleteCarrier', 'url_name': 'allifmaalcommonapp:commonDeleteCarrier', 'requires_pk': True},
+        
         {'name': 'commonWantToDeleteCategory', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCategory', 'requires_pk': True},
         {'name': 'commonDeleteCategory', 'url_name': 'allifmaalcommonapp:commonDeleteCategory', 'requires_pk': True},
         
         {'name': 'commonWantToDeleteCode', 'url_name': 'allifmaalcommonapp:commonWantToDeleteCode', 'requires_pk': True},
         {'name': 'commonDeleteCode', 'url_name': 'allifmaalcommonapp:commonDeleteCode', 'requires_pk': True},
         
-        
+       
         {'name': 'commonWantToDeleteStaffCat', 'url_name': 'allifmaalcommonapp:commonWantToDeleteStaffCat', 'requires_pk': True},
        
         
@@ -254,7 +260,10 @@ allif_sector_contextual_action_require_pk_links = {
         {'name': 'deleteFlightConfirm', 'url_name': 'allifmaallogisticsapp:wantToDeleteFlight', 'requires_pk': True},
         {'name': 'deleteFlightTicketConfirm', 'url_name': 'allifmaallogisticsapp:wantToDeleteFlightTicket', 'requires_pk': True},
       
-  
+      {'name': 'flightpdf', 'url_name': 'allifmaallogisticsapp:flightpdf', 'requires_pk': True},
+        {'name': 'addFlightDetails', 'url_name': 'allifmaallogisticsapp:addFlightDetails', 'requires_pk': True},
+      
+        {'name': 'flightTicketPdf', 'url_name': 'allifmaallogisticsapp:flightTicketPdf', 'requires_pk': True},
     ],
     
     'Service': [

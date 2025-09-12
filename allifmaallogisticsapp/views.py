@@ -82,6 +82,14 @@ def newFlight(request,*allifargs,**allifkwargs):
     new_item_obj.save()
     return redirect('allifmaallogisticsapp:flights',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
 
+
+@allif_base_view_wrapper
+def addFlightDetails(request, pk, *allifargs, **allifkwargs):
+    allifquery=get_object_or_404(FlightsModel, id=pk)
+    return allif_common_form_edit_and_save(request,pk,AddFlightDetailsForm,"Flight Details",
+    'addFlightDetails','allifmaallogisticsapp/flights/add_flight_details.html',
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaallogisticsapp',)
+    
 @allif_base_view_wrapper
 def wantToDeleteFlight(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,FlightsModel,"Delete this item",'allifmaallogisticsapp/flights/delete-flight-confirm.html')
@@ -102,12 +110,6 @@ def flightAdvanceSearch(request,*allifargs,**allifkwargs):
         template_html_path='allifmaallogisticsapp/flights/flights.html',
         template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html',)
  
-@allif_base_view_wrapper
-def addFlightDetails(request, pk, *allifargs, **allifkwargs):
-    allifquery=get_object_or_404(FlightsModel, id=pk)
-    return allif_common_form_edit_and_save(request,pk,AddFlightDetailsForm,"Flight Details",
-    'addFlightDetails','allifmaallogisticsapp/flights/add_flight_details.html',
-    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaallogisticsapp',)
 
 
 @allif_base_view_wrapper
@@ -124,9 +126,32 @@ def flightTickets(request,*allifargs,**allifkwargs):
     allifqueryset =allif_filtered_and_sorted_queryset(request,TicketsModel,allif_data,explicit_scope='all')
     context={"title":title,"allifqueryset":allifqueryset,"sort_options": allifqueryset.sort_options,"formats":formats,}
     return render(request,'allifmaallogisticsapp/flights/tickets/tickets.html',context)
+
+
+@allif_base_view_wrapper
+def newFlightTicket(request,*allifargs,**allifkwargs):
+    allif_data=common_shared_data(request)
+    
+    ###### start... UID generation ##################
+    allifquery=TicketsModel.all_objects.filter(company=request.user.company)
+    unque=str(uuid4()).split('-')[2]
+    nmbr=int(allifquery.count())+int(1)
+    currntyear=timezone.now().date().today().year
+    allifuid=str(nmbr)+"/"+str(unque)
+    ###### End... UID generation ##################
+
+    if allifquery:
+        item_no='TCKT'+"/"+str(allifuid)
+    else:
+        item_no= 'TCKT/1'+"/"+str(uuid4()).split('-')[2]
+
+    new_item_obj=TicketsModel.all_objects.create(number=item_no,company=request.user.company,owner=request.user,division=allif_data.get("logged_user_division"),branch=allif_data.get("logged_user_branch"),department=allif_data.get("logged_user_department"))
+    new_item_obj.save()
+    return redirect('allifmaallogisticsapp:flightTickets',allifusr=allif_data.get("usrslg"),allifslug=allif_data.get("compslg"))
+
+
 @allif_base_view_wrapper
 def addFlightTickets(request,pk,*allifargs,**allifkwargs):
-    allif_data=common_shared_data(request)
     allifquery=get_object_or_404(FlightsModel, id=pk)
     allifqueryset=TicketsModel.all_objects.filter(flight=allifquery)
    
@@ -134,11 +159,11 @@ def addFlightTickets(request,pk,*allifargs,**allifkwargs):
         obj.flight=allifquery
     my_extra_context={"allifquery":allifquery,"allifqueryset": allifqueryset}
     return allif_common_form_submission_and_save(request,form_class=AddFlightTicketDetailsForm,
-        title_text="Add Transit Items",
+        title_text="Add Flight Tickets",
         success_redirect_url_name='addFlightTickets', # This URL expects a PK
         template_path='allifmaallogisticsapp/flights/tickets/add_tickets.html',
         pre_save_callback=transaction_item_pre_save,redirect_with_pk=True,redirect_pk_value=pk,
-        extra_context=my_extra_context,)
+        extra_context=my_extra_context,app_namespace='allifmaallogisticsapp',)
 
 @allif_base_view_wrapper
 def wantToDeleteFlightTicket(request,pk,*allifargs,**allifkwargs):
@@ -146,21 +171,19 @@ def wantToDeleteFlightTicket(request,pk,*allifargs,**allifkwargs):
 
 @allif_base_view_wrapper
 def deleteFlightTicket(request,pk,*allifargs,**allifkwargs):
-    query=get_object_or_404(TicketsModel, id=pk)
-    allifquery=query.flight.id
+   
     return allif_delete_hanlder(request,model_name='TicketsModel',
-    pk=pk,success_redirect_url_name='flightTickets',redirect_with_pk=True,redirect_pk_value=allifquery)
+    pk=pk,success_redirect_url_name='flightTickets',app_namespace='allifmaallogisticsapp',)
 
 
 
 @allif_base_view_wrapper
 def editFlightTicket(request, pk, *allifargs, **allifkwargs):
-    query=get_object_or_404(TicketsModel, id=pk) 
-    allifquery=query.flight.id
-    print(allifquery)
-    return allif_common_form_edit_and_save(request,pk,AddFlightTicketDetailsForm,"Edit Item",
+    allifquery=get_object_or_404(TicketsModel, id=pk) 
+   
+    return allif_common_form_edit_and_save(request,pk,AddFlightTicketDetailsForm,"Edit Ticket",
     'editFlightTicket','allifmaallogisticsapp/flights/tickets/add_tickets.html',
-    redirect_with_pk=True,redirect_pk_value=allifquery,app_namespace='allifmaallogisticsapp',)
+    redirect_with_pk=True,redirect_pk_value=pk,app_namespace='allifmaallogisticsapp',)
    
 @allif_base_view_wrapper
 def flightTicketDetails(request, pk, *allifargs, **allifkwargs):
@@ -180,4 +203,9 @@ def flightTicketAdvanceSearch(request,*allifargs,**allifkwargs):
         template_html_path='allifmaallogisticsapp/flights/tickets/tickets.html',
         template_pdf_path='allifmaalcommonapp/ui/pdf/items-pdf.html',)
  
-    
+
+
+@allif_base_view_wrapper
+def flightTicketPdf(request, pk, *allifargs, **allifkwargs):
+    return allif_document_pdf_handler(request,pk=pk,document_config_key='TicketsModel',)
+  

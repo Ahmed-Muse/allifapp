@@ -117,6 +117,20 @@ path('Edit/Unit/Details/Of/Measure/Details/<str:pk>/<str:allifusr>/<str:allifslu
 path('Delete/Unit/Of/Measure/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteUnit, name="commonDeleteUnit"),
 path('Delete/Confirm/Initiate/Unit/Of/Measure/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonConfirmDeleteUnits, name="commonConfirmDeleteUnits"),
 
+################################## Countries ##############
+path('Countries/Nations/States/<str:allifusr>/<str:allifslug>/', views.commonCountries, name="commonCountries"),
+path('Add/New/Country/State/Nation/<str:allifusr>/<str:allifslug>/', views.commonAddCountry, name="commonAddCountry"),
+path('Edit/Country/Nation/State/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCountry, name="commonEditCountry"),
+path('Delete/Country/Nation/State/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteCountry, name="commonDeleteCountry"),
+path('Delete/Confirm/Country/Nation/State/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonConfirmDeleteCountry, name="commonConfirmDeleteCountry"),
+
+################################## Carriers ##############
+path('Carrier/s/<str:allifusr>/<str:allifslug>/', views.commonCarriers, name="commonCarriers"),
+path('Add/New/Carrier/s/<str:allifusr>/<str:allifslug>/', views.commonAddCarrier, name="commonAddCarrier"),
+path('Edit/Carrier/Details/<str:pk>/<str:allifusr>/<str:allifslug>/', views.commonEditCarrier, name="commonEditCarrier"),
+path('Delete/Carrier/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonDeleteCarrier, name="commonDeleteCarrier"),
+path('Delete/Carrier/Confirm/Permntly/<str:pk>/<str:allifusr>/<str:allifslug>/Permanently/', views.commonConfirmDeleteCarrier, name="commonConfirmDeleteCarrier"),
+
 ################################## Operation Years ##############
 path('Operation/Years/<str:allifusr>/<str:allifslug>/Fiscals/Academics', views.commonOperationYears, name="commonOperationYears"),
 path('Add/New/Operation/Year/<str:allifusr>/<str:allifslug>/', views.commonAddOperationYear, name="commonAddOperationYear"),

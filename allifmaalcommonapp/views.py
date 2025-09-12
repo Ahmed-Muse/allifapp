@@ -1412,6 +1412,56 @@ def commonDeleteUnit(request,pk,*allifargs,**allifkwargs):
 def commonConfirmDeleteUnits(request,pk,*allifargs,**allifkwargs):
     return allif_delete_confirm(request,pk,CommonUnitsModel,"Delete this item",'allifmaalcommonapp/units/delete-unit-confirm.html')
 
+############################ Countries #########
+@allif_base_view_wrapper
+def commonCountries(request,*allifargs,**allifkwargs):
+    title="Countries"
+    allif_data=common_shared_data(request)
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonCountriesModel,allif_data)
+    context={"title":title,"allifqueryset":allifqueryset,}
+    return render(request,'allifmaalcommonapp/countries/countries.html',context)
+
+@allif_base_view_wrapper
+def commonAddCountry(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonAddCountryForm,"Add Country","commonCountries",'allifmaalcommonapp/countries/add_country.html')
+
+@allif_base_view_wrapper
+def commonEditCountry(request,pk,*allifargs,**allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonAddCountryForm,"Edit Country","commonCountries",'allifmaalcommonapp/countries/add_country.html')
+
+@allif_base_view_wrapper
+def commonDeleteCountry(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_hanlder(request,model_name='CommonCountriesModel',pk=pk,success_redirect_url_name='commonCountries')
+
+@allif_base_view_wrapper
+def commonConfirmDeleteCountry(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonCountriesModel,"Delete this item",'allifmaalcommonapp/countries/delete-country-confirm.html')
+
+############################ Carriers #########
+@allif_base_view_wrapper
+def commonCarriers(request,*allifargs,**allifkwargs):
+    title="Carriers"
+    allif_data=common_shared_data(request)
+    allifqueryset =allif_filtered_and_sorted_queryset(request,CommonCarriersModel,allif_data)
+    context={"title":title,"allifqueryset":allifqueryset,}
+    return render(request,'allifmaalcommonapp/carriers/carriers.html',context)
+
+@allif_base_view_wrapper
+def commonAddCarrier(request, *allifargs, **allifkwargs):
+    return allif_common_form_submission_and_save(request,CommonAddCarrierForm,"Add Carrier","commonCarriers",'allifmaalcommonapp/carriers/add_carrier.html')
+
+@allif_base_view_wrapper
+def commonEditCarrier(request,pk,*allifargs,**allifkwargs):
+    return allif_common_form_edit_and_save(request,pk,CommonAddCarrierForm,"Edit Carrier","commonCarriers",'allifmaalcommonapp/carriers/add_carrier.html')
+
+@allif_base_view_wrapper
+def commonDeleteCarrier(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_hanlder(request,model_name='CommonCarriersModel',pk=pk,success_redirect_url_name='commonCarriers')
+
+@allif_base_view_wrapper
+def commonConfirmDeleteCarrier(request,pk,*allifargs,**allifkwargs):
+    return allif_delete_confirm(request,pk,CommonCarriersModel,"Delete this item",'allifmaalcommonapp/carriers/delete-carrier-confirm.html')
+
 ########################################33 categories ####################3
 @allif_base_view_wrapper
 def commonCategories(request,*allifargs,**allifkwargs):
@@ -5108,7 +5158,6 @@ def commonWantToDeleteProgress(request,pk,*allifargs,**allifkwargs):
 def commonProgressSearch(request,*allifargs,**allifkwargs):
     return allif_search_handler(request,model_name='CommonProgressModel',search_fields_key='CommonProgressModel',
     template_path='allifmaalcommonapp/records/progress/progress.html',search_input_name='allifsearchcommonfieldname',)
-
 
 @allif_base_view_wrapper
 def commonProgressAdvanceSearch(request,*allifargs,**allifkwargs):

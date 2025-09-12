@@ -29598,3 +29598,233 @@ INFO 2025-09-06 21:10:23,155 autoreload 29200 21384 C:\am\allifapp\allifapperp\a
 INFO 2025-09-06 21:10:24,902 autoreload 16544 39960 Watching for file changes with StatReloader
 INFO 2025-09-06 21:13:59,106 autoreload 16544 39960 C:\am\allifapp\allifapperp\allifapperp\settings.py changed, reloading.
 INFO 2025-09-06 21:14:00,632 autoreload 43828 30692 Watching for file changes with StatReloader
+INFO 2025-09-09 17:29:18,082 autoreload 16440 10736 Watching for file changes with StatReloader
+INFO 2025-09-09 17:35:07,403 autoreload 44028 17636 Watching for file changes with StatReloader
+INFO 2025-09-09 17:40:59,945 autoreload 16812 46664 Watching for file changes with StatReloader
+WARNING 2025-09-09 17:42:15,653 log 16812 29884 Not Found: /favicon.ico
+WARNING 2025-09-09 17:42:21,954 allif_navigation_tags 16812 38420 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-09-09 17:42:27,901 allif_navigation_tags 16812 38420 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-09-09 21:03:16,373 allif_navigation_tags 16812 972 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-09-09 21:03:22,075 allif_navigation_tags 16812 972 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-09-09 21:03:54,321 allif_navigation_tags 16812 972 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-09-09 21:04:03,436 allif_navigation_tags 16812 972 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-09-11 17:46:03,631 allif_navigation_tags 16812 32588 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-09-11 22:01:41,979 allif_navigation_tags 16812 41304 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-09-11 22:01:49,183 allif_navigation_tags 16812 41304 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-09-11 22:06:32,531 autoreload 16812 46664 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-09-11 22:06:36,245 autoreload 49260 3004 Watching for file changes with StatReloader
+INFO 2025-09-11 22:08:22,716 autoreload 23652 27864 Watching for file changes with StatReloader
+INFO 2025-09-11 22:12:46,039 autoreload 23652 27864 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-09-11 22:12:46,109 autoreload 49260 3004 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-09-11 22:12:48,391 autoreload 35956 38436 Watching for file changes with StatReloader
+INFO 2025-09-11 22:12:48,412 autoreload 30032 2952 Watching for file changes with StatReloader
+INFO 2025-09-12 09:42:35,386 autoreload 10864 13260 Watching for file changes with StatReloader
+ERROR 2025-09-12 09:50:21,849 log 10864 11840 Internal Server Error: /Allifmaal/ERP/System/Healthcare/App/Healthcare/Home/ahmedmuse-cbedca9dd565/demo-company-ltdsadi-road-054757f928fe/
+Traceback (most recent call last):
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\am\allifapp\allifapperp\allifmaalshaafiapp\views.py", line 25, in shaafiHome
+    company=request.user.company
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ahmed\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\functional.py", line 268, in inner
+    return func(_wrapped, *args)
+AttributeError: 'AnonymousUser' object has no attribute 'company'
+WARNING 2025-09-12 09:50:22,115 log 10864 11840 Not Found: /favicon.ico
+WARNING 2025-09-12 17:46:45,627 allif_navigation_tags 10864 6328 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+WARNING 2025-09-12 17:47:04,567 allif_navigation_tags 10864 6328 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-09-12 17:48:56,056 autoreload 10864 13260 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 17:48:58,807 autoreload 12716 25180 Watching for file changes with StatReloader
+INFO 2025-09-12 17:52:58,965 autoreload 12716 25180 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 17:53:01,319 autoreload 28620 25876 Watching for file changes with StatReloader
+INFO 2025-09-12 17:54:09,379 autoreload 28620 25876 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-09-12 17:54:10,676 autoreload 14840 27904 Watching for file changes with StatReloader
+INFO 2025-09-12 17:57:15,082 autoreload 14840 27904 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 17:57:16,524 autoreload 25892 11456 Watching for file changes with StatReloader
+WARNING 2025-09-12 17:57:19,550 log 25892 12240 Not Found: /Allifmaal/ERP/System/Logistics/App/Logistics/Flight/To/PDF/1/user-full-names-cdb1eaf42c19/demo-company-ltdsadi-road-054757f928fe/
+WARNING 2025-09-12 17:57:19,682 log 25892 12240 Not Found: /favicon.ico
+INFO 2025-09-12 17:57:58,430 autoreload 25892 11456 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 17:57:59,999 autoreload 20520 27756 Watching for file changes with StatReloader
+INFO 2025-09-12 17:58:31,720 autoreload 20520 27756 C:\am\allifapp\allifapperp\allifmaallogisticsapp\urls.py changed, reloading.
+INFO 2025-09-12 17:58:32,664 autoreload 18776 26908 Watching for file changes with StatReloader
+INFO 2025-09-12 17:59:27,828 autoreload 18776 26908 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-09-12 17:59:28,973 autoreload 24056 24744 Watching for file changes with StatReloader
+INFO 2025-09-12 17:59:34,435 autoreload 24056 24744 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-09-12 17:59:37,289 autoreload 15724 9720 Watching for file changes with StatReloader
+INFO 2025-09-12 18:03:06,930 autoreload 15724 9720 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 18:03:07,951 autoreload 25696 27324 Watching for file changes with StatReloader
+INFO 2025-09-12 18:28:16,375 autoreload 25696 27324 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-09-12 18:28:17,799 autoreload 2364 10268 Watching for file changes with StatReloader
+INFO 2025-09-12 18:29:12,371 autoreload 2364 10268 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-09-12 18:29:13,532 autoreload 16688 22896 Watching for file changes with StatReloader
+INFO 2025-09-12 18:29:42,192 autoreload 2168 27684 Watching for file changes with StatReloader
+INFO 2025-09-12 18:33:14,748 autoreload 2168 27684 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-09-12 18:33:15,701 autoreload 27036 12348 Watching for file changes with StatReloader
+INFO 2025-09-12 18:34:09,244 autoreload 27036 12348 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-09-12 18:34:10,448 autoreload 26828 26668 Watching for file changes with StatReloader
+INFO 2025-09-12 18:36:57,294 autoreload 26828 26668 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-09-12 18:36:58,153 autoreload 24700 17268 Watching for file changes with StatReloader
+INFO 2025-09-12 19:05:36,625 autoreload 24700 17268 C:\am\allifapp\allifapperp\allifmaalcommonapp\urls.py changed, reloading.
+INFO 2025-09-12 19:05:38,765 autoreload 25800 17248 Watching for file changes with StatReloader
+INFO 2025-09-12 19:11:23,979 autoreload 25800 17248 C:\am\allifapp\allifapperp\allifmaalcommonapp\forms.py changed, reloading.
+INFO 2025-09-12 19:11:24,959 autoreload 25472 24812 Watching for file changes with StatReloader
+INFO 2025-09-12 19:14:43,913 autoreload 25472 24812 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-09-12 19:14:44,880 autoreload 28448 16840 Watching for file changes with StatReloader
+INFO 2025-09-12 19:17:45,681 autoreload 28448 16840 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-09-12 19:17:46,612 autoreload 26996 13684 Watching for file changes with StatReloader
+INFO 2025-09-12 19:20:03,596 autoreload 26996 13684 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-09-12 19:20:04,552 autoreload 24604 26368 Watching for file changes with StatReloader
+INFO 2025-09-12 19:22:13,214 autoreload 24604 26368 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-12 19:22:14,175 autoreload 12472 14304 Watching for file changes with StatReloader
+INFO 2025-09-12 19:23:45,305 autoreload 12472 14304 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-09-12 19:23:46,209 autoreload 14556 26216 Watching for file changes with StatReloader
+INFO 2025-09-12 19:25:00,863 autoreload 14556 26216 C:\am\allifapp\allifapperp\allifmaalcommonapp\utils.py changed, reloading.
+INFO 2025-09-12 19:25:01,848 autoreload 27060 19616 Watching for file changes with StatReloader
+INFO 2025-09-12 19:26:02,479 autoreload 27060 19616 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-12 19:26:03,382 autoreload 26092 23652 Watching for file changes with StatReloader
+INFO 2025-09-12 19:28:24,030 autoreload 26092 23652 C:\am\allifapp\allifapperp\allifmaalcommonapp\views.py changed, reloading.
+INFO 2025-09-12 19:28:25,075 autoreload 12796 17292 Watching for file changes with StatReloader
+INFO 2025-09-12 19:32:20,202 autoreload 12796 17292 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:32:21,260 autoreload 20264 9408 Watching for file changes with StatReloader
+INFO 2025-09-12 19:32:57,642 autoreload 27968 9108 Watching for file changes with StatReloader
+INFO 2025-09-12 19:33:27,318 autoreload 27968 9108 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:33:28,568 autoreload 23904 16756 Watching for file changes with StatReloader
+INFO 2025-09-12 19:33:35,363 autoreload 23904 16756 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:33:36,446 autoreload 2300 13648 Watching for file changes with StatReloader
+INFO 2025-09-12 19:34:02,447 autoreload 23328 25972 Watching for file changes with StatReloader
+INFO 2025-09-12 19:34:58,186 autoreload 23328 25972 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:34:59,381 autoreload 18776 17240 Watching for file changes with StatReloader
+INFO 2025-09-12 19:35:15,012 autoreload 18776 17240 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:35:16,073 autoreload 3884 19304 Watching for file changes with StatReloader
+INFO 2025-09-12 19:36:01,167 autoreload 3884 19304 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:36:02,391 autoreload 4196 24812 Watching for file changes with StatReloader
+INFO 2025-09-12 19:36:22,885 autoreload 4196 24812 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:36:23,989 autoreload 16032 17416 Watching for file changes with StatReloader
+INFO 2025-09-12 19:36:45,580 autoreload 16032 17416 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:36:46,695 autoreload 24984 11556 Watching for file changes with StatReloader
+INFO 2025-09-12 19:36:54,770 autoreload 24984 11556 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:36:56,123 autoreload 27472 27116 Watching for file changes with StatReloader
+INFO 2025-09-12 19:37:14,832 autoreload 21196 20776 Watching for file changes with StatReloader
+INFO 2025-09-12 19:37:41,005 autoreload 21196 20776 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-12 19:37:42,087 autoreload 26656 11504 Watching for file changes with StatReloader
+INFO 2025-09-12 19:38:20,973 autoreload 26656 11504 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-12 19:38:22,279 autoreload 11840 26148 Watching for file changes with StatReloader
+INFO 2025-09-12 19:39:01,488 autoreload 11840 26148 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-12 19:39:02,754 autoreload 9040 25264 Watching for file changes with StatReloader
+INFO 2025-09-12 19:42:34,737 autoreload 9040 25264 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 19:42:36,100 autoreload 16896 21188 Watching for file changes with StatReloader
+INFO 2025-09-12 19:42:58,134 autoreload 16896 21188 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-12 19:42:59,369 autoreload 24968 8440 Watching for file changes with StatReloader
+INFO 2025-09-12 19:43:21,245 autoreload 24968 8440 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-12 19:43:22,361 autoreload 18976 6116 Watching for file changes with StatReloader
+INFO 2025-09-12 19:43:52,864 autoreload 2788 19624 Watching for file changes with StatReloader
+INFO 2025-09-12 19:48:37,461 autoreload 2788 19624 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-12 19:48:38,588 autoreload 24852 18280 Watching for file changes with StatReloader
+INFO 2025-09-12 19:50:18,545 autoreload 24852 18280 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-12 19:50:19,670 autoreload 12276 3208 Watching for file changes with StatReloader
+INFO 2025-09-12 20:07:11,100 autoreload 12276 3208 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:07:12,424 autoreload 27768 11284 Watching for file changes with StatReloader
+ERROR 2025-09-12 20:07:22,276 utils 27768 27904 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-cdb1eaf42c19', 'allifslug': 'demo-company-ltdsadi-road-054757f928fe', 'pk': 3}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-12 20:10:20,803 autoreload 27768 11284 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:10:22,094 autoreload 18504 11260 Watching for file changes with StatReloader
+ERROR 2025-09-12 20:10:23,616 utils 18504 21364 Failed to reverse URL 'allifmaallogisticsapp:editFlightTicket' with kwargs {'allifusr': 'user-full-names-cdb1eaf42c19', 'allifslug': 'demo-company-ltdsadi-road-054757f928fe', 'pk': <TicketsModel: None: FLT/1/4ea5 - A1>}: Reverse for 'editFlightTicket' with keyword arguments '{'allifusr': 'user-full-names-cdb1eaf42c19', 'allifslug': 'demo-company-ltdsadi-road-054757f928fe', 'pk': <TicketsModel: None: FLT/1/4ea5 - A1>}' not found. 1 pattern(s) tried: ['Allifmaal/ERP/System/Logistics/App/Logistics/Edit/This/Flight/Ticket/(?P<pk>[0-9]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+ERROR 2025-09-12 20:10:27,529 utils 18504 21364 Failed to reverse URL 'allifmaallogisticsapp:editFlightTicket' with kwargs {'allifusr': 'user-full-names-cdb1eaf42c19', 'allifslug': 'demo-company-ltdsadi-road-054757f928fe', 'pk': <TicketsModel: None: FLT/1/4ea5 - A1>}: Reverse for 'editFlightTicket' with keyword arguments '{'allifusr': 'user-full-names-cdb1eaf42c19', 'allifslug': 'demo-company-ltdsadi-road-054757f928fe', 'pk': <TicketsModel: None: FLT/1/4ea5 - A1>}' not found. 1 pattern(s) tried: ['Allifmaal/ERP/System/Logistics/App/Logistics/Edit/This/Flight/Ticket/(?P<pk>[0-9]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+ERROR 2025-09-12 20:10:34,089 utils 18504 21364 Failed to reverse URL 'allifmaallogisticsapp:editFlightTicket' with kwargs {'allifusr': 'user-full-names-cdb1eaf42c19', 'allifslug': 'demo-company-ltdsadi-road-054757f928fe', 'pk': <TicketsModel: None: FLT/1/4ea5 - A1>}: Reverse for 'editFlightTicket' with keyword arguments '{'allifusr': 'user-full-names-cdb1eaf42c19', 'allifslug': 'demo-company-ltdsadi-road-054757f928fe', 'pk': <TicketsModel: None: FLT/1/4ea5 - A1>}' not found. 1 pattern(s) tried: ['Allifmaal/ERP/System/Logistics/App/Logistics/Edit/This/Flight/Ticket/(?P<pk>[0-9]+)/(?P<allifusr>[^/]+)/(?P<allifslug>[^/]+)/\\Z']
+INFO 2025-09-12 20:11:08,675 autoreload 18504 11260 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:11:09,830 autoreload 2900 25832 Watching for file changes with StatReloader
+INFO 2025-09-12 20:34:46,628 autoreload 2900 25832 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:34:47,785 autoreload 27020 15068 Watching for file changes with StatReloader
+INFO 2025-09-12 20:36:08,227 autoreload 27020 15068 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:36:09,515 autoreload 25416 24964 Watching for file changes with StatReloader
+INFO 2025-09-12 20:41:24,215 autoreload 25416 24964 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:41:25,361 autoreload 13684 24928 Watching for file changes with StatReloader
+INFO 2025-09-12 20:41:43,751 autoreload 13684 24928 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:41:45,036 autoreload 7648 9928 Watching for file changes with StatReloader
+INFO 2025-09-12 20:42:57,326 autoreload 7648 9928 C:\am\allifapp\allifapperp\allifmaallogisticsapp\urls.py changed, reloading.
+INFO 2025-09-12 20:42:58,452 autoreload 18776 28284 Watching for file changes with StatReloader
+INFO 2025-09-12 20:43:02,302 autoreload 18776 28284 C:\am\allifapp\allifapperp\allifmaallogisticsapp\urls.py changed, reloading.
+INFO 2025-09-12 20:43:03,323 autoreload 12212 16072 Watching for file changes with StatReloader
+INFO 2025-09-12 20:43:54,754 autoreload 12212 16072 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-12 20:43:55,988 autoreload 19044 25248 Watching for file changes with StatReloader
+INFO 2025-09-12 20:45:10,379 autoreload 19044 25248 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-12 20:45:11,708 autoreload 25172 20448 Watching for file changes with StatReloader
+WARNING 2025-09-12 20:45:13,321 allif_navigation_tags 25172 23340 General navigation link with name 'NewFlightTicket' not found in allif_single_access_general_links.
+INFO 2025-09-12 20:45:24,590 autoreload 25172 20448 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-12 20:45:25,825 autoreload 24744 26608 Watching for file changes with StatReloader
+INFO 2025-09-12 20:45:34,888 autoreload 24744 26608 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-12 20:45:36,051 autoreload 18452 25472 Watching for file changes with StatReloader
+WARNING 2025-09-12 20:45:55,571 allif_navigation_tags 18452 12608 General navigation link with name 'NewFlightTicket' not found in allif_single_access_general_links.
+INFO 2025-09-12 20:46:52,122 autoreload 18452 25472 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_navigation_links.py changed, reloading.
+INFO 2025-09-12 20:46:53,258 autoreload 25120 5932 Watching for file changes with StatReloader
+INFO 2025-09-12 20:49:36,484 autoreload 25120 5932 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:49:37,614 autoreload 27448 25212 Watching for file changes with StatReloader
+INFO 2025-09-12 20:50:56,132 autoreload 27448 25212 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:50:57,424 autoreload 9480 24548 Watching for file changes with StatReloader
+INFO 2025-09-12 20:52:20,749 autoreload 9480 24548 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:52:21,985 autoreload 25252 11276 Watching for file changes with StatReloader
+INFO 2025-09-12 20:52:44,128 autoreload 25252 11276 C:\am\allifapp\allifapperp\allifmaallogisticsapp\urls.py changed, reloading.
+INFO 2025-09-12 20:52:45,334 autoreload 14780 11520 Watching for file changes with StatReloader
+ERROR 2025-09-12 20:53:27,939 utils 14780 21556 Failed to reverse URL 'allifmaalcommonapp:flightTickets' with kwargs {'allifusr': 'user-full-names-cdb1eaf42c19', 'allifslug': 'demo-company-ltdsadi-road-054757f928fe', 'pk': 3}: Reverse for 'flightTickets' not found. 'flightTickets' is not a valid view function or pattern name.
+INFO 2025-09-12 20:54:56,031 autoreload 14780 11520 C:\am\allifapp\allifapperp\allifmaallogisticsapp\urls.py changed, reloading.
+INFO 2025-09-12 20:54:57,743 autoreload 3860 26100 Watching for file changes with StatReloader
+INFO 2025-09-12 20:55:23,846 autoreload 3860 26100 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:55:24,961 autoreload 25668 4780 Watching for file changes with StatReloader
+INFO 2025-09-12 20:56:17,911 autoreload 25668 4780 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:56:19,110 autoreload 3032 22952 Watching for file changes with StatReloader
+INFO 2025-09-12 20:57:12,808 autoreload 3032 22952 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:57:13,933 autoreload 24264 16912 Watching for file changes with StatReloader
+INFO 2025-09-12 20:57:20,849 autoreload 24264 16912 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:57:21,907 autoreload 26424 11820 Watching for file changes with StatReloader
+ERROR 2025-09-12 20:58:49,445 utils 26424 14840 Failed to reverse URL 'allifmaalcommonapp:addFlightTickets' with kwargs {'allifusr': 'user-full-names-cdb1eaf42c19', 'allifslug': 'demo-company-ltdsadi-road-054757f928fe', 'pk': 3}: Reverse for 'addFlightTickets' not found. 'addFlightTickets' is not a valid view function or pattern name.
+INFO 2025-09-12 20:59:29,335 autoreload 26424 11820 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 20:59:30,621 autoreload 28440 9280 Watching for file changes with StatReloader
+INFO 2025-09-12 21:00:25,415 autoreload 28440 9280 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 21:00:26,652 autoreload 4740 27684 Watching for file changes with StatReloader
+INFO 2025-09-12 21:00:33,564 autoreload 4740 27684 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 21:00:34,631 autoreload 26240 15288 Watching for file changes with StatReloader
+INFO 2025-09-12 21:09:49,105 autoreload 26240 15288 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 21:09:50,447 autoreload 18392 27448 Watching for file changes with StatReloader
+WARNING 2025-09-12 21:09:56,940 allif_navigation_tags 18392 14332 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-09-12 21:10:03,813 allif_navigation_tags 18392 14332 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-09-12 21:10:27,357 allif_navigation_tags 18392 14332 General navigation link with name 'ReceiveClientPayment' not found in allif_single_access_general_links.
+WARNING 2025-09-12 21:11:10,382 allif_navigation_tags 18392 14332 Could not resolve URL for general link 'AddCompany' (URL name: 'allifmaalcommonapp:commonAddnewEntity'). Check URL patterns.
+INFO 2025-09-12 21:17:00,032 autoreload 18392 27448 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 21:17:01,205 autoreload 18080 25540 Watching for file changes with StatReloader
+INFO 2025-09-12 21:17:14,020 autoreload 25336 13780 Watching for file changes with StatReloader
+INFO 2025-09-12 21:17:21,345 autoreload 25336 13780 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 21:17:22,601 autoreload 20900 27328 Watching for file changes with StatReloader
+INFO 2025-09-12 21:17:34,863 autoreload 20900 27328 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 21:17:35,823 autoreload 28016 13276 Watching for file changes with StatReloader
+INFO 2025-09-12 21:28:25,938 autoreload 28016 13276 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 21:28:27,195 autoreload 17272 17128 Watching for file changes with StatReloader
+INFO 2025-09-12 21:34:31,868 autoreload 17272 17128 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-12 21:34:33,233 autoreload 28104 13116 Watching for file changes with StatReloader
+INFO 2025-09-12 21:43:07,995 autoreload 28104 13116 C:\am\allifapp\allifapperp\allifmaallogisticsapp\forms.py changed, reloading.
+INFO 2025-09-12 21:43:09,267 autoreload 11600 27084 Watching for file changes with StatReloader
+INFO 2025-09-12 21:51:55,852 autoreload 11600 27084 C:\am\allifapp\allifapperp\allifmaalcommonapp\models.py changed, reloading.
+INFO 2025-09-12 21:51:57,139 autoreload 21040 10680 Watching for file changes with StatReloader
+INFO 2025-09-12 21:53:57,155 autoreload 21040 10680 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 21:53:58,420 autoreload 26360 7736 Watching for file changes with StatReloader
+INFO 2025-09-12 21:55:10,802 autoreload 26360 7736 C:\am\allifapp\allifapperp\allifmaallogisticsapp\models.py changed, reloading.
+INFO 2025-09-12 21:55:12,069 autoreload 20444 14820 Watching for file changes with StatReloader
+INFO 2025-09-12 22:03:17,354 autoreload 20444 14820 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 22:03:18,640 autoreload 26004 12816 Watching for file changes with StatReloader
+INFO 2025-09-12 22:03:22,420 autoreload 26004 12816 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 22:03:23,425 autoreload 16848 28312 Watching for file changes with StatReloader
+INFO 2025-09-12 22:04:22,366 autoreload 16848 28312 C:\am\allifapp\allifapperp\allifmaallogisticsapp\urls.py changed, reloading.
+INFO 2025-09-12 22:04:23,502 autoreload 27180 28012 Watching for file changes with StatReloader
+INFO 2025-09-12 22:05:31,256 autoreload 27180 28012 C:\am\allifapp\allifapperp\allifmaalcommonapp\allif_contextual_action_links.py changed, reloading.
+INFO 2025-09-12 22:05:32,365 autoreload 4376 26564 Watching for file changes with StatReloader
+INFO 2025-09-12 22:07:22,113 autoreload 4376 26564 C:\am\allifapp\allifapperp\allifmaallogisticsapp\views.py changed, reloading.
+INFO 2025-09-12 22:07:23,237 autoreload 16784 14628 Watching for file changes with StatReloader
+ERROR 2025-09-12 22:12:34,742 files 16784 21156 gaierror: [Errno 11001] getaddrinfo failed while extracting data from NetworkFileUri: 'https://via.placeholder.com/150x50?text=Airline+Logo' on attempt 1
+ERROR 2025-09-12 22:12:34,788 files 16784 21156 gaierror: [Errno 11001] getaddrinfo failed while extracting data from NetworkFileUri: 'https://via.placeholder.com/150x50?text=Airline+Logo' on attempt 2
+ERROR 2025-09-12 22:12:34,831 files 16784 21156 gaierror: [Errno 11001] getaddrinfo failed while extracting data from NetworkFileUri: 'https://via.placeholder.com/150x50?text=Airline+Logo' on attempt 3
+WARNING 2025-09-12 22:12:34,832 tags 16784 21156 Could not get image data from src attribute: https://via.placeholder.com/150x50?text=Airline+Logo
+'<img src="https://via.placeholder.com/150x50?text=Airline+Logo" alt="Airline Logo"/>'
+ERROR 2025-09-12 22:12:34,910 files 16784 21156 gaierror: [Errno 11001] getaddrinfo failed while extracting data from NetworkFileUri: 'https://via.placeholder.com/300x80?text=Barcode+or+QR+Code' on attempt 1
+ERROR 2025-09-12 22:12:34,955 files 16784 21156 gaierror: [Errno 11001] getaddrinfo failed while extracting data from NetworkFileUri: 'https://via.placeholder.com/300x80?text=Barcode+or+QR+Code' on attempt 2
+ERROR 2025-09-12 22:12:35,002 files 16784 21156 gaierror: [Errno 11001] getaddrinfo failed while extracting data from NetworkFileUri: 'https://via.placeholder.com/300x80?text=Barcode+or+QR+Code' on attempt 3
+WARNING 2025-09-12 22:12:35,002 tags 16784 21156 Could not get image data from src attribute: https://via.placeholder.com/300x80?text=Barcode+or+QR+Code
+'<img src="https://via.placeholder.com/300x80?text=Barcode+or+QR+Code" alt="Barcode"/>'

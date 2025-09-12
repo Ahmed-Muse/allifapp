@@ -14,16 +14,19 @@
   {% block allif-header-links %}
   <a href="{% allif_get_single_nav_link_url 'flights' user_var glblslug %}">Flights</a>
   <a href="{% allif_get_single_nav_link_url 'flightTickets' user_var glblslug %}">Tickets</a>
+  <a href="{% allif_get_single_nav_link_url 'NewFlightTicket' user_var glblslug %}">New Ticket</a>
  
   {% endblock %}
   {% block upload-excel-file %}
   {%endblock%}
   {% block list-table-headers %}
-  <td class="allif-fix-table-col"> Number</td>
+  <td class="allif-fix-table-col">Ticket Number</td>
+  <td class="allif-table-header-td">Flight Number</td>
+  <td class="allif-table-header-td">Passenger</td>
    <td class="allif-table-header-td">Origin</td>
   
   <td class="allif-table-header-td">Destination</td>
-  <td class="allif-table-header-td">Via</td>
+  
   <td class="allif-table-header-td">Status</td>
   <td class="allif-table-header-td">Date</td>
   {% endblock %}
@@ -32,15 +35,16 @@
   {% block list-table-content-seciton %}
   <td class="allif-fix-table-col">{% block list-table-content-seciton-links %}
   <a class="allif-table-links" href="{% url 'allifmaallogisticsapp:flightTicketDetails' item.id user_var glblslug %}"> {{item.number}} </a>{%endblock%}</td>
-  
+  <td class="allif-table-content-td">{{item.flight.number}}: {{item.flight.carrier}} </td>
+  <td class="allif-table-content-td"> {{item.passenger}} </td>
   <td class="allif-table-content-td"> {{item.origin}} </td>
   <td class="allif-table-content-td">{{item.destination}}</td>
-  <td class="allif-table-content-td">{{item.via}}</td>
-  <td class="allif-table-content-td">{{item.transit_status}}</td>
+  
+  <td class="allif-table-content-td">{{item.ticket_status}}</td>
   <td class="allif-table-content-td">{{item.date|date:'d/m/Y'}}</td>
   {% endblock %}
   {% block list-table-content-seciton-dropdown-links %}
-  <a href="{% url 'allifmaallogisticsapp:editFlightTicket' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Shipment Items</a>
+  <a href="{% url 'allifmaallogisticsapp:editFlightTicket' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Edit Ticket</a>
   
   
   {% endblock %}

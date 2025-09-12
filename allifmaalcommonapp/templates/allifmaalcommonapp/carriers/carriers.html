@@ -1,0 +1,16 @@
+{% extends 'allifmaalcommonapp/ui/tables/full/data-list.html'%}
+{% load allif_navigation_tags %}
+{% block allif_header_forms_dropdown%}
+{% endblock %}
+
+{% block allif-header-links %}
+<a href="{% allif_get_single_nav_link_url 'Carriers' user_var glblslug %}">Carriers</a>
+<a href="{% allif_get_single_nav_link_url 'AddCarrier' user_var glblslug %}">New Carrier</a>
+{% endblock %}
+{% block list-table-content-seciton-links %}
+<a class="allif-table-links" href="{% url 'allifmaalcommonapp:commonEditCarrier' item.id user_var glblslug %}"> {{item.name}}</a>
+{% endblock %}
+{% block list-table-content-seciton-dropdown-links %}
+<a href="{% url 'allifmaalcommonapp:commonEditCarrier' item.id user_var glblslug %}" class="dropdown-item" id="allif-table-drop-item-link">Item Details</a>
+{% endblock %}
+  

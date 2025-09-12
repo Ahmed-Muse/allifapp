@@ -398,6 +398,10 @@ class CommonCountriesModel(CommonBaseModel):# this is the company  hospitality l
     def __str__(self):
         return self.name
 
+class CommonCarriersModel(CommonBaseModel):
+    def __str__(self):
+        return str(self.name)
+
 #########################################3 stock, items, services, subjects categories.. ##############################################
 class CommonCategoriesModel(CommonBaseModel):
     """

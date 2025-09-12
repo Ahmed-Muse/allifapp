@@ -26,6 +26,8 @@ allifmaal_general_links = [
     {'name': 'Payments', 'url_name': 'allifmaalcommonapp:commonCustomerPayments'},
     {'name': 'Jobs', 'url_name': 'allifmaalcommonapp:commonJobs'},
     {'name': 'Profit & Loss', 'url_name': 'allifmaalcommonapp:commonProfitAndLoss'},
+    {'name': 'Countries', 'url_name': 'allifmaalcommonapp:commonCountries'},
+    {'name': 'Carriers', 'url_name': 'allifmaalcommonapp:commonCarriers'},
     
     
     
@@ -78,6 +80,9 @@ allifmaal_sector_specific_links= {
         {'name': 'Shipments', 'url_name': 'allifmaalcommonapp:commonTransits'},
         {'name': 'Flights', 'url_name': 'allifmaallogisticsapp:flights'},
         {'name': 'Tickets', 'url_name': 'allifmaallogisticsapp:flightTickets'},
+        
+        
+        
        
     ],
     'Service': [
@@ -108,6 +113,11 @@ allif_single_access_general_links = [
     {'name': 'Add_Payment_Term', 'url_name': 'allifmaalcommonapp:commonAddPaymentTerm'},
     {'name': 'MeasuringUnits', 'url_name': 'allifmaalcommonapp:commonUnits'},
     {'name': 'AddUnit', 'url_name': 'allifmaalcommonapp:commonAddUnit'},
+    
+    {'name': 'Countries', 'url_name': 'allifmaalcommonapp:commonCountries'},
+    {'name': 'AddCountry', 'url_name': 'allifmaalcommonapp:commonAddCountry'},
+    {'name': 'Carriers', 'url_name': 'allifmaalcommonapp:commonCarriers'},
+    {'name': 'AddCarrier', 'url_name': 'allifmaalcommonapp:commonAddCarrier'},
     
     {'name': 'Categories', 'url_name': 'allifmaalcommonapp:commonCategories'},
     {'name': 'AddCategory', 'url_name': 'allifmaalcommonapp:commonAddCategory'},
@@ -261,7 +271,8 @@ allif_single_access_general_links = [
     {'name': 'flights', 'url_name': 'allifmaallogisticsapp:flights'},
     {'name': 'newFlight', 'url_name': 'allifmaallogisticsapp:newFlight'},
     {'name': 'flightTickets', 'url_name': 'allifmaallogisticsapp:flightTickets'},
-    {'name': 'addFlightTicket', 'url_name': 'allifmaallogisticssapp:addFlightTicket'},    
+    {'name': 'addFlightTicket', 'url_name': 'allifmaallogisticssapp:addFlightTicket'}, 
+    {'name': 'NewFlightTicket', 'url_name': 'allifmaallogisticsapp:newFlightTicket'},   
     
 
     

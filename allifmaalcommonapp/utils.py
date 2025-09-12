@@ -112,6 +112,30 @@ allif_model_sort_configs = {
         'default_sort_field': '-date',
         'default_ui_label': 'Created At Descending', # A default label for initial load
     },
+      'commoncountriesmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
+       'commoncarriersmodel': { # Key should be consistent, e.g., model._meta.model_name
+        'sort_mapping': {
+            "Name Ascending": "name",
+            "Name Descending": "-name",
+            "Description Ascending": "description",
+            "Description Descending": "-description",
+            
+           
+        },
+        'default_sort_field': '-date',
+        'default_ui_label': 'Created At Descending', # A default label for initial load
+    },
      
       'commonstaffcategoriesmodel': { # Key should be consistent, e.g., model._meta.model_name
         'sort_mapping': {
@@ -1355,12 +1379,10 @@ allif_main_models_registry = {
      "CommonStaffCategoriesModel":CommonStaffCategoriesModel,
     "FlightsModel":FlightsModel,
     "TicketsModel":TicketsModel,
-     
-     
-     
-     
+    # Add other models here as needed
+    "CommonCarriersModel":CommonCarriersModel,
+    "CommonCountriesModel":CommonCountriesModel,
   
-   
 }
 
 # --- Document PDF Configuration Map ---

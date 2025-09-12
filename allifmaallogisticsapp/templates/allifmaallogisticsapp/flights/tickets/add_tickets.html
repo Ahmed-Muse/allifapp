@@ -5,20 +5,19 @@
 <a href="{% allif_get_single_nav_link_url 'flights' user_var glblslug %}">Flights</a>
  <a href="{% allif_get_single_nav_link_url 'newFlight' user_var glblslug %}">New Flight</a>
 <a href="{% allif_get_single_nav_link_url 'flightTickets' user_var glblslug %}">Tickets</a>
+<a href="{{ allif_contextual_action_links.flightTicketPdf.url }}">Download Ticket</a>
+
+
 
 {% endblock %}
 
    {% block core-tab-col-one %}
    
      <tr>
-      <td class="allif-fix-table-col-forms">Consigner</td>
-      <td>{{form.consigner}}</td>
+      <td class="allif-fix-table-col-forms">Passenger</td>
+      <td>{{form.passenger}}</td>
     </tr>
 
-    <tr>
-      <td class="allif-fix-table-col-forms">Name</td>
-      <td>{{form.name}}</td>
-    </tr>
     
      <tr>
       <td class="allif-fix-table-col-forms">Origin</td>
@@ -29,83 +28,99 @@
       <td>{{form.destination}}</td>
     </tr>
 
+    
+     <tr>
+      <td class="allif-fix-table-col-forms">Nationality</td>
+      <td>{{form.nationality}}</td>
+    </tr>
+     <tr>
+            <td class="allif-fix-table-col-forms">Ticket Status</td>
+            <td>{{form.ticket_status}}</td>
+          </tr>
+     
+     
     {%endblock%}
 
     {% block core-tab-col-two %}
+     
+      <tr>
+        <td class="allif-fix-table-col-forms">Travel Date</td>
+        <td>{{form.travel_date}}</td>
+      </tr>
+        <tr>
+          <td class="allif-fix-table-col-forms">Booking Date</td>
+          <td>{{form.booking_date}}</td>
+        </tr>
+         
+         
+          <tr>
+            <td class="allif-fix-table-col-forms">Ticket Type</td>
+            <td>{{form.ticket_type}}</td>
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col-forms">Payment</td>
+            <td>{{form.payment}}</td>
+          </tr>
+         
+    {%endblock%}
+
+     {% block standard-tab-col-one %}
+      <tr>
+            <td class="allif-fix-table-col-forms">Luggage</td>
+            <td>{{form.luggage}}</td>
+          </tr>
+          <tr>
+            <td class="allif-fix-table-col-forms">Children</td>
+            <td>{{form.children}}</td>
+          </tr>
+
+     
+    <tr>
+      <td class="allif-fix-table-col-forms">Name</td>
+      <td>{{form.name}}</td>
+    </tr>
     
-     <tr>
-      <td class="allif-fix-table-col-forms">Consignee</td>
-      <td>{{form.consignee}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Items</td>
-      <td>{{form.items}}</td>
-    </tr>
      <tr>
         <td class="allif-fix-table-col-forms">Description</td>
         <td>{{form.description}}</td>
       </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Value</td>
-      <td>{{form.value}}</td>
-    </tr>
-    
-    
-    {%endblock%}
-
-     {% block standard-tab-col-one %}
-    <tr>
-      <td class="allif-fix-table-col-forms">Charge Rate</td>
-      <td>{{form.rate}}</td>
-    </tr>
      
-     <tr>
-      <td class="allif-fix-table-col-forms">Units</td>
-      <td>{{form.unit_of_measure}}</td>
-    </tr>
-    <tr>
-      <td class="allif-fix-table-col-forms">Expires</td>
-      <td>{{form.expires}}</td>
-    </tr>
-   
-     <tr>
-      <td class="allif-fix-table-col-forms">Expected On</td>
-      <td>{{form.expected}}</td>
-    </tr>
-    
-     <tr>
-      <td class="allif-fix-table-col-forms">Dispatched By</td>
-      <td>{{form.dispatched_by}}</td>
-    </tr>
-    
-    
     {%endblock%}
        
    {% block standard-tab-col-two %}
    
      <tr>
-      <td class="allif-fix-table-col-forms">Weight</td>
-      <td>{{form.weight}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Length</td>
-      <td>{{form.length}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Width</td>
-      <td>{{form.width}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Height</td>
-      <td>{{form.height}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Item Status</td>
-      <td>{{form.shipment_status}}</td>
-    </tr>
+        <td class="allif-fix-table-col-forms">Seat Number</td>
+        <td>{{form.seat_number}}</td>
+      </tr>
+
+    <tr>
+        <td class="allif-fix-table-col-forms">Price</td>
+        <td>{{form.price}}</td>
+      </tr>
+        <tr>
+          <td class="allif-fix-table-col-forms">Tax Amount</td>
+          <td>{{form.tax_amount}}</td>
+        </tr>
+          <tr>
+            <td class="allif-fix-table-col-forms">Total Amount</td>
+            <td>{{form.total_amount}}</td>
+          </tr>
+
     
+     <tr>
+      <td class="allif-fix-table-col-forms">Passport</td>
+      <td>{{form.passport}}</td>
+    </tr>
+
     
     {%endblock%}
+     {% block bottom-fields-col-one %}
+      <tr>
+        <td class="allif-fix-table-col-forms">Flight</td>
+        <td>{{form.flight}}</td>
+      </tr>
+      {%endblock%}
 
 
   {% block allif_sensitive_section_col_one %}

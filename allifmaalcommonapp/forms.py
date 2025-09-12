@@ -548,6 +548,25 @@ class CommonAddUnitForm(CommonBaseForm):
         widgets = {
         **CommonBaseForm.Meta.widgets,
         }
+
+
+class CommonAddCountryForm(CommonBaseForm):
+    class Meta(CommonBaseForm.Meta):
+        model=CommonCountriesModel
+        fields=CommonBaseForm.Meta.fields + []
+        widgets = {
+        **CommonBaseForm.Meta.widgets,
+        }
+
+class CommonAddCarrierForm(CommonBaseForm):
+    class Meta(CommonBaseForm.Meta):
+        model=CommonCarriersModel
+        fields=CommonBaseForm.Meta.fields + []
+        widgets = {
+        **CommonBaseForm.Meta.widgets,
+        }
+ 
+ 
  
 class CommonAssetsAddForm(CommonBaseForm):
     company_filtered_fields = {

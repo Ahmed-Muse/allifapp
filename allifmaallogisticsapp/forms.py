@@ -7,7 +7,7 @@ class DatePickerInput(forms.DateInput):#use this class whereever you have a date
 class TimePickerInput(forms.TimeInput):#use this wherever you have time input
     input_type='time'
 class DateTimePickerInput(forms.DateTimeInput):#use this wherever you have datetime input
-    input_type='datetime'
+    input_type = 'datetime-local'
     
 ############################# end of datepicker customization ##############################
 ######################### FLIGHTS #########################
@@ -15,17 +15,20 @@ class AddFlightDetailsForm(CommonBaseForm):
     company_filtered_fields = {
         'origin': CommonCodesModel,
         'destination': CommonCodesModel,
+        'carrier': CommonCarriersModel,
+        
        
         }
     class Meta(CommonBaseForm.Meta):
         model=FlightsModel
         fields=CommonBaseForm.Meta.fields + ['carrier','origin','destination','departure','arrival','transit',
                     'ticket_price','tax_amount','captain','co_pilot','flight_status',
-                    'flight_capacity','seats_available','seats_booked']
+                    'flight_capacity','seats_available','seats_booked','via']
         widgets = {
         **CommonBaseForm.Meta.widgets,
        
-            'carrier':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            
+            'carrier':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'origin':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'destination':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'departure' : DateTimePickerInput(attrs={'class':'form-control'}),
@@ -34,6 +37,7 @@ class AddFlightDetailsForm(CommonBaseForm):
             'ticket_price':forms.TextInput(attrs={'class':'form-control','placeholder':'in USD'}),
             'tax_amount':forms.TextInput(attrs={'class':'form-control','placeholder':'in USD'}),
             'captain':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'via':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'co_pilot':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'flight_status':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'flight_capacity':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
@@ -54,7 +58,7 @@ class AddFlightTicketDetailsForm(CommonBaseForm):
         fields=CommonBaseForm.Meta.fields + ['passenger','passport','nationality','seat_number',
                     'price','tax_amount','total_amount','travel_date','booking_date',
                     'ticket_status','origin','destination','ticket_type','payment',
-                    'luggage','children']
+                    'luggage','children','flight']
         widgets = {
         **CommonBaseForm.Meta.widgets,
        
@@ -75,4 +79,5 @@ class AddFlightTicketDetailsForm(CommonBaseForm):
             'payment':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
             'luggage':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
             'children':forms.TextInput(attrs={'class':'form-control','placeholder':''}),
+            'flight':forms.Select(attrs={'class':'form-control custom-field-class-for-seclect2','placeholder':''}),
         }

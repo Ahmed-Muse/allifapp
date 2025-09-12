@@ -1,11 +1,11 @@
 from allifmaalusersapp.models import User
 from django.db import models
-from allifmaalcommonapp.models import (CommonCompanyDetailsModel,CommonPaymentTermsModel,CommonCountriesModel,CommonCodesModel,CommonBaseModel, CommonTransitModel,CommonCustomersModel,CommonDivisionsModel, CommonBranchesModel, CommonDepartmentsModel,)
+from allifmaalcommonapp.models import (CommonCompanyDetailsModel,CommonCarriersModel,CommonPaymentTermsModel,CommonCountriesModel,CommonCodesModel,CommonBaseModel, CommonTransitModel,CommonCustomersModel,CommonDivisionsModel, CommonBranchesModel, CommonDepartmentsModel,)
 from allifmaalcommonapp.constants import flight_status,Flight_Ticket_Type,Flight_Ticket_Status
 
 ##################3 EXPENSES ###########################     
 class FlightsModel(CommonBaseModel):
-    carrier=models.CharField(blank=True,null=True,default="destination",max_length=250)
+    carrier=models.ForeignKey(CommonCarriersModel,blank=True,null=True,on_delete=models.SET_NULL,related_name="flight_carrier")
     origin=models.ForeignKey(CommonCodesModel,blank=True,null=True,on_delete=models.SET_NULL,related_name="origin_code")
     destination=models.ForeignKey(CommonCodesModel,blank=True,null=True,on_delete=models.SET_NULL,related_name="destination_code")
     
@@ -15,6 +15,7 @@ class FlightsModel(CommonBaseModel):
     ticket_price=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,default=0.00)
     tax_amount=models.DecimalField(max_digits=30,blank=True,null=True,decimal_places=2,default=0)
     captain=models.CharField(blank=True,null=True,default="captain",max_length=250)
+    via=models.CharField(blank=True,null=True,default="N/A",max_length=250)
     co_pilot=models.CharField(blank=True,null=True,default="co_pilot",max_length=250)
     flight_status=models.CharField(choices=flight_status,max_length=100,blank=True,null=True,default="Scheduled")
     flight_capacity=models.IntegerField(blank=True,null=True,default=0)

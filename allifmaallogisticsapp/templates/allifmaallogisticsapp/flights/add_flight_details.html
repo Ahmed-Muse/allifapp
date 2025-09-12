@@ -3,14 +3,63 @@
 
  {% block add-form-header-block %}
 
-<a href="{% allif_get_single_nav_link_url 'Transits' user_var glblslug %}">Transports</a>
-<a href="{{ allif_contextual_action_links.AddTransitDetails.url }}">Flight Details</a>
-<a href="{{ allif_contextual_action_links.AddShipmentItems.url }}">Add Items</a>
-<a href="{{ allif_contextual_action_links.TransitPdf.url }}">Download Shipment</a>
- 
+<a href="{% allif_get_single_nav_link_url 'flights' user_var glblslug %}">Flights</a>
+<a href="{{ allif_contextual_action_links.addFlightDetails.url }}">Flight Details</a>
+<a href="{{ allif_contextual_action_links.flightpdf.url }}">Download Flight Details</a>
+  
 {% endblock %}
 
    {% block core-tab-col-one %}
+   
+       <tr>
+        <td class="allif-fix-table-col-forms">Airline</td>
+        <td>{{form.carrier}}</td>
+      </tr>
+   <tr>
+      <td class="allif-fix-table-col-forms">Origin</td>
+      <td>{{form.origin}}</td>
+    </tr>
+     <tr>
+      <td class="allif-fix-table-col-forms">Destination</td>
+      <td>{{form.destination}}</td>
+    </tr>
+
+
+    {%endblock%}
+
+    {% block core-tab-col-two %}
+    
+       <tr>
+        <td class="allif-fix-table-col-forms">Departure</td>
+        <td>{{form.departure}}</td>
+      </tr>
+       <tr>
+        <td class="allif-fix-table-col-forms">Arival</td>
+        <td>{{form.arrival}}</td>
+      </tr>
+
+       <tr>
+          <td class="allif-fix-table-col-forms">Flight Status</td>
+          <td>{{form.flight_status}}</td>
+        </tr>
+
+     
+    
+      
+    {%endblock%}
+
+     {% block standard-tab-col-one %}
+
+      <tr>
+        <td class="allif-fix-table-col-forms">Ticket Price</td>
+        <td>{{form.ticket_price}}</td>
+      </tr>
+       <tr>
+        <td class="allif-fix-table-col-forms">Tax Amount</td>
+        <td>{{form.tax_amount}}</td>
+      </tr>
+       
+        
     <tr>
       <td class="allif-fix-table-col-forms">Name</td>
       <td>{{form.name}}</td>
@@ -19,107 +68,44 @@
         <td class="allif-fix-table-col-forms">Description</td>
         <td>{{form.description}}</td>
       </tr>
-    
-    {%endblock%}
+ <tr>
+        <td class="allif-fix-table-col-forms">Transit</td>
+        <td>{{form.transit}}</td>
+      </tr>
 
-    {% block core-tab-col-two %}
-     <tr>
-      <td class="allif-fix-table-col-forms">Origin</td>
-      <td>{{form.origin}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Destination</td>
-      <td>{{form.destination}}</td>
-    </tr>
-    
-    {%endblock%}
-
-     {% block standard-tab-col-one %}
-     
-     <tr>
-      <td class="allif-fix-table-col-forms">Customer</td>
-      <td>{{form.customer}}</td>
-    </tr>
-   
-     <tr>
-      <td class="allif-fix-table-col-forms">Exit Warehouse</td>
-      <td>{{form.exit_warehouse}}</td>
-    </tr>
- 
-      <tr>
-      <td class="allif-fix-table-col-forms">Entry Warehouse</td>
-      <td>{{form.entry_warehouse}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Status</td>
-      <td>{{form.transit_status}}</td>
-    </tr>
-
-     <tr>
-      <td class="allif-fix-table-col-forms">Carrier</td>
-      <td>{{form.carrier}}</td>
-    </tr>
-    
-     <tr>
-      <td class="allif-fix-table-col-forms">Received On</td>
-      <td>{{form.received_on}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Expected On</td>
-      <td>{{form.expected}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Route</td>
-      <td>{{form.via}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Dispatched By</td>
-      <td>{{form.dispatched_by}}</td>
-    </tr>
     
     
     {%endblock%}
        
    {% block standard-tab-col-two %}
-    <tr>
-      <td class="allif-fix-table-col-forms">Received By</td>
-      <td>{{form.received_by}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Delivery Confirmed By Staff</td>
-      <td>{{form.delivery_confirmed_by_employee}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Delivery Confirm By Customer</td>
-      <td>{{form.delivery_confirmed_by_customer}}</td>
-    </tr>
-    
-    
-    <tr>
-      <td class="allif-fix-table-col-forms">Supplier</td>
-      <td>{{form.supplier}}</td>
-    </tr>
-    
-     <tr>
-      <td class="allif-fix-table-col-forms">Delivery Notes</td>
-      <td>{{form.delivery_notes}}</td>
-    </tr>
-   
-    <tr>
-      <td class="allif-fix-table-col-forms">Payment Mode</td>
-      <td>{{form.terms}}</td>
-    </tr>
-     <tr>
-      <td class="allif-fix-table-col-forms">Currency</td>
-      <td>{{form.currency}}</td>
-    </tr>
+      <tr>
+          <td class="allif-fix-table-col-forms">Flight Capacity</td>
+          <td>{{form.flight_capacity}}</td>
+        </tr>
+         <tr>
+          <td class="allif-fix-table-col-forms">Seats Available</td>
+          <td>{{form.seats_available}}</td> 
+        </tr>
+         <tr>
+          <td class="allif-fix-table-col-forms">Seats Booked</td>
+          <td>{{form.seats_booked}}</td>  
+        </tr>
+         <tr>
+          <td class="allif-fix-table-col-forms">Via</td>
+          <td>{{form.via}}</td>  
+        </tr>
+        
+      
+       <tr>
+          <td class="allif-fix-table-col-forms">Captain</td>
+          <td>{{form.captain}}</td>
+        </tr>
+         <tr>
+          <td class="allif-fix-table-col-forms">Co-Pilot</td>
+          <td>{{form.co_pilot}}</td> 
+        </tr>
 
-     <tr>
-      <td class="allif-fix-table-col-forms">Delivery Date</td>
-      <td>{{form.delivery_confirmation_date_time}}</td>
-    </tr>
-       
-       
+    
     {%endblock%}
 
 
